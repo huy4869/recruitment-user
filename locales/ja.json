@@ -1,3 +1,23 @@
 {
-  "lang": "ログイン"
+  "lang": "ログイン",
+  "login": {
+    "title": "ログイン",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "remember_me": "次回から自動的にログインする",
+    "forgot_password": "パスワードを忘れた方は",
+    "here": "こちら",
+    "create_new_account": "新しくアカウントを作成する"
+  },
+  "validation": {
+    "required": "{_field_}が入力されていません。",
+    "email_required": "メールアドレスが入力されていません。",
+    "email": "{_field_}は有効なメールアドレスではありません.",
+    "float": "{_field_}価格は数値以外入力できません。",
+    "max_content_file": "最大サイズを超えました。再度選択してください。",
+    "file_type": "選択可能なファイルはImage, Video, Audio, Glb, Gltf, Docです。再度選択してください。",
+    "accept_file_type": "選択可能な拡張子はJPEG、PNG、JPGです。再度選択してください。",
+    "max": "{_field_}は{length}文字以内にしてください。",
+    "min_value": "こちらに{min}以上の数字を入力してください。"
+  }
 }
