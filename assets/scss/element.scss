@@ -1,0 +1,37 @@
+.el-form-item__error {
+  color: $color-red-primary;
+}
+.el-form-item.is-error {
+  .el-input {
+    .el-input__inner {
+      border: 2px solid $color-red-primary;
+    }
+  }
+}
+.el-input {
+  height: 44px;
+  .el-input__inner {
+    border: 2px solid $border-default;
+    &:focus {
+      border: 2px solid $color-text-primary;
+      outline: 0;
+    }
+    &:hover {
+      border-color: $color-text-primary;
+    }
+  }
+  input {
+    height: 44px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 10px 16px;
+    &::placeholder {
+      color: $color-placeholder;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      top: 10px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <LoginElement></LoginElement>
+  <div class="login-page">
+      <LoginElement></LoginElement>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import LoginElement from '../components/element-ui/LoginElement'
 
 export default {
-  name: 'IndexPage',
+  name: 'LoginPage',
   components: { LoginElement },
   data() {
     return {

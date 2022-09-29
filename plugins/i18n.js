@@ -4,11 +4,11 @@ Vue.use(VueI18n)
 
 export default ({ app, store }) => {
   app.i18n = new VueI18n({
-    locale: app.$cookies.get('lang') || 'vi',
-    fallbackLocale: 'vi',
+    locale: app.$cookies.get('lang') || 'ja',
+    fallbackLocale: 'ja',
     silentTranslationWarn: true,
     messages: {
-      'vi': require('~/locales/vi.json'),
+      'ja': require('~/locales/ja.json'),
       'en': require('~/locales/en.json')
     }
   })
