@@ -35,3 +35,37 @@
     }
   }
 }
+.el-checkbox {
+  display: flex;
+  height: 24px;
+  .el-checkbox__inner {
+    width: 24px;
+    height: 24px;
+    background: $color-white;
+    border: 2px solid $border-focus;
+    border-radius: 4px;
+    &:focus-visible {
+      border: 2px solid $border-focus;
+    }
+  }
+  .el-checkbox__input.is-checked .el-checkbox__inner {
+    background-color: unset;
+    background-image: url('/assets/icon/icon_checked.svg');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    width: 24px;
+    height: 24px;
+    border: none;
+    &::after {
+      display: none;
+    }
+  }
+  .el-checkbox__label {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+    color: $color-black;
+    padding-left: 8px;
+  }
+}
+

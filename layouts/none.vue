@@ -1,19 +1,15 @@
 <template>
   <div>
-    <HeaderCommon></HeaderCommon>
     <div class="home">
       <nuxt />
     </div>
-    <FooterCommon></FooterCommon>
   </div>
 </template>
 
 <script>
-import HeaderCommon from '../components/layout/HeaderCommon'
-import FooterCommon from '../components/layout/FooterCommon'
+
 export default {
-  name: 'DefaultLayout',
-  components: { FooterCommon, HeaderCommon },
+  name: 'NoneLayout',
   data() {
     return {
       categories: [

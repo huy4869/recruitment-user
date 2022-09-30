@@ -3,7 +3,6 @@ body {
   margin: 0;
   font-style: normal;
   color: $color-black;
-  background-color: $color-background-default;
 }
 
 h1 {
@@ -35,35 +34,7 @@ h4 {
 }
 
 input, button, textarea {
-  font-family: Mulish;
-}
-
-.el-button--primary {
-  background: $color-btn;
-  border: 1px solid $color-btn;
-  border-radius: 4px;
-  height: 40px;
-  &:hover, &:focus {
-    background: $color-red-primary-600;
-    border: 1px solid $color-red-primary-600;
-  }
-}
-.el-button--default {
-  border-radius: 4px;
-  height: 40px;
-  border: 1px solid $color-btn;
-  color: $color-btn;
-  &:hover, &:focus {
-    background: $color-white;
-    color: $color-red-primary-600;
-    border: 1px solid $color-red-primary-600;
-  }
-}
-.el-button {
-  padding: 0;
-}
-a {
-  color: $color-btn;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 
@@ -128,7 +99,6 @@ a {
   display: block;
   width: 25%;
   height: 25%;
-  background-color: $color-red-primary-500;
   border-radius: 100%;
   -webkit-animation: chase-dot-before 2s infinite ease-in-out both;
   animation: chase-dot-before 2s infinite ease-in-out both;
@@ -238,9 +208,7 @@ a {
   }
 }
 
-.color-red {
-  color: $color-red-primary-500;
-}
-a.color-red:hover {
-  color: $color-red-primary-600;
+*:focus-visible {
+  outline-color: $color-white;
+  outline-width: 2px;
 }

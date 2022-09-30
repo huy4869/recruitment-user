@@ -84,7 +84,7 @@ import {
 import { validEmail } from '@/utils/validate'
 
 export default {
-  name: 'LoginElement',
+  name: 'EditCvElement',
   data() {
     const validFormEmail = (rule, value, callback) => {
       if (!validEmail(value)) {
