@@ -68,4 +68,19 @@
     padding-left: 8px;
   }
 }
+.el-button--danger {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 28px;
+  height: 48px;
+  background-color: $color-button-danger;
+  border: none;
+  text-align: center;
+  &:hover {
+    background-color: $color-button-hover;
+  }
+  &:focus {
+    background-color: $color-button-focus;
+  }
+}
 

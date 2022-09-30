@@ -25,5 +25,16 @@
     "accept_file_type": "選択可能な拡張子はJPEG、PNG、JPGです。再度選択してください。",
     "max": "{_field_}は{length}文字以内にしてください。",
     "min_value": "こちらに{min}以上の数字を入力してください。"
+  },
+  "header": {
+    "search": "求人を探す",
+    "notification": "通知",
+    "member_register": "会員登録(無料)",
+    "name": "こんにちは、"
+  },
+  "page": {
+    "home": "ホームページ",
+    "my_page": "マイページ",
+    "web_cv": "Web履歴書"
   }
 }
