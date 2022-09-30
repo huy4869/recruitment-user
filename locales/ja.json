@@ -8,6 +8,12 @@
     "forgot_password": "パスワードを忘れた方は",
     "here": "こちら",
     "create_new_account": "新しくアカウントを作成する"
+  },"footer": {
+    "company": "運営会社",
+    "faq": "よくある質問",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "inquiry": "お問い合わせ"
   },
   "validation": {
     "required": "{_field_}が入力されていません。",
