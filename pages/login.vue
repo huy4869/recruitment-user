@@ -9,6 +9,7 @@ import LoginElement from '../components/element-ui/LoginElement'
 
 export default {
   name: 'LoginPage',
+  layout: 'none',
   components: { LoginElement },
   data() {
     return {
