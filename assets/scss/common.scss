@@ -212,3 +212,7 @@ input, button, textarea {
   outline-color: $color-white;
   outline-width: 2px;
 }
+
+.home {
+  min-height: calc(100vh - 417px);
+}

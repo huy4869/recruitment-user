@@ -3,30 +3,7 @@ export const INDEX_SET_SUCCESS = 'setNotifySuccess'
 export const INDEX_SET_ERROR = 'setNotifyError'
 export const INDEX_SET_WARNING = 'setNotifyWarning'
 export const INDEX_SET_LOADING = 'setLoading'
-export const INDEX_SET_HIDE_FOOTER = 'setHideFooter'
-export const INDEX_SET_OPEN_SIDEBAR = 'setOpenSidebar'
-export const MASTER_GET_DATA = 'getMasterData'
-export const UPLOAD_FILE = 'uploadFile'
-export const REGISTER_RECEIVE_EMAIL = 'registerReceiveEmail'
-
-// Filter
-export const SET_REMOVE_FILTER = 'filter/setRemoveFilter'
-export const SET_ADD_FILTER = 'filter/setAddFilter'
-export const SET_CLEAR_ALL_FILTER = 'filter/setClearAllFilter'
-
-// authentication
-export const AUTH_LOGOUT = 'authentication/logout'
-export const AUTH_SET_ROLES = 'authentication/setRoles'
-export const AUTH_SET_PERMISSIONS = 'authentication/setPermissions'
-export const AUTH_SEND_OTP = 'authentication/sendOtp'
-export const AUTH_RE_SEND_OTP = 'authentication/reSendOtp'
-export const AUTH_VERIFY_OTP = 'authentication/verifyOtp'
-export const AUTH_REGISTER = 'authentication/register'
-export const AUTH_FORGOT_PASSWORD = 'authentication/forgotPassword'
-export const AUTH_FORGOT_PASSWORD_VERIFY = 'authentication/forgotPasswordVerifyOtp'
-export const AUTH_RESET_PASSWORD = 'authentication/resetPassword'
-export const AUTH_OPEN_MODAL_LOGIN = 'authentication/setOpenModalLoginState'
-export const AUTH_SET_RESET_CART = 'authentication/setResetCartState'
+export const INDEX_SET_TITLE_MENU = 'setTitleMenu'
 
 // category
 export const CATEGORY_OUT_STANDING = 'category/getOutStanding'

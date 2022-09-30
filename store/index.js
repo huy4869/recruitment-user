@@ -6,7 +6,8 @@ export const state = () => ({
   notifyWarning: { show: false, text: '' },
   loading: false,
   hideFooter: false,
-  openSidebar: 0
+  openSidebar: 0,
+  titleMenu: [{ name: '', route: '/' }]
 })
 
 export const getters = {}
@@ -29,6 +30,9 @@ export const mutations = {
   },
   setOpenSidebar(state, openSidebar) {
     state.openSidebar = openSidebar
+  },
+  setTitleMenu(state, titleMenu) {
+    state.titleMenu = titleMenu
   }
 }
 

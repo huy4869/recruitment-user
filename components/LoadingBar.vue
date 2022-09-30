@@ -23,7 +23,9 @@ import { mapState } from 'vuex'
 export default {
   data: () => ({}),
   computed: {
-    ...mapState(['loading'])
+    ...mapState({
+      loading: state => state.loading
+    })
   },
   methods: {}
 }

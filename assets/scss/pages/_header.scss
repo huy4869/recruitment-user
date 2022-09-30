@@ -1,11 +1,58 @@
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  .header-logo {
-    font-family: 'Croissant One';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 48px;
+.header-common {
+  height: 80px;
+  box-shadow: inset 0px -2px 0px $color-text-primary;
+  .header-container {
+    display: flex;
+    max-width: 1280px;
+    margin: 0 auto;
+    justify-content: space-between;
+    .header-logo {
+      font-family: 'Croissant One';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 48px;
+      margin: 16px 62px;
+      height: 48px;
+    }
+    .header-content {
+      height: 80px;
+      display: flex;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      .button-action {
+        margin-right: 50px;
+        display: flex;
+        span {
+          padding: 4px 0 2px 6px;
+        }
+        div {
+          display: flex;
+          margin: 26px 0;
+          cursor: pointer;
+        }
+        img {
+          width: 28px;
+          height: 28px;
+        }
+      }
+      .button-register {
+        color: $color-blue;
+        cursor: pointer;
+        margin: 28px 0;
+        span {
+          line-height: 28px;
+          margin-left: 20px;
+          margin-right: 30px;
+        }
+      }
+      .button-login {
+        margin: 16px 64px 16px 0;
+        button {
+          padding: 12px 28px;
+        }
+      }
+    }
   }
 }
