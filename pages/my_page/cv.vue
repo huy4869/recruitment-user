@@ -1,18 +1,24 @@
 <template>
-  <div>
+  <div class="cv-page">
     <TitlePageElement></TitlePageElement>
-    <EditCvElement></EditCvElement>
+    <BannerElement :banner="$t('page.web_cv')"></BannerElement>
+    <div class="cv-content">
+      <MenuLeftElement menu-active="web_cv"></MenuLeftElement>
+      <EditCvElement></EditCvElement>
+    </div>
   </div>
 </template>
 
 <script>
-import EditCvElement from '../../components/element-ui/EditCvElement'
+import BannerElement from '../../components/layout/BannerElement'
 import TitlePageElement from '../../components/layout/TitlePageElement'
+import MenuLeftElement from '../../components/my-page/MenuLeftElement'
+import EditCvElement from '../../components/my-page/EditCvElement'
 import { INDEX_SET_TITLE_MENU } from '../../store/store.const'
 
 export default {
   name: 'CvPage',
-  components: { EditCvElement, TitlePageElement },
+  components: { EditCvElement, TitlePageElement, BannerElement, MenuLeftElement },
   created() {
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },

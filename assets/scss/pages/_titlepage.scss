@@ -26,3 +26,17 @@
     padding: 1px 6px;
   }
 }
+.banner-element {
+  padding: 24px 0;
+  text-align: center;
+  background-color: $color-primary;
+  .banner-title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: $color-text-primary;
+  }
+  .sub-banner-title {
+
+  }
+}

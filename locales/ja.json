@@ -54,6 +54,46 @@
     "description": "仕事内容",
     "status": "雇用形態",
     "remove": "お気に入り求人リストから削除"
-
+  },
+  "form": {
+    "required": "必須",
+    "year": "年",
+    "month": "月",
+    "day": "日",
+    "male": "男性",
+    "female": "女性",
+    "other": "その他"
+  },
+  "my_page": {
+    "top_page": "TOPページ",
+    "history": "応募履歴",
+    "favorite_job": "お気に入り求人",
+    "web_cv": "Web履歴書",
+    "chat": "チャット",
+    "change_password": "パスワードの変更",
+    "edit_basic_information": "基本情報編集",
+    "basic_information": "基本情報",
+    "update_profile_picture": "プロフィール画像をアップロード",
+    "image_avatar": "プロフィール画像",
+    "image_detail": "実績紹介写真",
+    "name": "名前",
+    "alias_name": "表示名",
+    "furigana": "フリガナ",
+    "birth": "生年月日",
+    "age": "年齢",
+    "gender": "性別",
+    "phone": "電話番号",
+    "email": "メールアドレス",
+    "address": "住所",
+    "post_code": "郵便番号",
+    "prefectures": "都道府県",
+    "city": "市区町村・番地",
+    "building_name": "建物名",
+    "first_name": "姓",
+    "last_name": "名",
+    "furi_first_name": "セイ",
+    "furi_last_name": "メイ",
+    "enter_alias_name": "表示名を入力",
+    "enter_address": "例）１２−３ 〇〇マンション１０１号"
   }
 }

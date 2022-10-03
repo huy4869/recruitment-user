@@ -1,20 +1,13 @@
 <template>
-  <div class="banner-element">
-    <div class="banner-title"></div>
-    <div class="banner-sub-title"></div>
+  <div v-if="banner" class="banner-element">
+    <div class="banner-title">{{ banner }}</div>
+    <div v-if="subBanner" class="sub-banner-title">{{ subBanner }}</div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'BannerElement',
-  props: ['menu'],
-  computed: {
-    ...mapState({
-      listMenu: state => state.titleMenu
-    })
-  }
+  props: ['banner', 'subBanner']
 }
 </script>
