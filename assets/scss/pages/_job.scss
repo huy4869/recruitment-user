@@ -1,0 +1,66 @@
+ .favorite-job-element {
+   padding: 1.5rem;
+   border: 2px solid #FED6D7;
+   border-radius: 4px;
+
+   .job-title {
+    margin-bottom: 21px;
+
+     .title-left {
+       margin-left: 1.5rem;
+
+       .card-subtitle {
+         margin: 0.5rem 0 18px 0
+       }
+     }
+   }
+
+  .job-box {
+    display: grid;
+    grid-template-columns: 170px calc(100% - 170px);
+
+    .left-item {
+      background: $color-blue-3;
+      border-radius: 4px;
+      height: 96%;
+
+      p {
+        margin-left: 1.5rem;
+      }
+    }
+
+    .right-item {
+      border-bottom: 1px solid $border-default;
+      margin-left: 20px;
+
+      &.first-right-item {
+        border-top: 1px solid $border-default;
+      }
+
+      .text-ellipsis {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 90%;
+      }
+
+      .item-status {
+        gap: 0.625rem;
+
+        .text-status {
+          color: $color-text-primary;
+          border: 1px solid $color-text-primary;
+          border-radius: 2px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 22px;
+          padding: 3px 8px;
+          width: fit-content;
+        }
+      }
+    }
+  }
+   .union-icon {
+     margin-right: 0.75rem;
+   }
+ }

@@ -3,24 +3,7 @@
   box-shadow: 0 1px 7px rgba(177, 175, 175, 0.25);
   padding: 20px 24px;
 
-  span {
-    font-weight: 500;
-
-    &.primary {
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: 700;
-    }
-  }
-
   .title {
-    margin-bottom: 40px;
-
-    .card-title {
-      font-size: 20px;
-      line-height: 28px;
-      font-weight: 700;
-    }
 
     .schedule-day {
       color: $color-text-primary;
@@ -34,8 +17,16 @@
   }
 
   .schedule-box {
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
     .schedule-content {
+      width: calc(100% - 210px);
       margin-left: 1rem;
+
       .item {
         margin-bottom: 6px;
       }
@@ -43,16 +34,19 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 35%;
+        width: 90%;
         font-weight: 700;
         font-size: 24px;
         line-height: 32px;
       }
-      .schedule-subtitle {
-        color: $color-text-2;
-      }
+
       .btn-group {
-        margin-top: 16px;
+        margin-top: 18px;
+
+        .schedule-button {
+          height: 40px;
+          line-height: 0;
+        }
       }
     }
   }
