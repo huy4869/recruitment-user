@@ -2,6 +2,11 @@
   background: $color-primary;
   display: flex;
   height: 100vh;
+  #register-element {
+    .login-title {
+      margin: 0 auto 48px;
+    }
+  }
   .login-element {
     max-width: 1280px;
     margin: auto;
@@ -63,6 +68,19 @@
         opacity: 0.8;
       }
     }
+    .description {
+      margin-top: 3rem;
+      .el-checkbox {
+        align-items: center;
+      }
+      .el-checkbox__label {
+        white-space: pre-line;
+      }
+    }
+    .terms {
+      margin-left: 0.5rem;
+    }
+
   }
   .label {
     font-weight: 700;

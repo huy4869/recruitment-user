@@ -106,3 +106,37 @@
     color: $color-button-focus;
   }
 }
+
+.el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
+  color: $color-white;
+  cursor: not-allowed;
+  background-image: none !important;
+  background-color: $color-button-disable !important;
+  border-color: $color-button-disable !important;
+  opacity: 0.5 !important;
+}
+
+.el-form-item__label {
+  color: $color-black;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 5px;
+}
+
+.el-form-item.is-required:not(.is-no-asterisk) .el-form-item__label-wrap > .el-form-item__label:after, .el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label:after {
+  content: "必須";
+  color: $color-white;
+  padding: 2px 6px;
+  background: $color-red-primary;
+  margin-left: 1px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  border-radius: 2px;
+  margin-left: 6px;
+}
+
+.el-form-item.is-required:not(.is-no-asterisk) .el-form-item__label-wrap > .el-form-item__label:before, .el-form-item.is-required:not(.is-no-asterisk) > .el-form-item__label:before {
+  display: none;
+}

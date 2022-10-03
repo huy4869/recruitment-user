@@ -447,3 +447,20 @@ hr {
   font-weight: 500;
 }
 
+.d-none {
+  display: none;
+}
+
+.text-primary-black {
+  color: $color-black;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.text-primary-pink {
+  color: $color-text-primary;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
