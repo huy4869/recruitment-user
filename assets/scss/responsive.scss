@@ -1,0 +1,59 @@
+@media only screen and (max-width: 1280px) {
+  .login-page {
+    height: fit-content !important;
+    #register-element {
+      .login-title {
+        margin: 123px auto 48px !important;
+      }
+      .image-login {
+        display: none;
+      }
+    }
+    .login-element {
+      .login-title {
+        width: 100%;
+        font-size: 24px !important ;
+      }
+      .col-mobile {
+        float: none;
+      }
+      .image-login {
+        padding-left: 0 !important;
+      }
+      .login-here {
+        display: none;
+      }
+      .here-mobile {
+        display: block;
+        margin: 20px 0 30px 0;
+      }
+      .register-here {
+        padding-bottom: 110px;
+      }
+    }
+  }
+  .text-mobile, .el-form-item__label, .el-checkbox__label {
+    font-size: 14px !important;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .login-page {
+    .login-element {
+      width: 100%;
+      .login-title {
+        width: 100% !important;
+      }
+      .col-mobile {
+        width: 100%;
+        .img-login {
+          width: 90%;
+        }
+      }
+      form {
+        width: calc(100% - 3rem) !important;
+        padding: 0 1.5rem;
+      }
+    }
+  }
+}

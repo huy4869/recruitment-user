@@ -1,8 +1,8 @@
 <template>
-  <div class="login-element">
+  <div class="login-element" id="register-element">
     <el-row>
-      <el-col class="col-mobile" :span="12">
-        <div class="login-title">{{ $t('login.title') }}</div>
+      <el-col class="col-mobile"  :span="12">
+        <div class="login-title">{{ $t('register.title') }}</div>
         <el-form
           ref="accountForm"
           :model="accountForm"
@@ -10,8 +10,8 @@
           autocomplete="off"
           label-position="left"
         >
-          <el-form-item class="email-login" label="" prop="email" :error="(error.key === 'email') ? error.value : ''">
-            <div class="label">{{ $t('login.email') }}</div>
+          <el-form-item class="email-login" :label="$t('login.email')" prop="email" :error="(error.key === 'email') ? error.value : ''">
+<!--            <div class="label">{{ $t('login.email') }}</div>-->
             <el-input
               ref="email"
               v-model.trim="accountForm.email"
@@ -23,8 +23,7 @@
               @focus="resetValidate('email')"
             />
           </el-form-item>
-          <el-form-item class="password-login" label="" prop="password">
-            <div class="label">{{ $t('login.password') }}</div>
+          <el-form-item class="password-login" :label="$t('login.password')" prop="password">
             <el-input
               ref="password"
               v-model="accountForm.password"
@@ -34,21 +33,40 @@
               tabindex="3"
               maxlength="32"
               autocomplete="off"
-              @keydown.native.enter="login"
-              @keydown.native.tab.prevent="$refs.email.focus()"
-              @focus="resetValidate('password')"
               show-password
+              @keydown.native.enter="login"
+              @focus="resetValidate('password')"
             />
           </el-form-item>
-          <div class="d-flex align-items-center check-remember">
-            <el-checkbox v-model="accountForm.remember" :label="$t('login.remember_me')" size="large"></el-checkbox>
-            <div class="login-here">
-              <span>{{ $t('login.forgot_password') }}</span>
-              <span class="forgot-password" @click="changeLink('forgot')">
-                {{ $t('login.here') }}
+          <el-form-item class="password-login" :label="$t('register.password_confirmation')" prop="password_confirmation">
+            <el-input
+              ref="password_confirmation"
+              v-model="accountForm.password_confirmation"
+              :placeholder="$t('register.password_confirmation')"
+              name="password_confirmation"
+              type="password"
+              tabindex="3"
+              maxlength="32"
+              autocomplete="off"
+              show-password
+              @keydown.native.enter="login"
+              @keydown.native.tab.prevent="$refs.email.focus()"
+              @focus="resetValidate('password_confirmation')"
+            />
+          </el-form-item>
+          <div class="d-flex align-items-center">
+            <el-checkbox v-model="accountForm.has_terms" size="large"></el-checkbox>
+            <div class="terms cursor-pointer">
+              <span class="text-primary-pink text-mobile">
+                {{ $t('register.terms') }}
               </span>
+              <span class="text-primary-black text-mobile" @click="accountForm.has_terms = !accountForm.has_terms">{{ $t('register.agree') }}</span>
             </div>
           </div>
+          <div class="description">
+            <el-checkbox v-model="accountForm.has_agreement" :label="$t('register.description')" size="large"></el-checkbox>
+          </div>
+
           <el-form-item class="button-login">
             <div :class="{'disabled' : disabledButton}">
               <el-button
@@ -58,18 +76,13 @@
                 type="danger"
                 @click.native.prevent="login"
               >
-                {{ $t('login.title') }}
+                {{ $t('register.send') }}
               </el-button>
             </div>
           </el-form-item>
-          <div class="link-register">
-            <span class="register-button" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
-          </div>
-          <div class="here-mobile text-center">
-            <span class="text-primary-black">{{ $t('login.forgot_password') }}</span>
-            <span class="text-primary-pink cursor-pointer" @click="changeLink('forgot')">
-                {{ $t('login.here') }}
-              </span>
+          <div class="register-here text-primary-black text-center">
+            <span class="text-mobile">{{ $t('register.have_account') }}</span>
+            <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('register')">{{ $t('register.here') }}</span>
           </div>
         </el-form>
       </el-col>
@@ -100,11 +113,22 @@ export default {
         callback()
       }
     }
+    const validateConfirmPass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }).toString()))
+      } else if (value !== this.accountForm.password) {
+        callback(new Error(this.$t('validation.passNotMatch').toString()))
+      } else {
+        callback()
+      }
+    }
     return {
       accountForm: {
         email: '',
         password: '',
-        remember: false,
+        password_confirmation: '',
+        has_terms: false,
+        has_agreement: false,
         errors: {}
       },
       error: {
@@ -119,6 +143,14 @@ export default {
         password: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('login.password') }), trigger: 'blur' }
         ],
+        password_confirmation: [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }), trigger: 'blur' },
+          {
+            validator: validateConfirmPass,
+            message: this.$t('validation.passNotMatch'),
+            trigger: 'blur'
+          }
+        ],
         remember: []
       },
       valid: false,
@@ -129,7 +161,8 @@ export default {
   },
   computed: {
     disabledButton() {
-      return this.accountForm.email === '' || this.accountForm.password === '' || !this.accountForm.remember
+      return this.accountForm.email === '' || this.accountForm.password === '' ||
+        this.accountForm.password_confirmation === '' || !this.accountForm.has_terms || !this.accountForm.has_agreement
     }
   },
   created() {
