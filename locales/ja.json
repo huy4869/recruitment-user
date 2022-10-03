@@ -44,5 +44,16 @@
     "home": "ホームページ",
     "my_page": "マイページ",
     "web_cv": "Web履歴書"
+  },
+  "favorite_job": {
+    "place": "勤務場所",
+    "recruitment_type": "募集職種",
+    "salary": "給料",
+    "working_hours": "勤務時間",
+    "holiday": "休日・休暇",
+    "description": "仕事内容",
+    "status": "雇用形態",
+    "remove": "お気に入り求人リストから削除"
+
   }
 }
