@@ -84,6 +84,21 @@
       }
     }
   }
+  .schedule-history {
+    .title-create {
+    }
+    .schedule-content {
+      .schedule-image {
+        width: 134px;
+        height: 89px;
+        img {
+          width: 134px;
+          height: 89px;
+        }
+      }
+    }
+  }
+
 }
 
 @media only screen and (max-width: 540px) {
@@ -238,6 +253,78 @@
     .menu-left {
     }
     .menu-active {
+    }
+  }
+  .my-page-top-element {
+    .top-page-content {
+      padding: 0 12px;
+      .button-view-all {
+        margin-bottom: 50px;
+      }
+    }
+    .top-page-title {
+      margin-top: 13px;
+      margin-left: 12px;
+      font-size: 16px;
+      line-height: 24px;
+      padding-left: 73px;
+      img {
+        top: -17px;
+        width: 68px;
+        height: 68px;
+      }
+    }
+    .button-footer {
+      padding: 0 12px;
+      .button-item {
+        width: auto;
+        padding: 13px 6px;
+        height: 21px;
+        span {
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 22px;
+        }
+        img {
+          width: 24px;
+          height: 24px;
+        }
+        .icon-arrow {
+          display: none;
+        }
+      }
+    }
+  }
+  .my-page-schedule-element {
+    padding: 12px;
+    .schedule-content {
+      display: block;
+      .schedule-description {
+        padding-left: 0;
+        .schedule-button {
+          justify-content: space-between;
+        }
+      }
+      .schedule-image{
+        width: 100%;
+        height: auto;
+        margin-bottom: 12px;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+  .no-data-element {
+    padding: 40px 0 57px;
+    .no-data-content {
+      img {
+        width: 154px;
+        height: 131px;
+      }
+      font-size: 14px;
+      line-height: 22px;
     }
   }
 }

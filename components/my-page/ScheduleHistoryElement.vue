@@ -1,0 +1,39 @@
+<template>
+  <div class="my-page-schedule-element schedule-history">
+    <div class="title-create">
+      {{ $t('schedule.created_at') }}:{{ schedule.created_at }}
+    </div>
+    <div class="schedule-title">
+      <div class="title-main">{{ schedule.job_name }}</div>
+      <div class="sub-title">{{ schedule.store_name }}</div>
+    </div>
+    <div class="schedule-content">
+      <div class="schedule-image">
+        <img :src="schedule.image" alt="">
+      </div>
+      <div class="schedule-description">
+        <div>
+          <span class="bold">{{ $t('schedule.date') }}</span><span>{{ schedule.date }}</span>
+        </div>
+        <div>
+          <span class="bold">{{ $t('schedule.method') }}</span><span>{{ schedule.method }}</span>
+        </div>
+        <div>
+          <span class="bold">{{ $t('schedule.place') }}</span><span>{{ schedule.place }}</span>
+        </div>
+        <div class="schedule-button">
+          <el-button :loading="loading" :disabled="schedule.change_date_state" type="danger">{{ $t('schedule.change') }}</el-button>
+          <el-button :loading="loading">{{ $t('button.cancel') }}</el-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: 'ScheduleHistoryElement',
+  props: ['schedule']
+}
+</script>

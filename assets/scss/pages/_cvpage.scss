@@ -5,7 +5,6 @@
   }
 }
 .edit-cv-element {
-  padding-left: 29px;
   width: 100%;
   .edit-cv-title {
     font-weight: 700;
@@ -145,16 +144,17 @@
   }
 }
 .menu-left-element {
+  margin-right: 29px;
   .menu-left {
     text-decoration: none;
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
     padding: 16px 14px 16px 24px;
-    margin-top: 3px;
+    margin-bottom: 3px;
     color: $color-text-primary;
     background-color: $color-primary;
-    width: 241px;
+    width: 203px;
     display: flex;
     justify-content: space-between;
     border-radius: 4px;

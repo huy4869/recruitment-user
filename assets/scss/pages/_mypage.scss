@@ -20,9 +20,6 @@
       color: $color-text-3;
     }
   }
-  .title-sp {
-
-  }
   .index-cv-content {
     display: flex;
     justify-content: space-between;
@@ -151,6 +148,143 @@
           top: 10px;
           right: 10px;
         }
+      }
+    }
+  }
+}
+
+.my-page-top-element {
+  width: 100%;
+  .top-page-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: $color-text-primary;
+    background-color: $color-primary;
+    border-left: 5px solid $color-text-primary;
+    padding: 11px 0 11px 100px;
+    position: relative;
+    margin-bottom: 24px;
+    img {
+      position: absolute;
+      top: -24px;
+      left: 0;
+    }
+  }
+  .top-page-content {
+    .button-view-all {
+      color: $color-text-primary;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      margin: 32px 0 70px;
+      img {
+        margin-right: 8px;
+      }
+    }
+  }
+  .button-footer {
+    display: flex;
+    justify-content: space-between;
+    .button-item {
+      width: 27.666%;
+      border-bottom: 3px solid $color-blue-4;
+      border-radius: 4px;
+      background-color: $color-blue;
+      padding: 24px 18px;
+      display: flex;
+      justify-content: space-between;
+      height: 29px;
+      cursor: pointer;
+      span {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 28px;
+        color: $color-white;
+        margin-left: 6px;
+      }
+      .icon-arrow {
+        margin-top: 4px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}
+
+.my-page-schedule-element {
+  box-shadow: 0px 1px 7px rgba(177, 175, 175, 0.25);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  .schedule-title {
+    margin-bottom: 12px;
+    .title-main {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 28px;
+    }
+    .sub-title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: $color-text-3;
+      margin-top: 3px;
+    }
+  }
+  .schedule-content {
+    display: flex;
+    .schedule-image {
+      width: 134px;
+      height: 89px;
+    }
+    .schedule-button {
+      margin-top: 12px;
+      display: flex;
+    }
+    .schedule-description {
+      padding-left: 16px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      div {
+        margin-bottom: 7px;
+      }
+      .bold {
+        margin-right: 4px;
+      }
+      .desc-date {
+        color: $color-blue;
+        font-weight: 700;
+      }
+      .desc-state {
+        display: inline-block;
+        font-weight: 700;
+        background-color: $color-blue;
+        border-radius: 4px;
+        color: $color-white;
+        margin-left: 10px;
+        padding: 1px 6px;
+      }
+    }
+  }
+}
+.schedule-history {
+  padding: 12px 24px 16px;
+  .title-create {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: $color-text-primary;
+    margin-bottom: 12px;
+  }
+  .schedule-content {
+    .schedule-image {
+      width: 230px;
+      height: 153px;
+      img {
+        width: 230px;
+        height: 153px;
       }
     }
   }
