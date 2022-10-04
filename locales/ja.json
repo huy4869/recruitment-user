@@ -55,7 +55,8 @@
   "page": {
     "home": "ホームページ",
     "my_page": "マイページ",
-    "web_cv": "Web履歴書"
+    "web_cv": "Web履歴書",
+    "sub_web_cv": "美容室オーナが探すため、WEB履歴書を更新しましょう！"
   },
   "favorite_job": {
     "place": "勤務場所",
@@ -84,7 +85,6 @@
     "chat": "チャット",
     "change_password": "パスワードの変更",
     "edit_basic_information": "基本情報編集",
-    "basic_information": "基本情報",
     "update_profile_picture": "プロフィール画像をアップロード",
     "image_avatar": "プロフィール画像",
     "image_detail": "実績紹介写真",
@@ -106,6 +106,15 @@
     "furi_first_name": "セイ",
     "furi_last_name": "メイ",
     "enter_alias_name": "表示名を入力",
-    "enter_address": "例）１２−３ 〇〇マンション１０１号"
+    "enter_address": "例）１２−３ 〇〇マンション１０１号",
+    "last_updated": "最終更新日",
+    "complete_each_item": "各項目の完成度",
+    "item_completed": "項目完了しています",
+    "basic_information": "基本情報",
+    "qualification": "資格",
+    "job_career": "職務経歴",
+    "education_background": "学歴",
+    "self_pr": "自己PR",
+    "motivation": "志望動機"
   }
 }

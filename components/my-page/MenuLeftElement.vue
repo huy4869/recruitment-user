@@ -1,14 +1,26 @@
 <template>
   <div class="menu-left-element">
-    <div v-for="(menu, key) in menuLeft" :key="key">
-      <router-link v-if="menu.key === menuActive" class="menu-left menu-active" :to="menu.route">
-        <span class="menu-name">{{ menu.name }}</span>
-        <img src="/assets/icon/icon_arrow_active.svg" alt="">
-      </router-link>
-      <router-link v-else class="menu-left" :to="menu.route">
-        <span class="menu-name">{{ menu.name }}</span>
-        <img src="/assets/icon/icon_arrow.svg" alt="">
-      </router-link>
+    <div class="show-pc">
+      <div v-for="(menu, key) in menuLeft" :key="key">
+        <router-link v-if="menu.key === menuActive" class="menu-left menu-active" :to="menu.route">
+          <span class="menu-name">{{ menu.name }}</span>
+          <img src="/assets/icon/icon_arrow_active.svg" alt="">
+        </router-link>
+        <router-link v-else class="menu-left" :to="menu.route">
+          <span class="menu-name">{{ menu.name }}</span>
+          <img src="/assets/icon/icon_arrow.svg" alt="">
+        </router-link>
+      </div>
+    </div>
+    <div class="show-sp">
+      <el-select v-model="menuActiveSelect">
+        <el-option
+          v-for="item in menuLeft"
+          :key="item.key"
+          :label="item.name"
+          :value="item.key">
+        </el-option>
+      </el-select>
     </div>
   </div>
 </template>
@@ -19,6 +31,7 @@ export default {
   props: ['menuActive'],
   data() {
     return {
+      menuActiveSelect: '',
       menuLeft: [
         { name: this.$t('my_page.top_page'), key: 'top_page', route: '/' },
         { name: this.$t('my_page.history'), key: 'history', route: '/' },
@@ -27,6 +40,14 @@ export default {
         { name: this.$t('my_page.chat'), key: 'chat', route: '/' },
         { name: this.$t('my_page.change_password'), key: 'change_password', route: '/' }
       ]
+    }
+  },
+  created() {
+    this.menuActiveSelect = this.menuActive
+  },
+  watch: {
+    menuActive(value) {
+      this.menuActiveSelect = value
     }
   }
 }
