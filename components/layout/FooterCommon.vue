@@ -2,12 +2,12 @@
   <footer class="footer">
     <div class="container-footer">
       <div class="footer-item">
-        <div>{{ $t('footer.company') }}</div>
-        <div>{{ $t('footer.faq') }}</div>
+        <div class="show-sp-center">{{ $t('footer.company') }}</div>
+        <div class="show-sp-center">{{ $t('footer.faq') }}</div>
         <div>{{ $t('footer.terms') }}</div>
         <div>{{ $t('footer.privacy') }}</div>
         <div>{{ $t('footer.inquiry') }}</div>
-        <img class="top-arrow" src="@/static/assets/icon/top-arrow.svg" alt="top-arrow">
+        <img class="top-arrow show-pc" src="@/static/assets/icon/top-arrow.svg" alt="top-arrow">
       </div>
       <div class="logo">LOGO</div>
       <div class="copy-right">
