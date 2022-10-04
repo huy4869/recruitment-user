@@ -4,15 +4,19 @@
   height: 100vh;
   #register-element {
     .login-title {
-      margin: 0 auto 48px;
+      margin: 0 auto 1.5em;
     }
+  }
+  #forgot-des {
+    width: 550px;
+    margin-bottom: 2.5rem;
   }
   .login-element {
     max-width: 1280px;
     margin: auto;
     .login-title {
       text-align: center;
-      margin: 123px auto 48px;
+      margin: 123px auto 1.5em;
       font-style: normal;
       font-weight: 700;
       font-size: 32px;
@@ -80,7 +84,9 @@
     .terms {
       margin-left: 0.5rem;
     }
-
+    #here-login {
+      display: none;
+    }
   }
   .label {
     font-weight: 700;

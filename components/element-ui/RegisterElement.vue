@@ -82,7 +82,7 @@
           </el-form-item>
           <div class="register-here text-primary-black text-center">
             <span class="text-mobile">{{ $t('register.have_account') }}</span>
-            <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('register')">{{ $t('register.here') }}</span>
+            <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('login')">{{ $t('register.here') }}</span>
           </div>
         </el-form>
       </el-col>
@@ -110,6 +110,19 @@ export default {
       if (!validEmail(value)) {
         callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))
       } else {
+        callback()
+      }
+    }
+    const validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('account.password') }).toString()))
+      } else {
+        if (value.length < 4 || value.length > 12) {
+          callback(new Error(this.$t('validation.pass_format')))
+        }
+        if (this.accountForm.password_confirmation !== '') {
+          this.$refs.accountForm.validateField('password_confirmation')
+        }
         callback()
       }
     }
@@ -141,7 +154,8 @@ export default {
           { validator: validFormEmail, trigger: 'blur' }
         ],
         password: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('login.password') }), trigger: 'blur' }
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('login.password') }), trigger: 'blur' },
+          { validator: validatePass, trigger: 'blur' }
         ],
         password_confirmation: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }), trigger: 'blur' },
@@ -226,8 +240,8 @@ export default {
         }
       })
     },
-    async changeLink(state) {
-      await this.$emit('change', state)
+    changeLink(state) {
+      this.$router.push(state)
     }
   }
 }

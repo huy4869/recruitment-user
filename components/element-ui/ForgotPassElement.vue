@@ -1,8 +1,12 @@
 <template>
   <div class="login-element">
     <el-row>
-      <el-col class="col-mobile" :span="12">
-        <div class="login-title">{{ $t('login.title') }}</div>
+      <el-col class="col-mobile"  :span="12">
+        <div class="login-title">{{ $t('forgot_pass.title') }}</div>
+        <div id="forgot-des" class="text-center">
+          <div class="text-primary-black text-mobile">{{ $t('forgot_pass.description') }}</div>
+          <div class="text-primary-black text-mobile">{{ $t('forgot_pass.description_second') }}</div>
+        </div>
         <el-form
           ref="accountForm"
           :model="accountForm"
@@ -10,7 +14,7 @@
           autocomplete="off"
           label-position="left"
         >
-          <el-form-item class="email-login" label="" prop="email" :error="(error.key === 'email') ? error.value : ''">
+          <el-form-item class="email-login" prop="email" :error="(error.key === 'email') ? error.value : ''">
             <div class="label">{{ $t('login.email') }}</div>
             <el-input
               ref="email"
@@ -23,32 +27,7 @@
               @focus="resetValidate('email')"
             />
           </el-form-item>
-          <el-form-item class="password-login" label="" prop="password">
-            <div class="label">{{ $t('login.password') }}</div>
-            <el-input
-              ref="password"
-              v-model="accountForm.password"
-              :placeholder="$t('login.password')"
-              name="password"
-              type="password"
-              tabindex="3"
-              maxlength="32"
-              autocomplete="off"
-              @keydown.native.enter="login"
-              @keydown.native.tab.prevent="$refs.email.focus()"
-              @focus="resetValidate('password')"
-              show-password
-            />
-          </el-form-item>
-          <div class="d-flex align-items-center check-remember">
-            <el-checkbox v-model="accountForm.remember" :label="$t('login.remember_me')" size="large"></el-checkbox>
-            <div class="login-here">
-              <span>{{ $t('login.forgot_password') }}</span>
-              <span class="forgot-password" @click="changeLink('forgot-password')">
-                {{ $t('login.here') }}
-              </span>
-            </div>
-          </div>
+
           <el-form-item class="button-login">
             <div :class="{'disabled' : disabledButton}">
               <el-button
@@ -58,18 +37,12 @@
                 type="danger"
                 @click.native.prevent="login"
               >
-                {{ $t('login.title') }}
+                {{ $t('register.send') }}
               </el-button>
             </div>
           </el-form-item>
-          <div class="link-register">
-            <span class="register-button" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
-          </div>
-          <div id="here-login" class="here-mobile text-center">
-            <span class="text-primary-black">{{ $t('login.forgot_password') }}</span>
-            <span class="text-primary-pink cursor-pointer" @click="changeLink('forgot-password')">
-                {{ $t('login.here') }}
-              </span>
+          <div class="here-mobile text-center">
+            <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
           </div>
         </el-form>
       </el-col>
@@ -91,7 +64,7 @@ import {
 import { validEmail } from '@/utils/validate'
 
 export default {
-  name: 'LoginElement',
+  name: 'ForgotElement',
   data() {
     const validFormEmail = (rule, value, callback) => {
       if (!validEmail(value)) {
@@ -100,13 +73,12 @@ export default {
         callback()
       }
     }
-    const validatePass = (rule, value, callback) => {
+    const validateConfirmPass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error(this.$t('validation.required', { _field_: this.$t('account.password') }).toString()))
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }).toString()))
+      } else if (value !== this.accountForm.password) {
+        callback(new Error(this.$t('validation.passNotMatch').toString()))
       } else {
-        if (value.length < 4 || value.length > 12) {
-          callback(new Error(this.$t('validation.pass_format')))
-        }
         callback()
       }
     }
@@ -114,7 +86,9 @@ export default {
       accountForm: {
         email: '',
         password: '',
-        remember: false,
+        password_confirmation: '',
+        has_terms: false,
+        has_agreement: false,
         errors: {}
       },
       error: {
@@ -127,9 +101,15 @@ export default {
           { validator: validFormEmail, trigger: 'blur' }
         ],
         password: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('login.password') }), trigger: 'blur' },
-          { validator: validatePass, trigger: 'blur' }
-
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('login.password') }), trigger: 'blur' }
+        ],
+        password_confirmation: [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }), trigger: 'blur' },
+          {
+            validator: validateConfirmPass,
+            message: this.$t('validation.passNotMatch'),
+            trigger: 'blur'
+          }
         ],
         remember: []
       },
@@ -141,7 +121,7 @@ export default {
   },
   computed: {
     disabledButton() {
-      return this.accountForm.email === '' || this.accountForm.password === '' || !this.accountForm.remember
+      return this.accountForm.email === ''
     }
   },
   created() {
@@ -211,6 +191,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-</style>
