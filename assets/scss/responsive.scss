@@ -1,9 +1,9 @@
 @media only screen and (max-width: 1280px) {
   .login-page {
-    height: fit-content !important;
+    height: fit-content;
     #register-element {
       .login-title {
-        margin: 123px auto 48px !important;
+        margin: 123px auto 1.5em;
       }
       .image-login {
         display: none;
@@ -11,28 +11,31 @@
     }
     .login-element {
       .login-title {
-        width: 100%;
-        font-size: 24px !important ;
+        font-size: 24px;
       }
       .col-mobile {
         float: none;
       }
       .image-login {
-        padding-left: 0 !important;
+        padding-left: 0;
       }
       .login-here {
         display: none;
       }
       .here-mobile {
+        &#here-login {
+          display: block;
+          margin: 20px 0 30px 0;
+        }
         display: block;
-        margin: 20px 0 30px 0;
+        margin: 20px 0 50px 0;
       }
       .register-here {
         padding-bottom: 110px;
       }
     }
   }
-  .text-mobile, .el-form-item__label, .el-checkbox__label {
+  .text-mobile, .el-form-item__label, .el-checkbox__label, .label, span {
     font-size: 14px !important;
   }
 }
@@ -117,10 +120,15 @@
     }
   }
   .login-page {
+    #forgot-des {
+      width: 94%;
+      font-size: 14px;
+      margin: 2.5em auto;
+    }
     .login-element {
       width: 100%;
       .login-title {
-        width: 100% !important;
+        width: 100%;
       }
       .col-mobile {
         width: 100%;
@@ -129,7 +137,7 @@
         }
       }
       form {
-        width: calc(100% - 3rem) !important;
+        width: calc(100% - 3rem);
         padding: 0 1.5rem;
       }
     }
