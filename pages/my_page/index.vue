@@ -7,6 +7,7 @@
       <TopPageElement v-if="statePage === 'top_page'"></TopPageElement>
       <ApplicationHistoryElement v-if="statePage === 'application_history'"></ApplicationHistoryElement>
       <IndexCvElement v-if="statePage === 'web_cv'"></IndexCvElement>
+      <ChangePasswordElement v-if="statePage === 'change_password'"></ChangePasswordElement>
     </div>
   </div>
 </template>
@@ -18,14 +19,23 @@ import MenuLeftElement from '../../components/my-page/MenuLeftElement'
 import IndexCvElement from '../../components/my-page/IndexCvElement'
 import TopPageElement from '../../components/my-page/TopPageElement'
 import ApplicationHistoryElement from '../../components/my-page/ApplicationHistoryElement'
+import ChangePasswordElement from '../../components/my-page/ChangePasswordElement'
 import { INDEX_SET_TITLE_MENU } from '../../store/store.const'
 
 export default {
   name: 'MyPage',
-  components: { TitlePageElement, BannerElement, MenuLeftElement, IndexCvElement, TopPageElement, ApplicationHistoryElement },
+  components: {
+    TitlePageElement,
+    BannerElement,
+    MenuLeftElement,
+    IndexCvElement,
+    TopPageElement,
+    ApplicationHistoryElement,
+    ChangePasswordElement
+  },
   data() {
     return {
-      statePage: 'application_history',
+      statePage: 'change_password',
       titlePage: {
         'top_page': this.$t('page.my_page'),
         'application_history': this.$t('page.my_page'),

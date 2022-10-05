@@ -376,3 +376,24 @@
     }
   }
 }
+
+.change-password-element {
+  width: 100%;
+  .change-password-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .change-password-content {
+    .button-change {
+      margin-top: 24px;
+      padding-left: 31px;
+      .el-button {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        padding: 12px 43px;
+      }
+    }
+  }
+}
