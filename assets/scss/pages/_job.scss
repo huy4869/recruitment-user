@@ -1,66 +1,99 @@
- .favorite-job-element {
-   padding: 1.5rem;
-   border: 2px solid #FED6D7;
-   border-radius: 4px;
+.card-component {
+  width: 100%;
+  .favorite-job-element {
+    padding: 1.5rem;
+    border: 2px solid $border-focus;
+    border-radius: 4px;
+    margin-left: 29px;
 
-   .job-title {
-    margin-bottom: 21px;
-
-     .title-left {
-       margin-left: 1.5rem;
-
-       .card-subtitle {
-         margin: 0.5rem 0 18px 0
-       }
-     }
-   }
-
-  .job-box {
-    display: grid;
-    grid-template-columns: 170px calc(100% - 170px);
-
-    .left-item {
-      background: $color-blue-3;
-      border-radius: 4px;
-      height: 96%;
-
-      p {
-        margin-left: 1.5rem;
-      }
+    .card-text-title {
+      margin-bottom: 1em;
     }
 
-    .right-item {
-      border-bottom: 1px solid $border-default;
-      margin-left: 20px;
+    .job-title {
 
-      &.first-right-item {
-        border-top: 1px solid $border-default;
+      margin-bottom: 21px;
+
+      .title-left {
+        margin-left: 1.5rem;
+
+        .card-subtitle {
+          margin: 0.5rem 0 18px 0
+        }
       }
 
-      .text-ellipsis {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        width: 90%;
+      .avatar-img {
+        margin-right: 1.5em;
       }
 
-      .item-status {
-        gap: 0.625rem;
-
-        .text-status {
-          color: $color-text-primary;
-          border: 1px solid $color-text-primary;
-          border-radius: 2px;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 22px;
-          padding: 3px 8px;
-          width: fit-content;
+      .social-media {
+        img {
+          margin-right: 9px;
         }
       }
     }
+
+    .job-box {
+      display: grid;
+      grid-template-columns: 170px calc(100% - 160px);
+
+      .left-item {
+        background: $color-blue-3;
+        border-radius: 4px;
+        height: 96%;
+
+        p {
+          margin-left: 1.5rem;
+        }
+      }
+
+      .right-item {
+        border-bottom: 1px solid $border-default;
+        margin-left: 20px;
+
+        &.first-right-item {
+          border-top: 1px solid $border-default;
+        }
+
+        .text-ellipsis {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          //white-space: nowrap;
+          width: 90%;
+        }
+
+        .item-status {
+          gap: 0.625rem;
+
+          .text-status {
+            color: $color-text-primary;
+            border: 1px solid $color-text-primary;
+            border-radius: 2px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 22px;
+            padding: 3px 8px;
+            width: fit-content;
+          }
+        }
+
+        &#img-detail {
+          padding: 16px 0 20px 0;
+          img {
+            padding-right: 20px;
+          }
+        }
+      }
+    }
+
+    .union-icon {
+      margin-right: 0.75rem;
+    }
+    .img-detail-mobile {
+      display: none;
+    }
   }
-   .union-icon {
-     margin-right: 0.75rem;
-   }
+}
+ .text-center {
+   margin: 24px 0 0 29px;
  }

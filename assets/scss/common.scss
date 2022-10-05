@@ -408,6 +408,13 @@ hr {
 }
 
 .card-component {
+
+  .card-text-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+  }
+
   .card-text-primary {
     font-size: 16px;
     line-height: 24px;
@@ -439,6 +446,14 @@ hr {
     height: 30px;
     border: none;
     padding: 3px 16px;
+  }
+
+  .card-button {
+    height: 48px;
+    padding: 12px 59px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1px;
   }
 }
 .text-primary-blue {
