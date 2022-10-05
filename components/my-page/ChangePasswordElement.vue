@@ -14,7 +14,7 @@
         >
           <div class="edit-form-input">
             <BorderElement :middle="false"></BorderElement>
-            <el-row class="d-flex">
+            <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="24" class="col-label">
                 <div class="label"><span>{{ $t('my_page.current_password') }}</span></div>
               </el-col>
@@ -42,7 +42,7 @@
               </el-col>
             </el-row>
             <BorderElement :middle="true"></BorderElement>
-            <el-row class="d-flex">
+            <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="24" class="col-label">
                 <div class="label"><span>{{ $t('my_page.new_password') }}</span></div>
               </el-col>
@@ -70,7 +70,7 @@
               </el-col>
             </el-row>
             <BorderElement :middle="true"></BorderElement>
-            <el-row class="d-flex">
+            <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="24" class="col-label">
                 <div class="label">
                   <span>{{ $t('my_page.new_password_confirmation') }}</span>
@@ -102,7 +102,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
           </div>
-          <el-row class="d-flex">
+          <el-row class="d-flex form-label-input">
             <el-col :md="6" :sm="24" class="show-pc">
             </el-col>
             <el-col :md="18" :sm="24">

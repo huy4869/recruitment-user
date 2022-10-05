@@ -59,3 +59,6 @@ export const CHAT_FETCH_UN_READ_MESSAGE = 'chat/fetchUnreadMessage'
 export const CHAT_SET_CHAT_WITH_SHOP = 'chat/setChatWithShop'
 export const CHAT_SET_SWITCH_CHAT = 'chat/setSwitchChat'
 export const CHAT_SET_UN_READ_MESSAGE = 'chat/setUnreadMessage'
+
+// my_page
+export const MY_PAGE_SET_STATE_PAGE = 'my_page/setStatePage'

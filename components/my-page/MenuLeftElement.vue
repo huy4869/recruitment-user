@@ -2,7 +2,7 @@
   <div class="menu-left-element">
     <div class="show-pc">
       <div v-for="(menu, key) in menuLeft" :key="key" @click="changeToPage(menu.key)">
-        <div v-if="menu.key === menuActive" class="menu-left menu-active">
+        <div v-if="menu.key === statePage" class="menu-left menu-active">
           <span class="menu-name">{{ menu.name }}</span>
           <img src="/assets/icon/icon_arrow_active.svg" alt="">
         </div>
@@ -26,6 +26,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { MY_PAGE_SET_STATE_PAGE } from '../../store/store.const'
+
 export default {
   name: 'MenuLeftElement',
   props: ['menuActive'],
@@ -42,17 +45,28 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapState({
+      statePage: state => state.my_page.statePage
+    })
+  },
   created() {
-    this.menuActiveSelect = this.menuActive
+    if (this.menuActive) {
+      this.menuActiveSelect = this.menuActive
+      this.$store.commit(MY_PAGE_SET_STATE_PAGE, this.menuActive)
+    } else {
+      this.menuActiveSelect = this.statePage
+    }
   },
   watch: {
-    menuActive(value) {
+    statePage(value) {
       this.menuActiveSelect = value
     }
   },
   methods: {
     changeToPage(page) {
-      this.$emit('changePage', page)
+      this.$store.commit(MY_PAGE_SET_STATE_PAGE, page)
+      this.$router.push('/my_page')
     }
   }
 }
