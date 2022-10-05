@@ -513,15 +513,32 @@
       }
     }
   }
+  .edit-cv-element {
+    margin-top: -20px;
+    .edit-cv-title {
+      display: none;
+    }
+    .edit-cv-content {
+      padding: 0 12px;
+      .basic-information {
+        font-size: 16px !important;
+        line-height: 24px;
+        margin-top: 0;
+        padding-bottom: 8px;
+        margin-bottom: 20px;
+      }
+    }
+  }
   .edit-form-content {
     .edit-form-input {
       .border-input {
         display: none;
       }
-      .d-flex {
+      .form-label-input {
         flex-direction: column;
       }
       .col-label {
+        display: flex;
         .label {
           background-color: $color-white;
           font-weight: 700;
@@ -534,9 +551,43 @@
           }
         }
       }
+      .required {
+        position: relative;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        padding: 0 6px;
+        font-size: 13px;
+        line-height: 22px;
+        margin-left: 6px;
+      }
       .content-input {
         margin: 5px 0 24px;
         padding: 0;
+        .button-upload {
+          margin-left: 0;
+        }
+      }
+      .image-avatar {
+        margin-bottom: 0;
+        display: block;
+        .el-form-item__content {
+          line-height: 40px;
+        }
+        .button-upload {
+          display: inline-block;
+          margin-left: 0;
+          width: 242px;
+          button {
+            bottom: 0;
+            label {
+              width: 242px;
+              display: block;
+              padding: 4px 0;
+              text-align: center;
+            }
+          }
+        }
       }
     }
   }
