@@ -143,6 +143,8 @@
     "self_pr": "自己PR",
     "motivation": "志望動機",
     "schedule_interview": "面接予定",
-    "application_history": "応募履歴"
+    "application_history": "応募履歴",
+    "back": "戻る",
+    "edit": "編集"
   }
 }
