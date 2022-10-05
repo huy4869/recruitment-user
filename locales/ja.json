@@ -145,6 +145,10 @@
     "schedule_interview": "面接予定",
     "application_history": "応募履歴",
     "back": "戻る",
-    "edit": "編集"
+    "edit": "編集",
+    "current_password": "現在のパスワード",
+    "new_password": "新しいパスワード",
+    "new_password_confirmation": "新しいパスワード確認",
+    "change": "変更する"
   }
 }
