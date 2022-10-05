@@ -92,8 +92,6 @@
     }
     .schedule-content {
       .schedule-image {
-        width: 134px;
-        height: 89px;
         img {
           width: 134px;
           height: 89px;
@@ -101,7 +99,35 @@
       }
     }
   }
-
+}
+@media screen and (max-width: 720px) {
+  .my-page-schedule-element {
+    padding: 12px;
+    .schedule-content {
+      display: block;
+      .schedule-description {
+        padding-left: 0;
+        .schedule-button {
+          display: flex;
+          .el-button--default {
+            padding: 12px 37px;
+          }
+        }
+        span {
+          word-break: break-all;
+        }
+      }
+      .schedule-image{
+        width: 100%;
+        height: auto;
+        margin-bottom: 12px;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 540px) {
@@ -154,6 +180,13 @@
       form {
         width: calc(100% - 3rem);
         padding: 0 1.5rem;
+      }
+    }
+  }
+  .header-common {
+    .header-container{
+      .header-logo{
+        margin: 12px;
       }
     }
   }
@@ -244,6 +277,7 @@
   }
   .menu-left-element {
     padding: 16px 12px;
+    margin-right: 0;
     .el-select {
       width: 100%;
       .el-input {
@@ -303,27 +337,6 @@
       }
     }
   }
-  .my-page-schedule-element {
-    padding: 12px;
-    .schedule-content {
-      display: block;
-      .schedule-description {
-        padding-left: 0;
-        .schedule-button {
-          justify-content: space-between;
-        }
-      }
-      .schedule-image{
-        width: 100%;
-        height: auto;
-        margin-bottom: 12px;
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-    }
-  }
   .no-data-element {
     padding: 40px 0 57px;
     .no-data-content {
@@ -333,6 +346,63 @@
       }
       font-size: 14px;
       line-height: 22px;
+    }
+  }
+  .application-history-element {
+    .application-history-content {
+      padding: 0 12px;
+    }
+    .application-history-title {
+      margin: 0 12px 24px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      color: $color-text-primary;
+      background-color: $color-primary;
+      border-left: 5px solid $color-text-primary;
+      padding: 9px 11px;
+    }
+    .pagination-common {
+      .pagination {
+        justify-content: center;
+        padding: 0;
+      }
+    }
+  }
+  .schedule-history {
+    .schedule-status {
+      margin-bottom: 12px;
+      .schedule-button-status {
+        position: relative;
+        width: max-content;
+        top: 0;
+        right: unset;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .my-page-schedule-element {
+    .schedule-content {
+      .schedule-description {
+        .schedule-button {
+          .el-button--default {
+            padding: 12px 24px;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 280px) {
+  .my-page-schedule-element {
+    .schedule-content {
+      .schedule-description {
+        .schedule-button {
+          display: inline-block;
+        }
+      }
     }
   }
 }

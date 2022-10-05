@@ -93,6 +93,7 @@
 .el-button--default {
   background: $color-white;
   border-radius: 4px;
+  line-height: 22px;
   border-color: $color-button-danger;
   color: $color-button-danger;
   &:hover {

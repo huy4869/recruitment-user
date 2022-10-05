@@ -42,7 +42,16 @@
     "place": "場所:",
     "change": "希望面接時間を変更",
     "cancel": "キャンセル:",
-    "created_at": "応募日時"
+    "created_at": "応募日時",
+    "interview": "面接",
+    "open_google_map": "グーグルマップを開く",
+    "status": {
+      "waiting_interview": "面接待ち",
+      "waiting_result": "結果待ち",
+      "not_adopted": "不採用",
+      "adoption": "採用",
+      "cancel": "キャンセル"
+    }
   },
   "validation": {
     "required": "{_field_}が入力されていません。",
