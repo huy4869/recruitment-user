@@ -1,10 +1,11 @@
 <template>
   <div class="cv-page">
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="titlePage" :sub-banner="subTitle"></BannerElement>
+    <BannerElement :banner="titlePage[statePage]" :sub-banner="subTitle"></BannerElement>
     <div class="cv-content">
       <MenuLeftElement :menu-active="statePage" @changePage="changeStatePage"></MenuLeftElement>
       <TopPageElement v-if="statePage === 'top_page'"></TopPageElement>
+      <ApplicationHistoryElement v-if="statePage === 'application_history'"></ApplicationHistoryElement>
       <IndexCvElement v-if="statePage === 'web_cv'"></IndexCvElement>
     </div>
   </div>
@@ -16,15 +17,23 @@ import TitlePageElement from '../../components/layout/TitlePageElement'
 import MenuLeftElement from '../../components/my-page/MenuLeftElement'
 import IndexCvElement from '../../components/my-page/IndexCvElement'
 import TopPageElement from '../../components/my-page/TopPageElement'
+import ApplicationHistoryElement from '../../components/my-page/ApplicationHistoryElement'
 import { INDEX_SET_TITLE_MENU } from '../../store/store.const'
 
 export default {
   name: 'MyPage',
-  components: { TitlePageElement, BannerElement, MenuLeftElement, IndexCvElement, TopPageElement },
+  components: { TitlePageElement, BannerElement, MenuLeftElement, IndexCvElement, TopPageElement, ApplicationHistoryElement },
   data() {
     return {
-      statePage: 'top_page',
-      titlePage: this.$t('my_page.top_page'),
+      statePage: 'application_history',
+      titlePage: {
+        'top_page': this.$t('page.my_page'),
+        'application_history': this.$t('page.my_page'),
+        'favorite_job': this.$t('page.my_page'),
+        'web_cv': this.$t('page.web_cv'),
+        'chat': this.$t('page.my_page'),
+        'change_password': this.$t('page.my_page')
+      },
       subTitle: this.$t('page.sub_web_cv')
     }
   },
@@ -37,7 +46,6 @@ export default {
   methods: {
     changeStatePage(page) {
       this.statePage = page
-      this.titlePage = this.$t('my_page.' + page)
     }
   }
 }

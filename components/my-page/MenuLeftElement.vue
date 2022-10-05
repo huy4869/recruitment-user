@@ -34,7 +34,7 @@ export default {
       menuActiveSelect: '',
       menuLeft: [
         { name: this.$t('my_page.top_page'), key: 'top_page' },
-        { name: this.$t('my_page.history'), key: 'history' },
+        { name: this.$t('my_page.history'), key: 'application_history' },
         { name: this.$t('my_page.favorite_job'), key: 'favorite_job' },
         { name: this.$t('my_page.web_cv'), key: 'web_cv' },
         { name: this.$t('my_page.chat'), key: 'chat' },

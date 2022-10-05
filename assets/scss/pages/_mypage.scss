@@ -235,12 +235,15 @@
   .schedule-content {
     display: flex;
     .schedule-image {
-      width: 134px;
-      height: 89px;
+      img {
+        width: 134px;
+        height: 89px;
+      }
     }
     .schedule-button {
-      margin-top: 12px;
-      display: flex;
+      .el-button {
+        margin-top: 12px;
+      }
     }
     .schedule-description {
       padding-left: 16px;
@@ -271,6 +274,7 @@
 }
 .schedule-history {
   padding: 12px 24px 16px;
+  position: relative;
   .title-create {
     font-weight: 500;
     font-size: 14px;
@@ -278,14 +282,97 @@
     color: $color-text-primary;
     margin-bottom: 12px;
   }
+  .schedule-title {
+    .title-main {
+      .show-interview {
+        background-color: $color-blue;
+        position: relative;
+        display: inline-block;
+        top: -2px;
+        margin-right: 8px;
+        border-radius: 2px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        padding: 1px 6px;
+        color: $color-white;
+      }
+    }
+  }
+  .schedule-status {
+    .schedule-button-status {
+      position: absolute;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: $color-white;
+      padding: 3px 16px;
+      border-radius: 4px;
+      top: 12px;
+      right: 24px;
+    }
+  }
+  .status-waiting_interview {
+    background-color: $color-blue-2;
+  }
+  .status-waiting_result {
+    background-color: $color-orange;
+  }
+  .status-not_adopted {
+    background-color: $color-placeholder;
+  }
+  .status-adoption {
+    background-color: $color-green;
+  }
+  .status-cancel {
+    background-color: $color-placeholder;
+  }
   .schedule-content {
     .schedule-image {
-      width: 230px;
-      height: 153px;
       img {
         width: 230px;
         height: 153px;
       }
+    }
+    .schedule-description {
+      .open-google-map {
+        margin-bottom: 0;
+        display: inline-flex;
+        position: relative;
+        cursor: pointer;
+        .show-button-google-map {
+          margin-bottom: 0;
+          display: flex;
+          padding-left: 24px;
+          img {
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            left: 0;
+          }
+          span {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            color: $color-blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+.application-history-element {
+  width: 100%;
+  .application-history-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 24px;
+  }
+  .pagination-common {
+    .pagination {
+      justify-content: right;
     }
   }
 }

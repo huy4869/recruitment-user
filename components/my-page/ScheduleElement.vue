@@ -32,6 +32,11 @@
 
 export default {
   name: 'ScheduleElement',
-  props: ['schedule']
+  props: ['schedule'],
+  data() {
+    return {
+      loading: false
+    }
+  }
 }
 </script>

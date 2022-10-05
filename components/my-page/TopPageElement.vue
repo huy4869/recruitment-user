@@ -78,8 +78,8 @@ export default {
     }
   },
   created() {
-    // this.getDataSchedule()
-    // this.getDataScheduleHistory()
+    this.getDataSchedule()
+    this.getDataScheduleHistory()
   },
   methods: {
     getDataSchedule() {
