@@ -13,6 +13,9 @@
     color: $color-black;
   }
   .edit-cv-content {
+    .card-title-mobile {
+      display: none;
+    }
     .edit-form-input {
       margin-top: 24px;
       .border-form-middle {
@@ -31,6 +34,12 @@
         margin-bottom: 0;
       }
       .el-form-item__content {
+        .el-select {
+          width: 100%;
+        }
+        .el-input__inner {
+          color: $color-black;
+        }
         .col-label {
           position: relative;
           min-height: 100%;
@@ -141,6 +150,9 @@
       border-bottom: 2px solid $color-text-primary;
       margin-bottom: 2px;
     }
+  }
+  .btn-right {
+    margin-left: 22px;
   }
 }
 
@@ -263,6 +275,16 @@
       }
       .last-name {
         padding-left: 10px;
+      }
+      .birthday {
+        padding: 0 10px;
+      }
+      .text-normal {
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .gender {
+        padding: 0 36px 0 8px;
       }
     }
   }
