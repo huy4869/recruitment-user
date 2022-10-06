@@ -97,7 +97,10 @@
     "other": "その他"
   },
   "common": {
-    "no_data": "データがありません。"
+    "no_data": "データがありません。",
+    "all": "全",
+    "subject": "件",
+    "display_item": "{min}～{max}件目を表示中"
   },
   "button": {
     "cancel": "キャンセル",

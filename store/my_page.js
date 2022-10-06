@@ -1,5 +1,5 @@
 export const state = () => ({
-  statePage: 'top_page'
+  statePage: 'favorite_job'
 })
 
 export const mutations = {
