@@ -96,6 +96,18 @@
   }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 912px) {
+  .edit-form-content {
+    .edit-form-input {
+      .content-input {
+        .gender {
+          padding: 0 12px 0 0;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 900px) {
   .header-common {
     .header-container {
@@ -126,6 +138,15 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .edit-cv-element .edit-cv-content .edit-form-input .el-form-item__content .el-input__inner::placeholder {
+    font-size: 14px;
+  }
+  .edit-cv-element .edit-cv-content .edit-form-input .el-form-item__content .el-input__inner {
+    font-size: 14px;
   }
 }
 @media screen and (max-width: 720px) {
@@ -515,6 +536,17 @@
   }
   .edit-cv-element {
     margin-top: -20px;
+    .card-title-mobile {
+      display: block;
+      background-color: $color-primary;
+      padding: 9px 0 9px 16px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      color: $--color-primary;
+      border-left: 5px solid $--color-primary;
+      margin-top: 24px
+    }
     .edit-cv-title {
       display: none;
     }
@@ -527,6 +559,12 @@
         padding-bottom: 8px;
         margin-bottom: 20px;
       }
+    }
+  }
+  .text-center {
+    margin: 24px 0 0 0;
+    .btn-right {
+      margin-left: 14px;
     }
   }
   .edit-form-content {
@@ -566,6 +604,16 @@
         padding: 0;
         .button-upload {
           margin-left: 0;
+        }
+        .show-image {
+          &#img-avatar {
+            width: 90px;
+            height: 90px;
+          }
+          &#img-intro {
+            width: 70px;
+            height: 70px;
+          }
         }
       }
       .image-avatar {

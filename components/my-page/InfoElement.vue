@@ -123,7 +123,7 @@
     </div>
     <div class="text-center">
       <el-button class="card-button" @click="handleRouter('/my_page')">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button" type="danger" @click="handleRouter('cv')">{{ $t('my_page.edit') }}</el-button>
+      <el-button class="card-button btn-right" type="danger" @click="handleRouter('cv')">{{ $t('my_page.edit') }}</el-button>
     </div>
   </div>
 </template>
