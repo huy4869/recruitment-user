@@ -4,9 +4,20 @@
       <div class="favorite-job-page-title">
         <span>{{ $t('my_page.application_history') }}</span>
       </div>
+      <div class="show-paginate-data">
+        <div>
+          <span>{{ $t('common.all') }}</span>
+          <span class="total-record">{{ total + $t('common.subject') }}</span>
+          <span>{{ $t('common.display_item', { min: listJobs.length ? 1 : 0, max: listJobs.length }) }}</span>
+        </div>
+      </div>
       <div v-if="listJobs.length" class="favorite-job-page-content">
-        <div v-for="(schedule, index) in listJobs" :key="index">
-          <JobElement :schedule="schedule" :show-status="true"></JobElement>
+        <div v-for="(job, index) in listJobs" :key="index">
+          <JobElement :job="job" :show-status="true"></JobElement>
+        </div>
+        <div v-if="listJobs.length < total" class="button-view-all" @click="getDataJob">
+          <img src="/assets/icon/icon_add.svg" alt="">
+          <span>{{ $t('button.view_all') }}</span>
         </div>
       </div>
       <div v-else>
@@ -24,9 +35,10 @@ export default {
   components: { JobElement, NoDataElement },
   data() {
     return {
+      total: 3,
       listJobs: [],
-      page: 1,
-      lastPage: 10
+      showViewAllJob: true,
+      lastUpdated: '2022年09月26日更新'
     }
   },
   created() {
@@ -37,18 +49,20 @@ export default {
       this.page = page
     },
     getDataJob() {
-      for (let x = 0; x <= 5; x++) {
+      for (let x = 0; x <= 0; x++) {
         this.listJobs.push({
-          created_at: ['2022年08月01日（月）11:00', '2022年07月29日（金）13:23', '2022年07月22日（金）23:11'][Math.floor(Math.random() * 3)],
-          image: '/assets/icon/schedule_image_default.svg',
-          job_name: ['☆新規のお客様多数来店☆お仕事もプライベートも充実したい方、大歓迎♪', '美容を楽しみながらそれぞれのプライベートを大切にしています☆', '【働き方改革】オリジナルコミッションシステム始動！！'][Math.floor(Math.random() * 3)],
-          store_name: '虎ノ門店舗 (デモ美容室)',
-          date: ['2022年08月01日（月）11:00', '2022年08月04日（木）   08:00', '2022年08月10日（日）  14:30'][Math.floor(Math.random() * 3)],
-          method: ['対面', 'オンライン面接', '電話面接'][Math.floor(Math.random() * 3)],
-          place: ['https://meet.google.com/gpg-ftjc-demo', '〒1000001 東京都千代田区千代田１－２－４', '01234567890'][Math.floor(Math.random() * 3)],
-          change_date_state: [true, false][Math.floor(Math.random() * 2)],
-          google_map: [true, false][Math.floor(Math.random() * 2)],
-          status: ['waiting_interview', 'waiting_result', 'not_adopted', 'adoption', 'cancel'][Math.floor(Math.random() * 2)]
+          name: ['★入社祝金100万円支給！/選べる保障/完週2日30万円★', 'オープニングスタッフ募集☆週休２日＋歩合６０％', '業務委託が初めての方でも<週休2日×35万円保障>で安心'][Math.floor(Math.random() * 3)],
+          address: ['〒100-0001東京都千代田区大手町１－２－３', '東京都千代田区', '東京都千代田区'][Math.floor(Math.random() * 3)],
+          store_name: ['虎ノ門店舗 (デモ美容室)', 'デモ美容室 - 虎ノ門店舗', 'デモ美容室 - 虎ノ門店舗'][Math.floor(Math.random() * 3)],
+          status: ['waiting_interview', 'waiting_result', 'not_adopted', 'adoption', 'cancel'][Math.floor(Math.random() * 5)],
+          work_type: ['ヘア、ネイル・マツゲ、整体・カイロ・酸素・温浴', 'ヘア、ネイル・マツゲ、整体・カイロ・酸素・温浴'][Math.floor(Math.random() * 2)],
+          salary: ['10~20万/月収', '250~400万/収'][Math.floor(Math.random() * 2)],
+          work_time: ['午前9時～午後', '6~10万円/月収 残業手当があります。'][Math.floor(Math.random() * 2)],
+          shifs: ['休日・休暇', '休日・休暇'][Math.floor(Math.random() * 2)],
+          features: ['正社員', '派遣社員', 'アルバイト', 'その他'],
+          welfare_treatment_description: '・カット\n' +
+          '全体のバランスを見ながらカットを行います。髪を塗らした状態だけではなく、乾かし...',
+          last_updated: '2022年09月26日更新'
         })
       }
     }

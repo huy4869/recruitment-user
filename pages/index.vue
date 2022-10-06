@@ -1,15 +1,12 @@
 <template>
   <div>
-    <LoginElement></LoginElement>
   </div>
 </template>
 
 <script>
-import LoginElement from '../components/element-ui/LoginElement'
 
 export default {
   name: 'IndexPage',
-  components: { LoginElement },
   data() {
     return {
       windowWidth: 0

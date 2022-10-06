@@ -171,18 +171,6 @@
       left: 0;
     }
   }
-  .top-page-content {
-    .button-view-all {
-      color: $color-text-primary;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      margin: 32px 0 70px;
-      img {
-        margin-right: 8px;
-      }
-    }
-  }
   .button-footer {
     display: flex;
     justify-content: space-between;
@@ -302,30 +290,9 @@
   .schedule-status {
     .schedule-button-status {
       position: absolute;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
-      color: $color-white;
-      padding: 3px 16px;
-      border-radius: 4px;
       top: 12px;
       right: 24px;
     }
-  }
-  .status-waiting_interview {
-    background-color: $color-blue-2;
-  }
-  .status-waiting_result {
-    background-color: $color-orange;
-  }
-  .status-not_adopted {
-    background-color: $color-placeholder;
-  }
-  .status-adoption {
-    background-color: $color-green;
-  }
-  .status-cancel {
-    background-color: $color-placeholder;
   }
   .schedule-content {
     .schedule-image {
@@ -359,6 +326,40 @@
         }
       }
     }
+  }
+}
+
+.schedule-button-status {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: $color-white;
+  padding: 3px 16px;
+  border-radius: 4px;
+}
+.status-waiting_interview {
+  background-color: $color-blue-2;
+}
+.status-waiting_result {
+  background-color: $color-orange;
+}
+.status-not_adopted {
+  background-color: $color-placeholder;
+}
+.status-adoption {
+  background-color: $color-green;
+}
+.status-cancel {
+  background-color: $color-placeholder;
+}
+.button-view-all {
+  color: $color-text-primary;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin: 32px 0 70px;
+  img {
+    margin-right: 8px;
   }
 }
 
@@ -404,7 +405,30 @@
     font-weight: 700;
     font-size: 24px;
     line-height: 32px;
+    margin-bottom: 14px;
+  }
+  .show-paginate-data {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 24px;
+    .total-record {
+      color: $color-blue;
+      font-weight: 700;
+    }
+  }
+  .favorite-job-page-content {
+    .job-element {
+      margin-bottom: 24px;
+      .schedule-button-status {
+        display: inline-block;
+      }
+    }
+  }
+  .no-data-content {
+    color: $color-text-primary;
   }
 }
 
@@ -412,5 +436,61 @@
   margin-left: 0;
   .remove-button {
     object-fit: contain;
+  }
+  .job-title {
+    .title-left {
+      .card-title {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 28px;
+      }
+      .card-subtitle {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: $color-text-3;
+        margin: 8px 0 18px;
+      }
+      .btn-blue {
+        background-color: $color-blue-2;
+        padding: 3px 16px;
+        border: none;
+        span {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+  .job-box {
+    .left-item {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+    }
+    .right-item {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      .item-status {
+        padding-top: 14px;
+        .text-status {
+          display: inline-block;
+          margin-right: 10px;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .text-last-updated {
+    color: $color-text-3;
+    display: flex;
+    span {
+      margin: auto;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 22px;
+    }
   }
 }
