@@ -45,7 +45,7 @@
       <div class="index-page">
         <el-row>
           <el-col v-for="(tab, key) in listTab" :key="key" :span="12">
-            <div class="tab-index">
+            <div class="tab-index" @click="handleRouter(tab.link)">
               <img :src="tab.icon" alt="">
               <div>{{ tab.name }}</div>
               <img v-if="tab.state" class="icon-done" src="/assets/icon/mypage_done.svg" alt="">
@@ -70,37 +70,37 @@ export default {
       listTab: {
         basic: {
           icon: '/assets/icon/001-mypage.svg',
-          link: '/my-page/cv',
+          link: '/my_page/info',
           name: this.$t('my_page.basic_information'),
           state: true
         },
         qualification: {
           icon: '/assets/icon/002-mypage.svg',
-          link: '/my-page',
+          link: '/my_page',
           name: this.$t('my_page.qualification'),
           state: true
         },
         job_career: {
           icon: '/assets/icon/003-mypage.svg',
-          link: '/my-page',
+          link: '/my_page/job_career',
           name: this.$t('my_page.job_career'),
           state: true
         },
         education_background: {
           icon: '/assets/icon/004-mypage.svg',
-          link: '/my-page',
+          link: '/my_page',
           name: this.$t('my_page.education_background'),
           state: false
         },
         self_pr: {
           icon: '/assets/icon/005-mypage.svg',
-          link: '/my-page',
+          link: '/my_page',
           name: this.$t('my_page.self_pr'),
           state: false
         },
         motivation: {
           icon: '/assets/icon/006-mypage.svg',
-          link: '/my-page',
+          link: '/my_page',
           name: this.$t('my_page.motivation'),
           state: false
         }
@@ -110,6 +110,11 @@ export default {
   computed: {
     percent() {
       return 500 * (1 - this.success / 6)
+    }
+  },
+  methods: {
+    handleRouter(route) {
+      this.$router.push(route)
     }
   }
 }

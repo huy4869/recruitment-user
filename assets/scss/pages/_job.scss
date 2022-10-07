@@ -186,10 +186,56 @@
   .img-detail-mobile {
     display: none;
   }
+  .btn-option {
+    margin-top: -8px;
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      vertical-align: bottom;
+    }
+    .btn-edit {
+      border: 1px solid $color-blue;
+      margin-right: 6px;
+      color: $color-blue;
+    }
+    .btn-remove {
+      border-radius: 4px;
+      color: $color-red;
+    }
+    .btn-green, .btn-red {
+      line-height: 20px;
+    }
+  }
+  .btn-option-mobile {
+    display: none;
+  }
 }
- .text-center {
-   margin: 24px 0 0 29px;
-   .btn-right {
-     margin-left: 22px;
-   }
- }
+.career-job-page-element {
+  width: 100%;
+  .favorite-job-page-content {
+    .job-element {
+      margin-bottom: 24px;
+    }
+    #btn-center {
+      margin: 24px 0 0 29px;
+      .btn-right {
+        margin-left: 22px;
+      }
+    }
+
+    #career {
+      .el-button--danger {
+        font-weight: 500;
+      }
+      img {
+        vertical-align: text-top;
+      }
+    }
+    #career-mobile {
+      display: none;
+    }
+  }
+}
+
+

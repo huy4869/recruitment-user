@@ -110,3 +110,9 @@ export function handleServerError(params, validates) {
   }
   return params
 }
+
+export function validFullWidth(str) {
+  // const reg = /^[ぁ-んァ-ン]{0,3}$/
+  const reg = /^[ぁ-んァ-ン一-龥]{0,255}$/
+  return reg.test(str)
+}

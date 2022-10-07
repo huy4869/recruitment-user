@@ -20,7 +20,7 @@
                 <el-col :md="18" :sm="24">
                   <div class="content-input image-avatar">
                     <el-form-item label="" prop="imageAvatar" :error="(error.key === 'imageAvatar') ? error.value : ''">
-                      <img class="show-image" id="img-avatar" :src="imageAvatarShow ? imageAvatarShow : '/assets/icon/icon_user_default.svg'" alt="">
+                      <img id="img-avatar" class="show-image" :src="imageAvatarShow ? imageAvatarShow : '/assets/icon/icon_user_default.svg'" alt="">
                       <input id="upload-avatar" ref="fileUploadAvatar" class="d-none" type="file" @change="onFileChange">
                       <div class="button-upload">
                         <button type="button"><label for="upload-avatar">{{ $t('my_page.update_profile_picture') }}</label></button>
@@ -43,7 +43,7 @@
                       </div>
                       <div v-if="imageDetailShow.length" class="d-flex">
                         <div v-for="(detail, index) in imageDetailShow" :key="index" class="show-detail">
-                          <img class="show-image" id="img-intro" :src="detail ? detail : '/assets/icon/icon_user_default.svg'" alt="">
+                          <img id="img-intro" class="show-image" :src="detail ? detail : '/assets/icon/icon_user_default.svg'" alt="">
                           <img class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="removeImage(index)">
                         </div>
                       </div>
@@ -179,25 +179,31 @@
                       <el-col :md="4" :sm="12" class="birth-year">
                         <el-input
                           ref="birthday"
-                          v-model.trim="accountForm.birthday"
+                          v-model.trim="accountForm.year"
                           :placeholder="$t('YYYY')"
                           name="birthday"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="4"
+                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                          pattern="[0-9]*"
+                          inputmode="numeric"
                           @focus="resetValidate('birthday')"
                         />
                       </el-col>
                       <span class="text-normal birthday">{{ $t('form.year') }}</span>
                       <el-col :md="4" :sm="12" class="birth-month">
                         <el-input
-                          ref="birthday"
-                          v-model.trim="accountForm.birthday"
+                          ref="birthday.month"
+                          v-model.trim="accountForm.month"
                           :placeholder="$t('MM')"
                           name="birthday"
                           type="text"
+                          maxlength="2"
                           tabindex="2"
-                          show-word-limit
+                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                          pattern="[0-9]*"
+                          inputmode="numeric"
                           @focus="resetValidate('birthday')"
                         />
                       </el-col>
@@ -205,12 +211,15 @@
                       <el-col :md="4" :sm="12" class="birth-day">
                         <el-input
                           ref="birthday"
-                          v-model.trim="accountForm.birthday"
+                          v-model.trim="accountForm.day"
                           :placeholder="$t('DD')"
                           name="birthday"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="2"
+                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                          pattern="[0-9]*"
+                          inputmode="numeric"
                           @focus="resetValidate('birthday')"
                         />
                       </el-col>
@@ -256,51 +265,50 @@
               </el-col>
               <el-col :md="18" :sm="24">
                 <div class="content-input">
-                  <el-form-item label="" prop="gender" :error="(error.key === 'gender') ? error.value : ''">
-                    <el-row class="d-flex">
-                      <el-col :md="1" :sm="3" :xs="2" class="birth-year">
-                        <el-checkbox
-                          ref="gender"
-                          v-model.trim="accountForm.gender"
-                          class="round-checkbox"
-                          name="gender"
-                          type="text"
-                          tabindex="2"
-                          show-word-limit
-                          @focus="resetValidate('gender')"
-                        />
-                      </el-col>
-                      <span class="text-normal gender">{{ $t('form.male') }}</span>
-                      <el-col :md="1" :sm="3" :xs="2" class="birth-month">
-                        <el-checkbox
-                          ref="gender"
-                          v-model.trim="accountForm.furi_last_name"
-                          class="round-checkbox"
-                          :placeholder="$t('MM')"
-                          name="gender"
-                          type="text"
-                          tabindex="2"
-                          show-word-limit
-                          @focus="resetValidate('gender')"
-                        />
-                      </el-col>
-                      <span class="text-normal gender">{{ $t('form.female') }}</span>
-                      <el-col :md="1" :sm="3" :xs="2" class="birth-day">
-                        <el-checkbox
-                          ref="gender"
-                          v-model.trim="accountForm.furi_last_name"
-                          class="round-checkbox"
-                          :placeholder="$t('DD')"
-                          name="gender"
-                          type="text"
-                          tabindex="2"
-                          show-word-limit
-                          @focus="resetValidate('gender')"
-                        />
-                      </el-col>
-                      <span class="text-normal gender">{{ $t('form.other') }}</span>
-                    </el-row>
-                  </el-form-item>
+                  <el-row class="d-flex">
+                    <el-col :md="3" :sm="7" :xs="6" class="birth-year">
+                      <el-radio
+                        ref="gender"
+                        v-model.trim="accountForm.gender_id"
+                        :label="$t('form.male')"
+                        class="round-checkbox"
+                        name="gender"
+                        type="text"
+                        tabindex="2"
+                        show-word-limit
+                        @focus="resetValidate('gender')"
+                      />
+                    </el-col>
+<!--                    <span class="text-normal gender">{{ $t('form.male') }}</span>-->
+                    <el-col :md="3" :sm="7" :xs="6" class="birth-month">
+                      <el-radio
+                        ref="gender"
+                        v-model.trim="accountForm.gender_id"
+                        :label="$t('form.female')"
+                        class="round-checkbox"
+                        name="gender"
+                        type="text"
+                        tabindex="2"
+                        show-word-limit
+                        @focus="resetValidate('gender')"
+                      />
+                    </el-col>
+<!--                    <span class="text-normal gender">{{ $t('form.female') }}</span>-->
+                    <el-col :md="3" :sm="7" :xs="6" class="birth-day">
+                      <el-radio
+                        ref="gender"
+                        v-model.trim="accountForm.gender_id"
+                        :label="$t('form.other')"
+                        class="round-checkbox"
+                        name="gender"
+                        type="text"
+                        tabindex="2"
+                        show-word-limit
+                        @focus="resetValidate('gender')"
+                      />
+                    </el-col>
+<!--                    <span class="text-normal gender">{{ $t('form.other') }}</span>-->
+                  </el-row>
                 </div>
               </el-col>
             </el-row>
@@ -481,8 +489,10 @@
                           :placeholder="placeholder.post_code"
                           name="alias_name"
                           type="text"
+                          maxlength="7"
                           tabindex="2"
-                          show-word-limit
+                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                          pattern="[0-9]*"
                           @focus="resetValidate('post_code')"
                         />
                       </el-form-item>
@@ -547,7 +557,6 @@
             <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="24" class="col-label">
                 <div class="label"><span>{{ $t('my_page.building_name') }}</span></div>
-                <div class="required">{{ $t('form.required') }}</div>
               </el-col>
               <el-col :md="18" :sm="24">
                 <div class="content-input">
@@ -575,7 +584,7 @@
         </el-form>
       </div>
     </div>
-    <div class="text-center">
+    <div id="btn-center" class="text-center">
       <el-button class="card-button" @click="handleRouter('/my_page')">{{ $t('my_page.back') }}</el-button>
       <el-button class="card-button btn-right" type="danger" @click="handleRouter('cv')">{{ $t('my_page.edit') }}</el-button>
     </div>
@@ -583,7 +592,7 @@
 </template>
 
 <script>
-import { validEmail } from '../../utils/validate'
+import { validEmail, validFullWidth } from '../../utils/validate'
 import BorderElement from './BorderElement'
 
 export default {
@@ -592,14 +601,28 @@ export default {
   data() {
     const validFormEmail = (rule, value, callback) => {
       if (!validEmail(value)) {
-        callback(new Error(this.$t('validation.phone')))
+        callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))
       } else {
         callback()
       }
     }
     const validFormLength = (rule, value, callback, message) => {
-      if (value && value.length > 2) {
+      if (value && value.length > 255) {
         callback(new Error(this.$t('validation.max_length', { _field_: message })))
+      } else {
+        callback()
+      }
+    }
+    const validFullWidthLength = (rule, value, callback, message) => {
+      if (!validFullWidth(value)) {
+        callback(new Error(this.$t('validation.max_length', { _field_: message })))
+      } else {
+        callback()
+      }
+    }
+    const validPostCode = (rule, value, callback) => {
+      if (value && value.length < 6) {
+        callback(new Error(this.$t('validation.postcode_length', { _field_: this.$t('my_page.post_code') })))
       } else {
         callback()
       }
@@ -615,6 +638,9 @@ export default {
         furi_last_name: '',
         alias_name: '',
         birthday: '',
+        year: '',
+        month: '',
+        day: '',
         age: '',
         gender_id: '',
         tel: '',
@@ -679,7 +705,7 @@ export default {
             message: this.$t('validation.required', { _field_: this.$t('my_page.furi_first_name') }),
             trigger: 'blur'
           },
-          { validator: validFormLength, message: this.$t('validation.fullwidth_length', { _field_: this.$t('my_page.furi_first_name') }), trigger: 'blur' }
+          { validator: validFullWidthLength, message: this.$t('validation.fullwidth_length', { _field_: this.$t('my_page.furi_first_name') }), trigger: 'blur' }
         ],
         furi_last_name: [
           {
@@ -687,8 +713,49 @@ export default {
             message: this.$t('validation.required', { _field_: this.$t('my_page.furi_last_name') }),
             trigger: 'blur'
           },
-          { validator: validFormLength, message: this.$t('validation.fullwidth_length', { _field_: this.$t('my_page.furi_last_name') }), trigger: 'blur' }
+          { validator: validFullWidthLength, message: this.$t('validation.fullwidth_length', { _field_: this.$t('my_page.furi_last_name') }), trigger: 'blur' }
+        ],
+        phone: [
+          {
+            required: true,
+            message: this.$t('validation.required', { _field_: this.$t('my_page.phone') }),
+            trigger: 'blur'
+          }
+        ],
+        birthday: [
+          {
+            required: true,
+            message: this.$t('validation.required', { _field_: this.$t('my_page.birth') }),
+            trigger: 'blur'
+          }
+        ],
+        line: [
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.line') }), trigger: 'blur' }
+        ],
+        facebook: [
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.facebook') }), trigger: 'blur' }
+        ],
+        instagram: [
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.instagram') }), trigger: 'blur' }
+        ],
+        twitter: [
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.twitter') }), trigger: 'blur' }
+        ],
+        post_code: [
+          { validator: validPostCode, message: this.$t('validation.postcode_length', { _field_: this.$t('my_page.post_code') }), trigger: 'blur' }
+        ],
+        city: [
+          {
+            required: true,
+            message: this.$t('validation.required', { _field_: this.$t('my_page.city') }),
+            trigger: 'blur'
+          },
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
+        ],
+        building_name: [
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
         ]
+
       },
       placeholder: {
         phone: '000123001',
@@ -704,6 +771,20 @@ export default {
         facebook: 'Facebook',
         instagram: 'Instagram',
         twitter: 'Twitter'
+      }
+    }
+  },
+  computed: {
+    birthday() {
+      return this.accountForm.month && this.accountForm.day && this.accountForm.year
+    }
+  },
+  watch: {
+    birthday(newValue, oldValue) {
+      // console.log('abc')
+      this.accountForm.birthday = 'birthday'
+      if (this.accountForm.year.length === 4) {
+        this.accountForm.age = this.accountForm.year - new Date().getFullYear()
       }
     }
   },
