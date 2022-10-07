@@ -494,3 +494,229 @@
     }
   }
 }
+
+.chat-page-element {
+  width: 100%;
+  .chat-page-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .chat-page-content {
+    border: 1px solid $color-text-primary;
+    border-radius: 6px;
+    margin-top: 24px;
+    padding: 16px;
+    .form-chat {
+      display: flex;
+      justify-content: space-between;
+      .list-form-chat {
+        width: 36.1%;
+        .form-search {
+          .el-input{
+            input {
+              padding-left: 48px;
+            }
+            .el-input__prefix {
+              display: flex;
+              left: 16px;
+              img {
+                margin: auto;
+              }
+            }
+          }
+        }
+        .list-user {
+          height: 450px;
+          overflow: auto;
+          margin-top: 8px;
+          .user-active {
+            background-color: $color-bg-footer;
+            border-radius: 4px;
+          }
+          .user-message-item {
+            padding: 10px 12px;
+            cursor: pointer;
+            .user-avatar {
+              min-width: 36px;
+              width: 36px;
+              height: 36px;
+            }
+            .message-content {
+              margin-left: 10px;
+              width: 100%;
+              .user-name {
+                font-weight: 700;
+                font-size: 13px;
+                line-height: 22px;
+              }
+              .message-date {
+                font-weight: 500;
+                font-size: 11px;
+                line-height: 16px;
+                height: 16px;
+                color: $color-text-3;
+                margin: 3px 0;
+              }
+              .last-message {
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 20px;
+                color: $color-text-3;
+                word-wrap: break-word;
+                white-space: normal;
+                overflow: hidden;
+                display: -webkit-box;
+                text-overflow: ellipsis;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+              }
+              .not-read {
+                color: $color-black;
+                font-weight: 700;
+              }
+              .message-status {
+                background-color: $color-text-primary;
+                border-radius: 50%;
+                min-width: 12px;
+                height: 12px;
+              }
+            }
+          }
+        }
+      }
+      .content-form-chat {
+        width: 58.91%;
+        background: $color-form-chat;
+        border-radius: 5px;
+        padding: 24px 14px 14px 12px;
+        .form-message {
+          height: 398px;
+          overflow: auto;
+          .content-chat {
+            .message-date {
+              color: $color-text-3;
+              font-size: 13px;
+              line-height: 22px;
+            }
+            .show-user-image {
+              min-width: 36px;
+              width: 36px;
+              height: 36px;
+            }
+            .message-chat {
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 22px;
+              width: 178px;
+              padding: 10px;
+              border-radius: 4px;
+              margin-bottom: 4px;
+            }
+          }
+          .content-chat-right {
+            .message-chat {
+              color: $color-white;
+              background-color: $color-blue;
+            }
+            .message-date {
+              text-align: right;
+            }
+          }
+          .content-chat-left {
+            .show-message {
+              margin-left: 8px;
+              .user-name {
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 22px;
+                margin-bottom: 4px;
+              }
+              .message-chat {
+                background-color: $color-white;
+                color: $color-blue;
+              }
+            }
+          }
+          .show-date {
+            position: relative;
+            display: flex;
+            margin-top: 20px;
+            .date-time {
+              font-weight: 500;
+              font-size: 13px;
+              line-height: 22px;
+              background: $color-form-chat;
+              padding: 0 23px;
+              margin: auto;
+              z-index: 2;
+              color: $color-text-3;
+            }
+            .border-date {
+              position: absolute;
+              top: 50%;
+              width: 100%;
+              border-bottom: 1px solid $color-placeholder;
+            }
+          }
+        }
+        .input-chat {
+          border: 1px solid $border-default;
+          border-radius: 24px;
+          background: $color-white;
+          margin-left: 2px;
+          margin-top: 8px;
+          .button-send {
+            padding: 8px 10px;
+            background: $color-button-danger;
+            border-radius: 19px;
+            margin: 11px 10px 5px 0;
+            display: flex;
+            cursor: pointer;
+            span {
+              color: $color-white;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 22px;
+            }
+            img {
+              width: 24px;
+              height: 24px;
+              margin-left: 4px;
+            }
+          }
+          input {
+            width: 77%;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            border: none;
+            height: 24px;
+            margin: auto 0 auto 14px;
+            &::placeholder {
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 24px;
+              color: $color-placeholder;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.show-avatar-element {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 22px;
+  color: $color-white;
+  height: 100%;
+  .show-avatar {
+    height: 100%;
+    border-radius: 50%;
+    span {
+      margin: auto;
+    }
+  }
+}

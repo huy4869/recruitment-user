@@ -1,14 +1,15 @@
 <template>
   <div class="cv-page">
-    <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="titlePage[statePage]" :sub-banner="subTitle"></BannerElement>
+    <TitlePageElement v-if="!showDetailMessage" class="show-pc"></TitlePageElement>
+    <BannerElement v-if="!showDetailMessage" :banner="titlePage[page]" :sub-banner="subTitle"></BannerElement>
     <div class="cv-content">
-      <MenuLeftElement></MenuLeftElement>
-      <TopPageElement v-if="statePage === 'top_page'"></TopPageElement>
-      <ApplicationHistoryElement v-if="statePage === 'application_history'"></ApplicationHistoryElement>
-      <FavoriteJobElement v-if="statePage === 'favorite_job'"></FavoriteJobElement>
-      <IndexCvElement v-if="statePage === 'web_cv'"></IndexCvElement>
-      <ChangePasswordElement v-if="statePage === 'change_password'"></ChangePasswordElement>
+      <MenuLeftElement v-if="!showDetailMessage" :menu-active="page"></MenuLeftElement>
+      <TopPageElement v-if="page === 'top_page'"></TopPageElement>
+      <ApplicationHistoryElement v-if="page === 'application_history'"></ApplicationHistoryElement>
+      <FavoriteJobElement v-if="page === 'favorite_job'"></FavoriteJobElement>
+      <IndexCvElement v-if="page === 'web_cv'"></IndexCvElement>
+      <ChatElement v-if="page === 'chat'"></ChatElement>
+      <ChangePasswordElement v-if="page === 'change_password'"></ChangePasswordElement>
     </div>
   </div>
 </template>
@@ -19,6 +20,7 @@ import BannerElement from '../../components/layout/BannerElement'
 import TitlePageElement from '../../components/layout/TitlePageElement'
 import MenuLeftElement from '../../components/my-page/MenuLeftElement'
 import IndexCvElement from '../../components/my-page/IndexCvElement'
+import ChatElement from '../../components/my-page/ChatElement'
 import TopPageElement from '../../components/my-page/TopPageElement'
 import ApplicationHistoryElement from '../../components/my-page/ApplicationHistoryElement'
 import FavoriteJobElement from '../../components/my-page/FavoriteJobElement'
@@ -35,7 +37,8 @@ export default {
     TopPageElement,
     ApplicationHistoryElement,
     FavoriteJobElement,
-    ChangePasswordElement
+    ChangePasswordElement,
+    ChatElement
   },
   data() {
     return {
@@ -47,15 +50,26 @@ export default {
         'chat': this.$t('page.my_page'),
         'change_password': this.$t('page.my_page')
       },
-      subTitle: this.$t('page.sub_web_cv')
+      subTitle: this.$t('page.sub_web_cv'),
+      page: 'top_page'
     }
   },
   computed: {
     ...mapState({
-      statePage: state => state.my_page.statePage
+      statePage: state => state.my_page.statePage,
+      showDetailMessage: state => state.my_page.showDetailMessage
     })
   },
+  watch: {
+    'statePage'(value) {
+      this.page = value
+    }
+  },
   created() {
+    if (this.$route.hash) {
+      const data = this.$route.hash
+      this.page = data.replace('#', '')
+    }
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },
       { name: this.$t('page.my_page'), route: '/my_page' }

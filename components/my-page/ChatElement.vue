@@ -1,0 +1,200 @@
+<template>
+  <div class="chat-page-element">
+    <div>
+      <div class="chat-page-title">
+        <span>{{ $t('my_page.chat') }}</span>
+      </div>
+      <div v-if="showDetailMessage" class="back-to-list-user" @click="backToListUser">
+        <img src="/assets/icon/icon_arrow.svg" alt="">
+        <span>{{ userActive.name }}</span>
+      </div>
+      <div class="chat-page-content">
+        <div class="show-pc">
+          <div class="form-chat">
+            <div class="list-form-chat">
+              <div class="form-search">
+                <el-input
+                  v-model.trim="search"
+                  :placeholder="$t('common.search')"
+                  name="search"
+                  type="text"
+                  tabindex="2"
+                  show-word-limit
+                >
+                  <img slot="prefix" src="/assets/icon/icon_search_input.svg" alt="">
+                </el-input>
+              </div>
+              <div class="list-user">
+                <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}]" @click="changeActive(user, index)">
+                  <div class="d-flex">
+                    <div class="user-avatar">
+                      <ShowAvatarElement :user="user"></ShowAvatarElement>
+                    </div>
+                    <div class="message-content">
+                      <div class="d-flex justify-between">
+                        <div class="user-name">{{ user.name }}</div>
+                        <div class="message-date">{{ user.last_updated }}</div>
+                      </div>
+                      <div class="d-flex justify-between">
+                        <div :class="['last-message', { 'not-read': user.status_read }]">
+                          {{ user.last_message }}
+                        </div>
+                        <div v-if="user.status_read" class="message-status">
+                          <span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-form-chat">
+              <div class="form-message">
+                <div v-for="(message, index) in listMessages" :key="index">
+                  <FormChatElement :message="message"></FormChatElement>
+                </div>
+              </div>
+              <div class="input-chat">
+                <div class="d-flex justify-between">
+                  <input type="text" v-model="message"  :placeholder="$t('my_page.enter_message')">
+                  <div class="button-send">
+                    <span>{{ $t('my_page.send') }}</span>
+                    <img src="/assets/icon/icon_send_message.svg" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="show-sp">
+          <div class="form-chat">
+            <div v-if="!showDetailMessage" class="list-form-chat">
+              <div class="form-search">
+                <el-input
+                  v-model.trim="search"
+                  :placeholder="$t('common.search')"
+                  name="search"
+                  type="text"
+                  tabindex="2"
+                  show-word-limit
+                >
+                  <img slot="prefix" src="/assets/icon/icon_search_input.svg" alt="">
+                </el-input>
+              </div>
+              <div class="list-user">
+                <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}]" @click="changeActive(user, index, true)">
+                  <div class="d-flex">
+                    <div class="user-avatar">
+                      <ShowAvatarElement :user="user"></ShowAvatarElement>
+                    </div>
+                    <div class="message-content">
+                      <div class="d-flex justify-between">
+                        <div class="user-name">{{ user.name }}</div>
+                        <div class="message-date">{{ user.last_updated }}</div>
+                      </div>
+                      <div class="d-flex justify-between">
+                        <div :class="['last-message', { 'not-read': user.status_read }]">
+                          {{ user.last_message }}
+                        </div>
+                        <div v-if="user.status_read" class="message-status">
+                          <span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-else class="content-form-chat">
+              <div class="form-message">
+                <div v-for="(message, index) in listMessages" :key="index">
+                  <FormChatElement :message="message"></FormChatElement>
+                </div>
+              </div>
+              <div class="input-chat">
+                <div class="d-flex justify-between">
+                  <input type="text" v-model="message" :placeholder="$t('my_page.enter_message')">
+                  <div class="button-send">
+                    <span>{{ $t('my_page.send') }}</span>
+                    <img src="/assets/icon/icon_send_message.svg" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { MY_PAGE_SET_SHOW_DETAIL_MESSAGE } from '../../store/store.const'
+import ShowAvatarElement from '../element-ui/ShowAvatarElement'
+import FormChatElement from './FormChatElement'
+export default {
+  name: 'ChatElement',
+  components: { ShowAvatarElement, FormChatElement },
+  data() {
+    return {
+      total: 3,
+      listUsers: [],
+      userActive: {},
+      indexActive: 3,
+      showDetailMessage: false,
+      search: '',
+      message: '',
+      lastUpdated: '2022年09月26日更新',
+      listMessages: []
+    }
+  },
+  created() {
+    this.getDataUser()
+    this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, false)
+  },
+  methods: {
+    changeActive(user, index, mobile) {
+      this.indexActive = index
+      this.userActive = user
+      this.listMessages = user.listMessages
+      this.listUsers[index].status_read = false
+      if (mobile) {
+        this.showDetailMessage = true
+        this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, true)
+      }
+    },
+    backToListUser() {
+      this.showDetailMessage = false
+      this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, false)
+    },
+    getDataUser() {
+      for (let x = 0; x <= 14; x++) {
+        this.listUsers.push({
+          id: Math.floor(Math.random() * 10),
+          name: ['虎ノ門店舗 (デモ美容室)', '虎ノ門店舗 (デモ美容室)', '株式会社タオ'][Math.floor(Math.random() * 3)],
+          last_message: ['よろしくお願いいたします。', 'お問い合わせをいただきまして', 'お問い合わせをいただきまして合わせお問い合わせをいただきまして合わせ'][Math.floor(Math.random() * 3)],
+          avatar: '',
+          last_updated: ['1分前', '08月01日', '07月01日'][Math.floor(Math.random() * 3)],
+          status_read: [true, false][Math.floor(Math.random() * 2)],
+          listMessages: this.getMessage()
+        })
+      }
+    },
+    getMessage() {
+      const listMessages = []
+      for (let x = 0; x <= 14; x++) {
+        listMessages.push({
+          id: Math.floor(Math.random() * 10),
+          name: ['虎ノ門店舗 (デモ美容室)', '虎ノ門店舗 (デモ美容室)', '株式会社タオ'][Math.floor(Math.random() * 3)],
+          message: ['Hi 虎ノ門店舗', 'お問い合わせをいただきまして、ありがとうございました。', 'お問い合わせをいただきまして'][Math.floor(Math.random() * 3)],
+          avatar: '',
+          state: ['user', 'date', 'send'][Math.floor(Math.random() * 3)],
+          date: ['1分前', '08月01日', '07月01日'][Math.floor(Math.random() * 3)],
+          status_read: [true, false][Math.floor(Math.random() * 2)]
+        })
+      }
+      return listMessages
+    }
+  }
+}
+</script>
