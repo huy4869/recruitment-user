@@ -561,7 +561,7 @@
       }
     }
   }
-  .text-center {
+  #btn-center {
     margin: 24px 0 0 0;
     .btn-right {
       margin-left: 14px;
@@ -732,41 +732,52 @@
       }
     }
   }
+
   .chat-page-element {
     width: 100%;
     margin-top: -20px;
+
     .chat-page-title {
       display: none;
     }
+
     .chat-page-content {
       padding: 0;
       border: none;
+
       .form-chat {
         .list-form-chat {
           width: 100%;
+
           .form-search {
             padding: 0 12px;
           }
+
           .list-user {
             .user-message-item {
               border-radius: 0;
             }
           }
         }
+
         .content-form-chat {
           width: 100%;
           background: $color-white;
           padding: 0;
           margin-top: -12px;
+
           .form-message {
             height: calc(100vh - 216px);
             padding: 0 12px;
           }
+
           .input-chat {
             margin: 8px 12px 0;
+
             input {
               width: 70%;
             }
+
             .button-send {
               margin: 5px;
             }
@@ -774,11 +785,13 @@
         }
       }
     }
+
     .back-to-list-user {
       margin-top: 20px;
       background: $color-primary;
       display: flex;
       padding: 8px 12px;
+
       span {
         color: $color-text-primary;
         font-weight: 700;
@@ -786,8 +799,60 @@
         line-height: 20px;
         margin-left: 3px;
       }
+
       img {
         transform: rotate(180deg);
+      }
+    }
+  }
+
+  .career-job-page-element {
+    .favorite-job-page-content {
+      #career-mobile {
+        display: flex;
+        margin: 0 12px;
+      }
+      #career {
+        display: none;
+      }
+      .favorite-job-element {
+        padding: 12px;
+        border: none;
+        .btn-option {
+          display: none;
+        }
+        .btn-option-mobile {
+          display: flex;
+          justify-content: center;
+          margin-top: 24px;
+          img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: bottom;
+          }
+          .btn-edit {
+            border: 1px solid $color-blue;
+            margin-right: 6px;
+            color: $color-blue;
+          }
+          .btn-remove {
+            border-radius: 4px;
+            color: $color-red;
+          }
+          .btn-green, .btn-red {
+            line-height: 20px;
+          }
+        }
+        .card-title-mobile {
+          background-color: $color-primary;
+          padding: 9px 0 9px 16px;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 24px;
+          color: $--color-primary;
+          border-left: 5px solid $--color-primary;
+        }
       }
     }
   }

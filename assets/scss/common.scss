@@ -409,16 +409,16 @@ hr {
 
 .card-component {
 
-  .card-text-title {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 32px;
-  }
-
   .card-text-primary {
     font-size: 16px;
     line-height: 24px;
     font-weight: 700;
+  }
+
+  .card-text-title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
   }
 
   .card-text-normal {
@@ -456,6 +456,7 @@ hr {
   line-height: 24px;
   font-weight: 500;
 }
+
 .card-button {
   height: 48px;
   padding: 12px 59px;
@@ -463,6 +464,7 @@ hr {
   font-size: 16px;
   line-height: 1px;
 }
+
 
 .d-none {
   display: none;
@@ -480,6 +482,26 @@ hr {
   font-size: 16px;
   line-height: 24px;
   font-weight: 500;
+}
+
+.card-primary-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.btn-red {
+  color: $color-red;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.btn-green {
+  color: $color-blue;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
 }
 
 .show-pc {
@@ -504,5 +526,27 @@ hr {
       outline: none;
       cursor: pointer;
     }
+  }
+}
+
+.el-radio {
+  .el-radio__input {
+    .el-radio__inner{
+      width: 24px;
+      height: 24px;
+      border: 2px solid $border-focus;
+      background: $color-white;
+    }
+  }
+  .el-radio__label {
+    color: $color-black;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    vertical-align: middle;
+  }
+  .el-radio__input.is-checked .el-radio__inner::after {
+    background: $border-focus;
+    transform: translate(-50%,-50%) scale(3);
   }
 }
