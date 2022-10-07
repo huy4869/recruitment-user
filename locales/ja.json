@@ -102,7 +102,8 @@
     "no_data": "データがありません。",
     "all": "全",
     "subject": "件",
-    "display_item": "{min}～{max}件目を表示中"
+    "display_item": "{min}～{max}件目を表示中",
+    "search": "検索"
   },
   "button": {
     "cancel": "キャンセル",
@@ -155,6 +156,8 @@
     "current_password": "現在のパスワード",
     "new_password": "新しいパスワード",
     "new_password_confirmation": "新しいパスワード確認",
-    "change": "変更する"
+    "change": "変更する",
+    "send": "送信",
+    "enter_message": "メッセージを入力"
   }
 }

@@ -61,12 +61,16 @@ export default {
   watch: {
     statePage(value) {
       this.menuActiveSelect = value
+    },
+    menuActive(value) {
+      this.menuActiveSelect = value
+      this.$store.commit(MY_PAGE_SET_STATE_PAGE, value)
     }
   },
   methods: {
     changeToPage(page) {
       this.$store.commit(MY_PAGE_SET_STATE_PAGE, page)
-      this.$router.push('/my_page')
+      this.$router.push('/my_page#' + page)
     }
   }
 }

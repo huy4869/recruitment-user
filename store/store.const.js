@@ -62,3 +62,4 @@ export const CHAT_SET_UN_READ_MESSAGE = 'chat/setUnreadMessage'
 
 // my_page
 export const MY_PAGE_SET_STATE_PAGE = 'my_page/setStatePage'
+export const MY_PAGE_SET_SHOW_DETAIL_MESSAGE = 'my_page/setShowDetailMessage'
