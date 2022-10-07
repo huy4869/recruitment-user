@@ -12,7 +12,7 @@
       <div class="border-date"></div>
       <div class="date-time">{{ message.date }}</div>
     </div>
-    <div v-if="message.state === 'user'" class="content-chat content-chat-left">
+    <div v-if="message.state === 'user'" class="content-chat content-chat-left" >
       <div class="d-flex justify-start">
         <div class="d-flex">
           <div class="show-user-image">
@@ -30,9 +30,10 @@
 </template>
 
 <script>
-
+import ShowAvatarElement from '../element-ui/ShowAvatarElement'
 export default {
   name: 'FormChatElement',
-  props: ['message']
+  props: ['message'],
+  components: { ShowAvatarElement }
 }
 </script>
