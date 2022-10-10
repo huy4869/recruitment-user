@@ -161,11 +161,15 @@
     "new_password_confirmation": "新しいパスワード確認",
     "change": "変更する",
     "send": "送信",
+    "save": "保存",
     "enter_message": "メッセージを入力",
     "line": "LINE ID",
     "facebook": "Facebook",
     "instagram": "Instagram",
-    "twitter": "Twitter"
+    "twitter": "Twitter",
+    "enroll": "在籍中",
+    "currently": "※現在：",
+    "characters": "文字/2000"
   },
   "career": {
     "store_name": "店舗名",
@@ -177,6 +181,16 @@
     "business_content": "業務内容",
     "experience_accumulation1": "主な取り組み、",
     "experience_accumulation2": "具体的な施策、",
-    "experience_accumulation3": "得られた経験"
+    "experience_accumulation3": "得られた経験",
+    "experience": "主な取り組み、具体的な施策、 得られた経験",
+    "enter_company_name": "勤務先企業名を入力",
+    "enter_occupation": "職種を選択",
+    "enter_emp_status": "雇用形態を選択"
+  },
+  "confirm_modal": {
+    "back_confirm" : "編集中のデータが保存されません。よろしいですか？",
+    "delete_confirm" : "削除します。よろしいですか？",
+    "no" : "いいえ",
+    "yes" : "はい"
   }
 }

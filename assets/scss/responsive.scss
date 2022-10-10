@@ -807,6 +807,9 @@
   }
 
   .career-job-page-element {
+    #career-mobile {
+      margin: 0 12px;
+    }
     .favorite-job-page-content {
       #career-mobile {
         display: flex;
@@ -856,9 +859,20 @@
       }
     }
   }
+
+  // confirm-modal
+  .modal-backdrop {
+    .confirm-modal {
+      padding: 24px;
+      width: 75%;
+      .title {
+        font-size: 16px;
+      }
+    }
+  }
 }
 
-@media only screen and (max-width: 412px) {
+@media only screen and (max-width: 414px) {
   .card-component {
     .favorite-job-element {
       .card-title-mobile {
@@ -870,6 +884,17 @@
             margin-right: -5px;
           }
         }
+      }
+    }
+  }
+  #career-mobile {
+    display: flex;
+    margin: 0 12px;
+    .card-button {
+      padding: 12px 42px;
+      img {
+        width: 14px;
+        height: 14px;
       }
     }
   }

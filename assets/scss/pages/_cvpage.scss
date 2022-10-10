@@ -5,6 +5,7 @@
   }
 }
 .edit-cv-element {
+  margin-bottom: 24px;
   width: 100%;
   .edit-cv-title {
     font-weight: 700;
@@ -137,6 +138,16 @@
             margin-left: 0;
           }
         }
+      }
+      .sm-text {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        color: $color-text-3;
+        margin-top: 8px;
+      }
+      .enroll-checkbox {
+        margin-bottom: 20px;
       }
     }
     .basic-information {

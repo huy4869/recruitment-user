@@ -3,25 +3,32 @@
     <div>
       <div v-if="listJobs.length" class="favorite-job-page-content">
         <div id="career-mobile" class="d-flex justify-between">
-          <el-button type="danger"  class="card-button" @click="handleRouter('/my_page')">
+          <el-button type="danger" class="card-button" @click="handleRouter('/my_page')">
             <img src="/assets/icon/add-white.svg" alt="">
             {{ $t('my_page.add_experience') }}
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my_page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
         <div v-for="(job, index) in listJobs" :key="index">
-          <CareerElement :job="job" :show-status="true"></CareerElement>
+          <CareerElement :job="job" :index="index + 1" :show-status="true"></CareerElement>
         </div>
         <div id="career" class="d-flex justify-between">
           <el-button type="danger"  class="card-button" @click="handleRouter('/my_page')">
             <img src="/assets/icon/add-white.svg" alt="">
             {{ $t('my_page.add_experience') }}
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my_page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
       </div>
       <div v-else>
-        <NoDataElement :text="$t('common.no_data')"></NoDataElement>
+        <div id="career-mobile" class="d-flex justify-between">
+          <el-button type="danger" class="card-button" @click="handleRouter('/my_page')">
+            <img src="/assets/icon/add-white.svg" alt="">
+            {{ $t('my_page.add_experience') }}
+          </el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my_page#web_cv')">{{ $t('my_page.back') }}</el-button>
+        </div>
+        <NoDataElement :text="$t('common.no_data')" :type="'career'"></NoDataElement>
       </div>
     </div>
   </div>
@@ -65,6 +72,9 @@ export default {
           last_updated: '2022年09月26日更新'
         })
       }
+    },
+    handleRouter(route) {
+      this.$router.push(route)
     }
   }
 }
