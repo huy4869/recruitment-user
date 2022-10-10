@@ -170,3 +170,16 @@
 .el-select-dropdown__item.selected {
   color: $color-text-primary;
 }
+
+.el-textarea .el-textarea__inner {
+  font-weight: 500;
+  color: $color-black;
+  font-size: 16px;
+}
+
+.el-select .el-select__tags .el-select__tags-text,
+.el-select-dropdown__wrap .el-select-dropdown__list .el-select-dropdown__item {
+  font-size: 16px;
+  color: $color-black;
+  font-weight: 500;
+}
