@@ -70,7 +70,7 @@ export default {
   methods: {
     changeToPage(page) {
       this.$store.commit(MY_PAGE_SET_STATE_PAGE, page)
-      this.$router.push('/my_page#' + page)
+      this.$router.push('/my-page#' + page)
     }
   }
 }
