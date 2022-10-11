@@ -301,7 +301,7 @@
       v-show="confirmModal"
       :text="$t('confirm_modal.back_confirm')"
       @close="closeConfirmModal"
-      @handleRouter="handleRouter('/my_page/info')">
+      @handleRouter="handleRouter('/my-page/info')">
     </ConfirmModal>
   </div>
 </template>

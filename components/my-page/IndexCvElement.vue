@@ -70,37 +70,37 @@ export default {
       listTab: {
         basic: {
           icon: '/assets/icon/001-mypage.svg',
-          link: '/my_page/info',
+          link: '/my-page/info',
           name: this.$t('my_page.basic_information'),
           state: true
         },
         qualification: {
           icon: '/assets/icon/002-mypage.svg',
-          link: '/my_page',
+          link: '/my-page',
           name: this.$t('my_page.qualification'),
           state: true
         },
         job_career: {
           icon: '/assets/icon/003-mypage.svg',
-          link: '/my_page/job_career',
+          link: '/my-page/job-career',
           name: this.$t('my_page.job_career'),
           state: true
         },
         education_background: {
           icon: '/assets/icon/004-mypage.svg',
-          link: '/my_page',
+          link: '/my-page',
           name: this.$t('my_page.education_background'),
           state: false
         },
         self_pr: {
           icon: '/assets/icon/005-mypage.svg',
-          link: '/my_page',
+          link: '/my-page',
           name: this.$t('my_page.self_pr'),
           state: false
         },
         motivation: {
           icon: '/assets/icon/006-mypage.svg',
-          link: '/my_page',
+          link: '/my-page',
           name: this.$t('my_page.motivation'),
           state: false
         }
