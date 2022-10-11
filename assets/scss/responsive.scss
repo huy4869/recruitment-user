@@ -1386,6 +1386,43 @@
       }
     }
   }
+  .notification-history-page {
+    .notification-history-content {
+      padding: 20px 12px;
+      .notification-list {
+        .notification-item {
+          display: block;
+          padding: 12px 6px 12px 18px;
+          .notification-form {
+            padding-left: 0;
+            .show-status {
+              width: 10px;
+              height: 10px;
+              top: 6px;
+              left: -18px;
+            }
+            .notification-title {
+              font-size: 14px;
+              line-height: 22px;
+            }
+            .notification-detail {
+              font-size: 14px;
+              line-height: 22px;
+              margin: 8px 0;
+            }
+          }
+          .notification-date {
+            text-align: left;
+          }
+        }
+      }
+      .pagination-common {
+        .pagination {
+          justify-content: center;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 390px) {

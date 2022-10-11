@@ -1,0 +1,51 @@
+.notification-history-page {
+  .notification-history-content {
+    padding: 45px 64px;
+    .notification-list {
+      .notification-item {
+        padding: 14px 0;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $border-default;
+        cursor: pointer;
+        .notification-form {
+          position: relative;
+          padding-left: 23px;
+          .show-status {
+            width: 15px;
+            height: 15px;
+            background-color: $color-text-primary;
+            border-radius: 50%;
+            position: absolute;
+            top: 6.5px;
+            left: 0;
+          }
+          .notification-title {
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 28px;
+            color: $color-text-primary;
+          }
+          .notification-detail {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+          }
+        }
+        .notification-date {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 22px;
+          color: $color-text-3;
+          text-align: right;
+        }
+      }
+    }
+    .pagination-common {
+      .pagination {
+        justify-content: flex-end;
+        padding-left: 0;
+      }
+    }
+  }
+}
