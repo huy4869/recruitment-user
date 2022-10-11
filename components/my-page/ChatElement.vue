@@ -56,7 +56,7 @@
               </div>
               <div class="input-chat">
                 <div class="d-flex justify-between">
-                  <input type="text" v-model="message"  :placeholder="$t('my_page.enter_message')">
+                  <input v-model="message" type="text" :placeholder="$t('my_page.enter_message')">
                   <div class="button-send">
                     <span>{{ $t('my_page.send') }}</span>
                     <img src="/assets/icon/icon_send_message.svg" alt="">
@@ -113,7 +113,7 @@
               </div>
               <div class="input-chat">
                 <div class="d-flex justify-between">
-                  <input type="text" v-model="message" :placeholder="$t('my_page.enter_message')">
+                  <input v-model="message" type="text" :placeholder="$t('my_page.enter_message')">
                   <div class="button-send">
                     <span>{{ $t('my_page.send') }}</span>
                     <img src="/assets/icon/icon_send_message.svg" alt="">

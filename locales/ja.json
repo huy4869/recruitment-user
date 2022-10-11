@@ -192,5 +192,23 @@
     "delete_confirm" : "削除します。よろしいですか？",
     "no" : "いいえ",
     "yes" : "はい"
+  },
+  "home": {
+    "banner_title": "本日、あなたに組み合わせる美容<br />の仕事を見つける。",
+    "banner_title_mobile": "本日、あなたに組み合わせる美容の仕事を見つける。",
+    "all_job_opening": "全ての求人数",
+    "find_a_job": "求人を探す",
+    "search_by_condition": "詳しい条件で探す",
+    "search_by_prefecture": "都道府県を選ぶ",
+    "choose_a_job": "職種を選ぶ",
+    "new_job_posting": "新着の求人情報",
+    "new_job": "新着求人",
+    "see_all_job": "全ての求人を見る",
+    "recommended_job": "おすすめの求人",
+    "search_from_popular": "人気のエリアから探す",
+    "search_by_employment": "雇用形態から探す",
+    "job_favorite": "お気に入り",
+    "view_job_detail": "詳細を見る",
+    "most_popular_job": "よく見られている人気のお仕事"
   }
 }
