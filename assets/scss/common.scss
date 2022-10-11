@@ -490,6 +490,12 @@ hr {
   line-height: 32px;
 }
 
+.text-bold {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
 .btn-red {
   color: $color-red;
   font-size: 16px;
@@ -549,4 +555,8 @@ hr {
     background: $border-focus;
     transform: translate(-50%,-50%) scale(3);
   }
+}
+
+.el-autocomplete {
+  width: 100%;
 }
