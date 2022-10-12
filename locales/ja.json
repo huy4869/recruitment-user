@@ -55,6 +55,7 @@
   },
   "validation": {
     "required": "{_field_}が入力されていません。",
+    "required_select": "{_field_}が選択されていません。",
     "email_required": "メールアドレスが入力されていません。",
     "email": "{_field_}は有効なメールアドレスではありません.",
     "float": "{_field_}価格は数値以外入力できません。",
@@ -66,6 +67,7 @@
     "pass_format": "パスワードは半角英数字で4桁〜12桁まで入力してください",
     "max_length": "{_field_}は255文字以内で入力してください。",
     "fullwidth_length": "{_field_}は255文字以内で入力してください。",
+    "area_length": "{_field_}は2000文字以内で入力してください。",
     "postcode_length": "{_field_}は7桁英数字で入力してください。"
   },
   "header": {
@@ -178,7 +180,7 @@
     "period_start": "勤務期間",
     "occupation": "職種",
     "position_offices": "役職",
-    "period_end": "雇用形態",
+    "status": "雇用形態",
     "business_content": "業務内容",
     "experience_accumulation1": "主な取り組み、",
     "experience_accumulation2": "具体的な施策、",
@@ -186,7 +188,12 @@
     "experience": "主な取り組み、具体的な施策、 得られた経験",
     "enter_company_name": "勤務先企業名を入力",
     "enter_occupation": "職種を選択",
-    "enter_emp_status": "雇用形態を選択"
+    "enter_emp_status": "雇用形態を選択",
+    "other_occupation": "その他の職種",
+    "other_emp_status": "その他の雇用形態",
+    "enter_other_occupation": "その他の職種を入力",
+    "enter_other_emp_status": "その他の雇用形態を入力"
+
   },
   "confirm_modal": {
     "back_confirm" : "編集中のデータが保存されません。よろしいですか？",
