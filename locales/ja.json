@@ -107,7 +107,8 @@
     "all": "全",
     "subject": "件",
     "display_item": "{min}～{max}件目を表示中",
-    "search": "検索"
+    "search": "検索",
+    "delete": "削除"
   },
   "button": {
     "cancel": "キャンセル",
@@ -118,6 +119,7 @@
     "history": "応募履歴",
     "favorite_job": "お気に入り求人",
     "web_cv": "Web履歴書",
+    "past_search_condition": "過去検索条件",
     "chat": "チャット",
     "change_password": "パスワードの変更",
     "edit_basic_information": "基本情報編集",
@@ -172,7 +174,17 @@
     "twitter": "Twitter",
     "enroll": "在籍中",
     "currently": "※現在：",
-    "characters": "文字/2000"
+    "characters": "文字/2000",
+    "search_by_other_condition": "他の条件で検索する",
+    "condition": {
+      "occupation": "職種",
+      "work_location": "勤務地",
+      "keyword": "キーワード",
+      "employment_status": "雇用形態",
+      "experience": "経験",
+      "sort_by": "並び替え",
+      "feature": "特徴"
+    }
   },
   "career": {
     "store_name": "店舗名",

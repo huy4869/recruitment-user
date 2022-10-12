@@ -8,6 +8,7 @@
       <ApplicationHistoryElement v-if="page === 'application_history'"></ApplicationHistoryElement>
       <FavoriteJobElement v-if="page === 'favorite_job'"></FavoriteJobElement>
       <IndexCvElement v-if="page === 'web_cv'"></IndexCvElement>
+      <PastSearchConditionElement v-if="page === 'past_search_condition'"></PastSearchConditionElement>
       <ChatElement v-if="page === 'chat'"></ChatElement>
       <ChangePasswordElement v-if="page === 'change_password'"></ChangePasswordElement>
     </div>
@@ -25,6 +26,7 @@ import TopPageElement from '../../components/my-page/TopPageElement'
 import ApplicationHistoryElement from '../../components/my-page/ApplicationHistoryElement'
 import FavoriteJobElement from '../../components/my-page/FavoriteJobElement'
 import ChangePasswordElement from '../../components/my-page/ChangePasswordElement'
+import PastSearchConditionElement from '../../components/my-page/PastSearchConditionElement'
 import { INDEX_SET_TITLE_MENU } from '../../store/store.const'
 
 export default {
@@ -38,6 +40,7 @@ export default {
     ApplicationHistoryElement,
     FavoriteJobElement,
     ChangePasswordElement,
+    PastSearchConditionElement,
     ChatElement
   },
   data() {
@@ -47,6 +50,7 @@ export default {
         'application_history': this.$t('page.my_page'),
         'favorite_job': this.$t('page.my_page'),
         'web_cv': this.$t('page.web_cv'),
+        'past_search_condition': this.$t('page.my_page'),
         'chat': this.$t('page.my_page'),
         'change_password': this.$t('page.my_page')
       },
