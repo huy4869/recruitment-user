@@ -341,9 +341,9 @@
       </div>
     </div>
     <div id="btn-center" class="text-center">
-      <el-button class="card-button" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button">{{ $t('my_page.remove') }}</el-button>
-      <el-button class="card-button btn-right" type="danger" @click.native="submit" >{{ $t('my_page.save') }}</el-button>
+      <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
+      <el-button class="card-button triple-btn">{{ $t('my_page.remove') }}</el-button>
+      <el-button class="card-button triple-btn btn-right" type="danger" @click.native="submit" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"

@@ -76,7 +76,7 @@ export default {
         },
         qualification: {
           icon: '/assets/icon/002-mypage.svg',
-          link: '/my-page',
+          link: '/my-page/qualification',
           name: this.$t('my_page.qualification'),
           state: true
         },
