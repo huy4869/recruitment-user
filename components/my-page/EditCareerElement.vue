@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="right-content-element">
     <div class="edit-cv-element">
       <div class="edit-cv-title">{{ $t('my_page.edit_basic_information') }}</div>
       <div class="edit-cv-content edit-form-content">

@@ -205,7 +205,16 @@
     "other_emp_status": "その他の雇用形態",
     "enter_other_occupation": "その他の職種を入力",
     "enter_other_emp_status": "その他の雇用形態を入力"
-
+  },
+  "self_pr": {
+    "title": "自己PR",
+    "business_content": "業務内容",
+    "experience": "活かせる経験・",
+    "skill": "知識・スキル",
+    "pr": "自己PR",
+    "enter_business_content": "・ビューティー雑誌を読むこと\nヘアスタイルとメイクすること",
+    "enter_experience": "特に販売では「女性の職場」という独特の環境下にあり、相手の心理を考え、気持ちよく業務を行ってもらうように心がけたことでコミュニケーション力を鍛えられたと思います",
+    "enter_pr": "・コミュニケーション能力が高いと言われます。\n・プレゼンテーションスキル、チームワーク、独立した仕事もできる。\n・美容相談が得意です。"
   },
   "confirm_modal": {
     "back_confirm" : "編集中のデータが保存されません。よろしいですか？",

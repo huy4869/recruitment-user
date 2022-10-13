@@ -94,7 +94,7 @@ export default {
         },
         self_pr: {
           icon: '/assets/icon/005-mypage.svg',
-          link: '/my-page',
+          link: '/my-page/self-pr',
           name: this.$t('my_page.self_pr'),
           state: false
         },
