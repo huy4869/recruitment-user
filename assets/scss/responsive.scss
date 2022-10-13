@@ -809,6 +809,16 @@
         }
       }
 
+      .col-label-pr {
+        .label {
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 22px;
+          padding: 0;
+          margin: 0;
+        }
+      }
+
       .required {
         position: relative;
         display: inline-block;

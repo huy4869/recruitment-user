@@ -20,7 +20,7 @@
         <div class="right-item"><p class="card-text-normal">{{ job.work_time }}</p></div>
         <div class="left-item"><p class="card-text-primary">{{ $t('career.position_offices') }}</p></div>
         <div class="right-item"><p class="card-text-normal">{{ job.shifs }}</p></div>
-        <div class="left-item"><p class="card-text-primary">{{ $t('career.period_end') }}</p></div>
+        <div class="left-item"><p class="card-text-primary">{{ $t('career.position_offices') }}</p></div>
         <div class="right-item"><p class="card-text-normal text-ellipsis">{{ job.welfare_treatment_description }}</p></div>
         <div class="left-item"><p class="card-text-primary">{{ $t('career.business_content') }}</p></div>
         <div class="right-item"><p class="card-text-normal text-ellipsis">{{ job.welfare_treatment_description }}</p></div>
