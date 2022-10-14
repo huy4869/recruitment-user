@@ -14,6 +14,9 @@
                 <img src="/assets/icon/icon_add_blue.svg" alt="">
                 {{ $t('condition.enter_occupation') }}
               </el-button>
+              <div v-if="showProvince" class="show-result-condition">
+                {{ showProvince }}
+              </div>
             </div>
           </div>
           <div class="search-work-location">
@@ -25,6 +28,9 @@
                 <img src="/assets/icon/icon_add_blue.svg" alt="">
                 {{ $t('condition.enter_work_location') }}
               </el-button>
+              <div v-if="showJobType" class="show-result-condition">
+                {{ showJobType }}
+              </div>
             </div>
           </div>
         </div>
@@ -60,7 +66,7 @@
                 </el-checkbox-group>
               </div>
             </div>
-            <div class="form-condition-item">
+            <div class="form-condition-item form-item-50">
               <div class="header-search-left">
                 <span>{{ $t('condition.experience') }}</span>
               </div>
@@ -72,7 +78,7 @@
                 </el-checkbox-group>
               </div>
             </div>
-            <div class="form-condition-item">
+            <div class="form-condition-item form-item-50">
               <div class="header-search-left">
                 <span>{{ $t('condition.sort_by') }}</span>
               </div>
@@ -84,7 +90,7 @@
                 </el-checkbox-group>
               </div>
             </div>
-            <div class="form-condition-item">
+            <div class="form-condition-item form-item-50">
               <div class="header-search-left">
                 <span>{{ $t('condition.feature') }}</span>
               </div>
@@ -116,12 +122,12 @@
             {{ $t('button.search_again') }}
           </el-button>
         </div>
-        <el-dialog class="form-dialog-select" :title="$t('condition.select_work_location')" :visible.sync="occupationDialog" width="75%">
+        <el-dialog class="form-dialog-select" :title="$t('condition.select_work_location')" :visible.sync="occupationDialog" width="84%">
           <el-checkbox-group v-model="districts">
             <div class="form-filter-location">
               <div v-for="(district, index) in listProvinceDistrict" :key="index" class="district-item">
                 <div class="district-name">
-                    <el-checkbox :label="district.id" @change="changeDistrict(district)">{{ district.name }}</el-checkbox>
+                  <el-checkbox :label="district.id" @change="changeDistrict(district)">{{ district.name }}</el-checkbox>
                 </div>
                 <div class="list-province">
                   <el-checkbox-group v-model="workLocation">
@@ -134,20 +140,20 @@
             </div>
           </el-checkbox-group>
           <div slot="footer" class="dialog-footer">
-            <el-button type="danger" @click="occupationDialog = false">
+            <el-button type="danger" @click="changeCondition('provinces', workLocation)">
               {{ $t('button.decide') }}
             </el-button>
           </div>
         </el-dialog>
-        <el-dialog class="form-dialog-select" :title="$t('condition.select_a_job')" :visible.sync="workDialog" width="75%">
+        <el-dialog class="form-dialog-select form-work-dialog" :title="$t('condition.select_a_job')" :visible.sync="workDialog" width="84%">
           <div class="form-filter-location">
             <div class="district-item">
               <div class="district-name">
-                  <el-checkbox v-model="jobTypeSelectAll" @change="changeJobType">{{ $t('common.select_all') }}</el-checkbox>
+                <el-checkbox v-model="jobTypeSelectAll" @change="changeJobType">{{ $t('common.select_all') }}</el-checkbox>
               </div>
               <div class="list-province">
-                <el-checkbox-group v-model="workLocation">
-                  <div v-for="(type, key) in listJobType" :key="key" class="province-item">
+                <el-checkbox-group v-model="jobType">
+                  <div v-for="(type, key) in listJobType" :key="key" class="province-item form-work">
                     <el-checkbox :label="type.id">{{ type.name }} <span class="total-record">(12{{ $t('common.subject') }})</span></el-checkbox>
                   </div>
                 </el-checkbox-group>
@@ -155,7 +161,7 @@
             </div>
           </div>
           <div slot="footer" class="dialog-footer">
-            <el-button type="danger" @click="workDialog = false">
+            <el-button type="danger" @click="changeCondition('jobTypes', jobType)">
               {{ $t('button.decide') }}
             </el-button>
           </div>
@@ -354,14 +360,22 @@ export default {
           ]
         }
       ],
-      listJobType: [],
+      listJobType: [
+        { id: 1, name: 'ヘア', record: 12 },
+        { id: 2, name: 'ネイル・マツゲ ', record: 12 },
+        { id: 3, name: '美容クリニック', record: 12 },
+        { id: 4, name: '整体・カイロ・酸素・温浴', record: 12 },
+        { id: 5, name: 'フェイシャル・ボディ・脱毛', record: 12 },
+        { id: 6, name: 'その他', record: 12 }
+      ],
       jobType: [],
-      jobTypeSelectAll: [],
+      jobTypeSelectAll: false,
       workLocation: [],
       districts: [],
       condition: {
         keyword: '',
         provinces: [],
+        jobTypes: [],
         employment_status: [],
         experience: [],
         sort_by: [],
@@ -369,9 +383,31 @@ export default {
       }
     }
   },
+  computed: {
+    showProvince() {
+      const text = []
+      this.listProvinceDistrict.forEach(district => {
+        district.provinces.forEach(province => {
+          if (this.condition.provinces.includes(province.id)) {
+            text.push(province.name)
+          }
+        })
+      })
+      return text.join('、')
+    },
+    showJobType() {
+      const text = []
+      this.listJobType.forEach(type => {
+        if (this.condition.jobTypes.includes(type.id)) {
+          text.push(type.name)
+        }
+      })
+      return text.join('、')
+    }
+  },
   created() {
     this.getRecommendJob()
-    this.getMasterData()
+    // this.getMasterData()
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },
       { name: this.$t('page.search'), route: '/search' }
@@ -389,7 +425,6 @@ export default {
       ]
       this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&')).then(res => {
         this.listExperiences = res.data.m_job_experiences
-        this.listJobType = res.data.m_job_types
       })
     },
     getRecommendJob() {
@@ -424,20 +459,20 @@ export default {
       }
     },
     changeJobType() {
-      if (!this.jobTypeSelectAll) {
-        this.listJobType.forEach((type) => {
-          const key = this.jobType.indexOf(type.id)
-          if (key > -1) {
-            this.jobType.splice(key, 1)
-          }
-        })
-      } else {
+      if (this.jobTypeSelectAll) {
         this.listJobType.forEach((type) => {
           if (!this.jobType.includes(type.id)) {
             this.jobType.push(type.id)
           }
         })
+      } else {
+        this.jobType = []
       }
+    },
+    changeCondition(key, value) {
+      this.condition[key] = value
+      this.occupationDialog = false
+      this.workDialog = false
     }
   }
 }
