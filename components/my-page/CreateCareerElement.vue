@@ -563,12 +563,12 @@ export default {
     },
     loadAllYear() {
       for (let i = new Date().getFullYear(); i >= 1900; i--) {
-        this.linksYear.push({ value: i })
+        this.linksYear.push({ value: i.toString() })
       }
     },
     loadAllMonth() {
       for (let i = 1; i <= 12; i++) {
-        this.linksMonth.push({ value: i })
+        this.linksMonth.push({ value: i.toString() })
       }
     },
     submit() {

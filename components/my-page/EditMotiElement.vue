@@ -1,9 +1,9 @@
 <template>
   <div class="right-content-element">
     <div class="edit-cv-element">
-      <div class="edit-cv-title">{{ $t('self_pr.edit') }}</div>
+      <div class="edit-cv-title">{{ $t('motivation.edit') }}</div>
       <div class="edit-cv-content edit-form-content">
-        <div class="card-text-title card-title-mobile"> {{ $t('self_pr.edit') }}</div>
+        <div class="card-text-title card-title-mobile"> {{ $t('motivation.edit') }}</div>
         <el-form
           ref="accountForm"
           :model="accountForm"
@@ -15,23 +15,23 @@
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="24" class="col-label">
-                <div class="label"><span>{{ $t('self_pr.business_content') }}</span></div>
+                <div class="label"><span>{{ $t('motivation.name') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="business_content" :error="(error.key === 'business_content') ? error.value : ''">
+                      <el-form-item label="" prop="motivation" :error="(error.key === 'motivation') ? error.value : ''">
                         <el-input
-                          ref="business_content"
-                          v-model="accountForm.business_content"
-                          :placeholder="$t('self_pr.enter_business_content')"
+                          ref="motivation"
+                          v-model="accountForm.motivation"
+                          :placeholder="$t('motivation.name')"
                           :autosize="{ minRows: 5, maxRows: 12}"
-                          name="business_content"
+                          name="motivation"
                           type="textarea"
                           maxlength="2000"
                           tabindex="2"
-                          @focus="resetValidate('business_content')"
+                          @focus="resetValidate('motivation')"
                         />
                       </el-form-item>
                       <div class="sm-text">{{ $t('my_page.currently') }}{{ contentLength }}{{ $t('my_page.characters') }}</div>
@@ -43,54 +43,26 @@
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="24" class="col-label">
-                <div class="label"><span>{{ $t('self_pr.experience') }}{{ $t('self_pr.skill') }}</span></div>
+                <div class="label"><span>{{ $t('motivation.note') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="experience" :error="(error.key === 'experience') ? error.value : ''">
+                      <el-form-item label="" prop="other_notable_things" :error="(error.key === 'other_notable_things') ? error.value : ''">
                         <el-input
                           ref="alias_name"
-                          v-model="accountForm.experience"
-                          :placeholder="$t('self_pr.enter_experience')"
+                          v-model="accountForm.other_notable_things"
+                          :placeholder="$t('motivation.note')"
                           :autosize="{ minRows: 5, maxRows: 12}"
-                          name="experience"
+                          name="other_notable_things"
                           type="textarea"
                           maxlength="2000"
                           tabindex="2"
-                          @focus="resetValidate('experience')"
+                          @focus="resetValidate('other_notable_things')"
                         />
                       </el-form-item>
                       <div class="sm-text">{{ $t('my_page.currently') }}{{ experienceLength }}{{ $t('my_page.characters') }}</div>
-                    </el-col>
-                  </el-row>
-                </div>
-              </el-col>
-            </el-row>
-            <BorderElement :middle="true"></BorderElement>
-            <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
-                <div class="label"><span>{{ $t('self_pr.pr') }}</span></div>
-              </el-col>
-              <el-col :md="18" :sm="24">
-                <div class="content-input">
-                  <el-row class="d-flex">
-                    <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="pr" :error="(error.key === 'pr') ? error.value : ''">
-                        <el-input
-                          ref="pr"
-                          v-model="accountForm.pr"
-                          :placeholder="$t('self_pr.enter_pr')"
-                          :autosize="{ minRows: 5, maxRows: 12}"
-                          name="pr"
-                          type="textarea"
-                          maxlength="2000"
-                          tabindex="2"
-                          @focus="resetValidate('pr')"
-                        />
-                      </el-form-item>
-                      <div class="sm-text">{{ $t('my_page.currently') }}{{ prLength }}{{ $t('my_page.characters') }}</div>
                     </el-col>
                   </el-row>
                 </div>
@@ -109,7 +81,7 @@
       v-show="confirmModal"
       :text="$t('confirm_modal.back_confirm')"
       @close="closeConfirmModal"
-      @handleRouter="handleRouter('/my-page/self-pr')">
+      @handleRouter="handleRouter('/my-page/motivation')">
     </ConfirmModal>
   </div>
 </template>
@@ -130,9 +102,8 @@ export default {
     }
     return {
       accountForm: {
-        business_content: '',
-        experience: '',
-        pr: '',
+        motivation: '',
+        other_notable_things: '',
         errors: {}
       },
       error: {
@@ -140,14 +111,11 @@ export default {
         value: ''
       },
       accountRules: {
-        business_content: [
-          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.business_content') }), trigger: 'blur' }
+        motivation: [
+          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('motivation.name') }), trigger: 'blur' }
         ],
-        experience: [
-          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
-        ],
-        pr: [
-          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
+        other_notable_things: [
+          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('motivation.note') }), trigger: 'blur' }
         ]
       },
       confirmModal: false
@@ -155,13 +123,10 @@ export default {
   },
   computed: {
     contentLength() {
-      return this.accountForm.business_content.length
+      return this.accountForm.motivation.length
     },
     experienceLength() {
-      return this.accountForm.experience.length
-    },
-    prLength() {
-      return this.accountForm.pr.length
+      return this.accountForm.other_notable_things.length
     }
   },
   methods: {

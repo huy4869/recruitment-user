@@ -1,9 +1,9 @@
 <template>
   <div class="right-content-element">
     <div class="edit-cv-element">
-      <div class="edit-cv-title">{{ $t('my_page.edit_basic_information') }}</div>
+      <div class="edit-cv-title">{{ $t('my_page.job_career') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
       <div class="edit-cv-content edit-form-content">
-        <div class="card-text-title card-title-mobile"> {{ $t('my_page.edit_basic_information') }}</div>
+        <div class="card-text-title card-title-mobile"> {{ $t('my_page.job_career') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
         <el-form
           ref="accountForm"
           :model="accountForm"
@@ -343,7 +343,7 @@
     <div id="btn-center" class="text-center">
       <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
       <el-button class="card-button triple-btn">{{ $t('my_page.remove') }}</el-button>
-      <el-button class="card-button triple-btn btn-right" type="danger" @click.native="submit" >{{ $t('my_page.save') }}</el-button>
+      <el-button class="card-button triple-btn" type="danger" @click.native="submit" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -360,6 +360,11 @@ import BorderElement from './BorderElement'
 export default {
   name: 'EditCvElement',
   components: { BorderElement },
+  filters: {
+    toFullWidth(value) {
+      return value.toString().replace(/[A-Za-z0-9]/g, function(s) { return String.fromCharCode(s.charCodeAt(0) + 0xFEE0) })
+    }
+  },
   data() {
     const validFormLength = (rule, value, callback, message) => {
       if (value && value.length > 255) {
@@ -469,7 +474,8 @@ export default {
       linksStatus: [],
       linksOccupation: [],
       linksYear: [],
-      linksMonth: []
+      linksMonth: [],
+      index: this.$route.params.id || ''
     }
   },
   computed: {
@@ -564,12 +570,12 @@ export default {
     },
     loadAllYear() {
       for (let i = new Date().getFullYear(); i >= 1900; i--) {
-        this.linksYear.push({ value: i })
+        this.linksYear.push({ value: i.toString() })
       }
     },
     loadAllMonth() {
       for (let i = 1; i <= 12; i++) {
-        this.linksMonth.push({ value: i })
+        this.linksMonth.push({ value: i.toString() })
       }
     },
     submit() {

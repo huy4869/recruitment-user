@@ -1657,6 +1657,13 @@
       margin-right: 8px;
     }
   }
+
+  .right-content-element {
+    #self-pr {
+      border: none;
+      padding: 0;
+    }
+  }
 }
 @media only screen and (max-width: 414px) {
   .card-component {

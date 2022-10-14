@@ -1,9 +1,9 @@
 <template>
   <div class="right-content-element">
     <div class="edit-cv-element">
-      <div class="edit-cv-title">{{ $t('my_page.edit_basic_information') }}</div>
+      <div class="edit-cv-title">{{ $t('education.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
       <div class="edit-cv-content edit-form-content">
-        <div class="card-text-title card-title-mobile"> {{ $t('my_page.edit_basic_information') }}</div>
+        <div class="card-text-title card-title-mobile"> {{ $t('education.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
         <el-form
           ref="accountForm"
           :model="accountForm"
@@ -15,7 +15,7 @@
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="24" class="col-label">
-                <div class="label"><span>{{ $t('qualification.name') }}</span></div>
+                <div class="label"><span>{{ $t('education.name') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -26,7 +26,7 @@
                         <el-input
                           ref="store_name"
                           v-model="accountForm.name"
-                          :placeholder="$t('qualification.name')"
+                          :placeholder="$t('education.enter_name')"
                           name="name"
                           type="text"
                           tabindex="2"
@@ -43,8 +43,9 @@
             <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="24" class="col-label">
                 <div class="label">
-                  <span>{{ $t('qualification.date') }}</span>
+                  <span>{{ $t('education.date') }}</span>
                 </div>
+                <div class="required">{{ $t('form.required') }}</div>
               </el-col>
               <el-col :md="18" :sm="24">
                 <div class="content-input">
@@ -55,7 +56,7 @@
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-autocomplete
                               ref="period_start"
-                              v-model.trim="accountForm.year"
+                              v-model.trim="accountForm.period_start_year"
                               :placeholder="$t('YYYY')"
                               :fetch-suggestions="queryYear"
                               name="year"
@@ -71,8 +72,8 @@
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col :sm="12" :xs="10" class="birth-month">
                             <el-autocomplete
-                              ref="period_startx"
-                              v-model.trim="accountForm.month"
+                              ref="period_start"
+                              v-model.trim="accountForm.period_start_month"
                               :placeholder="$t('MM')"
                               :fetch-suggestions="queryMonth"
                               name="period_start"
@@ -89,29 +90,85 @@
                         </el-row>
                       </el-form-item>
                     </el-col>
+                    <span class="date-space">~</span>
+                    <el-col :md="9" :sm="24" class="birth-year">
+                      <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
+                        <el-row class="d-flex">
+                          <el-col  :sm="12" :xs="12" class="birth-year">
+                            <el-autocomplete
+                              ref="period_end"
+                              v-model.trim="accountForm.period_end_year"
+                              :placeholder="$t('YYYY')"
+                              :fetch-suggestions="queryYear"
+                              name="birthday"
+                              type="text"
+                              tabindex="2"
+                              :maxlength="4"
+                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                              pattern="[0-9]*"
+                              inputmode="numeric"
+                              @focus="resetValidate('period_end')"
+                            />
+                          </el-col>
+                          <span class="text-normal birthday">{{ $t('form.year') }}</span>
+                          <el-col  :sm="12" :xs="10" class="birth-month">
+                            <el-autocomplete
+                              ref="period_end"
+                              v-model.trim="accountForm.period_end_month"
+                              :placeholder="$t('MM')"
+                              :fetch-suggestions="queryMonth"
+                              name="birthday"
+                              type="text"
+                              :maxlength="2"
+                              tabindex="2"
+                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                              pattern="[0-9]*"
+                              inputmode="numeric"
+                              @focus="resetValidate('period_end')"
+                            />
+                          </el-col>
+                          <span class="text-normal birthday">{{ $t('form.month') }}</span>
+                        </el-row>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                  <el-row class="edu-status">
+                    <el-col :md="10" :sm="24" :xs="16">
+                      <el-form-item label="" prop="typeSelect" :error="(error.key === 'typeSelect') ? error.value : ''">
+                        <el-select v-model="accountForm.typeSelect" :placeholder="$t('education.enter_type')">
+                          <el-option
+                            v-for="item in typeList"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                          </el-option>
+                        </el-select>
+                      </el-form-item>
+                    </el-col>
                   </el-row>
                 </div>
               </el-col>
             </el-row>
+            <BorderElement :middle="true"></BorderElement>
           </div>
         </el-form>
       </div>
     </div>
     <div id="btn-center" class="text-center">
-      <el-button class="card-button" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button btn-right" type="danger" @click.native="submit" >{{ $t('my_page.save') }}</el-button>
+      <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
+      <el-button class="card-button triple-btn" @click="showDeleteModal">{{ $t('my_page.remove') }}</el-button>
+      <el-button class="card-button triple-btn" type="danger" @click.native="submit" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
       :text="$t('confirm_modal.back_confirm')"
       @close="closeConfirmModal"
-      @handleRouter="handleRouter('/my-page/qualification')">
+      @handleRouter="handleRouter('/my-page/education')">
     </ConfirmModal>
     <ConfirmModal
       v-show="deleteModal"
       :text="$t('confirm_modal.delete_confirm')"
-      @close="closeDeleteModal"
-      @handleRouter="handleRouter('/my-page/qualification')">
+      @close="closeDeleteModal">
     </ConfirmModal>
   </div>
 </template>
@@ -120,7 +177,12 @@
 import BorderElement from './BorderElement'
 
 export default {
-  name: 'EditCvElement',
+  name: 'EditEduElement',
+  filters: {
+    toFullWidth(value) {
+      return value.toString().replace(/[A-Za-z0-9]/g, function(s) { return String.fromCharCode(s.charCodeAt(0) + 0xFEE0) })
+    }
+  },
   components: { BorderElement },
   data() {
     const validFormLength = (rule, value, callback, message) => {
@@ -134,29 +196,83 @@ export default {
       accountForm: {
         name: '',
         date: '',
-        year: '',
-        month: '',
+        period_start: '',
+        period_end: '',
+        period_start_year: '',
+        period_start_month: '',
+        period_end_year: '',
+        period_end_month: '',
+        typeSelect: '',
         errors: {}
       },
+      typeList: [
+        { value: '在学ステータスを選択', label: '在学ステータスを選択' },
+        { value: '卒業', label: '卒業' },
+        { value: '卒業見込み', label: '卒業見込み' },
+        { value: '中退', label: '中退' }
+      ],
       error: {
         key: null,
         value: ''
       },
       accountRules: {
         name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('qualification.name') }), trigger: 'blur' },
-          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('qualification.name') }), trigger: 'blur' }
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.name') }), trigger: 'blur' },
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('education.name') }), trigger: 'blur' }
+        ],
+        period_start: [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
+        ],
+        period_end: [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
+        ],
+        typeSelect: [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
         ]
       },
       linksYear: [],
       linksMonth: [],
+      index: this.$route.params.id || '',
       confirmModal: false,
       deleteModal: false
     }
   },
   computed: {
     period_start() {
-      return this.accountForm.year && this.accountForm.month
+      return this.accountForm.period_start_year && this.accountForm.period_start_month
+    },
+    period_end() {
+      return this.accountForm.period_end_year && this.accountForm.period_end_month
+    }
+  },
+  watch: {
+    'accountForm.period_start_year'() {
+      if (this.accountForm.period_start_year && this.accountForm.period_start_month) {
+        this.accountForm.period_start = 'period_start'
+      } else {
+        this.accountForm.period_start = ''
+      }
+    },
+    'accountForm.period_start_month'() {
+      if (this.accountForm.period_start_month && this.accountForm.period_start_year) {
+        this.accountForm.period_start = 'period_start'
+      } else {
+        this.accountForm.period_start = ''
+      }
+    },
+    'accountForm.period_end_year'() {
+      if (this.accountForm.period_end_year && this.accountForm.period_end_month) {
+        this.accountForm.period_start = 'period_start'
+      } else {
+        this.accountForm.period_start = ''
+      }
+    },
+    'accountForm.period_end_month'() {
+      if (this.accountForm.period_end_month && this.accountForm.period_end_year) {
+        this.accountForm.period_end = 'period_end'
+      } else {
+        this.accountForm.period_end = ''
+      }
     }
   },
   mounted() {
