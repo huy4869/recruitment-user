@@ -1657,7 +1657,176 @@
       margin-right: 8px;
     }
   }
+  .search-page {
+    .search-content {
+      padding: 16px 12px;
+      .search-form-condition {
+        padding: 0;
+        border: none;
+        .header-search {
+          display: block;
+          .search-occupation, .search-work-location {
+            width: 100%;
+            display: block;
+            .header-search-right {
+              border: none;
+              .el-button {
+                height: 36px;
+                padding: 6px 22px;
+                text-align: center;
+                span {
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 22px;
+                }
+              }
+              .show-result-condition {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 22px;
+                margin-top: 6px;
+              }
+            }
+          }
+        }
+        .all-condition {
+          .form-all-condition {
+            border-bottom: 1px solid $color-placeholder;
+            .form-condition-item {
+              display: block;
+              .header-search-right {
+                padding: 3px 0 3px 10px;
+                width: calc(100% - 10px);
+              }
+              .input-keyword {
+                width: calc(100% - 14px);
+                margin: 9px 12px 9px 2px;
+              }
+              .el-checkbox-group {
+                .checkbox-item {
+                  margin: 9px 0;
+                  .el-checkbox__label {
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 24px;
+                  }
+                }
+              }
+              .feature-title {
+                margin: 9px 0 1px;
+              }
+            }
+            .form-item-50 {
+              .el-checkbox-group {
+                .checkbox-item {
+                  width: 50%;
+                }
+              }
+            }
+          }
+          .button-see-all {
+            margin-top: 12px;
+          }
+        }
+        .button-search {
+          margin-top: 16px;
+        }
+      }
+      .search-result {
+        span {
+          font-size: 14px;
+          line-height: 22px;
+        }
+        .total-record {
+          font-size: 14px;
+          line-height: 24px;
+          margin-right: 6px;
+        }
+      }
+      .search-list-job {
+        margin-top: 16px;
+      }
+    }
 
+    .header-search-left {
+      width: 100%;
+      padding: 8px 0;
+      border: none;
+      line-height: 22px;
+      span {
+        padding-left: 10px;
+      }
+    }
+    .header-search-right {
+      width: calc(100% - 24px);
+      display: block;
+      margin-left: 0;
+      border: none;
+      padding: 12px;
+    }
+  }
+  .form-dialog-select {
+    .el-dialog {
+      width: 100% !important;
+      margin-top: 0 !important;
+      margin: 0;
+      .el-dialog__header {
+        padding: 15px 0 15px;
+        background-color: $color-text-primary;
+        text-align: center;
+        .el-dialog__title {
+          font-size: 16px;
+          line-height: 24px;
+          border: 0;
+          height: 24px;
+          color: $color-white;
+        }
+        .el-dialog__headerbtn {
+          top: 11px;
+          right: 15px;
+          width: 24px;
+          height: 24px;
+          i, i::before {
+            width: 24px;
+            height: 24px;
+            color: $color-white;
+          }
+        }
+      }
+      .el-dialog__body {
+        padding: 12px;
+        .form-filter-location {
+          .district-item {
+            .district-name {
+              font-size: 12px;
+              line-height: 22px;
+              padding: 12px;
+            }
+            .list-province {
+              padding: 3px 12px;
+              .province-item {
+                width: 33%;
+                margin: 9px 0;
+                .el-checkbox__label {
+                  font-size: 12px;
+                  line-height: 22px;
+                  padding-left: 6px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .form-work-dialog {
+    .el-dialog {
+      height: 100vh;
+      .el-dialog__body .form-filter-location .district-item .list-province .province-item {
+        width: 50%;
+      }
+    }
+  }
   .right-content-element {
     #self-pr {
       border: none;

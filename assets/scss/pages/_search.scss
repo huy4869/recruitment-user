@@ -11,6 +11,12 @@
         margin-bottom: 4px;
         .header-search-right {
           border-top: 1px solid $border-default;
+          .show-result-condition {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            margin-top: 12px;
+          }
           .el-button {
             height: 48px;
             padding: 11px 21px;
@@ -84,6 +90,9 @@
                 display: inline-block;
                 margin-bottom: 20px;
                 margin-top: 10px;
+                .el-checkbox__label {
+                  white-space: normal;
+                }
               }
             }
             .feature-title {
@@ -206,6 +215,12 @@
             width: 25%;
             display: inline-block;
             margin: 12px 0;
+            .el-checkbox__label {
+              white-space: normal;
+            }
+          }
+          .form-work {
+            width: 33%;
           }
           .total-record {
             color: $color-blue;
