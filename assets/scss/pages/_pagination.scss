@@ -58,7 +58,8 @@
       border-color: $color-button-disable;
     }
   }
-}
-.pagination {
-  justify-content: center;
+  .pagination {
+    justify-content: flex-end;
+    padding: 0;
+  }
 }

@@ -17,6 +17,7 @@
     </div>
     <div class="show-sp">
       <div class="form-condition-title">
+        <div class="form-condition-date">{{ condition.date }}</div>
         <div class="form-condition-button">
           <el-button type="primary" class="form-search" plain>
             <img src="/assets/icon/icon_search_blue.svg" alt="">
@@ -25,7 +26,6 @@
             <img src="/assets/icon/icon_delete.svg" alt="">
           </el-button>
         </div>
-        <div class="form-condition-date">{{ condition.date }}</div>
       </div>
     </div>
     <div class="form-condition-content">
@@ -34,7 +34,7 @@
       </div>
       <div v-for="(detail, index) in condition.detail" :key="index">
         <div v-if="detail" class="form-condition-item">
-          <div class="form-left">{{ $t('my_page.condition.' + index) }}</div>
+          <div class="form-left">{{ $t('condition.' + index) }}</div>
           <div class="form-right"><span>{{ detail }}</span></div>
         </div>
       </div>
