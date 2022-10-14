@@ -4,6 +4,7 @@ export const INDEX_SET_ERROR = 'setNotifyError'
 export const INDEX_SET_WARNING = 'setNotifyWarning'
 export const INDEX_SET_LOADING = 'setLoading'
 export const INDEX_SET_TITLE_MENU = 'setTitleMenu'
+export const MASTER_GET_DATA = 'getMasterData'
 
 // category
 export const CATEGORY_OUT_STANDING = 'category/getOutStanding'

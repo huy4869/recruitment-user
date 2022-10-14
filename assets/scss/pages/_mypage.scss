@@ -371,11 +371,6 @@
     line-height: 32px;
     margin-bottom: 24px;
   }
-  .pagination-common {
-    .pagination {
-      justify-content: right;
-    }
-  }
 }
 
 .change-password-element {
@@ -453,19 +448,13 @@
           img {
             width: 24px;
             height: 24px;
-            margin-left: 6px;
+            margin-right: 6px;
           }
         }
       }
     }
     .past-search-condition-form {
       margin-top: 24px;
-    }
-    .pagination-common {
-      .pagination {
-        justify-content: flex-end;
-        padding: 0;
-      }
     }
   }
 }
@@ -538,7 +527,7 @@
         width: calc(100% - 184px);
         display: flex;
         span {
-          margin: auto 0;
+          margin: 17px 0;
           font-weight: 500;
           font-size: 16px;
           line-height: 24px;

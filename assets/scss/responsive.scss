@@ -53,7 +53,7 @@
     }
   }
   .text-mobile, .el-form-item__label, .el-checkbox__label, .label, span {
-    font-size: 14px !important;
+    font-size: 14px;
   }
   // end-login-page
 
@@ -649,13 +649,6 @@
       background-color: $color-primary;
       border-left: 5px solid $color-text-primary;
       padding: 9px 11px;
-    }
-
-    .pagination-common {
-      .pagination {
-        justify-content: center;
-        padding: 0;
-      }
     }
   }
   .schedule-history {
@@ -1598,12 +1591,6 @@
           }
         }
       }
-      .pagination-common {
-        .pagination {
-          justify-content: center;
-          margin-right: 8px;
-        }
-      }
     }
   }
   .past-search-condition-element {
@@ -1613,35 +1600,24 @@
     }
     .past-search-condition-content {
       padding: 12px;
+      .past-search-button {
+
+      }
       .past-search-condition-form {
         margin-top: 20px;
-        .form-condition-element:first-child {
-          border-top: 1px solid $border-default;
-        }
-      }
-      .pagination-common {
-        .pagination {
-          justify-content: center;
-          margin-right: 8px;
-        }
       }
     }
   }
   .form-condition-element {
-    box-shadow: none;
-    border-radius: 0;
-    padding: 16px 0;
-    margin-bottom: 0;
-    border-bottom: 1px solid $border-default;
+    padding: 12px 8px;
+    margin-bottom: 16px;
     .form-condition-title {
       display: flex;
       justify-content: space-between;
       margin-bottom: 8px;
       .form-condition-date {
-        font-weight: 500;
-        font-size: 14px;
+        font-size: 13px;
         line-height: 22px;
-        color: $color-text-3;
         margin-top: 9px;
       }
       .form-condition-button {
@@ -1653,28 +1629,32 @@
     }
     .form-condition-content {
       .form-right {
-        border-bottom: none;
-        width: calc(100% - 87px);
+        width: calc(100% - 110px);
+        border-top: 1px solid $border-default;
       }
       .form-condition-item {
         .form-left {
-          background: $color-white;
-          color: $color-black;
-          border: none;
+          border-top: none;
           font-size: 14px;
           line-height: 22px;
           width: 78px;
-          padding: 8px 0;
+          padding: 16px 8px;
         }
         .form-right {
-          border-bottom: none;
-          width: calc(100% - 87px);
+          width: calc(100% - 110px);
+          border-top: none;
           span {
             font-size: 14px;
             line-height: 22px;
           }
         }
       }
+    }
+  }
+  .pagination-common {
+    .pagination {
+      justify-content: center;
+      margin-right: 8px;
     }
   }
 }

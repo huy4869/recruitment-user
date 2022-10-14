@@ -11,7 +11,7 @@
         </el-button>
       </div>
       <div class="past-search-condition-form">
-        <div v-for="(condition, key) in listConditions" :key="key">
+        <div class="form-condition-list" v-for="(condition, key) in listConditions" :key="key">
           <FormConditionElement :condition="condition"></FormConditionElement>
         </div>
       </div>
