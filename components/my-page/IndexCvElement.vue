@@ -88,7 +88,7 @@ export default {
         },
         education_background: {
           icon: '/assets/icon/004-mypage.svg',
-          link: '/my-page',
+          link: '/my-page/education',
           name: this.$t('my_page.education_background'),
           state: false
         },
@@ -100,7 +100,7 @@ export default {
         },
         motivation: {
           icon: '/assets/icon/006-mypage.svg',
-          link: '/my-page',
+          link: '/my-page/motivation',
           name: this.$t('my_page.motivation'),
           state: false
         }

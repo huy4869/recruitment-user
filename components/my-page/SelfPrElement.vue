@@ -1,6 +1,6 @@
 <template>
   <div class="right-content-element">
-    <div class="edit-cv-element">
+    <div id="self-pr" class="edit-cv-element">
       <div class="edit-cv-title">{{ $t('self_pr.title') }}</div>
       <div class="edit-cv-content edit-info-content">
         <div class="card-text-title card-title-mobile"> {{ $t('self_pr.title') }}</div>

@@ -6,6 +6,11 @@
 }
 .right-content-element {
   width: 100%;
+  #self-pr {
+    border: 2px solid $border-focus;
+    padding: 24px;
+    border-radius: 4px;
+  }
 }
 .edit-cv-element {
   margin-bottom: 24px;
@@ -305,6 +310,9 @@
       }
       .date-space {
         margin: 10px 20px 0 0
+      }
+      .edu-status {
+        margin-top: 20px;
       }
     }
   }
