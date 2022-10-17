@@ -464,6 +464,13 @@
   border-radius: 4px;
   padding: 20px;
   margin-bottom: 20px;
+  &#desired {
+    border: 2px solid $border-focus;
+    box-shadow: none;
+  }
+  .card-title-mobile {
+    display: none;
+  }
   .form-condition-title {
     display: flex;
     justify-content: space-between;
@@ -505,7 +512,7 @@
   }
   .form-condition-content {
     .form-right {
-      border-bottom: 1 solid $border-default;
+      border-bottom: 1px solid $border-default;
       width: calc(100% - 184px);
     }
     .form-condition-item {
