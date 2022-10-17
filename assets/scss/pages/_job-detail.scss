@@ -1,0 +1,265 @@
+.job-detail-page {
+  .job-detail-header {
+    margin: 18px 64px;
+    border-bottom: 2px solid $border-focus;
+    .job-detail-title {
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
+    }
+    .job-detail-store-name {
+      margin-top: 12px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 28px;
+      display: flex;
+      justify-content: space-between;
+      .last-updated {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: $color-text-3;
+      }
+    }
+  }
+  .job-detail-content {
+    padding: 0 64px;
+    .button-pickup{
+      display: flex;
+      justify-content: space-between;
+      .el-button {
+        span {
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 150%;
+        }
+      }
+      .about-job {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: $color-blue;
+        display: flex;
+        cursor: pointer;
+        margin-top: 16px;
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+    .sub-detail-title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      margin: 24px 0 28px;
+    }
+    .detail-job-image {
+      .job-avatar {
+        display: flex;
+        img {
+          width: 100%;
+        }
+      }
+      .job-detail {
+        margin-top: 24px;
+        display: flex;
+        .image-detail {
+          width: 31.97%;
+          margin-right: 24px;
+          display: flex;
+          img {
+            width: 100%;
+          }
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+    .job-button-detail {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      margin-top: 12px;
+      .button-like {
+        width: 160px;
+        display: flex;
+        padding: 11px 0;
+        border: 1px solid $color-blue;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        justify-content: center;
+        color: $color-blue;
+        margin: 12px;
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+      .button-detail {
+        display: inline-block;
+        width: 150px;
+        margin: 12px;
+        .el-button {
+          width: 100%;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          color: $color-white;
+          background-color: $color-button-danger;
+          padding: 12px 0;
+          border: none;
+        }
+      }
+    }
+    .form-list-new-social {
+      top: 14px;
+      left: 0;
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      img {
+        width: 40px;
+        height: 40px;
+        margin-right: 13px;
+      }
+    }
+    .application-requirement {
+      padding: 14px 0;
+      .application-requirement-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        line-height: 24px;
+        .application-requirement-left {
+          background-color: $color-blue-3;
+          width: 170px;
+          font-weight: 700;
+          border-radius: 4px;
+          border-bottom: 1px solid $color-white;
+          span {
+            margin: 16px 24px;
+            display: block;
+          }
+        }
+        .application-requirement-right {
+          width: calc(100% - 194px);
+          border-bottom: 1px solid $border-default;
+          padding: 16px 0;
+          font-weight: 500;
+          .show-button-google-map {
+            margin-bottom: 0;
+            display: flex;
+            padding-left: 24px;
+            position: relative;
+            margin-top: 10px;
+            img {
+              width: 24px;
+              height: 24px;
+              position: absolute;
+              left: 0;
+            }
+            span {
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 24px;
+              color: $color-blue;
+            }
+          }
+          .employment-status-item {
+            color: $color-text-primary;
+            border: 1px solid $color-text-primary;
+            border-radius: 2px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 22px;
+            padding: 3px 8px;
+            width: fit-content;
+            display: inline-block;
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+    .title-component {
+      border-left: 5px solid $color-text-primary;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 32px;
+      padding: 11px 24px;
+      color: $color-text-primary;
+      background-color: $color-primary;
+      margin-bottom: 14px;
+    }
+    .recently-viewed-job {
+      .view-job-content {
+        margin: 0 -12px;
+        .slick-dots {
+          li {
+            button {
+              width: 12px;
+              height: 12px;
+              border-radius: 50%;
+              background-color: $border-focus;
+              &::before {
+                content: '';
+              }
+            }
+          }
+          .slick-active{
+            button {
+              background-color: $color-text-primary;
+            }
+          }
+        }
+      }
+    }
+    .jobs-similar-job {
+      margin-top: 106px;
+      .jobs-similar-job-title {
+        height: 54px;
+        display: flex;
+        justify-content: space-between;
+        background: $color-primary;
+        border-left: 5px solid $color-text-primary;
+        margin-bottom: 24px;
+        .title-component {
+          border-left: none;
+          margin-bottom: 0;
+        }
+        .button-see-all {
+          display: flex;
+          margin: auto 15px;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          color: $color-text-primary;
+          cursor: pointer;
+        }
+      }
+    }
+    .find-other-job {
+      .find-other-job-content{
+        padding: 24px;
+        border: 2px solid $border-focus;
+        border-radius: 4px;
+        .find-other-job-item {
+          display: flex;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          color: $color-blue;
+          height: 24px;
+          span {
+            margin: 0 4px;
+            color: $color-button-disable;
+          }
+        }
+      }
+    }
+  }
+}
