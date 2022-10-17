@@ -94,6 +94,25 @@
     "status": "雇用形態",
     "remove": "お気に入り求人リストから削除"
   },
+  "job": {
+    "application_requirement": "募集要項",
+    "recruitment_type": "募集職種",
+    "description": "仕事内容",
+    "employment_status": "雇用形態",
+    "salary": "給与",
+    "working_hours": "勤務時間",
+    "age": "年齢",
+    "gender": "性別",
+    "experience": "経験",
+    "work_type": "勤務先",
+    "station1": "最寄り駅1",
+    "welfare_treatment": "福利厚生・待遇",
+    "pick_up_point": "PICK UP POINT",
+    "about_job": "求人に対してのお問い合わせ",
+    "recently_viewed_job": "最近見た求人",
+    "jobs_similar": "この求人に似た求人",
+    "find_other_jobs": "他の求人を探す"
+  },
   "form": {
     "required": "必須",
     "year": "年",
