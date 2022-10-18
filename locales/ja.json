@@ -143,6 +143,7 @@
     "favorite_job": "お気に入り求人",
     "web_cv": "Web履歴書",
     "past_search_condition": "過去検索条件",
+    "desired_condition": "希望条件",
     "chat": "チャット",
     "change_password": "パスワードの変更",
     "edit_basic_information": "基本情報編集",
@@ -265,6 +266,20 @@
     "name" : "志望動機",
     "note": "美容師国家資格",
     "edit": "志望動機編集"
+  },
+  "desired_condition": {
+    "location": "希望勤務地",
+    "enter_location": "勤務地の選択",
+    "type": "希望雇用形態",
+    "enter_type": "雇用形態の選択",
+    "age" : "年齢",
+    "salary": "希望給与",
+    "position": "希望職種",
+    "enter_position": "職種の選択",
+    "experience": "就業経験",
+    "enter_experience": "就業経験を選択",
+    "features": "希望特徴",
+    "edit": "希望条件編集"
   },
   "confirm_modal": {
     "back_confirm" : "編集中のデータが保存されません。よろしいですか？",

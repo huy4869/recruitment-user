@@ -52,7 +52,8 @@
       }
     }
   }
-  .text-mobile, .el-form-item__label, .el-checkbox__label, .label, span {
+  .text-mobile, .el-form-item__label, .el-checkbox__label, .label, span,.el-form-item__content .el-input__inner,
+  .el-checkbox .el-checkbox__label, .el-form-item__content .el-input__inner::placeholder {
     font-size: 14px;
   }
   // end-login-page
@@ -111,6 +112,9 @@
       }
     }
   }
+  .edit-form-content .edit-form-input .content-input .feature-title {
+    font-size: 14px;
+  }
 }
 
 @media screen  and (max-width: 1024px) {
@@ -138,6 +142,23 @@
                 display: inline-block;
               }
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 912px) {
+  .edit-form-content {
+    .edit-form-input {
+      .content-input {
+        .feature-group {
+          display: block;
+          border: none;
+          margin-bottom: 0;
+          .feature-title {
+            margin-bottom: 12px;
           }
         }
       }
@@ -356,6 +377,18 @@
               }
             }
           }
+        }
+      }
+    }
+  }
+  .edit-form-content {
+    .edit-form-input {
+      .content-input {
+        .salary-range {
+          margin: 12px 12px 0 12px;
+        }
+        .salary-select {
+          margin-left: 14px;
         }
       }
     }
@@ -1641,6 +1674,22 @@
   .form-condition-element {
     padding: 12px 8px;
     margin-bottom: 16px;
+    &#desired {
+      border: none;
+      box-shadow: none;
+      padding: 12px 0;
+    }
+    .card-title-mobile {
+      display: block;
+      background-color: $color-primary;
+      padding: 9px 0 9px 16px;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      color: $--color-primary;
+      border-left: 5px solid $--color-primary;
+      margin: 8px 0 16px;
+    }
     .form-condition-title {
       display: flex;
       justify-content: space-between;

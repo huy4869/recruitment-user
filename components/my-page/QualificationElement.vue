@@ -3,7 +3,7 @@
     <div>
       <div v-if="listJobs.length" class="favorite-job-page-content">
         <div id="career-mobile" class="d-flex justify-between">
-          <el-button type="danger" class="card-button" @click="handleRouter('qualification/create')">
+          <el-button type="danger" class="card-button" @click="handleRouter({name: 'my-page-qualification-create', params: {id: 1}})">
             <img src="/assets/icon/add-white.svg" alt="">
             {{ $t('my_page.add_experience') }}
           </el-button>
