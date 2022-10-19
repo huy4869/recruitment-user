@@ -3,7 +3,7 @@
     <div>
       <div v-if="listJobs.length" class="favorite-job-page-content">
         <div id="career-mobile" class="d-flex justify-between">
-          <el-button type="danger" class="card-button" @click="handleRouter('job-career/create')">
+          <el-button type="danger" class="card-button" @click="handleRouter('job-career/create/' + (listJobs.length + 1))">
             <img src="/assets/icon/add-white.svg" alt="">
             {{ $t('my_page.add_experience') }}
           </el-button>
@@ -13,7 +13,7 @@
           <CareerElement :job="job" :index="index + 1" :show-status="true"></CareerElement>
         </div>
         <div id="career" class="d-flex justify-between">
-          <el-button type="danger"  class="card-button" @click="handleRouter('job-career/create')">
+          <el-button type="danger"  class="card-button" @click="handleRouter('job-career/create/' + (listJobs.length + 1))">
             <img src="/assets/icon/add-white.svg" alt="">
             {{ $t('my_page.add_experience') }}
           </el-button>
@@ -22,7 +22,7 @@
       </div>
       <div v-else>
         <div id="career-mobile" class="d-flex justify-between">
-          <el-button type="danger" class="card-button" @click="handleRouter('job-career/create')">
+          <el-button type="danger" class="card-button" @click="handleRouter('job-career/create/' + (listJobs.length + 1))">
             <img src="/assets/icon/add-white.svg" alt="">
             {{ $t('my_page.add_experience') }}
           </el-button>

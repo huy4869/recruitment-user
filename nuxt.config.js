@@ -43,6 +43,7 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     '@/plugins/i18n.js',
+    '@/plugins/fullwidth.js'
   ],
 
   // middleware route

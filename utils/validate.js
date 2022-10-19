@@ -116,3 +116,13 @@ export function validFullWidth(str) {
   const reg = /^[ぁ-んァ-ン一-龥]{0,255}$/
   return reg.test(str)
 }
+
+export function validHalfWidth(str) {
+  const reg = /^[a-zA-Z0-9\*\.\!\@\$\%\^\&\(\)\{\}\[\]\:\;\<\>\,\.\?\/\~\_\+\-\=\|\\]+$/
+  return reg.test(str)
+}
+
+export function validPhoneNumber(str) {
+  const reg = /^[0-9\-]{0,13}$/
+  return reg.test(str)
+}
