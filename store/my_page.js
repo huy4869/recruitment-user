@@ -1,3 +1,5 @@
+import { handleApi } from '@/utils/handleApi'
+
 export const state = () => ({
   statePage: 'top_page',
   showDetailMessage: false
@@ -13,4 +15,14 @@ export const mutations = {
 }
 
 export const actions = {
+  getListWorkHistory(context, resource) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/work-history'))
+    })
+  },
+  getBasicInfo(context, resource) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/profile'))
+    })
+  }
 }

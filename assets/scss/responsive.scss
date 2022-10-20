@@ -147,6 +147,13 @@
       }
     }
   }
+  .job-element {
+    .job-box {
+      .left-item, .right-item {
+        font-size: 14px;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 912px) {
@@ -309,7 +316,7 @@
       }
       .card-main {
         .job-title {
-          .avatar-img {
+          #avatar-img {
             width: 144px;
             height: 144px;
           }
@@ -1214,7 +1221,7 @@
           border-left: 5px solid $--color-primary;
           .card-primary-title {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
           }
         }
       }

@@ -5,13 +5,21 @@
       <div class="card-main d-flex">
         <div class="job-title">
           <img v-if="!info.avatar" class="avatar-img" src="/assets/icon/icon_user_default.svg" alt="favorite-job">
-          <img v-else class="avatar-img" :src="info.avatar" alt="favorite-job">
+          <img v-else id="avatar-img"  class="avatar-img" :src="info.avatar" alt="favorite-job">
           <br>
           <div class="social-media">
-            <img src="/assets/icon/fb.svg" alt="fb">
-            <img src="/assets/icon/ebay.svg" alt="ebay">
-            <img src="/assets/icon/ig.svg" alt="ig">
-            <img src="/assets/icon/line.svg" alt="line">
+            <a :href="info.facebook" target="_blank">
+              <img src="/assets/icon/fb.svg" alt="fb">
+            </a>
+            <a :href="info.twitter" target="_blank">
+              <img src="/assets/icon/ebay.svg" alt="ebay">
+            </a>
+            <a :href="info.instagram" target="_blank">
+              <img src="/assets/icon/ig.svg" alt="ig">
+            </a>
+            <a :href="info.line" target="_blank">
+              <img src="/assets/icon/line.svg" alt="line">
+            </a>
           </div>
         </div>
         <div class="img-detail-mobile">
@@ -31,7 +39,7 @@
           </div>
           <div class="right-item first-right-item">
             <p class="card-text-normal">
-              午前9時〜午後5時
+              {{ info.full_name }}
             </p>
           </div>
           <div class="left-item">
@@ -41,7 +49,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              午前9時〜午後5時
+              {{ info.alias_name }}
             </p>
           </div>
           <div class="left-item">
@@ -51,7 +59,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              午前9時〜午後5時
+              {{ info.birthday }}
             </p>
           </div>
           <div class="left-item">
@@ -61,7 +69,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              午前9時〜午後5時
+              {{ info.age }}
             </p>
           </div>
           <div class="left-item">
@@ -71,9 +79,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              ・カット
-              <br>
-              。髪を
+              {{ info.gender_name }}
             </p>
           </div>
           <div class="left-item">
@@ -83,7 +89,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              午前9時〜午後5時
+              {{ info.tel }}
             </p>
           </div>
           <div class="left-item">
@@ -93,7 +99,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              午前9時〜午後5時
+              {{ info.email }}
             </p>
           </div>
           <div class="left-item">
@@ -103,7 +109,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              午前9時〜午後5時
+              {{ info.address }}
             </p>
           </div>
           <div id="img-detail" class="left-item">
@@ -112,10 +118,8 @@
             </p>
           </div>
           <div id="img-detail" class="right-item">
-            <div class="img-detail">
-              <img src="/assets/images/achie.png" alt="">
-              <img src="/assets/images/achie.png" alt="">
-              <img src="/assets/images/achie.png" alt="">
+            <div v-for="(img, key) in info.images" :key="key" class="img-detail">
+              <img :src="img" alt="img-detail">
             </div>
           </div>
         </div>
@@ -132,29 +136,10 @@
 
 export default {
   name: 'InfoElement',
-  data() {
-    return {
-      info: {
-        avatar: '/assets/images/avartar.png',
-        first_name: '',
-        last_name: '',
-        furi_first_name: '',
-        furi_last_name: '',
-        alias_name: '',
-        birthday: '',
-        age: '',
-        gender_id: '',
-        tel: '',
-        email: '',
-        line: '',
-        facebook: '',
-        instagram: '',
-        twitter: '',
-        postal_code: '',
-        province_id: '',
-        city: '',
-        address: ''
-      }
+  props: {
+    info: {
+      type: Object,
+      default: () => {}
     }
   },
   methods: {
