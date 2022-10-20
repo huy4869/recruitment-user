@@ -116,7 +116,16 @@
     "about_job": "求人に対してのお問い合わせ",
     "recently_viewed_job": "最近見た求人",
     "jobs_similar": "この求人に似た求人",
-    "find_other_jobs": "他の求人を探す"
+    "find_other_jobs": "他の求人を探す",
+    "set_date_time_interview": "面接希望日時を設定",
+    "preferred_date": "希望日",
+    "desired_time": "希望時間",
+    "interview_time": "面接時間",
+    "choose_preferred_method": "ご希望の面接方法をお選びください",
+    "note_choose_method": "その他の面談方法ご希望の場合はその他を選択の上、下記よりお問い合わせください。",
+    "question_request": "ご質問・ご要望・お問い合わせ ",
+    "question_request_note": "ご希望の面接日時が複数ある場合は、他の候補日を下記にご記載ください",
+    "enter_your_question": "ご質問・ご要望・お問い合わせを入力"
   },
   "form": {
     "required": "必須",
@@ -140,7 +149,9 @@
     "cancel": "キャンセル",
     "view_all": "全てを見る",
     "search_again": "再検索する",
-    "decide": "決定する"
+    "decide": "決定する",
+    "close_up": "閉じる",
+    "confirm": "確定"
   },
   "my_page": {
     "top_page": "TOPページ",
