@@ -536,7 +536,22 @@ hr {
 }
 
 .el-radio {
+  .el-radio__input.is-checked .el-radio__inner::after {
+    background: $border-focus;
+    transform: translate(-50%,-50%) scale(3);
+  }
+  .el-radio__input.is-checked+.el-radio__label {
+    color: $color-black;
+  }
   .el-radio__input {
+    &.is-checked {
+      .el-radio__inner{
+        border-color: $color-text-primary;
+        &::after {
+          background: $color-text-primary;
+        }
+      }
+    }
     .el-radio__inner{
       width: 24px;
       height: 24px;
@@ -550,10 +565,7 @@ hr {
     font-size: 16px;
     line-height: 24px;
     vertical-align: middle;
-  }
-  .el-radio__input.is-checked .el-radio__inner::after {
-    background: $border-focus;
-    transform: translate(-50%,-50%) scale(3);
+    white-space: normal;
   }
 }
 

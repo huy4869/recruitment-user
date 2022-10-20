@@ -418,6 +418,19 @@
       }
     }
   }
+  .form-dialog-apply {
+    .el-dialog {
+      .el-dialog__body {
+        .header-search-left {
+          width: 85px;
+        }
+        .header-search-right {
+          width: calc(100% - 93px);
+          margin-left: 8px;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 750px) {
@@ -2142,6 +2155,99 @@
             .edit-cv-content {
               padding: 0
             }
+          }
+        }
+      }
+    }
+  }
+  .form-dialog-apply {
+    .el-dialog {
+      width: 100% !important;
+      margin-top: 0 !important;
+      margin-bottom: 0;
+      min-height: 100vh;
+      height: auto;
+      padding: 14px;
+      .el-dialog__header {
+        .el-dialog__title {
+          font-size: 16px;
+          line-height: 24px;
+          padding: 8px 14px;
+        }
+        .el-dialog__headerbtn {
+          top: 10px;
+          right: 14px;
+          i {
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+            &::before {
+              width: 24px;
+              height: 24px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+      .el-dialog__body {
+        .header-search {
+          display: block;
+          .search-apply {
+            width: 100%;
+            display: block;
+          }
+          .search-work-location {
+            width: 100%;
+            display: block;
+          }
+          .header-search-right {
+            border: 0;
+          }
+        }
+        .header-search-left {
+          width: 100%;
+          padding: 0;
+          span {
+            display: block;
+            padding: 8px 10px;
+          }
+        }
+        .header-search-right {
+          width: 100%;
+          margin-left: 0;
+          padding: 0;
+          border: 0;
+          .el-select {
+            display: block;
+            padding: 12px 12px 12px 10px;
+          }
+        }
+        .interview-time {
+          margin: 8px 0 22px;
+        }
+        .title-form {
+          font-size: 16px;
+          line-height: 24px;
+        }
+        .form-change-method {
+          .method-content {
+            margin-top: 12px;
+            .el-radio-group {
+              .el-radio {
+                margin-bottom: 12px;
+                font-size: 14px;
+                line-height: 22px;
+              }
+            }
+          }
+          .method-note {
+            font-size: 13px;
+            line-height: 20px;
+          }
+        }
+        .form-question {
+          .question-note {
+            margin: 4px 0 16px;
           }
         }
       }
