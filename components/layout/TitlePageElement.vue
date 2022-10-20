@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="d-flex" v-else>
-        <router-link class="title-link" to="/foo" tag="button">
+        <router-link class="title-link" :to="title.route" tag="button">
           <span>{{ title.name }}</span>
         </router-link>
         <span>・</span>

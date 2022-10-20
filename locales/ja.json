@@ -57,7 +57,7 @@
     "required": "{_field_}が入力されていません。",
     "required_select": "{_field_}が選択されていません。",
     "email_required": "メールアドレスが入力されていません。",
-    "email": "{_field_}は有効なメールアドレスではありません.",
+    "email": "{_field_}が正しく入力されていません。",
     "float": "{_field_}価格は数値以外入力できません。",
     "max_content_file": "最大サイズを超えました。再度選択してください。",
     "file_type": "選択可能なファイルはImage, Video, Audio, Glb, Gltf, Docです。再度選択してください。",
@@ -66,9 +66,13 @@
     "min_value": "こちらに{min}以上の数字を入力してください。",
     "pass_format": "パスワードは半角英数字で4桁〜12桁まで入力してください",
     "max_length": "{_field_}は255文字以内で入力してください。",
-    "fullwidth_length": "{_field_}は255文字以内で入力してください。",
+    "fullwidth_length": "{_field_}は全角カナの255文字以内で入力してください。",
+    "halfwidth_length": "{_field_}は半角英数字で入力してください。",
     "area_length": "{_field_}は2000文字以内で入力してください。",
-    "postcode_length": "{_field_}は7桁英数字で入力してください。"
+    "area_length_2": "{_field_}は1000文字以内で入力してください。",
+    "postcode_length": "{_field_}は7桁英数字で入力してください。",
+    "phone_length": "{_field_}は0から始まる10桁から13桁まで入力してください。",
+    "phone": "{_field_}は数字とハイフンのみで入力してください。"
   },
   "header": {
     "search": "求人を探す",
@@ -82,7 +86,8 @@
     "web_cv": "Web履歴書",
     "sub_web_cv": "美容室オーナが探すため、WEB履歴書を更新しましょう！",
     "notification_history": "通知履歴",
-    "search": "検索結果"
+    "search": "検索結果",
+    "inquiry": "お問い合わせ"
   },
   "favorite_job": {
     "place": "勤務場所",
@@ -184,6 +189,7 @@
     "back": "戻る",
     "edit": "編集",
     "remove": "削除",
+    "create": "追加",
     "add_experience": "職務経歴を追加する",
     "current_password": "現在のパスワード",
     "new_password": "新しいパスワード",
@@ -236,7 +242,8 @@
     "other_occupation": "その他の職種",
     "other_emp_status": "その他の雇用形態",
     "enter_other_occupation": "その他の職種を入力",
-    "enter_other_emp_status": "その他の雇用形態を入力"
+    "enter_other_emp_status": "その他の雇用形態を入力",
+    "create": "職務経歴追加"
   },
   "self_pr": {
     "title": "自己PR",
@@ -304,5 +311,22 @@
     "job_favorite": "お気に入り",
     "view_job_detail": "詳細を見る",
     "most_popular_job": "よく見られている人気のお仕事"
+  },
+  "inquiry": {
+    "form" : "お問い合わせフォーム",
+    "des_1" : "美容室採用サイトへのご意見・ご要望などお気軽にお寄せください。",
+    "des_2" : "ご登録のメールアドレス宛にご返信させていただきます。",
+    "email" : "メールアドレス",
+    "enter_email" : "メールアドレスを入力",
+    "name" : "お名前",
+    "enter_name" : "お名前を入力",
+    "phone" : "電話番号",
+    "enter_phone" : "お名前を入力",
+    "content" : "お問い合わせ内容",
+    "enter_content" : "お問い合わせ内容を入力",
+    "send" : "送信",
+    "here" : "お電話でのお問い合わせはこちら",
+    "phone_number" : "0120-222-333",
+    "time" : "(10:00～18:00 / 平日のみ)"
   }
 }

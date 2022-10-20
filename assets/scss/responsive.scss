@@ -185,6 +185,31 @@
       }
     }
   }
+  .inquiry-page {
+    .inquiry-content {
+      padding: 54px 24px;
+      .inquiry-container {
+        .left-container {
+          .description, .description2 {
+            font-size: 14px;
+          }
+        }
+        .right-container {
+          .here {
+            font-size: 14px;
+          }
+          .schedule-des {
+            .phone-number {
+              font-size: 26px;
+            }
+            .time {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -2089,6 +2114,35 @@
         }
         .recommend-job-element {
           margin-bottom: 16px;
+        }
+      }
+    }
+  }
+  .inquiry-page {
+    .inquiry-content {
+      padding: 24px 6px;
+      .inquiry-container {
+        display: block;
+        .left-container {
+          margin-bottom: 42px;
+          .inquiry-title {
+            font-size: 16px;
+          }
+          .description, .description2 {
+            font-size: 14px;
+          }
+          .description {
+            margin-top: 12px;
+          }
+          .edit-form-input {
+            margin-top: 40px;
+          }
+          .edit-cv-element {
+            margin-bottom: -20px;
+            .edit-cv-content {
+              padding: 0
+            }
+          }
         }
       }
     }

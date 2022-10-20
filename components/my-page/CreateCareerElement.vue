@@ -1,7 +1,9 @@
 <template>
   <div class="right-content-element">
     <div class="edit-cv-element">
-      <div class="edit-cv-title">{{ $t('my_page.edit_basic_information') }}</div>
+      <div class="edit-cv-title">
+        {{ $t('my_page.job_career') + $route.params.id + $t('my_page.create') }}
+      </div>
       <div class="edit-cv-content edit-form-content">
         <div class="card-text-title card-title-mobile"> {{ $t('my_page.edit_basic_information') }}</div>
         <el-form
