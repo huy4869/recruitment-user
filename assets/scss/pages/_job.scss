@@ -14,6 +14,7 @@
     .job-title {
 
       margin-bottom: 21px;
+      min-width: 214px;
 
       .title-left {
         margin-left: 1.5rem;
@@ -79,9 +80,11 @@
         }
 
         &#img-detail {
-          padding: 16px 0 20px 0;
           img {
             padding-right: 20px;
+          }
+          .img-detail {
+            margin: 16px 0 20px 0;
           }
         }
       }
@@ -145,9 +148,15 @@
     .right-item {
       border-bottom: 1px solid $border-default;
       margin-left: 20px;
+      height: 100%;
 
       &.first-right-item {
         border-top: 1px solid $border-default;
+      }
+
+      .text-wide {
+        min-height: 80px;
+        margin-top: 16px;
       }
 
       .text-ellipsis {
@@ -173,9 +182,11 @@
       }
 
       &#img-detail {
-        padding: 16px 0 20px 0;
         img {
           padding-right: 20px;
+        }
+        .img-detail {
+          margin: 16px 0 20px 0;
         }
       }
     }
