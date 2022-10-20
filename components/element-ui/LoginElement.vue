@@ -23,7 +23,7 @@
               @focus="resetValidate('email')"
             />
           </el-form-item>
-          <el-form-item class="password-login" label="" prop="password">
+          <el-form-item class="password-login" label="" prop="password" :error="(error.key === 'password') ? error.value : ''">
             <div class="label">{{ $t('login.password') }}</div>
             <el-input
               ref="password"
@@ -34,10 +34,10 @@
               tabindex="3"
               maxlength="32"
               autocomplete="off"
+              show-password
               @keydown.native.enter="login"
               @keydown.native.tab.prevent="$refs.email.focus()"
               @focus="resetValidate('password')"
-              show-password
             />
           </el-form-item>
           <div class="d-flex align-items-center check-remember">
@@ -84,16 +84,20 @@
 import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
-  INDEX_SET_ERROR,
-  CHAT_FETCH_ROOMS,
-  CHAT_SET_UN_READ_MESSAGE
+  INDEX_SET_ERROR
 } from '../../store/store.const'
-import { validEmail } from '@/utils/validate'
+import { validEmail, validHalfWidth } from '@/utils/validate'
 
 export default {
   name: 'LoginElement',
   data() {
     const validFormEmail = (rule, value, callback) => {
+      if (value && value.length > 255) {
+        callback(new Error(this.$t('validation.max_length', { _field_: this.$t('login.email') })))
+      }
+      if (!validHalfWidth(value)) {
+        callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.email') })))
+      }
       if (!validEmail(value)) {
         callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))
       } else {
@@ -102,8 +106,11 @@ export default {
     }
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error(this.$t('validation.required', { _field_: this.$t('account.password') }).toString()))
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('login.password') }).toString()))
       } else {
+        if (!validHalfWidth(value)) {
+          callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.email') })))
+        }
         if (value.length < 4 || value.length > 12) {
           callback(new Error(this.$t('validation.pass_format')))
         }
@@ -141,7 +148,7 @@ export default {
   },
   computed: {
     disabledButton() {
-      return this.accountForm.email === '' || this.accountForm.password === '' || !this.accountForm.remember
+      return this.accountForm.email === '' || this.accountForm.password === ''
     }
   },
   created() {
@@ -165,7 +172,7 @@ export default {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const { data } = await this.$auth.loginWith('local', {
               data: {
-                phone_number: this.accountForm.email,
+                email: this.accountForm.email,
                 password: this.accountForm.password,
                 remember: this.accountForm.remember ? 1 : 0
               }
@@ -174,20 +181,9 @@ export default {
               case 200:
                 await this.$store.commit(INDEX_SET_SUCCESS, {
                   show: true,
-                  text: data.message
+                  text: data.messages
                 })
-                await this.$emit('close')
-                if (this.$device.isMobile) {
-                  const response = await this.$store.dispatch(CHAT_FETCH_ROOMS, {
-                    per_page: 1000,
-                    page: 1,
-                    shop_id: '',
-                    name: ''
-                  })
-                  if (response.status_code === 200 && response.data.data.length) {
-                    this.$store.commit(CHAT_SET_UN_READ_MESSAGE, response.data.data.map(item => item.unread_total_user).reduce((prev, curr) => prev + curr, 0) || '')
-                  }
-                }
+                this.$router.push('/')
                 break
               case 422:
                 for (const [key] of Object.entries(data.data)) {
@@ -195,7 +191,7 @@ export default {
                 }
                 break
               default:
-                await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.message })
+                await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
                 break
             }
           } catch (err) {

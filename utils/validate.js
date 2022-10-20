@@ -118,7 +118,7 @@ export function validFullWidth(str) {
 }
 
 export function validHalfWidth(str) {
-  const reg = /^[a-zA-Z0-9\*\.\!\@\$\%\^\&\(\)\{\}\[\]\:\;\<\>\,\.\?\/\~\_\+\-\=\|\\]+$/
+  const reg = /^[a-zA-Z0-9\*\.\#\!\@\$\%\^\&\(\)\{\}\[\]\:\;\<\>\,\.\?\/\~\_\+\-\=\|\\]+$/
   return reg.test(str)
 }
 

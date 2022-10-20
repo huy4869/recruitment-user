@@ -44,7 +44,7 @@ export const actions = {
   },
   register(context, data) {
     return new Promise((resolve, reject) => {
-      handleApi(resolve, reject, this.$axios.post('/register', data), context)
+      handleApi(resolve, reject, this.$axios.post('/auth/register', data), context)
     })
   },
   forgotPassword(context, data) {
