@@ -1,5 +1,6 @@
 <template>
   <div>
+    <NotificationBlock />
     <div class="home">
       <nuxt />
     </div>
@@ -9,11 +10,13 @@
 
 <script>
 import LoadingBar from '../components/LoadingBar'
+import NotificationBlock from '@/components/NotificationBlock'
 
 export default {
   name: 'NoneLayout',
   components: {
-    LoadingBar
+    LoadingBar,
+    NotificationBlock
   },
   data() {
     return {

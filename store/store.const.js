@@ -16,6 +16,9 @@ export const CATEGORY_SEARCH = 'category/categorySearch'
 export const USER_UPDATE_PROFILE = 'user/updateProfile'
 export const USER_UPLOAD_AVATAR = 'user/uploadAvatar'
 
+// authentication
+export const AUTH_REGISTER = 'authentication/register'
+
 // product
 export const PRODUCT_DETAIL = 'product/detail'
 export const PRODUCT_COMMENT = 'product/comment'

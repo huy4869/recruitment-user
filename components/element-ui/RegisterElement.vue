@@ -1,5 +1,5 @@
 <template>
-  <div class="login-element" id="register-element">
+  <div id="register-element" class="login-element">
     <el-row>
       <el-col class="col-mobile"  :span="12">
         <div class="login-title">{{ $t('register.title') }}</div>
@@ -23,7 +23,7 @@
               @focus="resetValidate('email')"
             />
           </el-form-item>
-          <el-form-item class="password-login" :label="$t('login.password')" prop="password">
+          <el-form-item class="password-login" :label="$t('login.password')" prop="password" :error="(error.key === 'password') ? error.value : ''">
             <el-input
               ref="password"
               v-model="accountForm.password"
@@ -38,7 +38,7 @@
               @focus="resetValidate('password')"
             />
           </el-form-item>
-          <el-form-item class="password-login" :label="$t('register.password_confirmation')" prop="password_confirmation">
+          <el-form-item class="password-login" :label="$t('register.password_confirmation')" prop="password_confirmation" :error="(error.key === 'password_confirmation') ? error.value : ''">
             <el-input
               ref="password_confirmation"
               v-model="accountForm.password_confirmation"
@@ -98,8 +98,7 @@ import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
   INDEX_SET_ERROR,
-  CHAT_FETCH_ROOMS,
-  CHAT_SET_UN_READ_MESSAGE
+  AUTH_REGISTER
 } from '../../store/store.const'
 import { validEmail } from '@/utils/validate'
 
@@ -107,8 +106,11 @@ export default {
   name: 'LoginElement',
   data() {
     const validFormEmail = (rule, value, callback) => {
+      if (value && value.length > 255) {
+        callback(new Error(this.$t('validation.max_length', { _field_: this.$t('inquiry.email') })))
+      }
       if (!validEmail(value)) {
-        callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))
+        callback(new Error(this.$t('validation.email', { _field_: this.$t('inquiry.email') })))
       } else {
         callback()
       }
@@ -198,31 +200,20 @@ export default {
         if (valid) {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
-            const { data } = await this.$auth.loginWith('local', {
-              data: {
-                phone_number: this.accountForm.email,
-                password: this.accountForm.password,
-                remember: this.accountForm.remember ? 1 : 0
-              }
+            const dto = {
+              email: this.accountForm.email,
+              password: this.accountForm.password,
+              password_confirmation: this.accountForm.password_confirmation
+            }
+            const data = await this.$store.dispatch(AUTH_REGISTER, {
+              ...dto
             })
             switch (data.status_code) {
               case 200:
                 await this.$store.commit(INDEX_SET_SUCCESS, {
                   show: true,
-                  text: data.message
+                  text: data.messages
                 })
-                await this.$emit('close')
-                if (this.$device.isMobile) {
-                  const response = await this.$store.dispatch(CHAT_FETCH_ROOMS, {
-                    per_page: 1000,
-                    page: 1,
-                    shop_id: '',
-                    name: ''
-                  })
-                  if (response.status_code === 200 && response.data.data.length) {
-                    this.$store.commit(CHAT_SET_UN_READ_MESSAGE, response.data.data.map(item => item.unread_total_user).reduce((prev, curr) => prev + curr, 0) || '')
-                  }
-                }
                 break
               case 422:
                 for (const [key] of Object.entries(data.data)) {
@@ -230,7 +221,7 @@ export default {
                 }
                 break
               default:
-                await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.message })
+                await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
                 break
             }
           } catch (err) {
