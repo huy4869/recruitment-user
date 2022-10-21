@@ -22,13 +22,13 @@
     <div class="job-detail-content">
       <div class="button-pickup">
         <div class="show-sp">
-          <div v-if="jobStatus" class="about-job ">
+          <div v-if="jobStatus" class="about-job" @click="aboutDialog = true">
             <img src="/assets/icon/icon_headphone.svg" alt="">
             <span>{{ $t('job.about_job') }}</span>
           </div>
         </div>
         <el-button type="danger">{{ $t('job.pick_up_point') }}</el-button>
-        <div class="about-job show-pc">
+        <div class="about-job show-pc" @click="aboutDialog = true">
           <img src="/assets/icon/icon_email.svg" alt="">
           <span>{{ $t('job.about_job') }}</span>
         </div>
@@ -284,6 +284,54 @@
           </el-button>
         </div>
       </el-dialog>
+      <el-dialog class="form-dialog-apply form-dialog-about" :title="$t('job.about_job')" :visible.sync="aboutDialog" width="84%" top="5vh">
+        <div>
+          <div class="interview-time">
+            {{ $t('job.text_about_note') }}
+          </div>
+          <div class="form-change-method">
+            <div class="title-form">
+              <span>{{ $t('job.inquiry_content_selection') }}</span>
+            </div>
+            <div class="method-content">
+              <el-checkbox-group v-model="formAbout.method">
+                <el-checkbox key="about_annual_monthly" label="about_annual_monthly">{{ $t('job.about_annual_monthly') }}</el-checkbox>
+                <el-input
+                  type="text"
+                  :rows="4"
+                  :placeholder="$t('job.enter_annual_monthly')"
+                  v-model="formApply.desired">
+                </el-input>
+                <el-checkbox label="about_benefit">{{ $t('job.about_benefit') }}</el-checkbox>
+                <el-checkbox label="about_education">{{ $t('job.about_education') }}</el-checkbox>
+                <el-checkbox label="about_overtime">{{ $t('job.about_overtime') }}</el-checkbox>
+                <el-checkbox label="about_other">{{ $t('job.about_other') }}</el-checkbox>
+              </el-checkbox-group>
+            </div>
+          </div>
+          <div class="form-question">
+            <div class="title-form">
+              <span>{{ $t('job.inquiry_details') }}</span>
+            </div>
+            <div class="question-content">
+              <el-input
+                type="textarea"
+                :rows="4"
+                :placeholder="$t('job.enter_inquiry_details')"
+                v-model="formApply.detail">
+              </el-input>
+            </div>
+          </div>
+        </div>
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" plain>
+            {{ $t('button.close_up') }}
+          </el-button>
+          <el-button type="danger">
+            {{ $t('button.confirm') }}
+          </el-button>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -304,12 +352,18 @@ export default {
   data() {
     return {
       applyDialog: false,
+      aboutDialog: false,
       jobStatus: true,
       formApply: {
         date: '',
         time: '',
         method: '',
         question: ''
+      },
+      formAbout: {
+        method: [],
+        desired: '',
+        detail: ''
       },
       listDate: [
         '2022年09月02日（月）',

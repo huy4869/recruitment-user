@@ -2233,8 +2233,10 @@
           margin: 8px 0 22px;
         }
         .title-form {
-          font-size: 16px;
-          line-height: 24px;
+          span {
+            font-size: 16px;
+            line-height: 24px;
+          }
         }
         .form-change-method {
           .method-content {
@@ -2255,6 +2257,26 @@
         .form-question {
           .question-note {
             margin: 4px 0 16px;
+          }
+        }
+      }
+    }
+  }
+  .form-dialog-about{
+    .el-dialog {
+      .el-dialog__body {
+        .form-change-method {
+          .method-content {
+            .el-checkbox-group {
+              .el-checkbox {
+                margin-bottom: 12px;
+              }
+            }
+            .el-input {
+              width: auto;
+              margin-bottom: 16px;
+              display: inline-block;
+            }
           }
         }
       }
