@@ -125,7 +125,17 @@
     "note_choose_method": "その他の面談方法ご希望の場合はその他を選択の上、下記よりお問い合わせください。",
     "question_request": "ご質問・ご要望・お問い合わせ ",
     "question_request_note": "ご希望の面接日時が複数ある場合は、他の候補日を下記にご記載ください",
-    "enter_your_question": "ご質問・ご要望・お問い合わせを入力"
+    "enter_your_question": "ご質問・ご要望・お問い合わせを入力",
+    "text_about_note": "美容室オーナに伝えたいことや、言いにくいことをご記入してください。",
+    "inquiry_content_selection": "お問い合わせ内容選択",
+    "about_annual_monthly": "年収／月収に関する相談",
+    "about_benefit": "福利厚生に関するお問合せ",
+    "about_education": "教育制度を知りたい",
+    "about_overtime": "残業代が出るか知りたいなど",
+    "about_other": "その他",
+    "enter_annual_monthly": "ご希望の年収/月収などを入力",
+    "inquiry_details": "お問い合わせ内容詳細",
+    "enter_inquiry_details": "お問い合わせ内容詳細を入力"
   },
   "form": {
     "required": "必須",
