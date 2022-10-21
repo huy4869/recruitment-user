@@ -77,8 +77,8 @@ import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
   INDEX_SET_ERROR,
-  CHAT_FETCH_ROOMS,
-  CHAT_SET_UN_READ_MESSAGE
+  AUTH_CHECK_TOKEN,
+  AUTH_RESET_PASS
 } from '../../store/store.const'
 import { validEmail } from '@/utils/validate'
 
@@ -157,9 +157,18 @@ export default {
       return this.accountForm.password_confirmation === '' || this.accountForm.password === ''
     }
   },
-  created() {
-    if (this.$refs.accountForm !== undefined) {
-      this.resetValidate('accountForm')
+  async created() {
+    this.token = this.$route.query.token
+    if (this.token == null || this.token === '') {
+      this.$router.push('/')
+    } else {
+      const data = await this.$store.dispatch(AUTH_CHECK_TOKEN, {
+        token: this.token
+      })
+      if (data.status_code !== 200) {
+        this.$router.push('/')
+        this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+      }
     }
   },
   methods: {
@@ -176,39 +185,29 @@ export default {
         if (valid) {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
-            const { data } = await this.$auth.loginWith('local', {
-              data: {
-                phone_number: this.accountForm.email,
-                password: this.accountForm.password,
-                remember: this.accountForm.remember ? 1 : 0
-              }
-            })
+            const dto = {
+              token: this.token,
+              password: this.accountForm.password,
+              password_confirmation: this.accountForm.password_confirmation
+            }
+            const data = await this.$store.dispatch(AUTH_RESET_PASS, dto)
+
             switch (data.status_code) {
               case 200:
-                await this.$store.commit(INDEX_SET_SUCCESS, {
+                this.$store.commit(INDEX_SET_SUCCESS, {
                   show: true,
-                  text: data.message
+                  text: data.messages
                 })
-                await this.$emit('close')
-                if (this.$device.isMobile) {
-                  const response = await this.$store.dispatch(CHAT_FETCH_ROOMS, {
-                    per_page: 1000,
-                    page: 1,
-                    shop_id: '',
-                    name: ''
-                  })
-                  if (response.status_code === 200 && response.data.data.length) {
-                    this.$store.commit(CHAT_SET_UN_READ_MESSAGE, response.data.data.map(item => item.unread_total_user).reduce((prev, curr) => prev + curr, 0) || '')
-                  }
-                }
+                this.$router.push('/login')
                 break
               case 422:
-                for (const [key] of Object.entries(data.data)) {
-                  this.error = { key, value: data.data[key][0] }
+                for (const [k] of Object.entries(data.data)) {
+                  this.error = { key: k, value: data.data[k][0] }
+                  this.errorResponse.push({ key: k, value: data.data[k][0] })
                 }
                 break
               default:
-                await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.message })
+                this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
                 break
             }
           } catch (err) {

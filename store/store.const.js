@@ -8,7 +8,10 @@ export const MASTER_GET_DATA = 'getMasterData'
 
 // user
 export const USER_UPDATE_PROFILE = 'user/updateProfile'
-export const USER_UPLOAD_AVATAR = 'user/uploadAvatar'
+export const USER_FORGOT_PASS = 'authentication/forgotPass'
+export const AUTH_CHECK_TOKEN = 'authentication/checkToken'
+export const AUTH_RESET_PASS = 'authentication/resetPass'
+
 
 // authentication
 export const AUTH_REGISTER = 'authentication/register'
@@ -26,6 +29,8 @@ export const CHAT_SET_UN_READ_MESSAGE = 'chat/setUnreadMessage'
 export const MY_PAGE_SET_STATE_PAGE = 'my_page/setStatePage'
 export const MY_PAGE_SET_SHOW_DETAIL_MESSAGE = 'my_page/setShowDetailMessage'
 
-export const WORK_BASIC_INFO = 'my_page/getBasicInfo'
+export const USER_BASIC_INFO = 'my_page/getBasicInfo'
+export const USER_UPDATE_BASIC_INFO = 'my_page/updateBasicInfo'
+export const USER_UPLOAD_AVATAR = 'my_page/uploadAvatar'
 export const WORK_HISTORY_LIST = 'my_page/getListWorkHistory'
 

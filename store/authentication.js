@@ -47,14 +47,19 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.post('/auth/register', data), context)
     })
   },
-  forgotPassword(context, data) {
+  forgotPass(context, data) {
     return new Promise((resolve, reject) => {
-      handleApi(resolve, reject, this.$axios.post('/forgot-password/reset-password-otp', data), context)
+      handleApi(resolve, reject, this.$axios.post('/forgot-password', data), context)
     })
   },
-  forgotPasswordVerifyOtp(context, data) {
+  checkToken(context, data) {
     return new Promise((resolve, reject) => {
-      handleApi(resolve, reject, this.$axios.post('/forgot-password/reset-password-verifyotp', data), context)
+      handleApi(resolve, reject, this.$axios.post('/forgot-password/check-token', data), context)
+    })
+  },
+  resetPass(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/forgot-password/reset-password', data), context)
     })
   },
   resetPassword(context, data) {

@@ -14,7 +14,7 @@ import BannerElement from '../../../components/layout/BannerElement'
 import TitlePageElement from '../../../components/layout/TitlePageElement'
 import MenuLeftElement from '../../../components/my-page/MenuLeftElement'
 import InfoElement from '../../../components/my-page/InfoElement'
-import { INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, WORK_BASIC_INFO } from '../../../store/store.const'
+import { INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, USER_BASIC_INFO } from '../../../store/store.const'
 export default {
   name: 'CvPage',
   components: { TitlePageElement, BannerElement, MenuLeftElement, InfoElement },
@@ -36,7 +36,7 @@ export default {
     async getBasicInfo() {
       this.$store.commit(INDEX_SET_LOADING, true)
       try {
-        const response = await this.$store.dispatch(WORK_BASIC_INFO)
+        const response = await this.$store.dispatch(USER_BASIC_INFO)
         const { data, status_code } = response
         if (status_code === 200) {
           this.info = data

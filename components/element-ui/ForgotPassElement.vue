@@ -57,9 +57,7 @@
 import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
-  INDEX_SET_ERROR,
-  CHAT_FETCH_ROOMS,
-  CHAT_SET_UN_READ_MESSAGE
+  INDEX_SET_ERROR, USER_FORGOT_PASS
 } from '../../store/store.const'
 import { validEmail } from '@/utils/validate'
 
@@ -73,22 +71,9 @@ export default {
         callback()
       }
     }
-    const validateConfirmPass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error(this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }).toString()))
-      } else if (value !== this.accountForm.password) {
-        callback(new Error(this.$t('validation.passNotMatch').toString()))
-      } else {
-        callback()
-      }
-    }
     return {
       accountForm: {
         email: '',
-        password: '',
-        password_confirmation: '',
-        has_terms: false,
-        has_agreement: false,
         errors: {}
       },
       error: {
@@ -99,22 +84,9 @@ export default {
         email: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('login.email') }), trigger: 'blur' },
           { validator: validFormEmail, trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('login.password') }), trigger: 'blur' }
-        ],
-        password_confirmation: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }), trigger: 'blur' },
-          {
-            validator: validateConfirmPass,
-            message: this.$t('validation.passNotMatch'),
-            trigger: 'blur'
-          }
-        ],
-        remember: []
+        ]
       },
       valid: false,
-      capsToolPasswordTip: false,
       loading: false,
       fullscreenLoading: false
     }
@@ -143,31 +115,18 @@ export default {
         if (valid) {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
-            const { data } = await this.$auth.loginWith('local', {
-              data: {
-                phone_number: this.accountForm.email,
-                password: this.accountForm.password,
-                remember: this.accountForm.remember ? 1 : 0
-              }
+            const dto = {
+              email: this.accountForm.email
+            }
+            const data = await this.$store.dispatch(USER_FORGOT_PASS, {
+              ...dto
             })
             switch (data.status_code) {
               case 200:
                 await this.$store.commit(INDEX_SET_SUCCESS, {
                   show: true,
-                  text: data.message
+                  text: data.messages
                 })
-                await this.$emit('close')
-                if (this.$device.isMobile) {
-                  const response = await this.$store.dispatch(CHAT_FETCH_ROOMS, {
-                    per_page: 1000,
-                    page: 1,
-                    shop_id: '',
-                    name: ''
-                  })
-                  if (response.status_code === 200 && response.data.data.length) {
-                    this.$store.commit(CHAT_SET_UN_READ_MESSAGE, response.data.data.map(item => item.unread_total_user).reduce((prev, curr) => prev + curr, 0) || '')
-                  }
-                }
                 break
               case 422:
                 for (const [key] of Object.entries(data.data)) {
@@ -175,7 +134,7 @@ export default {
                 }
                 break
               default:
-                await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.message })
+                await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
                 break
             }
           } catch (err) {
