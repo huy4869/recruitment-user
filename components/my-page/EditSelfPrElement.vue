@@ -21,17 +21,17 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="business_content" :error="(error.key === 'business_content') ? error.value : ''">
+                      <el-form-item label="" prop="favorite_skill" :error="(error.key === 'favorite_skill') ? error.value : ''">
                         <el-input
-                          ref="business_content"
-                          v-model="accountForm.business_content"
+                          ref="favorite_skill"
+                          v-model="accountForm.favorite_skill"
                           :placeholder="$t('self_pr.enter_business_content')"
                           :autosize="{ minRows: 5, maxRows: 12}"
-                          name="business_content"
+                          name="favorite_skill"
                           type="textarea"
                           maxlength="2000"
                           tabindex="2"
-                          @focus="resetValidate('business_content')"
+                          @focus="resetValidate('favorite_skill')"
                         />
                       </el-form-item>
                       <div class="sm-text">{{ $t('my_page.currently') }}{{ contentLength }}{{ $t('my_page.characters') }}</div>
@@ -49,17 +49,17 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="experience" :error="(error.key === 'experience') ? error.value : ''">
+                      <el-form-item label="" prop="experience_knowledge" :error="(error.key === 'experience_knowledge') ? error.value : ''">
                         <el-input
                           ref="alias_name"
-                          v-model="accountForm.experience"
+                          v-model="accountForm.experience_knowledge"
                           :placeholder="$t('self_pr.enter_experience')"
                           :autosize="{ minRows: 5, maxRows: 12}"
-                          name="experience"
+                          name="experience_knowledge"
                           type="textarea"
                           maxlength="2000"
                           tabindex="2"
-                          @focus="resetValidate('experience')"
+                          @focus="resetValidate('experience_knowledge')"
                         />
                       </el-form-item>
                       <div class="sm-text">{{ $t('my_page.currently') }}{{ experienceLength }}{{ $t('my_page.characters') }}</div>
@@ -77,17 +77,17 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="pr" :error="(error.key === 'pr') ? error.value : ''">
+                      <el-form-item label="" prop="self_pr" :error="(error.key === 'self_pr') ? error.value : ''">
                         <el-input
-                          ref="pr"
-                          v-model="accountForm.pr"
+                          ref="self_pr"
+                          v-model="accountForm.self_pr"
                           :placeholder="$t('self_pr.enter_pr')"
                           :autosize="{ minRows: 5, maxRows: 12}"
-                          name="pr"
+                          name="self_pr"
                           type="textarea"
                           maxlength="2000"
                           tabindex="2"
-                          @focus="resetValidate('pr')"
+                          @focus="resetValidate('self_pr')"
                         />
                       </el-form-item>
                       <div class="sm-text">{{ $t('my_page.currently') }}{{ prLength }}{{ $t('my_page.characters') }}</div>
@@ -103,7 +103,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button btn-right" type="danger" @click.native="submit" >{{ $t('my_page.edit') }}</el-button>
+      <el-button class="card-button btn-right" type="danger" @click.native="update" >{{ $t('my_page.edit') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -116,10 +116,22 @@
 
 <script>
 import BorderElement from './BorderElement'
+import {
+  INDEX_SET_ERROR,
+  INDEX_SET_LOADING,
+  INDEX_SET_SUCCESS,
+  USER_SELF_PR_UPDATE
+} from '@/store/store.const'
 
 export default {
   name: 'EditCvElement',
   components: { BorderElement },
+  props: {
+    self_pr: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     const validAreaLength = (rule, value, callback, message) => {
       if (value && value.length > 2000) {
@@ -130,9 +142,9 @@ export default {
     }
     return {
       accountForm: {
-        business_content: '',
-        experience: '',
-        pr: '',
+        favorite_skill: '',
+        experience_knowledge: '',
+        self_pr: '',
         errors: {}
       },
       error: {
@@ -140,13 +152,13 @@ export default {
         value: ''
       },
       accountRules: {
-        business_content: [
+        favorite_skill: [
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.business_content') }), trigger: 'blur' }
         ],
-        experience: [
+        experience_knowledge: [
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
         ],
-        pr: [
+        self_pr: [
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
         ]
       },
@@ -155,13 +167,20 @@ export default {
   },
   computed: {
     contentLength() {
-      return this.accountForm.business_content.length
+      return this.accountForm.favorite_skill.length
     },
     experienceLength() {
-      return this.accountForm.experience.length
+      return this.accountForm.experience_knowledge.length
     },
     prLength() {
-      return this.accountForm.pr.length
+      return this.accountForm.self_pr.length
+    }
+  },
+  watch: {
+    self_pr() {
+      for (const item in this.self_pr) {
+        this.accountForm[item] = this.self_pr[item]
+      }
     }
   },
   methods: {
@@ -181,13 +200,32 @@ export default {
     closeConfirmModal() {
       this.confirmModal = false
     },
-    submit() {
-      this.$refs.accountForm.validate(valid => {
+    update() {
+      this.error = { key: null, value: '' }
+      this.$refs.accountForm.validate(async valid => {
         if (valid) {
-          console.log('submit')
-        } else {
-          console.log('error submit!!')
-          return false
+          try {
+            await this.$store.commit(INDEX_SET_LOADING, true)
+            const dto = this.accountForm
+            const response = await this.$store.dispatch(USER_SELF_PR_UPDATE, {
+              ...dto
+            })
+            if (response.status_code === 200) {
+              await this.$store.commit(INDEX_SET_SUCCESS, {
+                show: true,
+                text: response.messages
+              })
+            } else {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: response.messages
+              })
+            }
+            await this.$store.commit(INDEX_SET_LOADING, false)
+          } catch (err) {
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+          }
+          await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
     }

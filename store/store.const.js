@@ -12,7 +12,6 @@ export const USER_FORGOT_PASS = 'authentication/forgotPass'
 export const AUTH_CHECK_TOKEN = 'authentication/checkToken'
 export const AUTH_RESET_PASS = 'authentication/resetPass'
 
-
 // authentication
 export const AUTH_REGISTER = 'authentication/register'
 
@@ -33,4 +32,7 @@ export const USER_BASIC_INFO = 'my_page/getBasicInfo'
 export const USER_UPDATE_BASIC_INFO = 'my_page/updateBasicInfo'
 export const USER_UPLOAD_AVATAR = 'my_page/uploadAvatar'
 export const WORK_HISTORY_LIST = 'my_page/getListWorkHistory'
-
+export const WORK_HISTORY_DETAIL = 'my_page/getWorkHistoryByID'
+export const WORK_HISTORY_UPDATE = 'my_page/updateWorkHistory'
+export const USER_SELF_PR = 'my_page/getSelfPr'
+export const USER_SELF_PR_UPDATE = 'my_page/updateSelfPr'

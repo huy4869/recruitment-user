@@ -20,6 +20,16 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.get('/work-history'))
     })
   },
+  getWorkHistoryByID(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get(`/work-history/${data}`))
+    })
+  },
+  updateWorkHistory(context, { id, data }) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/work-history/${id}`, data), context)
+    })
+  },
   getBasicInfo(context, resource) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.get('/profile'))
@@ -33,6 +43,16 @@ export const actions = {
   uploadAvatar(context, data) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.post('/upload-image', data), context)
+    })
+  },
+  getSelfPr(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/profile/pr'))
+    })
+  },
+  updateSelfPr(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/profile/pr', data), context)
     })
   }
 }
