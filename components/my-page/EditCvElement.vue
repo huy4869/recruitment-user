@@ -14,7 +14,7 @@
           <div class="edit-form-input">
             <BorderElement :middle="false"></BorderElement>
               <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="24" class="col-label">
+                <el-col :md="6" :sm="14" class="col-label">
                   <div class="label"><span>{{ $t('my_page.image_avatar') }}</span></div>
                 </el-col>
                 <el-col :md="18" :sm="24">
@@ -31,13 +31,13 @@
               </el-row>
             <BorderElement :middle="true"></BorderElement>
               <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="24" class="col-label">
+                <el-col :md="6" :sm="14" class="col-label">
                   <div class="label"><span>{{ $t('my_page.image_detail') }}</span></div>
                 </el-col>
                 <el-col :md="18" :sm="24">
                   <div class="content-input detail-image">
                     <el-form-item label="" prop="imageDetail" :error="(error.key === 'imageDetail') ? error.value : ''">
-                      <input id="upload-detail" ref="fileUploadDetail" class="d-none" type="file" multiple @change="onFileChangeDetail">
+                      <input id="upload-detail" ref="fileUploadDetail" class="d-none" type="file" max="3" multiple @change="onFileChangeDetail">
                       <div class="button-upload">
                         <button type="button"><label for="upload-detail">{{ $t('my_page.upload_image_detail') }}</label></button>
                       </div>
@@ -56,7 +56,7 @@
               <span>{{ $t('my_page.basic_information') }}</span>
             </div>
               <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="24" class="col-label">
+                <el-col :md="6" :sm="14" class="col-label">
                   <div class="label"><span>{{ $t('my_page.name') }}</span></div>
                   <div class="required">{{ $t('form.required') }}</div>
                 </el-col>
@@ -97,7 +97,7 @@
               </el-row>
             <BorderElement :middle="true"></BorderElement>
               <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="24" class="col-label">
+                <el-col :md="6" :sm="14" class="col-label">
                   <div class="label"><span>{{ $t('my_page.alias_name') }}</span></div>
                 </el-col>
                 <el-col :md="18" :sm="24">
@@ -123,7 +123,7 @@
               </el-row>
             <BorderElement :middle="true"></BorderElement>
               <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="24" class="col-label">
+                <el-col :md="6" :sm="14" class="col-label">
                   <div class="label">
                     <span>{{ $t('my_page.name') }}<br class="show-pc"/>({{ $t('my_page.furigana') }})</span>
                   </div>
@@ -166,7 +166,7 @@
               </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label">
                   <span>{{ $t('my_page.birth') }}</span>
                 </div>
@@ -177,14 +177,15 @@
                   <el-form-item label="" prop="birthday" :error="(error.key === 'birthday') ? error.value : ''">
                     <el-row class="d-flex">
                       <el-col :md="4" :sm="12" class="birth-year">
-                        <el-input
+                        <el-autocomplete
                           ref="birthday"
                           v-model.trim="accountForm.year"
                           :placeholder="$t('YYYY')"
-                          name="birthday"
+                          :fetch-suggestions="queryYear"
+                          name="year"
                           type="text"
                           tabindex="2"
-                          maxlength="4"
+                          :maxlength="4"
                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                           pattern="[0-9]*"
                           inputmode="numeric"
@@ -193,13 +194,14 @@
                       </el-col>
                       <span class="text-normal birthday">{{ $t('form.year') }}</span>
                       <el-col :md="4" :sm="12" class="birth-month">
-                        <el-input
-                          ref="birthday.month"
+                        <el-autocomplete
+                          ref="birthday"
                           v-model.trim="accountForm.month"
                           :placeholder="$t('MM')"
-                          name="birthday"
+                          :fetch-suggestions="queryMonth"
+                          name="month"
                           type="text"
-                          maxlength="2"
+                          :maxlength="2"
                           tabindex="2"
                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                           pattern="[0-9]*"
@@ -209,14 +211,15 @@
                       </el-col>
                       <span class="text-normal birthday">{{ $t('form.month') }}</span>
                       <el-col :md="4" :sm="12" class="birth-day">
-                        <el-input
+                        <el-autocomplete
                           ref="birthday"
                           v-model.trim="accountForm.day"
                           :placeholder="$t('DD')"
-                          name="birthday"
+                          :fetch-suggestions="queryDay"
+                          name="day"
                           type="text"
                           tabindex="2"
-                          maxlength="2"
+                          :maxlength="2"
                           oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                           pattern="[0-9]*"
                           inputmode="numeric"
@@ -231,7 +234,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ $t('my_page.age') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -257,7 +260,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label">
                   <span>{{ $t('my_page.gender') }}</span>
                 </div>
@@ -265,56 +268,31 @@
               </el-col>
               <el-col :md="18" :sm="24">
                 <div class="content-input">
-                  <el-row class="d-flex">
-                    <el-col :md="3" :sm="7" :xs="6" class="birth-year">
-                      <el-radio
-                        ref="gender"
-                        v-model.trim="accountForm.gender_id"
-                        :label="$t('form.male')"
-                        class="round-checkbox"
-                        name="gender"
-                        type="text"
-                        tabindex="2"
-                        show-word-limit
-                        @focus="resetValidate('gender')"
-                      />
-                    </el-col>
-<!--                    <span class="text-normal gender">{{ $t('form.male') }}</span>-->
-                    <el-col :md="3" :sm="7" :xs="6" class="birth-month">
-                      <el-radio
-                        ref="gender"
-                        v-model.trim="accountForm.gender_id"
-                        :label="$t('form.female')"
-                        class="round-checkbox"
-                        name="gender"
-                        type="text"
-                        tabindex="2"
-                        show-word-limit
-                        @focus="resetValidate('gender')"
-                      />
-                    </el-col>
-<!--                    <span class="text-normal gender">{{ $t('form.female') }}</span>-->
-                    <el-col :md="3" :sm="7" :xs="6" class="birth-day">
-                      <el-radio
-                        ref="gender"
-                        v-model.trim="accountForm.gender_id"
-                        :label="$t('form.other')"
-                        class="round-checkbox"
-                        name="gender"
-                        type="text"
-                        tabindex="2"
-                        show-word-limit
-                        @focus="resetValidate('gender')"
-                      />
-                    </el-col>
-<!--                    <span class="text-normal gender">{{ $t('form.other') }}</span>-->
+                  <el-row class="">
+                    <el-form-item label="" prop="gender_id" :error="(error.key === 'gender_id') ? error.value : ''">
+                      <el-col v-for="(gender, key) in listGender" :key="key" :xl="3" :md="4"  :sm="7" :xs="6" class="birth-year">
+                        <el-radio
+                          ref="gender"
+                          v-model="accountForm.gender_id"
+                          :label="gender.id"
+                          class="round-checkbox"
+                          name="gender"
+                          type="text"
+                          tabindex="2"
+                          show-word-limit
+                          @focus="resetValidate('gender_id')"
+                        >
+                          {{ gender.name }}
+                        </el-radio>
+                      </el-col>
+                    </el-form-item>
                   </el-row>
                 </div>
               </el-col>
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ $t('my_page.phone') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
@@ -322,16 +300,16 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="phone" :error="(error.key === 'phone') ? error.value : ''">
+                      <el-form-item label="" prop="tel" :error="(error.key === 'tel') ? error.value : ''">
                         <el-input
                           ref="alias_name"
-                          v-model.trim="accountForm.phone"
+                          v-model.trim="accountForm.tel"
                           :placeholder="placeholder.phone"
-                          name="phone"
+                          name="tel"
                           type="text"
                           tabindex="2"
-                          show-word-limit
-                          @focus="resetValidate('phone')"
+                          maxlength="13"
+                          @focus="resetValidate('tel')"
                         />
                       </el-form-item>
                     </el-col>
@@ -341,7 +319,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ $t('my_page.email') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
@@ -354,6 +332,7 @@
                           ref="email"
                           v-model.trim="accountForm.email"
                           :placeholder="placeholder.email"
+                          :disabled="true"
                           name="email"
                           type="text"
                           tabindex="2"
@@ -368,7 +347,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ title.line }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -394,7 +373,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ title.facebook }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -420,7 +399,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ title.instagram }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -446,7 +425,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ title.twitter }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -475,7 +454,7 @@
               <span>{{ $t('my_page.address') }}</span>
             </div>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ $t('my_page.post_code') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24" :xs="12">
@@ -503,7 +482,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ $t('my_page.prefectures') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
@@ -511,13 +490,13 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="prefectures" :error="(error.key === 'prefectures') ? error.value : ''">
-                        <el-select v-model="accountForm.prefecturesSelect">
+                      <el-form-item label="" prop="province_id" :error="(error.key === 'province_id') ? error.value : ''">
+                        <el-select v-model="accountForm.province_id" :placeholder="$t('my_page.prefectures')">
                           <el-option
-                            v-for="item in prefectures"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in listProvinceDistrict"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -528,7 +507,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ $t('my_page.city') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
@@ -555,7 +534,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="14" class="col-label">
                 <div class="label"><span>{{ $t('my_page.building_name') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -586,7 +565,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button btn-right" type="danger" @click="handleRouter('cv')">{{ $t('my_page.save') }}</el-button>
+      <el-button class="card-button btn-right" type="danger" @click="update">{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -598,8 +577,15 @@
 </template>
 
 <script>
-import { validEmail, validFullWidth } from '../../utils/validate'
+import { validEmail, validFullWidth, validPhoneNumber } from '../../utils/validate'
 import BorderElement from './BorderElement'
+import {
+  INDEX_SET_ERROR,
+  INDEX_SET_LOADING,
+  INDEX_SET_SUCCESS,
+  MASTER_GET_DATA,
+  USER_UPDATE_BASIC_INFO, USER_UPLOAD_AVATAR
+} from '@/store/store.const'
 
 export default {
   name: 'EditCvElement',
@@ -633,43 +619,68 @@ export default {
         callback()
       }
     }
+    const validPhone = (rule, value, callback) => {
+      if (value && (value.length > 13 || value.length < 10 || !value.startsWith(0))) {
+        callback(new Error(this.$t('validation.phone_length', { _field_: this.$t('my_page.phone') })))
+      } else if (!validPhoneNumber(value)) {
+        callback(new Error(this.$t('validation.phone', { _field_: this.$t('my_page.phone') })))
+      } else {
+        callback()
+      }
+    }
+    const validBirthDay = (rule, value, callback) => {
+      const year = (new Date().getFullYear()).toString()
+      const month = (new Date().getMonth() + 1).toString()
+      const day = (new Date().getDate()).toString()
+      if (this.accountForm.year > year) {
+        callback(new Error(this.$t('validation.birthday', { _field_: this.$t('my_page.birth') })))
+      } else if (this.accountForm.year === year.toString()) {
+        console.log('tha cho toi')
+        if (this.accountForm.month > month) {
+          callback(new Error(this.$t('validation.birthday', { _field_: this.$t('my_page.birth') })))
+        }
+        if (this.accountForm.month === month && this.accountForm.day > day) {
+          callback(new Error(this.$t('validation.birthday', { _field_: this.$t('my_page.birth') })))
+        }
+      }
+      callback()
+    }
     return {
-      imageAvatarShow: '',
+      imageAvatarShow: this.$auth.user.avatar,
       imageAvatar: '',
       imageDetailShow: [],
+      file: '',
+      listGender: [],
+      listProvinceDistrict: [],
+      linksYear: [],
+      linksMonth: [],
+      linksDay: [],
       accountForm: {
-        first_name: '',
-        last_name: '',
-        furi_first_name: '',
-        furi_last_name: '',
-        alias_name: '',
+        first_name: this.$auth.user.first_name,
+        last_name: this.$auth.user.last_name,
+        furi_first_name: this.$auth.user.furi_first_name,
+        furi_last_name: this.$auth.user.furi_last_name,
+        alias_name: this.$auth.user.alias_name,
         birthday: '',
         year: '',
         month: '',
         day: '',
-        age: '',
-        gender_id: '',
-        tel: '',
-        email: '',
-        line: '',
-        facebook: '',
-        instagram: '',
-        twitter: '',
-        postal_code: '',
-        province_id: '',
-        city: '',
-        address: '',
-        password: '',
-        remember: '',
-        prefecturesSelect: '',
+        age: this.$auth.user.age,
+        gender_id: this.$auth.user.gender_id,
+        tel: this.$auth.user.tel,
+        email: this.$auth.user.email,
+        line: this.$auth.user.line,
+        facebook: this.$auth.user.facebook,
+        instagram: this.$auth.user.instagram,
+        twitter: this.$auth.user.twitter,
+        postal_code: this.$auth.user.postal_code,
+        province_id: this.$auth.user.province_id,
+        city: this.$auth.user.city,
+        address: this.$auth.user.address,
+        avatar: '',
+        images: [],
         errors: {}
       },
-      prefectures: [
-        { value: '東京都', label: '東京都' },
-        { value: '東京都1', label: '東京都1' },
-        { value: '東京都2', label: '東京都2' },
-        { value: '東京都3', label: '東京都3' }
-      ],
       error: {
         key: null,
         value: ''
@@ -678,13 +689,6 @@ export default {
         email: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('login.email') }), trigger: 'blur' },
           { validator: validFormEmail, trigger: 'blur' }
-        ],
-        password: [
-          {
-            required: true,
-            message: this.$t('validation.required', { _field_: this.$t('login.password') }),
-            trigger: 'blur'
-          }
         ],
         first_name: [
           {
@@ -721,17 +725,33 @@ export default {
           },
           { validator: validFullWidthLength, message: this.$t('validation.fullwidth_length', { _field_: this.$t('my_page.furi_last_name') }), trigger: 'blur' }
         ],
-        phone: [
+        tel: [
           {
             required: true,
             message: this.$t('validation.required', { _field_: this.$t('my_page.phone') }),
             trigger: 'blur'
-          }
+          },
+          { validator: validPhone, trigger: 'blur' }
         ],
         birthday: [
           {
             required: true,
             message: this.$t('validation.required', { _field_: this.$t('my_page.birth') }),
+            trigger: 'blur'
+          },
+          { validator: validBirthDay, trigger: 'blur' }
+        ],
+        gender_id: [
+          {
+            required: true,
+            message: this.$t('validation.required', { _field_: this.$t('my_page.gender') }),
+            trigger: 'blur'
+          }
+        ],
+        province_id: [
+          {
+            required: true,
+            message: this.$t('validation.required', { _field_: this.$t('my_page.gender') }),
             trigger: 'blur'
           }
         ],
@@ -783,20 +803,63 @@ export default {
   },
   computed: {
     birthday() {
-      return this.accountForm.month && this.accountForm.day && this.accountForm.year
+      return this.accountForm.year && this.accountForm.month && this.accountForm.day
     }
   },
   watch: {
+    'accountForm.day'() {
+      if (this.accountForm.day && this.accountForm.year && this.accountForm.month) {
+        this.accountForm.birthday = this.accountForm.year + '-' + this.accountForm.month + '-' + this.accountForm.day
+        this.resetValidate('birthday')
+      } else {
+        this.accountForm.age = ''
+        this.accountForm.birthday = ''
+      }
+    },
+    'accountForm.month'() {
+      if (this.accountForm.month && this.accountForm.year && this.accountForm.day) {
+        this.accountForm.birthday = this.accountForm.year + '-' + this.accountForm.month + '-' + this.accountForm.day
+        this.resetValidate('birthday')
+      } else {
+        this.accountForm.birthday = ''
+        this.accountForm.age = ''
+      }
+    },
+    'accountForm.year'() {
+      if (this.accountForm.year && this.accountForm.month && this.accountForm.day) {
+        if (this.accountForm.year.length === 4) {
+          if (new Date().getFullYear() - this.accountForm.year === 0) {
+            this.accountForm.age = 1
+          } else {
+            this.accountForm.age = new Date().getFullYear() - this.accountForm.year
+          }
+        }
+        this.accountForm.birthday = this.accountForm.year + '-' + this.accountForm.month + '-' + this.accountForm.day
+        this.resetValidate('birthday')
+      } else {
+        this.accountForm.birthday = ''
+        this.accountForm.age = ''
+      }
+    },
     birthday(newValue, oldValue) {
-      // console.log('abc')
-      this.accountForm.birthday = 'birthday'
       if (this.accountForm.year.length === 4) {
-        this.accountForm.age = this.accountForm.year - new Date().getFullYear()
+        if (new Date().getFullYear() - this.accountForm.year === 0) {
+          this.accountForm.age = 1
+        } else {
+          this.accountForm.age = new Date().getFullYear() - this.accountForm.year
+        }
       }
     }
   },
   created() {
-    this.accountForm.prefecturesSelect = this.prefectures[0].value
+    this.getGenderMaster()
+    this.getProvinceMaster()
+    this.getBirthDay()
+  },
+  mounted() {
+    this.loadAllYear()
+    this.loadAllMonth()
+    this.loadAllDay()
   },
   methods: {
     resetValidate(ref) {
@@ -809,15 +872,29 @@ export default {
     onFileChange(e) {
       const file = e.target.files[0]
       this.imageAvatarShow = URL.createObjectURL(file)
+      this.file = file
+      this.upLoadFile('avatar_banner')
       this.$refs.fileUploadAvatar.value = null
     },
-    onFileChangeDetail(e) {
+    async onFileChangeDetail(e) {
       const dataImageDetailShow = []
       for (let x = 0; x < e.target.files.length; x++) {
         dataImageDetailShow.push(URL.createObjectURL(e.target.files[x]))
+        const formData = new FormData()
+        formData.append('image', e.target.files[x])
+        formData.append('type', 'avatar_detail')
+        const response = await this.$store.dispatch(USER_UPLOAD_AVATAR, formData)
+        this.accountForm.avatar = response.data.url
       }
       this.imageDetailShow = dataImageDetailShow
       this.$refs.fileUploadDetail.value = null
+    },
+    async upLoadFile(type) {
+      const formData = new FormData()
+      formData.append('image', this.file)
+      formData.append('type', type)
+      const response = await this.$store.dispatch(USER_UPLOAD_AVATAR, formData)
+      this.accountForm.avatar = response.data.url
     },
     removeImage(index) {
       this.imageDetailShow = this.imageDetailShow.filter(function(item, key) {
@@ -832,6 +909,94 @@ export default {
     },
     closeConfirmModal() {
       this.confirmModal = false
+    },
+    queryYear(queryString, cb) {
+      const links = this.linksYear
+      const results = queryString ? links.filter(this.createFilter(queryString)) : links
+      // call callback function to return suggestions
+      cb(results)
+    },
+    queryMonth(queryString, cb) {
+      const links = this.linksMonth
+      const results = queryString ? links.filter(this.createFilter(queryString)) : links
+      // call callback function to return suggestions
+      cb(results)
+    },
+    queryDay(queryString, cb) {
+      const links = this.linksDay
+      const results = queryString ? links.filter(this.createFilter(queryString)) : links
+      // call callback function to return suggestions
+      cb(results)
+    },
+    createFilter(queryString) {
+      return (link) => {
+        return (link.value.toString().indexOf(queryString.toString()) === 0)
+      }
+    },
+    loadAllYear() {
+      for (let i = new Date().getFullYear(); i >= 1900; i--) {
+        this.linksYear.push({ value: i.toString() })
+      }
+    },
+    loadAllMonth() {
+      for (let i = 1; i <= 12; i++) {
+        this.linksMonth.push({ value: i.toString() })
+      }
+    },
+    loadAllDay() {
+      for (let i = 1; i <= 31; i++) {
+        this.linksDay.push({ value: i.toString() })
+      }
+    },
+    getGenderMaster() {
+      const dataResources = [
+        'resources[m_genders]={"model": "Gender"}'
+      ]
+      this.$store.dispatch(MASTER_GET_DATA, dataResources).then(res => {
+        this.listGender = res.data.m_genders
+      })
+    },
+    getProvinceMaster() {
+      const dataResources = [
+        'resources[m_province_districts]={"model": "MProvinceDistrict"}'
+      ]
+      this.$store.dispatch(MASTER_GET_DATA, dataResources).then(res => {
+        this.listProvinceDistrict = res.data.m_province_districts
+      })
+    },
+    getBirthDay() {
+      const birthday = this.$auth.user.birthday.split('-')
+      this.accountForm.year = birthday[0]
+      this.accountForm.month = birthday[1]
+      this.accountForm.day = birthday[2]
+    },
+    update() {
+      this.error = { key: null, value: '' }
+      this.$refs.accountForm.validate(async valid => {
+        if (valid) {
+          try {
+            await this.$store.commit(INDEX_SET_LOADING, true)
+            const dto = this.accountForm
+            const response = await this.$store.dispatch(USER_UPDATE_BASIC_INFO, dto)
+            if (response.status_code === 200) {
+              await this.$store.commit(INDEX_SET_SUCCESS, {
+                show: true,
+                text: response.messages
+              })
+              await this.$auth.fetchUser()
+            } else {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: response.messages
+              })
+            }
+            await this.$store.commit(INDEX_SET_LOADING, false)
+          } catch (err) {
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+          }
+          await this.$store.commit(INDEX_SET_LOADING, false)
+        }
+      })
     }
   }
 }

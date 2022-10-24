@@ -168,6 +168,17 @@
   }
 }
 
+.el-input.is-disabled .el-input__inner {
+  border-color: $border-default;
+  background: $color-bg-footer;
+  &:focus {
+    border-color: $border-default;
+  }
+  &:hover {
+    border-color: $border-default;
+  }
+}
+
 .el-select-dropdown__item.selected {
   color: $color-text-primary;
 }

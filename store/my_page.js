@@ -24,5 +24,15 @@ export const actions = {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.get('/profile'))
     })
+  },
+  updateBasicInfo(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/profile/update', data), context)
+    })
+  },
+  uploadAvatar(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/upload-image', data), context)
+    })
   }
 }

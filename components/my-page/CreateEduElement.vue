@@ -226,6 +226,7 @@ export default {
       },
       linksYear: [],
       linksMonth: [],
+      linksDay: [],
       index: this.$route.params.id || '',
       confirmModal: false,
       deleteModal: false
