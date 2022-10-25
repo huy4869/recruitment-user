@@ -15,18 +15,18 @@
             <span>{{ $t('header.search') }}</span>
           </div>
         </div>
-        <div v-if="!$auth.loggedIn" class="button-register show-pc">
+        <div v-if="!$auth.loggedIn" class="button-register show-pc" @click="changeToLink('/register')">
           <span>{{ $t('header.member_register') }}</span>
         </div>
         <div v-if="!$auth.loggedIn" class="button-login">
-          <el-button type="danger">
+          <el-button type="danger" @click="changeToLink('/login')">
             {{ $t('login.title') }}
           </el-button>
         </div>
-        <div v-if="$auth.loggedIn">
-          <img src="/assets/images/user_default.svg" alt="">
+        <div class="content-user" v-if="$auth.loggedIn">
+          <img class="avatar" src="/assets/images/user_default.svg" alt="" @click="changeToLink('/my-page')">
           <span>{{ $t('header.name') }}たろ君</span>
-          <img src="/assets/icon/icon_dropdown.svg" alt="">
+          <img src="/assets/icon/icon_drop_more.svg" alt="">
         </div>
       </div>
     </div>
@@ -38,6 +38,11 @@ export default {
   data() {
     return {
       user: this.$auth.user
+    }
+  },
+  methods: {
+    changeToLink(link) {
+      this.$router.push(link)
     }
   }
 }

@@ -36,3 +36,14 @@ export const WORK_HISTORY_DETAIL = 'my_page/getWorkHistoryByID'
 export const WORK_HISTORY_UPDATE = 'my_page/updateWorkHistory'
 export const USER_SELF_PR = 'my_page/getSelfPr'
 export const USER_SELF_PR_UPDATE = 'my_page/updateSelfPr'
+
+// application
+export const APPLICATION_LIST = 'application/getListApplication'
+export const APPLICATION_LIST_APPLIED = 'application/getListApplicationApplied'
+export const APPLICATION_LIST_WAITING_INTERVIEW = 'application/getListApplicationWaitingInterview'
+
+// chat
+export const CHAT_LIST = 'chat/listChat'
+
+// chat
+export const JOB_LIST_FAVORITE = 'job/listFavorite'
