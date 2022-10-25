@@ -14,7 +14,7 @@
                 <div class="content-pr">
                   <el-row class="">
                     <el-col :md="20" :sm="24">
-                      {{ self_pr.business_content }}
+                      {{ self_pr.favorite_skill }}
                     </el-col>
                   </el-row>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="content-pr">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      {{ self_pr.experience }}
+                      {{ self_pr.experience_knowledge }}
                     </el-col>
                   </el-row>
                 </div>
@@ -49,7 +49,7 @@
                 <div class="content-pr">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      {{ self_pr.pr }}
+                      {{ self_pr.self_pr }}
                     </el-col>
                   </el-row>
                 </div>
@@ -73,18 +73,14 @@ import BorderElement from './BorderElement'
 export default {
   name: 'EditCvElement',
   components: { BorderElement },
+  props: {
+    self_pr: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
-      self_pr: {
-        business_content: '・ビューティー雑誌を読むこと\n' +
-          'ヘアスタイルとメイクすること',
-        experience: '・ビューティーサロンのプロモーション、サービス、製品に関する紹介、コンサルティング、情報を顧客に提供する。\n' +
-          '・顧客のためのアドバイスと美容ケアのための美容サロンの代表的なイメージを選ばれとなった。\n' +
-          '・美容をコンサルティング、顧客にサービスを使用するよう説得する。',
-        pr: '・コミュニケーション能力が高いと言われます。\n' +
-          '・プレゼンテーションスキル、チームワーク、独立した仕事もできる。\n' +
-          '・美容相談が得意です。'
-      }
     }
   },
   methods: {
