@@ -7,9 +7,9 @@ export const getters = {}
 export const mutations = {}
 
 export const actions = {
-  listChat(context, query) {
+  listFavorite(context, query) {
     return new Promise((resolve, reject) => {
-      handleApi(resolve, reject, this.$axios.get('/chat/list'), context)
+      handleApi(resolve, reject, this.$axios.get('/job/favorite-job'), context)
     })
   }
 }

@@ -5,6 +5,10 @@ export function handleApi(resolve, reject, serviceFn, context, mutationEvent) {
     }
     resolve(resp.data)
   }).catch((err) => {
-    reject(err)
+    resolve({
+      'status_code': 500,
+      'messages': err.message,
+      'data': []
+    })
   })
 }
