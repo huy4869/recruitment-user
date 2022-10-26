@@ -167,13 +167,13 @@ export default {
   },
   computed: {
     contentLength() {
-      return this.accountForm.favorite_skill.length
+      return this.accountForm.favorite_skill ? this.accountForm.favorite_skill.length : ''
     },
     experienceLength() {
-      return this.accountForm.experience_knowledge.length
+      return this.accountForm.experience_knowledge ? this.accountForm.experience_knowledge.length : ''
     },
     prLength() {
-      return this.accountForm.self_pr.length
+      return this.accountForm.self_pr ? this.accountForm.self_pr.length : ''
     }
   },
   watch: {

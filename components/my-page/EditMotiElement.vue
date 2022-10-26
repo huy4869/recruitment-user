@@ -49,17 +49,17 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="other_notable_things" :error="(error.key === 'other_notable_things') ? error.value : ''">
+                      <el-form-item label="" prop="noteworthy" :error="(error.key === 'noteworthy') ? error.value : ''">
                         <el-input
                           ref="alias_name"
-                          v-model="accountForm.other_notable_things"
+                          v-model="accountForm.noteworthy"
                           :placeholder="$t('motivation.note')"
                           :autosize="{ minRows: 5, maxRows: 12}"
-                          name="other_notable_things"
+                          name="noteworthy"
                           type="textarea"
                           maxlength="2000"
                           tabindex="2"
-                          @focus="resetValidate('other_notable_things')"
+                          @focus="resetValidate('noteworthy')"
                         />
                       </el-form-item>
                       <div class="sm-text">{{ $t('my_page.currently') }}{{ experienceLength }}{{ $t('my_page.characters') }}</div>
@@ -75,7 +75,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button btn-right" type="danger" @click.native="submit" >{{ $t('my_page.edit') }}</el-button>
+      <el-button class="card-button btn-right" type="danger" @click.native="update" >{{ $t('my_page.edit') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -88,10 +88,22 @@
 
 <script>
 import BorderElement from './BorderElement'
+import {
+  INDEX_SET_ERROR,
+  INDEX_SET_LOADING,
+  INDEX_SET_SUCCESS,
+  MOTIVATION_UPDATE
+} from '@/store/store.const'
 
 export default {
   name: 'EditCvElement',
   components: { BorderElement },
+  props: {
+    motivation: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     const validAreaLength = (rule, value, callback, message) => {
       if (value && value.length > 2000) {
@@ -103,7 +115,7 @@ export default {
     return {
       accountForm: {
         motivation: '',
-        other_notable_things: '',
+        noteworthy: '',
         errors: {}
       },
       error: {
@@ -114,7 +126,7 @@ export default {
         motivation: [
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('motivation.name') }), trigger: 'blur' }
         ],
-        other_notable_things: [
+        noteworthy: [
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('motivation.note') }), trigger: 'blur' }
         ]
       },
@@ -123,10 +135,17 @@ export default {
   },
   computed: {
     contentLength() {
-      return this.accountForm.motivation.length
+      return this.accountForm.motivation ? this.accountForm.motivation.length : ''
     },
     experienceLength() {
-      return this.accountForm.other_notable_things.length
+      return this.accountForm.noteworthy ? this.accountForm.noteworthy.length : ''
+    }
+  },
+  watch: {
+    motivation() {
+      for (const item in this.motivation) {
+        this.accountForm[item] = this.motivation[item]
+      }
     }
   },
   methods: {
@@ -146,13 +165,32 @@ export default {
     closeConfirmModal() {
       this.confirmModal = false
     },
-    submit() {
-      this.$refs.accountForm.validate(valid => {
+    update() {
+      this.error = { key: null, value: '' }
+      this.$refs.accountForm.validate(async valid => {
         if (valid) {
-          console.log('submit')
-        } else {
-          console.log('error submit!!')
-          return false
+          try {
+            await this.$store.commit(INDEX_SET_LOADING, true)
+            const dto = this.accountForm
+            const response = await this.$store.dispatch(MOTIVATION_UPDATE, {
+              ...dto
+            })
+            if (response.status_code === 200) {
+              await this.$store.commit(INDEX_SET_SUCCESS, {
+                show: true,
+                text: response.messages
+              })
+            } else {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: response.messages
+              })
+            }
+            await this.$store.commit(INDEX_SET_LOADING, false)
+          } catch (err) {
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+          }
+          await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
     }

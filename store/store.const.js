@@ -14,6 +14,7 @@ export const AUTH_RESET_PASS = 'authentication/resetPass'
 
 // authentication
 export const AUTH_REGISTER = 'authentication/register'
+export const CHANGE_PASS = 'authentication/changePassword'
 
 // chat
 export const CHAT_FETCH_MESSAGE = 'chat/fetchMessage'
@@ -36,6 +37,21 @@ export const WORK_HISTORY_DETAIL = 'my_page/getWorkHistoryByID'
 export const WORK_HISTORY_UPDATE = 'my_page/updateWorkHistory'
 export const USER_SELF_PR = 'my_page/getSelfPr'
 export const USER_SELF_PR_UPDATE = 'my_page/updateSelfPr'
+export const WORK_QUALIFICATION_LIST = 'my_page/getListQualification'
+export const WORK_QUALIFICATION_DETAIL = 'my_page/getQualificationByID'
+export const WORK_QUALIFICATION_UPDATE = 'my_page/updateQualification'
+export const WORK_QUALIFICATION_CREATE = 'my_page/createQualification'
+export const EDU_LIST = 'my_page/getListEdu'
+export const EDU_DETAIL = 'my_page/getEduByID'
+export const EDU_UPDATE = 'my_page/updateEdu'
+export const EDU_CREATE = 'my_page/createEdu'
+export const MOTIVATION_USER = 'my_page/getMotivation'
+export const MOTIVATION_UPDATE = 'my_page/updateMotivation'
+export const DESIRED_DETAIL = 'my_page/getDesired'
+export const DESIRED_UPDATE = 'my_page/updateDesired'
+
+// Inquiry
+export const INQUIRY_CREATE = 'my_page/createInquiry'
 
 // application
 export const APPLICATION_LIST = 'application/getListApplication'

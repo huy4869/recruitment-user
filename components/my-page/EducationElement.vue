@@ -40,29 +40,22 @@ import EduElement from './EduElement'
 export default {
   name: 'FavoriteJobElement',
   components: { EduElement, NoDataElement },
+  props: {
+    listEdu: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
       total: 3,
-      listEdu: [],
       showViewAllJob: true,
       lastUpdated: '2022年09月26日更新'
     }
   },
   created() {
-    this.getDataJob()
   },
   methods: {
-    changePage(page) {
-      this.page = page
-    },
-    getDataJob() {
-      for (let x = 0; x <= 1; x++) {
-        this.listEdu.push({
-          name: '美容師国家資格',
-          date: '2022年09月'
-        })
-      }
-    },
     handleRouter(route) {
       this.$router.push(route)
     }

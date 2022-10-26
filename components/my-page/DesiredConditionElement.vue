@@ -17,31 +17,31 @@
             </div>
             <div class="form-condition-item">
               <div class="form-left">{{ $t('desired_condition.location') }}</div>
-              <div class="form-right"><span>{{ condition.location }}</span></div>
+              <div class="form-right"><span>{{ condition.province }}</span></div>
             </div>
             <div class="form-condition-item">
               <div class="form-left">{{ $t('desired_condition.type') }}</div>
-              <div class="form-right"><span>{{ condition.location }}</span></div>
+              <div class="form-right"><span>{{ condition.work_type_string }}</span></div>
             </div>
             <div class="form-condition-item">
               <div class="form-left">{{ $t('desired_condition.age') }}</div>
-              <div class="form-right"><span>{{ condition.location }}</span></div>
+              <div class="form-right"><span>{{ condition.age_name }}</span></div>
             </div>
             <div class="form-condition-item">
               <div class="form-left">{{ $t('desired_condition.salary') }}</div>
-              <div class="form-right"><span>{{ condition.location }}</span></div>
+              <div class="form-right"><span>{{ condition.expected_salary }}</span></div>
             </div>
             <div class="form-condition-item">
               <div class="form-left">{{ $t('desired_condition.position') }}</div>
-              <div class="form-right"><span>{{ condition.location }}</span></div>
+              <div class="form-right"><span>{{ condition.job_type_string }}</span></div>
             </div>
             <div class="form-condition-item">
               <div class="form-left">{{ $t('desired_condition.experience') }}</div>
-              <div class="form-right"><span>{{ condition.location }}</span></div>
+              <div class="form-right"><span>{{ condition.job_experience_strings }}</span></div>
             </div>
             <div class="form-condition-item">
               <div class="form-left">{{ $t('desired_condition.features') }}</div>
-              <div class="form-right"><span>{{ condition.location }}</span></div>
+              <div class="form-right"><span>{{ condition.job_feature_string }}</span></div>
             </div>
           </div>
         </div>
@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { DESIRED_DETAIL, INDEX_SET_LOADING } from '@/store/store.const'
+
 export default {
   name: 'DesiredConditionElement',
   data() {
@@ -63,16 +65,24 @@ export default {
     }
   },
   created() {
-    this.getDataConditions()
+    this.getMotivation()
   },
   methods: {
     changePage(page) {
       this.page = page
     },
-    getDataConditions() {
-      this.condition = {
-        location: '東京都、千葉県'
+    async getMotivation() {
+      this.$store.commit(INDEX_SET_LOADING, true)
+      try {
+        const response = await this.$store.dispatch(DESIRED_DETAIL)
+        const { data, status_code } = response
+        if (status_code === 200) {
+          this.condition = data
+        }
+      } catch (e) {
+        this.$store.commit(INDEX_SET_LOADING, false)
       }
+      this.$store.commit(INDEX_SET_LOADING, false)
     },
     handleRouter(route) {
       this.$router.push(route)

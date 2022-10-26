@@ -362,6 +362,7 @@ import {
   INDEX_SET_SUCCESS,
   WORK_HISTORY_UPDATE
 } from '@/store/store.const'
+import { LINKS_MONTH } from '@/constants/store'
 export default {
   name: 'EditCvElement',
   components: { BorderElement },
@@ -375,7 +376,7 @@ export default {
       type: Object,
       default: () => {}
     },
-    m_job_types: {
+    m_learning_status: {
       type: Array,
       default: () => []
     },
@@ -599,9 +600,7 @@ export default {
       }
     },
     loadAllMonth() {
-      for (let i = 1; i <= 12; i++) {
-        this.linksMonth.push({ value: i.toString() })
-      }
+      this.linksMonth = LINKS_MONTH
     },
     update() {
       this.error = { key: null, value: '' }
@@ -611,6 +610,7 @@ export default {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
             dto.period_check = this.accountForm.period_check ? 0 : 1
+            dto.period_end = dto.period_check === 0 ? dto.period_end : ''
             if (typeof (this.accountForm.occupationSelect) === 'number') {
               dto.job_types = [this.m_job_types[this.accountForm.occupationSelect - 1]]
             }

@@ -357,6 +357,7 @@
 
 <script>
 import BorderElement from './BorderElement'
+import { LINKS_MONTH } from '@/constants/store'
 
 export default {
   name: 'EditCvElement',
@@ -569,9 +570,7 @@ export default {
       }
     },
     loadAllMonth() {
-      for (let i = 1; i <= 12; i++) {
-        this.linksMonth.push({ value: i.toString() })
-      }
+      this.linksMonth = LINKS_MONTH
     },
     submit() {
       this.$refs.accountForm.validate(valid => {

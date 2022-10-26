@@ -15,6 +15,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // work-history
   getListWorkHistory(context, resource) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.get('/work-history'))
@@ -30,6 +31,7 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.post(`/work-history/${id}`, data), context)
     })
   },
+  // basic-info
   getBasicInfo(context, resource) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.get('/profile'))
@@ -45,6 +47,7 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.post('/upload-image', data), context)
     })
   },
+  // self-pr
   getSelfPr(context, data) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.get('/profile/pr'))
@@ -53,6 +56,75 @@ export const actions = {
   updateSelfPr(context, data) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.post('/profile/pr', data), context)
+    })
+  },
+  // qualification
+  getListQualification(context, resource) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/licenses-qualifications'), context)
+    })
+  },
+  getQualificationByID(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get(`/licenses-qualifications/${data}`))
+    })
+  },
+  updateQualification(context, { id, data }) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/licenses-qualifications/${id}`, data), context)
+    })
+  },
+  createQualification(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/licenses-qualifications', data), context)
+    })
+  },
+  // edu
+  getListEdu(context, resource) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/learning-history'), context)
+    })
+  },
+  getEduByID(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get(`/learning-history/${data}`))
+    })
+  },
+  updateEdu(context, { id, data }) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/learning-history/${id}`, data), context)
+    })
+  },
+  createEdu(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/learning-history', data), context)
+    })
+  },
+  // Motivation
+  getMotivation(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/profile/motivation'), context)
+    })
+  },
+  updateMotivation(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/profile/motivation', data), context)
+    })
+  },
+  // Desired
+  getDesired(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/desired-condition'), context)
+    })
+  },
+  updateDesired(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/desired-condition', data), context)
+    })
+  },
+  createInquiry(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/contact/create', data), context)
     })
   }
 }

@@ -22,18 +22,18 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="password" :error="(error.key === 'password') ? error.value : ''">
+                      <el-form-item label="" prop="current_password" :error="(error.key === 'current_password') ? error.value : ''">
                         <el-input
-                          ref="password"
-                          v-model="accountForm.password"
+                          ref="current_password"
+                          v-model="accountForm.current_password"
                           :placeholder="$t('my_page.current_password')"
-                          name="password"
+                          name="current_password"
                           type="password"
                           tabindex="3"
                           maxlength="32"
                           autocomplete="off"
                           show-password
-                          @focus="resetValidate('password')"
+                          @focus="resetValidate('current_password')"
                         />
                       </el-form-item>
                     </el-col>
@@ -50,10 +50,10 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="new_password" :error="(error.key === 'new_password') ? error.value : ''">
+                      <el-form-item label="" prop="new_password" :error="(error.key === 'password') ? error.value : ''">
                         <el-input
                           ref="new_password"
-                          v-model="accountForm.password"
+                          v-model="accountForm.new_password"
                           :placeholder="$t('my_page.new_password')"
                           name="new_password"
                           type="password"
@@ -80,7 +80,7 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="new_password_confirmation" :error="(error.key === 'new_password_confirmation') ? error.value : ''">
+                      <el-form-item label="" prop="new_password_confirmation" :error="(error.key === 'password_confirmation') ? error.value : ''">
 
                       <el-input
                         ref="new_password_confirmation"
@@ -110,6 +110,7 @@
                 <el-button
                   :loading="loading"
                   type="danger"
+                  @click="submit"
                 >
                   {{ $t('my_page.change') }}
                 </el-button>
@@ -123,6 +124,12 @@
 </template>
 
 <script>
+import {
+  INDEX_SET_LOADING,
+  INDEX_SET_SUCCESS,
+  INDEX_SET_ERROR,
+  CHANGE_PASS
+} from '../../store/store.const'
 import BorderElement from './BorderElement'
 
 export default {
@@ -131,21 +138,21 @@ export default {
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error(this.$t('validation.required', { _field_: this.$t('account.password') }).toString()))
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('my_page.current_password') }).toString()))
       } else {
         if (value.length < 4 || value.length > 12) {
           callback(new Error(this.$t('validation.pass_format')))
         }
         if (this.accountForm.password_confirmation !== '') {
-          this.$refs.accountForm.validateField('password_confirmation')
+          this.$refs.accountForm.validateField('new_password_confirmation')
         }
         callback()
       }
     }
     const validateConfirmPass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error(this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }).toString()))
-      } else if (value !== this.accountForm.password) {
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('my_page.new_password_confirmation') }).toString()))
+      } else if (value !== this.accountForm.new_password) {
         callback(new Error(this.$t('validation.passNotMatch').toString()))
       } else {
         callback()
@@ -153,7 +160,7 @@ export default {
     }
     return {
       accountForm: {
-        password: '',
+        current_password: '',
         new_password: '',
         new_password_confirmation: '',
         errors: {}
@@ -163,19 +170,19 @@ export default {
         value: ''
       },
       accountRules: {
-        password: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('login.password') }), trigger: 'blur' },
+        current_password: [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('my_page.current_password') }), trigger: 'blur' },
           { validator: validatePass, trigger: 'blur' }
         ],
         new_password: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('login.password') }), trigger: 'blur' },
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('my_page.new_password') }), trigger: 'blur' },
           { validator: validatePass, trigger: 'blur' }
         ],
         new_password_confirmation: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }), trigger: 'blur' },
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('my_page.new_password_confirmation') }), trigger: 'blur' },
           {
             validator: validateConfirmPass,
-            message: this.$t('validation.passNotMatch'),
+            message: this.$t('validation.passNotMatch', { _field_: this.$t('my_page.new_password_confirmation') }),
             trigger: 'blur'
           }
         ],
@@ -195,6 +202,41 @@ export default {
       }
       this.$refs.accountForm.fields.find((f) => f.prop === ref).clearValidate()
       this.accountForm.errors[ref] = ''
+    },
+    submit() {
+      this.error = { key: null, value: '' }
+      this.$refs.accountForm.validate(async valid => {
+        if (valid) {
+          try {
+            this.$store.commit(INDEX_SET_LOADING, true)
+            const data = await this.$store.dispatch(CHANGE_PASS, {
+              current_password: this.accountForm.current_password,
+              password_confirmation: this.accountForm.new_password_confirmation,
+              password: this.accountForm.new_password
+            })
+
+            switch (data.status_code) {
+              case 200:
+                await this.$store.commit(INDEX_SET_SUCCESS, {
+                  show: true,
+                  text: data.messages
+                })
+                break
+              case 422:
+                for (const [key] of Object.entries(data.data)) {
+                  this.error = { key, value: data.data[key][0] }
+                }
+                break
+              default:
+                await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+                break
+            }
+          } catch (err) {
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+          }
+          await this.$store.commit(INDEX_SET_LOADING, false)
+        }
+      })
     }
   }
 }
