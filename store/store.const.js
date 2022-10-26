@@ -45,5 +45,8 @@ export const APPLICATION_LIST_WAITING_INTERVIEW = 'application/getListApplicatio
 // chat
 export const CHAT_LIST = 'chat/listChat'
 
-// chat
+// job
 export const JOB_LIST_FAVORITE = 'job/listFavorite'
+
+// chat
+export const NOTIFICATION_LIST = 'notification/listNotification'

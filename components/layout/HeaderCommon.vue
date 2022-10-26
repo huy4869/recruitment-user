@@ -1,7 +1,9 @@
 <template>
   <div class="header-common">
     <div class="header-container">
-      <div class="header-logo" @click="$router.push('/')">Logo</div>
+      <div class="header-logo" @click="$router.push('/')">
+        <img src="/assets/images/logo.svg" alt="">
+      </div>
       <div class="header-content">
         <div class="button-action show-pc">
           <div>

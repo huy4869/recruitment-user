@@ -9,7 +9,9 @@
         <div>{{ $t('footer.inquiry') }}</div>
         <img class="top-arrow show-pc" src="@/static/assets/icon/top-arrow.svg" alt="top-arrow">
       </div>
-      <div class="logo">LOGO</div>
+      <div class="logo">
+        <img src="/assets/images/logo.svg" alt="">
+      </div>
       <div class="copy-right">
         Copyright©2022 VAMPS Hair Design. All Rights Reserved
       </div>
