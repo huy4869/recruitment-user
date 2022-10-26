@@ -17,15 +17,15 @@
             <span>{{ $t('header.search') }}</span>
           </div>
         </div>
-        <div v-if="!$auth.loggedIn" class="button-register show-pc" @click="changeToLink('/register')">
+        <div v-if="!loggedIn" class="button-register show-pc" @click="changeToLink('/register')">
           <span>{{ $t('header.member_register') }}</span>
         </div>
-        <div v-if="!$auth.loggedIn" class="button-login">
+        <div v-if="!loggedIn" class="button-login">
           <el-button type="danger" @click="changeToLink('/login')">
             {{ $t('login.title') }}
           </el-button>
         </div>
-        <div class="content-user" v-if="$auth.loggedIn">
+        <div v-if="loggedIn" class="content-user">
           <img class="avatar" src="/assets/images/user_default.svg" alt="" @click="changeToLink('/my-page')">
           <span>{{ $t('header.name') }}たろ君</span>
           <img src="/assets/icon/icon_drop_more.svg" alt="">
@@ -39,7 +39,8 @@ export default {
   name: 'HeaderCommon',
   data() {
     return {
-      user: this.$auth.user
+      user: this.$auth.user,
+      loggedIn: this.$auth.loggedIn
     }
   },
   methods: {

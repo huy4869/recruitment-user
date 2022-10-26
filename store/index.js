@@ -39,7 +39,7 @@ export const mutations = {
 export const actions = {
   getMasterData(context, resource) {
     return new Promise((resolve, reject) => {
-      handleApi(resolve, reject, this.$axios.get(process.env.APP_URL + `/master-data?${resource}`), context)
+      handleApi(resolve, reject, this.$axios.get(`/master-data?${resource}`), context)
     })
   },
   uploadFile(context, data) {
