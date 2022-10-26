@@ -47,6 +47,9 @@ export const CHAT_LIST = 'chat/listChat'
 
 // job
 export const JOB_LIST_FAVORITE = 'job/listFavorite'
+export const JOB_LIST_NEW_JOBS = 'job/listNewJobs'
+export const JOB_LIST_MOST_VIEW_JOBS = 'job/listMostViewJobs'
+export const JOB_LIST_RECOMMEND_JOBS = 'job/listRecommendJobs'
 
 // chat
 export const NOTIFICATION_LIST = 'notification/listNotification'
