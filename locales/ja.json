@@ -73,7 +73,8 @@
     "postcode_length": "{_field_}は7桁英数字で入力してください。",
     "phone_length": "{_field_}は0から始まる10桁から13桁まで入力してください。",
     "phone": "{_field_}は数字とハイフンのみで入力してください。",
-    "birthday": "今日以前の日付を入力してください。"
+    "birthday": "今日以前の日付を入力してください。",
+    "passNotMatch": "{_field_}が一致しません。"
   },
   "header": {
     "search": "求人を探す",

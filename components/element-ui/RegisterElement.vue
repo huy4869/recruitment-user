@@ -163,7 +163,7 @@ export default {
           { required: true, message: this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }), trigger: 'blur' },
           {
             validator: validateConfirmPass,
-            message: this.$t('validation.passNotMatch'),
+            message: this.$t('validation.passNotMatch', { _field_: this.$t('register.password_confirmation') }),
             trigger: 'blur'
           }
         ],
@@ -214,6 +214,7 @@ export default {
                   show: true,
                   text: data.messages
                 })
+                this.changeLink('/login')
                 break
               case 422:
                 for (const [key] of Object.entries(data.data)) {

@@ -7,7 +7,7 @@
           <div class="edit-form-input">
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex">
-              <el-col :md="6" :sm="24" :xs="9" class="col-label-pr">
+              <el-col :md="6" :sm="12" :xs="9" class="col-label-pr">
                 <div class="label"><span>{{ $t('self_pr.business_content') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24" :xs="15">
@@ -22,7 +22,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex">
-              <el-col :md="6" :sm="24" :xs="9" class="col-label-pr">
+              <el-col :md="6" :sm="12" :xs="9" class="col-label-pr">
                 <div class="label">
                   <span>
                     {{ $t('self_pr.experience') }}<br>
@@ -42,7 +42,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex">
-              <el-col :md="6" :sm="24" :xs="9" class="col-label-pr">
+              <el-col :md="6" :sm="12" :xs="9" class="col-label-pr">
                 <div class="label"><span>{{ $t('self_pr.pr') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24" :xs="15">

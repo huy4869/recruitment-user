@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="right-content-element">
     <div class="edit-cv-element">
       <div class="edit-cv-title">{{ $t('my_page.edit_basic_information') }}</div>
       <div class="edit-cv-content edit-form-content">
@@ -586,6 +586,7 @@ import {
   MASTER_GET_DATA,
   USER_UPDATE_BASIC_INFO, USER_UPLOAD_AVATAR
 } from '@/store/store.const'
+import { LINKS_MONTH } from '@/constants/store'
 
 export default {
   name: 'EditCvElement',
@@ -827,7 +828,7 @@ export default {
     },
     'accountForm.year'() {
       if (this.accountForm.year && this.accountForm.month && this.accountForm.day) {
-        if (this.accountForm.year.length === 4) {
+        if (this.accountForm.year && this.accountForm.year.length === 4) {
           if (new Date().getFullYear() - this.accountForm.year === 0) {
             this.accountForm.age = 1
           } else {
@@ -842,7 +843,7 @@ export default {
       }
     },
     birthday(newValue, oldValue) {
-      if (this.accountForm.year.length === 4) {
+      if (this.accountForm.year && this.accountForm.year.length === 4) {
         if (new Date().getFullYear() - this.accountForm.year === 0) {
           this.accountForm.age = 1
         } else {
@@ -939,9 +940,7 @@ export default {
       }
     },
     loadAllMonth() {
-      for (let i = 1; i <= 12; i++) {
-        this.linksMonth.push({ value: i.toString() })
-      }
+      this.linksMonth = LINKS_MONTH
     },
     loadAllDay() {
       for (let i = 1; i <= 31; i++) {
@@ -965,7 +964,7 @@ export default {
       })
     },
     getBirthDay() {
-      const birthday = this.$auth.user.birthday.split('-')
+      const birthday = this.$auth.user.birthday ? this.$auth.user.birthday.split('-') : ''
       this.accountForm.year = birthday[0]
       this.accountForm.month = birthday[1]
       this.accountForm.day = birthday[2]

@@ -14,7 +14,7 @@
           <div class="edit-form-input">
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label"><span>{{ $t('qualification.name') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
@@ -41,7 +41,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label">
                   <span>{{ $t('qualification.date') }}</span>
                 </div>
@@ -50,11 +50,11 @@
                 <div class="content-input">
                   <el-row class="d-flex period">
                     <el-col :md="9" :sm="24" class="first-name">
-                      <el-form-item label="" prop="period_start" :error="(error.key === 'period_start') ? error.value : ''">
+                      <el-form-item label="" prop="new_issuance_date" :error="(error.key === 'new_issuance_date') ? error.value : ''">
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-autocomplete
-                              ref="period_start"
+                              ref="new_issuance_date"
                               v-model.trim="accountForm.year"
                               :placeholder="$t('YYYY')"
                               :fetch-suggestions="queryYear"
@@ -65,24 +65,24 @@
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('period_start')"
+                              @focus="resetValidate('new_issuance_date')"
                             />
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col :sm="12" :xs="10" class="birth-month">
                             <el-autocomplete
-                              ref="period_startx"
+                              ref="new_issuance_date"
                               v-model.trim="accountForm.month"
                               :placeholder="$t('MM')"
                               :fetch-suggestions="queryMonth"
-                              name="period_start"
+                              name="month"
                               type="text"
                               :maxlength="2"
                               tabindex="2"
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('period_start')"
+                              @focus="resetValidate('new_issuance_date')"
                             />
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.month') }}</span>
@@ -100,7 +100,7 @@
     <div id="btn-center" class="text-center">
       <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
       <el-button class="card-button triple-btn" @click="showDeleteModal">{{ $t('my_page.remove') }}</el-button>
-      <el-button class="card-button triple-btn" type="danger" @click.native="submit" >{{ $t('my_page.save') }}</el-button>
+      <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -119,6 +119,13 @@
 
 <script>
 import BorderElement from './BorderElement'
+import {
+  INDEX_SET_ERROR,
+  INDEX_SET_LOADING,
+  INDEX_SET_SUCCESS,
+  WORK_QUALIFICATION_UPDATE
+} from '@/store/store.const'
+import { LINKS_MONTH } from '@/constants/store'
 
 export default {
   name: 'EditQualifyElement',
@@ -128,6 +135,12 @@ export default {
     }
   },
   components: { BorderElement },
+  props: {
+    qualification: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     const validFormLength = (rule, value, callback, message) => {
       if (value && value.length > 255) {
@@ -139,7 +152,6 @@ export default {
     return {
       accountForm: {
         name: '',
-        date: '',
         year: '',
         month: '',
         errors: {}
@@ -162,8 +174,35 @@ export default {
     }
   },
   computed: {
-    period_start() {
+    new_issuance_date() {
       return this.accountForm.year && this.accountForm.month
+    }
+  },
+  watch: {
+    qualification() {
+      for (const item in this.qualification) {
+        this.accountForm[item] = this.qualification[item]
+      }
+    },
+    'accountForm.year'() {
+      if ((this.accountForm.year && !this.accountForm.month) || (!this.accountForm.year && this.accountForm.month)) {
+        this.accountRules.new_issuance_date = [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('qualification.date') }), trigger: 'blur' }
+        ]
+        this.$refs.accountForm.validateField('new_issuance_date')
+      } else if (this.accountForm.year && this.accountForm.month) {
+        delete this.accountRules.new_issuance_date
+      }
+    },
+    'accountForm.month'() {
+      if ((this.accountForm.month && !this.accountForm.year) || (!this.accountForm.month && this.accountForm.year)) {
+        this.accountRules.new_issuance_date = [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('qualification.date') }), trigger: 'blur' }
+        ]
+        this.$refs.accountForm.validateField('new_issuance_date')
+      } else if (this.accountForm.year && this.accountForm.month) {
+        delete this.accountRules.new_issuance_date
+      }
     }
   },
   mounted() {
@@ -216,22 +255,49 @@ export default {
       }
     },
     loadAllMonth() {
-      for (let i = 1; i <= 12; i++) {
-        this.linksMonth.push({ value: i.toString() })
-      }
+      this.linksMonth = LINKS_MONTH
     },
-    submit() {
-      this.$refs.accountForm.validate(valid => {
-        if ((this.accountForm.year && !this.accountForm.month) || (!this.accountForm.year && this.accountForm.month)) {
-          this.accountRules.period_start = [
-            { required: true, message: this.$t('validation.required', { _field_: this.$t('qualification.name') }), trigger: 'blur' }
-          ]
+    update() {
+      this.error = { key: null, value: '' }
+      this.$refs.accountForm.validate(async valid => {
+        if (this.accountForm.year === '' && this.accountForm.month === '') {
+          this.accountRules.new_issuance_date = []
         }
         if (valid) {
-          console.log('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
+          try {
+            await this.$store.commit(INDEX_SET_LOADING, true)
+            const dto = {
+              name: this.accountForm.name,
+              new_issuance_date: this.accountForm.year + '/' + this.accountForm.month
+            }
+            const response = await this.$store.dispatch(WORK_QUALIFICATION_UPDATE, {
+              id: this.$route.params.id,
+              data: dto
+            })
+            switch (response.status_code) {
+              case 200:
+                await this.$store.commit(INDEX_SET_SUCCESS, {
+                  show: true,
+                  text: response.messages
+                })
+                break
+              case 422:
+                for (const [key] of Object.entries(response.data)) {
+                  this.error = { key, value: response.data[key][0] }
+                }
+                break
+              default:
+                await this.$store.commit(INDEX_SET_ERROR, {
+                  show: true,
+                  text: response.messages
+                })
+                break
+            }
+            await this.$store.commit(INDEX_SET_LOADING, false)
+          } catch (err) {
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+          }
+          await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
     }

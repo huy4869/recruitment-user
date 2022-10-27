@@ -18,9 +18,9 @@
                 label-position="left"
               >
                 <div class="edit-form-input">
-                  <BorderElement :colSize="7" :middle="true"></BorderElement>
+                  <BorderElement :col-size="7" :middle="true"></BorderElement>
                   <el-row class="d-flex form-label-input">
-                    <el-col :md="7" :sm="24" class="col-label">
+                    <el-col :md="7" :sm="16" class="col-label">
                       <div class="label"><span>{{ $t('inquiry.email') }}</span></div>
                       <div class="required">{{ $t('form.required') }}</div>
                     </el-col>
@@ -45,9 +45,9 @@
                       </div>
                     </el-col>
                   </el-row>
-                  <BorderElement :colSize="7" :middle="true"></BorderElement>
+                  <BorderElement :col-size="7" :middle="true"></BorderElement>
                   <el-row class="d-flex form-label-input">
-                    <el-col :md="7" :sm="24" class="col-label">
+                    <el-col :md="7" :sm="16" class="col-label">
                       <div class="label"><span>{{ $t('inquiry.name') }}</span></div>
                     </el-col>
                     <el-col :md="17" :sm="24">
@@ -71,25 +71,25 @@
                       </div>
                     </el-col>
                   </el-row>
-                  <BorderElement :colSize="7" :middle="true"></BorderElement>
+                  <BorderElement :col-size="7" :middle="true"></BorderElement>
                   <el-row class="d-flex form-label-input">
-                    <el-col :md="7" :sm="24" class="col-label">
+                    <el-col :md="7" :sm="16" class="col-label">
                       <div class="label"><span>{{ $t('inquiry.phone') }}</span></div>
                     </el-col>
                     <el-col :md="17" :sm="24">
                       <div class="content-input">
                         <el-row class="d-flex">
                           <el-col :md="22" :sm="24">
-                            <el-form-item label="" prop="phone" :error="(error.key === 'phone') ? error.value : ''">
+                            <el-form-item label="" prop="tel" :error="(error.key === 'tel') ? error.value : ''">
                               <el-input
-                                ref="phone"
-                                v-model.trim="accountForm.phone"
+                                ref="tel"
+                                v-model.trim="accountForm.tel"
                                 :placeholder="$t('inquiry.enter_phone')"
-                                name="phone"
+                                name="tel"
                                 type="text"
                                 tabindex="2"
                                 maxlength="13"
-                                @focus="resetValidate('phone')"
+                                @focus="resetValidate('tel')"
                               />
                             </el-form-item>
                           </el-col>
@@ -97,9 +97,9 @@
                       </div>
                     </el-col>
                   </el-row>
-                  <BorderElement :colSize="7" :middle="true"></BorderElement>
+                  <BorderElement :col-size="7" :middle="true"></BorderElement>
                   <el-row class="d-flex form-label-input">
-                    <el-col :md="7" :sm="24" class="col-label">
+                    <el-col :md="7" :sm="16" class="col-label">
                       <div class="label"><span>{{ $t('inquiry.content') }}</span></div>
                       <div class="required">{{ $t('form.required') }}</div>
                     </el-col>
@@ -125,7 +125,7 @@
                       </div>
                     </el-col>
                   </el-row>
-                  <BorderElement :colSize="7" :middle="true"></BorderElement>
+                  <BorderElement :col-size="7" :middle="true"></BorderElement>
                 </div>
               </el-form>
             </div>
@@ -150,7 +150,13 @@
 import BorderElement from '~/components/my-page/BorderElement'
 import BannerElement from '~/components/layout/BannerElement'
 import TitlePageElement from '~/components/layout/TitlePageElement'
-import { INDEX_SET_TITLE_MENU } from '~/store/store.const'
+import {
+  INDEX_SET_ERROR,
+  INDEX_SET_LOADING,
+  INDEX_SET_SUCCESS,
+  INDEX_SET_TITLE_MENU,
+  INQUIRY_CREATE
+} from '~/store/store.const'
 import { validEmail, validHalfWidth, validPhoneNumber } from '~/utils/validate'
 
 export default {
@@ -198,7 +204,7 @@ export default {
         email: '',
         content: '',
         name: '',
-        phone: '',
+        tel: '',
         errors: {}
       },
       error: {
@@ -213,7 +219,7 @@ export default {
         name: [
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('inquiry.name') }), trigger: 'blur' }
         ],
-        phone: [
+        tel: [
           { validator: validPhone, trigger: 'blur' }
         ],
         content: [
@@ -236,6 +242,42 @@ export default {
       }
       this.$refs.accountForm.fields.find((f) => f.prop === ref).clearValidate()
       this.accountForm.errors[ref] = ''
+    },
+    submit() {
+      this.error = { key: null, value: '' }
+      this.$refs.accountForm.validate(async valid => {
+        if (valid) {
+          try {
+            await this.$store.commit(INDEX_SET_LOADING, true)
+            const dto = this.accountForm
+            const response = await this.$store.dispatch(INQUIRY_CREATE, {
+              ...dto
+            })
+            if (response.status_code === 200) {
+              await this.$store.commit(INDEX_SET_SUCCESS, {
+                show: true,
+                text: response.messages
+              })
+              this.accountForm = {
+                email: '',
+                content: '',
+                name: '',
+                tel: '',
+                errors: {}
+              }
+            } else {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: response.messages
+              })
+            }
+            await this.$store.commit(INDEX_SET_LOADING, false)
+          } catch (err) {
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+          }
+          await this.$store.commit(INDEX_SET_LOADING, false)
+        }
+      })
     }
   }
 }

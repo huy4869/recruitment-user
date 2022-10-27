@@ -13,21 +13,14 @@
 import BannerElement from '~/components/layout/BannerElement'
 import TitlePageElement from '~/components/layout/TitlePageElement'
 import MenuLeftElement from '~/components/my-page/MenuLeftElement'
-import { INDEX_SET_TITLE_MENU } from '~/store/store.const'
+import { INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, MOTIVATION_USER } from '~/store/store.const'
 import MotivationElement from '~/components/my-page/MotivationElement'
 export default {
   name: 'SelfPRPage',
   components: { MotivationElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {
-      motivation: {
-        id: 1,
-        motivation: '・ビューティー雑誌を読むこと ' +
-          'ヘアスタイルとメイクすること',
-        other_notable_things: '・ビューティーサロンのプロモーション、サービス、製品に関する紹介、コンサルティング、情報を顧客に提供する。\n' +
-          '・顧客のためのアドバイスと美容ケアのための美容サロンの代表的なイメージを選ばれとなった。\n' +
-          '・美容をコンサルティング、顧客にサービスを使用するよう説得する。'
-      }
+      motivation: {}
     }
   },
   created() {
@@ -37,6 +30,22 @@ export default {
       { name: this.$t('page.web_cv'), route: '/my-page#web_cv' },
       { name: this.$t('my_page.motivation'), route: '/my-page/motivation' }
     ])
+    this.getMotivation()
+  },
+  methods: {
+    async getMotivation() {
+      this.$store.commit(INDEX_SET_LOADING, true)
+      try {
+        const response = await this.$store.dispatch(MOTIVATION_USER)
+        const { data, status_code } = response
+        if (status_code === 200) {
+          this.motivation = data
+        }
+      } catch (e) {
+        this.$store.commit(INDEX_SET_LOADING, false)
+      }
+      this.$store.commit(INDEX_SET_LOADING, false)
+    }
   }
 }
 </script>

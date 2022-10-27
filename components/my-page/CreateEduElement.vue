@@ -22,16 +22,16 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="name" :error="(error.key === 'name') ? error.value : ''">
+                      <el-form-item label="" prop="school_name" :error="(error.key === 'school_name') ? error.value : ''">
                         <el-input
-                          ref="store_name"
-                          v-model="accountForm.name"
+                          ref="school_name"
+                          v-model="accountForm.school_name"
                           :placeholder="$t('education.enter_name')"
-                          name="name"
+                          name="school_name"
                           type="text"
                           tabindex="2"
                           show-word-limit
-                          @focus="resetValidate('name')"
+                          @focus="resetValidate('school_name')"
                         />
                       </el-form-item>
                     </el-col>
@@ -51,12 +51,12 @@
                 <div class="content-input">
                   <el-row class="d-flex period">
                     <el-col :md="9" :sm="24" class="first-name">
-                      <el-form-item label="" prop="period_start" :error="(error.key === 'period_start') ? error.value : ''">
+                      <el-form-item label="" prop="enrollment_period_start" :error="(error.key === 'enrollment_period_start') ? error.value : ''">
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-autocomplete
-                              ref="period_start"
-                              v-model.trim="accountForm.period_start_year"
+                              ref="enrollment_period_start"
+                              v-model.trim="accountForm.enrollment_period_year_start"
                               :placeholder="$t('YYYY')"
                               :fetch-suggestions="queryYear"
                               name="year"
@@ -66,24 +66,24 @@
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('period_start')"
+                              @focus="resetValidate('enrollment_period_start')"
                             />
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col :sm="12" :xs="10" class="birth-month">
                             <el-autocomplete
-                              ref="period_start"
-                              v-model.trim="accountForm.period_start_month"
+                              ref="enrollment_period_start"
+                              v-model.trim="accountForm.enrollment_period_month_start"
                               :placeholder="$t('MM')"
                               :fetch-suggestions="queryMonth"
-                              name="period_start"
+                              name="enrollment_period_start"
                               type="text"
                               :maxlength="2"
                               tabindex="2"
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('period_start')"
+                              @focus="resetValidate('enrollment_period_start')"
                             />
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.month') }}</span>
@@ -92,12 +92,12 @@
                     </el-col>
                     <span class="date-space">~</span>
                     <el-col :md="9" :sm="24" class="birth-year">
-                      <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
+                      <el-form-item label="" prop="enrollment_period_end" :error="(error.key === 'enrollment_period_end') ? error.value : ''">
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-autocomplete
-                              ref="period_end"
-                              v-model.trim="accountForm.period_end_year"
+                              ref="enrollment_period_end"
+                              v-model.trim="accountForm.enrollment_period_year_end"
                               :placeholder="$t('YYYY')"
                               :fetch-suggestions="queryYear"
                               name="birthday"
@@ -107,14 +107,14 @@
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('period_end')"
+                              @focus="resetValidate('enrollment_period_end')"
                             />
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col  :sm="12" :xs="10" class="birth-month">
                             <el-autocomplete
-                              ref="period_end"
-                              v-model.trim="accountForm.period_end_month"
+                              ref="enrollment_period_end"
+                              v-model.trim="accountForm.enrollment_period_month_end"
                               :placeholder="$t('MM')"
                               :fetch-suggestions="queryMonth"
                               name="birthday"
@@ -124,7 +124,7 @@
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('period_end')"
+                              @focus="resetValidate('enrollment_period_end')"
                             />
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.month') }}</span>
@@ -134,13 +134,13 @@
                   </el-row>
                   <el-row class="edu-status">
                     <el-col :md="10" :sm="24" :xs="16">
-                      <el-form-item label="" prop="typeSelect" :error="(error.key === 'typeSelect') ? error.value : ''">
-                        <el-select v-model="accountForm.typeSelect" :placeholder="$t('education.enter_type')">
+                      <el-form-item label="" prop="learning_status_id" :error="(error.key === 'learning_status_id') ? error.value : ''">
+                        <el-select v-model="accountForm.learning_status_id" :placeholder="$t('education.enter_type')">
                           <el-option
                             v-for="item in typeList"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -156,7 +156,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button triple-btn" type="danger" @click.native="submit" >{{ $t('my_page.save') }}</el-button>
+      <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -164,11 +164,19 @@
       @close="closeConfirmModal"
       @handleRouter="handleRouter('/my-page/education')">
     </ConfirmModal>
+    <ConfirmModal
+      v-show="deleteModal"
+      :text="$t('confirm_modal.delete_confirm')"
+      @close="closeDeleteModal">
+    </ConfirmModal>
   </div>
+
 </template>
 
 <script>
 import BorderElement from './BorderElement'
+import { LINKS_MONTH } from '@/constants/store'
+import { EDU_CREATE, INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS } from '@/store/store.const'
 
 export default {
   name: 'EditEduElement',
@@ -178,6 +186,12 @@ export default {
     }
   },
   components: { BorderElement },
+  props: {
+    m_learning_status: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     const validFormLength = (rule, value, callback, message) => {
       if (value && value.length > 255) {
@@ -188,85 +202,85 @@ export default {
     }
     return {
       accountForm: {
-        name: '',
-        date: '',
-        period_start: '',
-        period_end: '',
-        period_start_year: '',
-        period_start_month: '',
-        period_end_year: '',
-        period_end_month: '',
-        typeSelect: '',
+        school_name: '',
+        enrollment_period_start: '',
+        enrollment_period_end: '',
+        enrollment_period_year_start: '',
+        enrollment_period_month_start: '',
+        enrollment_period_year_end: '',
+        enrollment_period_month_end: '',
+        learning_status_id: '',
         errors: {}
       },
-      typeList: [
-        { value: '在学ステータスを選択', label: '在学ステータスを選択' },
-        { value: '卒業', label: '卒業' },
-        { value: '卒業見込み', label: '卒業見込み' },
-        { value: '中退', label: '中退' }
-      ],
+      typeList: [],
       error: {
         key: null,
         value: ''
       },
       accountRules: {
-        name: [
+        school_name: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('education.name') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('education.name') }), trigger: 'blur' }
         ],
-        period_start: [
+        enrollment_period_start: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
         ],
-        period_end: [
+        enrollment_period_end: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
         ],
-        typeSelect: [
+        learning_status_id: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
         ]
       },
       linksYear: [],
       linksMonth: [],
-      linksDay: [],
       index: this.$route.params.id || '',
       confirmModal: false,
       deleteModal: false
     }
   },
   computed: {
-    period_start() {
-      return this.accountForm.period_start_year && this.accountForm.period_start_month
+    enrollment_period_start() {
+      return this.accountForm.enrollment_period_year_start && this.accountForm.enrollment_period_month_start
     },
-    period_end() {
-      return this.accountForm.period_end_year && this.accountForm.period_end_month
+    enrollment_period_end() {
+      return this.accountForm.enrollment_period_year_end && this.accountForm.enrollment_period_month_end
     }
   },
   watch: {
-    'accountForm.period_start_year'() {
-      if (this.accountForm.period_start_year && this.accountForm.period_start_month) {
-        this.accountForm.period_start = 'period_start'
+    m_learning_status() {
+      this.typeList = this.m_learning_status
+    },
+    'accountForm.enrollment_period_year_start'() {
+      if (this.accountForm.enrollment_period_year_start && this.accountForm.enrollment_period_month_start) {
+        this.accountForm.enrollment_period_start = this.accountForm.enrollment_period_year_start + '/' + this.accountForm.enrollment_period_month_start
+        this.resetValidate('enrollment_period_start')
       } else {
-        this.accountForm.period_start = ''
+        this.accountForm.enrollment_period_start = ''
       }
     },
-    'accountForm.period_start_month'() {
-      if (this.accountForm.period_start_month && this.accountForm.period_start_year) {
-        this.accountForm.period_start = 'period_start'
+    'accountForm.enrollment_period_month_start'() {
+      if (this.accountForm.enrollment_period_month_start && this.accountForm.enrollment_period_year_start) {
+        this.accountForm.enrollment_period_start = this.accountForm.enrollment_period_year_start + '/' + this.accountForm.enrollment_period_month_start
+        this.resetValidate('enrollment_period_start')
       } else {
-        this.accountForm.period_start = ''
+        this.accountForm.enrollment_period_start = ''
       }
     },
-    'accountForm.period_end_year'() {
-      if (this.accountForm.period_end_year && this.accountForm.period_end_month) {
-        this.accountForm.period_start = 'period_start'
+    'accountForm.enrollment_period_year_end'() {
+      if (this.accountForm.enrollment_period_year_end && this.accountForm.enrollment_period_month_end) {
+        this.accountForm.enrollment_period_end = this.accountForm.enrollment_period_year_end + '/' + this.accountForm.enrollment_period_month_end
+        this.resetValidate('enrollment_period_end')
       } else {
-        this.accountForm.period_start = ''
+        this.accountForm.enrollment_period_end = ''
       }
     },
-    'accountForm.period_end_month'() {
-      if (this.accountForm.period_end_month && this.accountForm.period_end_year) {
-        this.accountForm.period_end = 'period_end'
+    'accountForm.enrollment_period_month_end'() {
+      if (this.accountForm.enrollment_period_month_end && this.accountForm.enrollment_period_year_end) {
+        this.accountForm.enrollment_period_end = this.accountForm.enrollment_period_year_end + '/' + this.accountForm.enrollment_period_month_end
+        this.resetValidate('enrollment_period_end')
       } else {
-        this.accountForm.period_end = ''
+        this.accountForm.enrollment_period_end = ''
       }
     }
   },
@@ -320,22 +334,54 @@ export default {
       }
     },
     loadAllMonth() {
-      for (let i = 1; i <= 12; i++) {
-        this.linksMonth.push({ value: i.toString() })
-      }
+      this.linksMonth = LINKS_MONTH
     },
-    submit() {
-      this.$refs.accountForm.validate(valid => {
-        if ((this.accountForm.year && !this.accountForm.month) || (!this.accountForm.year && this.accountForm.month)) {
-          this.accountRules.period_start = [
-            { required: true, message: this.$t('validation.required', { _field_: this.$t('qualification.name') }), trigger: 'blur' }
-          ]
-        }
+    update() {
+      this.error = { key: null, value: '' }
+      this.$refs.accountForm.validate(async valid => {
         if (valid) {
-          console.log('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
+          try {
+            await this.$store.commit(INDEX_SET_LOADING, true)
+            const dto = this.accountForm
+            console.log(dto)
+            const response = await this.$store.dispatch(EDU_CREATE, {
+              ...dto
+            })
+            switch (response.status_code) {
+              case 200:
+                await this.$store.commit(INDEX_SET_SUCCESS, {
+                  show: true,
+                  text: response.messages
+                })
+                this.accountForm = {
+                  school_name: '',
+                  enrollment_period_start: '',
+                  enrollment_period_end: '',
+                  enrollment_period_year_start: '',
+                  enrollment_period_month_start: '',
+                  enrollment_period_year_end: '',
+                  enrollment_period_month_end: '',
+                  learning_status_id: '',
+                  errors: {}
+                }
+                break
+              case 422:
+                for (const [key] of Object.entries(response.data)) {
+                  this.error = { key, value: response.data[key][0] }
+                }
+                break
+              default:
+                await this.$store.commit(INDEX_SET_ERROR, {
+                  show: true,
+                  text: response.messages
+                })
+                break
+            }
+            await this.$store.commit(INDEX_SET_LOADING, false)
+          } catch (err) {
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+          }
+          await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
     }
