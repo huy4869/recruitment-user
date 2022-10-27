@@ -30,7 +30,7 @@
 <script>
 import IndexPageElement from '../components/home/IndexPageElement'
 import IndexPageMobileElement from '../components/home/IndexPageMobileElement'
-import { MASTER_GET_DATA, JOB_LIST_NEW_JOBS, JOB_LIST_MOST_VIEW_JOBS, JOB_LIST_RECOMMEND_JOBS } from '../store/store.const'
+import { MASTER_GET_DATA, JOB_LIST_NEW_JOBS, JOB_LIST_MOST_VIEW_JOBS, JOB_LIST_RECOMMEND_JOBS, LOCATION_LIST_MOST_APPLY } from '../store/store.const'
 import { formatInteger } from '../utils/format'
 
 export default {
@@ -44,29 +44,8 @@ export default {
       listJobs: [],
       listMostViewJobs: [],
       listRecommendJobs: [],
-      listSearchEmployment: ['正社員', '派遣社員', '契約社員', ' アルバイト', ' その他'],
-      listSearch: [
-        {
-          'name': 'ヘアの人気エリアで検索',
-          'detail': ['東京', '鹿児島', '千葉', '長崎', '和歌山県', '広島県', '大分県']
-        },
-        {
-          'name': 'ネイル・マツゲの人気エリアで検索',
-          'detail': ['東京', '鹿児島', '千葉', '長崎', '和歌山県', '広島県', '大分県']
-        },
-        {
-          'name': '整体・カイロ・酸素・温浴の人気エリアで検索 ',
-          'detail': ['東京', '鹿児島', '千葉', '長崎', '和歌山県', '広島県', '大分県']
-        },
-        {
-          'name': '美容クリニックの人気エリアで検索',
-          'detail': ['東京', '鹿児島 ', '長崎県', '和歌山県', '広島県', '大分県']
-        },
-        {
-          'name': 'その他の人気エリアで検索',
-          'detail': ['東京', '鹿児島', '千葉', '長崎', '長崎県', '和歌山県', '広島県', '大分県']
-        }
-      ]
+      listSearchEmployment: [],
+      listSearch: []
     }
   },
   async created() {
@@ -79,11 +58,15 @@ export default {
     async getMasterData() {
       const dataResources = [
         'resources[m_job_types]={"model": "MJobType"}',
-        'resources[m_provinces_cities]={}'
+        'resources[m_provinces_cities]={}',
+        'resources[m_work_types]={"model": "MWorkType"}'
       ]
-      const dataResponse = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
-      this.listJobTypes = dataResponse.data.m_job_types
-      this.listProvinceCities = dataResponse.data.m_provinces_cities
+      const dataMasterData = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
+      this.listJobTypes = dataMasterData.data.m_job_types
+      this.listSearchEmployment = dataMasterData.data.m_work_types
+      this.listProvinceCities = dataMasterData.data.m_provinces_cities
+      const dataLocation = await this.$store.dispatch(LOCATION_LIST_MOST_APPLY)
+      this.listSearch = dataLocation.data
     },
     async getDataJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_NEW_JOBS, '')

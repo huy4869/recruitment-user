@@ -6,29 +6,51 @@
       </div>
       <div class="header-content">
         <div class="button-action show-pc">
-          <div>
+          <div @click="changeToLink('/search')">
             <img src="/assets/icon/icon_search.svg" alt="">
             <span>{{ $t('header.search') }}</span>
           </div>
         </div>
         <div class="button-action show-pc">
-          <div>
+          <div class="border-default"></div>
+          <div @click="changeToLink('/notification')">
             <img src="/assets/icon/icon_notification.svg" alt="">
-            <span>{{ $t('header.search') }}</span>
+            <span>{{ $t('header.notification') }}</span>
           </div>
         </div>
-        <div v-if="!loggedIn" class="button-register show-pc" @click="changeToLink('/register')">
-          <span>{{ $t('header.member_register') }}</span>
+        <div v-if="!loggedIn" class="button-action show-pc">
+          <div class="border-default"></div>
+          <div class="form-icon" @click="changeToLink('/register')">
+            <img src="/assets/icon/icon_register.svg" alt="">
+            <span>{{ $t('header.member_register') }}</span>
+          </div>
         </div>
-        <div v-if="!loggedIn" class="button-login">
+        <div v-if="!loggedIn" class="show-sp header-sp">
+          <div class="button-action">
+            <div class="form-icon" @click="changeToLink('/register')">
+              <img src="/assets/icon/icon_register.svg" alt="">
+              <span>{{ $t('header.member_register_mobile') }}</span>
+            </div>
+          </div>
+          <div class="button-action">
+            <div class="form-icon" @click="changeToLink('/login')">
+              <img src="/assets/icon/icon_login_mobile.svg" alt="">
+              <span>{{ $t('login.title') }}</span>
+            </div>
+          </div>
+        </div>
+        <div v-if="!loggedIn" class="button-login show-pc">
           <el-button type="danger" @click="changeToLink('/login')">
+            <img src="/assets/icon/icon_login.svg" alt="">
             {{ $t('login.title') }}
           </el-button>
         </div>
         <div v-if="loggedIn" class="content-user">
-          <img class="avatar" src="/assets/images/user_default.svg" alt="" @click="changeToLink('/my-page')">
-          <span>{{ $t('header.name') }}たろ君</span>
-          <img src="/assets/icon/icon_drop_more.svg" alt="">
+          <div class="d-flex cursor-pointer"  @click="changeToLink('/my-page')">
+            <img class="avatar" :src="user.avatar ? user.avatar : '/assets/images/user_default.svg'" alt="">
+            <span>{{ $t('header.name') + (user.alias_name || user.email)}}</span>
+          </div>
+          <img class="cursor-pointer" src="/assets/icon/icon_drop_more.svg" alt="">
         </div>
       </div>
     </div>

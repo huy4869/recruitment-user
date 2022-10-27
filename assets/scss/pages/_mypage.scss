@@ -198,6 +198,9 @@
       }
     }
   }
+  .top-page-content {
+    margin-bottom: 70px;
+  }
 }
 
 .my-page-schedule-element {
@@ -336,20 +339,18 @@
   color: $color-white;
   padding: 3px 16px;
   border-radius: 4px;
-}
-.status-waiting_interview {
   background-color: $color-blue-2;
 }
-.status-waiting_result {
+.status-2 {
   background-color: $color-orange;
 }
-.status-not_adopted {
+.status-3 {
   background-color: $color-placeholder;
 }
-.status-adoption {
+.status-4 {
   background-color: $color-green;
 }
-.status-cancel {
+.status-5 {
   background-color: $color-placeholder;
 }
 .button-view-all {

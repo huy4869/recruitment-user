@@ -126,5 +126,10 @@ export const actions = {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.post('/contact/create', data), context)
     })
+  },
+  getPercentage(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/profile/percentage'), context)
+    })
   }
 }

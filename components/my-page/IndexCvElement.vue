@@ -10,7 +10,7 @@
           <div class="skill">
             <div class="outer">
               <div class="inner">
-                <div class="number">{{ (success / 6)*100 }}%</div>
+                <div class="number">{{ percentage }}%</div>
               </div>
             </div>
             <svg class="image-percent" xmlns="http://www.w3.org/2000/svg" version="1.1" width="162px" height="162px">
@@ -61,38 +61,41 @@
 
 <script>
 
+import { MY_PAGE_GET_PERCENTAGE } from '../../store/store.const'
+
 export default {
   name: 'IndexCvElement',
   data() {
     return {
-      lastUpdated: '2022年08月22日',
-      success: 3,
+      lastUpdated: '',
+      success: 0,
+      percentage: 0,
       listTab: {
-        basic: {
+        baseInfo: {
           icon: '/assets/icon/001-mypage.svg',
           link: '/my-page/info',
           name: this.$t('my_page.basic_information'),
-          state: true
+          state: false
         },
         qualification: {
           icon: '/assets/icon/002-mypage.svg',
           link: '/my-page/qualification',
           name: this.$t('my_page.qualification'),
-          state: true
+          state: false
         },
-        job_career: {
+        workHistory: {
           icon: '/assets/icon/003-mypage.svg',
           link: '/my-page/job-career',
           name: this.$t('my_page.job_career'),
-          state: true
+          state: false
         },
-        education_background: {
+        percentageUserLearning: {
           icon: '/assets/icon/004-mypage.svg',
           link: '/my-page/education',
           name: this.$t('my_page.education_background'),
           state: false
         },
-        self_pr: {
+        selfPr: {
           icon: '/assets/icon/005-mypage.svg',
           link: '/my-page/self-pr',
           name: this.$t('my_page.self_pr'),
@@ -109,12 +112,34 @@ export default {
   },
   computed: {
     percent() {
-      return 500 * (1 - this.success / 6)
+      return 500 * (1 - this.percentage / 100)
     }
+  },
+  async created() {
+    await this.getDataProfile()
   },
   methods: {
     handleRouter(route) {
       this.$router.push(route)
+    },
+    async getDataProfile() {
+      const dataResponse = await this.$store.dispatch(MY_PAGE_GET_PERCENTAGE)
+      if (dataResponse.status_code === 200) {
+        let total = 0
+        let success = 0
+        for (const tab in this.listTab) {
+          total += (dataResponse.data[tab].percent ? dataResponse.data[tab].percent : 0)
+          if (dataResponse.data[tab].percent === dataResponse.data[tab].total) {
+            success++
+            this.listTab[tab].state = true
+          } else {
+            this.listTab[tab].state = false
+          }
+        }
+        this.percentage = total
+        this.success = success
+        this.lastUpdated = dataResponse.data.updateDateNew
+      }
     }
   }
 }

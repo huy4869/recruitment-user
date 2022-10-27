@@ -31,7 +31,7 @@
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
         <div class="button-detail">
-          <div class="el-button">
+          <div class="el-button" @click="changeToLink('/job/' + job.id)">
             {{ $t('home.view_job_detail') }}
           </div>
         </div>
@@ -63,6 +63,11 @@ export default {
         return ''
       }
       return this.job.salary.min + '~' + this.job.salary.max + this.job.salary.type
+    }
+  },
+  methods: {
+    changeToLink(link) {
+      this.$router.push(link)
     }
   }
 }

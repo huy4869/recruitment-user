@@ -60,7 +60,7 @@
               </div>
               <div class="header-search-right">
                 <el-checkbox-group v-model="condition.employment_status">
-                  <div v-for="(employment, index) in listEmploymentStatus" :key="index" class="checkbox-item">
+                  <div v-for="(employment, index) in listWorkTypes" :key="index" class="checkbox-item">
                     <el-checkbox :label="employment.id">{{ employment.name }}</el-checkbox>
                   </div>
                 </el-checkbox-group>
@@ -96,17 +96,11 @@
               </div>
               <div class="header-search-right">
                 <el-checkbox-group v-model="condition.feature">
-                  <div class="feature-title">※{{ $t('condition.recruitment_feature') }}</div>
-                  <div v-for="(feature, index) in listRecruitmentFeatures" :key="index" class="checkbox-item">
-                    <el-checkbox :label="feature.id">{{ feature.name }}</el-checkbox>
-                  </div>
-                  <div class="feature-title">※{{ $t('condition.company_feature') }}</div>
-                  <div v-for="(feature, index) in listCompanyFeatures" :key="index" class="checkbox-item">
-                    <el-checkbox :label="feature.id">{{ feature.name }}</el-checkbox>
-                  </div>
-                  <div class="feature-title">※{{ $t('condition.store_feature') }}</div>
-                  <div v-for="(feature, index) in listStoreFeatures" :key="index" class="checkbox-item">
-                    <el-checkbox :label="feature.id">{{ feature.name }}</el-checkbox>
+                  <div v-for="(list, key) in listJobFeatures" :key="key">
+                    <div class="feature-title">※{{ list.category_name }}</div>
+                    <div v-for="(feature, index) in list.feature" :key="index" class="checkbox-item">
+                      <el-checkbox :label="feature.id">{{ feature.name }}</el-checkbox>
+                    </div>
                   </div>
                 </el-checkbox-group>
               </div>
@@ -188,7 +182,11 @@
 </template>
 
 <script>
-import { INDEX_SET_TITLE_MENU, MASTER_GET_DATA } from '../store/store.const'
+import {
+  INDEX_SET_TITLE_MENU,
+  JOB_LIST_RECOMMEND_JOBS,
+  MASTER_GET_DATA
+} from '../store/store.const'
 import TitlePageElement from '../components/layout/TitlePageElement'
 import BannerElement from '../components/layout/BannerElement'
 import PaginationElement from '../components/element-ui/PaginationElement'
@@ -207,7 +205,7 @@ export default {
       total: 2500,
       page: 1,
       lastPage: 10,
-      listEmploymentStatus: [
+      listWorkTypes: [
         { id: 1, name: '正社員' },
         { id: 2, name: '派遣社員' },
         { id: 3, name: '契約社員' },
@@ -227,6 +225,7 @@ export default {
         { id: 1, name: '新着順' },
         { id: 2, name: '更新順' }
       ],
+      listJobFeatures: [],
       listRecruitmentFeatures: [
         { id: 1, name: '急募' },
         { id: 2, name: '10人以上募集' },
@@ -405,8 +404,8 @@ export default {
       return text.join('、')
     }
   },
-  created() {
-    this.getRecommendJob()
+  async created() {
+    await this.getJobs()
     this.getMasterData()
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },
@@ -419,28 +418,21 @@ export default {
     },
     getMasterData() {
       const dataResources = [
+        'resources[m_work_types]={"model": "MWorkType"}',
         'resources[m_job_experiences]={"model": "MJobExperience"}',
         'resources[m_job_types]={"model": "MJobType"}',
+        'resources[m_job_features]={}',
         'resources[m_province_districts]={"model": "MProvinceDistrict"}'
       ]
       this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&')).then(res => {
+        this.listWorkTypes = res.data.m_work_types
+        this.listJobFeatures = res.data.m_job_features
         this.listExperiences = res.data.m_job_experiences
       })
     },
-    getRecommendJob() {
-      for (let x = 0; x <= 4; x++) {
-        this.listJobs.push({
-          image: '/assets/images/home_job_default.svg',
-          name: ['★入社祝金100万円支給！/選べる保障/完週2日30万円★', 'オープニングスタッフ募集☆週休２日＋歩合６０％', '業務委託が初めての方でも<週休2日×35万円保障>で安心'][Math.floor(Math.random() * 3)],
-          address: ['〒100-0001東京都千代田区大手町１－２－３', '東京都千代田区', '東京都千代田区'][Math.floor(Math.random() * 3)],
-          store_name: ['虎ノ門店舗 (デモ美容室)', 'デモ美容室 - 虎ノ門店舗', 'デモ美容室 - 虎ノ門店舗'][Math.floor(Math.random() * 3)],
-          salary: ['10~20万/月収', '250~400万/収'][Math.floor(Math.random() * 2)],
-          features: ['正社員', '派遣社員', 'アルバイト', 'その他'],
-          date: '午前9時〜午後5時',
-          work_type: ['ヘア、ネイル・マツゲ、整体・カイロ・酸素・温浴', 'ヘア、ネイル・マツゲ、整体・カイロ・酸素・温浴'][Math.floor(Math.random() * 2)],
-          place: ['https://meet.google.com/gpg-ftjc-demo', '〒1000001 東京都千代田区千代田１－２－４', '01234567890'][Math.floor(Math.random() * 3)]
-        })
-      }
+    async getJobs() {
+      const dataResponse = await this.$store.dispatch(JOB_LIST_RECOMMEND_JOBS, '')
+      this.listJobs = dataResponse.data
     },
     changeDistrict(district) {
       if (!this.districts.includes(district.id)) {

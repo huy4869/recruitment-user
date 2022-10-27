@@ -44,7 +44,7 @@ export default {
     await this.getDataNotifications()
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },
-      { name: this.$t('page.notification_history'), route: '/notification-history' }
+      { name: this.$t('page.notification_history'), route: '/notification' }
     ])
   },
   methods: {
@@ -53,9 +53,11 @@ export default {
     },
     async getDataNotifications() {
       const dataResponse = await this.$store.dispatch(NOTIFICATION_LIST, '')
-      this.listNotifications = dataResponse.data.data
-      this.page = dataResponse.data.current_page
-      this.lastPage = dataResponse.data.total_page
+      if (dataResponse.data) {
+        this.listNotifications = dataResponse.data.data
+        this.page = dataResponse.data.current_page
+        this.lastPage = dataResponse.data.total_page
+      }
     }
   }
 }

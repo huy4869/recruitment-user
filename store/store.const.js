@@ -28,6 +28,7 @@ export const CHAT_SET_UN_READ_MESSAGE = 'chat/setUnreadMessage'
 // my_page
 export const MY_PAGE_SET_STATE_PAGE = 'my_page/setStatePage'
 export const MY_PAGE_SET_SHOW_DETAIL_MESSAGE = 'my_page/setShowDetailMessage'
+export const MY_PAGE_GET_PERCENTAGE = 'my_page/getPercentage'
 
 export const USER_BASIC_INFO = 'my_page/getBasicInfo'
 export const USER_UPDATE_BASIC_INFO = 'my_page/updateBasicInfo'
@@ -57,6 +58,7 @@ export const INQUIRY_CREATE = 'my_page/createInquiry'
 export const APPLICATION_LIST = 'application/getListApplication'
 export const APPLICATION_LIST_APPLIED = 'application/getListApplicationApplied'
 export const APPLICATION_LIST_WAITING_INTERVIEW = 'application/getListApplicationWaitingInterview'
+export const APPLICATION_CANCEL_APPLICATION = 'application/postCancelApplication'
 
 // chat
 export const CHAT_LIST = 'chat/listChat'
@@ -67,5 +69,8 @@ export const JOB_LIST_NEW_JOBS = 'job/listNewJobs'
 export const JOB_LIST_MOST_VIEW_JOBS = 'job/listMostViewJobs'
 export const JOB_LIST_RECOMMEND_JOBS = 'job/listRecommendJobs'
 
-// chat
+// notification
 export const NOTIFICATION_LIST = 'notification/listNotification'
+
+// location
+export const LOCATION_LIST_MOST_APPLY = 'location/listLocationMostApply'

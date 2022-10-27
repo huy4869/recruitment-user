@@ -9,7 +9,7 @@ export const mutations = {}
 export const actions = {
   listFavorite(context, query) {
     return new Promise((resolve, reject) => {
-      handleApi(resolve, reject, this.$axios.get('/job/favorite-job'), context)
+      handleApi(resolve, reject, this.$axios.get('/favorite-job'), context)
     })
   },
   listNewJobs(context, query) {

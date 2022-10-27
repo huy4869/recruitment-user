@@ -16,21 +16,27 @@
       font-weight: 700;
       font-size: 16px;
       line-height: 24px;
-      padding-right: 60px;
       .button-action {
-        margin-right: 50px;
         display: flex;
+        position: relative;
         span {
-          padding: 4px 0 2px 6px;
+          margin-left: 6px;
+          font-size: 16px;
+          line-height: 24px;
         }
         div {
           display: flex;
-          margin: 26px 0;
+          margin: auto 0;
           cursor: pointer;
         }
         img {
-          width: 28px;
-          height: 28px;
+          width: 24px;
+          height: 24px;
+        }
+        .border-default {
+          border: 1px solid $color-placeholder;
+          height: 24px;
+          margin: auto 14px;
         }
       }
       .button-register {
@@ -44,14 +50,24 @@
         }
       }
       .button-login {
-        margin: 16px 64px 16px 0;
+        margin: 16px 60px 16px 40px;
         button {
-          padding: 12px 28px;
+          padding: 8px 12px;
+          img {
+            margin-right: 6px;
+          }
+          span {
+            display: flex;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+          }
         }
       }
       .content-user {
         display: flex;
         padding: 22px 0;
+        margin-left: 40px;
         span {
           font-weight: 700;
           font-size: 16px;

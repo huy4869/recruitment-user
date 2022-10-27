@@ -11,7 +11,7 @@
       <div class="job-description">
         <div class="job-info">
           <img src="/assets/icon/icon_place.svg" alt="">
-          <span>{{ job.address.address }}</span>
+          <span>{{ job.address }}</span>
         </div>
         <div class="job-info">
           <img src="/assets/icon/icon_save.svg" alt="">
@@ -36,7 +36,7 @@
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div class="button-detail">
-            <div class="el-button">
+            <div class="el-button" @click="changeToLink('/job/' + job.id)">
               {{ $t('home.view_job_detail') }}
             </div>
           </div>
@@ -59,16 +59,15 @@ export default {
       return this.job.job_types.map((list) => list.name).join('、')
     },
     showDate() {
-      if (this.job.work_time === undefined) {
-        return ''
-      }
-      return this.job.work_time.start + '〜' + this.job.work_time.end
+      return this.job.start_work_time + '〜' + this.job.end_work_time
     },
     showSalary() {
-      if (this.job.salary === undefined) {
-        return ''
-      }
-      return this.job.salary.min + '~' + this.job.salary.max + this.job.salary.type
+      return this.job.salary_min + '~' + this.job.salary_max + this.job.salary_type
+    }
+  },
+  methods: {
+    changeToLink(link) {
+      this.$router.push(link)
     }
   }
 }

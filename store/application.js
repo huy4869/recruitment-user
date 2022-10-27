@@ -1,4 +1,4 @@
-import {handleApi} from "../utils/handleApi";
+import { handleApi } from '../utils/handleApi'
 
 export const state = () => ({})
 
@@ -20,6 +20,11 @@ export const actions = {
   getListApplicationWaitingInterview(context, resource) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.get(`/applications/waiting-interview?${resource}`), context)
+    })
+  },
+  postCancelApplication(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/applications/cancel/${data}`), context)
     })
   }
 }
