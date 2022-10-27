@@ -210,80 +210,6 @@
           <div class="find-other-job-item" v-html="listFindOtherJobs.join('<span>|</span>')"></div>
         </div>
       </div>
-      <el-dialog class="form-dialog-apply" :title="$t('job.set_date_time_interview')" :visible.sync="applyDialog" width="84%" top="5vh">
-        <div>
-          <div class="header-search">
-            <div class="search-apply">
-              <div class="header-search-left">
-                <span>{{ $t('job.preferred_date') }}</span>
-              </div>
-              <div class="header-search-right">
-                <el-select v-model="formApply.date" placeholder="Select">
-                  <el-option
-                    v-for="item in listDate"
-                    :key="item"
-                    :label="item"
-                    :value="item">
-                  </el-option>
-                </el-select>
-              </div>
-            </div>
-            <div class="search-work-location">
-              <div class="header-search-left">
-                <span>{{ $t('job.desired_time') }}</span>
-              </div>
-              <div class="header-search-right">
-                <el-select v-model="formApply.time" placeholder="Select">
-                  <el-option
-                    v-for="item in listTime"
-                    :key="item"
-                    :label="item"
-                    :value="item">
-                  </el-option>
-                </el-select>
-              </div>
-            </div>
-          </div>
-          <div class="interview-time">
-            {{ $t('job.interview_time') }}: {{ formApply.date + ' ' + formApply.time }}
-          </div>
-          <div class="form-change-method">
-            <div class="title-form">
-              <span>{{ $t('job.choose_preferred_method') }}</span>
-            </div>
-            <div class="method-content">
-              <el-radio-group v-model="formApply.method">
-                <el-radio v-for="(method, index) in listMethod" :key="index" :label="method.id">{{ method.value }}</el-radio>
-              </el-radio-group>
-            </div>
-            <div class="method-note">
-              <span class="danger">※</span><span>{{ $t('job.note_choose_method') }}</span>
-            </div>
-          </div>
-          <div class="form-question">
-            <div class="title-form">
-              <span>{{ $t('job.question_request') }}</span>
-            </div>
-            <div class="question-note">({{ $t('job.question_request_note') }})</div>
-            <div class="question-content">
-              <el-input
-                type="textarea"
-                :rows="4"
-                :placeholder="$t('job.enter_your_question')"
-                v-model="formApply.question">
-              </el-input>
-            </div>
-          </div>
-        </div>
-        <div slot="footer" class="dialog-footer">
-          <el-button type="primary" plain>
-            {{ $t('button.close_up') }}
-          </el-button>
-          <el-button type="danger">
-            {{ $t('button.confirm') }}
-          </el-button>
-        </div>
-      </el-dialog>
       <el-dialog class="form-dialog-apply form-dialog-about" :title="$t('job.about_job')" :visible.sync="aboutDialog" width="84%" top="5vh">
         <div>
           <div class="interview-time">
@@ -333,6 +259,7 @@
         </div>
       </el-dialog>
     </div>
+    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false"></FormApplyJobElement>
   </div>
 </template>
 
@@ -340,6 +267,7 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import FormApplyJobElement from '../../components/element-ui/FormApplyJobElement'
 import HomeJobElement from '../../components/home/HomeJobElement'
 import RecommendJobElement from '../../components/home/RecommendJobElement'
 import RecentJobMobileElement from '../../components/home/RecentJobMobileElement'
@@ -348,7 +276,7 @@ import { INDEX_SET_TITLE_MENU } from '../../store/store.const'
 
 export default {
   name: 'JobDetailPage',
-  components: { TitlePageElement, VueSlickCarousel, HomeJobElement, RecommendJobElement, RecentJobMobileElement },
+  components: { TitlePageElement, VueSlickCarousel, HomeJobElement, RecommendJobElement, RecentJobMobileElement, FormApplyJobElement },
   data() {
     return {
       applyDialog: false,

@@ -6,22 +6,22 @@
     </div>
     <div class="schedule-content">
       <div class="schedule-image">
-        <img :src="schedule.image" alt="">
+        <img :src="schedule.job_banner" alt="">
       </div>
       <div class="schedule-description">
         <div>
           <span class="bold">{{ $t('schedule.date') }}</span>
-          <span class="desc-date">{{ schedule.date }}</span><span class="desc-state">{{ schedule.date_state }}</span>
+          <span class="desc-date">{{ schedule.interview_date }}</span><span v-if="schedule.interview_date_status" class="desc-state">{{ schedule.interview_date_status }}</span>
         </div>
         <div>
-          <span class="bold">{{ $t('schedule.method') }}</span><span>{{ schedule.method }}</span>
+          <span class="bold">{{ $t('schedule.method') }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.method }}</span>
         </div>
         <div>
-          <span class="bold">{{ $t('schedule.place') }}</span><span>{{ schedule.place }}</span>
+          <span v-if="schedule.interview_approach" class="bold">{{ schedule.interview_approach.approach_label }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.approach }}</span>
         </div>
         <div class="schedule-button">
-          <el-button :loading="loading" :disabled="schedule.change_date_state" type="danger">{{ $t('schedule.change') }}</el-button>
-          <el-button :loading="loading">{{ $t('button.cancel') }}</el-button>
+          <el-button :loading="loading" :disabled="!schedule.can_change_interview" type="danger" @click="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
+          <el-button :loading="loading" :disabled="!schedule.can_cancel" @click="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
         </div>
       </div>
     </div>
@@ -36,6 +36,14 @@ export default {
   data() {
     return {
       loading: false
+    }
+  },
+  methods: {
+    cancelSchedule(id) {
+      this.$emit('cancelSchedule', id)
+    },
+    editApply(id) {
+      this.$emit('editApply', id)
     }
   }
 }

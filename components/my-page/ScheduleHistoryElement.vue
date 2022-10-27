@@ -12,32 +12,32 @@
     </div>
     <div class="schedule-content">
       <div class="schedule-image">
-        <img :src="schedule.image" alt="">
+        <img :src="schedule.job_banner" alt="">
       </div>
-      <div v-if="(schedule.status !== undefined) && showStatus" class="schedule-status">
-        <div :class="['schedule-button-status', 'status-' + schedule.status]">
-          {{ $t('schedule.status.' + schedule.status) }}
+      <div v-if="(schedule.interview_status_id !== undefined) && showStatus" class="schedule-status">
+        <div :class="['schedule-button-status', 'status-' + schedule.interview_status_id]">
+          {{ schedule.interview_status_name }}
         </div>
       </div>
       <div class="schedule-description">
         <div>
-          <span class="bold">{{ $t('schedule.date') }}</span><span>{{ schedule.date }}</span>
+          <span class="bold">{{ $t('schedule.date') }}</span><span>{{ schedule.interview_date }}</span>
         </div>
         <div>
-          <span class="bold">{{ $t('schedule.method') }}</span><span>{{ schedule.method }}</span>
+          <span class="bold">{{ $t('schedule.method') }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.method }}</span>
         </div>
         <div>
-          <span class="bold">{{ $t('schedule.place') }}</span><span>{{ schedule.place }}</span>
+          <span class="bold" v-if="schedule.interview_approach">{{ schedule.interview_approach.approach_label }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.approach }}</span>
           <div v-if="showStatus" class="open-google-map">
             <div v-if="schedule.google_map" class="show-button-google-map">
-              <img src="/assets/icon/icon_arrow_secondary.svg" alt="">
+              <img src="/assets/icon/icon_google_map.svg" alt="">
               <span>{{ $t('schedule.open_google_map') }}</span>
             </div>
           </div>
         </div>
         <div class="schedule-button">
-          <el-button v-if="schedule.change_date_state" :loading="loading" :disabled="schedule.change_date_state" type="danger">{{ $t('schedule.change') }}</el-button>
-          <el-button :loading="loading">{{ $t('button.cancel') }}</el-button>
+          <el-button v-if="schedule.can_change_interview" :loading="loading" type="danger" @click="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
+          <el-button v-if="schedule.can_cancel" :loading="loading" @click="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
         </div>
       </div>
     </div>
@@ -45,13 +45,20 @@
 </template>
 
 <script>
-
 export default {
   name: 'ScheduleHistoryElement',
   props: ['schedule', 'showStatus'],
   data() {
     return {
       loading: false
+    }
+  },
+  methods: {
+    cancelSchedule(id) {
+      this.$emit('cancelSchedule', id)
+    },
+    editApply(id) {
+      this.$emit('editApply', id)
     }
   }
 }

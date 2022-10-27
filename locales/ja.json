@@ -80,6 +80,7 @@
     "search": "求人を探す",
     "notification": "通知",
     "member_register": "会員登録(無料)",
+    "member_register_mobile": "会員登録",
     "name": "こんにちは、"
   },
   "page": {
@@ -333,7 +334,8 @@
     "search_by_employment": "雇用形態から探す",
     "job_favorite": "お気に入り",
     "view_job_detail": "詳細を見る",
-    "most_popular_job": "よく見られている人気のお仕事"
+    "most_popular_job": "よく見られている人気のお仕事",
+    "text_form_search": "の人気エリアで検索"
   },
   "inquiry": {
     "form" : "お問い合わせフォーム",

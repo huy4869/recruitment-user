@@ -129,7 +129,7 @@
   }
   .index-home-page {
     .index-home-content {
-      padding-left: 24px;
+      padding: 58px 12px;
       .form-list-job {
         .search-from-popular {
           .search-from-popular-content {
@@ -142,6 +142,14 @@
                 display: inline-block;
               }
             }
+          }
+        }
+      }
+      .form-list-new {
+        .form-list-new-social {
+          img {
+            width: 40px;
+            height: 40px;
           }
         }
       }
@@ -225,6 +233,15 @@
       .header-content {
         .button-action {
           margin-right: 10px;
+          .border-default {
+            margin: auto 4px;
+          }
+        }
+        .content-user {
+          margin-left: 0;
+        }
+        .button-login {
+          margin: 16px;
         }
       }
     }
@@ -498,24 +515,61 @@
 
     .container-footer {
       .footer-item {
-        display: block;
+        background: $color-white;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: 3px;
         height: auto;
-
+        width: calc(100% - 2px);
         div {
-          display: inline-block;
+          display: block;
+          background: $color-blue;
+          color: $color-white;
           text-align: center;
-          margin: 14px;
           font-weight: 500;
-          font-size: 14px;
-          line-height: 22px;
+          font-size: 13px;
+          line-height: 20px;
+          padding: 8px 0 10px;
+          margin: 0;
         }
 
         .show-sp-center {
-          width: 40%;
-          text-align: left;
-
-          &:first-child {
-            text-align: right;
+          width: 100%;
+        }
+      }
+    }
+    .footer-mobile {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: $color-white;
+      border-top: 1px solid $color-text-primary;
+      z-index: 3;
+      .content-button {
+        display: flex;
+        justify-content: space-between;
+        padding: 17px 20px 17px 12px;
+        .button-home {
+          padding: 6px 10px;
+          display: flex;
+          background: $color-primary;
+          border-radius: 18px;
+          span {
+            margin: 2px 0 2px 2px;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 20px;
+            color: $color-text-primary;
+          }
+        }
+        .list-icon {
+          width: 55%;
+          .button-footer {
+            img {
+              margin-top: 5px;
+              width: 24px;
+              height: 24px;
+            }
           }
         }
       }
@@ -550,9 +604,56 @@
     }
   }
   .header-common {
+    height: 50px;
     .header-container {
       .header-logo {
-        margin: 12px;
+        margin: 9px 12px;
+        img {
+          height: 28px;
+        }
+      }
+      .header-content {
+        height: 50px;
+        .content-user {
+          padding: 9px 14px 15px 0;
+          .avatar {
+            width: 28px;
+            height: 28px;
+          }
+          img {
+            margin: 2px 0;
+          }
+          span {
+            white-space: normal;
+            overflow: hidden;
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            padding:  0;
+            font-size: 13px;
+            line-height: 20px;
+          }
+        }
+        .header-sp {
+          display: flex;
+        }
+        .button-action {
+          border-left: 1px solid $border-default;
+          padding: 1px 8px 7px;
+          margin: 0;
+          .form-icon {
+            display: flex;
+            flex-direction: column;
+            img {
+              margin:0 auto;
+            }
+            span {
+              font-size: 13px;
+              line-height: 20px
+            }
+          }
+        }
       }
     }
   }
@@ -1263,7 +1364,7 @@
         }
 
         .form-search-banner {
-          padding: 0;
+          padding: 12px 0 0;
           margin: auto;
           bottom: -104px;
           position: relative;
@@ -1298,6 +1399,18 @@
                   justify-content: center;
                 }
               }
+            }
+          }
+
+          .all-job {
+            span {
+              font-size: 14px;
+              line-height: 22px;
+              padding-top: 0;
+            }
+            .all-subject {
+              font-size: 14px;
+              line-height: 22px;
             }
           }
         }
@@ -1562,13 +1675,8 @@
   }
   .home-job-element {
     .job-image {
-      .show-new {
-      }
-
-      .background-new {
-      }
-
       img {
+        height: 234px;
       }
     }
 

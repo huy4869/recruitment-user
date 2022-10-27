@@ -135,7 +135,7 @@
       <div class="form-popular">
         <div v-for="(item, index) in listSearchEmployment" :key="index" class="form-popular-item">
           <div class="form-item-title">
-            <span>{{ item }}</span>
+            <span>{{ item.name }}</span>
           </div>
         </div>
       </div>

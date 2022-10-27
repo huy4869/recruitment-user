@@ -57,6 +57,7 @@
               font-size: 16px;
               line-height: 24px;
               color: $color-text-primary;
+              cursor: pointer;
             }
           }
           .form-select {
@@ -347,6 +348,7 @@
                 font-size: 12px;
                 line-height: 16px;
                 margin-left: 4px;
+                word-break: break-word;
               }
             }
           }
@@ -404,6 +406,8 @@
     }
     img {
       width: 100%;
+      height: 180px;
+      object-fit: cover;
     }
   }
   .job-content {
@@ -520,6 +524,8 @@
     .job-image {
       img {
         width: 345px;
+        height: 230px;
+        object-fit: cover;
       }
     }
     .job-description {

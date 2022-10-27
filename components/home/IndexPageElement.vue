@@ -11,7 +11,7 @@
           <div class="form-select-search">
             <div class="select-title">
               <div>{{ $t('home.find_a_job') }}</div>
-              <div class="choose-job" @click="changeToLink('/search')">{{ $t('home.search_by_condition') }}</div>
+              <div class="choose-job" @click="changeToSearch(false)">{{ $t('home.search_by_condition') }}</div>
             </div>
             <div class="form-select">
               <div class="form-condition">
@@ -39,7 +39,7 @@
                 </el-select>
               </div>
               <div class="button-filter">
-                <button type="button" class="el-button el-button--danger" @click="changeToLink('/search')">
+                <button type="button" class="el-button el-button--danger" @click="changeToSearch(true)">
                   <img src="/assets/icon/icon_search_button.svg" alt="">
                   <span>{{ $t('common.search') }}</span>
                 </button>
@@ -61,7 +61,7 @@
               </div>
               <div class="all-job">{{ totalJob }}{{ $t('common.subject') }}</div>
             </div>
-            <div class="button-see-all">
+            <div class="button-see-all" @click="changeToSearch(false)">
               <span>{{ $t('home.see_all_job') }}</span>
               <img src="/assets/icon/icon_arrow.svg" alt="">
             </div>
@@ -80,7 +80,7 @@
               <img src="/assets/images/icon_home_sub_title1.svg" alt="">
               {{ $t('home.recommended_job') }}
             </div>
-            <div class="button-see-all">
+            <div class="button-see-all" @click="changeToSearch(false)">
               <span>{{ $t('home.see_all_job') }}</span>
               <img src="/assets/icon/icon_arrow.svg" alt="">
             </div>
@@ -100,13 +100,13 @@
           </div>
           <div class="search-from-popular-content">
             <div v-for="(search, index) in listSearch" :key="index" class="search-from-popular-item">
-              <div class="search-from-popular-button">{{ search.name }}</div>
+              <div class="search-from-popular-button">{{ index + $t('home.text_form_search') }}</div>
               <div class="search-next">
                 <img src="/assets/icon/icon_next_search.svg" alt="">
               </div>
               <div class="search-list-category">
-                <div v-for="(name, key) in search.detail" :key="key">
-                  {{ name }}
+                <div v-for="(name, key) in search" :key="key">
+                  {{ name.name }}
                 </div>
               </div>
             </div>
@@ -121,8 +121,8 @@
           </div>
           <div class="search-by-employment-content">
             <div class="search-by-employment-category">
-              <div v-for="(name, key) in listSearchEmployment" :key="key">
-                {{ name }}
+              <div v-for="(search, key) in listSearchEmployment" :key="key">
+                {{ search.name }}
               </div>
             </div>
           </div>
@@ -147,7 +147,7 @@
             </div>
           </div>
         </div>
-        <div class="form-list-new-see-all">
+        <div class="form-list-new-see-all" @click="changeToSearch(false)">
           <div class="button-see-all">
             <span>{{ $t('home.see_all_job') }}</span>
             <img src="/assets/icon/icon_arrow_secondary.svg" alt="">
@@ -192,8 +192,19 @@ export default {
     }
   },
   methods: {
-    changeToLink(link) {
-      this.$router.push(link)
+    changeToSearch(filter) {
+      if (filter) {
+        const condition = []
+        if (this.provinceCity) {
+          condition.push('province_city=' + this.provinceCity)
+        }
+        if (this.jobType) {
+          condition.push('job_type=' + this.jobType)
+        }
+        this.$router.push('/search?' + condition.join('&'))
+      } else {
+        this.$router.push('/search')
+      }
     }
   }
 }
