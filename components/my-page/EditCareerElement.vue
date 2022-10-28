@@ -174,8 +174,8 @@
                  <div class="content-input">
                    <el-row class="">
                      <el-col :md="10" :sm="24">
-                       <el-form-item label="" prop="occupationSelect" :error="(error.key === 'occupation') ? error.value : ''">
-                         <el-select v-model="accountForm.occupationSelect" :placeholder="$t('career.enter_occupation')">
+                       <el-form-item label="" prop="job_type_name" :error="(error.key === 'job_type_name') ? error.value : ''">
+                         <el-select v-model="accountForm.job_type_name" :placeholder="$t('career.enter_occupation')">
                            <el-option
                              v-for="item in m_job_types"
                              :key="item.id"
@@ -185,14 +185,13 @@
                          </el-select>
                        </el-form-item>
                      </el-col>
-                     <el-col v-if="accountForm.occupationSelect === 6" :md="20" :sm="24">
+                     <el-col v-if="accountForm.job_type_name === 'other'" :md="20" :sm="24">
                        <div class="text-bold">{{ $t('career.other_occupation') }}</div>
                        <el-form-item label="" prop="other_occupation" :error="(error.key === 'other_occupation') ? error.value : ''">
-                         <el-autocomplete
+                         <el-input
                            ref="other_occupation"
                            v-model="accountForm.other_occupation"
                            :placeholder="$t('career.enter_other_occupation')"
-                           :fetch-suggestions="queryOccupation"
                            name="other_occupation"
                            type="text"
                            tabindex="2"
@@ -239,8 +238,8 @@
                  <div class="content-input">
                    <el-row class="">
                      <el-col :md="10" :sm="24">
-                       <el-form-item label="" prop="status" :error="(error.key === 'status') ? error.value : ''">
-                         <el-select v-model="accountForm.status" :placeholder="$t('career.enter_emp_status')">
+                       <el-form-item label="" prop="work_type_name" :error="(error.key === 'work_type_name') ? error.value : ''">
+                         <el-select v-model="accountForm.work_type_name" :placeholder="$t('career.enter_emp_status')">
                            <el-option
                              v-for="item in m_work_types"
                              :key="item.id"
@@ -250,14 +249,13 @@
                          </el-select>
                        </el-form-item>
                      </el-col>
-                     <el-col v-if="accountForm.status === 5" :md="20" :sm="24">
+                     <el-col v-if="accountForm.work_type_name === 'other'" :md="20" :sm="24">
                        <div class="text-bold">{{ $t('career.other_emp_status') }}</div>
                        <el-form-item label="" prop="other_status" :error="(error.key === 'other_status') ? error.value : ''">
-                         <el-autocomplete
+                         <el-input
                            ref="other_status"
                            v-model="accountForm.other_status"
                            :placeholder="$t('career.enter_other_emp_status')"
-                           :fetch-suggestions="queryStatus"
                            name="other_status"
                            type="text"
                            tabindex="2"
@@ -342,7 +340,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button triple-btn">{{ $t('my_page.remove') }}</el-button>
+      <el-button class="card-button triple-btn" @click="showDeleteModal">{{ $t('my_page.remove') }}</el-button>
       <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
@@ -350,6 +348,13 @@
       :text="$t('confirm_modal.back_confirm')"
       @close="closeConfirmModal"
       @handleRouter="handleRouter('/my-page/job-career')">
+    </ConfirmModal>
+    <ConfirmModal
+      v-show="deleteModal"
+      :text="$t('confirm_modal.delete_confirm')"
+      @close="closeDeleteModal"
+      @handleRouter="handleDelete(job.id)"
+    >
     </ConfirmModal>
   </div>
 </template>
@@ -359,7 +364,7 @@ import BorderElement from './BorderElement'
 import {
   INDEX_SET_ERROR,
   INDEX_SET_LOADING,
-  INDEX_SET_SUCCESS,
+  INDEX_SET_SUCCESS, WORK_HISTORY_DELETE,
   WORK_HISTORY_UPDATE
 } from '@/store/store.const'
 import { LINKS_MONTH } from '@/constants/store'
@@ -376,7 +381,7 @@ export default {
       type: Object,
       default: () => {}
     },
-    m_learning_status: {
+    m_job_types: {
       type: Array,
       default: () => []
     },
@@ -420,9 +425,9 @@ export default {
         company_name: '',
         period_start: '',
         period_end: '',
-        occupationSelect: '',
-        position_offices: '',
-        status: '',
+        job_type_name: '',
+        position_offices: [],
+        work_type_name: '',
         other_status: '',
         other_occupation: '',
         period_year_end: '',
@@ -461,10 +466,10 @@ export default {
         period_end: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.period_start') }), trigger: 'blur' }
         ],
-        status: [
+        work_type_name: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.status') }), trigger: 'blur' }
         ],
-        occupationSelect: [
+        job_type_name: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.occupation') }), trigger: 'blur' }
         ],
         position_offices: [
@@ -477,7 +482,8 @@ export default {
       linksYear: [],
       linksMonth: [],
       index: this.$route.params.id || '',
-      clonedOccupation: []
+      clonedOccupation: [],
+      deleteModal: false
     }
   },
   computed: {
@@ -514,12 +520,10 @@ export default {
       for (const item in this.job) {
         this.accountForm[item] = this.job[item]
       }
-      this.accountForm.occupationSelect = this.job.job_types[0].name
-      this.accountForm.status = this.job.work_types[0].name
     },
     m_job_types() {
       this.m_job_types.forEach(element => {
-        if (element.name !== 'その他') {
+        if (element.id !== 'other') {
           this.linksOccupation.push({
             value: element.name
           })
@@ -528,7 +532,7 @@ export default {
     },
     m_work_types() {
       this.m_work_types.forEach(element => {
-        if (element.name !== 'その他') {
+        if (element.id !== 'other') {
           this.linksStatus.push({
             value: element.name
           })
@@ -556,6 +560,12 @@ export default {
     },
     closeConfirmModal() {
       this.confirmModal = false
+    },
+    showDeleteModal() {
+      this.deleteModal = true
+    },
+    closeDeleteModal() {
+      this.deleteModal = false
     },
     queryOccupation(queryString, cb) {
       const links = this.linksOccupation
@@ -611,28 +621,14 @@ export default {
             const dto = this.accountForm
             dto.period_check = this.accountForm.period_check ? 0 : 1
             dto.period_end = dto.period_check === 0 ? dto.period_end : ''
-            if (typeof (this.accountForm.occupationSelect) === 'number') {
-              dto.job_types = [this.m_job_types[this.accountForm.occupationSelect - 1]]
-            }
             if (this.accountForm.other_occupation) {
-              dto.job_types = [
-                {
-                  'name': this.accountForm.other_occupation
-                }
-              ]
-            }
-            if (typeof (this.accountForm.status) === 'number') {
-              dto.work_types = [this.m_job_types[this.accountForm.status - 1]]
+              dto.job_type_name = this.accountForm.other_occupation
             }
             if (this.accountForm.other_status) {
-              dto.work_types = [
-                {
-                  'name': this.accountForm.other_status
-                }
-              ]
+              dto.work_type_name = this.accountForm.other_status
             }
             const response = await this.$store.dispatch(WORK_HISTORY_UPDATE, {
-              id: this.$route.params.id,
+              id: this.$route.query.id,
               data: dto
             })
             if (response.status_code === 200) {
@@ -653,6 +649,31 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    async handleDelete(id) {
+      try {
+        await this.$store.commit(INDEX_SET_LOADING, true)
+        const response = await this.$store.dispatch(WORK_HISTORY_DELETE, id)
+        switch (response.status_code) {
+          case 200:
+            await this.$store.commit(INDEX_SET_SUCCESS, {
+              show: true,
+              text: response.messages
+            })
+            this.$router.push('/my-page/job-career')
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: response.messages
+            })
+            break
+        }
+        await this.$store.commit(INDEX_SET_LOADING, false)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }

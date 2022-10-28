@@ -168,7 +168,9 @@
     <ConfirmModal
       v-show="deleteModal"
       :text="$t('confirm_modal.delete_confirm')"
-      @close="closeDeleteModal">
+      @close="closeDeleteModal"
+      @handleRouter="handleDelete(edu.id)"
+    >
     </ConfirmModal>
   </div>
 </template>
@@ -176,7 +178,7 @@
 <script>
 import BorderElement from './BorderElement'
 import { LINKS_MONTH } from '@/constants/store'
-import { INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS, EDU_UPDATE } from '@/store/store.const'
+import { INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS, EDU_UPDATE, EDU_DELETE } from '@/store/store.const'
 
 export default {
   name: 'EditEduElement',
@@ -185,6 +187,7 @@ export default {
       return value.toString().replace(/[A-Za-z0-9]/g, function(s) { return String.fromCharCode(s.charCodeAt(0) + 0xFEE0) })
     }
   },
+  components: { BorderElement },
   props: {
     edu: {
       type: Object,
@@ -195,7 +198,6 @@ export default {
       default: () => []
     }
   },
-  components: { BorderElement },
   data() {
     const validFormLength = (rule, value, callback, message) => {
       if (value && value.length > 255) {
@@ -353,7 +355,7 @@ export default {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
             const response = await this.$store.dispatch(EDU_UPDATE, {
-              id: this.$route.params.id,
+              id: this.$route.query.id,
               data: dto
             })
             switch (response.status_code) {
@@ -382,6 +384,31 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    async handleDelete(id) {
+      try {
+        await this.$store.commit(INDEX_SET_LOADING, true)
+        const response = await this.$store.dispatch(EDU_DELETE, id)
+        switch (response.status_code) {
+          case 200:
+            await this.$store.commit(INDEX_SET_SUCCESS, {
+              show: true,
+              text: response.messages
+            })
+            this.$router.push('/my-page/education')
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: response.messages
+            })
+            break
+        }
+        await this.$store.commit(INDEX_SET_LOADING, false)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }

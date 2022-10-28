@@ -112,7 +112,8 @@
       v-show="deleteModal"
       :text="$t('confirm_modal.delete_confirm')"
       @close="closeDeleteModal"
-      @handleRouter="handleRouter('/my-page/qualification')">
+      @handleRouter="handleDelete(qualification.id)"
+      >
     </ConfirmModal>
   </div>
 </template>
@@ -122,7 +123,7 @@ import BorderElement from './BorderElement'
 import {
   INDEX_SET_ERROR,
   INDEX_SET_LOADING,
-  INDEX_SET_SUCCESS,
+  INDEX_SET_SUCCESS, WORK_QUALIFICATION_DELETE,
   WORK_QUALIFICATION_UPDATE
 } from '@/store/store.const'
 import { LINKS_MONTH } from '@/constants/store'
@@ -271,7 +272,7 @@ export default {
               new_issuance_date: this.accountForm.year + '/' + this.accountForm.month
             }
             const response = await this.$store.dispatch(WORK_QUALIFICATION_UPDATE, {
-              id: this.$route.params.id,
+              id: this.$route.query.id,
               data: dto
             })
             switch (response.status_code) {
@@ -300,6 +301,31 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    async handleDelete(id) {
+      try {
+        await this.$store.commit(INDEX_SET_LOADING, true)
+        const response = await this.$store.dispatch(WORK_QUALIFICATION_DELETE, id)
+        switch (response.status_code) {
+          case 200:
+            await this.$store.commit(INDEX_SET_SUCCESS, {
+              show: true,
+              text: response.messages
+            })
+            this.$router.push('/my-page/qualification')
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: response.messages
+            })
+            break
+        }
+        await this.$store.commit(INDEX_SET_LOADING, false)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }

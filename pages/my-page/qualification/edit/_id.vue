@@ -41,7 +41,7 @@ export default {
     async getQualification() {
       this.$store.commit(INDEX_SET_LOADING, true)
       try {
-        const response = await this.$store.dispatch(WORK_QUALIFICATION_DETAIL, this.$route.params.id)
+        const response = await this.$store.dispatch(WORK_QUALIFICATION_DETAIL, this.$route.query.id)
         const { data, status_code } = response
         if (status_code === 200) {
           this.qualification = data

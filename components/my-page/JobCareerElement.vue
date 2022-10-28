@@ -10,7 +10,7 @@
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
         <div v-for="(job, index) in listJobs" :key="index">
-          <CareerElement :job="job" :index="index + 1" :show-status="true"></CareerElement>
+          <CareerElement :job="job" :index="index + 1" :show-status="true" @reloadList="getDataJob"></CareerElement>
         </div>
         <div id="career" class="d-flex justify-between">
           <el-button type="danger"  class="card-button" @click="handleRouter('job-career/create/' + (listJobs.length + 1))">

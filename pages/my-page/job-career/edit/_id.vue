@@ -46,7 +46,7 @@ export default {
     async getDataJob() {
       this.$store.commit(INDEX_SET_LOADING, true)
       try {
-        const response = await this.$store.dispatch(WORK_HISTORY_DETAIL, this.$route.params.id)
+        const response = await this.$store.dispatch(WORK_HISTORY_DETAIL, this.$route.query.id)
         const { data, status_code } = response
         if (status_code === 200) {
           this.job = data
@@ -58,14 +58,14 @@ export default {
     },
     async getMasterData() {
       const dataResources = [
-        'resources[m_job_types]={"model": "MJobType"}',
-        'resources[m_work_types]={"model": "MWorkType"}',
+        'resources[m_job_types_other]={}',
+        'resources[m_work_types_other]={}',
         'resources[m_position_offices]={"model": "MPositionOffice"}'
       ]
       await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&')).then(res => {
-        this.m_job_types = res.data.m_job_types
+        this.m_job_types = res.data.m_job_types_other
         this.m_position_offices = res.data.m_position_offices
-        this.m_work_types = res.data.m_work_types
+        this.m_work_types = res.data.m_work_types_other
       })
     }
   }
