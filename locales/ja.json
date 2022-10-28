@@ -112,7 +112,7 @@
     "age": "年齢",
     "gender": "性別",
     "experience": "経験",
-    "work_type": "勤務先",
+    "work_place": "勤務先",
     "station1": "最寄り駅1",
     "welfare_treatment": "福利厚生・待遇",
     "pick_up_point": "PICK UP POINT",
@@ -138,7 +138,8 @@
     "about_other": "その他",
     "enter_annual_monthly": "ご希望の年収/月収などを入力",
     "inquiry_details": "お問い合わせ内容詳細",
-    "enter_inquiry_details": "お問い合わせ内容詳細を入力"
+    "enter_inquiry_details": "お問い合わせ内容詳細を入力",
+    "salary_note": "・給料が月末で支払い<br/>・銀行振込、現金が払い可能<br/>・祝日や残業の給与が10％アップ"
   },
   "form": {
     "required": "必須",
@@ -156,7 +157,8 @@
     "display_item": "{min}～{max}件目を表示中",
     "search": "検索",
     "delete": "削除",
-    "select_all": "全てを選択"
+    "select_all": "全てを選択",
+    "age": "歳"
   },
   "button": {
     "cancel": "キャンセル",

@@ -420,9 +420,9 @@
               display: inline-block;
               padding: 0 4px;
               margin-bottom: 12px;
-              border-left: 1px solid $color-button-disable;
-              &:first-child {
-                border-left: none;
+              border-right: 1px solid $color-button-disable;
+              &:last-child {
+                border-right: none;
               }
             }
           }

@@ -9,7 +9,7 @@ export const mutations = {}
 export const actions = {
   listFavorite(context, query) {
     return new Promise((resolve, reject) => {
-      handleApi(resolve, reject, this.$axios.get('/favorite-job'), context)
+      handleApi(resolve, reject, this.$axios.get('/favorite-job?' + query), context)
     })
   },
   listNewJobs(context, query) {
@@ -25,6 +25,26 @@ export const actions = {
   listRecommendJobs(context, query) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.get('/job/recommends'), context)
+    })
+  },
+  listRecentJobs(context, query) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/job/recent'), context)
+    })
+  },
+  listSuggestJobs(context, id) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/job/suggest/' + id), context)
+    })
+  },
+  getDetailJob(context, id) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/job/' + id), context)
+    })
+  },
+  removeFavoriteJob(context, id) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.delete('/favorite-job/delete/' + id), context)
     })
   }
 }
