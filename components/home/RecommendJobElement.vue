@@ -11,7 +11,7 @@
       <div class="job-description">
         <div class="job-info">
           <img src="/assets/icon/icon_place.svg" alt="">
-          <span>{{ job.address }}</span>
+          <span>{{ job.address ? job.address.address : '' }}</span>
         </div>
         <div class="job-info">
           <img src="/assets/icon/icon_save.svg" alt="">
@@ -59,10 +59,16 @@ export default {
       return this.job.job_types.map((list) => list.name).join('、')
     },
     showDate() {
-      return this.job.start_work_time + '〜' + this.job.end_work_time
+      if (this.job.work_time === undefined) {
+        return ''
+      }
+      return this.job.work_time.start + '〜' + this.job.work_time.end
     },
     showSalary() {
-      return this.job.salary_min + '~' + this.job.salary_max + this.job.salary_type
+      if (this.job.salary === undefined) {
+        return ''
+      }
+      return this.job.salary.min + '~' + this.job.salary.max + this.job.salary.type
     }
   },
   methods: {

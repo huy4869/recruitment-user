@@ -20,8 +20,8 @@
           <span v-if="schedule.interview_approach" class="bold">{{ schedule.interview_approach.approach_label }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.approach }}</span>
         </div>
         <div class="schedule-button">
-          <el-button :loading="loading" :disabled="!schedule.can_change_interview" type="danger" @click="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
-          <el-button :loading="loading" :disabled="!schedule.can_cancel" @click="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
+          <el-button :loading="loading" :disabled="!schedule.allow_edit" type="danger" @click="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
+          <el-button :loading="loading" :disabled="!schedule.allow_cancel" @click="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
         </div>
       </div>
     </div>

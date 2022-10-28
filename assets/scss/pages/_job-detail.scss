@@ -1,4 +1,6 @@
 .job-detail-page {
+  margin: auto;
+  max-width: 1280px;
   .job-detail-header {
     margin: 18px 64px;
     border-bottom: 2px solid $border-focus;
@@ -182,6 +184,9 @@
             display: inline-block;
             margin-right: 8px;
           }
+          .show-salary {
+            margin-bottom: 10px;
+          }
         }
       }
     }
@@ -248,15 +253,19 @@
         border: 2px solid $border-focus;
         border-radius: 4px;
         .find-other-job-item {
+          padding-top: 4px;
           display: flex;
           font-weight: 500;
           font-size: 16px;
           line-height: 24px;
           color: $color-blue;
           height: 24px;
-          span {
-            margin: 0 4px;
-            color: $color-button-disable;
+          div {
+            padding: 0 4px;
+            border-right: 1px solid $color-button-disable;
+            &:last-child {
+              border-right: none;
+            }
           }
         }
       }

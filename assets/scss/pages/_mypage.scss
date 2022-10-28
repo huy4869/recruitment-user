@@ -327,6 +327,9 @@
             color: $color-blue;
           }
         }
+        a {
+          text-decoration: none;
+        }
       }
     }
   }
@@ -414,6 +417,17 @@
       color: $color-blue;
       font-weight: 700;
     }
+    .form-text-all {
+      span {
+        margin: auto;
+      }
+    }
+    .pagination-common {
+      width: auto;
+      .pagination {
+        margin: 0;
+      }
+    }
   }
   .favorite-job-page-content {
     .job-element {
@@ -424,7 +438,7 @@
     }
   }
   .no-data-content {
-    color: $color-text-primary;
+    color: $color-black;
   }
 }
 

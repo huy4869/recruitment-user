@@ -5,7 +5,7 @@
     </div>
     <div class="schedule-title">
       <div class="title-main">
-        <span v-if="showStatus" class="show-interview">{{ $t('schedule.interview') }}</span>
+        <span v-if="showStatus && schedule.apply_or_interview" class="show-interview">{{ $t('schedule.interview') }}</span>
         {{ schedule.job_name }}
       </div>
       <div class="sub-title">{{ schedule.store_name }}</div>
@@ -26,18 +26,18 @@
         <div>
           <span class="bold">{{ $t('schedule.method') }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.method }}</span>
         </div>
-        <div>
-          <span class="bold" v-if="schedule.interview_approach">{{ schedule.interview_approach.approach_label }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.approach }}</span>
+        <div v-if="schedule.interview_approach">
+          <span class="bold">{{ schedule.interview_approach.approach_label }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.approach }}</span>
           <div v-if="showStatus" class="open-google-map">
-            <div v-if="schedule.google_map" class="show-button-google-map">
+            <a v-if="schedule.interview_approach.is_direct_interview" :href="'https://www.google.com/maps/place/' + schedule.interview_approach.approach" class="show-button-google-map" target="_blank">
               <img src="/assets/icon/icon_google_map.svg" alt="">
               <span>{{ $t('schedule.open_google_map') }}</span>
-            </div>
+            </a>
           </div>
         </div>
         <div class="schedule-button">
-          <el-button v-if="schedule.can_change_interview" :loading="loading" type="danger" @click="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
-          <el-button v-if="schedule.can_cancel" :loading="loading" @click="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
+          <el-button v-if="schedule.allow_edit" :loading="loading" type="danger" @click="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
+          <el-button v-if="schedule.allow_cancel" :loading="loading" @click="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
         </div>
       </div>
     </div>

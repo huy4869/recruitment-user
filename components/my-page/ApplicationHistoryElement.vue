@@ -6,28 +6,35 @@
       </div>
       <div v-if="listScheduleHistory.length" class="application-history-content">
         <div v-for="(schedule, index) in listScheduleHistory" :key="index">
-          <ScheduleHistoryElement :schedule="schedule" :show-status="true"></ScheduleHistoryElement>
+          <ScheduleHistoryElement :schedule="schedule" :show-status="true" @cancelSchedule="(id) => { cancelSchedule(id, true) }" @editApply="editApply"></ScheduleHistoryElement>
         </div>
       </div>
       <div v-else>
         <NoDataElement :text="$t('common.no_data')"></NoDataElement>
       </div>
+      <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false"></FormApplyJobElement>
     </div>
   </div>
 </template>
 
 <script>
-import { APPLICATION_LIST } from '../../store/store.const'
+import {
+  APPLICATION_CANCEL_APPLICATION,
+  APPLICATION_LIST, INDEX_SET_ERROR,
+  INDEX_SET_LOADING, INDEX_SET_SUCCESS
+} from '../../store/store.const'
 import NoDataElement from '../element-ui/NoDataElement'
+import FormApplyJobElement from '../element-ui/FormApplyJobElement'
 import ScheduleHistoryElement from './ScheduleHistoryElement'
 export default {
   name: 'ApplicationHistoryElement',
-  components: { ScheduleHistoryElement, NoDataElement },
+  components: { ScheduleHistoryElement, NoDataElement, FormApplyJobElement },
   data() {
     return {
       listScheduleHistory: [],
       page: 1,
-      lastPage: 10
+      lastPage: 10,
+      applyDialog: false
     }
   },
   async created() {
@@ -37,14 +44,31 @@ export default {
     changePage(page) {
       this.page = page
     },
-    async getDataScheduleHistory(all) {
-      let dataResponse
-      if (all) {
-        dataResponse = await this.$store.dispatch(APPLICATION_LIST, 'all=1')
-      } else {
-        dataResponse = await this.$store.dispatch(APPLICATION_LIST, '')
-      }
+    async getDataScheduleHistory() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const dataResponse = await this.$store.dispatch(APPLICATION_LIST, '')
       this.listScheduleHistory = dataResponse.data
+      await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    async cancelSchedule(id, history) {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const response = await this.$store.dispatch(APPLICATION_CANCEL_APPLICATION, id)
+      if (response.status_code === 200) {
+        await this.$store.commit(INDEX_SET_SUCCESS, {
+          show: true,
+          text: response.messages
+        })
+      } else {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: response.messages
+        })
+      }
+      await this.getDataScheduleHistory()
+      await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    editApply() {
+      this.applyDialog = true
     }
   }
 }

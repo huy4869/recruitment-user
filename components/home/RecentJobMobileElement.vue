@@ -1,8 +1,8 @@
 <template>
   <div class="recommend-job-element recent-job">
-    <div class="d-flex justify-between">
+    <div class="d-flex">
       <div class="job-image">
-        <img :src="job.image" alt="">
+        <img :src="job.banner_image" alt="">
       </div>
       <div class="job-title">
         <div class="title-main">{{ job.name }}</div>
@@ -13,19 +13,19 @@
       <div class="job-description">
         <div class="job-info">
           <img src="/assets/icon/icon_place.svg" alt="">
-          <span>{{ job.address }}</span>
+          <span>{{ job.address.address }}</span>
         </div>
-        <div class="job-info">
+        <div v-if="showType" class="job-info">
           <img src="/assets/icon/icon_save.svg" alt="">
-          <span>{{ job.work_type }}</span>
+          <span>{{ showJobType }}</span>
         </div>
         <div class="job-info">
           <img src="/assets/icon/icon_yen.svg" alt="">
-          <span>{{ job.salary }}</span>
+          <span>{{ showSalary }}</span>
         </div>
         <div class="job-info">
           <img src="/assets/icon/icon_time.svg" alt="">
-          <span>{{ job.date }}</span>
+          <span>{{ showDate }}</span>
         </div>
         <div>
           <div v-for="(feature, index) in job.features" :key="index" class="feature-item">
@@ -52,6 +52,31 @@
 
 export default {
   name: 'RecentJobMobileElement',
-  props: ['job']
+  props: ['job', 'showType'],
+  computed: {
+    showJobType() {
+      if (this.job.job_types === undefined) {
+        return ''
+      }
+      return this.job.job_types.map((list) => list.name).join('、')
+    },
+    showDate() {
+      if (this.job.work_time === undefined) {
+        return ''
+      }
+      return this.job.work_time.start + '〜' + this.job.work_time.end
+    },
+    showSalary() {
+      if (this.job.salary === undefined) {
+        return ''
+      }
+      return this.job.salary.min + '~' + this.job.salary.max + this.job.salary.type
+    }
+  },
+  methods: {
+    changeToLink(link) {
+      this.$router.push(link)
+    }
+  }
 }
 </script>
