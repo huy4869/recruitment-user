@@ -75,6 +75,8 @@ export const JOB_LIST_RECENT_JOBS = 'job/listRecentJobs'
 export const JOB_LIST_SUGGEST_JOBS = 'job/listSuggestJobs'
 export const JOB_GET_DETAIL_JOB = 'job/getDetailJob'
 export const JOB_REMOVE_FAVORITE_JOB = 'job/removeFavoriteJob'
+export const JOB_LIST_SEARCH_JOB = 'job/listSearchJob'
+export const JOB_REMOVE_SEARCH_JOB = 'job/removeSearchJob'
 
 // notification
 export const NOTIFICATION_LIST = 'notification/listNotification'

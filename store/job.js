@@ -46,5 +46,16 @@ export const actions = {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.delete('/favorite-job/delete/' + id), context)
     })
+  },
+  // search job
+  listSearchJob(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/search-jobs?' + data), context)
+    })
+  },
+  removeSearchJob(context, id) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.delete('/search-jobs/delete/' + id), context)
+    })
   }
 }

@@ -5,14 +5,14 @@
     </div>
     <div class="past-search-condition-content">
       <div class="past-search-button">
-        <el-button type="danger">
+        <el-button type="danger" @click="changeToLink('/search')">
           <img src="/assets/icon/icon_search_button.svg" alt="">
           {{ $t('my_page.search_by_other_condition') }}
         </el-button>
       </div>
       <div class="past-search-condition-form">
         <div class="form-condition-list" v-for="(condition, key) in listConditions" :key="key">
-          <FormConditionElement :condition="condition"></FormConditionElement>
+          <FormConditionElement :condition="condition" @removeSearchJob="removeSearchJob" @changeToSearch="changeToLink"></FormConditionElement>
         </div>
       </div>
       <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
@@ -21,6 +21,13 @@
 </template>
 
 <script>
+import {
+  JOB_LIST_SEARCH_JOB,
+  INDEX_SET_LOADING,
+  JOB_REMOVE_SEARCH_JOB,
+  INDEX_SET_SUCCESS,
+  INDEX_SET_ERROR
+} from '../../store/store.const'
 import PaginationElement from '../element-ui/PaginationElement'
 import FormConditionElement from './FormConditionElement'
 export default {
@@ -30,32 +37,48 @@ export default {
     return {
       listConditions: [],
       page: 1,
-      lastPage: 10
+      lastPage: 1
     }
   },
-  created() {
-    this.getDataConditions()
+  async created() {
+    await this.getDataConditions()
   },
   methods: {
+    changeToLink(link) {
+      this.$router.push(link)
+    },
     changePage(page) {
       this.page = page
     },
-    getDataConditions() {
-      for (let x = 0; x <= 5; x++) {
-        this.listConditions.push({
-          date: ['2022年08月09日 09:40（日）', '2022年08月10日 11:00（日）', '2022年08月09日 09:40（日)'][Math.floor(Math.random() * 3)],
-          detail: {
-            occupation: ['ヘア、ネイル・マツゲ', 'ヘア、ネイル・マツゲ', 'ヘア、ネイル・マツゲ', 'ヘア、ネイル・マツゲ'][Math.floor(Math.random() * 4)],
-            work_location: ['甲信越・北陸、岡山県、兵庫県', '甲信越・北陸、岡山県、兵庫県'][Math.floor(Math.random() * 2)],
-            keyword: ['アルバイト', ''][Math.floor(Math.random() * 2)],
-            employment_status: ['アルバイト、契約社員 、その他', 'アルバイト、契約社員 、その他'][Math.floor(Math.random() * 2)],
-            experience: ['正社員、免許・資格不問 、通信生（見習い）相談可', ''][Math.floor(Math.random() * 2)],
-            sort_by: ['新着順', '新着順'][Math.floor(Math.random() * 2)],
-            feature: ['フリーター歓迎、賞与あり/インセンティブあり、原則定時退社', 'フリーター歓迎、賞与あり/インセンティブあり、原則定時退社'][Math.floor(Math.random() * 2)]
-          },
-          status: [true, false][Math.floor(Math.random() * 2)]
+    async getDataConditions() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const dataRequest = [
+        'page=' + this.page,
+        'per_page=5'
+      ]
+      const dataResponse = await this.$store.dispatch(JOB_LIST_SEARCH_JOB, dataRequest.join('&'))
+      if (dataResponse.status_code === 200) {
+        this.listConditions = dataResponse.data.data
+        this.lastPage = dataResponse.data.total_page
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    async removeSearchJob(id) {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const response = await this.$store.dispatch(JOB_REMOVE_SEARCH_JOB, id)
+      if (response.status_code === 200) {
+        await this.$store.commit(INDEX_SET_SUCCESS, {
+          show: true,
+          text: response.messages
+        })
+      } else {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: response.messages
         })
       }
+      await this.getDataConditions()
+      await this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }

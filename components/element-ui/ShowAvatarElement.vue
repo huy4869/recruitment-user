@@ -5,7 +5,7 @@
     </div>
     <div v-else class="d-flex show-avatar" :style="{backgroundColor: backgroundColor}">
       <span>
-        {{ user.name.slice(0, 1) }}
+        {{ user.name ? user.name.slice(0, 1) : '' }}
       </span>
     </div>
   </div>

@@ -234,6 +234,15 @@
     "search_by_other_condition": "他の条件で検索する"
   },
   "condition": {
+    "list": {
+      "job_type_ids": "職種",
+      "province_id": "勤務地",
+      "text": "キーワード",
+      "employment_status": "雇用形態",
+      "experience_ids": "経験",
+      "order_by_ids": "並び替え",
+      "feature_ids": "特徴"
+    },
     "occupation": "職種",
     "work_location": "勤務地",
     "keyword": "キーワード",
