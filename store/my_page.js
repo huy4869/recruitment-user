@@ -31,6 +31,11 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.post(`/work-history/${id}`, data), context)
     })
   },
+  deleteWorkHistory(context, id) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/work-history/${id}/delete`), context)
+    })
+  },
   // basic-info
   getBasicInfo(context, resource) {
     return new Promise((resolve, reject) => {
@@ -79,6 +84,11 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.post('/licenses-qualifications', data), context)
     })
   },
+  deleteQualification(context, id) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/licenses-qualifications/${id}/delete`), context)
+    })
+  },
   // edu
   getListEdu(context, resource) {
     return new Promise((resolve, reject) => {
@@ -98,6 +108,11 @@ export const actions = {
   createEdu(context, data) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.post('/learning-history', data), context)
+    })
+  },
+  deleteEdu(context, id) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/learning-history/${id}/delete`), context)
     })
   },
   // Motivation

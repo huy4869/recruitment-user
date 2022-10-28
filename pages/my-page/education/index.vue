@@ -4,7 +4,7 @@
     <BannerElement :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
       <MenuLeftElement menu-active="web_cv"></MenuLeftElement>
-      <EducationElement :listEdu="listEdu"></EducationElement>
+      <EducationElement :listEdu="listEdu" @reloadList="getListEdu"></EducationElement>
     </div>
   </div>
 </template>

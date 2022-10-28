@@ -5,7 +5,7 @@
         <div class="card-primary-title">{{ $t('education.title') }}{{ index | toFullWidth(index) }}
         </div>
         <div class="btn-option d-flex">
-          <el-button class="btn-edit" @click="handleRouter('education/edit/' + job.id)"><img src="/assets/icon/edit.svg" alt="img-edit">{{ $t('my_page.edit') }}</el-button>
+          <el-button class="btn-edit" @click="handleRouter('education/edit/' + index + '?id=' + job.id)"><img src="/assets/icon/edit.svg" alt="img-edit">{{ $t('my_page.edit') }}</el-button>
           <el-button class="btn-remove" @click="showConfirmModal"><img src="/assets/icon/remove.svg" alt="img-edit">{{ $t('my_page.remove') }}</el-button>
         </div>
       </div>
@@ -16,7 +16,7 @@
         <div class="right-item"><p class="card-text-normal">{{ job.enrollment_period_format }}</p></div>
       </div>
       <div class="btn-option-mobile d-flex">
-        <el-button class="btn-edit" @click="handleRouter('education/edit/' + job.id)"><img src="/assets/icon/edit.svg" alt="img-edit">{{ $t('my_page.edit') }}</el-button>
+        <el-button class="btn-edit" @click="handleRouter('education/edit/' + index + '?id=' + job.id)"><img src="/assets/icon/edit.svg" alt="img-edit">{{ $t('my_page.edit') }}</el-button>
         <el-button class="btn-remove" @click="showConfirmModal"><img src="/assets/icon/remove.svg" alt="img-edit">{{ $t('my_page.remove') }}</el-button>
       </div>
     </div>
@@ -24,12 +24,15 @@
       v-show="confirmModal"
       :text="$t('confirm_modal.delete_confirm')"
       @close="closeConfirmModal"
+      @handleRouter="handleDelete(job.id)"
     >
     </ConfirmModal>
   </div>
 </template>
 
 <script>
+
+import { INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS, EDU_DELETE } from '@/store/store.const'
 
 export default {
   name: 'JobElement',
@@ -53,6 +56,35 @@ export default {
     },
     handleRouter(route) {
       this.$router.push(route)
+    },
+    async handleDelete(id) {
+      try {
+        await this.$store.commit(INDEX_SET_LOADING, true)
+        const response = await this.$store.dispatch(EDU_DELETE, id)
+        switch (response.status_code) {
+          case 200:
+            await this.$store.commit(INDEX_SET_SUCCESS, {
+              show: true,
+              text: response.messages
+            })
+            this.closeConfirmModal()
+            this.reloadList()
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: response.messages
+            })
+            break
+        }
+        await this.$store.commit(INDEX_SET_LOADING, false)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    reloadList() {
+      this.$emit('reloadList')
     }
   }
 }
