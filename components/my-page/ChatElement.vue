@@ -28,18 +28,18 @@
                 <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}]" @click="changeActive(user, index)">
                   <div class="d-flex">
                     <div class="user-avatar">
-                      <ShowAvatarElement :user="user"></ShowAvatarElement>
+                      <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name }"></ShowAvatarElement>
                     </div>
                     <div class="message-content">
                       <div class="d-flex justify-between">
-                        <div class="user-name">{{ user.name }}</div>
-                        <div class="message-date">{{ user.last_updated }}</div>
+                        <div class="user-name">{{ user.store_name }}</div>
+                        <div class="message-date">{{ user.send_time }}</div>
                       </div>
                       <div class="d-flex justify-between">
-                        <div :class="['last-message', { 'not-read': user.status_read }]">
-                          {{ user.last_message }}
+                        <div :class="['last-message', { 'not-read': user.be_readed }]">
+                          {{ user.content }}
                         </div>
-                        <div v-if="user.status_read" class="message-status">
+                        <div v-if="user.be_readed" class="message-status">
                           <span></span>
                         </div>
                       </div>
@@ -51,7 +51,7 @@
             <div class="content-form-chat">
               <div class="form-message">
                 <div v-for="(message, index) in listMessages" :key="index">
-                  <FormChatElement :message="message"></FormChatElement>
+                  <FormChatElement :message="{ avatar: message.avatar, name: message.store_name }"></FormChatElement>
                 </div>
               </div>
               <div class="input-chat">
@@ -85,7 +85,7 @@
                 <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}]" @click="changeActive(user, index, true)">
                   <div class="d-flex">
                     <div class="user-avatar">
-                      <ShowAvatarElement :user="user"></ShowAvatarElement>
+                      <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name }"></ShowAvatarElement>
                     </div>
                     <div class="message-content">
                       <div class="d-flex justify-between">
@@ -108,7 +108,7 @@
             <div v-else class="content-form-chat">
               <div class="form-message">
                 <div v-for="(message, index) in listMessages" :key="index">
-                  <FormChatElement :message="message"></FormChatElement>
+                  <FormChatElement :message="{ avatar: message.avatar, name: message.store_name }"></FormChatElement>
                 </div>
               </div>
               <div class="input-chat">
@@ -129,7 +129,11 @@
 </template>
 
 <script>
-import { MY_PAGE_SET_SHOW_DETAIL_MESSAGE } from '../../store/store.const'
+import {
+  INDEX_SET_LOADING,
+  CHAT_LIST,
+  MY_PAGE_SET_SHOW_DETAIL_MESSAGE
+} from '../../store/store.const'
 import ShowAvatarElement from '../element-ui/ShowAvatarElement'
 import FormChatElement from './FormChatElement'
 export default {
@@ -148,8 +152,8 @@ export default {
       listMessages: []
     }
   },
-  created() {
-    this.getDataUser()
+  async created() {
+    await this.getDataUser()
     this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, false)
   },
   methods: {
@@ -167,18 +171,13 @@ export default {
       this.showDetailMessage = false
       this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, false)
     },
-    getDataUser() {
-      for (let x = 0; x <= 14; x++) {
-        this.listUsers.push({
-          id: Math.floor(Math.random() * 10),
-          name: ['虎ノ門店舗 (デモ美容室)', '虎ノ門店舗 (デモ美容室)', '株式会社タオ'][Math.floor(Math.random() * 3)],
-          last_message: ['よろしくお願いいたします。', 'お問い合わせをいただきまして', 'お問い合わせをいただきまして合わせお問い合わせをいただきまして合わせ'][Math.floor(Math.random() * 3)],
-          avatar: '',
-          last_updated: ['1分前', '08月01日', '07月01日'][Math.floor(Math.random() * 3)],
-          status_read: [true, false][Math.floor(Math.random() * 2)],
-          listMessages: this.getMessage()
-        })
+    async getDataUser() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const dataResponse = await this.$store.dispatch(CHAT_LIST)
+      if (dataResponse.status_code === 200) {
+        this.listUsers = dataResponse.data
       }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     },
     getMessage() {
       const listMessages = []
