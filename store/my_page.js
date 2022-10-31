@@ -31,6 +31,11 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.post(`/work-history/${id}`, data), context)
     })
   },
+  createWorkHistory(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/work-history', data), context)
+    })
+  },
   deleteWorkHistory(context, id) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.post(`/work-history/${id}/delete`), context)

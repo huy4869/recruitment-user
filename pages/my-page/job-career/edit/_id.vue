@@ -58,14 +58,14 @@ export default {
     },
     async getMasterData() {
       const dataResources = [
-        'resources[m_job_types_other]={}',
-        'resources[m_work_types_other]={}',
+        'resources[m_job_types]={}',
+        'resources[m_work_types]={}',
         'resources[m_position_offices]={"model": "MPositionOffice"}'
       ]
       await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&')).then(res => {
-        this.m_job_types = res.data.m_job_types_other
+        this.m_job_types = res.data.m_job_types
         this.m_position_offices = res.data.m_position_offices
-        this.m_work_types = res.data.m_work_types_other
+        this.m_work_types = res.data.m_work_types
       })
     }
   }

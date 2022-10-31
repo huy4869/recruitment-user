@@ -343,7 +343,6 @@ export default {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
-            console.log(dto)
             const response = await this.$store.dispatch(EDU_CREATE, {
               ...dto
             })
