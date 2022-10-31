@@ -119,7 +119,7 @@
         <el-dialog class="form-dialog-select" :title="$t('condition.select_work_location')" :visible.sync="occupationDialog" width="84%">
           <el-checkbox-group v-model="districts">
             <div class="form-filter-location">
-              <div v-for="(district, index) in listProvinceDistrict" :key="index" class="district-item">
+              <div v-for="(district, index) in listProvinceDistricts" :key="index" class="district-item">
                 <div class="district-name">
                   <el-checkbox :label="district.id" @change="changeDistrict(district)">{{ district.name }}</el-checkbox>
                 </div>
@@ -185,7 +185,8 @@
 import {
   INDEX_SET_TITLE_MENU,
   JOB_LIST_RECOMMEND_JOBS,
-  MASTER_GET_DATA
+  MASTER_GET_DATA,
+  LOCATION_LIST_AMOUNT
 } from '../store/store.const'
 import TitlePageElement from '../components/layout/TitlePageElement'
 import BannerElement from '../components/layout/BannerElement'
@@ -274,7 +275,7 @@ export default {
         { id: 41, name: '資格取得支援あり' },
         { id: 42, name: '独立/開業支援' }
       ],
-      listProvinceDistrict: [
+      listProvinceDistricts: [
         {
           id: 1, name: '北海道・東北',
           provinces: [
@@ -385,7 +386,7 @@ export default {
   computed: {
     showProvince() {
       const text = []
-      this.listProvinceDistrict.forEach(district => {
+      this.listProvinceDistricts.forEach(district => {
         district.provinces.forEach(province => {
           if (this.condition.provinces.includes(province.id)) {
             text.push(province.name)
@@ -416,19 +417,44 @@ export default {
     changePage(page) {
       this.page = page
     },
-    getMasterData() {
+    async getMasterData() {
       const dataResources = [
         'resources[m_work_types]={"model": "MWorkType"}',
         'resources[m_job_experiences]={"model": "MJobExperience"}',
         'resources[m_job_types]={"model": "MJobType"}',
         'resources[m_job_features]={}',
-        'resources[m_province_districts]={"model": "MProvinceDistrict"}'
+        'resources[province_districts]={}'
       ]
-      this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&')).then(res => {
-        this.listWorkTypes = res.data.m_work_types
-        this.listJobFeatures = res.data.m_job_features
-        this.listExperiences = res.data.m_job_experiences
-      })
+      const dataMasterData = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
+      if (dataMasterData.status_code === 200) {
+        this.listWorkTypes = dataMasterData.data.m_work_types
+        this.listJobFeatures = dataMasterData.data.m_job_features
+        this.listExperiences = dataMasterData.data.m_job_experiences
+        this.listProvinceDistricts = dataMasterData.data.province_districts
+      }
+      const dataResponse = await this.$store.dispatch(LOCATION_LIST_AMOUNT, '')
+      if (dataResponse.status_code === 200) {
+        const dataProvince = {}
+        dataResponse.data.forEach(res => {
+          dataProvince[res.province_id] = res.amount_job
+        })
+        const dataListProvince = []
+        dataMasterData.data.province_districts.forEach(district => {
+          dataListProvince.push({
+            id: district.id,
+            name: district.name,
+            provinces: district.provinces.map(province => {
+              return {
+                id: province.id,
+                name: province.name,
+                record: dataProvince[province.id]
+              }
+            })
+          })
+        })
+        this.listProvinceDistricts = dataListProvince
+      }
+      this.listJobs = dataResponse.data
     },
     async getJobs() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_RECOMMEND_JOBS, '')

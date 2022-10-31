@@ -26,9 +26,9 @@
               </div>
               <div class="list-user">
                 <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}]" @click="changeActive(user, index)">
-                  <div class="d-flex">
+                  <div v-if="checkSearch(user.store_name)" class="d-flex">
                     <div class="user-avatar">
-                      <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name }"></ShowAvatarElement>
+                      <ShowAvatarElement :user="{ avatar: user.store_banner, name: user.store_name }"></ShowAvatarElement>
                     </div>
                     <div class="message-content">
                       <div class="d-flex justify-between">
@@ -49,15 +49,15 @@
               </div>
             </div>
             <div class="content-form-chat">
-              <div class="form-message">
+              <div class="form-message" ref="scrollListMessage">
                 <div v-for="(message, index) in listMessages" :key="index">
-                  <FormChatElement :message="{ avatar: message.avatar, name: message.store_name }"></FormChatElement>
+                  <FormChatElement :message="message"></FormChatElement>
                 </div>
               </div>
               <div class="input-chat">
                 <div class="d-flex justify-between">
                   <input v-model="message" type="text" :placeholder="$t('my_page.enter_message')">
-                  <div class="button-send">
+                  <div class="button-send" @click="sendMessage">
                     <span>{{ $t('my_page.send') }}</span>
                     <img src="/assets/icon/icon_send_message.svg" alt="">
                   </div>
@@ -83,7 +83,7 @@
               </div>
               <div class="list-user">
                 <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}]" @click="changeActive(user, index, true)">
-                  <div class="d-flex">
+                  <div  v-if="checkSearch(user.store_name)" class="d-flex">
                     <div class="user-avatar">
                       <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name }"></ShowAvatarElement>
                     </div>
@@ -106,15 +106,15 @@
               </div>
             </div>
             <div v-else class="content-form-chat">
-              <div class="form-message">
+              <div class="form-message" ref="scrollListMessageMobile">
                 <div v-for="(message, index) in listMessages" :key="index">
-                  <FormChatElement :message="{ avatar: message.avatar, name: message.store_name }"></FormChatElement>
+                  <FormChatElement :message="message"></FormChatElement>
                 </div>
               </div>
               <div class="input-chat">
                 <div class="d-flex justify-between">
                   <input v-model="message" type="text" :placeholder="$t('my_page.enter_message')">
-                  <div class="button-send">
+                  <div class="button-send" @click="sendMessage">
                     <span>{{ $t('my_page.send') }}</span>
                     <img src="/assets/icon/icon_send_message.svg" alt="">
                   </div>
@@ -132,7 +132,9 @@
 import {
   INDEX_SET_LOADING,
   CHAT_LIST,
-  MY_PAGE_SET_SHOW_DETAIL_MESSAGE
+  MY_PAGE_SET_SHOW_DETAIL_MESSAGE,
+  CHAT_CREATE_MESSAGE,
+  CHAT_DETAIL_CHAT
 } from '../../store/store.const'
 import ShowAvatarElement from '../element-ui/ShowAvatarElement'
 import FormChatElement from './FormChatElement'
@@ -157,11 +159,22 @@ export default {
     this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, false)
   },
   methods: {
-    changeActive(user, index, mobile) {
+    async changeActive(user, index, mobile) {
+      await this.changeDateMessage(user, index, mobile)
+      this.scrollToElement()
+    },
+    async changeDateMessage(user, index, mobile) {
       this.indexActive = index
       this.userActive = user
-      this.listMessages = user.listMessages
-      this.listUsers[index].status_read = false
+      const dataResponse = await this.$store.dispatch(CHAT_DETAIL_CHAT, user.store_id)
+      if (dataResponse.status_code === 200) {
+        const dataMessages = []
+        for (let x = dataResponse.data.length; x >= 0; x--) {
+          dataMessages.push(dataResponse.data[x])
+        }
+        this.listMessages = dataMessages
+        this.listUsers[index].be_readed = 0
+      }
       if (mobile) {
         this.showDetailMessage = true
         this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, true)
@@ -179,20 +192,33 @@ export default {
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
-    getMessage() {
-      const listMessages = []
-      for (let x = 0; x <= 14; x++) {
-        listMessages.push({
-          id: Math.floor(Math.random() * 10),
-          name: ['虎ノ門店舗 (デモ美容室)', '虎ノ門店舗 (デモ美容室)', '株式会社タオ'][Math.floor(Math.random() * 3)],
-          message: ['Hi 虎ノ門店舗', 'お問い合わせをいただきまして、ありがとうございました。', 'お問い合わせをいただきまして'][Math.floor(Math.random() * 3)],
-          avatar: '',
-          state: ['user', 'date', 'send'][Math.floor(Math.random() * 3)],
-          date: ['1分前', '08月01日', '07月01日'][Math.floor(Math.random() * 3)],
-          status_read: [true, false][Math.floor(Math.random() * 2)]
-        })
+    scrollToElement() {
+      const messageDisplayMobile = this.$refs.scrollListMessageMobile
+      const messageDisplay = this.$refs.scrollListMessage
+      if (messageDisplay) {
+        messageDisplay.scrollTop = messageDisplay.scrollHeight
       }
-      return listMessages
+      if (messageDisplayMobile) {
+        messageDisplayMobile.scrollTop = messageDisplayMobile.scrollHeight
+      }
+    },
+    checkSearch(name) {
+      if (this.search) {
+        return name.includes(this.search)
+      }
+      return true
+    },
+    async sendMessage() {
+      const dataMessage = {
+        content: this.message,
+        store_id: this.userActive.store_id
+      }
+      const dataResponse = await this.$store.dispatch(CHAT_CREATE_MESSAGE, dataMessage)
+      if (dataResponse.status_code === 200) {
+        this.listMessages.push(dataResponse.data)
+        this.listUsers[this.indexActive].content = this.message
+        this.message = ''
+      }
     }
   }
 }

@@ -65,15 +65,15 @@ export default {
       ]
       const dataResponse = await this.$store.dispatch(JOB_LIST_FAVORITE, dataRequest.join('&'))
       if (dataResponse.status_code === 200) {
-        this.listJobs = dataResponse.data.favoriteJob
-        this.total = dataResponse.data.paginate.total
-        this.lastPage = dataResponse.data.paginate.totalPage
+        this.listJobs = dataResponse.data.data
+        this.total = dataResponse.data.total
+        this.lastPage = dataResponse.data.total_page
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
-    async removeFavoriteJob(id) {
+    async removeFavoriteJob(job) {
       await this.$store.commit(INDEX_SET_LOADING, true)
-      const response = await this.$store.dispatch(JOB_REMOVE_FAVORITE_JOB, id)
+      const response = await this.$store.dispatch(JOB_REMOVE_FAVORITE_JOB, job.id_favorite)
       if (response.status_code === 200) {
         await this.$store.commit(INDEX_SET_SUCCESS, {
           show: true,
