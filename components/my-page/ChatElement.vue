@@ -36,10 +36,10 @@
                         <div class="message-date">{{ user.send_time }}</div>
                       </div>
                       <div class="d-flex justify-between">
-                        <div :class="['last-message', { 'not-read': user.be_readed }]">
+                        <div :class="['last-message', { 'not-read': !user.be_readed }]">
                           {{ user.content }}
                         </div>
-                        <div v-if="user.be_readed" class="message-status">
+                        <div v-if="!user.be_readed" class="message-status">
                           <span></span>
                         </div>
                       </div>
@@ -173,7 +173,7 @@ export default {
           dataMessages.push(dataResponse.data[x])
         }
         this.listMessages = dataMessages
-        this.listUsers[index].be_readed = 0
+        this.listUsers[index].be_readed = 1
       }
       if (mobile) {
         this.showDetailMessage = true
@@ -215,9 +215,10 @@ export default {
       }
       const dataResponse = await this.$store.dispatch(CHAT_CREATE_MESSAGE, dataMessage)
       if (dataResponse.status_code === 200) {
-        this.listMessages.push(dataResponse.data)
+        await this.listMessages.push(dataResponse.data)
         this.listUsers[this.indexActive].content = this.message
         this.message = ''
+        this.scrollToElement()
       }
     }
   }

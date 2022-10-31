@@ -70,6 +70,7 @@ export const CHAT_DETAIL_CHAT = 'chat/getDetailChat'
 export const CHAT_CREATE_MESSAGE = 'chat/createMessage'
 
 // job
+export const JOB_LIST_JOBS = 'job/listJob'
 export const JOB_LIST_FAVORITE = 'job/listFavorite'
 export const JOB_LIST_NEW_JOBS = 'job/listNewJobs'
 export const JOB_LIST_MOST_VIEW_JOBS = 'job/listMostViewJobs'
@@ -78,6 +79,7 @@ export const JOB_LIST_RECENT_JOBS = 'job/listRecentJobs'
 export const JOB_LIST_SUGGEST_JOBS = 'job/listSuggestJobs'
 export const JOB_GET_DETAIL_JOB = 'job/getDetailJob'
 export const JOB_REMOVE_FAVORITE_JOB = 'job/removeFavoriteJob'
+export const JOB_ADD_FAVORITE_JOB = 'job/addFavoriteJob'
 export const JOB_LIST_SEARCH_JOB = 'job/listSearchJob'
 export const JOB_REMOVE_SEARCH_JOB = 'job/removeSearchJob'
 

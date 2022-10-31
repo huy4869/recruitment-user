@@ -47,6 +47,16 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.delete('/favorite-job/delete/' + id), context)
     })
   },
+  addFavoriteJob(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/favorite-job', data), context)
+    })
+  },
+  listJob(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/job?' + data), context)
+    })
+  },
   // search job
   listSearchJob(context, data) {
     return new Promise((resolve, reject) => {

@@ -575,6 +575,7 @@
         display: flex;
         justify-content: flex-end;
         .button-like {
+          cursor: pointer;
           display: flex;
           padding: 11px 25px;
           border: 1px solid $color-blue;
@@ -583,6 +584,24 @@
           font-size: 14px;
           line-height: 22px;
           color: $color-blue;
+          height: 24px;
+          margin-right: 16px;
+          img {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        .button-dislike {
+          cursor: pointer;
+          display: flex;
+          padding: 11px 25px;
+          border: 1px solid $color-blue;
+          background: $color-blue;
+          border-radius: 4px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 22px;
+          color: $color-white;
           height: 24px;
           margin-right: 16px;
           img {

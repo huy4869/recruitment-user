@@ -282,7 +282,8 @@ import {
   INDEX_SET_LOADING,
   INDEX_SET_TITLE_MENU,
   JOB_LIST_RECENT_JOBS,
-  JOB_LIST_SUGGEST_JOBS, MASTER_GET_DATA
+  JOB_LIST_SUGGEST_JOBS,
+  MASTER_GET_DATA
 } from '../../store/store.const'
 
 export default {
@@ -411,6 +412,7 @@ export default {
       return this.job[key].map((item) => item[index]).join('、')
     },
     async getDataJob() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
       const dataResponse = await this.$store.dispatch(JOB_LIST_RECENT_JOBS, '')
       this.listJobs = dataResponse.data
       const dataResources = [
@@ -420,6 +422,7 @@ export default {
       if (dataMasterData.status_code === 200) {
         this.listJobTypes = dataMasterData.data.m_job_types
       }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     },
     async getSuggestJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_SUGGEST_JOBS, this.id)
