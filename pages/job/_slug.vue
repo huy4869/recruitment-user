@@ -224,18 +224,19 @@
               <span>{{ $t('job.inquiry_content_selection') }}</span>
             </div>
             <div class="method-content">
-              <el-checkbox-group v-model="formAbout.method">
-                <el-checkbox key="about_annual_monthly" label="about_annual_monthly">{{ $t('job.about_annual_monthly') }}</el-checkbox>
+              <el-checkbox-group v-model="formAbout.feedback_type_ids">
+                <el-checkbox :key="1" label="1">{{ $t('job.about_annual_monthly') }}</el-checkbox>
                 <el-input
+                  :disabled="disabledInput"
                   type="text"
                   :rows="4"
                   :placeholder="$t('job.enter_annual_monthly')"
-                  v-model="formApply.desired">
+                  v-model="formAbout.desired_salary">
                 </el-input>
-                <el-checkbox label="about_benefit">{{ $t('job.about_benefit') }}</el-checkbox>
-                <el-checkbox label="about_education">{{ $t('job.about_education') }}</el-checkbox>
-                <el-checkbox label="about_overtime">{{ $t('job.about_overtime') }}</el-checkbox>
-                <el-checkbox label="about_other">{{ $t('job.about_other') }}</el-checkbox>
+                <el-checkbox :key="2" label="2">{{ $t('job.about_benefit') }}</el-checkbox>
+                <el-checkbox :key="3" label="3">{{ $t('job.about_education') }}</el-checkbox>
+                <el-checkbox :key="4" label="4">{{ $t('job.about_overtime') }}</el-checkbox>
+                <el-checkbox :key="5" label="5">{{ $t('job.about_other') }}</el-checkbox>
               </el-checkbox-group>
             </div>
           </div>
@@ -248,16 +249,16 @@
                 type="textarea"
                 :rows="4"
                 :placeholder="$t('job.enter_inquiry_details')"
-                v-model="formApply.detail">
+                v-model="formAbout.content">
               </el-input>
             </div>
           </div>
         </div>
         <div slot="footer" class="dialog-footer">
-          <el-button type="primary" plain>
+          <el-button @click="aboutDialog = false" type="primary" plain>
             {{ $t('button.close_up') }}
           </el-button>
-          <el-button type="danger">
+          <el-button @click="createFeedback" type="danger">
             {{ $t('button.confirm') }}
           </el-button>
         </div>
@@ -283,7 +284,7 @@ import {
   INDEX_SET_TITLE_MENU,
   JOB_LIST_RECENT_JOBS,
   JOB_LIST_SUGGEST_JOBS,
-  MASTER_GET_DATA
+  MASTER_GET_DATA, INDEX_SET_SUCCESS, JOB_CREATE_FEEDBACK
 } from '../../store/store.const'
 
 export default {
@@ -302,9 +303,9 @@ export default {
         question: ''
       },
       formAbout: {
-        method: [],
-        desired: '',
-        detail: ''
+        feedback_type_ids: [],
+        desired_salary: '',
+        content: ''
       },
       listDate: [
         '2022年09月02日（月）',
@@ -380,6 +381,9 @@ export default {
         return this.job.stations[0].province_name + this.job.stations[0].railway_name + this.job.stations[0].station_name
       }
       return ''
+    },
+    disabledInput() {
+      return !this.formAbout.feedback_type_ids.includes('1')
     }
   },
   async created() {
@@ -430,6 +434,39 @@ export default {
     },
     changeToLink(link) {
       this.$router.push(link)
+    },
+    async createFeedback() {
+      try {
+        await this.$store.commit(INDEX_SET_LOADING, true)
+        const dto = this.formAbout
+        const response = await this.$store.dispatch(JOB_CREATE_FEEDBACK, {
+          id: this.id,
+          data: dto
+        })
+        switch (response.status_code) {
+          case 200:
+            await this.$store.commit(INDEX_SET_SUCCESS, {
+              show: true,
+              text: response.messages
+            })
+            break
+          case 422:
+            for (const [key] of Object.entries(response.data)) {
+              this.error = { key, value: response.data[key][0] }
+            }
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: response.messages
+            })
+            break
+        }
+        await this.$store.commit(INDEX_SET_LOADING, false)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }
