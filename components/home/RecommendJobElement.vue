@@ -1,17 +1,17 @@
 <template>
   <div class="recommend-job-element">
     <div class="job-title">
-      <div class="title-main">{{ job.name }}</div>
-      <div class="sub-title">{{ job.store_name }}</div>
+      <div class="title-main">{{ jobActive.name }}</div>
+      <div class="sub-title">{{ jobActive.store_name }}</div>
     </div>
     <div class="job-content">
       <div class="job-image">
-        <img :src="job.banner_image" alt="">
+        <img :src="jobActive.banner_image" alt="">
       </div>
       <div class="job-description">
         <div class="job-info">
           <img src="/assets/icon/icon_place.svg" alt="">
-          <span>{{ job.address ? job.address.address : '' }}</span>
+          <span>{{ jobActive.address ? jobActive.address.address : '' }}</span>
         </div>
         <div class="job-info">
           <img src="/assets/icon/icon_save.svg" alt="">
@@ -26,17 +26,21 @@
           <span>{{ showDate }}</span>
         </div>
         <div>
-          <div v-for="(work, index) in job.work_types" :key="index" class="feature-item">
+          <div v-for="(work, index) in jobActive.work_types" :key="index" class="feature-item">
             {{ work.name }}
           </div>
         </div>
         <div class="job-button">
-          <div class="button-like">
+          <div v-if="jobActive.is_favorite" class="button-dislike" @click="removeFavoriteJob">
+            <img src="/assets/icon/icon_dislike.svg" alt="">
+            <span>{{ $t('home.job_favorite') }}</span>
+          </div>
+          <div v-else class="button-like" @click="addFavoriteJob">
             <img src="/assets/icon/icon_like.svg" alt="">
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div class="button-detail">
-            <div class="el-button" @click="changeToLink('/job/' + job.id)">
+            <div class="el-button" @click="changeToLink('/job/' + jobActive.id)">
               {{ $t('home.view_job_detail') }}
             </div>
           </div>
@@ -48,32 +52,85 @@
 
 <script>
 
+import {
+  JOB_ADD_FAVORITE_JOB,
+  INDEX_SET_ERROR,
+  INDEX_SET_LOADING,
+  INDEX_SET_SUCCESS,
+  JOB_REMOVE_FAVORITE_JOB
+} from '../../store/store.const'
+
 export default {
   name: 'RecommendJobElement',
   props: ['job'],
+  data() {
+    return {
+      jobActive: {}
+    }
+  },
   computed: {
     showJobType() {
-      if (this.job.job_types === undefined) {
+      if (this.jobActive.job_types === undefined) {
         return ''
       }
-      return this.job.job_types.map((list) => list.name).join('、')
+      return this.jobActive.job_types.map((list) => list.name).join('、')
     },
     showDate() {
-      if (this.job.work_time === undefined) {
+      if (this.jobActive.work_time === undefined) {
         return ''
       }
-      return this.job.work_time.start + '〜' + this.job.work_time.end
+      return this.jobActive.work_time.start + '〜' + this.jobActive.work_time.end
     },
     showSalary() {
-      if (this.job.salary === undefined) {
+      if (this.jobActive.salary === undefined) {
         return ''
       }
-      return this.job.salary.min + '~' + this.job.salary.max + this.job.salary.type
+      return this.jobActive.salary.min + '~' + this.jobActive.salary.max + this.jobActive.salary.type
+    }
+  },
+  created() {
+    this.jobActive = this.job
+  },
+  watch: {
+    job: {
+      handler(newValue) {
+        this.jobActive = newValue
+      },
+      deep: true
     }
   },
   methods: {
     changeToLink(link) {
       this.$router.push(link)
+    },
+    async addFavoriteJob() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const dataMessage = {
+        job_posting_id: this.jobActive.id
+      }
+      const dataResponse = await this.$store.dispatch(JOB_ADD_FAVORITE_JOB, dataMessage)
+      await this.changeStatusJob(dataResponse, true)
+      await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    async removeFavoriteJob() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const response = await this.$store.dispatch(JOB_REMOVE_FAVORITE_JOB, this.jobActive.id)
+      await this.changeStatusJob(response, false)
+      await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    async changeStatusJob(response, state) {
+      if (response.status_code === 200) {
+        await this.$store.commit(INDEX_SET_SUCCESS, {
+          show: true,
+          text: response.messages
+        })
+        this.jobActive.is_favorite = state
+      } else {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: response.messages
+        })
+      }
     }
   }
 }

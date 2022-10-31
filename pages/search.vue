@@ -184,9 +184,11 @@
 <script>
 import {
   INDEX_SET_TITLE_MENU,
-  JOB_LIST_RECOMMEND_JOBS,
+  JOB_LIST_JOBS,
   MASTER_GET_DATA,
-  LOCATION_LIST_AMOUNT
+  LOCATION_LIST_AMOUNT,
+  INDEX_SET_LOADING,
+  INDEX_SET_ERROR
 } from '../store/store.const'
 import TitlePageElement from '../components/layout/TitlePageElement'
 import BannerElement from '../components/layout/BannerElement'
@@ -203,9 +205,9 @@ export default {
       occupationDialog: false,
       showAll: false,
       listJobs: [],
-      total: 2500,
+      total: 0,
       page: 1,
-      lastPage: 10,
+      lastPage: 1,
       listWorkTypes: [
         { id: 1, name: '正社員' },
         { id: 2, name: '派遣社員' },
@@ -418,6 +420,7 @@ export default {
       this.page = page
     },
     async getMasterData() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
       const dataResources = [
         'resources[m_work_types]={"model": "MWorkType"}',
         'resources[m_job_experiences]={"model": "MJobExperience"}',
@@ -454,11 +457,22 @@ export default {
         })
         this.listProvinceDistricts = dataListProvince
       }
-      this.listJobs = dataResponse.data
+      await this.$store.commit(INDEX_SET_LOADING, false)
     },
     async getJobs() {
-      const dataResponse = await this.$store.dispatch(JOB_LIST_RECOMMEND_JOBS, '')
-      this.listJobs = dataResponse.data
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const dataResponse = await this.$store.dispatch(JOB_LIST_JOBS, '')
+      if (dataResponse.status_code === 200) {
+        this.listJobs = dataResponse.data.data
+        this.total = dataResponse.data.total
+        this.lastPage = dataResponse.data.total_page
+      } else {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: dataResponse.messages
+        })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     },
     changeDistrict(district) {
       if (!this.districts.includes(district.id)) {
