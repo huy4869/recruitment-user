@@ -282,7 +282,6 @@ export default {
             }
             await this.$store.commit(INDEX_SET_LOADING, false)
           } catch (err) {
-            console.log(err)
             await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
           }
           await this.$store.commit(INDEX_SET_LOADING, false)

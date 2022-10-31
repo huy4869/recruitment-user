@@ -636,7 +636,6 @@ export default {
       if (this.accountForm.year > year) {
         callback(new Error(this.$t('validation.birthday', { _field_: this.$t('my_page.birth') })))
       } else if (this.accountForm.year === year.toString()) {
-        console.log('tha cho toi')
         if (this.accountForm.month > month) {
           callback(new Error(this.$t('validation.birthday', { _field_: this.$t('my_page.birth') })))
         }

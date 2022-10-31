@@ -5,7 +5,7 @@
         {{ $t('my_page.job_career') + $route.params.id + $t('my_page.create') }}
       </div>
       <div class="edit-cv-content edit-form-content">
-        <div class="card-text-title card-title-mobile"> {{ $t('my_page.edit_basic_information') }}</div>
+        <div class="card-text-title card-title-mobile"> {{ $t('my_page.job_career') + $route.params.id + $t('my_page.create') }}</div>
         <el-form
           ref="accountForm"
           :model="accountForm"
@@ -16,7 +16,7 @@
           <div class="edit-form-input">
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label"><span>{{ $t('career.store_name') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
@@ -43,7 +43,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label"><span>{{ $t('career.company_name') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -69,7 +69,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label">
                   <span>{{ $t('career.period_start') }}</span>
                 </div>
@@ -78,7 +78,7 @@
               <el-col :md="18" :sm="24">
                 <div class="content-input">
                   <el-row class="enroll-checkbox">
-                    <el-checkbox v-model="accountForm.enroll">{{ $t('my_page.enroll') }}</el-checkbox>
+                    <el-checkbox v-model="accountForm.period_check">{{ $t('my_page.enroll') }}</el-checkbox>
                   </el-row>
                   <el-row class="d-flex period">
                     <el-col :md="9" :sm="24" class="first-name">
@@ -87,7 +87,7 @@
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-autocomplete
                               ref="period_start"
-                              v-model.trim="accountForm.period_start_year"
+                              v-model.trim="accountForm.period_year_start"
                               :placeholder="$t('YYYY')"
                               :fetch-suggestions="queryYear"
                               name="year"
@@ -103,8 +103,8 @@
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col :sm="12" :xs="10" class="birth-month">
                             <el-autocomplete
-                              ref="period_startx"
-                              v-model.trim="accountForm.period_start_month"
+                              ref="period_start"
+                              v-model.trim="accountForm.period_month_start"
                               :placeholder="$t('MM')"
                               :fetch-suggestions="queryMonth"
                               name="period_start"
@@ -121,14 +121,14 @@
                         </el-row>
                       </el-form-item>
                     </el-col>
-                    <span v-show="accountForm.enroll" class="date-space">~</span>
-                    <el-col v-show="accountForm.enroll" :md="9" :sm="24" class="birth-year">
+                    <span v-show="accountForm.period_check" class="date-space">~</span>
+                    <el-col v-show="accountForm.period_check" :md="9" :sm="24" class="birth-year">
                       <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-autocomplete
                               ref="period_end"
-                              v-model.trim="accountForm.period_end_year"
+                              v-model.trim="accountForm.period_year_end"
                               :placeholder="$t('YYYY')"
                               :fetch-suggestions="queryYear"
                               name="birthday"
@@ -145,7 +145,7 @@
                           <el-col  :sm="12" :xs="10" class="birth-month">
                             <el-autocomplete
                               ref="period_end"
-                              v-model.trim="accountForm.period_end_month"
+                              v-model.trim="accountForm.period_month_end"
                               :placeholder="$t('MM')"
                               :fetch-suggestions="queryMonth"
                               name="birthday"
@@ -168,7 +168,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label"><span>{{ $t('career.occupation') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
@@ -176,25 +176,24 @@
                 <div class="content-input">
                   <el-row class="">
                     <el-col :md="10" :sm="24">
-                      <el-form-item label="" prop="occupationSelect" :error="(error.key === 'occupation') ? error.value : ''">
-                        <el-select v-model="accountForm.occupationSelect" :placeholder="$t('career.enter_occupation')">
+                      <el-form-item label="" prop="job_type_name" :error="(error.key === 'job_type_name') ? error.value : ''">
+                        <el-select v-model="accountForm.job_type_name" :placeholder="$t('career.enter_occupation')">
                           <el-option
-                            v-for="item in occupation"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in m_job_types"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                           </el-option>
                         </el-select>
                       </el-form-item>
                     </el-col>
-                    <el-col v-if="accountForm.occupationSelect === -1" :md="20" :sm="24">
+                    <el-col v-if="accountForm.job_type_name === 6" :md="20" :sm="24">
                       <div class="text-bold">{{ $t('career.other_occupation') }}</div>
                       <el-form-item label="" prop="other_occupation" :error="(error.key === 'other_occupation') ? error.value : ''">
-                        <el-autocomplete
+                        <el-input
                           ref="other_occupation"
                           v-model="accountForm.other_occupation"
                           :placeholder="$t('career.enter_other_occupation')"
-                          :fetch-suggestions="queryOccupation"
                           name="other_occupation"
                           type="text"
                           tabindex="2"
@@ -208,7 +207,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label"><span>{{ $t('career.position_offices') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
@@ -219,10 +218,10 @@
                       <el-form-item label="" prop="position_offices" :error="(error.key === 'position_offices') ? error.value : ''">
                         <el-select v-model="accountForm.position_offices" :placeholder="$t('career.position_offices')" size="large" multiple>
                           <el-option
-                            v-for="item in positions"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in m_position_offices"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -233,7 +232,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label"><span>{{ $t('career.status') }}</span></div>
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
@@ -241,25 +240,24 @@
                 <div class="content-input">
                   <el-row class="">
                     <el-col :md="10" :sm="24">
-                      <el-form-item label="" prop="status" :error="(error.key === 'status') ? error.value : ''">
-                        <el-select v-model="accountForm.status" :placeholder="$t('career.enter_emp_status')">
+                      <el-form-item label="" prop="work_type_name" :error="(error.key === 'work_type_name') ? error.value : ''">
+                        <el-select v-model="accountForm.work_type_name" :placeholder="$t('career.enter_emp_status')">
                           <el-option
-                            v-for="item in emp_status"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in m_work_types"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                           </el-option>
                         </el-select>
                       </el-form-item>
                     </el-col>
-                    <el-col v-if="accountForm.status === -1" :md="20" :sm="24">
+                    <el-col v-if="accountForm.work_type_name === 5" :md="20" :sm="24">
                       <div class="text-bold">{{ $t('career.other_emp_status') }}</div>
                       <el-form-item label="" prop="other_status" :error="(error.key === 'other_status') ? error.value : ''">
-                        <el-autocomplete
+                        <el-input
                           ref="other_status"
                           v-model="accountForm.other_status"
                           :placeholder="$t('career.enter_other_emp_status')"
-                          :fetch-suggestions="queryStatus"
                           name="other_status"
                           type="text"
                           tabindex="2"
@@ -273,7 +271,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label"><span>{{ $t('career.business_content') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -301,7 +299,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="24" class="col-label">
+              <el-col :md="6" :sm="12" class="col-label">
                 <div class="label show-pc">
                    <span>
                      {{ $t('career.experience_accumulation1') }}<br>
@@ -317,17 +315,17 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="experience" :error="(error.key === 'experience') ? error.value : ''">
+                      <el-form-item label="" prop="experience_accumulation" :error="(error.key === 'experience_accumulation') ? error.value : ''">
                         <el-input
                           ref="alias_name"
-                          v-model="accountForm.experience"
+                          v-model="accountForm.experience_accumulation"
                           :placeholder="$t('career.experience')"
                           :autosize="{ minRows: 5, maxRows: 10}"
                           name="experience"
                           type="textarea"
                           maxlength="2000"
                           tabindex="2"
-                          @focus="resetValidate('experience')"
+                          @focus="resetValidate('experience_accumulation')"
                         />
                       </el-form-item>
                       <div class="sm-text">{{ $t('my_page.currently') }}{{ experienceLength }}{{ $t('my_page.characters') }}</div>
@@ -343,8 +341,8 @@
       </div>
     </div>
     <div id="btn-center" class="text-center">
-      <el-button class="card-button" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button btn-right" type="danger" @click.native="submit" >{{ $t('my_page.save') }}</el-button>
+      <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
+      <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -357,11 +355,36 @@
 
 <script>
 import BorderElement from './BorderElement'
+import {
+  INDEX_SET_ERROR,
+  INDEX_SET_LOADING,
+  INDEX_SET_SUCCESS,
+  WORK_HISTORY_DELETE,
+  WORK_HISTORY_CREATE
+} from '@/store/store.const'
 import { LINKS_MONTH } from '@/constants/store'
-
 export default {
   name: 'EditCvElement',
   components: { BorderElement },
+  filters: {
+    toFullWidth(value) {
+      return value.toString().replace(/[A-Za-z0-9]/g, function(s) { return String.fromCharCode(s.charCodeAt(0) + 0xFEE0) })
+    }
+  },
+  props: {
+    m_job_types: {
+      type: Array,
+      default: () => []
+    },
+    m_position_offices: {
+      type: Array,
+      default: () => []
+    },
+    m_work_types: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     const validFormLength = (rule, value, callback, message) => {
       if (value && value.length > 255) {
@@ -387,46 +410,32 @@ export default {
     return {
       accountForm: {
         business_content: '',
-        experience: '',
-        enroll: false,
+        experience_accumulation: '',
+        period_check: false,
         store_name: '',
         company_name: '',
         period_start: '',
         period_end: '',
-        occupationSelect: '',
-        position_offices: '',
-        status: '',
+        job_type_name: '',
+        job_types: {
+          id: '',
+          name: ''
+        },
+        work_types: {
+          id: '',
+          name: ''
+        },
+        position_offices: [],
+        position_full_offices: [],
+        work_type_name: '',
         other_status: '',
         other_occupation: '',
-        period_end_year: '',
-        period_end_month: '',
-        period_start_year: '',
-        period_start_month: '',
+        period_year_end: '',
+        period_month_end: '',
+        period_year_start: '',
+        period_month_start: '',
         errors: {}
       },
-      occupation: [
-        { value: 'ヘア', label: 'ヘア' },
-        { value: 'ネイル・マツゲ', label: 'ネイル・マツゲ' },
-        { value: '整体・カイロ・酸素・温浴', label: '整体・カイロ・酸素・温浴' },
-        { value: 'フェイシャル・ボディ・脱毛', label: 'フェイシャル・ボディ・脱毛' },
-        { value: '美容クリニック', label: '美容クリニック' },
-        { value: -1, label: 'その他' }
-      ],
-      positions: [
-        { value: 'ヘア', label: 'ヘア' },
-        { value: 'ネイル・マツゲ', label: 'ネイル・マツゲ' },
-        { value: '整体・カイロ・酸素・温浴', label: '整体・カイロ・酸素・温浴' },
-        { value: 'フェイシャル・ボディ・脱毛', label: 'フェイシャル・ボディ・脱毛' },
-        { value: '美容クリニック', label: '美容クリニック' },
-        { value: 'その他', label: 'その他' }
-      ],
-      emp_status: [
-        { value: '正社員', label: '正社員' },
-        { value: '派遣社員', label: '派遣社員' },
-        { value: '契約社員', label: '契約社員' },
-        { value: 'アルバイト', label: 'アルバイト' },
-        { value: -1, label: 'その他' }
-      ],
       error: {
         key: null,
         value: ''
@@ -442,7 +451,7 @@ export default {
         business_content: [
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.business_content') }), trigger: 'blur' }
         ],
-        experience: [
+        experience_accumulation: [
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
         ],
         other_occupation: [
@@ -454,13 +463,10 @@ export default {
         period_start: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.period_start') }), trigger: 'blur' }
         ],
-        period_end: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.period_start') }), trigger: 'blur' }
-        ],
-        status: [
+        work_type_name: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.status') }), trigger: 'blur' }
         ],
-        occupationSelect: [
+        job_type_name: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.occupation') }), trigger: 'blur' }
         ],
         position_offices: [
@@ -471,7 +477,10 @@ export default {
       linksStatus: [],
       linksOccupation: [],
       linksYear: [],
-      linksMonth: []
+      linksMonth: [],
+      index: this.$route.params.id || '',
+      clonedOccupation: [],
+      deleteModal: false
     }
   },
   computed: {
@@ -479,34 +488,68 @@ export default {
       return this.accountForm.business_content.length
     },
     experienceLength() {
-      return this.accountForm.experience.length
+      return this.accountForm.experience_accumulation.length
     },
     period_start() {
-      return this.accountForm.period_start_year && this.accountForm.period_start_month
+      return this.accountForm.period_year_start && this.accountForm.period_month_start
     },
     period_end() {
-      return this.accountForm.period_end_year && this.accountForm.period_end_month
+      return this.accountForm.period_year_end && this.accountForm.period_month_end
     }
   },
   watch: {
     period_start() {
-      if (this.accountForm.period_start_year && this.accountForm.period_start_month) {
-        this.accountForm.period_start = 'period_start'
+      if (this.accountForm.period_year_start && this.accountForm.period_month_start) {
+        this.accountForm.period_start = this.accountForm.period_year_start + '/' + this.accountForm.period_month_start
       }
     },
     period_end() {
-      if (this.accountForm.period_end_year && this.accountForm.period_end_month) {
-        this.accountForm.period_end = 'period_end'
+      if (this.accountForm.period_year_end && this.accountForm.period_month_end) {
+        this.accountForm.period_end = this.accountForm.period_year_end + '/' + this.accountForm.period_month_end
       }
     },
-    'accountForm.enroll'() {
-      this.accountForm.period_end_year = ''
-      this.accountForm.period_end_month = ''
+    'accountForm.period_check'() {
+      if (this.accountForm.period_check) {
+        if (this.accountForm.period_year_end && this.accountForm.period_month_end) {
+          this.resetValidate('period_end')
+        }
+        this.accountRules.period_end = {
+          required: true, message: this.$t('validation.required', { _field_: this.$t('career.period_start') }), trigger: 'blur'
+        }
+      } else {
+        delete this.accountRules.period_end
+      }
+    },
+    'accountForm.job_type_name'() {
+      if (this.accountForm.job_type_name !== 6) {
+        this.accountForm.other_occupation = ''
+      }
+    },
+    'accountForm.work_type_name'() {
+      if (this.accountForm.work_type_name !== 5) {
+        this.accountForm.other_status = ''
+      }
+    },
+    m_job_types() {
+      this.m_job_types.forEach(element => {
+        if (element.id !== 'other') {
+          this.linksOccupation.push({
+            value: element.name
+          })
+        }
+      })
+    },
+    m_work_types() {
+      this.m_work_types.forEach(element => {
+        if (element.id !== 'other') {
+          this.linksStatus.push({
+            value: element.name
+          })
+        }
+      })
     }
   },
   mounted() {
-    this.linksOccupation = this.loadAllOccupation()
-    this.linksStatus = this.loadAllStatus()
     this.loadAllYear()
     this.loadAllMonth()
   },
@@ -526,6 +569,12 @@ export default {
     },
     closeConfirmModal() {
       this.confirmModal = false
+    },
+    showDeleteModal() {
+      this.deleteModal = true
+    },
+    closeDeleteModal() {
+      this.deleteModal = false
     },
     queryOccupation(queryString, cb) {
       const links = this.linksOccupation
@@ -557,11 +606,11 @@ export default {
       }
     },
     loadAllOccupation() {
-      const clonedOccupation = JSON.parse(JSON.stringify(this.occupation))
-      return clonedOccupation.splice(0, (clonedOccupation.length - 1))
+      // const clonedOccupation = JSON.parse(JSON.stringify(this.m_job_types))
+      return this.clonedOccupation.splice(0, (this.clonedOccupation.length - 1))
     },
     loadAllStatus() {
-      const clonedStatus = JSON.parse(JSON.stringify(this.emp_status))
+      const clonedStatus = JSON.parse(JSON.stringify(this.m_work_types))
       return clonedStatus.splice(0, (clonedStatus.length - 1))
     },
     loadAllYear() {
@@ -572,15 +621,92 @@ export default {
     loadAllMonth() {
       this.linksMonth = LINKS_MONTH
     },
-    submit() {
-      this.$refs.accountForm.validate(valid => {
+    update() {
+      this.error = { key: null, value: '' }
+      this.$refs.accountForm.validate(async valid => {
         if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
+          try {
+            await this.$store.commit(INDEX_SET_LOADING, true)
+            const dto = this.accountForm
+            dto.period_check = this.accountForm.period_check ? 0 : 1
+            dto.period_end = dto.period_check === 0 ? dto.period_end : ''
+            if (this.accountForm.other_occupation) {
+              dto.job_types.id = 6
+              dto.job_types.name = this.accountForm.other_occupation
+            }
+            if (this.accountForm.other_status) {
+              dto.work_types.id = 5
+              dto.work_types.name = this.accountForm.other_status
+            }
+            if (this.accountForm.job_type_name !== 6) {
+              this.accountForm.other_occupation = ''
+              this.accountForm.job_types = {
+                id: this.accountForm.job_type_name,
+                name: this.m_job_types[this.accountForm.job_type_name - 1].name
+              }
+            }
+            if (this.accountForm.work_type_name !== 5) {
+              this.accountForm.other_status = ''
+              this.accountForm.work_types = {
+                id: this.accountForm.work_type_name,
+                name: this.m_work_types[this.accountForm.work_type_name - 1].name
+              }
+            }
+            this.accountForm.position_full_offices = []
+            this.m_position_offices.forEach((element) => {
+              if (this.accountForm.position_offices.includes(element.id)) {
+                this.accountForm.position_full_offices.push({
+                  id: element.id,
+                  name: element.name
+                })
+              }
+            })
+            dto.position_offices = this.accountForm.position_full_offices
+            const response = await this.$store.dispatch(WORK_HISTORY_CREATE, dto)
+            if (response.status_code === 200) {
+              await this.$store.commit(INDEX_SET_SUCCESS, {
+                show: true,
+                text: response.messages
+              })
+              this.$router.push('/my-page/job-career')
+            } else {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: response.messages
+              })
+            }
+            await this.$store.commit(INDEX_SET_LOADING, false)
+          } catch (err) {
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+          }
+          await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    async handleDelete(id) {
+      try {
+        await this.$store.commit(INDEX_SET_LOADING, true)
+        const response = await this.$store.dispatch(WORK_HISTORY_DELETE, id)
+        switch (response.status_code) {
+          case 200:
+            await this.$store.commit(INDEX_SET_SUCCESS, {
+              show: true,
+              text: response.messages
+            })
+            this.$router.push('/my-page/job-career')
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: response.messages
+            })
+            break
+        }
+        await this.$store.commit(INDEX_SET_LOADING, false)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }

@@ -185,7 +185,7 @@
                          </el-select>
                        </el-form-item>
                      </el-col>
-                     <el-col v-if="accountForm.job_type_name === 'other'" :md="20" :sm="24">
+                     <el-col v-if="accountForm.job_type_name === 6" :md="20" :sm="24">
                        <div class="text-bold">{{ $t('career.other_occupation') }}</div>
                        <el-form-item label="" prop="other_occupation" :error="(error.key === 'other_occupation') ? error.value : ''">
                          <el-input
@@ -249,7 +249,7 @@
                          </el-select>
                        </el-form-item>
                      </el-col>
-                     <el-col v-if="accountForm.work_type_name === 'other'" :md="20" :sm="24">
+                     <el-col v-if="accountForm.work_type_name === 5" :md="20" :sm="24">
                        <div class="text-bold">{{ $t('career.other_emp_status') }}</div>
                        <el-form-item label="" prop="other_status" :error="(error.key === 'other_status') ? error.value : ''">
                          <el-input
@@ -427,6 +427,7 @@ export default {
         period_end: '',
         job_type_name: '',
         position_offices: [],
+        position_full_offices: [],
         work_type_name: '',
         other_status: '',
         other_occupation: '',
@@ -463,9 +464,6 @@ export default {
         period_start: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.period_start') }), trigger: 'blur' }
         ],
-        period_end: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.period_start') }), trigger: 'blur' }
-        ],
         work_type_name: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.status') }), trigger: 'blur' }
         ],
@@ -488,10 +486,10 @@ export default {
   },
   computed: {
     contentLength() {
-      return this.accountForm.business_content.length
+      return this.accountForm.business_content ? this.accountForm.business_content.length : ''
     },
     experienceLength() {
-      return this.accountForm.experience_accumulation.length
+      return this.accountForm.experience_accumulation ? this.accountForm.experience_accumulation.length : ''
     },
     period_start() {
       return this.accountForm.period_year_start && this.accountForm.period_month_start
@@ -511,14 +509,40 @@ export default {
         this.accountForm.period_end = this.accountForm.period_year_end + '/' + this.accountForm.period_month_end
       }
     },
-    // 'accountForm.period_check'() {
-    //   this.accountForm.period_year_end = ''
-    //   this.accountForm.period_month_end = ''
-    // },
+    'accountForm.period_check'() {
+      if (this.accountForm.period_check) {
+        if (this.accountForm.period_year_end && this.accountForm.period_month_end) {
+          this.resetValidate('period_end')
+        }
+        this.accountRules.period_end = {
+          required: true, message: this.$t('validation.required', { _field_: this.$t('career.period_start') }), trigger: 'blur'
+        }
+      } else {
+        delete this.accountRules.period_end
+      }
+    },
     job() {
+      this.accountForm.job_type_name = this.job.job_types.id
+      this.accountForm.work_type_name = this.job.work_types.id
+      this.accountForm.other_occupation = this.job.job_types.name
+      this.accountForm.other_status = this.job.work_types.name
       this.accountForm.period_check = !!this.job.period_end
       for (const item in this.job) {
         this.accountForm[item] = this.job[item]
+      }
+      this.accountForm.position_offices = []
+      this.job.position_offices.forEach((element) => {
+        this.accountForm.position_offices.push(element.id)
+      })
+    },
+    'accountForm.job_type_name'() {
+      if (this.accountForm.job_type_name !== 6) {
+        this.accountForm.other_occupation = ''
+      }
+    },
+    'accountForm.work_type_name'() {
+      if (this.accountForm.work_type_name !== 5) {
+        this.accountForm.other_status = ''
       }
     },
     m_job_types() {
@@ -622,11 +646,35 @@ export default {
             dto.period_check = this.accountForm.period_check ? 0 : 1
             dto.period_end = dto.period_check === 0 ? dto.period_end : ''
             if (this.accountForm.other_occupation) {
-              dto.job_type_name = this.accountForm.other_occupation
+              dto.job_types.name = this.accountForm.other_occupation
             }
             if (this.accountForm.other_status) {
-              dto.work_type_name = this.accountForm.other_status
+              dto.work_types.name = this.accountForm.other_status
             }
+            if (this.accountForm.job_type_name !== 6) {
+              this.accountForm.other_occupation = ''
+              this.accountForm.job_types = {
+                id: this.accountForm.job_type_name,
+                name: this.m_job_types[this.accountForm.job_type_name - 1].name
+              }
+            }
+            if (this.accountForm.work_type_name !== 5) {
+              this.accountForm.other_status = ''
+              this.accountForm.work_types = {
+                id: this.accountForm.work_type_name,
+                name: this.m_work_types[this.accountForm.work_type_name - 1].name
+              }
+            }
+            this.accountForm.position_full_offices = []
+            this.m_position_offices.forEach((element) => {
+              if (this.accountForm.position_offices.includes(element.id)) {
+                this.accountForm.position_full_offices.push({
+                  id: element.id,
+                  name: element.name
+                })
+              }
+            })
+            dto.position_offices = this.accountForm.position_full_offices
             const response = await this.$store.dispatch(WORK_HISTORY_UPDATE, {
               id: this.$route.query.id,
               data: dto
@@ -636,6 +684,7 @@ export default {
                 show: true,
                 text: response.messages
               })
+              this.$router.push('/my-page/job-career')
             } else {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,
