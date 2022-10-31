@@ -66,6 +66,8 @@ export const APPLICATION_CANCEL_APPLICATION = 'application/postCancelApplication
 
 // chat
 export const CHAT_LIST = 'chat/listChat'
+export const CHAT_DETAIL_CHAT = 'chat/getDetailChat'
+export const CHAT_CREATE_MESSAGE = 'chat/createMessage'
 
 // job
 export const JOB_LIST_FAVORITE = 'job/listFavorite'
@@ -84,3 +86,4 @@ export const NOTIFICATION_LIST = 'notification/listNotification'
 
 // location
 export const LOCATION_LIST_MOST_APPLY = 'location/listLocationMostApply'
+export const LOCATION_LIST_AMOUNT = 'location/listLocationAmount'

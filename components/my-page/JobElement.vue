@@ -133,7 +133,7 @@ export default {
       return this.job[key].map((item) => item[index]).join('、')
     },
     removeFavoriteJob() {
-      this.$emit('removeFavoriteJob', this.job.id)
+      this.$emit('removeFavoriteJob', this.job)
     }
   }
 }

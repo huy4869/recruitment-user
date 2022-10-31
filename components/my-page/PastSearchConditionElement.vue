@@ -15,7 +15,7 @@
           <FormConditionElement :condition="condition" @removeSearchJob="removeSearchJob" @changeToSearch="changeToLink"></FormConditionElement>
         </div>
       </div>
-      <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
+      <PaginationElement v-if="listConditions.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
     </div>
   </div>
 </template>
