@@ -83,6 +83,7 @@ export const JOB_REMOVE_FAVORITE_JOB = 'job/removeFavoriteJob'
 export const JOB_ADD_FAVORITE_JOB = 'job/addFavoriteJob'
 export const JOB_LIST_SEARCH_JOB = 'job/listSearchJob'
 export const JOB_REMOVE_SEARCH_JOB = 'job/removeSearchJob'
+export const JOB_CREATE_FEEDBACK = 'job/createFeedback'
 
 // notification
 export const NOTIFICATION_LIST = 'notification/listNotification'
