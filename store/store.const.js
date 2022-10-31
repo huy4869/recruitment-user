@@ -56,6 +56,7 @@ export const DESIRED_UPDATE = 'my_page/updateDesired'
 
 // Inquiry
 export const INQUIRY_CREATE = 'my_page/createInquiry'
+export const INQUIRY_PHONE_NUMBER = 'my_page/getPhoneNumber'
 
 // application
 export const APPLICATION_LIST = 'application/getListApplication'
