@@ -142,6 +142,11 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.post('/contact/create', data), context)
     })
   },
+  getPhoneNumber(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/contact/admin-tel'), context)
+    })
+  },
   getPercentage(context, data) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.get('/profile/percentage'), context)

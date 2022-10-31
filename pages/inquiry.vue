@@ -137,7 +137,7 @@
         <div class="right-container text-center">
           <div class="here text-bold">{{ $t('inquiry.here') }}</div>
           <div class="schedule-des">
-            <div class="phone-number">{{ $t('inquiry.phone_number') }}</div>
+            <div class="phone-number">{{ phone }}</div>
             <div class="time text-primary-black">{{ $t('inquiry.time') }}</div>
           </div>
         </div>
@@ -155,7 +155,8 @@ import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
   INDEX_SET_TITLE_MENU,
-  INQUIRY_CREATE
+  INQUIRY_CREATE,
+  INQUIRY_PHONE_NUMBER
 } from '~/store/store.const'
 import { validEmail, validHalfWidth, validPhoneNumber } from '~/utils/validate'
 
@@ -226,7 +227,8 @@ export default {
           { required: true, message: this.$t('validation.required', { _field_: this.$t('inquiry.content') }), trigger: 'blur' },
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('inquiry.content') }), trigger: 'blur' }
         ]
-      }
+      },
+      phone: ''
     }
   },
   created() {
@@ -234,6 +236,7 @@ export default {
       { name: this.$t('page.home'), route: '/' },
       { name: this.$t('page.inquiry'), route: '/my-page' }
     ])
+    this.getPhoneNumber()
   },
   methods: {
     resetValidate(ref) {
@@ -278,6 +281,19 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    async getPhoneNumber() {
+      this.$store.commit(INDEX_SET_LOADING, true)
+      try {
+        const response = await this.$store.dispatch(INQUIRY_PHONE_NUMBER)
+        const { data, status_code } = response
+        if (status_code === 200) {
+          this.phone = data
+        }
+      } catch (e) {
+        this.$store.commit(INDEX_SET_LOADING, false)
+      }
+      this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }
