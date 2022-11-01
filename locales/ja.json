@@ -166,7 +166,9 @@
     "search_again": "再検索する",
     "decide": "決定する",
     "close_up": "閉じる",
-    "confirm": "確定"
+    "confirm": "確定",
+    "applied": "応募済み",
+    "apply": "応募する"
   },
   "my_page": {
     "top_page": "TOPページ",

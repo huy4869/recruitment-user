@@ -64,6 +64,10 @@ export const APPLICATION_LIST = 'application/getListApplication'
 export const APPLICATION_LIST_APPLIED = 'application/getListApplicationApplied'
 export const APPLICATION_LIST_WAITING_INTERVIEW = 'application/getListApplicationWaitingInterview'
 export const APPLICATION_CANCEL_APPLICATION = 'application/postCancelApplication'
+export const APPLICATION_GET_DATA_APPLICATION = 'application/getDataApplication'
+export const APPLICATION_GET_DATA_DETAIL_APPLICATION = 'application/getDataDetailApplication'
+export const APPLICATION_CREATE_APPLICATION = 'application/postCreateApplication'
+export const APPLICATION_UPDATE_APPLICATION = 'application/postUpdateApplication'
 
 // chat
 export const CHAT_LIST = 'chat/listChat'

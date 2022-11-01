@@ -6,13 +6,18 @@
       </div>
       <div v-if="listScheduleHistory.length" class="application-history-content">
         <div v-for="(schedule, index) in listScheduleHistory" :key="index">
-          <ScheduleHistoryElement :schedule="schedule" :show-status="true" @cancelSchedule="(id) => { cancelSchedule(id, true) }" @editApply="editApply"></ScheduleHistoryElement>
+          <ScheduleHistoryElement
+            :schedule="schedule"
+            :show-status="true"
+            @cancelSchedule="(id) => { cancelSchedule(id, true) }"
+            @editApply="editApply(schedule)">
+          </ScheduleHistoryElement>
         </div>
       </div>
       <div v-else>
         <NoDataElement :text="$t('common.no_data')"></NoDataElement>
       </div>
-      <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false"></FormApplyJobElement>
+      <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
     </div>
   </div>
 </template>
@@ -33,8 +38,9 @@ export default {
     return {
       listScheduleHistory: [],
       page: 1,
-      lastPage: 10,
-      applyDialog: false
+      lastPage: 1,
+      applyDialog: false,
+      applyActive: {}
     }
   },
   async created() {
@@ -67,8 +73,9 @@ export default {
       await this.getDataScheduleHistory()
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
-    editApply() {
+    editApply(value) {
       this.applyDialog = true
+      this.applyActive = value
     }
   }
 }

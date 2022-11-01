@@ -51,13 +51,20 @@
           <div><img src="/assets/icon/icon_instagram.svg" alt=""></div>
           <div><img src="/assets/icon/icon_line.svg" alt=""></div>
         </div>
-        <div class="button-like">
+        <div v-if="job.is_favorite" class="button-dislike" @click="removeFavoriteJob">
+          <img src="/assets/icon/icon_dislike.svg" alt="">
+          <span>{{ $t('home.job_favorite') }}</span>
+        </div>
+        <div v-else class="button-like" @click="addFavoriteJob">
           <img src="/assets/icon/icon_like.svg" alt="">
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
         <div class="button-detail">
-          <div class="el-button" @click="applyDialog = true">
-            {{ $t('home.view_job_detail') }}
+          <div v-if="!job.is_apply" class="el-button" @click="applyDialog = true">
+            {{ $t('button.apply') }}
+          </div>
+          <div v-else class="el-button el-disabled">
+            {{ $t('button.applied') }}
           </div>
         </div>
       </div>
@@ -161,13 +168,20 @@
           </div>
         </div>
         <div class="job-button-detail">
-          <div class="button-like">
+          <div v-if="job.is_favorite" class="button-dislike" @click="removeFavoriteJob">
+            <img src="/assets/icon/icon_dislike.svg" alt="">
+            <span>{{ $t('home.job_favorite') }}</span>
+          </div>
+          <div v-else class="button-like" @click="addFavoriteJob">
             <img src="/assets/icon/icon_like.svg" alt="">
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div class="button-detail">
-            <div class="el-button" @click="applyDialog = true">
-              {{ $t('home.view_job_detail') }}
+            <div v-if="!job.is_apply" class="el-button" @click="applyDialog = true">
+              {{ $t('button.apply') }}
+            </div>
+            <div v-else class="el-button el-disabled">
+              {{ $t('button.applied') }}
             </div>
           </div>
         </div>
@@ -264,7 +278,7 @@
         </div>
       </el-dialog>
     </div>
-    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false"></FormApplyJobElement>
+    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :job="job" :is-edit="false" @changeApply="getDetailJob"></FormApplyJobElement>
   </div>
 </template>
 
@@ -284,7 +298,11 @@ import {
   INDEX_SET_TITLE_MENU,
   JOB_LIST_RECENT_JOBS,
   JOB_LIST_SUGGEST_JOBS,
-  MASTER_GET_DATA, INDEX_SET_SUCCESS, JOB_CREATE_FEEDBACK
+  MASTER_GET_DATA,
+  JOB_ADD_FAVORITE_JOB,
+  JOB_REMOVE_FAVORITE_JOB,
+  INDEX_SET_SUCCESS,
+  JOB_CREATE_FEEDBACK
 } from '../../store/store.const'
 
 export default {
@@ -388,7 +406,7 @@ export default {
   },
   async created() {
     await this.$store.commit(INDEX_SET_LOADING, true)
-    await this.getDetailJob(this.$route.params.slug)
+    await this.getDetailJob()
     await this.getDataJob()
     await this.getSuggestJob()
     await this.$store.commit(INDEX_SET_TITLE_MENU, [
@@ -398,8 +416,9 @@ export default {
     await this.$store.commit(INDEX_SET_LOADING, false)
   },
   methods: {
-    async getDetailJob(id) {
-      const dataResponse = await this.$store.dispatch(JOB_GET_DETAIL_JOB, id)
+    async getDetailJob() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const dataResponse = await this.$store.dispatch(JOB_GET_DETAIL_JOB, this.$route.params.slug)
       if (dataResponse.status_code === 200) {
         this.job = dataResponse.data
       } else {
@@ -407,7 +426,9 @@ export default {
           show: true,
           text: dataResponse.messages
         })
+        this.$router.push('/')
       }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     },
     showTextList(key, index) {
       if (this.job[key] === undefined) {
@@ -434,6 +455,35 @@ export default {
     },
     changeToLink(link) {
       this.$router.push(link)
+    },
+    async addFavoriteJob() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const dataMessage = {
+        job_posting_id: this.job.id
+      }
+      const dataResponse = await this.$store.dispatch(JOB_ADD_FAVORITE_JOB, dataMessage)
+      await this.changeStatusJob(dataResponse, true)
+      await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    async removeFavoriteJob() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
+      const response = await this.$store.dispatch(JOB_REMOVE_FAVORITE_JOB, this.job.id)
+      await this.changeStatusJob(response, false)
+      await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    async changeStatusJob(response, state) {
+      if (response.status_code === 200) {
+        await this.$store.commit(INDEX_SET_SUCCESS, {
+          show: true,
+          text: response.messages
+        })
+        this.job.is_favorite = state
+      } else {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: response.messages
+        })
+      }
     },
     async createFeedback() {
       try {
