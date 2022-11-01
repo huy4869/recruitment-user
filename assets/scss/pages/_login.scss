@@ -87,6 +87,15 @@
     #here-login {
       display: none;
     }
+    .el-input__suffix {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      right: 17px;
+      .icon-show-pass {
+        display: flex;
+      }
+    }
   }
   .label {
     font-weight: 700;

@@ -21,13 +21,13 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="location" :error="(error.key === 'location') ? error.value : ''">
-                        <el-select v-model="accountForm.occupationSelect" :placeholder="$t('desired_condition.location')">
+                      <el-form-item label="" prop="province_id" :error="(error.key === 'province_id') ? error.value : ''">
+                        <el-select v-model="accountForm.province_id" :placeholder="$t('desired_condition.location')">
                           <el-option
-                            v-for="item in occupation"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in listProvince"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -45,13 +45,13 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="type" :error="(error.key === 'type') ? error.value : ''">
-                        <el-select v-model="accountForm.occupationSelect" :placeholder="$t('desired_condition.type')">
+                      <el-form-item label="" prop="work_type_ids" :error="(error.key === 'work_type_ids') ? error.value : ''">
+                        <el-select v-model="accountForm.work_type_ids" multiple :placeholder="$t('desired_condition.type')">
                           <el-option
-                            v-for="item in occupation"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in ListWorkType"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -72,7 +72,7 @@
                       <el-form-item label="" prop="age" :error="(error.key === 'age') ? error.value : ''">
                         <el-select v-model="accountForm.age" :placeholder="$t('desired_condition.age')">
                           <el-option
-                            v-for="item in ages"
+                            v-for="item in listAge"
                             :key="item.id"
                             :label="item.name"
                             :value="item.id">
@@ -93,12 +93,12 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="4" :sm="15" :xs="15">
-                      <el-form-item class="salary-start" label="" prop="age" :error="(error.key === 'age') ? error.value : ''">
+                      <el-form-item class="salary-start" label="" prop="salary_min" :error="(error.key === 'salary_min') ? error.value : ''">
                         <el-input
-                          ref="store_name"
-                          v-model="accountForm.store_name"
+                          ref="salary_min"
+                          v-model="accountForm.salary_min"
                           :placeholder="$t('desired_condition.salary')"
-                          name="store_name"
+                          name="salary_min"
                           type="text"
                           tabindex="2"
                           show-word-limit
@@ -107,12 +107,12 @@
                     </el-col>
                     <span class="salary-range">~</span>
                     <el-col :md="4" :sm="15" :xs="15">
-                      <el-form-item label="" prop="age" :error="(error.key === 'age') ? error.value : ''">
+                      <el-form-item label="" prop="salary_max" :error="(error.key === 'salary_max') ? error.value : ''">
                         <el-input
-                          ref="store_name"
-                          v-model="accountForm.store_name"
+                          ref="salary_max"
+                          v-model="accountForm.salary_max"
                           :placeholder="$t('desired_condition.salary')"
-                          name="store_name"
+                          name="salary_max"
                           type="text"
                           tabindex="2"
                           show-word-limit
@@ -120,10 +120,10 @@
                       </el-form-item>
                     </el-col>
                     <el-col :md="6" :sm="24">
-                      <el-form-item class="salary-select" label="" prop="age" :error="(error.key === 'age') ? error.value : ''">
-                        <el-select v-model="accountForm.salary" :placeholder="$t('desired_condition.age')">
+                      <el-form-item class="salary-select" label="" prop="salary_type_id" :error="(error.key === 'salary_type_id') ? error.value : ''">
+                        <el-select v-model="accountForm.salary_type_id" :placeholder="$t('desired_condition.age')">
                           <el-option
-                            v-for="item in salary"
+                            v-for="item in listSalary"
                             :key="item.id"
                             :label="item.name"
                             :value="item.id">
@@ -144,13 +144,13 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="position" :error="(error.key === 'position') ? error.value : ''">
-                        <el-select v-model="accountForm.occupationSelect" :placeholder="$t('desired_condition.enter_position')">
+                      <el-form-item label="" prop="job_type_ids" :error="(error.key === 'job_type_ids') ? error.value : ''">
+                        <el-select v-model="accountForm.job_type_ids" :placeholder="$t('desired_condition.enter_position')">
                           <el-option
-                            v-for="item in occupation"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in ListJobType"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -168,13 +168,13 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="experience" :error="(error.key === 'experience') ? error.value : ''">
-                        <el-select v-model="accountForm.occupationSelect" :placeholder="$t('desired_condition.enter_experience')">
+                      <el-form-item label="" prop="job_experience_ids" :error="(error.key === 'job_experience_ids') ? error.value : ''">
+                        <el-select v-model="accountForm.job_experience_ids" :placeholder="$t('desired_condition.enter_experience')">
                           <el-option
-                            v-for="item in occupation"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
+                            v-for="item in listJobExperience"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
                           </el-option>
                         </el-select>
                       </el-form-item>
@@ -192,7 +192,7 @@
                 <div class="content-input">
                   <el-row class="">
                     <el-form-item label="" prop="job_features_ids" :error="(error.key === 'job_features_ids') ? error.value : ''">
-                      <el-checkbox-group v-model="accountForm.job_features_ids">
+                      <el-checkbox-group v-model="accountForm.job_feature_ids">
                         <div class="feature-group">
                           <div class="feature-title">※{{ $t('condition.recruitment_feature') }}</div>
                           <div class="checkbox-group">
@@ -230,7 +230,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button btn-right" type="danger" @click.native="submit" >{{ $t('my_page.edit') }}</el-button>
+      <el-button class="card-button btn-right" type="danger" @click.native="handleUpdate" >{{ $t('my_page.edit') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -243,15 +243,57 @@
 
 <script>
 import BorderElement from './BorderElement'
+import { INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS, DESIRED_UPDATE } from '@/store/store.const'
 
 export default {
   name: 'EditCvElement',
   components: { BorderElement },
+  props: {
+    listProvince: {
+      type: Array,
+      default: () => []
+    },
+    listWorkTypes: {
+      type: Array,
+      default: () => []
+    },
+    listJobTypes: {
+      type: Array,
+      default: () => []
+    },
+    listSalary: {
+      type: Array,
+      default: () => []
+    },
+    listJobExperience: {
+      type: Array,
+      default: () => []
+    },
+    listJobFeatures: {
+      type: Array,
+      default: () => []
+    },
+    listAge: {
+      type: Array,
+      default: () => []
+    },
+    desired: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
       accountForm: {
-        job_features_ids: [],
+        province_id: '',
+        work_type_ids: [],
         age: '',
+        salary_type_id: '',
+        job_type_ids: [],
+        job_experience_ids: [],
+        job_feature_ids: [],
+        salary_min: '',
+        salary_max: '',
         errors: {}
       },
       error: {
@@ -280,58 +322,37 @@ export default {
         { id: 3, name: '万円/月収' },
         { id: 4, name: '万円/年収' }
       ],
-      listRecruitmentFeatures: [
-        { id: 1, name: '急募' },
-        { id: 2, name: '10人以上募集' },
-        { id: 3, name: '未経験者歓迎' },
-        { id: 4, name: '経験者優遇' },
-        { id: 5, name: '学歴不問' },
-        { id: 6, name: '第二新卒歓迎' },
-        { id: 7, name: 'フリーター歓迎' },
-        { id: 8, name: '障がい者積極採用' },
-        { id: 9, name: '女性活躍中' },
-        { id: 10, name: '男性活躍中' },
-        { id: 11, name: '年齢不問' },
-        { id: 12, name: '20代以下活躍中' },
-        { id: 13, name: '30代活躍中' },
-        { id: 14, name: '40代以上活躍中' }
-      ],
-      listCompanyFeatures: [
-        { id: 15, name: '転勤なし' },
-        { id: 16, name: '海外勤務/出張あり' },
-        { id: 17, name: '残業月10時間以内' },
-        { id: 18, name: '残業月20時間以内' },
-        { id: 19, name: '原則定時退社' },
-        { id: 20, name: 'フレックスタイム制あり' },
-        { id: 21, name: 'オフィスワーク' },
-        { id: 22, name: '在宅勤務可' },
-        { id: 23, name: '時短勤務可' },
-        { id: 24, name: '英語を使う仕事' },
-        { id: 25, name: '中国語を使う仕事' },
-        { id: 26, name: 'その他の言語を使う仕事' },
-        { id: 27, name: '短期/期間限定' },
-        { id: 28, name: '賞与あり/インセンティブあり' },
-        { id: 29, name: '実力主義/歩合制' },
-        { id: 30, name: '月給25万円以上' }
-      ],
-      listStoreFeatures: [
-        { id: 31, name: '服装自由' },
-        { id: 32, name: '年間休日120日以上' },
-        { id: 33, name: '完全週休2日制' },
-        { id: 34, name: '土日休み' },
-        { id: 35, name: '5日以上連続休暇取得可能' },
-        { id: 36, name: 'マイカー通勤可' },
-        { id: 37, name: 'オフィス内禁煙/分煙' },
-        { id: 38, name: '社宅/家賃補助制度あり' },
-        { id: 39, name: '交通費全額支給' },
-        { id: 40, name: '産休/育休/介護休暇あり' },
-        { id: 41, name: '資格取得支援あり' },
-        { id: 42, name: '独立/開業支援' }
-      ],
-      confirmModal: false
+      listRecruitmentFeatures: [],
+      listCompanyFeatures: [],
+      listStoreFeatures: [],
+      confirmModal: false,
+      ListWorkType: [],
+      ListJobType: []
     }
   },
   computed: {
+  },
+  watch: {
+    listWorkTypes() {
+      this.ListWorkType = this.listWorkTypes.filter(function(obj) {
+        return !obj.is_other
+      })
+    },
+    listJobTypes() {
+      this.ListJobType = this.listJobTypes.filter(function(obj) {
+        return !obj.is_other
+      })
+    },
+    listJobFeatures() {
+      this.listRecruitmentFeatures = this.listJobFeatures[0].feature
+      this.listCompanyFeatures = this.listJobFeatures[1].feature
+      this.listStoreFeatures = this.listJobFeatures[2].feature
+    },
+    desired() {
+      // for (const item in this.desired) {
+      //   this.accountForm[item] = this.desired[item]
+      // }
+    }
   },
   methods: {
     resetValidate(ref) {
@@ -350,13 +371,32 @@ export default {
     closeConfirmModal() {
       this.confirmModal = false
     },
-    submit() {
-      this.$refs.accountForm.validate(valid => {
+    handleUpdate() {
+      this.error = { key: null, value: '' }
+      this.$refs.accountForm.validate(async valid => {
         if (valid) {
-          console.log('submit')
-        } else {
-          console.log('error submit!!')
-          return false
+          try {
+            await this.$store.commit(INDEX_SET_LOADING, true)
+            const dto = this.accountForm
+
+            const response = await this.$store.dispatch(DESIRED_UPDATE, dto)
+            if (response.status_code === 200) {
+              await this.$store.commit(INDEX_SET_SUCCESS, {
+                show: true,
+                text: response.messages
+              })
+              this.$router.push('/my-page#desired_condition')
+            } else {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: response.messages
+              })
+            }
+            await this.$store.commit(INDEX_SET_LOADING, false)
+          } catch (err) {
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+          }
+          await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
     }

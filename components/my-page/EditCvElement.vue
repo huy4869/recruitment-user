@@ -956,10 +956,10 @@ export default {
     },
     getProvinceMaster() {
       const dataResources = [
-        'resources[m_province_districts]={"model": "MProvinceDistrict"}'
+        'resources[m_provinces]={"model": "MProvince"}'
       ]
       this.$store.dispatch(MASTER_GET_DATA, dataResources).then(res => {
-        this.listProvinceDistrict = res.data.m_province_districts
+        this.listProvinceDistrict = res.data.m_provinces
       })
     },
     getBirthDay() {
