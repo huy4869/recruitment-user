@@ -30,15 +30,19 @@
               v-model="accountForm.password"
               :placeholder="$t('login.password')"
               name="password"
-              type="password"
+              :type="showPass?'text':'password'"
               tabindex="3"
               maxlength="32"
               autocomplete="off"
-              show-password
               @keydown.native.enter="login"
               @keydown.native.tab.prevent="$refs.email.focus()"
               @focus="resetValidate('password')"
-            />
+            >
+              <i slot="suffix" class="cursor-pointer" @click="displayPass()">
+                <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
+                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
+              </i>
+            </el-input>
           </el-form-item>
           <div class="d-flex align-items-center check-remember">
             <el-checkbox v-model="accountForm.remember" :label="$t('login.remember_me')" size="large"></el-checkbox>
@@ -143,7 +147,8 @@ export default {
       valid: false,
       capsToolPasswordTip: false,
       loading: false,
-      fullscreenLoading: false
+      fullscreenLoading: false,
+      showPass: false
     }
   },
   computed: {
@@ -203,6 +208,9 @@ export default {
     },
     changeLink(state) {
       this.$router.push(state)
+    },
+    displayPass() {
+      this.showPass = !this.showPass
     }
   }
 }

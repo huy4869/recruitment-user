@@ -29,14 +29,18 @@
               v-model="accountForm.password"
               :placeholder="$t('login.password')"
               name="password"
-              type="password"
+              :type="showPass?'text':'password'"
               tabindex="3"
               maxlength="32"
               autocomplete="off"
-              show-password
               @keydown.native.enter="login"
               @focus="resetValidate('password')"
-            />
+            >
+              <i slot="suffix" class="cursor-pointer" @click="displayPass('pass')">
+                <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
+                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
+              </i>
+            </el-input>
           </el-form-item>
           <el-form-item class="password-login" :label="$t('register.password_confirmation')" prop="password_confirmation" :error="(error.key === 'password_confirmation') ? error.value : ''">
             <el-input
@@ -44,15 +48,19 @@
               v-model="accountForm.password_confirmation"
               :placeholder="$t('register.password_confirmation')"
               name="password_confirmation"
-              type="password"
+              :type="showPassConfirm?'text':'password'"
               tabindex="3"
               maxlength="32"
               autocomplete="off"
-              show-password
               @keydown.native.enter="login"
               @keydown.native.tab.prevent="$refs.email.focus()"
               @focus="resetValidate('password_confirmation')"
-            />
+            >
+              <i slot="suffix" class="cursor-pointer" @click="displayPass('passConfirm')">
+                <img v-if="showPassConfirm" class="icon-show-pass" src="/assets/icon/eye-input.svg"/>
+                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg"/>
+              </i>
+            </el-input>
           </el-form-item>
           <div class="d-flex align-items-center">
             <el-checkbox v-model="accountForm.has_terms" size="large"></el-checkbox>
@@ -172,7 +180,9 @@ export default {
       valid: false,
       capsToolPasswordTip: false,
       loading: false,
-      fullscreenLoading: false
+      fullscreenLoading: false,
+      showPass: false,
+      showPassConfirm: false
     }
   },
   computed: {
@@ -234,6 +244,13 @@ export default {
     },
     changeLink(state) {
       this.$router.push(state)
+    },
+    displayPass(type) {
+      if (type === 'pass') {
+        this.showPass = !this.showPass
+      } else {
+        this.showPassConfirm = !this.showPassConfirm
+      }
     }
   }
 }

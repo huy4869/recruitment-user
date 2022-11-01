@@ -20,14 +20,18 @@
               v-model="accountForm.password"
               :placeholder="$t('login.password')"
               name="password"
-              type="password"
+              :type="showPass?'text':'password'"
               tabindex="3"
               maxlength="32"
               autocomplete="off"
-              show-password
               @keydown.native.enter="login"
               @focus="resetValidate('password')"
-            />
+            >
+              <i slot="suffix" class="cursor-pointer" @click="displayPass('pass')">
+                <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
+                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
+              </i>
+            </el-input>
           </el-form-item>
           <el-form-item class="password-login" prop="password_confirmation">
             <div class="label">{{ $t('register.password_confirmation') }}</div>
@@ -36,15 +40,19 @@
               v-model="accountForm.password_confirmation"
               :placeholder="$t('register.password_confirmation')"
               name="password_confirmation"
-              type="password"
+              :type="showPassConfirm?'text':'password'"
               tabindex="3"
               maxlength="32"
               autocomplete="off"
-              show-password
               @keydown.native.enter="login"
               @keydown.native.tab.prevent="$refs.email.focus()"
               @focus="resetValidate('password_confirmation')"
-            />
+            >
+              <i slot="suffix" class="cursor-pointer" @click="displayPass('passConfirm')">
+                <img v-if="showPassConfirm" class="icon-show-pass" src="/assets/icon/eye-input.svg"/>
+                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg"/>
+              </i>
+            </el-input>
           </el-form-item>
 
           <el-form-item class="button-login">
@@ -109,7 +117,7 @@ export default {
       if (value === '') {
         callback(new Error(this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }).toString()))
       } else if (value !== this.accountForm.password) {
-        callback(new Error(this.$t('validation.passNotMatch').toString()))
+        callback(new Error(this.$t('validation.passNotMatch', { _field_: this.$t('register.password_confirmation') }).toString()))
       } else {
         callback()
       }
@@ -149,7 +157,9 @@ export default {
       valid: false,
       capsToolPasswordTip: false,
       loading: false,
-      fullscreenLoading: false
+      fullscreenLoading: false,
+      showPass: false,
+      showPassConfirm: false
     }
   },
   computed: {
@@ -219,6 +229,13 @@ export default {
     },
     changeLink(state) {
       this.$router.push(state)
+    },
+    displayPass(type) {
+      if (type === 'pass') {
+        this.showPass = !this.showPass
+      } else {
+        this.showPassConfirm = !this.showPassConfirm
+      }
     }
   }
 }
