@@ -62,6 +62,8 @@
         display: flex;
         img {
           width: 100%;
+          max-height: 767px;
+          object-fit: cover;
         }
       }
       .job-detail {
@@ -73,6 +75,8 @@
           display: flex;
           img {
             width: 100%;
+            max-height: 245px;
+            object-fit: cover;
           }
           &:last-child {
             margin-right: 0;
@@ -85,6 +89,9 @@
       justify-content: center;
       position: relative;
       margin-top: 12px;
+      img {
+        margin-right: 6px;
+      }
       .button-like {
         width: 160px;
         display: flex;
@@ -97,6 +104,26 @@
         justify-content: center;
         color: $color-blue;
         margin: 12px;
+        cursor: pointer;
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+      .button-dislike {
+        width: 160px;
+        display: flex;
+        padding: 11px 0;
+        border: 1px solid $color-blue;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        justify-content: center;
+        margin: 12px;
+        background: $color-blue;
+        color: $color-white;
+        cursor: pointer;
         img {
           width: 24px;
           height: 24px;
@@ -115,6 +142,10 @@
           background-color: $color-button-danger;
           padding: 12px 0;
           border: none;
+        }
+        .el-disabled {
+          background-color: $color-button-disable;
+          cursor: not-allowed;
         }
       }
     }

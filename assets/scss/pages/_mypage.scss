@@ -227,6 +227,7 @@
     display: flex;
     .schedule-image {
       img {
+        object-fit: cover;
         width: 134px;
         height: 89px;
       }

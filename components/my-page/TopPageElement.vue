@@ -25,7 +25,7 @@
       </div>
       <div v-if="listScheduleHistory.length" class="top-page-content">
         <div v-for="(schedule, index) in listScheduleHistory" :key="index">
-          <ScheduleHistoryElement :schedule="schedule" @cancelSchedule="(id) => { cancelSchedule(id, true) }" @editApply="editApply"></ScheduleHistoryElement>
+          <ScheduleHistoryElement :schedule="schedule" @cancelSchedule="(id) => { cancelSchedule(id, true) }" @editApply="editApply(schedule)"></ScheduleHistoryElement>
         </div>
         <div v-if="showViewAllScheduleHistory" class="button-view-all" @click="getDataScheduleHistory(true)">
           <img src="/assets/icon/icon_add.svg" alt="">
@@ -59,7 +59,7 @@
         <img class="icon-arrow" src="/assets/icon/icon_arrow_active.svg" alt="">
       </div>
     </div>
-    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false"></FormApplyJobElement>
+    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
   </div>
 </template>
 
@@ -86,7 +86,8 @@ export default {
       listSchedule: [],
       listScheduleHistory: [],
       showViewAllSchedule: false,
-      showViewAllScheduleHistory: false
+      showViewAllScheduleHistory: false,
+      applyActive: {}
     }
   },
   async created() {
@@ -157,8 +158,9 @@ export default {
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
-    editApply() {
+    editApply(value) {
       this.applyDialog = true
+      this.applyActive = value
     }
   }
 }

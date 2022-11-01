@@ -26,5 +26,25 @@ export const actions = {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.post(`/applications/cancel/${data}`), context)
     })
+  },
+  getDataApplication(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get(`/job/${data}/application`), context)
+    })
+  },
+  getDataDetailApplication(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get(`/applications/${data}`), context)
+    })
+  },
+  postCreateApplication(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/applications`, data), context)
+    })
+  },
+  postUpdateApplication(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/applications/${data.id}`, data.form), context)
+    })
   }
 }
