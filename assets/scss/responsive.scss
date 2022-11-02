@@ -3,7 +3,7 @@
     height: 100vh;
   }
 }
-  @media only screen and (min-width: 1150px) and (max-width: 1280px) {
+@media only screen and (min-width: 1150px) and (max-width: 1280px) {
   .login-page {
     .login-element {
       margin: 123px 64px 123px 100px;
@@ -133,6 +133,15 @@
   .edit-form-content .edit-form-input .content-input .feature-title {
     font-size: 14px;
   }
+  .edit-form-content {
+    .edit-form-input {
+      .content-input {
+        .checkbox-days {
+          gap: 3%;
+        }
+      }
+    }
+  }
 }
 
 @media screen  and (max-width: 1024px) {
@@ -180,6 +189,19 @@
       }
     }
   }
+  .edit-form-content {
+    .edit-form-input {
+      .content-input {
+        .checkbox-days {
+          display: grid;
+          grid-template-columns: auto auto auto auto;
+        }
+        .text-normal {
+          font-size: 14px;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 912px) {
@@ -192,6 +214,12 @@
           margin-bottom: 0;
           .feature-title {
             margin-bottom: 12px;
+          }
+        }
+        .period-desired {
+          display: grid;
+          .first-name {
+            margin-bottom: 20px;
           }
         }
       }
@@ -1096,6 +1124,10 @@
 
         .date-space {
           margin: 10px 5px 0 -10px;
+        }
+
+        .checkbox-item {
+          margin-bottom: 20px;
         }
       }
 
