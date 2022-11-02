@@ -7,20 +7,6 @@
           <img v-if="!info.avatar" class="avatar-img" src="/assets/icon/icon_user_default.svg" alt="favorite-job">
           <img v-else id="avatar-img"  class="avatar-img" :src="info.avatar" alt="favorite-job">
           <br>
-          <div class="social-media">
-            <a :href="info.facebook" target="_blank">
-              <img src="/assets/icon/fb.svg" alt="fb">
-            </a>
-            <a :href="info.twitter" target="_blank">
-              <img src="/assets/icon/ebay.svg" alt="ebay">
-            </a>
-            <a :href="info.instagram" target="_blank">
-              <img src="/assets/icon/ig.svg" alt="ig">
-            </a>
-            <a :href="info.line" target="_blank">
-              <img src="/assets/icon/line.svg" alt="line">
-            </a>
-          </div>
         </div>
         <div class="img-detail-mobile">
           <span class="img-title-mobile card-text-primary">{{ $t('my_page.image_detail') }}</span>
@@ -34,10 +20,20 @@
         <div class="job-box items-center">
           <div class="left-item">
             <p class="card-text-primary">
-              {{ $t('my_page.name') }}
+              {{ $t('my_page.image_detail') }}
             </p>
           </div>
           <div class="right-item first-right-item">
+          <div v-for="(img, key) in info.images" :key="key" class="img-detail">
+          <img :src="img" alt="img-detail">
+          </div>
+          </div>
+          <div class="left-item">
+            <p class="card-text-primary">
+              {{ $t('my_page.name') }}
+            </p>
+          </div>
+          <div class="right-item">
             <p class="card-text-normal">
               {{ info.full_name }}
             </p>
@@ -114,13 +110,24 @@
           </div>
           <div id="img-detail" class="left-item">
             <p class="card-text-primary">
-              {{ $t('my_page.image_detail') }}
+              {{ $t('my_page.sns_social') }}
             </p>
           </div>
-          <div id="img-detail" class="right-item">
-            <div v-for="(img, key) in info.images" :key="key" class="img-detail">
-              <img :src="img" alt="img-detail">
-            </div>
+          <div id="img-detail1" class="right-item">
+          <div class="social-media">
+          <a :href="info.facebook" target="_blank">
+          <img src="/assets/icon/fb.svg" alt="fb">
+          </a>
+          <a :href="info.twitter" target="_blank">
+          <img src="/assets/icon/ebay.svg" alt="ebay">
+          </a>
+          <a :href="info.instagram" target="_blank">
+          <img src="/assets/icon/ig.svg" alt="ig">
+          </a>
+          <a :href="info.line" target="_blank">
+          <img src="/assets/icon/line.svg" alt="line">
+          </a>
+          </div>
           </div>
         </div>
       </div>

@@ -154,10 +154,10 @@
           </div>
         </div>
         <div class="form-list-new-social">
-          <div><img src="/assets/icon/icon_facebook.svg" alt=""></div>
-          <div><img src="/assets/icon/icon_twitter.svg" alt=""></div>
-          <div><img src="/assets/icon/icon_instagram.svg" alt=""></div>
-          <div><img src="/assets/icon/icon_line.svg" alt=""></div>
+          <a href="https://www.facebook.com/" target="_blank"><img src="/assets/icon/icon_facebook.svg" alt=""></a>
+          <a href="https://twitter.com/" target="_blank"><img src="/assets/icon/icon_twitter.svg" alt=""></a>
+          <a href="https://www.instagram.com/" target="_blank"><img src="/assets/icon/icon_instagram.svg" alt=""></a>
+          <a href="https://line.me/" target="_blank"><img src="/assets/icon/icon_line.svg" alt=""></a>
         </div>
       </div>
     </div>
