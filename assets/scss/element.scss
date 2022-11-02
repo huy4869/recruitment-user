@@ -207,3 +207,7 @@
 .el-checkbox__input.is-checked+.el-checkbox__label {
   color: $color-black;
 }
+
+.el-select .el-input {
+  height: 100%;
+}

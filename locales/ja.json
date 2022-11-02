@@ -323,7 +323,12 @@
     "experience": "就業経験",
     "enter_experience": "就業経験を選択",
     "features": "希望特徴",
-    "edit": "希望条件編集"
+    "edit": "希望条件編集",
+    "working_day": "希望勤務曜日",
+    "working_hour": "希望勤務時間",
+    "start_time": "開始時間",
+    "end_time": "終了時間"
+
   },
   "confirm_modal": {
     "back_confirm" : "編集中のデータが保存されません。よろしいですか？",

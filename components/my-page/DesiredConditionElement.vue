@@ -36,6 +36,14 @@
               <div class="form-right"><span>{{ condition.job_type_string }}</span></div>
             </div>
             <div class="form-condition-item">
+              <div class="form-left">{{ $t('desired_condition.working_day') }}</div>
+              <div class="form-right"><span>{{ workingDay }}</span></div>
+            </div>
+            <div class="form-condition-item">
+              <div class="form-left">{{ $t('desired_condition.working_hour') }}</div>
+              <div class="form-right"><span>{{ workingHour }}</span></div>
+            </div>
+            <div class="form-condition-item">
               <div class="form-left">{{ $t('desired_condition.experience') }}</div>
               <div class="form-right"><span>{{ condition.job_experience_strings }}</span></div>
             </div>
@@ -55,17 +63,37 @@
 </template>
 
 <script>
-import { DESIRED_DETAIL, INDEX_SET_LOADING } from '@/store/store.const'
+import { DESIRED_DETAIL, INDEX_SET_LOADING, MASTER_GET_DATA } from '@/store/store.const'
 
 export default {
   name: 'DesiredConditionElement',
   data() {
     return {
-      condition: {}
+      condition: {},
+      listDays: [],
+      workingDay: '',
+      workingHour: ''
     }
   },
-  created() {
-    this.getMotivation()
+  async created() {
+    await this.getMotivation()
+    await this.getMasterData()
+  },
+  watch: {
+    listDays() {
+      const text = []
+      this.listDays.forEach((element) => {
+        if (this.condition.working_days) {
+          if (this.condition.working_days.includes(element.id)) {
+            text.push(element.name)
+          }
+        }
+      })
+      this.workingDay = text.join('、')
+    },
+    condition() {
+      this.workingHour = this.condition.working_hours.working_hours_format
+    }
   },
   methods: {
     changePage(page) {
@@ -86,6 +114,13 @@ export default {
     },
     handleRouter(route) {
       this.$router.push(route)
+    },
+    async getMasterData() {
+      const dataResources = [
+        'resources[days_of_week]={}'
+      ]
+      const dataMasterData = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
+      this.listDays = dataMasterData.data.days_of_week
     }
   }
 }

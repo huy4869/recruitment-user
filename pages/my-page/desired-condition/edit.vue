@@ -12,6 +12,7 @@
         :list-job-experience="listJobExperience"
         :list-job-features="listJobFeatures"
         :list-age="listAge"
+        :list-days="listDays"
         :desired="desired"
       ></EditDesiredElement>
     </div>
@@ -36,6 +37,7 @@ export default {
       listJobExperience: [],
       listJobFeatures: [],
       listAge: [],
+      listDays: [],
       desired: {}
     }
   },
@@ -57,7 +59,8 @@ export default {
         'resources[m_salary_types]={}',
         'resources[m_job_experiences]={"model": "MJobExperience"}',
         'resources[m_job_features]={}',
-        'resources[age]={}'
+        'resources[age]={}',
+        'resources[days_of_week]={}'
       ]
       const dataMasterData = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
       this.listJobTypes = dataMasterData.data.m_job_types
@@ -67,6 +70,7 @@ export default {
       this.listJobExperience = dataMasterData.data.m_job_experiences
       this.listJobFeatures = dataMasterData.data.m_job_features
       this.listAge = dataMasterData.data.age
+      this.listDays = dataMasterData.data.days_of_week
     },
     async getDesired() {
       this.$store.commit(INDEX_SET_LOADING, true)

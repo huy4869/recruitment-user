@@ -14,7 +14,7 @@
           <div class="edit-form-input">
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="10" class="col-label">
+              <el-col :md="6" :sm="10" :xs="12" class="col-label">
                 <div class="label"><span>{{ $t('desired_condition.location') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -38,7 +38,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="10" class="col-label">
+              <el-col :md="6" :sm="10" :xs="12" class="col-label">
                 <div class="label"><span>{{ $t('desired_condition.type') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -62,15 +62,15 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="10" class="col-label">
+              <el-col :md="6" :sm="10" :xs="12" class="col-label">
                 <div class="label"><span>{{ $t('desired_condition.age') }}</span></div>
               </el-col>
               <el-col :md="9" :sm="24">
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="age" :error="(error.key === 'age') ? error.value : ''">
-                        <el-select v-model="accountForm.age" :placeholder="$t('desired_condition.age')">
+                      <el-form-item label="" prop="age_id" :error="(error.key === 'age_id') ? error.value : ''">
+                        <el-select v-model="accountForm.age_id" :placeholder="$t('desired_condition.age')">
                           <el-option
                             v-for="item in listAge"
                             :key="item.id"
@@ -86,7 +86,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="10" class="col-label">
+              <el-col :md="6" :sm="10" :xs="12" class="col-label">
                 <div class="label"><span>{{ $t('desired_condition.salary') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -137,7 +137,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="10" class="col-label">
+              <el-col :md="6" :sm="10" :xs="12" class="col-label">
                 <div class="label"><span>{{ $t('desired_condition.position') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -145,7 +145,7 @@
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="job_type_ids" :error="(error.key === 'job_type_ids') ? error.value : ''">
-                        <el-select v-model="accountForm.job_type_ids" :placeholder="$t('desired_condition.enter_position')">
+                        <el-select v-model="accountForm.job_type_ids" multiple :placeholder="$t('desired_condition.enter_position')">
                           <el-option
                             v-for="item in ListJobType"
                             :key="item.id"
@@ -161,7 +161,7 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="10" class="col-label">
+              <el-col :md="6" :sm="10" :xs="12" class="col-label">
                 <div class="label"><span>{{ $t('desired_condition.experience') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -169,7 +169,7 @@
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="job_experience_ids" :error="(error.key === 'job_experience_ids') ? error.value : ''">
-                        <el-select v-model="accountForm.job_experience_ids" :placeholder="$t('desired_condition.enter_experience')">
+                        <el-select v-model="accountForm.job_experience_ids" multiple :placeholder="$t('desired_condition.enter_experience')">
                           <el-option
                             v-for="item in listJobExperience"
                             :key="item.id"
@@ -185,7 +185,112 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
+              <el-col :md="6" :sm="10" :xs="12" class="col-label">
+                <div class="label"><span>{{ $t('desired_condition.working_day') }}</span></div>
+              </el-col>
+              <el-col :md="18" :sm="24">
+                <div class="content-input">
+                  <el-row class="">
+                    <el-form-item label="" prop="working_days" :error="(error.key === 'working_days') ? error.value : ''">
+                      <el-checkbox-group v-model="accountForm.working_days">
+                        <div class="checkbox-days">
+                          <div v-for="(feature, index) in listDays" :key="index" class="checkbox-item">
+                            <el-checkbox :label="feature.id">{{ feature.name }}</el-checkbox>
+                          </div>
+                        </div>
+                      </el-checkbox-group>
+                    </el-form-item>
+                  </el-row>
+                </div>
+              </el-col>
+            </el-row>
+            <BorderElement :middle="true"></BorderElement>
+            <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="10" class="col-label">
+                <div class="label"><span>{{ $t('desired_condition.working_day') }}</span></div>
+              </el-col>
+              <el-col :md="18" :sm="24">
+                <div class="content-input">
+                  <el-row class="d-flex period-desired">
+                    <el-col :md="12" :sm="24" class="first-name">
+                      <el-form-item label="" prop="enrollment_period_start" :error="(error.key === 'enrollment_period_start') ? error.value : ''">
+                        <el-row class="d-flex">
+                          <span class="text-normal birthday">{{ $t('desired_condition.start_time') }}</span>
+                          <el-col :sm="7" :xs="10" class="birth-year">
+                            <el-input
+                              ref="enrollment_period_start"
+                              v-model.trim="accountForm.enrollment_period_year_start"
+                              name="year"
+                              type="text"
+                              tabindex="2"
+                              :maxlength="2"
+                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                              pattern="[0-9]*"
+                              inputmode="numeric"
+                              @focus="resetValidate('enrollment_period_start')"
+                            />
+                          </el-col>
+                          <span class="text-normal birthday">:</span>
+                          <el-col :sm="7" :xs="10" class="birth-month">
+                            <el-input
+                              ref="enrollment_period_start"
+                              v-model.trim="accountForm.enrollment_period_month_start"
+                              name="enrollment_period_start"
+                              type="text"
+                              :maxlength="2"
+                              tabindex="2"
+                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                              pattern="[0-9]*"
+                              inputmode="numeric"
+                              @focus="resetValidate('enrollment_period_start')"
+                            />
+                          </el-col>
+                        </el-row>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :md="12" :sm="24" class="birth-year">
+                      <el-form-item label="" prop="enrollment_period_end" :error="(error.key === 'enrollment_period_end') ? error.value : ''">
+                        <el-row class="d-flex">
+                          <span class="text-normal birthday">{{ $t('desired_condition.end_time') }}</span>
+                          <el-col  :sm="7" :xs="10" class="birth-year">
+                            <el-input
+                              ref="enrollment_period_end"
+                              v-model.trim="accountForm.enrollment_period_year_end"
+                              name="birthday"
+                              type="text"
+                              tabindex="2"
+                              :maxlength="4"
+                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                              pattern="[0-9]*"
+                              inputmode="numeric"
+                              @focus="resetValidate('enrollment_period_end')"
+                            />
+                          </el-col>
+                          <span class="text-normal birthday">:</span>
+                          <el-col  :sm="7" :xs="10" class="birth-month">
+                            <el-input
+                              ref="enrollment_period_end"
+                              v-model.trim="accountForm.enrollment_period_month_end"
+                              name="birthday"
+                              type="text"
+                              :maxlength="2"
+                              tabindex="2"
+                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                              pattern="[0-9]*"
+                              inputmode="numeric"
+                              @focus="resetValidate('enrollment_period_end')"
+                            />
+                          </el-col>
+                        </el-row>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </div>
+              </el-col>
+            </el-row>
+            <BorderElement :middle="true"></BorderElement>
+            <el-row class="d-flex form-label-input">
+              <el-col :md="6" :sm="10" :xs="12" class="col-label">
                 <div class="label"><span>{{ $t('desired_condition.features') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
@@ -277,6 +382,10 @@ export default {
       type: Array,
       default: () => []
     },
+    listDays: {
+      type: Array,
+      default: () => []
+    },
     desired: {
       type: Object,
       default: () => {}
@@ -287,13 +396,16 @@ export default {
       accountForm: {
         province_id: '',
         work_type_ids: [],
-        age: '',
+        age_id: '',
         salary_type_id: '',
         job_type_ids: [],
         job_experience_ids: [],
         job_feature_ids: [],
         salary_min: '',
         salary_max: '',
+        working_days: [],
+        start_working_hour: '',
+        end_working_hour: '',
         errors: {}
       },
       error: {
@@ -302,26 +414,6 @@ export default {
       },
       accountRules: {
       },
-      occupation: [
-        { value: 'ヘア', label: 'ヘア' },
-        { value: 'ネイル・マツゲ', label: 'ネイル・マツゲ' },
-        { value: '整体・カイロ・酸素・温浴', label: '整体・カイロ・酸素・温浴' },
-        { value: 'フェイシャル・ボディ・脱毛', label: 'フェイシャル・ボディ・脱毛' },
-        { value: '美容クリニック', label: '美容クリニック' },
-        { value: -1, label: 'その他' }
-      ],
-      ages: [
-        { id: 1, name: '20代以上' },
-        { id: 2, name: '30代以上' },
-        { id: 3, name: '40代以上' },
-        { id: 4, name: '50代以上' }
-      ],
-      salary: [
-        { id: 1, name: '円/時給' },
-        { id: 2, name: '円/日給' },
-        { id: 3, name: '万円/月収' },
-        { id: 4, name: '万円/年収' }
-      ],
       listRecruitmentFeatures: [],
       listCompanyFeatures: [],
       listStoreFeatures: [],
@@ -349,9 +441,14 @@ export default {
       this.listStoreFeatures = this.listJobFeatures[2].feature
     },
     desired() {
-      // for (const item in this.desired) {
-      //   this.accountForm[item] = this.desired[item]
-      // }
+      for (const item in this.desired) {
+        this.accountForm[item] = this.desired[item]
+      }
+    },
+    'accountForm.salary_min'() {
+      if (!this.accountForm.min && !this.accountForm) {
+        this.accountForm.salary_type_id = ''
+      }
     }
   },
   methods: {
@@ -380,17 +477,24 @@ export default {
             const dto = this.accountForm
 
             const response = await this.$store.dispatch(DESIRED_UPDATE, dto)
-            if (response.status_code === 200) {
-              await this.$store.commit(INDEX_SET_SUCCESS, {
-                show: true,
-                text: response.messages
-              })
-              this.$router.push('/my-page#desired_condition')
-            } else {
-              await this.$store.commit(INDEX_SET_ERROR, {
-                show: true,
-                text: response.messages
-              })
+            switch (response.status_code) {
+              case 200:
+                await this.$store.commit(INDEX_SET_SUCCESS, {
+                  show: true,
+                  text: response.messages
+                })
+                this.$router.push('/my-page#desired_condition')
+                break
+              case 422:
+                for (const [key] of Object.entries(response.data)) {
+                  this.error = { key, value: response.data[key][0] }
+                }
+                break
+              default:
+                await this.$store.commit(INDEX_SET_ERROR, {
+                  show: true,
+                  text: response.messages
+                })
             }
             await this.$store.commit(INDEX_SET_LOADING, false)
           } catch (err) {

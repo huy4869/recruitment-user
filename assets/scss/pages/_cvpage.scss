@@ -333,6 +333,10 @@
         display: grid;
         grid-template-columns: 50% 50%;
       }
+      .checkbox-days {
+        display: flex;
+        gap: 5%;
+      }
       .checkbox-item {
         margin-bottom: 30px;
         .el-checkbox .el-checkbox__label {
