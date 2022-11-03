@@ -15,7 +15,7 @@
         </div>
       </div>
       <div v-else>
-        <NoDataElement :text="$t('common.no_data')"></NoDataElement>
+        <NoDataElement :text="$t('common.message_no_data.interview_schedule')"></NoDataElement>
       </div>
     </div>
     <div class="application-history">
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div v-else>
-        <NoDataElement :text="$t('common.no_data')"></NoDataElement>
+        <NoDataElement :text="$t('common.message_no_data.application_history')"></NoDataElement>
       </div>
     </div>
     <div class="button-footer">

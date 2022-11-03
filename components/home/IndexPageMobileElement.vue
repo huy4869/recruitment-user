@@ -77,7 +77,7 @@
               </div>
               <div class="all-job">{{ totalJob }}{{ $t('common.subject') }}</div>
             </div>
-            <div class="button-see-all">
+            <div class="button-see-all" @click="changeToSearch(false)">
               <span>{{ $t('home.see_all_job') }}</span>
               <img src="/assets/icon/icon_arrow.svg" alt="">
             </div>
@@ -89,21 +89,27 @@
               </div>
             </VueSlickCarousel>
           </div>
+          <div v-else>
+            <NoDataElement :text="$t('common.message_no_data.new_job_posting')"></NoDataElement>
+          </div>
         </div>
         <div class="recommended-job">
           <div class="recommended-job-title">
             <div class="title">
               {{ $t('home.recommended_job') }}
             </div>
-            <div class="button-see-all">
+            <div class="button-see-all" @click="changeToSearch(false)">
               <span>{{ $t('home.see_all_job') }}</span>
               <img src="/assets/icon/icon_arrow.svg" alt="">
             </div>
           </div>
-          <div class="recommended-job-content">
+          <div v-if="listRecommendJobs.length" class="recommended-job-content">
             <div v-for="(job, index) in listRecommendJobs" :key="index">
               <RecommendJobElement :job="job"></RecommendJobElement>
             </div>
+          </div>
+          <div v-else>
+            <NoDataElement :text="$t('common.message_no_data.recommend_job')"></NoDataElement>
           </div>
         </div>
       </div>
@@ -141,7 +147,7 @@
       </div>
     </el-drawer>
     <el-drawer :title="$t('home.most_popular_job')" :visible.sync="dialogMost" size="100%" direction="ttb">
-      <div class="form-popular form-most-popular">
+      <div v-if="listMostViewJobs.length" class="form-popular form-most-popular">
         <div v-for="(job, index) in listMostViewJobs" :key="index" class="form-popular-item new-item">
           <div class="new-item-image">
             <img :src="job.banner_image" alt="">
@@ -155,10 +161,13 @@
             </div>
           </div>
         </div>
-        <div class="button-see-all">
+        <div class="button-see-all" @click="changeToSearch(false)">
           <span>{{ $t('home.see_all_job') }}</span>
           <img src="/assets/icon/icon_arrow_secondary.svg" alt="">
         </div>
+      </div>
+      <div v-else>
+        <NoDataElement :text="$t('common.message_no_data.popular_job')"></NoDataElement>
       </div>
     </el-drawer>
   </div>
@@ -168,12 +177,13 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import NoDataElement from '../element-ui/NoDataElement'
 import HomeJobElement from './HomeJobElement'
 import RecommendJobElement from './RecommendJobElement'
 
 export default {
   name: 'IndexPageMobileElement',
-  components: { HomeJobElement, VueSlickCarousel, RecommendJobElement },
+  components: { HomeJobElement, VueSlickCarousel, RecommendJobElement, NoDataElement },
   props: ['totalJob', 'listJobs', 'listMostViewJobs', 'listRecommendJobs', 'listSearchEmployment', 'listSearch', 'listJobTypes', 'listProvinceCities'],
   data() {
     return {
@@ -204,6 +214,20 @@ export default {
         }
       } else {
         this.openPopular.push(index)
+      }
+    },
+    changeToSearch(filter) {
+      if (filter) {
+        const condition = []
+        if (this.provinceCity) {
+          condition.push('province_city=' + this.provinceCity)
+        }
+        if (this.jobType) {
+          condition.push('job_type=' + this.jobType)
+        }
+        this.$router.push('/search?' + condition.join('&'))
+      } else {
+        this.$router.push('/search')
       }
     }
   }

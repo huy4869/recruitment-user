@@ -2,7 +2,10 @@
   <div class="past-search-condition-element">
     <div class="past-search-condition-content">
       <div class="">
-        <div id="desired" class="form-condition-element">
+        <div v-if="checkCondition" >
+          <NoDataElement :text="$t('common.message_no_data.preference')" :type="'career'"></NoDataElement>
+        </div>
+        <div v-else id="desired" class="form-condition-element">
           <div class="show-pc">
             <div class="form-condition-title">
               <div class="past-search-condition-title">
@@ -63,10 +66,16 @@
 </template>
 
 <script>
-import { DESIRED_DETAIL, INDEX_SET_LOADING, MASTER_GET_DATA } from '@/store/store.const'
+import NoDataElement from '../element-ui/NoDataElement'
+import {
+  DESIRED_DETAIL,
+  INDEX_SET_LOADING,
+  MASTER_GET_DATA
+} from '@/store/store.const'
 
 export default {
   name: 'DesiredConditionElement',
+  components: { NoDataElement },
   data() {
     return {
       condition: {},
@@ -78,6 +87,17 @@ export default {
   async created() {
     await this.getMotivation()
     await this.getMasterData()
+  },
+  computed: {
+    checkCondition() {
+      let check = true
+      for (const index in this.condition) {
+        if (this.condition[index]) {
+          check = false
+        }
+      }
+      return check
+    }
   },
   watch: {
     listDays() {

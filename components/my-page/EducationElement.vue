@@ -28,7 +28,7 @@
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
-        <NoDataElement :text="$t('common.no_data')" :type="'career'"></NoDataElement>
+        <NoDataElement :text="$t('common.message_no_data.education_background')" :type="'career'"></NoDataElement>
       </div>
     </div>
   </div>

@@ -45,7 +45,7 @@ export default {
       listMostViewJobs: [],
       listRecommendJobs: [],
       listSearchEmployment: [],
-      listSearch: []
+      listSearch: {}
     }
   },
   async created() {
@@ -66,7 +66,9 @@ export default {
       this.listSearchEmployment = dataMasterData.data.m_work_types
       this.listProvinceCities = dataMasterData.data.m_provinces_cities
       const dataLocation = await this.$store.dispatch(LOCATION_LIST_MOST_APPLY)
-      this.listSearch = dataLocation.data
+      if (dataLocation.status_code === 200) {
+        this.listSearch = dataLocation.data
+      }
     },
     async getDataJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_NEW_JOBS, '')

@@ -15,7 +15,7 @@
         </div>
       </div>
       <div v-else>
-        <NoDataElement :text="$t('common.no_data')"></NoDataElement>
+        <NoDataElement :text="$t('common.message_no_data.application_history')"></NoDataElement>
       </div>
       <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
     </div>

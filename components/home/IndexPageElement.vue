@@ -6,7 +6,7 @@
         <div class="form-search-banner">
           <div class="all-job">
             <span>{{ $t('home.all_job_opening') }}</span>
-            <span class="all-subject">158,798{{ $t('common.subject') }}</span>
+            <span class="all-subject">{{ totalJob }}{{ $t('common.subject') }}</span>
           </div>
           <div class="form-select-search">
             <div class="select-title">
@@ -61,7 +61,7 @@
               </div>
               <div class="all-job">{{ totalJob }}{{ $t('common.subject') }}</div>
             </div>
-            <div class="button-see-all" @click="changeToSearch(false)">
+            <div class="button-see-all" @click="changeToSearch(false, 'new')">
               <span>{{ $t('home.see_all_job') }}</span>
               <img src="/assets/icon/icon_arrow.svg" alt="">
             </div>
@@ -73,6 +73,9 @@
               </div>
             </VueSlickCarousel>
           </div>
+          <div v-else>
+            <NoDataElement :text="$t('common.message_no_data.new_job_posting')"></NoDataElement>
+          </div>
         </div>
         <div class="recommended-job">
           <div class="recommended-job-title">
@@ -80,15 +83,18 @@
               <img src="/assets/images/icon_home_sub_title1.svg" alt="">
               {{ $t('home.recommended_job') }}
             </div>
-            <div class="button-see-all" @click="changeToSearch(false)">
+            <div class="button-see-all" @click="changeToSearch(false, 'recommend')">
               <span>{{ $t('home.see_all_job') }}</span>
               <img src="/assets/icon/icon_arrow.svg" alt="">
             </div>
           </div>
-          <div class="recommended-job-content">
+          <div v-if="listRecommendJobs.length" class="recommended-job-content">
             <div v-for="(job, index) in listRecommendJobs" :key="index">
               <RecommendJobElement :job="job"></RecommendJobElement>
             </div>
+          </div>
+          <div v-else>
+            <NoDataElement :text="$t('common.message_no_data.recommend_job')"></NoDataElement>
           </div>
         </div>
         <div class="search-from-popular">
@@ -98,7 +104,7 @@
               {{ $t('home.search_from_popular') }}
             </div>
           </div>
-          <div class="search-from-popular-content">
+          <div v-if="Object.keys(listSearch).length" class="search-from-popular-content">
             <div v-for="(search, index) in listSearch" :key="index" class="search-from-popular-item">
               <div class="search-from-popular-button">{{ index + $t('home.text_form_search') }}</div>
               <div class="search-next">
@@ -111,15 +117,18 @@
               </div>
             </div>
           </div>
+          <div v-else>
+            <NoDataElement :text="$t('common.message_no_data.popular_area')"></NoDataElement>
+          </div>
         </div>
         <div class="search-by-employment">
           <div class="search-by-employment-title">
             <div class="title">
               <img src="/assets/images/icon_home_sub_title3.svg" alt="">
-              {{ $t('home.search_from_popular') }}
+              {{ $t('home.search_by_employment') }}
             </div>
           </div>
-          <div class="search-by-employment-content">
+          <div v-if="listSearchEmployment.length" class="search-by-employment-content">
             <div class="search-by-employment-category">
               <div v-for="(search, key) in listSearchEmployment" :key="key">
                 {{ search.name }}
@@ -133,21 +142,26 @@
           <div>{{ $t('home.most_popular_job') }}</div>
         </div>
         <div class="form-list-new-content">
-          <div v-for="(job, index) in listMostViewJobs" :key="index" class="new-item">
-            <div class="new-item-image">
-              <img :src="job.banner_image" alt="">
-            </div>
-            <div class="new-item-content">
-              <div class="job-name">{{ job.name }}</div>
-              <div class="store-name">{{ job.store_name }}</div>
-              <div class="job-info">
-                <img src="/assets/icon/icon_place.svg" alt="">
-                <span>{{ job.address.address }}</span>
+          <div v-if="listMostViewJobs.length">
+            <div v-for="(job, index) in listMostViewJobs" :key="index" class="new-item">
+              <div class="new-item-image">
+                <img :src="job.banner_image" alt="">
+              </div>
+              <div class="new-item-content">
+                <div class="job-name">{{ job.name }}</div>
+                <div class="store-name">{{ job.store_name }}</div>
+                <div class="job-info">
+                  <img src="/assets/icon/icon_place.svg" alt="">
+                  <span>{{ job.address.address }}</span>
+                </div>
               </div>
             </div>
           </div>
+          <div v-else>
+            <NoDataElement :text="$t('common.message_no_data.popular_job')"></NoDataElement>
+          </div>
         </div>
-        <div class="form-list-new-see-all" @click="changeToSearch(false)">
+        <div class="form-list-new-see-all" @click="changeToSearch(false, 'most_view')">
           <div class="button-see-all">
             <span>{{ $t('home.see_all_job') }}</span>
             <img src="/assets/icon/icon_arrow_secondary.svg" alt="">
@@ -168,12 +182,13 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import NoDataElement from '../element-ui/NoDataElement'
 import HomeJobElement from './HomeJobElement'
 import RecommendJobElement from './RecommendJobElement'
 
 export default {
   name: 'IndexPageElement',
-  components: { HomeJobElement, VueSlickCarousel, RecommendJobElement },
+  components: { HomeJobElement, VueSlickCarousel, RecommendJobElement, NoDataElement },
   props: ['totalJob', 'listJobs', 'listMostViewJobs', 'listRecommendJobs', 'listSearchEmployment', 'listSearch', 'listJobTypes', 'listProvinceCities'],
   data() {
     return {
@@ -192,16 +207,18 @@ export default {
     }
   },
   methods: {
-    changeToSearch(filter) {
+    changeToSearch(filter, type) {
       if (filter) {
         const condition = []
         if (this.provinceCity) {
-          condition.push('province_city=' + this.provinceCity)
+          condition.push('province_id=' + this.provinceCity)
         }
         if (this.jobType) {
-          condition.push('job_type=' + this.jobType)
+          condition.push('job_type_ids=' + this.jobType)
         }
         this.$router.push('/search?' + condition.join('&'))
+      } else if (type) {
+        this.$router.push('/search?list_type=' + type)
       } else {
         this.$router.push('/search')
       }

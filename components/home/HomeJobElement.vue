@@ -12,7 +12,7 @@
         <img src="/assets/icon/icon_place.svg" alt="">
         <span>{{ job.address ? job.address.address : '' }}</span>
       </div>
-      <div v-if="showType" class="job-info">
+      <div class="job-info">
         <img src="/assets/icon/icon_save.svg" alt="">
         <span>{{ showJobType }}</span>
       </div>
@@ -48,7 +48,7 @@
 
 export default {
   name: 'HomeJobElement',
-  props: ['job', 'showType'],
+  props: ['job'],
   computed: {
     showJobType() {
       if (this.job.job_types === undefined) {

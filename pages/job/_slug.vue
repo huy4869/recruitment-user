@@ -211,9 +211,9 @@
           </div>
         </div>
       </div>
-      <div v-if="listJobs.length" class="recently-viewed-job">
+      <div class="recently-viewed-job">
         <div class="view-job-title title-component">{{ $t('job.recently_viewed_job') }}</div>
-        <div class="view-job-content">
+        <div v-if="listJobs.length" class="view-job-content">
           <div class="show-pc">
             <VueSlickCarousel v-bind="settings">
               <div v-for="(job, index) in listJobs" :key="index">
@@ -227,6 +227,9 @@
             </div>
           </div>
         </div>
+        <div v-else>
+          <NoDataElement :text="$t('common.message_no_data.recent_job')"></NoDataElement>
+        </div>
       </div>
       <div class="jobs-similar-job">
         <div class="jobs-similar-job-title">
@@ -235,10 +238,13 @@
             <span>{{ $t('home.see_all_job') }}</span>
           </div>
         </div>
-        <div class="jobs-similar-job-content">
+        <div v-if="listSuggestJobs.length" class="jobs-similar-job-content">
           <div v-for="(job, index) in listSuggestJobs" :key="index">
             <RecommendJobElement :job="job"></RecommendJobElement>
           </div>
+        </div>
+        <div v-else>
+          <NoDataElement :text="$t('common.message_no_data.similar_job')"></NoDataElement>
         </div>
       </div>
       <div class="find-other-job">
@@ -312,6 +318,7 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 import FormApplyJobElement from '../../components/element-ui/FormApplyJobElement'
+import NoDataElement from '../../components/element-ui/NoDataElement'
 import HomeJobElement from '../../components/home/HomeJobElement'
 import RecommendJobElement from '../../components/home/RecommendJobElement'
 import RecentJobMobileElement from '../../components/home/RecentJobMobileElement'
@@ -332,7 +339,7 @@ import {
 
 export default {
   name: 'JobDetailPage',
-  components: { TitlePageElement, VueSlickCarousel, HomeJobElement, RecommendJobElement, RecentJobMobileElement, FormApplyJobElement },
+  components: { TitlePageElement, VueSlickCarousel, HomeJobElement, RecommendJobElement, RecentJobMobileElement, FormApplyJobElement, NoDataElement },
   data() {
     return {
       id: this.$route.params.slug,
