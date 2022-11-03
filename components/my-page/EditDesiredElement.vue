@@ -22,7 +22,7 @@
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="province_id" :error="(error.key === 'province_id') ? error.value : ''">
-                        <el-select v-model="accountForm.province_id" :placeholder="$t('desired_condition.location')">
+                        <el-select v-model="accountForm.province_id" :placeholder="$t('desired_condition.enter_location')">
                           <el-option
                             v-for="item in listProvince"
                             :key="item.id"
@@ -46,7 +46,7 @@
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="work_type_ids" :error="(error.key === 'work_type_ids') ? error.value : ''">
-                        <el-select v-model="accountForm.work_type_ids" multiple :placeholder="$t('desired_condition.type')">
+                        <el-select v-model="accountForm.work_type_ids" multiple :placeholder="$t('desired_condition.enter_type')">
                           <el-option
                             v-for="item in ListWorkType"
                             :key="item.id"
@@ -70,7 +70,7 @@
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="age_id" :error="(error.key === 'age_id') ? error.value : ''">
-                        <el-select v-model="accountForm.age_id" :placeholder="$t('desired_condition.age')">
+                        <el-select v-model="accountForm.age_id" :placeholder="$t('desired_condition.enter_age')">
                           <el-option
                             v-for="item in listAge"
                             :key="item.id"
@@ -92,12 +92,24 @@
               <el-col :md="18" :sm="24">
                 <div class="content-input">
                   <el-row class="d-flex">
-                    <el-col :md="4" :sm="15" :xs="15">
+                    <el-col :md="6" :sm="24">
+                      <el-form-item class="salary-select" label="" prop="salary_type_id" :error="(error.key === 'salary_type_id') ? error.value : ''">
+                        <el-select v-model="accountForm.salary_type_id" :placeholder="$t('desired_condition.enter_salary')">
+                          <el-option
+                            v-for="item in listSalary"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
+                          </el-option>
+                        </el-select>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :md="5" :sm="15" :xs="15">
                       <el-form-item class="salary-start" label="" prop="salary_min" :error="(error.key === 'salary_min') ? error.value : ''">
                         <el-input
                           ref="salary_min"
                           v-model="accountForm.salary_min"
-                          :placeholder="$t('desired_condition.salary')"
+                          :placeholder="$t('desired_condition.enter_salary')"
                           name="salary_min"
                           type="text"
                           tabindex="2"
@@ -106,29 +118,17 @@
                       </el-form-item>
                     </el-col>
                     <span class="salary-range">~</span>
-                    <el-col :md="4" :sm="15" :xs="15">
+                    <el-col :md="5" :sm="15" :xs="15">
                       <el-form-item label="" prop="salary_max" :error="(error.key === 'salary_max') ? error.value : ''">
                         <el-input
                           ref="salary_max"
                           v-model="accountForm.salary_max"
-                          :placeholder="$t('desired_condition.salary')"
+                          :placeholder="$t('desired_condition.enter_salary')"
                           name="salary_max"
                           type="text"
                           tabindex="2"
                           show-word-limit
                         />
-                      </el-form-item>
-                    </el-col>
-                    <el-col :md="6" :sm="24">
-                      <el-form-item class="salary-select" label="" prop="salary_type_id" :error="(error.key === 'salary_type_id') ? error.value : ''">
-                        <el-select v-model="accountForm.salary_type_id" :placeholder="$t('desired_condition.age')">
-                          <el-option
-                            v-for="item in listSalary"
-                            :key="item.id"
-                            :label="item.name"
-                            :value="item.id">
-                          </el-option>
-                        </el-select>
                       </el-form-item>
                     </el-col>
                   </el-row>

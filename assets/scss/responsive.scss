@@ -470,6 +470,13 @@
     }
     .job-detail-content {
       padding: 0 24px;
+      .form-list-new-social {
+        img {
+          width: 24px;
+          height: 24px;
+          border-radius: 5px;
+        }
+      }
       .find-other-job {
         .find-other-job-content{
           padding-bottom: 12px;
@@ -497,7 +504,7 @@
           margin: 12px 12px 0 12px;
         }
         .salary-select {
-          margin-left: 14px;
+          margin-right: 14px;
         }
       }
     }
@@ -2187,14 +2194,22 @@
     }
     .job-detail-content {
       padding: 0 12px;
+      .pick-up-sp {
+        margin-bottom: 20px;
+        .sub-detail-title-sp {
+          font-weight: 500;
+          font-size: 13px;
+          word-break: break-word;
+          line-height: 20px;
+        }
+      }
       .sub-detail-title {
-        font-size: 14px;
-        line-height: 22px;
-        margin: 14px 0 20px;
+        display: none;
       }
       .detail-job-image {
         .job-detail {
           margin-top: 7px;
+          gap: 3px;
           .image-detail {
             margin-right: 7px;
           }
@@ -2203,7 +2218,6 @@
       .job-button-detail {
         margin-top: 8px;
         .button-detail {
-          margin: 8px;
         }
         .button-like {
           margin: 8px;
