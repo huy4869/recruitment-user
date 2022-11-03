@@ -42,7 +42,7 @@
               </div>
               <div class="header-search-right">
                 <el-input
-                  v-model.trim="condition.keyword"
+                  v-model.trim="search"
                   class="input-keyword"
                   :placeholder="$t('common.search')"
                   name="search"
@@ -59,7 +59,7 @@
                 <span>{{ $t('condition.employment_status') }}</span>
               </div>
               <div class="header-search-right">
-                <el-checkbox-group v-model="condition.employment_status">
+                <el-checkbox-group v-model="condition.work_type_ids">
                   <div v-for="(employment, index) in listWorkTypes" :key="index" class="checkbox-item">
                     <el-checkbox :label="employment.id">{{ employment.name }}</el-checkbox>
                   </div>
@@ -71,7 +71,7 @@
                 <span>{{ $t('condition.experience') }}</span>
               </div>
               <div class="header-search-right">
-                <el-checkbox-group v-model="condition.experience">
+                <el-checkbox-group v-model="condition.experience_ids">
                   <div v-for="(experience, index) in listExperiences" :key="index" class="checkbox-item">
                     <el-checkbox :label="experience.id">{{ experience.name }}</el-checkbox>
                   </div>
@@ -83,9 +83,9 @@
                 <span>{{ $t('condition.sort_by') }}</span>
               </div>
               <div class="header-search-right">
-                <el-checkbox-group v-model="condition.sort_by">
+                <el-checkbox-group v-model="sort_by">
                   <div v-for="(sort, index) in listSortBy" :key="index" class="checkbox-item">
-                    <el-checkbox :label="sort.id">{{ sort.name }}</el-checkbox>
+                    <el-checkbox :label="sort.id" @change="(value) => { changeSortBy(value, sort.id) }">{{ sort.name }}</el-checkbox>
                   </div>
                 </el-checkbox-group>
               </div>
@@ -95,7 +95,7 @@
                 <span>{{ $t('condition.feature') }}</span>
               </div>
               <div class="header-search-right">
-                <el-checkbox-group v-model="condition.feature">
+                <el-checkbox-group v-model="condition.feature_ids">
                   <div v-for="(list, key) in listJobFeatures" :key="key">
                     <div class="feature-title">※{{ list.category_name }}</div>
                     <div v-for="(feature, index) in list.feature" :key="index" class="checkbox-item">
@@ -112,7 +112,7 @@
           </div>
         </div>
         <div class="button-search">
-          <el-button type="danger">
+          <el-button type="danger" @click="searchJob">
             {{ $t('button.search_again') }}
           </el-button>
         </div>
@@ -134,7 +134,7 @@
             </div>
           </el-checkbox-group>
           <div slot="footer" class="dialog-footer">
-            <el-button type="danger" @click="changeCondition('provinces', workLocation)">
+            <el-button type="danger" @click="changeCondition('province_id', workLocation)">
               {{ $t('button.decide') }}
             </el-button>
           </div>
@@ -155,7 +155,7 @@
             </div>
           </div>
           <div slot="footer" class="dialog-footer">
-            <el-button type="danger" @click="changeCondition('jobTypes', jobType)">
+            <el-button type="danger" @click="changeCondition('job_type_ids', jobType)">
               {{ $t('button.decide') }}
             </el-button>
           </div>
@@ -174,7 +174,7 @@
         </div>
       </div>
       <div v-else class="search-list-job">
-        <NoDataElement :text="$t('common.no_data')"></NoDataElement>
+        <NoDataElement :text="$t('common.message_no_data.specified_criteria')"></NoDataElement>
       </div>
       <PaginationElement v-if="listJobs.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
     </div>
@@ -375,14 +375,16 @@ export default {
       workLocation: [],
       districts: [],
       condition: {
-        keyword: '',
-        provinces: [],
-        jobTypes: [],
-        employment_status: [],
-        experience: [],
-        sort_by: [],
-        feature: []
-      }
+        work_type_ids: [],
+        job_type_ids: [],
+        experience_ids: [],
+        feature_ids: [],
+        province_id: [],
+        province_city_id: []
+      },
+      search: '',
+      sort_by: [],
+      query: this.$route.query
     }
   },
   computed: {
@@ -390,7 +392,7 @@ export default {
       const text = []
       this.listProvinceDistricts.forEach(district => {
         district.provinces.forEach(province => {
-          if (this.condition.provinces.includes(province.id)) {
+          if (this.condition.province_id.includes(province.id)) {
             text.push(province.name)
           }
         })
@@ -400,7 +402,7 @@ export default {
     showJobType() {
       const text = []
       this.listJobType.forEach(type => {
-        if (this.condition.jobTypes.includes(type.id)) {
+        if (this.condition.job_type_ids.includes(type.id)) {
           text.push(type.name)
         }
       })
@@ -408,8 +410,8 @@ export default {
     }
   },
   async created() {
+    await this.getMasterData()
     await this.getJobs()
-    this.getMasterData()
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },
       { name: this.$t('page.search'), route: '/search' }
@@ -459,9 +461,45 @@ export default {
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
+    getDataSearch() {
+      const dataSearch = []
+      let key = 0
+      for (const query in this.query) {
+        if (this.query[query].length) {
+          if (query === 'list_type') {
+            dataSearch.push(`filters[${key}][key]=${query}&filters[${key}][data]=${this.query[query]}`)
+          } else {
+            dataSearch.push(`filters[${key}][key]=${query}&filters[${key}][data]=[${this.query[query]}]`)
+          }
+          key++
+        }
+      }
+      if (this.search) {
+        dataSearch.push(`search=${this.search}`)
+      }
+      if (this.page) {
+        dataSearch.push(`page=${this.page}`)
+      }
+      if (this.sort_by.length) {
+        dataSearch.push(`orders[${key}][key]=${(this.sort_by[0] === 1) ? 'created_at' : 'updated_at'}&filters[${key}][dir]=asc`)
+      }
+      for (const index in this.condition) {
+        if (this.condition[index].length) {
+          dataSearch.push(`filters[${key}][key]=${index}&filters[${key}][data]=[${this.condition[index].join(',')}]`)
+          key++
+        }
+      }
+      return dataSearch
+    },
+    async searchJob() {
+      await this.$router.push('/search')
+      this.query = []
+      await this.getJobs()
+    },
     async getJobs() {
       await this.$store.commit(INDEX_SET_LOADING, true)
-      const dataResponse = await this.$store.dispatch(JOB_LIST_JOBS, '')
+      const dataSearch = this.getDataSearch()
+      const dataResponse = await this.$store.dispatch(JOB_LIST_JOBS, dataSearch.join('&'))
       if (dataResponse.status_code === 200) {
         this.listJobs = dataResponse.data.data
         this.total = dataResponse.data.total
@@ -505,6 +543,11 @@ export default {
       this.condition[key] = value
       this.occupationDialog = false
       this.workDialog = false
+    },
+    changeSortBy(value, type) {
+      if (value) {
+        this.sort_by = [type]
+      }
     }
   }
 }

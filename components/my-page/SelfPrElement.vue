@@ -1,6 +1,9 @@
 <template>
   <div class="right-content-element">
-    <div id="self-pr" class="edit-cv-element">
+    <div v-if="self_pr.favorite_skill === '' && self_pr.experience_knowledge === '' && self_pr.self_pr === ''" >
+      <NoDataElement :text="$t('common.message_no_data.self_pr')" :type="'career'"></NoDataElement>
+    </div>
+    <div v-else id="self-pr" class="edit-cv-element">
       <div class="edit-cv-title">{{ $t('self_pr.title') }}</div>
       <div class="edit-cv-content edit-info-content">
         <div class="card-text-title card-title-mobile"> {{ $t('self_pr.title') }}</div>
@@ -56,7 +59,6 @@
               </el-col>
             </el-row>
             <BorderElement :middle="true"></BorderElement>
-
           </div>
       </div>
     </div>
@@ -68,11 +70,12 @@
 </template>
 
 <script>
+import NoDataElement from '../element-ui/NoDataElement'
 import BorderElement from './BorderElement'
 
 export default {
   name: 'EditCvElement',
-  components: { BorderElement },
+  components: { BorderElement, NoDataElement },
   props: {
     self_pr: {
       type: Object,

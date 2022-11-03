@@ -1,44 +1,57 @@
 .notification-history-page {
   .notification-history-content {
-    padding: 45px 64px;
+    padding: 40px 140px;
+    margin: auto;
+    max-width: 1000px;
     .notification-list {
       .notification-item {
-        padding: 14px 0;
+        padding: 14px;
         display: flex;
         justify-content: space-between;
-        border-bottom: 1px solid $border-default;
         cursor: pointer;
+        border-radius: 8px;
+        margin-bottom: 2px;
         .notification-form {
           position: relative;
-          padding-left: 23px;
+          padding-left: 34px;
+          width: 100%;
           .show-status {
-            width: 15px;
-            height: 15px;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 20px;
             background-color: $color-text-primary;
-            border-radius: 50%;
             position: absolute;
-            top: 6.5px;
-            left: 0;
+            color: $color-white;
+            top: 2px;
+            left: -6px;
+            padding: 0 5px;
+            border-radius: 2px;
           }
           .notification-title {
             font-weight: 700;
-            font-size: 20px;
-            line-height: 28px;
-            color: $color-text-primary;
+            font-size: 16px;
+            line-height: 24px;
+            color: $color-blue;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
           }
           .notification-detail {
             font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
+            font-size: 14px;
+            line-height: 22px;
           }
         }
         .notification-date {
           font-weight: 500;
-          font-size: 14px;
-          line-height: 22px;
+          font-size: 13px;
+          line-height: 20px;
           color: $color-text-3;
           text-align: right;
         }
+      }
+      .notification-unread {
+        background: $color-primary;
       }
     }
   }

@@ -19,7 +19,7 @@
         <PaginationElement v-if="listJobs.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
       </div>
       <div v-else>
-        <NoDataElement :text="$t('common.no_data')"></NoDataElement>
+        <NoDataElement :text="$t('common.message_no_data.favorite_job')"></NoDataElement>
       </div>
     </div>
   </div>

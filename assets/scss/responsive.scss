@@ -154,6 +154,11 @@
   .card-main {
     display: block;
   }
+  .notification-history-page {
+    .notification-history-content {
+      padding: 40px;
+    }
+  }
   .index-home-page {
     .index-home-content {
       padding: 58px 12px;
@@ -199,6 +204,17 @@
         .text-normal {
           font-size: 14px;
         }
+      }
+    }
+  }
+  .footer {
+    .container-footer {
+      .footer-item {
+        padding-right: 90px;
+        padding-left: 8px;
+        grid-gap: 8px;
+        gap: 8px;
+        justify-content: space-between;
       }
     }
   }
@@ -1610,7 +1626,9 @@
         .form-list-new-social {
           justify-content: center;
           margin-top: 32px;
-
+          a {
+            margin: 0 8px;
+          }
           div {
             margin: 0 8px;
 

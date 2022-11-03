@@ -10,12 +10,15 @@
           {{ $t('my_page.search_by_other_condition') }}
         </el-button>
       </div>
-      <div class="past-search-condition-form">
+      <div v-if="listConditions.length" class="past-search-condition-form">
         <div class="form-condition-list" v-for="(condition, key) in listConditions" :key="key">
           <FormConditionElement :condition="condition" @removeSearchJob="removeSearchJob" @changeToSearch="changeToLink"></FormConditionElement>
         </div>
       </div>
       <PaginationElement v-if="listConditions.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
+      <div v-else>
+        <NoDataElement :text="$t('common.message_no_data.search_condition')"></NoDataElement>
+      </div>
     </div>
   </div>
 </template>
@@ -28,11 +31,12 @@ import {
   INDEX_SET_SUCCESS,
   INDEX_SET_ERROR
 } from '../../store/store.const'
+import NoDataElement from '../element-ui/NoDataElement'
 import PaginationElement from '../element-ui/PaginationElement'
 import FormConditionElement from './FormConditionElement'
 export default {
   name: 'PastSearchConditionElement',
-  components: { PaginationElement, FormConditionElement },
+  components: { PaginationElement, FormConditionElement, NoDataElement },
   data() {
     return {
       listConditions: [],

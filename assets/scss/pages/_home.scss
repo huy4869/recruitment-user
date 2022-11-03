@@ -4,7 +4,7 @@
     height: 366px;
     background-position-x: right;
     background-position-y: bottom;
-    padding: 18px 28.13px;
+    padding: 18px 28.13px 24px 64px;
     .banner-page-element {
       background: url('~assets/images/home_banner.svg') center no-repeat;
       background-position-x: right;
@@ -38,6 +38,7 @@
             padding-top: 1px;
           }
           .all-subject {
+            margin-left: 2px;
             padding: 0;
             font-weight: 700;
             line-height: 28px;
@@ -468,7 +469,7 @@
       justify-content: space-between;
       .button-like {
         display: flex;
-        padding: 6px 8px;
+        padding: 7px 8px;
         border: 1px solid $color-blue;
         border-radius: 4px;
         font-weight: 500;
@@ -491,7 +492,7 @@
           line-height: 22px;
           color: $color-white;
           background-color: $color-button-danger;
-          padding: 8px 0;
+          padding: 9px 0;
           border: none;
         }
       }

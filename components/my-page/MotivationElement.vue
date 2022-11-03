@@ -1,6 +1,9 @@
 <template>
   <div class="right-content-element">
-    <div id="self-pr" class="edit-cv-element">
+    <div v-if="motivation.noteworthy === '' && motivation.motivation === ''" >
+      <NoDataElement :text="$t('common.message_no_data.motive')" :type="'career'"></NoDataElement>
+    </div>
+    <div v-else id="self-pr" class="edit-cv-element">
       <div class="edit-cv-title">{{ $t('motivation.title') }}</div>
       <div class="edit-cv-content edit-info-content">
         <div class="card-text-title card-title-mobile"> {{ $t('motivation.title') }}</div>
