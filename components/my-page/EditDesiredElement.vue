@@ -212,73 +212,73 @@
               <el-col :md="18" :sm="24">
                 <div class="content-input">
                   <el-row class="d-flex period-desired">
-                    <el-col :md="12" :sm="24" class="first-name">
-                      <el-form-item label="" prop="enrollment_period_start" :error="(error.key === 'enrollment_period_start') ? error.value : ''">
+                    <el-col :md="12" :sm="24" class="start-time">
+                      <el-form-item label="" prop="start_working_hour" :error="(error.key === 'start_working_hour') ? error.value : ''">
                         <el-row class="d-flex">
                           <span class="text-normal birthday">{{ $t('desired_condition.start_time') }}</span>
-                          <el-col :sm="7" :xs="10" class="birth-year">
+                          <el-col :sm="7" :xs="9" class="birth-year">
                             <el-input
-                              ref="enrollment_period_start"
-                              v-model.trim="accountForm.enrollment_period_year_start"
+                              ref="start_working_hour"
+                              v-model.trim="accountForm.working_hours.start_hours"
                               name="year"
                               type="text"
                               tabindex="2"
-                              :maxlength="2"
+                              maxlength="2"
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('enrollment_period_start')"
+                              @focus="resetValidate('start_working_hour')"
                             />
                           </el-col>
                           <span class="text-normal birthday">:</span>
-                          <el-col :sm="7" :xs="10" class="birth-month">
+                          <el-col :sm="7" :xs="9" class="birth-month">
                             <el-input
-                              ref="enrollment_period_start"
-                              v-model.trim="accountForm.enrollment_period_month_start"
-                              name="enrollment_period_start"
+                              ref="start_working_hour"
+                              v-model.trim="accountForm.working_hours.start_minutes"
+                              name="start_working_hour"
                               type="text"
-                              :maxlength="2"
+                              maxlength="2"
                               tabindex="2"
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('enrollment_period_start')"
+                              @focus="resetValidate('start_working_hour')"
                             />
                           </el-col>
                         </el-row>
                       </el-form-item>
                     </el-col>
                     <el-col :md="12" :sm="24" class="birth-year">
-                      <el-form-item label="" prop="enrollment_period_end" :error="(error.key === 'enrollment_period_end') ? error.value : ''">
+                      <el-form-item label="" prop="end_working_hour" :error="(error.key === 'end_working_hour') ? error.value : ''">
                         <el-row class="d-flex">
                           <span class="text-normal birthday">{{ $t('desired_condition.end_time') }}</span>
-                          <el-col  :sm="7" :xs="10" class="birth-year">
+                          <el-col  :sm="7" :xs="9" class="birth-year">
                             <el-input
-                              ref="enrollment_period_end"
-                              v-model.trim="accountForm.enrollment_period_year_end"
+                              ref="end_working_hour"
+                              v-model.trim="accountForm.working_hours.end_hours"
                               name="birthday"
                               type="text"
                               tabindex="2"
-                              :maxlength="4"
+                              maxlength="2"
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('enrollment_period_end')"
+                              @focus="resetValidate('end_working_hour')"
                             />
                           </el-col>
                           <span class="text-normal birthday">:</span>
-                          <el-col  :sm="7" :xs="10" class="birth-month">
+                          <el-col  :sm="7" :xs="9" class="birth-month">
                             <el-input
-                              ref="enrollment_period_end"
-                              v-model.trim="accountForm.enrollment_period_month_end"
+                              ref="end_working_hour"
+                              v-model.trim="accountForm.working_hours.end_minutes"
                               name="birthday"
                               type="text"
-                              :maxlength="2"
+                              maxlength="2"
                               tabindex="2"
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                               pattern="[0-9]*"
                               inputmode="numeric"
-                              @focus="resetValidate('enrollment_period_end')"
+                              @focus="resetValidate('end_working_hour')"
                             />
                           </el-col>
                         </el-row>
@@ -404,6 +404,13 @@ export default {
         salary_min: '',
         salary_max: '',
         working_days: [],
+        working_hours: {
+          start_hours: '',
+          start_minutes: '',
+          end_hours: '',
+          end_minutes: '',
+          working_hours_format: ''
+        },
         start_working_hour: '',
         end_working_hour: '',
         errors: {}
@@ -423,6 +430,15 @@ export default {
     }
   },
   computed: {
+    start_working_hour() {
+      return this.accountForm.working_hours.start_hours && this.accountForm.working_hours.start_minutes
+    },
+    end_working_hour() {
+      return this.accountForm.working_hours.end_hours && this.accountForm.working_hours.end_minutes
+    },
+    working_day() {
+      return this.accountForm.working_days
+    }
   },
   watch: {
     listWorkTypes() {
@@ -448,6 +464,56 @@ export default {
     'accountForm.salary_min'() {
       if (!this.accountForm.min && !this.accountForm) {
         this.accountForm.salary_type_id = ''
+      }
+    },
+    start_working_hour() {
+      this.accountForm.start_working_hour = this.start_working_hour
+    },
+    end_working_hour() {
+      this.accountForm.end_working_hour = this.end_working_hour
+    },
+    'accountForm.working_hours.start_hours'() {
+      if ((this.accountForm.working_hours.start_hours && !this.accountForm.working_hours.start_minutes) || (!this.accountForm.working_hours.start_hours && this.accountForm.working_hours.start_minutes)) {
+        this.accountRules.start_working_hour = [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('desired_condition.start_time') }), trigger: 'blur' }
+        ]
+        this.$refs.accountForm.validateField('start_working_hour')
+      } else if (this.accountForm.working_hours.start_hours && this.accountForm.working_hours.start_minutes) {
+        this.accountForm.start_working_hour = this.accountForm.working_hours.start_hours + '' + this.accountForm.working_hours.start_minutes
+        this.resetValidate('start_working_hour')
+      }
+    },
+    'accountForm.working_hours.start_minutes'() {
+      if ((this.accountForm.working_hours.start_hours && !this.accountForm.working_hours.start_minutes) || (!this.accountForm.working_hours.start_hours && this.accountForm.working_hours.start_minutes)) {
+        this.accountRules.start_working_hour = [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('desired_condition.start_time') }), trigger: 'blur' }
+        ]
+        this.$refs.accountForm.validateField('start_working_hour')
+      } else if (this.accountForm.working_hours.start_hours && this.accountForm.working_hours.start_minutes) {
+        this.accountForm.start_working_hour = this.accountForm.working_hours.start_hours + '' + this.accountForm.working_hours.start_minutes
+        this.resetValidate('start_working_hour')
+      }
+    },
+    'accountForm.working_hours.end_hours'() {
+      if ((this.accountForm.working_hours.end_hours && !this.accountForm.working_hours.end_minutes) || (!this.accountForm.working_hours.end_hours && this.accountForm.working_hours.end_minutes)) {
+        this.accountRules.end_working_hour = [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('desired_condition.end_time') }), trigger: 'blur' }
+        ]
+        this.$refs.accountForm.validateField('end_working_hour')
+      } else if (this.accountForm.working_hours.end_hours && this.accountForm.working_hours.end_minutes) {
+        this.accountForm.end_working_hour = this.accountForm.working_hours.end_hours + '' + this.accountForm.working_hours.end_minutes
+        this.resetValidate('end_working_hour')
+      }
+    },
+    'accountForm.working_hours.end_minutes'() {
+      if ((this.accountForm.working_hours.end_hours && !this.accountForm.working_hours.end_minutes) || (!this.accountForm.working_hours.end_hours && this.accountForm.working_hours.end_minutes)) {
+        this.accountRules.end_working_hour = [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('desired_condition.end_time') }), trigger: 'blur' }
+        ]
+        this.$refs.accountForm.validateField('end_working_hour')
+      } else if (this.accountForm.working_hours.end_hours && this.accountForm.working_hours.end_minutes) {
+        this.accountForm.end_working_hour = this.accountForm.working_hours.end_hours + '' + this.accountForm.working_hours.end_minutes
+        this.resetValidate('end_working_hour')
       }
     }
   },
@@ -475,6 +541,11 @@ export default {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
+            if (!(this.accountForm.salary_min && this.accountForm.salary_max && this.accountForm.salary_type_id)) {
+              dto.salary_max = ''
+              dto.salary_min = ''
+              dto.salary_type_id = ''
+            }
 
             const response = await this.$store.dispatch(DESIRED_UPDATE, dto)
             switch (response.status_code) {
