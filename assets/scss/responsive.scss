@@ -277,7 +277,11 @@
 @media screen and (max-width: 900px) {
   .header-common {
     .header-container {
+      .header-logo {
+        margin: 24px 20px;
+      }
       .header-content {
+        padding-right: 20px;
         .button-action {
           margin-right: 10px;
           .border-default {
@@ -286,6 +290,15 @@
         }
         .content-user {
           margin-left: 0;
+          span {
+            overflow: hidden;
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            max-width: 150px;
+            word-break: break-all;
+          }
         }
         .button-login {
           margin: 16px;
@@ -678,6 +691,7 @@
       }
       .header-content {
         height: 50px;
+        padding-right: 0;
         .content-user {
           padding: 9px 14px 15px 0;
           .avatar {

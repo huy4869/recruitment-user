@@ -13,6 +13,13 @@
         </div>
         <div class="button-action show-pc">
           <div class="border-default"></div>
+          <div @click="changeToLink('/my-page#chat')">
+            <img src="/assets/icon/icon_chat.svg" alt="">
+            <span>{{ $t('my_page.chat') }}</span>
+          </div>
+        </div>
+        <div class="button-action show-pc">
+          <div class="border-default"></div>
           <div @click="changeToLink('/notification')">
             <img src="/assets/icon/icon_notification.svg" alt="">
             <span>{{ $t('header.notification') }}</span>

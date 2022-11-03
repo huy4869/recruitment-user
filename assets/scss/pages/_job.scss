@@ -25,7 +25,9 @@
       }
 
       .avatar-img {
-        margin-right: 1.5em;
+        width: 190px;
+        height: 190px;
+        border-radius: 4px;
       }
 
       .social-media {
@@ -52,6 +54,16 @@
       .right-item {
         border-bottom: 1px solid $border-default;
         margin-left: 20px;
+
+        .social-media {
+          display: flex;
+          margin-top: 12px;
+          img {
+            margin-right: 13px;
+            width: 32px;
+            height: 32px;
+          }
+        }
 
         &.first-right-item {
           border-top: 1px solid $border-default;
