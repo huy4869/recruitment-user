@@ -684,3 +684,8 @@ hr {
 .break-word {
   word-break: break-word;
 }
+
+.underline-hover:hover {
+  border-bottom-width: 1px;
+  border-bottom-style: solid
+}

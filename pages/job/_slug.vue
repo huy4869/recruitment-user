@@ -8,49 +8,61 @@
         <div class="show-pc">
           <div class="last-updated">{{ job.updated_at }}</div>
         </div>
-        <div class="show-sp">
-          <div class="last-updated">{{ job.updated_at }}</div>
-          <div class="form-list-new-social">
-            <div><img src="/assets/icon/icon_facebook.svg" alt=""></div>
-            <div><img src="/assets/icon/icon_twitter.svg" alt=""></div>
-            <div><img src="/assets/icon/icon_instagram.svg" alt=""></div>
-            <div><img src="/assets/icon/icon_line.svg" alt=""></div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="job-detail-content">
       <div class="button-pickup">
         <div class="show-sp">
           <div v-if="jobStatus" class="about-job" @click="aboutDialog = true">
-            <img src="/assets/icon/icon_headphone.svg" alt="">
+            <img src="/assets/icon/icon_email.svg" alt="">
             <span>{{ $t('job.about_job') }}</span>
           </div>
         </div>
-        <el-button type="danger">{{ $t('job.pick_up_point') }}</el-button>
+        <div class="show-pc">
+          <el-button class="pick-up-point" type="danger">{{ $t('job.pick_up_point') }}</el-button>
+        </div>
+        <div class="show-sp pick-up-sp">
+          <div class="d-flex">
+            <el-button class="pick-up-point" type="danger">
+            <span class="pick-up-text">
+              {{ $t('job.pick_up_point1') }}<br>
+              {{ $t('job.pick_up_point2') }}
+            </span>
+            </el-button>
+            <div class="sub-detail-title-sp">{{ job.sub_title }}</div>
+          </div>
+        </div>
         <div class="about-job show-pc" @click="aboutDialog = true">
           <img src="/assets/icon/icon_email.svg" alt="">
           <span>{{ $t('job.about_job') }}</span>
         </div>
       </div>
       <div class="sub-detail-title">{{ job.sub_title }}</div>
-      <div class="detail-job-image">
-        <div class="job-avatar">
-          <img :src="job.banner_image" alt="">
+      <div class="show-sp">
+        <div class="detail-job-image">
+          <div class="job-avatar">
+            <img :src="job.banner_image" alt="">
+          </div>
+          <div class="job-detail">
+            <div v-for="(image, index) in job.detail_images" :key="index" class="image-detail">
+              <img :src="image.url" alt="">
+            </div>
+          </div>
         </div>
-        <div class="job-detail">
-          <div v-for="(image, index) in job.detail_images" :key="index" class="image-detail">
-            <img :src="image.url" alt="">
+      </div>
+      <div class="show-pc">
+        <div class="detail-job-image-pc">
+          <div class="job-avatar">
+            <img :src="job.banner_image" alt="">
+          </div>
+          <div class="job-detail">
+            <div v-for="(image, index) in job.detail_images" :key="index" class="image-detail">
+              <img :src="image.url" alt="">
+            </div>
           </div>
         </div>
       </div>
       <div class="job-button-detail">
-        <div v-if="jobStatus" class="form-list-new-social">
-          <div><img src="/assets/icon/icon_facebook.svg" alt=""></div>
-          <div><img src="/assets/icon/icon_twitter.svg" alt=""></div>
-          <div><img src="/assets/icon/icon_instagram.svg" alt=""></div>
-          <div><img src="/assets/icon/icon_line.svg" alt=""></div>
-        </div>
         <div v-if="job.is_favorite" class="button-dislike" @click="removeFavoriteJob">
           <img src="/assets/icon/icon_dislike.svg" alt="">
           <span>{{ $t('home.job_favorite') }}</span>
@@ -165,6 +177,19 @@
           </div>
           <div class="application-requirement-right">
             <div>{{ job.welfare_treatment_description }}</div>
+          </div>
+        </div>
+        <div class="application-requirement-item">
+          <div class="application-requirement-left">
+            <span>{{ $t('job.sns') }}</span>
+          </div>
+          <div class="application-requirement-right">
+            <div v-if="jobStatus" class="form-list-new-social">
+              <div><img src="/assets/icon/icon_facebook.svg" alt=""></div>
+              <div><img src="/assets/icon/icon_twitter.svg" alt=""></div>
+              <div><img src="/assets/icon/icon_instagram.svg" alt=""></div>
+              <div><img src="/assets/icon/icon_line.svg" alt=""></div>
+            </div>
           </div>
         </div>
         <div class="job-button-detail">

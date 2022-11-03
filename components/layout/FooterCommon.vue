@@ -2,12 +2,12 @@
   <footer class="footer">
     <div class="container-footer">
       <div class="footer-item">
-        <div class="show-sp-center">{{ $t('footer.company') }}</div>
-        <div class="show-sp-center">{{ $t('footer.faq') }}</div>
-        <div>{{ $t('footer.terms') }}</div>
-        <div>{{ $t('footer.privacy') }}</div>
-        <div>{{ $t('footer.inquiry') }}</div>
-        <img class="top-arrow show-pc" src="@/static/assets/icon/top-arrow.svg" alt="top-arrow">
+        <div class="show-sp-center cursor-pointer">{{ $t('footer.company') }}</div>
+        <div class="show-sp-center cursor-pointer">{{ $t('footer.faq') }}</div>
+        <div class="cursor-pointer">{{ $t('footer.terms') }}</div>
+        <div class="cursor-pointer">{{ $t('footer.privacy') }}</div>
+        <div class="cursor-pointer" @click="handleRouter('/inquiry')">{{ $t('footer.inquiry') }}</div>
+        <img class="top-arrow show-pc" src="@/static/assets/icon/top-arrow.svg" alt="top-arrow" @click="scrollToTop">
       </div>
       <div class="logo show-pc">
         <img src="/assets/images/logo.svg" alt="">
@@ -40,6 +40,17 @@
 </template>
 <script>
 export default {
-  name: 'FooterCommon'
+  name: 'FooterCommon',
+  methods: {
+    handleRouter(route) {
+      this.$router.push(route)
+    },
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+  }
 }
 </script>

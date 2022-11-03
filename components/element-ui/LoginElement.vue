@@ -67,13 +67,13 @@
             </div>
           </el-form-item>
           <div class="link-register">
-            <span class="register-button" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
+            <span class="underline-hover register-button" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
           </div>
           <div id="here-login" class="here-mobile text-center">
             <span class="text-primary-black">{{ $t('login.forgot_password') }}</span>
-            <span class="text-primary-pink cursor-pointer" @click="changeLink('forgot-password')">
-                {{ $t('login.here') }}
-              </span>
+            <span class="underline-hover text-primary-pink cursor-pointer" @click="changeLink('forgot-password')">
+              {{ $t('login.here') }}
+            </span>
           </div>
         </el-form>
       </el-col>
