@@ -156,7 +156,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
+      <el-button :disabled="disabledButton" class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -245,6 +245,11 @@ export default {
     },
     enrollment_period_end() {
       return this.accountForm.enrollment_period_year_end && this.accountForm.enrollment_period_month_end
+    },
+    disabledButton() {
+      return this.accountForm.school_name === '' || this.accountForm.enrollment_period_year_start === '' ||
+        this.accountForm.enrollment_period_month_start === '' || this.accountForm.enrollment_period_year_end === '' ||
+        this.accountForm.enrollment_period_month_end === '' || this.accountForm.learning_status_id === ''
     }
   },
   watch: {
@@ -329,7 +334,7 @@ export default {
       }
     },
     loadAllYear() {
-      for (let i = new Date().getFullYear(); i >= 1900; i--) {
+      for (let i = new Date().getFullYear(); i >= 1970; i--) {
         this.linksYear.push({ value: i.toString() })
       }
     },
@@ -352,17 +357,7 @@ export default {
                   show: true,
                   text: response.messages
                 })
-                this.accountForm = {
-                  school_name: '',
-                  enrollment_period_start: '',
-                  enrollment_period_end: '',
-                  enrollment_period_year_start: '',
-                  enrollment_period_month_start: '',
-                  enrollment_period_year_end: '',
-                  enrollment_period_month_end: '',
-                  learning_status_id: '',
-                  errors: {}
-                }
+                this.handleRouter('/my-page/education')
                 break
               case 422:
                 for (const [key] of Object.entries(response.data)) {

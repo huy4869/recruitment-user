@@ -20,10 +20,15 @@
                 <el-col :md="18" :sm="24">
                   <div class="content-input image-avatar">
                     <el-form-item label="" prop="imageAvatar" :error="(error.key === 'imageAvatar') ? error.value : ''">
-                      <img id="img-avatar" class="show-image" :src="imageAvatarShow ? imageAvatarShow : '/assets/icon/icon_user_default.svg'" alt="">
-                      <input id="upload-avatar" ref="fileUploadAvatar" class="d-none" type="file" @change="onFileChange">
-                      <div class="button-upload">
-                        <button type="button"><label for="upload-avatar">{{ $t('my_page.update_profile_picture') }}</label></button>
+                      <div class="d-flex show-avatar">
+                        <div class="show-detail">
+                          <img id="img-avatar" class="show-image" :src="imageAvatarShow ? imageAvatarShow : '/assets/icon/icon_user_default.svg'" alt="">
+                          <img v-if="imageAvatarShow" class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="imageAvatarShow = ''">
+                        </div>
+                        <input id="upload-avatar" ref="fileUploadAvatar" class="d-none" type="file" @change="onFileChange">
+                        <div class="button-upload">
+                          <button type="button"><label for="upload-avatar">{{ $t('my_page.update_profile_picture') }}</label></button>
+                        </div>
                       </div>
                     </el-form-item>
                   </div>
@@ -308,7 +313,8 @@
                           name="tel"
                           type="text"
                           tabindex="2"
-                          maxlength="13"
+                          pattern="[0-9]*"
+                          @input="phoneInput"
                           @focus="resetValidate('tel')"
                         />
                       </el-form-item>
@@ -461,18 +467,17 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="10" :sm="24">
-                      <el-form-item label="" prop="post_code" :error="(error.key === 'post_code') ? error.value : ''">
+                      <el-form-item label="" prop="postal_code" :error="(error.key === 'postal_code') ? error.value : ''">
                         <el-input
                           ref="alias_name"
-                          v-model.trim="accountForm.post_code"
+                          v-model.trim="accountForm.postal_code"
                           :placeholder="placeholder.post_code"
                           name="alias_name"
                           type="text"
-                          maxlength="7"
                           tabindex="2"
-                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                           pattern="[0-9]*"
-                          @focus="resetValidate('post_code')"
+                          @input="zipCodeInput"
+                          @focus="resetValidate('postal_code')"
                         />
                       </el-form-item>
                     </el-col>
@@ -491,9 +496,38 @@
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="province_id" :error="(error.key === 'province_id') ? error.value : ''">
-                        <el-select v-model="accountForm.province_id" :placeholder="$t('my_page.prefectures')">
+                        <el-select
+                          v-model="accountForm.province_id"
+                          :placeholder="$t('my_page.prefectures')"
+                          @change="selectCity"
+                        >
                           <el-option
-                            v-for="item in listProvinceDistrict"
+                            v-for="item in listProvinces"
+                            :key="item.id"
+                            :label="item.name"
+                            :value="item.id">
+                          </el-option>
+                        </el-select>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </div>
+              </el-col>
+            </el-row>
+            <BorderElement :middle="true"></BorderElement>
+            <el-row class="d-flex form-label-input">
+              <el-col :md="6" :sm="14" class="col-label">
+                <div class="label"><span>{{ $t('my_page.province_city') }}</span></div>
+                <div class="required">{{ $t('form.required') }}</div>
+              </el-col>
+              <el-col :md="18" :sm="24">
+                <div class="content-input">
+                  <el-row class="d-flex">
+                    <el-col :md="20" :sm="24">
+                      <el-form-item label="" prop="province_city_id" :error="(error.key === 'province_city_id') ? error.value : ''">
+                        <el-select v-model="accountForm.province_city_id" :placeholder="$t('my_page.enter_province_city')">
+                          <el-option
+                            v-for="item in listProvinceCity"
                             :key="item.id"
                             :label="item.name"
                             :value="item.id">
@@ -541,16 +575,16 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="building_name" :error="(error.key === 'building_name') ? error.value : ''">
+                      <el-form-item label="" prop="address" :error="(error.key === 'address') ? error.value : ''">
                         <el-input
-                          ref="building_name"
-                          v-model="accountForm.building_name"
+                          ref="address"
+                          v-model="accountForm.address"
                           :placeholder="$t('my_page.enter_address')"
-                          name="building_name"
+                          name="address"
                           type="text"
                           tabindex="2"
                           show-word-limit
-                          @focus="resetValidate('building_name')"
+                          @focus="resetValidate('address')"
                         />
                       </el-form-item>
                     </el-col>
@@ -565,7 +599,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button btn-right" type="danger" @click="update">{{ $t('my_page.save') }}</el-button>
+      <el-button :disabled="disabledButton" class="card-button btn-right" type="danger" @click="update">{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -577,7 +611,7 @@
 </template>
 
 <script>
-import { validEmail, validFullWidth, validPhoneNumber } from '../../utils/validate'
+import { validEmail, validFullWidth } from '../../utils/validate'
 import BorderElement from './BorderElement'
 import {
   INDEX_SET_ERROR,
@@ -614,17 +648,15 @@ export default {
       }
     }
     const validPostCode = (rule, value, callback) => {
-      if (value && value.length < 6) {
+      if (value && value.length < 8) {
         callback(new Error(this.$t('validation.postcode_length', { _field_: this.$t('my_page.post_code') })))
       } else {
         callback()
       }
     }
     const validPhone = (rule, value, callback) => {
-      if (value && (value.length > 13 || value.length < 10 || !value.startsWith(0))) {
+      if (value && (value.length > 18 || value.length < 12 || !value.startsWith(0))) {
         callback(new Error(this.$t('validation.phone_length', { _field_: this.$t('my_page.phone') })))
-      } else if (!validPhoneNumber(value)) {
-        callback(new Error(this.$t('validation.phone', { _field_: this.$t('my_page.phone') })))
       } else {
         callback()
       }
@@ -652,6 +684,8 @@ export default {
       file: '',
       listGender: [],
       listProvinceDistrict: [],
+      listProvinces: [],
+      listProvinceCity: [],
       linksYear: [],
       linksMonth: [],
       linksDay: [],
@@ -673,8 +707,9 @@ export default {
         facebook: this.$auth.user.facebook,
         instagram: this.$auth.user.instagram,
         twitter: this.$auth.user.twitter,
-        postal_code: this.$auth.user.postal_code,
+        postal_code: this.zipCodeFormat(this.$auth.user.postal_code),
         province_id: this.$auth.user.province_id,
+        province_city_id: this.$auth.user.province_city_id,
         city: this.$auth.user.city,
         address: this.$auth.user.address,
         avatar: '',
@@ -751,7 +786,14 @@ export default {
         province_id: [
           {
             required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.gender') }),
+            message: this.$t('validation.required', { _field_: this.$t('my_page.prefectures') }),
+            trigger: 'blur'
+          }
+        ],
+        province_city_id: [
+          {
+            required: true,
+            message: this.$t('validation.required', { _field_: this.$t('my_page.province_city') }),
             trigger: 'blur'
           }
         ],
@@ -767,7 +809,7 @@ export default {
         twitter: [
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.twitter') }), trigger: 'blur' }
         ],
-        post_code: [
+        postal_code: [
           { validator: validPostCode, message: this.$t('validation.postcode_length', { _field_: this.$t('my_page.post_code') }), trigger: 'blur' }
         ],
         city: [
@@ -778,19 +820,19 @@ export default {
           },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
         ],
-        building_name: [
+        address: [
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
         ]
 
       },
       placeholder: {
-        phone: '000123001',
+        phone: '000-1000-0000',
         email: 'example@example.com',
         line: 'line.me/ti/p/z73demo',
         facebook: 'facebook.com/example',
         instagram: 'instagram.com/example',
         twitter: 'twitter.com/example',
-        post_code: '0000000'
+        post_code: '000-0000'
       },
       title: {
         line: 'LINE ID',
@@ -804,6 +846,16 @@ export default {
   computed: {
     birthday() {
       return this.accountForm.year && this.accountForm.month && this.accountForm.day
+    },
+    disabledButton() {
+      return this.accountForm.first_name === '' || this.accountForm.last_name === '' ||
+        this.accountForm.furi_first_name === '' || this.accountForm.furi_last_name === '' ||
+        this.accountForm.tel === '' || this.accountForm.birthday === '' ||
+        this.accountForm.gender_id === '' || this.accountForm.province_id === '' ||
+        this.accountForm.province_city_id === '' || this.accountForm.city === ''
+    },
+    numberOfDays() {
+      return this.daysInMonth(this.accountForm.month, this.accountForm.year)
     }
   },
   watch: {
@@ -849,9 +901,16 @@ export default {
           this.accountForm.age = new Date().getFullYear() - this.accountForm.year
         }
       }
+    },
+    listProvinces() {
+      this.listProvinceCity = this.listProvinces[this.$auth.user.province_id].province_city
+    },
+    numberOfDays() {
+      this.loadAllDay()
     }
   },
-  created() {
+  async created() {
+    await this.$auth.fetchUser()
     this.getGenderMaster()
     this.getProvinceMaster()
     this.getBirthDay()
@@ -942,7 +1001,10 @@ export default {
       this.linksMonth = LINKS_MONTH
     },
     loadAllDay() {
-      for (let i = 1; i <= 31; i++) {
+      for (let i = 1; i <= this.numberOfDays; i++) {
+        if (i < 10) {
+          i = '0' + i
+        }
         this.linksDay.push({ value: i.toString() })
       }
     },
@@ -956,10 +1018,17 @@ export default {
     },
     getProvinceMaster() {
       const dataResources = [
-        'resources[m_provinces]={"model": "MProvince"}'
+        'resources[province_districts]={}'
       ]
       this.$store.dispatch(MASTER_GET_DATA, dataResources).then(res => {
-        this.listProvinceDistrict = res.data.m_provinces
+        this.listProvinceDistrict = res.data.province_districts
+        const listCity = {}
+        this.listProvinceDistrict.forEach((district) => {
+          district.provinces.forEach((provinces) => {
+            listCity[provinces.id] = provinces
+          })
+        })
+        this.listProvinces = listCity
       })
     },
     getBirthDay() {
@@ -975,6 +1044,7 @@ export default {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
+            dto.postal_code = dto.postal_code ? dto.postal_code.replace(/[^0-9]/g, '') : dto.postal_code
             const response = await this.$store.dispatch(USER_UPDATE_BASIC_INFO, dto)
             if (response.status_code === 200) {
               await this.$store.commit(INDEX_SET_SUCCESS, {
@@ -982,6 +1052,7 @@ export default {
                 text: response.messages
               })
               await this.$auth.fetchUser()
+              this.$router.push('/my-page/info')
             } else {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,
@@ -995,6 +1066,24 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    zipCodeInput() {
+      const x = this.accountForm.postal_code.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})/)
+      this.accountForm.postal_code = !x[2] ? x[1] : '' + x[1] + '-' + x[2]
+    },
+    phoneInput() {
+      const x = this.accountForm.tel.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,5})/)
+      this.accountForm.tel = !x[2] ? x[1] : '' + x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '')
+    },
+    zipCodeFormat(zip) {
+      return zip ? zip.toString().slice(0, 3) + '-' + zip.toString().slice(3) : ''
+    },
+    selectCity(value) {
+      this.listProvinceCity = this.listProvinces[value].province_city
+      this.accountForm.province_city_id = this.listProvinceCity[0].id
+    },
+    daysInMonth(month, year) {
+      return new Date(Number(year), Number(month), 0).getDate()
     }
   }
 }

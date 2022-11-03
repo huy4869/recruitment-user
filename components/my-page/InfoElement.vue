@@ -105,7 +105,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              {{ info.address }}
+              〒{{ zipCodeFormat(info.postal_code) }}{{ info.province_name }} {{ info.province_city_name }}{{info.city}}{{ info.address }}
             </p>
           </div>
           <div id="img-detail" class="left-item">
@@ -152,6 +152,9 @@ export default {
   methods: {
     handleRouter(route) {
       this.$router.push(route)
+    },
+    zipCodeFormat(zip) {
+      return zip ? zip.toString().slice(0, 3) + '-' + zip.toString().slice(3) : ''
     }
   }
 }
