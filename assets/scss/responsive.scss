@@ -405,6 +405,11 @@
             }
           }
         }
+        .left-item {
+          p {
+            margin-left: 10px;
+          }
+        }
       }
       .card-main {
         .job-title {
@@ -1010,6 +1015,9 @@
           justify-content: space-between;
         }
 
+        .avatar-pc {
+          display: none;
+        }
         .img-detail-mobile {
           display: block;
           margin-bottom: 16px;
