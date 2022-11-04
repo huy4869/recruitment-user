@@ -25,8 +25,8 @@
   }
   .icon-next {
     background: url('~assets/icons/arrow_next.svg') center no-repeat;
-    width: 7px;
-    height: 12px;
+    width: 24px;
+    height: 24px;
     display: inline-block;
   }
   .page-item:hover {
@@ -36,11 +36,16 @@
   }
 
   .page-item:hover, .active span {
-    color: $color-text-primary;
+    color: $color-white;
+    background-color: $color-text-primary;
     border-color: $color-text-primary;
+    .icon-next {
+      background: url('~assets/icons/arrow_next_disable.svg') center no-repeat;
+    }
   }
   .active {
-    color: $color-text-primary;
+    color: $color-white;
+    background-color: $color-text-primary;
     border-color: $color-text-primary;
   }
   .page-item.disable, .page-item.disable:hover {
@@ -61,5 +66,6 @@
   .pagination {
     justify-content: flex-end;
     padding: 0;
+    margin: 0;
   }
 }

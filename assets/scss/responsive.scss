@@ -670,8 +670,9 @@
   .login-page {
     #forgot-des {
       width: 94%;
+      margin: 32px 12px;
       font-size: 14px;
-      margin: 2.5em auto;
+      line-height: 22px;
     }
 
     #register-element {
@@ -683,7 +684,9 @@
     .login-element {
       width: 100%;
       margin-top: 90px;
-
+      .check-remember {
+        justify-content: center;
+      }
       .login-title {
         width: 100%;
       }
@@ -1297,6 +1300,18 @@
         line-height: 22px;
         padding: 3px 8px;
         width: fit-content;
+      }
+    }
+    .card-primary-title {
+      display: flex;
+      height: 32px;
+      .text-count-career {
+        width: auto;
+        height: 20px;
+        border: none;
+        font-size: 14px;
+        line-height: 22px;
+        font-family: 'Noto Sans JP', sans-serif;
       }
     }
 

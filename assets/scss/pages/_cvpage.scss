@@ -2,6 +2,8 @@
   .cv-content {
     display: flex;
     padding: 54px 64px;
+    max-width: 1152px;
+    margin: auto;
   }
 }
 .right-content-element {
@@ -14,11 +16,31 @@
 }
 .edit-cv-element {
   margin-bottom: 24px;
+  .text-count-career {
+    width: 24px;
+    height: 24px;
+    border: 1px solid $color-black;
+    font-size: 18px;
+    border-radius: 50%;
+    line-height: 22px;
+    display: inline-flex;
+    justify-content: center;
+    vertical-align: middle;
+    font-family: 'Zen Kaku Gothic New';
+    font-weight: 700;
+    margin: auto 0;
+    span {
+      margin: auto;
+      font-size: 18px;
+      line-height: unset;
+    }
+  }
   .edit-cv-title {
     font-weight: 700;
     font-size: 24px;
     line-height: 32px;
     color: $color-black;
+    display: flex;
   }
   .edit-cv-content {
     .card-title-mobile {
