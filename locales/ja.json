@@ -323,7 +323,8 @@
     "other_emp_status": "その他の雇用形態",
     "enter_other_occupation": "その他の職種を入力",
     "enter_other_emp_status": "その他の雇用形態を入力",
-    "create": "職務経歴追加"
+    "create": "職務経歴追加",
+    "current": "現在"
   },
   "self_pr": {
     "title": "自己PR",
