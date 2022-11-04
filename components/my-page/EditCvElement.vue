@@ -13,162 +13,162 @@
         >
           <div class="edit-form-input">
             <BorderElement :middle="false"></BorderElement>
-              <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="14" class="col-label">
-                  <div class="label"><span>{{ $t('my_page.image_avatar') }}</span></div>
-                </el-col>
-                <el-col :md="18" :sm="24">
-                  <div class="content-input image-avatar">
-                    <el-form-item label="" prop="imageAvatar" :error="(error.key === 'imageAvatar') ? error.value : ''">
-                      <div class="d-flex show-avatar">
-                        <div class="show-detail">
-                          <img id="img-avatar" class="show-image" :src="imageAvatarShow ? imageAvatarShow : '/assets/icon/icon_user_default.svg'" alt="">
-                          <img v-if="imageAvatarShow" class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="imageAvatarShow = ''">
-                        </div>
-                        <input id="upload-avatar" ref="fileUploadAvatar" class="d-none" type="file" @change="onFileChange">
-                        <div class="button-upload">
-                          <button type="button"><label for="upload-avatar">{{ $t('my_page.update_profile_picture') }}</label></button>
-                        </div>
+            <el-row class="d-flex form-label-input">
+              <el-col :md="6" :sm="14" class="col-label">
+                <div class="label"><span>{{ $t('my_page.image_avatar') }}</span></div>
+              </el-col>
+              <el-col :md="18" :sm="24">
+                <div class="content-input image-avatar">
+                  <el-form-item label="" prop="imageAvatar" :error="(error.key === 'imageAvatar') ? error.value : ''">
+                    <div class="d-flex show-avatar">
+                      <div class="show-detail">
+                        <img id="img-avatar" class="show-image" :src="imageAvatarShow ? imageAvatarShow : '/assets/icon/icon_user_default.svg'" alt="">
+                        <img v-if="imageAvatarShow" class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="imageAvatarShow = ''">
                       </div>
-                    </el-form-item>
-                  </div>
-                </el-col>
-              </el-row>
-            <BorderElement :middle="true"></BorderElement>
-              <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="14" class="col-label">
-                  <div class="label"><span>{{ $t('my_page.image_detail') }}</span></div>
-                </el-col>
-                <el-col :md="18" :sm="24">
-                  <div class="content-input detail-image">
-                    <el-form-item label="" prop="imageDetail" :error="(error.key === 'imageDetail') ? error.value : ''">
-                      <input id="upload-detail" ref="fileUploadDetail" class="d-none" type="file" max="3" multiple @change="onFileChangeDetail">
+                      <input id="upload-avatar" ref="fileUploadAvatar" class="d-none" type="file" @change="onFileChange">
                       <div class="button-upload">
-                        <button type="button"><label for="upload-detail">{{ $t('my_page.upload_image_detail') }}</label></button>
+                        <button type="button"><label for="upload-avatar">{{ $t('my_page.update_profile_picture') }}</label></button>
                       </div>
-                      <div v-if="imageDetailShow.length" class="d-flex">
-                        <div v-for="(detail, index) in imageDetailShow" :key="index" class="show-detail">
-                          <img id="img-intro" class="show-image" :src="detail ? detail : '/assets/icon/icon_user_default.svg'" alt="">
-                          <img class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="removeImage(index)">
-                        </div>
+                    </div>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </el-row>
+            <BorderElement :middle="true"></BorderElement>
+            <el-row class="d-flex form-label-input">
+              <el-col :md="6" :sm="14" class="col-label">
+                <div class="label"><span>{{ $t('my_page.image_detail') }}</span></div>
+              </el-col>
+              <el-col :md="18" :sm="24">
+                <div class="content-input detail-image">
+                  <el-form-item label="" prop="imageDetail" :error="(error.key === 'imageDetail') ? error.value : ''">
+                    <input id="upload-detail" ref="fileUploadDetail" class="d-none" type="file" max="3" multiple @change="onFileChangeDetail">
+                    <div class="button-upload">
+                      <button type="button"><label for="upload-detail">{{ $t('my_page.upload_image_detail') }}</label></button>
+                    </div>
+                    <div v-if="imageDetailShow.length" class="d-flex">
+                      <div v-for="(detail, index) in imageDetailShow" :key="index" class="show-detail">
+                        <img id="img-intro" class="show-image" :src="detail ? detail.url : '/assets/icon/icon_user_default.svg'" alt="">
+                        <img class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="removeImage(index)">
                       </div>
-                    </el-form-item>
-                  </div>
-                </el-col>
-              </el-row>
+                    </div>
+                  </el-form-item>
+                </div>
+              </el-col>
+            </el-row>
             <BorderElement :middle="false"></BorderElement>
             <div class="basic-information">
               <span>{{ $t('my_page.basic_information') }}</span>
             </div>
-              <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="14" class="col-label">
-                  <div class="label"><span>{{ $t('my_page.name') }}</span></div>
-                  <div class="required">{{ $t('form.required') }}</div>
-                </el-col>
-                <el-col :md="18" :sm="24">
-                  <div class="content-input">
-                    <el-row class="d-flex">
-                      <el-col :md="10" :sm="12" class="first-name">
-                        <el-form-item label="" prop="first_name" :error="(error.key === 'first_name') ? error.value : ''">
-                          <el-input
-                              ref="first_name"
-                              v-model="accountForm.first_name"
-                              :placeholder="$t('my_page.first_name')"
-                              name="first_name"
-                              type="text"
-                              tabindex="2"
-                              show-word-limit
-                              @focus="resetValidate('first_name')"
-                            />
-                        </el-form-item>
-                      </el-col>
-                      <el-col :md="10" :sm="12" class="last-name">
-                        <el-form-item label="" prop="last_name" :error="(error.key === 'last_name') ? error.value : ''">
-                          <el-input
-                            ref="last_name"
-                            v-model="accountForm.last_name"
-                            :placeholder="$t('my_page.last_name')"
-                            name="last_name"
-                            type="text"
-                            tabindex="2"
-                            show-word-limit
-                            @focus="resetValidate('last_name')"
-                          />
-                        </el-form-item>
-                      </el-col>
-                    </el-row>
-                  </div>
-                </el-col>
-              </el-row>
+            <el-row class="d-flex form-label-input">
+              <el-col :md="6" :sm="14" class="col-label">
+                <div class="label"><span>{{ $t('my_page.name') }}</span></div>
+                <div class="required">{{ $t('form.required') }}</div>
+              </el-col>
+              <el-col :md="18" :sm="24">
+                <div class="content-input">
+                  <el-row class="d-flex">
+                    <el-col :md="10" :sm="12" class="first-name">
+                      <el-form-item label="" prop="first_name" :error="(error.key === 'first_name') ? error.value : ''">
+                        <el-input
+                          ref="first_name"
+                          v-model="accountForm.first_name"
+                          :placeholder="$t('my_page.first_name')"
+                          name="first_name"
+                          type="text"
+                          tabindex="2"
+                          show-word-limit
+                          @focus="resetValidate('first_name')"
+                        />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :md="10" :sm="12" class="last-name">
+                      <el-form-item label="" prop="last_name" :error="(error.key === 'last_name') ? error.value : ''">
+                        <el-input
+                          ref="last_name"
+                          v-model="accountForm.last_name"
+                          :placeholder="$t('my_page.last_name')"
+                          name="last_name"
+                          type="text"
+                          tabindex="2"
+                          show-word-limit
+                          @focus="resetValidate('last_name')"
+                        />
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </div>
+              </el-col>
+            </el-row>
             <BorderElement :middle="true"></BorderElement>
-              <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="14" class="col-label">
-                  <div class="label"><span>{{ $t('my_page.alias_name') }}</span></div>
-                </el-col>
-                <el-col :md="18" :sm="24">
-                  <div class="content-input">
-                    <el-row class="d-flex">
-                      <el-col :md="20" :sm="24">
-                        <el-form-item label="" prop="alias_name" :error="(error.key === 'alias_name') ? error.value : ''">
-                          <el-input
-                            ref="alias_name"
-                            v-model="accountForm.alias_name"
-                            :placeholder="$t('my_page.enter_alias_name')"
-                            name="alias_name"
-                            type="text"
-                            tabindex="2"
-                            show-word-limit
-                            @focus="resetValidate('alias_name')"
-                          />
-                        </el-form-item>
-                      </el-col>
-                    </el-row>
-                  </div>
-                </el-col>
-              </el-row>
+            <el-row class="d-flex form-label-input">
+              <el-col :md="6" :sm="14" class="col-label">
+                <div class="label"><span>{{ $t('my_page.alias_name') }}</span></div>
+              </el-col>
+              <el-col :md="18" :sm="24">
+                <div class="content-input">
+                  <el-row class="d-flex">
+                    <el-col :md="20" :sm="24">
+                      <el-form-item label="" prop="alias_name" :error="(error.key === 'alias_name') ? error.value : ''">
+                        <el-input
+                          ref="alias_name"
+                          v-model="accountForm.alias_name"
+                          :placeholder="$t('my_page.enter_alias_name')"
+                          name="alias_name"
+                          type="text"
+                          tabindex="2"
+                          show-word-limit
+                          @focus="resetValidate('alias_name')"
+                        />
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </div>
+              </el-col>
+            </el-row>
             <BorderElement :middle="true"></BorderElement>
-              <el-row class="d-flex form-label-input">
-                <el-col :md="6" :sm="14" class="col-label">
-                  <div class="label">
-                    <span>{{ $t('my_page.name') }}<br class="show-pc"/>({{ $t('my_page.furigana') }})</span>
-                  </div>
-                  <div class="required">{{ $t('form.required') }}</div>
-                </el-col>
-                <el-col :md="18" :sm="24">
-                  <div class="content-input">
-                      <el-row class="d-flex">
-                        <el-col :md="10" :sm="12" class="first-name">
-                          <el-form-item label="" prop="furi_first_name" :error="(error.key === 'furi_first_name') ? error.value : ''">
-                            <el-input
-                              ref="furi_first_name"
-                              v-model="accountForm.furi_first_name"
-                              :placeholder="$t('my_page.furi_first_name')"
-                              name="furi_first_name"
-                              type="text"
-                              tabindex="2"
-                              show-word-limit
-                              @focus="resetValidate('furi_first_name')"
-                            />
-                          </el-form-item>
-                        </el-col>
-                        <el-col :md="10" :sm="12" class="last-name">
-                          <el-form-item label="" prop="furi_last_name" :error="(error.key === 'furi_last_name') ? error.value : ''">
-                            <el-input
-                              ref="furi_last_name"
-                              v-model="accountForm.furi_last_name"
-                              :placeholder="$t('my_page.furi_last_name')"
-                              name="furi_last_name"
-                              type="text"
-                              tabindex="2"
-                              show-word-limit
-                              @focus="resetValidate('furi_last_name')"
-                            />
-                          </el-form-item>
-                        </el-col>
-                      </el-row>
-                  </div>
-                </el-col>
-              </el-row>
+            <el-row class="d-flex form-label-input">
+              <el-col :md="6" :sm="14" class="col-label">
+                <div class="label">
+                  <span>{{ $t('my_page.name') }}<br class="show-pc"/>({{ $t('my_page.furigana') }})</span>
+                </div>
+                <div class="required">{{ $t('form.required') }}</div>
+              </el-col>
+              <el-col :md="18" :sm="24">
+                <div class="content-input">
+                  <el-row class="d-flex">
+                    <el-col :md="10" :sm="12" class="first-name">
+                      <el-form-item label="" prop="furi_first_name" :error="(error.key === 'furi_first_name') ? error.value : ''">
+                        <el-input
+                          ref="furi_first_name"
+                          v-model="accountForm.furi_first_name"
+                          :placeholder="$t('my_page.furi_first_name')"
+                          name="furi_first_name"
+                          type="text"
+                          tabindex="2"
+                          show-word-limit
+                          @focus="resetValidate('furi_first_name')"
+                        />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :md="10" :sm="12" class="last-name">
+                      <el-form-item label="" prop="furi_last_name" :error="(error.key === 'furi_last_name') ? error.value : ''">
+                        <el-input
+                          ref="furi_last_name"
+                          v-model="accountForm.furi_last_name"
+                          :placeholder="$t('my_page.furi_last_name')"
+                          name="furi_last_name"
+                          type="text"
+                          tabindex="2"
+                          show-word-limit
+                          @focus="resetValidate('furi_last_name')"
+                        />
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </div>
+              </el-col>
+            </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
               <el-col :md="6" :sm="14" class="col-label">
@@ -680,7 +680,7 @@ export default {
     return {
       imageAvatarShow: this.$auth.user.avatar,
       imageAvatar: '',
-      imageDetailShow: [],
+      imageDetailShow: this.$auth.user.images,
       file: '',
       listGender: [],
       listProvinceDistrict: [],
@@ -712,8 +712,8 @@ export default {
         province_city_id: this.$auth.user.province_city_id,
         city: this.$auth.user.city,
         address: this.$auth.user.address,
-        avatar: '',
-        images: [],
+        avatar: this.$auth.user.avatar,
+        images: this.$auth.user.images,
         errors: {}
       },
       error: {
@@ -840,19 +840,13 @@ export default {
         instagram: 'Instagram',
         twitter: 'Twitter'
       },
-      confirmModal: false
+      confirmModal: false,
+      disabledButton: false
     }
   },
   computed: {
     birthday() {
       return this.accountForm.year && this.accountForm.month && this.accountForm.day
-    },
-    disabledButton() {
-      return this.accountForm.first_name === '' || this.accountForm.last_name === '' ||
-        this.accountForm.furi_first_name === '' || this.accountForm.furi_last_name === '' ||
-        this.accountForm.tel === '' || this.accountForm.birthday === '' ||
-        this.accountForm.gender_id === '' || this.accountForm.province_id === '' ||
-        this.accountForm.province_city_id === '' || this.accountForm.city === ''
     },
     numberOfDays() {
       return this.daysInMonth(this.accountForm.month, this.accountForm.year)
@@ -907,6 +901,21 @@ export default {
     },
     numberOfDays() {
       this.loadAllDay()
+    },
+    accountForm: {
+      handler() {
+        let check = true
+        this.$refs.accountForm.validate(valid => {
+          if (valid) {
+            check = false
+            this.disabledButton = false
+          }
+        })
+        if (check) {
+          this.disabledButton = true
+        }
+      },
+      deep: true
     }
   },
   async created() {
@@ -936,16 +945,15 @@ export default {
       this.$refs.fileUploadAvatar.value = null
     },
     async onFileChangeDetail(e) {
-      const dataImageDetailShow = []
       for (let x = 0; x < e.target.files.length; x++) {
-        dataImageDetailShow.push(URL.createObjectURL(e.target.files[x]))
         const formData = new FormData()
         formData.append('image', e.target.files[x])
         formData.append('type', 'avatar_detail')
         const response = await this.$store.dispatch(USER_UPLOAD_AVATAR, formData)
-        this.accountForm.avatar = response.data.url
+        this.imageDetailShow.push({
+          url: response.data.url
+        })
       }
-      this.imageDetailShow = dataImageDetailShow
       this.$refs.fileUploadDetail.value = null
     },
     async upLoadFile(type) {
@@ -957,6 +965,9 @@ export default {
     },
     removeImage(index) {
       this.imageDetailShow = this.imageDetailShow.filter(function(item, key) {
+        return key !== index
+      })
+      this.accountForm.images = this.accountForm.images.filter(function(item, key) {
         return key !== index
       })
     },

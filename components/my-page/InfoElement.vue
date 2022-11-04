@@ -11,21 +11,19 @@
         <div class="img-detail-mobile">
           <span class="img-title-mobile card-text-primary">{{ $t('my_page.image_detail') }}</span>
           <div class="img-detail">
-            <img src="/assets/images/achie.png" alt="">
-            <img src="/assets/images/achie.png" alt="">
-            <img src="/assets/images/achie.png" alt="">
+            <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="">
           </div>
 
         </div>
         <div class="job-box items-center">
-          <div class="left-item">
+          <div class="left-item avatar-pc">
             <p class="card-text-primary">
               {{ $t('my_page.image_detail') }}
             </p>
           </div>
-          <div class="right-item first-right-item">
-          <div v-for="(img, key) in info.images" :key="key" class="img-detail">
-          <img :src="img" alt="img-detail">
+          <div class="right-item first-right-item avatar-pc">
+          <div class="img-detail">
+            <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="img-detail">
           </div>
           </div>
           <div class="left-item">
@@ -108,7 +106,7 @@
               〒{{ zipCodeFormat(info.postal_code) }}{{ info.province_name }} {{ info.province_city_name }}{{info.city}}{{ info.address }}
             </p>
           </div>
-          <div id="img-detail" class="left-item">
+          <div class="left-item">
             <p class="card-text-primary">
               {{ $t('my_page.sns_social') }}
             </p>

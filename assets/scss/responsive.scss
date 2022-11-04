@@ -405,6 +405,11 @@
             }
           }
         }
+        .left-item {
+          p {
+            margin-left: 10px;
+          }
+        }
       }
       .card-main {
         .job-title {
@@ -724,25 +729,27 @@
       .header-content {
         height: 50px;
         padding-right: 0;
-        .content-user {
+        .show-action-user {
           padding: 9px 14px 15px 0;
-          .avatar {
-            width: 28px;
-            height: 28px;
-          }
-          img {
-            margin: 2px 0;
-          }
-          span {
-            white-space: normal;
-            overflow: hidden;
-            display: -webkit-box;
-            text-overflow: ellipsis;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            padding:  0;
-            font-size: 13px;
-            line-height: 20px;
+          .content-user {
+            .avatar {
+              width: 28px;
+              height: 28px;
+            }
+            img {
+              margin: 2px 0;
+            }
+            span {
+              white-space: normal;
+              overflow: hidden;
+              display: -webkit-box;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+              padding:  0;
+              font-size: 13px;
+              line-height: 20px;
+            }
           }
         }
         .header-sp {
@@ -1008,6 +1015,9 @@
           justify-content: space-between;
         }
 
+        .avatar-pc {
+          display: none;
+        }
         .img-detail-mobile {
           display: block;
           margin-bottom: 16px;

@@ -481,7 +481,8 @@ export default {
       linksMonth: [],
       index: this.$route.params.id || '',
       clonedOccupation: [],
-      deleteModal: false
+      deleteModal: false,
+      disabledButton: true
     }
   },
   computed: {
@@ -576,6 +577,30 @@ export default {
           })
         }
       })
+    },
+    accountForm: {
+      handler() {
+        let check = true
+        this.$refs.accountForm.validate(valid => {
+          if (valid) {
+            check = false
+            this.disabledButton = false
+          }
+        })
+        if (check) {
+          this.disabledButton = true
+        }
+        if (this.accountForm.job_type_name === 6 && this.accountForm.other_occupation === '') {
+          this.disabledButton = true
+        }
+        if (this.accountForm.work_type_name === 5 && this.accountForm.other_status === '') {
+          this.disabledButton = true
+        }
+        if (this.accountForm.period_check && (this.accountForm.period_year_end === '' || this.accountForm.period_month_end === '')) {
+          this.disabledButton = true
+        }
+      },
+      deep: true
     }
   },
   mounted() {

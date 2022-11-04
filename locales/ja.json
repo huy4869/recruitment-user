@@ -90,7 +90,8 @@
     "sub_web_cv": "美容室オーナが探すため、WEB履歴書を更新しましょう！",
     "notification_history": "通知履歴",
     "search": "検索結果",
-    "inquiry": "お問い合わせ"
+    "inquiry": "お問い合わせ",
+    "logout": "ログアウト"
   },
   "favorite_job": {
     "place": "勤務場所",

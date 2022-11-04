@@ -242,7 +242,8 @@ export default {
       linksMonth: [],
       index: this.$route.params.id || '',
       confirmModal: false,
-      deleteModal: false
+      deleteModal: false,
+      disabledButton: false
     }
   },
   computed: {
@@ -298,6 +299,21 @@ export default {
       } else {
         this.accountForm.enrollment_period_end = ''
       }
+    },
+    accountForm: {
+      handler() {
+        let check = true
+        this.$refs.accountForm.validate(valid => {
+          if (valid) {
+            check = false
+            this.disabledButton = false
+          }
+        })
+        if (check) {
+          this.disabledButton = true
+        }
+      },
+      deep: true
     }
   },
   mounted() {
@@ -369,6 +385,7 @@ export default {
                   show: true,
                   text: response.messages
                 })
+                this.handleRouter('/my-page/education')
                 break
               case 422:
                 for (const [key] of Object.entries(response.data)) {

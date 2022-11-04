@@ -171,7 +171,8 @@ export default {
       linksMonth: [],
       index: this.$route.params.id || '',
       confirmModal: false,
-      deleteModal: false
+      deleteModal: false,
+      disabledButton: false
     }
   },
   computed: {
@@ -211,6 +212,21 @@ export default {
       } else if (this.accountForm.year === '' && this.accountForm.month === '') {
         delete this.accountRules.new_issuance_date
       }
+    },
+    accountForm: {
+      handler() {
+        let check = true
+        this.$refs.accountForm.validate(valid => {
+          if (valid) {
+            check = false
+            this.disabledButton = false
+          }
+        })
+        if (check) {
+          this.disabledButton = true
+        }
+      },
+      deep: true
     }
   },
   mounted() {
