@@ -119,8 +119,8 @@
                          </el-row>
                        </el-form-item>
                      </el-col>
-                     <span v-show="accountForm.period_check" class="date-space">~</span>
-                     <el-col v-show="accountForm.period_check" :md="9" :sm="24" class="birth-year">
+                     <span class="date-space">~</span>
+                     <el-col v-if="!accountForm.period_check" :md="9" :sm="24" class="birth-year">
                        <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
                          <el-row class="d-flex">
                            <el-col  :sm="12" :xs="12" class="birth-year">
@@ -160,6 +160,7 @@
                          </el-row>
                        </el-form-item>
                      </el-col>
+                     <div class="text-normal date-space" v-else>{{ $t('career.current') }}</div>
                    </el-row>
                  </div>
                </el-col>
@@ -481,8 +482,7 @@ export default {
       linksMonth: [],
       index: this.$route.params.id || '',
       clonedOccupation: [],
-      deleteModal: false,
-      disabledButton: true
+      deleteModal: false
     }
   },
   computed: {
@@ -505,18 +505,21 @@ export default {
       if (this.accountForm.work_type_name === 5 && this.accountForm.other_status === '') {
         return true
       }
-      if (this.accountForm.period_check && (this.accountForm.period_year_end === '' || this.accountForm.period_month_end === '')) {
+      if (!this.accountForm.period_check && (this.accountForm.period_year_end === '' || this.accountForm.period_month_end === '')) {
         return true
       }
       return this.accountForm.store_name === '' || this.accountForm.period_month_start === '' ||
         this.accountForm.period_year_start === '' || this.accountForm.job_type_name === '' ||
-        this.accountForm.position_offices === '' || this.accountForm.work_type_name === ''
+        this.accountForm.position_offices.length === 0 || this.accountForm.work_type_name === ''
     }
   },
   watch: {
     period_start() {
       if (this.accountForm.period_year_start && this.accountForm.period_month_start) {
         this.accountForm.period_start = this.accountForm.period_year_start + '/' + this.accountForm.period_month_start
+        this.resetValidate('period_start')
+      } else {
+        this.accountForm.period_start = ''
       }
     },
     period_end() {
@@ -541,7 +544,7 @@ export default {
       this.accountForm.work_type_name = this.job.work_types.id
       this.accountForm.other_occupation = this.job.job_types.name
       this.accountForm.other_status = this.job.work_types.name
-      this.accountForm.period_check = !!this.job.period_end
+      this.accountForm.period_check = !this.job.period_end
       for (const item in this.job) {
         this.accountForm[item] = this.job[item]
       }
@@ -577,30 +580,6 @@ export default {
           })
         }
       })
-    },
-    accountForm: {
-      handler() {
-        let check = true
-        this.$refs.accountForm.validate(valid => {
-          if (valid) {
-            check = false
-            this.disabledButton = false
-          }
-        })
-        if (check) {
-          this.disabledButton = true
-        }
-        if (this.accountForm.job_type_name === 6 && this.accountForm.other_occupation === '') {
-          this.disabledButton = true
-        }
-        if (this.accountForm.work_type_name === 5 && this.accountForm.other_status === '') {
-          this.disabledButton = true
-        }
-        if (this.accountForm.period_check && (this.accountForm.period_year_end === '' || this.accountForm.period_month_end === '')) {
-          this.disabledButton = true
-        }
-      },
-      deep: true
     }
   },
   mounted() {
@@ -682,7 +661,7 @@ export default {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
-            dto.period_check = this.accountForm.period_check ? 0 : 1
+            dto.period_check = !this.accountForm.period_check ? 0 : 1
             dto.period_end = dto.period_check === 0 ? dto.period_end : ''
             if (this.accountForm.other_occupation) {
               dto.job_types.name = this.accountForm.other_occupation
