@@ -100,7 +100,7 @@
     <div id="btn-center" class="text-center">
       <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
       <el-button class="card-button triple-btn" @click="showDeleteModal">{{ $t('my_page.remove') }}</el-button>
-      <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
+      <el-button :disabled="disabledButton" class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -177,6 +177,9 @@ export default {
   computed: {
     new_issuance_date() {
       return this.accountForm.year && this.accountForm.month
+    },
+    disabledButton() {
+      return this.accountForm.name === ''
     }
   },
   watch: {
@@ -193,6 +196,8 @@ export default {
         this.$refs.accountForm.validateField('new_issuance_date')
       } else if (this.accountForm.year && this.accountForm.month) {
         delete this.accountRules.new_issuance_date
+      } else if (this.accountForm.year === '' && this.accountForm.month === '') {
+        delete this.accountRules.new_issuance_date
       }
     },
     'accountForm.month'() {
@@ -202,6 +207,8 @@ export default {
         ]
         this.$refs.accountForm.validateField('new_issuance_date')
       } else if (this.accountForm.year && this.accountForm.month) {
+        delete this.accountRules.new_issuance_date
+      } else if (this.accountForm.year === '' && this.accountForm.month === '') {
         delete this.accountRules.new_issuance_date
       }
     }
@@ -251,7 +258,7 @@ export default {
       }
     },
     loadAllYear() {
-      for (let i = new Date().getFullYear(); i >= 1900; i--) {
+      for (let i = new Date().getFullYear(); i >= 1970; i--) {
         this.linksYear.push({ value: i.toString() })
       }
     },
@@ -261,15 +268,15 @@ export default {
     update() {
       this.error = { key: null, value: '' }
       this.$refs.accountForm.validate(async valid => {
-        if (this.accountForm.year === '' && this.accountForm.month === '') {
-          this.accountRules.new_issuance_date = []
-        }
         if (valid) {
           try {
-            await this.$store.commit(INDEX_SET_LOADING, true)
+            let new_issuance_date = this.accountForm.year + '/' + this.accountForm.month
+            if (this.accountForm.year === '' && this.accountForm.month === '') {
+              new_issuance_date = ''
+            }
             const dto = {
               name: this.accountForm.name,
-              new_issuance_date: this.accountForm.year + '/' + this.accountForm.month
+              new_issuance_date
             }
             const response = await this.$store.dispatch(WORK_QUALIFICATION_UPDATE, {
               id: this.$route.query.id,
@@ -281,6 +288,7 @@ export default {
                   show: true,
                   text: response.messages
                 })
+                this.handleRouter('/my-page/qualification')
                 break
               case 422:
                 for (const [key] of Object.entries(response.data)) {

@@ -342,7 +342,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
+      <el-button :disabled="disabledButton" class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
@@ -495,6 +495,20 @@ export default {
     },
     period_end() {
       return this.accountForm.period_year_end && this.accountForm.period_month_end
+    },
+    disabledButton() {
+      if (this.accountForm.job_type_name === 6 && this.accountForm.other_occupation === '') {
+        return true
+      }
+      if (this.accountForm.work_type_name === 5 && this.accountForm.other_status === '') {
+        return true
+      }
+      if (this.accountForm.period_check && (this.accountForm.period_year_end === '' || this.accountForm.period_month_end === '')) {
+        return true
+      }
+      return this.accountForm.store_name === '' || this.accountForm.period_month_start === '' ||
+        this.accountForm.period_year_start === '' || this.accountForm.job_type_name === '' ||
+        this.accountForm.position_offices === '' || this.accountForm.work_type_name === ''
     }
   },
   watch: {
@@ -614,7 +628,7 @@ export default {
       return clonedStatus.splice(0, (clonedStatus.length - 1))
     },
     loadAllYear() {
-      for (let i = new Date().getFullYear(); i >= 1900; i--) {
+      for (let i = new Date().getFullYear(); i >= 1970; i--) {
         this.linksYear.push({ value: i.toString() })
       }
     },

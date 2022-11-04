@@ -231,6 +231,20 @@
       .el-form-item__content {
         line-height: 13px;
       }
+      .show-avatar {
+        .show-detail {
+          position: relative;
+          display: flex;
+          .image-close {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
     }
     .detail-image {
       display: block;
