@@ -294,6 +294,15 @@
     .content-input {
       margin-left: 20px;
       padding: 20px 0;
+      .el-input__suffix {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        right: 17px;
+        .icon-show-pass {
+          display: flex;
+        }
+      }
       .show-image {
         width: 100px;
         height: 100px;

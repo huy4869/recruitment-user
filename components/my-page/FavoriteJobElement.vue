@@ -8,7 +8,7 @@
         <div class="d-flex form-text-all">
           <span>{{ $t('common.all') }}</span>
           <span class="total-record">{{ total + $t('common.subject') }}</span>
-          <span>{{ $t('common.display_item', { min: listJobs.length ? 1 : 0, max: listJobs.length }) }}</span>
+          <span>{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total } ) }}</span>
         </div>
         <PaginationElement v-if="listJobs.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
       </div>
@@ -42,6 +42,7 @@ export default {
   data() {
     return {
       total: 0,
+      per_page: 5,
       listJobs: [],
       page: 1,
       lastPage: 1,
@@ -61,7 +62,7 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const dataRequest = [
         'page=' + this.page,
-        'limit=5'
+        'limit=' + this.per_page
       ]
       const dataResponse = await this.$store.dispatch(JOB_LIST_FAVORITE, dataRequest.join('&'))
       if (dataResponse.status_code === 200) {
@@ -73,7 +74,7 @@ export default {
     },
     async removeFavoriteJob(job) {
       await this.$store.commit(INDEX_SET_LOADING, true)
-      const response = await this.$store.dispatch(JOB_REMOVE_FAVORITE_JOB, job.id_favorite)
+      const response = await this.$store.dispatch(JOB_REMOVE_FAVORITE_JOB, job.id)
       if (response.status_code === 200) {
         await this.$store.commit(INDEX_SET_SUCCESS, {
           show: true,

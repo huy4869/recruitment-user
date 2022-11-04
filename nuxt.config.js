@@ -97,9 +97,9 @@ export default {
       '~/plugins/axios.js'
     ],
     redirect: {
-      login: '/#login',
+      login: '/login',
       logout: false,
-      callback: '/#login',
+      callback: '/login',
       home: false
     }
   },

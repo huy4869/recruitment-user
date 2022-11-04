@@ -59,7 +59,7 @@
               <div class="total-new-job">
                 {{ $t('home.new_job') }}
               </div>
-              <div class="all-job">{{ totalJob }}{{ $t('common.subject') }}</div>
+              <div class="all-job">{{ totalNewJob }}{{ $t('common.subject') }}</div>
             </div>
             <div class="button-see-all" @click="changeToSearch(false, 'new')">
               <span>{{ $t('home.see_all_job') }}</span>
@@ -189,7 +189,17 @@ import RecommendJobElement from './RecommendJobElement'
 export default {
   name: 'IndexPageElement',
   components: { HomeJobElement, VueSlickCarousel, RecommendJobElement, NoDataElement },
-  props: ['totalJob', 'listJobs', 'listMostViewJobs', 'listRecommendJobs', 'listSearchEmployment', 'listSearch', 'listJobTypes', 'listProvinceCities'],
+  props: [
+    'totalJob',
+    'totalNewJob',
+    'listJobs',
+    'listMostViewJobs',
+    'listRecommendJobs',
+    'listSearchEmployment',
+    'listSearch',
+    'listJobTypes',
+    'listProvinceCities'
+  ],
   data() {
     return {
       provinceCity: '',

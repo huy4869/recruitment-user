@@ -91,7 +91,8 @@
     "notification_history": "通知履歴",
     "search": "検索結果",
     "inquiry": "お問い合わせ",
-    "logout": "ログアウト"
+    "logout": "ログアウト",
+    "chat": "チャット"
   },
   "favorite_job": {
     "place": "勤務場所",

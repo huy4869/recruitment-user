@@ -3,6 +3,7 @@
     <div class="show-pc">
       <IndexPageElement
         :total-job="totalJob"
+        :total-new-job="totalNewJob"
         :list-jobs="listJobs"
         :list-most-view-jobs="listMostViewJobs"
         :list-recommend-jobs="listRecommendJobs"
@@ -15,6 +16,7 @@
     <div class="show-sp">
       <IndexPageMobileElement
         :total-job="totalJob"
+        :total-new-job="totalNewJob"
         :list-jobs="listJobs"
         :list-most-view-jobs="listMostViewJobs"
         :list-recommend-jobs="listRecommendJobs"
@@ -30,7 +32,14 @@
 <script>
 import IndexPageElement from '../components/home/IndexPageElement'
 import IndexPageMobileElement from '../components/home/IndexPageMobileElement'
-import { MASTER_GET_DATA, JOB_LIST_NEW_JOBS, JOB_LIST_MOST_VIEW_JOBS, JOB_LIST_RECOMMEND_JOBS, LOCATION_LIST_MOST_APPLY } from '../store/store.const'
+import {
+  MASTER_GET_DATA,
+  JOB_LIST_NEW_JOBS,
+  JOB_LIST_MOST_VIEW_JOBS,
+  JOB_LIST_RECOMMEND_JOBS,
+  LOCATION_LIST_MOST_APPLY,
+  JOB_GET_TOTAL_JOB
+} from '../store/store.const'
 import { formatInteger } from '../utils/format'
 
 export default {
@@ -41,6 +50,7 @@ export default {
       listJobTypes: [],
       listProvinceCities: [],
       totalJob: 0,
+      totalNewJob: 0,
       listJobs: [],
       listMostViewJobs: [],
       listRecommendJobs: [],
@@ -69,11 +79,15 @@ export default {
       if (dataLocation.status_code === 200) {
         this.listSearch = dataLocation.data
       }
+      const dataTotalJob = await this.$store.dispatch(JOB_GET_TOTAL_JOB)
+      if (dataTotalJob.status_code === 200) {
+        this.totalJob = formatInteger(dataTotalJob.data)
+      }
     },
     async getDataJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_NEW_JOBS, '')
       this.listJobs = dataResponse.data.data
-      this.totalJob = formatInteger(dataResponse.data.total_jobs)
+      this.totalNewJob = formatInteger(dataResponse.data.total_jobs)
     },
     async getRecommendJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_RECOMMEND_JOBS, '')

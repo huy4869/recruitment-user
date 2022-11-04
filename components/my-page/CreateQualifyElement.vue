@@ -160,8 +160,7 @@ export default {
       linksYear: [],
       linksMonth: [],
       confirmModal: false,
-      deleteModal: false,
-      disabledButton: true
+      deleteModal: false
     }
   },
   computed: {
@@ -196,21 +195,6 @@ export default {
       } else if (this.accountForm.year && this.accountForm.month) {
         delete this.accountRules.new_issuance_date
       }
-    },
-    accountForm: {
-      handler() {
-        let check = true
-        this.$refs.accountForm.validate(valid => {
-          if (valid) {
-            check = false
-            this.disabledButton = false
-          }
-        })
-        if (check) {
-          this.disabledButton = true
-        }
-      },
-      deep: true
     }
   },
   methods: {

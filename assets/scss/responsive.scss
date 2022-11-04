@@ -1351,18 +1351,36 @@
     .chat-page-content {
       padding: 0;
       border: none;
+      margin-top: 16px;
 
       .form-chat {
         .list-form-chat {
           width: 100%;
 
           .form-search {
-            padding: 0 12px;
+            padding: 0;
+            margin: 16px 12px 14px;
           }
 
           .list-user {
             .user-message-item {
               border-radius: 0;
+              .message-content {
+                .user-name {
+                  color: $color-black;
+                }
+                .message-date, .last-message {
+                  color: $color-text-3;
+                }
+                .not-read {
+                  color: $color-black;
+                  font-weight: 700;
+                }
+                .message-status {
+                  right: 12px;
+                  bottom: 14px;
+                }
+              }
             }
           }
         }
