@@ -52,18 +52,38 @@
             {{ $t('login.title') }}
           </el-button>
         </div>
-        <div v-if="loggedIn" class="content-user">
-          <div class="d-flex cursor-pointer"  @click="changeToLink('/my-page')">
-            <img class="avatar" :src="user.avatar ? user.avatar : '/assets/images/user_default.svg'" alt="">
-            <span>{{ $t('header.name') + (user.alias_name || user.email)}}</span>
-          </div>
-          <img class="cursor-pointer" src="/assets/icon/icon_drop_more.svg" alt="">
+        <div v-if="loggedIn" class="show-action-user">
+          <el-dropdown trigger="click">
+            <div class="content-user">
+              <div class="d-flex cursor-pointer">
+                <img class="avatar" :src="user.avatar ? user.avatar : '/assets/images/user_default.svg'" alt="">
+                <span>{{ $t('header.name') + (user.alias_name || user.email)}}</span>
+              </div>
+              <img class="cursor-pointer" src="/assets/icon/icon_drop_more.svg" alt="">
+            </div>
+            <el-dropdown-menu slot="dropdown" class="show-dropdown-user">
+              <el-dropdown-item>
+                <div class="d-flex cursor-pointer show-action" @click="changeToLink('/my-page')">
+                  <img src="/assets/icon/icon_my_page.svg" alt="">
+                  <span>{{ $t('page.my_page') }}</span>
+                </div>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <div class="d-flex cursor-pointer show-action" @click="logout">
+                  <img src="/assets/icon/icon_logout.svg" alt="">
+                  <span>{{ $t('page.logout') }}</span>
+                </div>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { INDEX_SET_LOADING } from '../../store/store.const'
+
 export default {
   name: 'HeaderCommon',
   data() {
@@ -75,6 +95,12 @@ export default {
   methods: {
     changeToLink(link) {
       this.$router.push(link)
+    },
+    async logout() {
+      this.$store.commit(INDEX_SET_LOADING, true)
+      await this.$auth.logout()
+      await this.$router.go('/')
+      this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }
