@@ -4,8 +4,10 @@
       <div v-if="listJobs.length" class="favorite-job-page-content">
         <div id="career-mobile" class="d-flex justify-between">
           <el-button type="danger" class="card-button" @click="handleRouter('job-career/create/' + (listJobs.length + 1))">
-            <img src="/assets/icon/add-white.svg" alt="">
-            {{ $t('my_page.add_experience') }}
+            <span class="d-flex">
+              <img src="/assets/icon/add-white.svg" alt="">
+              {{ $t('my_page.add_job_career') }}
+            </span>
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
@@ -14,8 +16,10 @@
         </div>
         <div id="career" class="d-flex justify-between">
           <el-button type="danger"  class="card-button" @click="handleRouter('job-career/create/' + (listJobs.length + 1))">
-            <img src="/assets/icon/add-white.svg" alt="">
-            {{ $t('my_page.add_experience') }}
+            <span class="d-flex">
+              <img src="/assets/icon/add-white.svg" alt="">
+              {{ $t('my_page.add_job_career') }}
+            </span>
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
@@ -23,8 +27,10 @@
       <div v-else>
         <div id="career-mobile" class="d-flex justify-between">
           <el-button type="danger" class="card-button" @click="handleRouter('job-career/create/' + (listJobs.length + 1))">
-            <img src="/assets/icon/add-white.svg" alt="">
-            {{ $t('my_page.add_experience') }}
+            <span class="d-flex">
+              <img src="/assets/icon/add-white.svg" alt="">
+              {{ $t('my_page.add_job_career') }}
+            </span>
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
@@ -46,7 +52,6 @@ export default {
   components: { CareerElement, NoDataElement },
   data() {
     return {
-      total: 3,
       listJobs: [],
       showViewAllJob: true,
       lastUpdated: '2022年09月26日更新'

@@ -652,21 +652,16 @@
   .chat-page-content {
     border: 1px solid $color-text-primary;
     border-radius: 6px;
-    margin: 54px auto;
-    max-width: 1152px;
+    margin-top: 24px;
+    padding: 16px;
     .form-chat {
       display: flex;
       justify-content: space-between;
-      height: 535px;
       .list-form-chat {
-        width: 358px;
-        border-right: 1px solid $border-default;
+        width: 36.1%;
         .form-search {
-          margin: 16px;
           .el-input{
             input {
-              border: 2px solid $border-focus;
-              border-radius: 4px;
               padding-left: 48px;
             }
             .el-input__prefix {
@@ -683,16 +678,12 @@
           overflow: auto;
           margin-top: 8px;
           .user-active {
-            background-color: $color-bg-btn;
-          }
-          .user-unread {
-            background-color: $color-primary;
+            background-color: $color-bg-footer;
+            border-radius: 4px;
           }
           .user-message-item {
-            position: relative;
             padding: 10px 12px;
             cursor: pointer;
-            margin-bottom: 1px;
             .user-avatar {
               min-width: 36px;
               width: 36px;
@@ -704,21 +695,21 @@
               .user-name {
                 font-weight: 700;
                 font-size: 13px;
-                line-height: 20px;
-                color: $color-dark;
+                line-height: 22px;
               }
               .message-date {
                 font-weight: 500;
                 font-size: 11px;
                 line-height: 16px;
                 height: 16px;
-                color: $color-dark-50;
+                color: $color-text-3;
                 margin: 3px 0;
               }
               .last-message {
                 font-weight: 500;
                 font-size: 12px;
                 line-height: 20px;
+                color: $color-text-3;
                 word-wrap: break-word;
                 white-space: normal;
                 overflow: hidden;
@@ -726,27 +717,28 @@
                 text-overflow: ellipsis;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 1;
+              }
+              .not-read {
                 color: $color-black;
+                font-weight: 700;
               }
               .message-status {
                 background-color: $color-text-primary;
                 border-radius: 50%;
                 min-width: 12px;
                 height: 12px;
-                position: absolute;
-                right: 16px;
-                bottom: 12px;
               }
             }
           }
         }
       }
       .content-form-chat {
-        width: calc(100% - 358px);
+        width: 58.91%;
+        background: $color-form-chat;
         border-radius: 5px;
-        padding: 24px;
+        padding: 24px 14px 14px 12px;
         .form-message {
-          height: calc(100% - 54px);
+          height: 398px;
           overflow: auto;
           .content-chat {
             .message-date {
@@ -796,7 +788,7 @@
           .show-date {
             position: relative;
             display: flex;
-            margin-top: 20px;
+            margin: 20px 0;
             .date-time {
               font-weight: 500;
               font-size: 13px;
@@ -816,22 +808,25 @@
           }
         }
         .input-chat {
-          height: 54px;
           border: 1px solid $border-default;
-          border-radius: 27px;
+          border-radius: 24px;
           background: $color-white;
+          margin-left: 2px;
+          margin-top: 8px;
           .button-send {
             padding: 8px 10px;
             background: $color-button-danger;
             border-radius: 19px;
-            margin: 7px 10px;
+            margin: 11px 10px 5px 0;
             display: flex;
             cursor: pointer;
+            min-width: 56px;
             span {
               color: $color-white;
               font-weight: 500;
               font-size: 14px;
               line-height: 22px;
+              padding-top: 1px;
             }
             img {
               width: 24px;

@@ -243,6 +243,12 @@
 }
 .career-job-page-element {
   width: 100%;
+  .card-button {
+    padding: 12px 24px;
+    img {
+      margin-right: 6px;
+    }
+  }
   .favorite-job-page-content {
     .job-element {
       margin-bottom: 24px;

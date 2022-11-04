@@ -1,9 +1,12 @@
 <template>
   <div class="chat-page-element">
     <div>
+      <div class="chat-page-title">
+        <span>{{ $t('my_page.chat') }}</span>
+      </div>
       <div v-if="showDetailMessage" class="back-to-list-user" @click="backToListUser">
         <img src="/assets/icon/icon_arrow.svg" alt="">
-        <span>{{ userActive.name }}</span>
+        <span>{{ userActive.store_name }}</span>
       </div>
       <div class="chat-page-content">
         <div class="show-pc">
@@ -25,7 +28,7 @@
                 <div
                   v-for="(user, index) in listUsers"
                   :key="index"
-                  :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': user.be_readed}]"
+                  :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': !user.be_readed}]"
                   @click="changeActive(user, index)"
                 >
                   <div v-if="checkSearch(user.store_name)" class="d-flex">
@@ -41,7 +44,7 @@
                         <div class="last-message">
                           {{ user.content }}
                         </div>
-                        <div v-if="user.be_readed" class="message-status">
+                        <div v-if="!user.be_readed" class="message-status">
                           <span></span>
                         </div>
                       </div>
@@ -84,7 +87,7 @@
                 </el-input>
               </div>
               <div class="list-user">
-                <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': user.be_readed}]" @click="changeActive(user, index, true)">
+                <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': !user.be_readed}]" @click="changeActive(user, index, true)">
                   <div  v-if="checkSearch(user.store_name)" class="d-flex">
                     <div class="user-avatar">
                       <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name }"></ShowAvatarElement>
@@ -95,10 +98,10 @@
                         <div class="message-date">{{ user.send_time }}</div>
                       </div>
                       <div class="d-flex justify-between">
-                        <div :class="['last-message', { 'not-read': user.be_readed }]">
+                        <div :class="['last-message', { 'not-read': !user.be_readed }]">
                           {{ user.content }}
                         </div>
-                        <div v-if="user.be_readed" class="message-status">
+                        <div v-if="!user.be_readed" class="message-status">
                           <span></span>
                         </div>
                       </div>
@@ -170,11 +173,16 @@ export default {
       const dataResponse = await this.$store.dispatch(CHAT_DETAIL_CHAT, user.store_id)
       if (dataResponse.status_code === 200) {
         const dataMessages = []
-        for (let x = dataResponse.data.length; x >= 0; x--) {
-          dataMessages.push(dataResponse.data[x])
+        for (let x = dataResponse.data.length - 1; x >= 0; x--) {
+          for (const y in dataResponse.data[x]) {
+            dataMessages.push({ is_date_now: true, date_show: y })
+            for (let i = dataResponse.data[x][y].length - 1; i >= 0; i--) {
+              dataMessages.push(dataResponse.data[x][y][i])
+            }
+          }
         }
         this.listMessages = dataMessages
-        this.listUsers[index].be_readed = 0
+        this.listUsers[index].be_readed = 1
       }
       if (mobile) {
         this.showDetailMessage = true
@@ -190,6 +198,7 @@ export default {
       const dataResponse = await this.$store.dispatch(CHAT_LIST)
       if (dataResponse.status_code === 200) {
         this.listUsers = dataResponse.data
+        await this.changeActive(this.listUsers[0], 0, false)
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },

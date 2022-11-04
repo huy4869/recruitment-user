@@ -274,6 +274,7 @@ export default {
       } else {
         this.accountForm.enrollment_period_start = ''
       }
+      this.checkStartYear()
     },
     'accountForm.enrollment_period_month_start'() {
       if (this.accountForm.enrollment_period_month_start && this.accountForm.enrollment_period_year_start) {
@@ -345,7 +346,7 @@ export default {
       }
     },
     loadAllYear() {
-      for (let i = new Date().getFullYear(); i >= 1970; i--) {
+      for (let i = new Date().getFullYear() + 10; i >= 1970; i--) {
         this.linksYear.push({ value: i.toString() })
       }
     },
@@ -415,6 +416,12 @@ export default {
         await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    checkStartYear() {
+      const current = new Date().toISOString().slice(0, 6)
+      const start = this.accountForm.enrollment_period_year_start + '-' + (Number(this.accountForm.enrollment_period_month_start) >= 10 ? this.accountForm.enrollment_period_month_start : ('0' + this.accountForm.enrollment_period_month_start))
+      const end = this.accountForm.enrollment_period_year_end + '-' + (Number(this.accountForm.enrollment_period_month_end) >= 10 ? this.accountForm.enrollment_period_month_end : ('0' + this.accountForm.enrollment_period_month_end))
+      return { current, start, end }
     }
   }
 }
