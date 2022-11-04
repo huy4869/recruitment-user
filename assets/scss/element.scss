@@ -225,3 +225,25 @@
     }
   }
 }
+
+.el-dropdown-menu {
+  &.show-dropdown-user {
+    .el-dropdown-menu__item:hover {
+      background: $color-bg-footer;
+    }
+    .show-action {
+      padding: 11px;
+      span {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        color: $color-black;
+      }
+    }
+    img {
+      width: 24px;
+      height: 24px;
+    }
+
+  }
+}

@@ -65,26 +65,29 @@
           }
         }
       }
-      .content-user {
-        display: flex;
+      .show-action-user {
         padding: 22px 0;
         margin-left: 40px;
-        span {
-          font-weight: 700;
-          font-size: 16px;
-          line-height: 24px;
-          margin: 4px 8px;
-        }
-        img {
-          width: 24px;
-          height: 24px;
-          margin: 6px 0 6px 4px;
-        }
-        .avatar {
-          cursor: pointer;
-          margin: 0;
-          width: 36px;
-          height: 36px;
+        .content-user {
+          display: flex;
+          span {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            margin: 4px 8px;
+            color: $color-black;
+          }
+          img {
+            width: 24px;
+            height: 24px;
+            margin: 6px 0 6px 4px;
+          }
+          .avatar {
+            cursor: pointer;
+            margin: 0;
+            width: 36px;
+            height: 36px;
+          }
         }
       }
     }
