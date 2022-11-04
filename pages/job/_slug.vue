@@ -29,7 +29,7 @@
               {{ $t('job.pick_up_point2') }}
             </span>
             </el-button>
-            <div class="sub-detail-title-sp">{{ job.sub_title }}</div>
+            <div class="sub-detail-title-sp">{{ job.pick_up_point }}</div>
           </div>
         </div>
         <div class="about-job show-pc" @click="aboutDialog = true">
@@ -37,7 +37,7 @@
           <span>{{ $t('job.about_job') }}</span>
         </div>
       </div>
-      <div class="sub-detail-title">{{ job.sub_title }}</div>
+      <div class="sub-detail-title">{{ job.pick_up_point }}</div>
       <div class="show-sp">
         <div class="detail-job-image">
           <div class="job-avatar">
@@ -77,6 +77,45 @@
           </div>
           <div v-else class="el-button el-disabled">
             {{ $t('button.applied') }}
+          </div>
+        </div>
+      </div>
+      <div v-if="job.application ? job.application.id : false" class="form-application">
+        <div class="form-application-content">
+          <div class="form-application-title">{{ $t('job.application.title') }}</div>
+          <div class="form-application-detail">
+            <div class="application-item">
+              <div class="application-item-left">
+                <span>{{ $t('job.application.date') }}</span>
+              </div>
+              <div class="application-item-right">
+                <span>{{ job.application.date }}</span>
+              </div>
+            </div>
+            <div class="application-item">
+              <div class="application-item-left">
+                <span>{{ $t('job.application.method') }}</span>
+              </div>
+              <div class="application-item-right">
+                <span>{{ job.application.interview_approaches.method }}</span>
+              </div>
+            </div>
+            <div class="application-item">
+              <div class="application-item-left">
+                <span>{{ job.application.interview_approaches.approach_label }}</span>
+              </div>
+              <div class="application-item-right">
+                <span>{{ job.application.interview_approaches.approach }}</span>
+              </div>
+            </div>
+            <div class="application-item">
+              <div class="application-item-left">
+                <span>{{ $t('job.application.status') }}</span>
+              </div>
+              <div class="application-item-right">
+                <span :class="'schedule-button-status status-' + job.application.status.id">{{ job.application.status.name }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -165,10 +204,14 @@
         </div>
         <div class="application-requirement-item">
           <div class="application-requirement-left">
-            <span>{{ $t('job.station1') }}</span>
+            <span>{{ $t('job.station') }}</span>
           </div>
           <div class="application-requirement-right">
-            <div>{{ showStation }}</div>
+            <div>
+              <div v-for="(station, index) in job.stations" :key="index">
+                {{ station.province_name + station.railway_name + station.station_name }}
+              </div>
+            </div>
           </div>
         </div>
         <div class="application-requirement-item">
@@ -181,14 +224,22 @@
         </div>
         <div class="application-requirement-item">
           <div class="application-requirement-left">
-            <span>{{ $t('job.sns') }}</span>
+            <span>{{ $t('job.feature') }}</span>
+          </div>
+          <div class="application-requirement-right">
+            <div>{{ job.welfare_treatment_description }}</div>
+          </div>
+        </div>
+        <div class="application-requirement-item">
+          <div class="application-requirement-left">
+            <span>{{ $t('job.sns_social') }}</span>
           </div>
           <div class="application-requirement-right">
             <div v-if="jobStatus" class="form-list-new-social">
-              <div><img src="/assets/icon/icon_facebook.svg" alt=""></div>
-              <div><img src="/assets/icon/icon_twitter.svg" alt=""></div>
-              <div><img src="/assets/icon/icon_instagram.svg" alt=""></div>
-              <div><img src="/assets/icon/icon_line.svg" alt=""></div>
+              <a href="https://www.facebook.com/" target="_blank"><img src="/assets/icon/icon_facebook.svg" alt=""></a>
+              <a href="https://twitter.com/" target="_blank"><img src="/assets/icon/icon_twitter.svg" alt=""></a>
+              <a href="https://www.instagram.com/" target="_blank"><img src="/assets/icon/icon_instagram.svg" alt=""></a>
+              <a href="https://line.me/" target="_blank"><img src="/assets/icon/icon_line.svg" alt=""></a>
             </div>
           </div>
         </div>

@@ -208,10 +208,9 @@
     }
   }
   .footer {
+    overflow: hidden;
     .container-footer {
       .footer-item {
-        padding-right: 90px;
-        padding-left: 8px;
         grid-gap: 8px;
         gap: 8px;
         justify-content: space-between;
@@ -595,43 +594,53 @@
   }
   .footer {
     margin-top: 40px;
+    margin-bottom: 90px;
 
     .container-footer {
+      background: $color-dark;
       .footer-item {
-        background: $color-white;
         display: grid;
-        grid-template-columns: 50% 50%;
-        grid-gap: 3px;
-        height: auto;
-        width: calc(100% - 2px);
+        grid-template-columns: 40% 40% 20%;
+        background: $color-dark;
+        color: $color-white;
+        padding: 16px 35px 5px 36px;
         div {
-          display: block;
-          background: $color-blue;
-          color: $color-white;
-          text-align: center;
+          display: inline-block;
           font-weight: 500;
-          font-size: 13px;
-          line-height: 20px;
-          padding: 8px 0 10px;
-          margin: 0;
+          font-size: 14px;
+          line-height: 22px;
+          margin-bottom: 18px;
+          span {
+            width: 150%;
+            display: block;
+          }
         }
-
-        .show-sp-center {
-          width: 100%;
-        }
+      }
+      .border-footer {
+        background: #EAE8E8;
+        opacity: 0.5;
+        transform: matrix(1, 0, 0, -1, 0, 0);
+        height: 1px;
+        margin: 0 12px;
+      }
+      .copy-right {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 20px;
+        color: $color-white;
       }
     }
     .footer-mobile {
       position: fixed;
       bottom: 0;
-      width: 100%;
+      width: 100vw;
       background: $color-white;
       border-top: 1px solid $color-text-primary;
       z-index: 3;
       .content-button {
         display: flex;
         justify-content: space-between;
-        padding: 17px 20px 17px 12px;
+        padding: 17px;
         .button-home {
           padding: 6px 10px;
           display: flex;
@@ -649,7 +658,7 @@
           width: 55%;
           .button-footer {
             img {
-              margin-top: 5px;
+              margin-top: 6px;
               width: 24px;
               height: 24px;
             }
@@ -2258,6 +2267,42 @@
         .about-job {
           margin-top: 12px;
           margin-bottom: 14px;
+        }
+      }
+      .form-application {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+        .form-application-content {
+          position: relative;
+          border: 2px solid $color-text-primary;
+          border-radius: 6px;
+          padding: 32px 10px;
+          margin: 25px 0 28px;
+          .form-application-title {
+            font-size: 16px;
+            line-height: 24px;
+            padding: 5px 32px 8px 33px;
+            left: calc(50% - 64px);
+            width: 64px;
+          }
+          .form-application-detail {
+            .application-item {
+              .application-item-left {
+                width: 83px;
+                font-size: 14px;
+                line-height: 22px;
+                padding: 16px 0 16px 8px;
+              }
+              .application-item-right {
+                width: calc(100% - 109px);
+                font-size: 14px;
+                line-height: 22px;
+                padding: 16px 0 16px 16px;
+              }
+            }
+          }
         }
       }
       .recently-viewed-job {
