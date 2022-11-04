@@ -161,11 +161,14 @@
           </div>
         </el-dialog>
       </div>
-      <div class="search-result">
+      <div class="search-result d-flex justify-between">
         <div>
           <span>{{ $t('page.search') }}</span>
           <span class="total-record">{{ total + $t('common.subject') }}</span>
-          <span>{{ $t('common.display_item', { min: listJobs.length ? 1 : 0, max: listJobs.length }) }}</span>
+          <span>{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total }) }}</span>
+        </div>
+        <div>
+          <PaginationElement v-if="listJobs.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
         </div>
       </div>
       <div v-if="listJobs.length" class="search-list-job">
@@ -206,6 +209,7 @@ export default {
       showAll: false,
       listJobs: [],
       total: 0,
+      per_page: 10,
       page: 1,
       lastPage: 1,
       listWorkTypes: [
@@ -418,8 +422,9 @@ export default {
     ])
   },
   methods: {
-    changePage(page) {
+    async changePage(page) {
       this.page = page
+      await this.getJobs()
     },
     async getMasterData() {
       await this.$store.commit(INDEX_SET_LOADING, true)
@@ -474,6 +479,7 @@ export default {
           key++
         }
       }
+      dataSearch.push(`per_page=${this.per_page}`)
       if (this.search) {
         dataSearch.push(`search=${this.search}`)
       }

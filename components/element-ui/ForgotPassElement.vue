@@ -3,7 +3,7 @@
     <el-row>
       <el-col class="col-mobile"  :span="12">
         <div class="login-title">{{ $t('forgot_pass.title') }}</div>
-        <div id="forgot-des" class="text-center">
+        <div id="forgot-des">
           <div class="text-primary-black text-mobile">{{ $t('forgot_pass.description') }}</div>
           <div class="text-primary-black text-mobile">{{ $t('forgot_pass.description_second') }}</div>
         </div>

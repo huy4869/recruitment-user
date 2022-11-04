@@ -322,13 +322,6 @@
             <div class="method-content">
               <el-checkbox-group v-model="formAbout.feedback_type_ids">
                 <el-checkbox :key="1" label="1">{{ $t('job.about_annual_monthly') }}</el-checkbox>
-                <el-input
-                  :disabled="disabledInput"
-                  type="text"
-                  :rows="4"
-                  :placeholder="$t('job.enter_annual_monthly')"
-                  v-model="formAbout.desired_salary">
-                </el-input>
                 <el-checkbox :key="2" label="2">{{ $t('job.about_benefit') }}</el-checkbox>
                 <el-checkbox :key="3" label="3">{{ $t('job.about_education') }}</el-checkbox>
                 <el-checkbox :key="4" label="4">{{ $t('job.about_overtime') }}</el-checkbox>
@@ -405,7 +398,6 @@ export default {
       },
       formAbout: {
         feedback_type_ids: [],
-        desired_salary: '',
         content: ''
       },
       listDate: [
@@ -582,6 +574,8 @@ export default {
               show: true,
               text: response.messages
             })
+            this.aboutDialog = false
+            this.formAbout = { feedback_type_ids: [], content: '' }
             break
           case 422:
             for (const [key] of Object.entries(response.data)) {
