@@ -278,7 +278,9 @@
     "currently": "※現在：",
     "characters": "文字/2000",
     "search_by_other_condition": "他の条件で検索する",
-    "sns_social": "SNSアカウント"
+    "sns_social": "SNSアカウント",
+    "add_job_career": "資格を追加する",
+    "add_education": "学歴を追加する"
   },
   "condition": {
     "list": {

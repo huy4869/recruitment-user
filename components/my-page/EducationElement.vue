@@ -4,8 +4,10 @@
       <div v-if="listEdu.length" class="favorite-job-page-content">
         <div id="career-mobile" class="d-flex justify-between">
           <el-button type="danger" class="card-button" @click="handleRouter('education/create/' + (listEdu.length + 1))">
-            <img src="/assets/icon/add-white.svg" alt="">
-            {{ $t('my_page.add_experience') }}
+            <div class="d-flex">
+              <img src="/assets/icon/add-white.svg" alt="">
+              {{ $t('my_page.add_education') }}
+            </div>
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
@@ -14,8 +16,10 @@
         </div>
         <div id="career" class="d-flex justify-between">
           <el-button type="danger"  class="card-button" @click="handleRouter('education/create/' + (listEdu.length + 1))">
-            <img src="/assets/icon/add-white.svg" alt="">
-            {{ $t('my_page.add_experience') }}
+            <div class="d-flex">
+              <img src="/assets/icon/add-white.svg" alt="">
+              {{ $t('my_page.add_education') }}
+            </div>
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
@@ -23,8 +27,10 @@
       <div v-else>
         <div id="career-mobile" class="d-flex justify-between">
           <el-button type="danger" class="card-button" @click="handleRouter('education/create/' + (listEdu.length + 1))">
-            <img src="/assets/icon/add-white.svg" alt="">
-            {{ $t('my_page.add_experience') }}
+            <div class="d-flex">
+              <img src="/assets/icon/add-white.svg" alt="">
+              {{ $t('my_page.add_education') }}
+            </div>
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
@@ -48,12 +54,9 @@ export default {
   },
   data() {
     return {
-      total: 3,
       showViewAllJob: true,
       lastUpdated: '2022年09月26日更新'
     }
-  },
-  created() {
   },
   methods: {
     handleRouter(route) {
