@@ -48,7 +48,7 @@
             <el-checkbox v-model="accountForm.remember" :label="$t('login.remember_me')" size="large"></el-checkbox>
             <div class="login-here">
               <span>{{ $t('login.forgot_password') }}</span>
-              <span class="forgot-password" @click="changeLink('forgot-password')">
+              <span class="forgot-password underline-hover" @click="changeLink('forgot-password')">
                 {{ $t('login.here') }}
               </span>
             </div>
