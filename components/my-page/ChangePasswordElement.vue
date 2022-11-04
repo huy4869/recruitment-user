@@ -28,13 +28,17 @@
                           v-model="accountForm.current_password"
                           :placeholder="$t('my_page.current_password')"
                           name="current_password"
-                          type="password"
+                          :type="showPass.current ? 'text' : 'password'"
                           tabindex="3"
                           maxlength="32"
                           autocomplete="off"
-                          show-password
                           @focus="resetValidate('current_password')"
-                        />
+                        >
+                          <i slot="suffix" class="cursor-pointer" @click="displayPass('current')">
+                            <img v-if="showPass.current" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
+                            <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
+                          </i>
+                        </el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -56,13 +60,17 @@
                           v-model="accountForm.new_password"
                           :placeholder="$t('my_page.new_password')"
                           name="new_password"
-                          type="password"
+                          :type="showPass.new ? 'text' : 'password'"
                           tabindex="3"
                           maxlength="32"
                           autocomplete="off"
-                          show-password
                           @focus="resetValidate('new_password')"
-                        />
+                        >
+                          <i slot="suffix" class="cursor-pointer" @click="displayPass('new')">
+                            <img v-if="showPass.new" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
+                            <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
+                          </i>
+                        </el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -87,13 +95,17 @@
                         v-model="accountForm.new_password_confirmation"
                         :placeholder="$t('my_page.new_password_confirmation')"
                         name="new_password_confirmation"
-                        type="password"
+                        :type="showPass.confirm ? 'text' : 'password'"
                         tabindex="3"
                         maxlength="32"
                         autocomplete="off"
-                        show-password
                         @focus="resetValidate('new_password_confirmation')"
-                      />
+                      >
+                        <i slot="suffix" class="cursor-pointer" @click="displayPass('confirm')">
+                          <img v-if="showPass.confirm" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
+                          <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
+                        </i>
+                      </el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -111,6 +123,7 @@
                   :loading="loading"
                   type="danger"
                   @click="submit"
+                  :disabled="disabledButton"
                 >
                   {{ $t('my_page.change') }}
                 </el-button>
@@ -190,10 +203,22 @@ export default {
       },
       valid: false,
       capsToolPasswordTip: false,
-      loading: false
+      loading: false,
+      showPass: {
+        current: false,
+        new: false,
+        confirm: false
+      }
     }
   },
-  created() {
+  computed: {
+    disabledButton() {
+      if (this.accountForm.new_password !== this.accountForm.new_password_confirmation) {
+        return true
+      }
+      return this.accountForm.current_password === '' || this.accountForm.new_password === '' ||
+        this.accountForm.new_password_confirmation === ''
+    }
   },
   methods: {
     resetValidate(ref) {
@@ -202,6 +227,9 @@ export default {
       }
       this.$refs.accountForm.fields.find((f) => f.prop === ref).clearValidate()
       this.accountForm.errors[ref] = ''
+    },
+    displayPass(state) {
+      this.showPass[state] = !this.showPass[state]
     },
     submit() {
       this.error = { key: null, value: '' }

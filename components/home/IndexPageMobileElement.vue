@@ -6,7 +6,7 @@
         <div class="form-search-banner">
           <div class="all-job">
             <span>{{ $t('home.all_job_opening') }}</span>
-            <span class="all-subject">158,798{{ $t('common.subject') }}</span>
+            <span class="all-subject">{{ totalJob }}{{ $t('common.subject') }}</span>
           </div>
           <div class="form-select-search">
             <div class="select-title">
@@ -75,7 +75,7 @@
               <div class="total-new-job">
                 {{ $t('home.new_job') }}
               </div>
-              <div class="all-job">{{ totalJob }}{{ $t('common.subject') }}</div>
+              <div class="all-job">{{ totalNewJob }}{{ $t('common.subject') }}</div>
             </div>
             <div class="button-see-all" @click="changeToSearch(false)">
               <span>{{ $t('home.see_all_job') }}</span>
@@ -184,7 +184,17 @@ import RecommendJobElement from './RecommendJobElement'
 export default {
   name: 'IndexPageMobileElement',
   components: { HomeJobElement, VueSlickCarousel, RecommendJobElement, NoDataElement },
-  props: ['totalJob', 'listJobs', 'listMostViewJobs', 'listRecommendJobs', 'listSearchEmployment', 'listSearch', 'listJobTypes', 'listProvinceCities'],
+  props: [
+    'totalJob',
+    'totalNewJob',
+    'listJobs',
+    'listMostViewJobs',
+    'listRecommendJobs',
+    'listSearchEmployment',
+    'listSearch',
+    'listJobTypes',
+    'listProvinceCities'
+  ],
   data() {
     return {
       dialogPopular: false,

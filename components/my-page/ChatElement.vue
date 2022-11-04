@@ -1,9 +1,6 @@
 <template>
   <div class="chat-page-element">
     <div>
-      <div class="chat-page-title">
-        <span>{{ $t('my_page.chat') }}</span>
-      </div>
       <div v-if="showDetailMessage" class="back-to-list-user" @click="backToListUser">
         <img src="/assets/icon/icon_arrow.svg" alt="">
         <span>{{ userActive.name }}</span>
@@ -25,7 +22,12 @@
                 </el-input>
               </div>
               <div class="list-user">
-                <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}]" @click="changeActive(user, index)">
+                <div
+                  v-for="(user, index) in listUsers"
+                  :key="index"
+                  :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': user.be_readed}]"
+                  @click="changeActive(user, index)"
+                >
                   <div v-if="checkSearch(user.store_name)" class="d-flex">
                     <div class="user-avatar">
                       <ShowAvatarElement :user="{ avatar: user.store_banner, name: user.store_name }"></ShowAvatarElement>
@@ -36,10 +38,10 @@
                         <div class="message-date">{{ user.send_time }}</div>
                       </div>
                       <div class="d-flex justify-between">
-                        <div :class="['last-message', { 'not-read': !user.be_readed }]">
+                        <div class="last-message">
                           {{ user.content }}
                         </div>
-                        <div v-if="!user.be_readed" class="message-status">
+                        <div v-if="user.be_readed" class="message-status">
                           <span></span>
                         </div>
                       </div>
@@ -82,21 +84,21 @@
                 </el-input>
               </div>
               <div class="list-user">
-                <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}]" @click="changeActive(user, index, true)">
+                <div v-for="(user, index) in listUsers" :key="index" :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': user.be_readed}]" @click="changeActive(user, index, true)">
                   <div  v-if="checkSearch(user.store_name)" class="d-flex">
                     <div class="user-avatar">
                       <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name }"></ShowAvatarElement>
                     </div>
                     <div class="message-content">
                       <div class="d-flex justify-between">
-                        <div class="user-name">{{ user.name }}</div>
-                        <div class="message-date">{{ user.last_updated }}</div>
+                        <div class="user-name">{{ user.store_name }}</div>
+                        <div class="message-date">{{ user.send_time }}</div>
                       </div>
                       <div class="d-flex justify-between">
-                        <div :class="['last-message', { 'not-read': user.status_read }]">
-                          {{ user.last_message }}
+                        <div :class="['last-message', { 'not-read': user.be_readed }]">
+                          {{ user.content }}
                         </div>
-                        <div v-if="user.status_read" class="message-status">
+                        <div v-if="user.be_readed" class="message-status">
                           <span></span>
                         </div>
                       </div>
@@ -143,10 +145,9 @@ export default {
   components: { ShowAvatarElement, FormChatElement },
   data() {
     return {
-      total: 3,
       listUsers: [],
       userActive: {},
-      indexActive: 3,
+      indexActive: '',
       showDetailMessage: false,
       search: '',
       message: '',
@@ -173,7 +174,7 @@ export default {
           dataMessages.push(dataResponse.data[x])
         }
         this.listMessages = dataMessages
-        this.listUsers[index].be_readed = 1
+        this.listUsers[index].be_readed = 0
       }
       if (mobile) {
         this.showDetailMessage = true

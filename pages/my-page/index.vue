@@ -10,7 +10,6 @@
       <IndexCvElement v-if="page === 'web_cv'"></IndexCvElement>
       <PastSearchConditionElement v-if="page === 'past_search_condition'"></PastSearchConditionElement>
       <DesiredConditionElement v-if="page === 'desired_condition'"></DesiredConditionElement>
-      <ChatElement v-if="page === 'chat'"></ChatElement>
       <ChangePasswordElement v-if="page === 'change_password'"></ChangePasswordElement>
     </div>
   </div>
@@ -22,7 +21,6 @@ import BannerElement from '../../components/layout/BannerElement'
 import TitlePageElement from '../../components/layout/TitlePageElement'
 import MenuLeftElement from '../../components/my-page/MenuLeftElement'
 import IndexCvElement from '../../components/my-page/IndexCvElement'
-import ChatElement from '../../components/my-page/ChatElement'
 import TopPageElement from '../../components/my-page/TopPageElement'
 import ApplicationHistoryElement from '../../components/my-page/ApplicationHistoryElement'
 import FavoriteJobElement from '../../components/my-page/FavoriteJobElement'
@@ -43,9 +41,9 @@ export default {
     FavoriteJobElement,
     ChangePasswordElement,
     PastSearchConditionElement,
-    DesiredConditionElement,
-    ChatElement
+    DesiredConditionElement
   },
+  middleware: 'auth',
   data() {
     return {
       titlePage: {
@@ -55,7 +53,6 @@ export default {
         'web_cv': this.$t('page.web_cv'),
         'past_search_condition': this.$t('page.my_page'),
         'desired_condition': this.$t('page.my_page'),
-        'chat': this.$t('page.my_page'),
         'change_password': this.$t('page.my_page')
       },
       subTitle: this.$t('page.sub_web_cv'),

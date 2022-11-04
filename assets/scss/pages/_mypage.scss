@@ -652,16 +652,21 @@
   .chat-page-content {
     border: 1px solid $color-text-primary;
     border-radius: 6px;
-    margin-top: 24px;
-    padding: 16px;
+    margin: 54px auto;
+    max-width: 1152px;
     .form-chat {
       display: flex;
       justify-content: space-between;
+      height: 535px;
       .list-form-chat {
-        width: 36.1%;
+        width: 358px;
+        border-right: 1px solid $border-default;
         .form-search {
+          margin: 16px;
           .el-input{
             input {
+              border: 2px solid $border-focus;
+              border-radius: 4px;
               padding-left: 48px;
             }
             .el-input__prefix {
@@ -678,12 +683,16 @@
           overflow: auto;
           margin-top: 8px;
           .user-active {
-            background-color: $color-bg-footer;
-            border-radius: 4px;
+            background-color: $color-bg-btn;
+          }
+          .user-unread {
+            background-color: $color-primary;
           }
           .user-message-item {
+            position: relative;
             padding: 10px 12px;
             cursor: pointer;
+            margin-bottom: 1px;
             .user-avatar {
               min-width: 36px;
               width: 36px;
@@ -695,21 +704,21 @@
               .user-name {
                 font-weight: 700;
                 font-size: 13px;
-                line-height: 22px;
+                line-height: 20px;
+                color: $color-dark;
               }
               .message-date {
                 font-weight: 500;
                 font-size: 11px;
                 line-height: 16px;
                 height: 16px;
-                color: $color-text-3;
+                color: $color-dark-50;
                 margin: 3px 0;
               }
               .last-message {
                 font-weight: 500;
                 font-size: 12px;
                 line-height: 20px;
-                color: $color-text-3;
                 word-wrap: break-word;
                 white-space: normal;
                 overflow: hidden;
@@ -717,28 +726,27 @@
                 text-overflow: ellipsis;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 1;
-              }
-              .not-read {
                 color: $color-black;
-                font-weight: 700;
               }
               .message-status {
                 background-color: $color-text-primary;
                 border-radius: 50%;
                 min-width: 12px;
                 height: 12px;
+                position: absolute;
+                right: 16px;
+                bottom: 12px;
               }
             }
           }
         }
       }
       .content-form-chat {
-        width: 58.91%;
-        background: $color-form-chat;
+        width: calc(100% - 358px);
         border-radius: 5px;
-        padding: 24px 14px 14px 12px;
+        padding: 24px;
         .form-message {
-          height: 398px;
+          height: calc(100% - 54px);
           overflow: auto;
           .content-chat {
             .message-date {
@@ -808,16 +816,15 @@
           }
         }
         .input-chat {
+          height: 54px;
           border: 1px solid $border-default;
-          border-radius: 24px;
+          border-radius: 27px;
           background: $color-white;
-          margin-left: 2px;
-          margin-top: 8px;
           .button-send {
             padding: 8px 10px;
             background: $color-button-danger;
             border-radius: 19px;
-            margin: 11px 10px 5px 0;
+            margin: 7px 10px;
             display: flex;
             cursor: pointer;
             span {

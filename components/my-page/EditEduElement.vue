@@ -242,8 +242,7 @@ export default {
       linksMonth: [],
       index: this.$route.params.id || '',
       confirmModal: false,
-      deleteModal: false,
-      disabledButton: false
+      deleteModal: false
     }
   },
   computed: {
@@ -299,21 +298,6 @@ export default {
       } else {
         this.accountForm.enrollment_period_end = ''
       }
-    },
-    accountForm: {
-      handler() {
-        let check = true
-        this.$refs.accountForm.validate(valid => {
-          if (valid) {
-            check = false
-            this.disabledButton = false
-          }
-        })
-        if (check) {
-          this.disabledButton = true
-        }
-      },
-      deep: true
     }
   },
   mounted() {
