@@ -356,7 +356,7 @@
         margin: 10px 20px 0 0
       }
       .edu-status {
-        margin-top: 20px;
+        margin-top: 32px;
       }
       .feature-title {
         font-weight: 700;
@@ -485,3 +485,8 @@
     color: $color-primary;
   }
 }
+
+#btn-no-data {
+  margin-top: -55px;
+}
+

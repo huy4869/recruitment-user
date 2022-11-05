@@ -180,6 +180,7 @@ export default {
                 show: true,
                 text: response.messages
               })
+              this.handleRouter('/my-page/motivation')
             } else {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,
