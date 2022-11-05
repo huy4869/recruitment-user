@@ -170,6 +170,7 @@
                 height: 12px;
                 border-radius: 50%;
                 background-color: $border-focus;
+                margin: auto;
                 &::before {
                   content: '';
                 }
@@ -629,6 +630,29 @@
           }
         }
       }
+    }
+  }
+}
+.show-pc {
+  .slick-arrow {
+    top: unset;
+    bottom: -38.5px;
+    height: 28px;
+    width: 28px;
+    background-repeat: no-repeat;
+    background-size: 28px 28px;
+    z-index: 2;
+    &::before {
+      color: $color-text-primary;
+      content: '';
+    }
+    &.slick-next {
+      right: calc(50% - 72px);
+      background: url('~assets/icons/arrow_next_active.svg');
+    }
+    &.slick-prev {
+      left: calc(50% - 72px);
+      background: url('~assets/icons/arrow_prev_active.svg');
     }
   }
 }
