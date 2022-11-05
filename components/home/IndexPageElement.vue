@@ -205,14 +205,16 @@ export default {
       provinceCity: '',
       jobType: '',
       settings: {
-        'arrows': false,
+        'arrows': true,
         'dots': true,
         'focusOnSelect': true,
-        'infinite': false,
-        'speed': 500,
+        'infinite': true,
+        'speed': 1000,
         'slidesToShow': 3,
         'slidesToScroll': 3,
-        'touchThreshold': 5
+        'touchThreshold': 5,
+        'autoplay': true,
+        'autoplaySpeed': 5000
       }
     }
   },
