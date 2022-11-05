@@ -200,15 +200,25 @@ export default {
         callback()
       }
     }
+    const validDate = (rule, value, callback, message) => {
+      const date = this.checkStartYear()
+      if (date.start > date.end) {
+        callback(new Error(this.$t('validation.err004')))
+      } else if (date.start > date.current) {
+        callback(new Error(this.$t('validation.err043')))
+      } else {
+        callback()
+      }
+    }
     return {
       accountForm: {
         school_name: '',
         enrollment_period_start: '',
         enrollment_period_end: '',
         enrollment_period_year_start: '',
-        enrollment_period_month_start: '',
+        enrollment_period_month_start: '04',
         enrollment_period_year_end: '',
-        enrollment_period_month_end: '',
+        enrollment_period_month_end: '04',
         learning_status_id: '',
         errors: {}
       },
@@ -223,10 +233,12 @@ export default {
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('education.name') }), trigger: 'blur' }
         ],
         enrollment_period_start: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' },
+          { validator: validDate, trigger: 'blur' }
         ],
         enrollment_period_end: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' },
+          { validator: validDate, trigger: 'blur' }
         ],
         learning_status_id: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
@@ -257,33 +269,47 @@ export default {
       this.typeList = this.m_learning_status
     },
     'accountForm.enrollment_period_year_start'() {
+      const date = this.checkStartYear()
       if (this.accountForm.enrollment_period_year_start && this.accountForm.enrollment_period_month_start) {
         this.accountForm.enrollment_period_start = this.accountForm.enrollment_period_year_start + '/' + this.accountForm.enrollment_period_month_start
-        this.resetValidate('enrollment_period_start')
+        if (date.start < date.end) {
+          this.resetValidate('enrollment_period_start')
+        }
       } else {
         this.accountForm.enrollment_period_start = ''
       }
     },
     'accountForm.enrollment_period_month_start'() {
+      const date = this.checkStartYear()
       if (this.accountForm.enrollment_period_month_start && this.accountForm.enrollment_period_year_start) {
         this.accountForm.enrollment_period_start = this.accountForm.enrollment_period_year_start + '/' + this.accountForm.enrollment_period_month_start
-        this.resetValidate('enrollment_period_start')
+        if (date.start < date.end) {
+          this.resetValidate('enrollment_period_start')
+        }
       } else {
         this.accountForm.enrollment_period_start = ''
       }
     },
     'accountForm.enrollment_period_year_end'() {
+      const date = this.checkStartYear()
       if (this.accountForm.enrollment_period_year_end && this.accountForm.enrollment_period_month_end) {
         this.accountForm.enrollment_period_end = this.accountForm.enrollment_period_year_end + '/' + this.accountForm.enrollment_period_month_end
-        this.resetValidate('enrollment_period_end')
+        if (date.start < date.end) {
+          this.resetValidate('enrollment_period_end')
+          this.resetValidate('enrollment_period_start')
+        }
       } else {
         this.accountForm.enrollment_period_end = ''
       }
     },
     'accountForm.enrollment_period_month_end'() {
+      const date = this.checkStartYear()
       if (this.accountForm.enrollment_period_month_end && this.accountForm.enrollment_period_year_end) {
         this.accountForm.enrollment_period_end = this.accountForm.enrollment_period_year_end + '/' + this.accountForm.enrollment_period_month_end
-        this.resetValidate('enrollment_period_end')
+        if (date.start < date.end) {
+          this.resetValidate('enrollment_period_end')
+          this.resetValidate('enrollment_period_start')
+        }
       } else {
         this.accountForm.enrollment_period_end = ''
       }
@@ -334,7 +360,7 @@ export default {
       }
     },
     loadAllYear() {
-      for (let i = new Date().getFullYear(); i >= 1970; i--) {
+      for (let i = new Date().getFullYear() + 10; i >= 1970; i--) {
         this.linksYear.push({ value: i.toString() })
       }
     },
@@ -378,6 +404,12 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    checkStartYear() {
+      const current = new Date().toISOString().slice(0, 7)
+      const start = this.accountForm.enrollment_period_year_start + '-' + (Number(this.accountForm.enrollment_period_month_start) <= 10 ? this.accountForm.enrollment_period_month_start : ('0' + this.accountForm.enrollment_period_month_start))
+      const end = this.accountForm.enrollment_period_year_end + '-' + (Number(this.accountForm.enrollment_period_month_end) <= 10 ? this.accountForm.enrollment_period_month_end : ('0' + this.accountForm.enrollment_period_month_end))
+      return { current, start, end }
     }
   }
 }
