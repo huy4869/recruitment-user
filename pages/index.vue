@@ -11,6 +11,7 @@
         :list-search="listSearch"
         :list-job-types="listJobTypes"
         :list-province-cities="listProvinceCities"
+        :list-social="listSocial"
       ></IndexPageElement>
     </div>
     <div class="show-sp">
@@ -24,6 +25,7 @@
         :list-search="listSearch"
         :list-job-types="listJobTypes"
         :list-province-cities="listProvinceCities"
+        :list-social="listSocial"
       ></IndexPageMobileElement>
     </div>
   </div>
@@ -55,7 +57,8 @@ export default {
       listMostViewJobs: [],
       listRecommendJobs: [],
       listSearchEmployment: [],
-      listSearch: {}
+      listSearch: {},
+      listSocial: []
     }
   },
   async created() {
@@ -69,12 +72,15 @@ export default {
       const dataResources = [
         'resources[m_job_types]={"model": "MJobType"}',
         'resources[m_provinces_cities]={}',
-        'resources[m_work_types]={"model": "MWorkType"}'
+        'resources[m_work_types]={"model": "MWorkType"}',
+        'resources[m_social_links]={}'
       ]
       const dataMasterData = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
       this.listJobTypes = dataMasterData.data.m_job_types
       this.listSearchEmployment = dataMasterData.data.m_work_types
       this.listProvinceCities = dataMasterData.data.m_provinces_cities
+      this.listSocial = dataMasterData.data.m_social_links
+      console.log(this.listSocial)
       const dataLocation = await this.$store.dispatch(LOCATION_LIST_MOST_APPLY)
       if (dataLocation.status_code === 200) {
         this.listSearch = dataLocation.data
