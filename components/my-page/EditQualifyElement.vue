@@ -30,7 +30,7 @@
                           name="name"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('name')"
                         />
                       </el-form-item>
