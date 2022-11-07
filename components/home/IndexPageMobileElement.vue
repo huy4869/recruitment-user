@@ -115,10 +115,10 @@
       </div>
       <div class="form-list-new">
         <div class="form-list-new-social">
-        <a href="https://www.facebook.com/" target="_blank"><img src="/assets/icon/icon_facebook.svg" alt=""></a>
-        <a href="https://twitter.com/" target="_blank"><img src="/assets/icon/icon_twitter.svg" alt=""></a>
-        <a href="https://www.instagram.com/" target="_blank"><img src="/assets/icon/icon_instagram.svg" alt=""></a>
-        <a href="https://line.me/" target="_blank"><img src="/assets/icon/icon_line.svg" alt=""></a>
+        <a :href="listSocial.facebook" target="_blank"><img src="/assets/icon/icon_facebook.svg" alt=""></a>
+        <a :href="listSocial.twitter" target="_blank"><img src="/assets/icon/icon_twitter.svg" alt=""></a>
+        <a :href="listSocial.instagram" target="_blank"><img src="/assets/icon/icon_instagram.svg" alt=""></a>
+        <a :href="listSocial.line" target="_blank"><img src="/assets/icon/icon_line.svg" alt=""></a>
         </div>
       </div>
     </div>
@@ -193,7 +193,8 @@ export default {
     'listSearchEmployment',
     'listSearch',
     'listJobTypes',
-    'listProvinceCities'
+    'listProvinceCities',
+    'listSocial'
   ],
   data() {
     return {
