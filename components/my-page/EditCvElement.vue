@@ -77,7 +77,7 @@
                           name="first_name"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('first_name')"
                         />
                       </el-form-item>
@@ -91,7 +91,7 @@
                           name="last_name"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('last_name')"
                         />
                       </el-form-item>
@@ -117,7 +117,7 @@
                           name="alias_name"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('alias_name')"
                         />
                       </el-form-item>
@@ -146,7 +146,7 @@
                           name="furi_first_name"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('furi_first_name')"
                         />
                       </el-form-item>
@@ -160,7 +160,7 @@
                           name="furi_last_name"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('furi_last_name')"
                         />
                       </el-form-item>
@@ -254,7 +254,8 @@
                           name="age"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                          pattern="[0-9]*"
                           @focus="resetValidate('age')"
                         />
                       </el-form-item>
@@ -342,7 +343,7 @@
                           name="email"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('email')"
                         />
                       </el-form-item>
@@ -368,7 +369,7 @@
                           name="line"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('line')"
                         />
                       </el-form-item>
@@ -394,7 +395,7 @@
                           name="facebook"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('facebook')"
                         />
                       </el-form-item>
@@ -420,7 +421,7 @@
                           name="instagram"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('instagram')"
                         />
                       </el-form-item>
@@ -440,13 +441,13 @@
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="twitter" :error="(error.key === 'twitter') ? error.value : ''">
                         <el-input
-                          ref="alias_name"
+                          ref="twitter"
                           v-model.trim="accountForm.twitter"
                           :placeholder="placeholder.twitter"
-                          name="alias_name"
+                          name="twitter"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('twitter')"
                         />
                       </el-form-item>
@@ -557,7 +558,7 @@
                           name="city"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('city')"
                         />
                       </el-form-item>
@@ -583,7 +584,7 @@
                           name="address"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('address')"
                         />
                       </el-form-item>
@@ -840,8 +841,7 @@ export default {
         instagram: 'Instagram',
         twitter: 'Twitter'
       },
-      confirmModal: false,
-      disabledButton: false
+      confirmModal: false
     }
   },
   computed: {
@@ -850,6 +850,13 @@ export default {
     },
     numberOfDays() {
       return this.daysInMonth(this.accountForm.month, this.accountForm.year)
+    },
+    disabledButton() {
+      return this.accountForm.first_name === '' || this.accountForm.last_name === '' ||
+        this.accountForm.furi_first_name === '' || this.accountForm.furi_last_name === '' ||
+        this.accountForm.tel === '' || this.accountForm.birthday === '' ||
+        this.accountForm.gender_id === '' || this.accountForm.province_id === '' ||
+        this.accountForm.province_city_id === '' || this.accountForm.city === ''
     }
   },
   watch: {
@@ -897,25 +904,10 @@ export default {
       }
     },
     listProvinces() {
-      this.listProvinceCity = this.listProvinces[this.$auth.user.province_id].province_city
+      this.listProvinceCity = this.$auth.user.province_id ? this.listProvinces[this.$auth.user.province_id].province_city : ''
     },
     numberOfDays() {
       this.loadAllDay()
-    },
-    accountForm: {
-      handler() {
-        let check = true
-        this.$refs.accountForm.validate(valid => {
-          if (valid) {
-            check = false
-            this.disabledButton = false
-          }
-        })
-        if (check) {
-          this.disabledButton = true
-        }
-      },
-      deep: true
     }
   },
   async created() {
