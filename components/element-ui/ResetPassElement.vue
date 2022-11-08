@@ -22,7 +22,7 @@
               name="password"
               :type="showPass?'text':'password'"
               tabindex="3"
-              maxlength="32"
+              maxlength="12"
               autocomplete="off"
               @keydown.native.enter="login"
               @focus="resetValidate('password')"
@@ -42,7 +42,7 @@
               name="password_confirmation"
               :type="showPassConfirm?'text':'password'"
               tabindex="3"
-              maxlength="32"
+              maxlength="12"
               autocomplete="off"
               @keydown.native.enter="login"
               @keydown.native.tab.prevent="$refs.email.focus()"
@@ -105,7 +105,7 @@ export default {
         callback(new Error(this.$t('validation.required', { _field_: this.$t('account.password') }).toString()))
       } else {
         if (value.length < 4 || value.length > 12) {
-          callback(new Error(this.$t('validation.pass_format')))
+          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('account.password') })))
         }
         if (this.accountForm.password_confirmation !== '') {
           this.$refs.accountForm.validateField('password_confirmation')

@@ -30,7 +30,7 @@
                           name="current_password"
                           :type="showPass.current ? 'text' : 'password'"
                           tabindex="3"
-                          maxlength="32"
+                          maxlength="12"
                           autocomplete="off"
                           @focus="resetValidate('current_password')"
                         >
@@ -62,7 +62,7 @@
                           name="new_password"
                           :type="showPass.new ? 'text' : 'password'"
                           tabindex="3"
-                          maxlength="32"
+                          maxlength="12"
                           autocomplete="off"
                           @focus="resetValidate('new_password')"
                         >
@@ -97,7 +97,7 @@
                         name="new_password_confirmation"
                         :type="showPass.confirm ? 'text' : 'password'"
                         tabindex="3"
-                        maxlength="32"
+                        maxlength="12"
                         autocomplete="off"
                         @focus="resetValidate('new_password_confirmation')"
                       >
@@ -154,7 +154,7 @@ export default {
         callback(new Error(this.$t('validation.required', { _field_: this.$t('my_page.current_password') }).toString()))
       } else {
         if (value.length < 4 || value.length > 12) {
-          callback(new Error(this.$t('validation.pass_format')))
+          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('my_page.current_password') })))
         }
         if (this.accountForm.password_confirmation !== '') {
           this.$refs.accountForm.validateField('new_password_confirmation')

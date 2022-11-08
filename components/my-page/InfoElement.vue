@@ -103,7 +103,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              〒{{ zipCodeFormat(info.postal_code) }}{{ info.province_name }} {{ info.province_city_name }}{{info.city}}{{ info.address }}
+              <span v-if="info.postal_code">〒</span>{{ zipCodeFormat(info.postal_code) }}{{ info.province_name }} {{ info.province_city_name }}{{info.city}}{{ info.address }}
             </p>
           </div>
           <div class="left-item">

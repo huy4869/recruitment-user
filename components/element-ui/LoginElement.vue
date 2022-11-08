@@ -17,9 +17,9 @@
               v-model.trim="accountForm.email"
               :placeholder="$t('login.email')"
               name="email"
+              maxlength="255"
               type="text"
               tabindex="2"
-              show-word-limit
               @focus="resetValidate('email')"
             />
           </el-form-item>
@@ -32,9 +32,9 @@
               name="password"
               :type="showPass?'text':'password'"
               tabindex="3"
-              maxlength="32"
+              maxlength="12"
               autocomplete="off"
-              @keydown.native.enter="login"
+              @keydown.enter="login"
               @keydown.native.tab.prevent="$refs.email.focus()"
               @focus="resetValidate('password')"
             >
@@ -116,7 +116,7 @@ export default {
           callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.email') })))
         }
         if (value.length < 4 || value.length > 12) {
-          callback(new Error(this.$t('validation.pass_format')))
+          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('login.password') })))
         }
         callback()
       }
@@ -153,7 +153,8 @@ export default {
   },
   computed: {
     disabledButton() {
-      return this.accountForm.email === '' || this.accountForm.password === ''
+      return this.accountForm.email === '' || !validEmail(this.accountForm.email) || !validHalfWidth(this.accountForm.email) ||
+        !validHalfWidth(this.accountForm.password) || this.accountForm.password === '' || this.accountForm.password.length < 4 || this.accountForm.password.length > 12
     }
   },
   created() {
