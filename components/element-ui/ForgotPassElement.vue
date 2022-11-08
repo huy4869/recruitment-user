@@ -3,7 +3,7 @@
     <el-row>
       <el-col class="col-mobile"  :span="12">
         <div class="login-title">{{ $t('forgot_pass.title') }}</div>
-        <div class="text-center" id="forgot-des">
+        <div id="forgot-des" class="text-center">
           <div class="text-primary-black text-mobile">{{ $t('forgot_pass.description') }}</div>
           <div class="text-primary-black text-mobile">{{ $t('forgot_pass.description_second') }}</div>
         </div>
@@ -23,7 +23,7 @@
               name="email"
               type="text"
               tabindex="2"
-              show-word-limit
+              maxlength="255"
               @focus="resetValidate('email')"
             />
           </el-form-item>
@@ -59,12 +59,18 @@ import {
   INDEX_SET_SUCCESS,
   INDEX_SET_ERROR, USER_FORGOT_PASS
 } from '../../store/store.const'
-import { validEmail } from '@/utils/validate'
+import { validEmail, validHalfWidth } from '@/utils/validate'
 
 export default {
   name: 'ForgotElement',
   data() {
     const validFormEmail = (rule, value, callback) => {
+      if (value && value.length > 255) {
+        callback(new Error(this.$t('validation.max_length', { _field_: this.$t('login.email') })))
+      }
+      if (!validHalfWidth(value)) {
+        callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.email') })))
+      }
       if (!validEmail(value)) {
         callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))
       } else {
@@ -93,7 +99,7 @@ export default {
   },
   computed: {
     disabledButton() {
-      return this.accountForm.email === ''
+      return this.accountForm.email === '' || !validEmail(this.accountForm.email) || !validHalfWidth(this.accountForm.email)
     }
   },
   created() {
@@ -127,6 +133,7 @@ export default {
                   show: true,
                   text: data.messages
                 })
+                this.$router.push('/login')
                 break
               case 422:
                 for (const [key] of Object.entries(data.data)) {
