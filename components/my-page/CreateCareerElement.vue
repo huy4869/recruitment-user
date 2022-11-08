@@ -342,7 +342,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button triple-btn" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button :disabled="disabledButton" class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
+      <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"

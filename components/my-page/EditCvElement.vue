@@ -276,7 +276,7 @@
                 <div class="content-input">
                   <el-row class="">
                     <el-form-item label="" prop="gender_id" :error="(error.key === 'gender_id') ? error.value : ''">
-                      <el-col v-for="(gender, key) in listGender" :key="key" :xl="3" :md="4"  :sm="7" :xs="6" class="birth-year">
+                      <el-col v-for="(gender, key) in listGender" :key="key" :xl="4" :md="4"  :sm="7" :xs="6" class="birth-year">
                         <el-radio
                           ref="gender"
                           v-model="accountForm.gender_id"
@@ -600,7 +600,7 @@
     </div>
     <div id="btn-center" class="text-center">
       <el-button class="card-button" @click="showConfirmModal">{{ $t('my_page.back') }}</el-button>
-      <el-button :disabled="disabledButton" class="card-button btn-right" type="danger" @click="update">{{ $t('my_page.save') }}</el-button>
+      <el-button class="card-button btn-right" type="danger" @click="update">{{ $t('my_page.save') }}</el-button>
     </div>
     <ConfirmModal
       v-show="confirmModal"
