@@ -27,6 +27,7 @@ import { DESIRED_DETAIL, INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, MASTER_GET_DAT
 import EditDesiredElement from '~/components/my-page/EditDesiredElement'
 export default {
   name: 'EditDesiredPage',
+  middleware: 'auth',
   components: { EditDesiredElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {

@@ -17,6 +17,7 @@ import InfoElement from '../../../components/my-page/InfoElement'
 import { INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, USER_BASIC_INFO } from '../../../store/store.const'
 export default {
   name: 'CvPage',
+  middleware: 'auth',
   components: { TitlePageElement, BannerElement, MenuLeftElement, InfoElement },
   data() {
     return {

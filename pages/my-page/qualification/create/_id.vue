@@ -17,6 +17,7 @@ import { INDEX_SET_TITLE_MENU } from '~/store/store.const'
 import CreateQualifyElement from '~/components/my-page/CreateQualifyElement'
 export default {
   name: 'JobCareerPage',
+  middleware: 'auth',
   components: { CreateQualifyElement, TitlePageElement, BannerElement, MenuLeftElement },
   created() {
     this.$store.commit(INDEX_SET_TITLE_MENU, [

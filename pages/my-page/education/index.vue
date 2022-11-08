@@ -17,6 +17,7 @@ import { INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, EDU_LIST } from '../../../stor
 import EducationElement from '../../../components/my-page/EducationElement'
 export default {
   name: 'JobCareerPage',
+  middleware: 'auth',
   components: { EducationElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {

@@ -21,6 +21,7 @@ import {
 import QualificationElement from '../../../components/my-page/QualificationElement'
 export default {
   name: 'JobCareerPage',
+  middleware: 'auth',
   components: { QualificationElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {

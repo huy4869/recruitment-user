@@ -17,6 +17,7 @@ import { INDEX_SET_TITLE_MENU } from '../../../store/store.const'
 import JobCareerElement from '../../../components/my-page/JobCareerElement'
 export default {
   name: 'JobCareerPage',
+  middleware: 'auth',
   components: { JobCareerElement, TitlePageElement, BannerElement, MenuLeftElement },
   created() {
     this.$store.commit(INDEX_SET_TITLE_MENU, [

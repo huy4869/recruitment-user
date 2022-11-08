@@ -27,7 +27,7 @@
             <div class="label">{{ $t('login.password') }}</div>
             <el-input
               ref="password"
-              v-model="accountForm.password"
+              v-model.trim="accountForm.password"
               :placeholder="$t('login.password')"
               name="password"
               :type="showPass?'text':'password'"
@@ -113,7 +113,7 @@ export default {
         callback(new Error(this.$t('validation.required', { _field_: this.$t('login.password') }).toString()))
       } else {
         if (!validHalfWidth(value)) {
-          callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.email') })))
+          callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.password') })))
         }
         if (value.length < 4 || value.length > 12) {
           callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('login.password') })))

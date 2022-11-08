@@ -19,14 +19,14 @@
               name="email"
               type="text"
               tabindex="2"
-              show-word-limit
+              maxlength="255"
               @focus="resetValidate('email')"
             />
           </el-form-item>
           <el-form-item class="password-login" :label="$t('login.password')" prop="password" :error="(error.key === 'password') ? error.value : ''">
             <el-input
               ref="password"
-              v-model="accountForm.password"
+              v-model.trim="accountForm.password"
               :placeholder="$t('login.password')"
               name="password"
               :type="showPass?'text':'password'"
@@ -45,8 +45,8 @@
           <el-form-item class="password-login" :label="$t('register.password_confirmation')" prop="password_confirmation" :error="(error.key === 'password_confirmation') ? error.value : ''">
             <el-input
               ref="password_confirmation"
-              v-model="accountForm.password_confirmation"
-              :placeholder="$t('register.password_confirmation')"
+              v-model.trim="accountForm.password_confirmation"
+              :placeholder="$t('register.password')"
               name="password_confirmation"
               :type="showPassConfirm?'text':'password'"
               tabindex="3"
@@ -108,30 +108,33 @@ import {
   INDEX_SET_ERROR,
   AUTH_REGISTER
 } from '../../store/store.const'
-import { validEmail } from '@/utils/validate'
+import { validEmail, validHalfWidth } from '@/utils/validate'
 
 export default {
   name: 'LoginElement',
   data() {
     const validFormEmail = (rule, value, callback) => {
       if (value && value.length > 255) {
-        callback(new Error(this.$t('validation.max_length', { _field_: this.$t('inquiry.email') })))
+        callback(new Error(this.$t('validation.max_length', { _field_: this.$t('login.email') })))
+      }
+      if (!validHalfWidth(value)) {
+        callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.email') })))
       }
       if (!validEmail(value)) {
-        callback(new Error(this.$t('validation.email', { _field_: this.$t('inquiry.email') })))
+        callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))
       } else {
         callback()
       }
     }
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error(this.$t('validation.required', { _field_: this.$t('account.password') }).toString()))
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('login.password') }).toString()))
       } else {
-        if (value.length < 4 || value.length > 12) {
-          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('account.password') })))
+        if (!validHalfWidth(value)) {
+          callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.password') })))
         }
-        if (this.accountForm.password_confirmation !== '') {
-          this.$refs.accountForm.validateField('password_confirmation')
+        if (value.length < 4 || value.length > 12) {
+          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('login.password') })))
         }
         callback()
       }
@@ -187,8 +190,10 @@ export default {
   },
   computed: {
     disabledButton() {
-      return this.accountForm.email === '' || this.accountForm.password === '' ||
-        this.accountForm.password_confirmation === '' || !this.accountForm.has_terms || !this.accountForm.has_agreement
+      return this.accountForm.email === '' || !validEmail(this.accountForm.email) || !validHalfWidth(this.accountForm.email) ||
+        !validHalfWidth(this.accountForm.password) || this.accountForm.password === '' || this.accountForm.password.length < 4 || this.accountForm.password.length > 12 ||
+        !validHalfWidth(this.accountForm.password_confirmation) || this.accountForm.password_confirmation === '' || this.accountForm.password_confirmation.length < 4 || this.accountForm.password_confirmation.length > 12 ||
+        !this.accountForm.has_terms || !this.accountForm.has_agreement
     }
   },
   created() {

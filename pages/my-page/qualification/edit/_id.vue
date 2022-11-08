@@ -21,6 +21,7 @@ import {
 import EditQualifyElement from '~/components/my-page/EditQualifyElement'
 export default {
   name: 'JobCareerPage',
+  middleware: 'auth',
   components: { EditQualifyElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {

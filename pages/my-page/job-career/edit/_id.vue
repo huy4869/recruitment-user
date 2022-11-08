@@ -22,6 +22,7 @@ import { INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, MASTER_GET_DATA, WORK_HISTORY_
 import EditCareerElement from '~/components/my-page/EditCareerElement'
 export default {
   name: 'JobCareerPage',
+  middleware: 'auth',
   components: { EditCareerElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {
