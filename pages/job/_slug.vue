@@ -383,6 +383,7 @@ import {
 
 export default {
   name: 'JobDetailPage',
+  middleware: 'auth',
   components: { TitlePageElement, VueSlickCarousel, HomeJobElement, RecommendJobElement, RecentJobMobileElement, FormApplyJobElement, NoDataElement },
   data() {
     return {

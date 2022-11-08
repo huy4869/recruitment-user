@@ -17,6 +17,7 @@ import { INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, MOTIVATION_USER } from '~/stor
 import EditMotiElement from '~/components/my-page/EditMotiElement'
 export default {
   name: 'EditSelfPrPage',
+  middleware: 'auth',
   components: { EditMotiElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {

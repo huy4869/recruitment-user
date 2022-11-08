@@ -17,6 +17,7 @@ import { INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, USER_SELF_PR } from '~/store/s
 import SelfPrElement from '~/components/my-page/SelfPrElement'
 export default {
   name: 'SelfPRPage',
+  middleware: 'auth',
   components: { SelfPrElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {

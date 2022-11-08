@@ -18,6 +18,7 @@ import { INDEX_SET_TITLE_MENU } from '../../../store/store.const'
 
 export default {
   name: 'CvPage',
+  middleware: 'auth',
   components: { EditCvElement, TitlePageElement, BannerElement, MenuLeftElement },
   created() {
     this.$store.commit(INDEX_SET_TITLE_MENU, [

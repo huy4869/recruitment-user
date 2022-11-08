@@ -17,6 +17,7 @@ import { INDEX_SET_LOADING, INDEX_SET_TITLE_MENU, MOTIVATION_USER } from '~/stor
 import MotivationElement from '~/components/my-page/MotivationElement'
 export default {
   name: 'SelfPRPage',
+  middleware: 'auth',
   components: { MotivationElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {

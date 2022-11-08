@@ -113,16 +113,16 @@
           </div>
           <div id="img-detail1" class="right-item">
           <div class="social-media">
-          <a :href="info.facebook" target="_blank">
+          <a v-if="info.facebook" :href="info.facebook" target="_blank">
           <img src="/assets/icon/fb.svg" alt="fb">
           </a>
-          <a :href="info.twitter" target="_blank">
+          <a v-if="info.twitter" :href="info.twitter" target="_blank">
           <img src="/assets/icon/ebay.svg" alt="ebay">
           </a>
-          <a :href="info.instagram" target="_blank">
+          <a v-if="info.instagram" :href="info.instagram" target="_blank">
           <img src="/assets/icon/ig.svg" alt="ig">
           </a>
-          <a :href="info.line" target="_blank">
+          <a v-if="info.line" :href="info.line" target="_blank">
           <img src="/assets/icon/line.svg" alt="line">
           </a>
           </div>

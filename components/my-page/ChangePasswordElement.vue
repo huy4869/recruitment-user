@@ -151,13 +151,13 @@ export default {
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error(this.$t('validation.required', { _field_: this.$t('my_page.current_password') }).toString()))
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('login.password') }).toString()))
       } else {
         if (value.length < 4 || value.length > 12) {
-          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('my_page.current_password') })))
+          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('login.password') })))
         }
         if (this.accountForm.password_confirmation !== '') {
-          this.$refs.accountForm.validateField('new_password_confirmation')
+          this.$refs.accountForm.validateField('password_confirmation')
         }
         callback()
       }

@@ -17,7 +17,7 @@
             <div class="label">{{ $t('login.password') }}</div>
             <el-input
               ref="password"
-              v-model="accountForm.password"
+              v-model.trim="accountForm.password"
               :placeholder="$t('login.password')"
               name="password"
               :type="showPass?'text':'password'"
@@ -37,7 +37,7 @@
             <div class="label">{{ $t('register.password_confirmation') }}</div>
             <el-input
               ref="password_confirmation"
-              v-model="accountForm.password_confirmation"
+              v-model.trim="accountForm.password_confirmation"
               :placeholder="$t('register.password_confirmation')"
               name="password_confirmation"
               :type="showPassConfirm?'text':'password'"
@@ -102,10 +102,10 @@ export default {
     }
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error(this.$t('validation.required', { _field_: this.$t('account.password') }).toString()))
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('login.password') }).toString()))
       } else {
         if (value.length < 4 || value.length > 12) {
-          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('account.password') })))
+          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('login.password') })))
         }
         if (this.accountForm.password_confirmation !== '') {
           this.$refs.accountForm.validateField('password_confirmation')

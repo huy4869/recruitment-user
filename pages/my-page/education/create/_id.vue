@@ -17,6 +17,7 @@ import { INDEX_SET_TITLE_MENU, MASTER_GET_DATA } from '~/store/store.const'
 import CreateEduElement from '~/components/my-page/CreateEduElement'
 export default {
   name: 'JobCareerPage',
+  middleware: 'auth',
   components: { CreateEduElement, TitlePageElement, BannerElement, MenuLeftElement },
   data() {
     return {
