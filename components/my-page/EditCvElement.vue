@@ -41,10 +41,10 @@
               </el-col>
               <el-col :md="18" :sm="24">
                 <div class="content-input detail-image">
-                  <el-form-item label="" prop="imageDetail" :error="(error.key === 'imageDetail') ? error.value : ''">
-                    <input id="upload-detail" ref="fileUploadDetail" class="d-none" type="file" max="3" multiple @change="onFileChangeDetail">
+                  <el-form-item label="" prop="imageDetail" :error="(error.key === 'image') ? error.value : ''">
+                    <input id="upload-detail" ref="fileUploadDetail" :class="{'disabledImg' : disableImgUp}" :disabled="disableImgUp" class="d-none" type="file" max="3" multiple @change="onFileChangeDetail">
                     <div class="button-upload">
-                      <button type="button"><label for="upload-detail">{{ $t('my_page.upload_image_detail') }}</label></button>
+                      <button type="button"><label :class="{'disabledImg' : disableImgUp}" for="upload-detail">{{ $t('my_page.upload_image_detail') }}</label></button>
                     </div>
                     <div v-if="imageDetailShow.length" class="d-flex">
                       <div v-for="(detail, index) in imageDetailShow" :key="index" class="show-detail">
@@ -612,6 +612,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import { validEmail, validFullWidth } from '../../utils/validate'
 import BorderElement from './BorderElement'
 import {
@@ -656,7 +657,7 @@ export default {
       }
     }
     const validPhone = (rule, value, callback) => {
-      if (value && (value.length > 18 || value.length < 12 || !value.startsWith(0))) {
+      if (value && (value.length > 13 || value.length < 10 || !value.startsWith(0))) {
         callback(new Error(this.$t('validation.phone_length', { _field_: this.$t('my_page.phone') })))
       } else {
         callback()
@@ -772,7 +773,7 @@ export default {
         birthday: [
           {
             required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.birth') }),
+            message: this.$t('validation.required_select', { _field_: this.$t('my_page.birth') }),
             trigger: 'blur'
           },
           { validator: validBirthDay, trigger: 'blur' }
@@ -780,22 +781,22 @@ export default {
         gender_id: [
           {
             required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.gender') }),
-            trigger: 'blur'
+            message: this.$t('validation.required_select', { _field_: this.$t('my_page.gender') }),
+            trigger: 'change'
           }
         ],
         province_id: [
           {
             required: true,
             message: this.$t('validation.required', { _field_: this.$t('my_page.prefectures') }),
-            trigger: 'blur'
+            trigger: 'change'
           }
         ],
         province_city_id: [
           {
             required: true,
             message: this.$t('validation.required', { _field_: this.$t('my_page.province_city') }),
-            trigger: 'blur'
+            trigger: 'change'
           }
         ],
         line: [
@@ -841,7 +842,8 @@ export default {
         instagram: 'Instagram',
         twitter: 'Twitter'
       },
-      confirmModal: false
+      confirmModal: false,
+      clonedAccountForm: {}
     }
   },
   computed: {
@@ -857,6 +859,9 @@ export default {
         this.accountForm.tel === '' || this.accountForm.birthday === '' ||
         this.accountForm.gender_id === '' || this.accountForm.province_id === '' ||
         this.accountForm.province_city_id === '' || this.accountForm.city === ''
+    },
+    disableImgUp() {
+      return this.imageDetailShow.length >= 3
     }
   },
   watch: {
@@ -912,9 +917,10 @@ export default {
   },
   async created() {
     await this.$auth.fetchUser()
-    this.getGenderMaster()
-    this.getProvinceMaster()
-    this.getBirthDay()
+    await this.getGenderMaster()
+    await this.getProvinceMaster()
+    await this.getBirthDay()
+    this.clonedAccountForm = _.cloneDeep(this.accountForm)
   },
   mounted() {
     this.loadAllYear()
@@ -941,10 +947,26 @@ export default {
         const formData = new FormData()
         formData.append('image', e.target.files[x])
         formData.append('type', 'avatar_detail')
-        const response = await this.$store.dispatch(USER_UPLOAD_AVATAR, formData)
-        this.imageDetailShow.push({
-          url: response.data.url
-        })
+        const data = await this.$store.dispatch(USER_UPLOAD_AVATAR, formData)
+        switch (data.status_code) {
+          case 200:
+            this.imageDetailShow.push({
+              url: data.data.url
+            })
+            break
+          case 422:
+            for (const [key] of Object.entries(data.data)) {
+              this.error = { key, value: data.data[key][0] }
+            }
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+            break
+        }
+
+        if (this.imageDetailShow.length > 3) {
+          this.imageDetailShow.splice(3, this.imageDetailShow.length - 3)
+        }
       }
       this.$refs.fileUploadDetail.value = null
     },
@@ -967,28 +989,23 @@ export default {
       this.$router.push(route)
     },
     showConfirmModal() {
-      this.confirmModal = true
+      if (_.isEqual(this.accountForm, this.clonedAccountForm)) {
+        this.handleRouter('/my-page/info')
+      } else {
+        this.confirmModal = true
+      }
     },
     closeConfirmModal() {
       this.confirmModal = false
     },
     queryYear(queryString, cb) {
-      const links = this.linksYear
-      const results = queryString ? links.filter(this.createFilter(queryString)) : links
-      // call callback function to return suggestions
-      cb(results)
+      cb(this.linksYear)
     },
     queryMonth(queryString, cb) {
-      const links = this.linksMonth
-      const results = queryString ? links.filter(this.createFilter(queryString)) : links
-      // call callback function to return suggestions
-      cb(results)
+      cb(this.linksMonth)
     },
     queryDay(queryString, cb) {
-      const links = this.linksDay
-      const results = queryString ? links.filter(this.createFilter(queryString)) : links
-      // call callback function to return suggestions
-      cb(results)
+      cb(this.linksDay)
     },
     createFilter(queryString) {
       return (link) => {
@@ -1035,7 +1052,7 @@ export default {
       })
     },
     getBirthDay() {
-      const birthday = this.$auth.user.birthday ? this.$auth.user.birthday.split('-') : ''
+      const birthday = this.$auth.user.birthday ? this.$auth.user.birthday.split('-') : '2000-01-01'.split('-')
       this.accountForm.year = birthday[0]
       this.accountForm.month = birthday[1]
       this.accountForm.day = birthday[2]
@@ -1056,6 +1073,10 @@ export default {
               })
               await this.$auth.fetchUser()
               this.$router.push('/my-page/info')
+            } else if (response.status_code === 422) {
+              for (const [key] of Object.entries(response.data)) {
+                this.error = { key, value: response.data[key][0] }
+              }
             } else {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,
@@ -1075,7 +1096,7 @@ export default {
       this.accountForm.postal_code = !x[2] ? x[1] : '' + x[1] + '-' + x[2]
     },
     phoneInput() {
-      const x = this.accountForm.tel.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,5})/)
+      const x = this.accountForm.tel.replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/)
       this.accountForm.tel = !x[2] ? x[1] : '' + x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '')
     },
     zipCodeFormat(zip) {

@@ -33,7 +33,6 @@
               <el-button
                 v-loading.fullscreen.lock="fullscreenLoading"
                 :loading="loading"
-                :disabled="disabledButton"
                 type="danger"
                 @click.native.prevent="login"
               >

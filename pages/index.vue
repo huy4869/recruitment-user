@@ -80,7 +80,6 @@ export default {
       this.listSearchEmployment = dataMasterData.data.m_work_types
       this.listProvinceCities = dataMasterData.data.m_provinces_cities
       this.listSocial = dataMasterData.data.m_social_links
-      console.log(this.listSocial)
       const dataLocation = await this.$store.dispatch(LOCATION_LIST_MOST_APPLY)
       if (dataLocation.status_code === 200) {
         this.listSearch = dataLocation.data
