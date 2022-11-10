@@ -190,10 +190,7 @@ export default {
   },
   computed: {
     disabledButton() {
-      return this.accountForm.email === '' || !validEmail(this.accountForm.email) || !validHalfWidth(this.accountForm.email) ||
-        !validHalfWidth(this.accountForm.password) || this.accountForm.password === '' || this.accountForm.password.length < 4 || this.accountForm.password.length > 12 ||
-        !validHalfWidth(this.accountForm.password_confirmation) || this.accountForm.password_confirmation === '' || this.accountForm.password_confirmation.length < 4 || this.accountForm.password_confirmation.length > 12 ||
-        !this.accountForm.has_terms || !this.accountForm.has_agreement
+      return !this.accountForm.has_terms || !this.accountForm.has_agreement
     }
   },
   created() {
