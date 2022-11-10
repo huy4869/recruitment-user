@@ -120,7 +120,7 @@ export default {
       if (dataResponse.status_code === 200) {
         this.listSchedule = dataResponse.data.data
         this.showViewAllSchedule = all ? false : dataResponse.data.view_all
-      } else if (response.status_code === 500) {
+      } else if (dataResponse.status_code === 500) {
         await this.$store.commit(INDEX_SET_ERROR, {
           show: true,
           text: this.$t('content.EXC_001')
@@ -144,7 +144,7 @@ export default {
       if (dataResponse.status_code === 200) {
         this.listScheduleHistory = dataResponse.data.data
         this.showViewAllScheduleHistory = all ? false : dataResponse.data.view_all
-      } else if (response.status_code === 500) {
+      } else if (dataResponse.status_code === 500) {
         await this.$store.commit(INDEX_SET_ERROR, {
           show: true,
           text: this.$t('content.EXC_001')

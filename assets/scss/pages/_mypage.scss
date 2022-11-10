@@ -350,12 +350,15 @@
   background-color: $color-orange;
 }
 .status-3 {
-  background-color: $color-placeholder;
+  background-color: $color-blue-2;
 }
 .status-4 {
   background-color: $color-green;
 }
 .status-5 {
+  background-color: $color-placeholder;
+}
+.status-6 {
   background-color: $color-placeholder;
 }
 .button-view-all {
@@ -651,7 +654,7 @@
     line-height: 32px;
   }
   .chat-page-content {
-    border: 1px solid $color-text-primary;
+    border: 1px solid $border-focus;
     border-radius: 6px;
     margin: 54px auto;
     max-width: 1152px;
@@ -680,7 +683,7 @@
           }
         }
         .list-user {
-          height: 450px;
+          height: 455px;
           overflow: auto;
           margin-top: 8px;
           .user-active {
@@ -743,7 +746,7 @@
         }
       }
       .content-form-chat {
-        width: calc(100% - 358px);
+        width: calc(100% - 406px);
         border-radius: 5px;
         padding: 24px;
         .form-message {
@@ -797,7 +800,7 @@
           .show-date {
             position: relative;
             display: flex;
-            margin: 20px 0;
+            margin-top: 20px;
             .date-time {
               font-weight: 500;
               font-size: 13px;
@@ -828,13 +831,11 @@
             margin: 7px 10px;
             display: flex;
             cursor: pointer;
-            min-width: 56px;
             span {
               color: $color-white;
               font-weight: 500;
               font-size: 14px;
               line-height: 22px;
-              padding-top: 1px;
             }
             img {
               width: 24px;

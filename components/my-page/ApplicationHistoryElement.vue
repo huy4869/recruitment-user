@@ -17,6 +17,18 @@
       <div v-else>
         <NoDataElement :text="$t('common.message_no_data.application_history')"></NoDataElement>
       </div>
+      <el-dialog class="popup-confirm" :visible.sync="dialogCancel" width="570px">
+        <div class="image-confirm text-center">
+          <img src="/assets/icon/Cancel.svg" alt="">
+        </div>
+        <div class="content-confirm text-center">
+          {{ $t('content.CON_005') }}
+        </div>
+        <div slot="footer" class="dialog-footer text-center">
+          <el-button @click="dialogCancel = false">{{ $t('confirm_modal.no') }}</el-button>
+          <el-button type="danger" @click="cancelSchedulePost(applyActive, dialogHistory)">{{ $t('confirm_modal.yes') }}</el-button>
+        </div>
+      </el-dialog>
       <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
     </div>
   </div>
@@ -40,7 +52,9 @@ export default {
       page: 1,
       lastPage: 1,
       applyDialog: false,
-      applyActive: {}
+      applyActive: '',
+      dialogCancel: false,
+      dialogHistory: false
     }
   },
   async created() {
@@ -53,16 +67,28 @@ export default {
     async getDataScheduleHistory() {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const dataResponse = await this.$store.dispatch(APPLICATION_LIST, '')
-      this.listScheduleHistory = dataResponse.data
+      if (dataResponse.status_code === 200) {
+        this.listScheduleHistory = dataResponse.data
+      }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
-    async cancelSchedule(id, history) {
+    cancelSchedule(id, history) {
+      this.dialogCancel = true
+      this.applyActive = id
+      this.dialogHistory = history
+    },
+    async cancelSchedulePost(id, history) {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const response = await this.$store.dispatch(APPLICATION_CANCEL_APPLICATION, id)
       if (response.status_code === 200) {
         await this.$store.commit(INDEX_SET_SUCCESS, {
           show: true,
           text: response.messages
+        })
+      } else if (response.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
         })
       } else {
         await this.$store.commit(INDEX_SET_ERROR, {
