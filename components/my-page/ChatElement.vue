@@ -1,9 +1,6 @@
 <template>
   <div class="chat-page-element">
     <div>
-      <div class="chat-page-title">
-        <span>{{ $t('my_page.chat') }}</span>
-      </div>
       <div v-if="showDetailMessage" class="back-to-list-user" @click="backToListUser">
         <img src="/assets/icon/icon_arrow.svg" alt="">
         <span>{{ userActive.store_name }}</span>
