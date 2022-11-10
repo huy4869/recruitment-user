@@ -11,7 +11,7 @@
             <span>{{ $t('header.search') }}</span>
           </div>
         </div>
-        <div class="button-action show-pc">
+        <div v-if="loggedIn" class="button-action show-pc">
           <div class="border-default"></div>
           <div @click="changeToLink('/chat')">
             <img src="/assets/icon/icon_chat.svg" alt="">

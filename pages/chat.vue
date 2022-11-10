@@ -20,6 +20,7 @@ import { INDEX_SET_TITLE_MENU } from '../store/store.const'
 export default {
   name: 'ChatPage',
   components: { TitlePageElement, BannerElement, ChatElement, MenuLeftElement },
+  middleware: 'auth',
   data() {
     return {
       listNotifications: [],

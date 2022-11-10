@@ -173,12 +173,10 @@ export default {
       const dataResponse = await this.$store.dispatch(CHAT_DETAIL_CHAT, user.store_id)
       if (dataResponse.status_code === 200) {
         const dataMessages = []
-        for (let x = dataResponse.data.length - 1; x >= 0; x--) {
-          for (const y in dataResponse.data[x]) {
-            dataMessages.push({ is_date_now: true, date_show: y })
-            for (let i = dataResponse.data[x][y].length - 1; i >= 0; i--) {
-              dataMessages.push(dataResponse.data[x][y][i])
-            }
+        for (const y in dataResponse.data) {
+          dataMessages.push({ is_date_now: true, date_show: y })
+          for (let i = dataResponse.data[y].length - 1; i >= 0; i--) {
+            dataMessages.push(dataResponse.data[y][i])
           }
         }
         this.listMessages = dataMessages
