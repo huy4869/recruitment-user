@@ -58,7 +58,7 @@ export default {
       listRecommendJobs: [],
       listSearchEmployment: [],
       listSearch: {},
-      listSocial: []
+      listSocial: {}
     }
   },
   async created() {
