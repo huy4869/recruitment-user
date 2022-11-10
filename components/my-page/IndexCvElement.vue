@@ -61,7 +61,11 @@
 
 <script>
 
-import { MY_PAGE_GET_PERCENTAGE } from '../../store/store.const'
+import {
+  INDEX_SET_ERROR,
+  INDEX_SET_LOADING,
+  MY_PAGE_GET_PERCENTAGE
+} from '../../store/store.const'
 
 export default {
   name: 'IndexCvElement',
@@ -123,6 +127,7 @@ export default {
       this.$router.push(route)
     },
     async getDataProfile() {
+      await this.$store.commit(INDEX_SET_LOADING, true)
       const dataResponse = await this.$store.dispatch(MY_PAGE_GET_PERCENTAGE)
       if (dataResponse.status_code === 200) {
         let total = 0
@@ -140,6 +145,13 @@ export default {
         this.success = success
         this.lastUpdated = dataResponse.data.updateDateNew
       }
+      if (dataResponse.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }

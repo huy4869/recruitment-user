@@ -122,6 +122,11 @@ export function validHalfWidth(str) {
   return reg.test(str)
 }
 
+export function validOnlyHalfWidth(str) {
+  const reg = /^[a-zA-Z0-9]+$/
+  return reg.test(str)
+}
+
 export function validPhoneNumber(str) {
   const reg = /^[0-9\-]{0,13}$/
   return reg.test(str)

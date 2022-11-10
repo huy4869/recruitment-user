@@ -68,6 +68,7 @@
     "max_length": "{_field_}は255文字以内で入力してください。",
     "fullwidth_length": "{_field_}は全角カナの255文字以内で入力してください。",
     "halfwidth_length": "{_field_}は半角英数字で入力してください。",
+    "halfwidth_email_length": "{_field_}は半角の255英数字以内で入力してください。",
     "area_length": "{_field_}は2000文字以内で入力してください。",
     "area_length_2": "{_field_}は1000文字以内で入力してください。",
     "postcode_length": "{_field_}は7桁英数字で入力してください。",
@@ -77,8 +78,8 @@
     "passNotMatch": "{_field_}が一致しません。",
     "select_time": "時を選択してください。",
     "err004": "終了年月は開始年月より未来年月を選択してください。",
-    "err043": "未来の年月を入力することはできません。"
-
+    "err043": "未来の年月を入力することはできません。",
+    "com002": "{_field_}が正しく入力されていません。"
   },
   "header": {
     "search": "求人を探す",
