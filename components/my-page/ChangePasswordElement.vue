@@ -137,6 +137,8 @@
 </template>
 
 <script>
+
+import { validOnlyHalfWidth } from '../../utils/validate'
 import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
@@ -151,23 +153,43 @@ export default {
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error(this.$t('validation.required', { _field_: this.$t('login.password') }).toString()))
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('my_page.current_password') }).toString()))
       } else {
         if (value.length < 4 || value.length > 12) {
-          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('login.password') })))
+          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('my_page.current_password') })))
         }
-        if (this.accountForm.password_confirmation !== '') {
-          this.$refs.accountForm.validateField('password_confirmation')
+        if (!validOnlyHalfWidth(value)) {
+          callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('my_page.current_password') })))
         }
         callback()
+      }
+    }
+    const validateNewPass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('validation.required', { _field_: this.$t('my_page.new_password') }).toString()))
+      } else {
+        if (value.length < 4 || value.length > 12) {
+          callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('my_page.new_password') })))
+        }
+        if (!validOnlyHalfWidth(value)) {
+          callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('my_page.new_password') })))
+        }
+        callback()
+      }
+      if (this.accountForm.password_confirmation !== '') {
+        this.$refs.accountForm.validateField('password_confirmation')
       }
     }
     const validateConfirmPass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error(this.$t('validation.required', { _field_: this.$t('my_page.new_password_confirmation') }).toString()))
-      } else if (value !== this.accountForm.new_password) {
-        callback(new Error(this.$t('validation.passNotMatch').toString()))
       } else {
+        if (value !== this.accountForm.new_password) {
+          callback(new Error(this.$t('validation.passNotMatch', { _field_: this.$t('my_page.new_password_confirmation') }).toString()))
+        }
+        if (!validOnlyHalfWidth(value)) {
+          callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('my_page.new_password_confirmation') })))
+        }
         callback()
       }
     }
@@ -189,15 +211,11 @@ export default {
         ],
         new_password: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('my_page.new_password') }), trigger: 'blur' },
-          { validator: validatePass, trigger: 'blur' }
+          { validator: validateNewPass, trigger: 'blur' }
         ],
         new_password_confirmation: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('my_page.new_password_confirmation') }), trigger: 'blur' },
-          {
-            validator: validateConfirmPass,
-            message: this.$t('validation.passNotMatch', { _field_: this.$t('my_page.new_password_confirmation') }),
-            trigger: 'blur'
-          }
+          { validator: validateConfirmPass, trigger: 'blur' }
         ],
         remember: []
       },
@@ -205,9 +223,9 @@ export default {
       capsToolPasswordTip: false,
       loading: false,
       showPass: {
-        current: false,
-        new: false,
-        confirm: false
+        current: true,
+        new: true,
+        confirm: true
       }
     }
   },
@@ -219,6 +237,9 @@ export default {
       return this.accountForm.current_password === '' || this.accountForm.new_password === '' ||
         this.accountForm.new_password_confirmation === ''
     }
+  },
+  async created() {
+    await this.$store.commit(INDEX_SET_LOADING, false)
   },
   methods: {
     resetValidate(ref) {

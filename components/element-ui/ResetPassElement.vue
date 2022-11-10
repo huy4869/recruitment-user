@@ -157,8 +157,8 @@ export default {
       capsToolPasswordTip: false,
       loading: false,
       fullscreenLoading: false,
-      showPass: false,
-      showPassConfirm: false
+      showPass: true,
+      showPassConfirm: true
     }
   },
   computed: {
@@ -214,6 +214,12 @@ export default {
                   this.error = { key: k, value: data.data[k][0] }
                   this.errorResponse.push({ key: k, value: data.data[k][0] })
                 }
+                break
+              case 500:
+                await this.$store.commit(INDEX_SET_ERROR, {
+                  show: true,
+                  text: this.$t('content.EXC_001')
+                })
                 break
               default:
                 this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })

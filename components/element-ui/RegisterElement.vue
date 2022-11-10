@@ -118,7 +118,7 @@ export default {
         callback(new Error(this.$t('validation.max_length', { _field_: this.$t('login.email') })))
       }
       if (!validHalfWidth(value)) {
-        callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.email') })))
+        callback(new Error(this.$t('validation.halfwidth_email_length', { _field_: this.$t('login.email') })))
       }
       if (!validEmail(value)) {
         callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))
@@ -184,8 +184,8 @@ export default {
       capsToolPasswordTip: false,
       loading: false,
       fullscreenLoading: false,
-      showPass: false,
-      showPassConfirm: false
+      showPass: true,
+      showPassConfirm: true
     }
   },
   computed: {
