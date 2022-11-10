@@ -49,43 +49,43 @@
                 </div>
               </el-col>
               <el-col :md="18" :sm="24">
-                <div class="content-input">
+                <div class="content-input content-datetime">
                   <el-row class="d-flex period">
                     <el-col :md="9" :sm="24" class="first-name">
                       <el-form-item label="" prop="new_issuance_date" :error="(error.key === 'new_issuance_date') ? error.value : ''">
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
-                            <el-autocomplete
+                            <el-select
                               ref="new_issuance_date"
-                              v-model.trim="accountForm.year"
+                              name="new_issuance_date"
+                              v-model="accountForm.year"
                               :placeholder="$t('YYYY')"
-                              :fetch-suggestions="queryYear"
-                              name="year"
-                              type="text"
-                              tabindex="2"
-                              :maxlength="4"
-                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                              pattern="[0-9]*"
-                              inputmode="numeric"
                               @focus="resetValidate('new_issuance_date')"
-                            />
+                              @blur="validate('new_issuance_date')"
+                            >
+                              <el-option
+                                v-for="item in linksYear"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value">
+                              </el-option>
+                            </el-select>
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col :sm="12" :xs="10" class="birth-month">
-                            <el-autocomplete
-                              ref="new_issuance_date"
-                              v-model.trim="accountForm.month"
+                            <el-select
+                              v-model="accountForm.month"
                               :placeholder="$t('MM')"
-                              :fetch-suggestions="queryMonth"
-                              name="month"
-                              type="text"
-                              :maxlength="2"
-                              tabindex="2"
-                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                              pattern="[0-9]*"
-                              inputmode="numeric"
                               @focus="resetValidate('new_issuance_date')"
-                            />
+                              @blur="validate('new_issuance_date')"
+                            >
+                              <el-option
+                                v-for="item in linksMonth"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value">
+                              </el-option>
+                            </el-select>
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.month') }}</span>
                         </el-row>
@@ -184,6 +184,7 @@ export default {
         this.$refs.accountForm.validateField('new_issuance_date')
       } else if (this.accountForm.year && this.accountForm.month) {
         delete this.accountRules.new_issuance_date
+        this.resetValidate('new_issuance_date')
       }
     },
     'accountForm.month'() {
@@ -194,10 +195,14 @@ export default {
         this.$refs.accountForm.validateField('new_issuance_date')
       } else if (this.accountForm.year && this.accountForm.month) {
         delete this.accountRules.new_issuance_date
+        this.resetValidate('new_issuance_date')
       }
     }
   },
   methods: {
+    validate(ref) {
+      this.$refs.accountForm.validateField(ref)
+    },
     resetValidate(ref) {
       if (ref === this.error.key) {
         this.error = { key: null, value: '' }
@@ -238,7 +243,7 @@ export default {
       }
     },
     loadAllYear() {
-      for (let i = new Date().getFullYear(); i >= 1970; i--) {
+      for (let i = new Date().getFullYear() + 10; i >= 1970; i--) {
         this.linksYear.push({ value: i.toString() })
       }
     },
