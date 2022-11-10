@@ -1,5 +1,5 @@
 <template>
-  <div class="my-page-schedule-element schedule-history">
+  <div class="my-page-schedule-element schedule-history" @click="changeToDetail(schedule.job_id)">
     <div class="title-create">
       {{ $t('schedule.created_at') }}:{{ schedule.created_at }}
     </div>
@@ -36,8 +36,8 @@
           </div>
         </div>
         <div class="schedule-button">
-          <el-button v-if="schedule.allow_edit" :loading="loading" type="danger" @click="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
-          <el-button v-if="schedule.allow_cancel" :loading="loading" @click="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
+          <el-button v-if="schedule.allow_edit" :loading="loading" type="danger" @click.stop="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
+          <el-button v-if="schedule.allow_cancel" :loading="loading" @click.stop="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
         </div>
       </div>
     </div>
@@ -59,6 +59,9 @@ export default {
     },
     editApply(id) {
       this.$emit('editApply', id)
+    },
+    changeToDetail(id) {
+      this.$router.push('/job/' + id)
     }
   }
 }

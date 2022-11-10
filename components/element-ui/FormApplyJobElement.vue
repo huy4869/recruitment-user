@@ -117,7 +117,9 @@ export default {
   watch: {
     async applyDialog(value) {
       this.applyDialogState = value
-      await this.getDetailJob()
+      if (value) {
+        await this.getDetailJob()
+      }
     }
   },
   methods: {
@@ -133,7 +135,7 @@ export default {
     },
     async getDetailJob() {
       if (this.isEdit) {
-        const dataResponse = await this.$store.dispatch(APPLICATION_GET_DATA_DETAIL_APPLICATION, this.apply.id)
+        const dataResponse = await this.$store.dispatch(APPLICATION_GET_DATA_DETAIL_APPLICATION, this.apply)
         if (dataResponse.status_code === 200) {
           this.formApply.date = dataResponse.data.application_user.date
           this.formApply.hours = dataResponse.data.application_user.hours
@@ -169,7 +171,7 @@ export default {
     async submitApply() {
       if (this.isEdit) {
         const dataForm = this.formApply
-        const dataResponse = await this.$store.dispatch(APPLICATION_UPDATE_APPLICATION, { id: this.apply.id, form: dataForm })
+        const dataResponse = await this.$store.dispatch(APPLICATION_UPDATE_APPLICATION, { id: this.apply, form: dataForm })
         if (dataResponse.status_code === 200) {
           await this.$store.commit(INDEX_SET_SUCCESS, {
             show: true,

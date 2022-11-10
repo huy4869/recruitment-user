@@ -197,6 +197,9 @@
   &.is-disabled {
     color: $color-text-2;
   }
+  &.selected {
+    background-color: $color-bg-footer;
+  }
 }
 
 .el-checkbox__input.is-focus {

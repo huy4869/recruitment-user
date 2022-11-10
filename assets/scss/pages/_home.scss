@@ -656,3 +656,22 @@
     }
   }
 }
+
+.popup-confirm {
+  .el-dialog__header {
+    display: none;
+  }
+  .el-dialog__body {
+    padding: 32px 32px 24px;
+    .image-confirm {}
+    .content-confirm {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 28px;
+      color: $color-black;
+    }
+  }
+  .el-dialog__footer {
+    padding:0 0 32px;
+  }
+}

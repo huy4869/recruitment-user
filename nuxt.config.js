@@ -99,7 +99,7 @@ export default {
     redirect: {
       login: '/login',
       logout: false,
-      callback: '/login',
+      callback: false,
       home: false
     }
   },

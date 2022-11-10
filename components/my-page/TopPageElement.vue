@@ -59,6 +59,18 @@
         <img class="icon-arrow" src="/assets/icon/icon_arrow_active.svg" alt="">
       </div>
     </div>
+    <el-dialog class="popup-confirm" :visible.sync="dialogCancel" width="570px">
+      <div class="image-confirm text-center">
+        <img src="/assets/icon/Cancel.svg" alt="">
+      </div>
+      <div class="content-confirm text-center">
+        {{ $t('content.CON_005') }}
+      </div>
+      <div slot="footer" class="dialog-footer text-center">
+        <el-button @click="dialogCancel = false">{{ $t('confirm_modal.no') }}</el-button>
+        <el-button type="danger" @click="cancelSchedulePost(applyActive, dialogHistory)">{{ $t('confirm_modal.yes') }}</el-button>
+      </div>
+    </el-dialog>
     <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
   </div>
 </template>
@@ -87,7 +99,9 @@ export default {
       listScheduleHistory: [],
       showViewAllSchedule: false,
       showViewAllScheduleHistory: false,
-      applyActive: {}
+      applyActive: '',
+      dialogCancel: false,
+      dialogHistory: false
     }
   },
   async created() {
@@ -106,6 +120,11 @@ export default {
       if (dataResponse.status_code === 200) {
         this.listSchedule = dataResponse.data.data
         this.showViewAllSchedule = all ? false : dataResponse.data.view_all
+      } else if (response.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
       } else {
         await this.$store.commit(INDEX_SET_ERROR, {
           show: true,
@@ -125,6 +144,11 @@ export default {
       if (dataResponse.status_code === 200) {
         this.listScheduleHistory = dataResponse.data.data
         this.showViewAllScheduleHistory = all ? false : dataResponse.data.view_all
+      } else if (response.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
       } else {
         await this.$store.commit(INDEX_SET_ERROR, {
           show: true,
@@ -137,13 +161,23 @@ export default {
       this.$store.commit(MY_PAGE_SET_STATE_PAGE, page)
       this.$router.push('/my-page#' + page)
     },
-    async cancelSchedule(id, history) {
+    cancelSchedule(id, history) {
+      this.dialogCancel = true
+      this.applyActive = id
+      this.dialogHistory = history
+    },
+    async cancelSchedulePost(id, history) {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const response = await this.$store.dispatch(APPLICATION_CANCEL_APPLICATION, id)
       if (response.status_code === 200) {
         await this.$store.commit(INDEX_SET_SUCCESS, {
           show: true,
           text: response.messages
+        })
+      } else if (response.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
         })
       } else {
         await this.$store.commit(INDEX_SET_ERROR, {
@@ -156,6 +190,7 @@ export default {
       } else {
         await this.getDataSchedule(!this.showViewAllSchedule)
       }
+      this.dialogCancel = false
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     editApply(value) {
