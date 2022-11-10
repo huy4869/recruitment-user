@@ -559,16 +559,16 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="city" :error="(error.key === 'city') ? error.value : ''">
+                      <el-form-item label="" prop="address" :error="(error.key === 'address') ? error.value : ''">
                         <el-input
-                          ref="city"
-                          v-model="accountForm.city"
+                          ref="address"
+                          v-model="accountForm.address"
                           :placeholder="$t('my_page.city')"
-                          name="city"
+                          name="address"
                           type="text"
                           tabindex="2"
                           maxlength="255"
-                          @focus="resetValidate('city')"
+                          @focus="resetValidate('address')"
                         />
                       </el-form-item>
                     </el-col>
@@ -585,16 +585,16 @@
                 <div class="content-input">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      <el-form-item label="" prop="address" :error="(error.key === 'address') ? error.value : ''">
+                      <el-form-item label="" prop="building" :error="(error.key === 'building') ? error.value : ''">
                         <el-input
-                          ref="address"
-                          v-model="accountForm.address"
+                          ref="building"
+                          v-model="accountForm.building"
                           :placeholder="$t('my_page.enter_address')"
-                          name="address"
+                          name="building"
                           type="text"
                           tabindex="2"
                           maxlength="255"
-                          @focus="resetValidate('address')"
+                          @focus="resetValidate('building')"
                         />
                       </el-form-item>
                     </el-col>
@@ -640,6 +640,13 @@ export default {
     const validFormEmail = (rule, value, callback) => {
       if (!validEmail(value)) {
         callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))
+      } else {
+        callback()
+      }
+    }
+    const validRequired = (rule, value, callback, message) => {
+      if (value.trim() === '') {
+        callback(new Error(message))
       } else {
         callback()
       }
@@ -721,8 +728,8 @@ export default {
         postal_code: this.zipCodeFormat(this.$auth.user.postal_code),
         province_id: this.$auth.user.province_id,
         province_city_id: this.$auth.user.province_city_id,
-        city: this.$auth.user.city,
         address: this.$auth.user.address,
+        building: this.$auth.user.building,
         avatar: this.$auth.user.avatar,
         images: this.$auth.user.images,
         errors: {}
@@ -737,46 +744,26 @@ export default {
           { validator: validFormEmail, trigger: 'blur' }
         ],
         first_name: [
-          {
-            required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.first_name') }),
-            trigger: 'blur'
-          },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.first_name') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.first_name') }), trigger: 'blur' }
         ],
         last_name: [
-          {
-            required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.last_name') }),
-            trigger: 'blur'
-          },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.last_name') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.last_name') }), trigger: 'blur' }
         ],
         alias_name: [
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.alias_name') }), trigger: 'blur' }
         ],
         furi_first_name: [
-          {
-            required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.furi_first_name') }),
-            trigger: 'blur'
-          },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.furi_first_name') }), trigger: 'blur' },
           { validator: validFullWidthLength, message: this.$t('validation.fullwidth_length', { _field_: this.$t('my_page.furi_first_name') }), trigger: 'blur' }
         ],
         furi_last_name: [
-          {
-            required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.furi_last_name') }),
-            trigger: 'blur'
-          },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.furi_last_name') }), trigger: 'blur' },
           { validator: validFullWidthLength, message: this.$t('validation.fullwidth_length', { _field_: this.$t('my_page.furi_last_name') }), trigger: 'blur' }
         ],
         tel: [
-          {
-            required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.phone') }),
-            trigger: 'blur'
-          },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.phone') }), trigger: 'blur' },
           { validator: validPhone, trigger: 'blur' }
         ],
         birthday: [
@@ -823,15 +810,11 @@ export default {
         postal_code: [
           { validator: validPostCode, message: this.$t('validation.postcode_length', { _field_: this.$t('my_page.post_code') }), trigger: 'blur' }
         ],
-        city: [
-          {
-            required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.city') }),
-            trigger: 'blur'
-          },
+        address: [
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.phone') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
         ],
-        address: [
+        building: [
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
         ]
 

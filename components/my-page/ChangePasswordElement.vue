@@ -122,8 +122,8 @@
                 <el-button
                   :loading="loading"
                   type="danger"
-                  @click="submit"
                   :disabled="disabledButton"
+                  @click="submit"
                 >
                   {{ $t('my_page.change') }}
                 </el-button>
