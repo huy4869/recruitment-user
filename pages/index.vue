@@ -91,16 +91,22 @@ export default {
     },
     async getDataJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_NEW_JOBS, '')
-      this.listJobs = dataResponse.data.data
-      this.totalNewJob = formatInteger(dataResponse.data.total_jobs)
+      if (dataResponse.status_code === 200) {
+        this.listJobs = dataResponse.data.data
+        this.totalNewJob = formatInteger(dataResponse.data.total_jobs)
+      }
     },
     async getRecommendJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_RECOMMEND_JOBS, '')
-      this.listRecommendJobs = dataResponse.data
+      if (dataResponse.status_code === 200) {
+        this.listRecommendJobs = dataResponse.data
+      }
     },
     async getMostPopularJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_MOST_VIEW_JOBS, '')
-      this.listMostViewJobs = dataResponse.data
+      if (dataResponse.status_code === 200) {
+        this.listMostViewJobs = dataResponse.data
+      }
     }
   }
 }

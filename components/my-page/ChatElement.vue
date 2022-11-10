@@ -164,8 +164,10 @@ export default {
   },
   methods: {
     async changeActive(user, index, mobile) {
-      await this.changeDateMessage(user, index, mobile)
-      this.scrollToElement()
+      if (user) {
+        await this.changeDateMessage(user, index, mobile)
+        this.scrollToElement()
+      }
     },
     async changeDateMessage(user, index, mobile) {
       this.indexActive = index

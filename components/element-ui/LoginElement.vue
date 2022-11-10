@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
@@ -148,7 +149,8 @@ export default {
       capsToolPasswordTip: false,
       loading: false,
       fullscreenLoading: false,
-      showPass: false
+      showPass: false,
+      routerBack: '/'
     }
   },
   computed: {
@@ -158,6 +160,7 @@ export default {
     }
   },
   created() {
+    this.routerBack = _.cloneDeep(this.$cookies.get('auth.redirect'))
     if (this.$refs.accountForm !== undefined) {
       this.resetValidate('accountForm')
     }
@@ -189,7 +192,10 @@ export default {
                   show: true,
                   text: data.messages
                 })
-                this.$router.push('/')
+                await this.$router.push(this.routerBack)
+                if (this.routerBack !== '/') {
+                  this.$cookies.set('auth.redirect', '/')
+                }
                 break
               case 422:
                 for (const [key] of Object.entries(data.data)) {

@@ -503,6 +503,8 @@
                           v-model="accountForm.province_id"
                           :placeholder="$t('my_page.prefectures')"
                           @change="selectCity"
+                          @blur="validate('province_id')"
+                          @focus="resetValidate('province_id')"
                         >
                           <el-option
                             v-for="item in listProvinces"
@@ -528,7 +530,12 @@
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="province_city_id" :error="(error.key === 'province_city_id') ? error.value : ''">
-                        <el-select v-model="accountForm.province_city_id" :placeholder="$t('my_page.enter_province_city')">
+                        <el-select
+                          v-model="accountForm.province_city_id"
+                          :placeholder="$t('my_page.enter_province_city')"
+                          @blur="validate('province_city_id')"
+                          @focus="resetValidate('province_city_id')"
+                        >
                           <el-option
                             v-for="item in listProvinceCity"
                             :key="item.id"
@@ -950,6 +957,9 @@ export default {
       }
       this.$refs.accountForm.fields.find((f) => f.prop === ref).clearValidate()
       this.accountForm.errors[ref] = ''
+    },
+    validate(ref) {
+      this.$refs.accountForm.validateField(ref)
     },
     onFileChange(e) {
       const file = e.target.files[0]
