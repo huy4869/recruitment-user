@@ -251,6 +251,7 @@
                           ref="age"
                           v-model.trim="accountForm.age"
                           :placeholder="$t('my_page.age')"
+                          disabled
                           name="age"
                           type="text"
                           tabindex="2"
@@ -276,21 +277,22 @@
                 <div class="content-input">
                   <el-row class="">
                     <el-form-item label="" prop="gender_id" :error="(error.key === 'gender_id') ? error.value : ''">
-                      <el-col v-for="(gender, key) in listGender" :key="key" :xl="4" :md="4"  :sm="7" :xs="6" class="birth-year">
-                        <el-radio
-                          ref="gender"
-                          v-model="accountForm.gender_id"
-                          :label="gender.id"
-                          class="round-checkbox"
-                          name="gender"
-                          type="text"
-                          tabindex="2"
-                          show-word-limit
-                          @focus="resetValidate('gender_id')"
-                        >
-                          {{ gender.name }}
-                        </el-radio>
-                      </el-col>
+                      <el-radio-group class="d-flex" v-model="accountForm.gender_id">
+                        <el-col v-for="(gender, key) in listGender" :key="key" :xl="4" :md="4"  :sm="7" :xs="6" class="birth-year">
+                          <el-radio
+                            ref="gender"
+                            :label="gender.id"
+                            class="round-checkbox"
+                            name="gender"
+                            type="text"
+                            tabindex="2"
+                            show-word-limit
+                            @focus="resetValidate('gender_id')"
+                          >
+                            {{ gender.name }}
+                          </el-radio>
+                        </el-col>
+                      </el-radio-group>
                     </el-form-item>
                   </el-row>
                 </div>
@@ -788,14 +790,14 @@ export default {
         province_id: [
           {
             required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.prefectures') }),
+            message: this.$t('validation.required_select', { _field_: this.$t('my_page.prefectures') }),
             trigger: 'change'
           }
         ],
         province_city_id: [
           {
             required: true,
-            message: this.$t('validation.required', { _field_: this.$t('my_page.province_city') }),
+            message: this.$t('validation.required_select', { _field_: this.$t('my_page.province_city') }),
             trigger: 'change'
           }
         ],
@@ -913,6 +915,20 @@ export default {
     },
     numberOfDays() {
       this.loadAllDay()
+    },
+    imageDetailShow() {
+      if (this.imageDetailShow.length) {
+        if (this.error.key === 'image') {
+          this.error.value = ''
+        }
+      }
+    },
+    imageAvatarShow() {
+      if (this.imageAvatarShow) {
+        if (this.error.key === 'imageAvatar') {
+          this.error.value = ''
+        }
+      }
     }
   },
   async created() {
@@ -974,8 +990,21 @@ export default {
       const formData = new FormData()
       formData.append('image', this.file)
       formData.append('type', type)
-      const response = await this.$store.dispatch(USER_UPLOAD_AVATAR, formData)
-      this.accountForm.avatar = response.data.url
+
+      const data = await this.$store.dispatch(USER_UPLOAD_AVATAR, formData)
+      switch (data.status_code) {
+        case 200:
+          this.accountForm.avatar = data.data.url
+          break
+        case 422:
+          for (const [key] of Object.entries(data.data)) {
+            this.error = { key: key === 'image' ? 'imageAvatar' : key, value: data.data[key][0] }
+          }
+          break
+        default:
+          await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+          break
+      }
     },
     removeImage(index) {
       this.imageDetailShow = this.imageDetailShow.filter(function(item, key) {
