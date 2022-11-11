@@ -30,7 +30,7 @@
                            name="store_name"
                            type="text"
                            tabindex="2"
-                           show-word-limit
+                           maxlength="255"
                            @focus="resetValidate('store_name')"
                          />
                        </el-form-item>
@@ -56,7 +56,7 @@
                           name="company_name"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="255"
                           @focus="resetValidate('company_name')"
                         />
                       </el-form-item>
@@ -73,8 +73,8 @@
                  </div>
                  <div class="required">{{ $t('form.required') }}</div>
                </el-col>
-               <el-col :md="18" :sm="24">
-                 <div class="content-input">
+               <el-col class="pb-8" :md="18" :sm="24">
+                 <div class="content-input content-datetime">
                    <el-row class="enroll-checkbox">
                      <el-checkbox v-model="accountForm.period_check">{{ $t('my_page.enroll') }}</el-checkbox>
                    </el-row>
@@ -83,84 +83,87 @@
                        <el-form-item label="" prop="period_start" :error="(error.key === 'period_start') ? error.value : ''">
                          <el-row class="d-flex">
                            <el-col  :sm="12" :xs="12" class="birth-year">
-                             <el-autocomplete
+                             <el-select
                                ref="period_start"
-                               v-model.trim="accountForm.period_year_start"
+                               name="period_start"
+                               v-model="accountForm.period_year_start"
                                :placeholder="$t('YYYY')"
-                               :fetch-suggestions="queryYear"
-                               name="year"
-                               type="text"
-                               tabindex="2"
-                               :maxlength="4"
-                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                               pattern="[0-9]*"
-                               inputmode="numeric"
                                @focus="resetValidate('period_start')"
-                             />
+                               @blur="validate('period_start')"
+                             >
+                               <el-option
+                                 v-for="item in linksYear"
+                                 :key="item.value"
+                                 :label="item.value"
+                                 :value="item.value">
+                               </el-option>
+                             </el-select>
                            </el-col>
                            <span class="text-normal birthday">{{ $t('form.year') }}</span>
                            <el-col :sm="12" :xs="10" class="birth-month">
-                             <el-autocomplete
+                             <el-select
                                ref="period_start"
-                               v-model.trim="accountForm.period_month_start"
-                               :placeholder="$t('MM')"
-                               :fetch-suggestions="queryMonth"
                                name="period_start"
-                               type="text"
-                               :maxlength="2"
-                               tabindex="2"
-                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                               pattern="[0-9]*"
-                               inputmode="numeric"
+                               v-model="accountForm.period_month_start"
+                               :placeholder="$t('MM')"
                                @focus="resetValidate('period_start')"
-                             />
+                               @blur="validate('period_start')"
+                             >
+                               <el-option
+                                 v-for="item in linksMonth"
+                                 :key="item.value"
+                                 :label="item.value"
+                                 :value="item.value">
+                               </el-option>
+                             </el-select>
                            </el-col>
                            <span class="text-normal birthday">{{ $t('form.month') }}</span>
                          </el-row>
                        </el-form-item>
                      </el-col>
-                     <span class="date-space">~</span>
-                     <el-col v-if="!accountForm.period_check" :md="9" :sm="24" class="birth-year">
+                     <span v-show="accountForm.period_check" class="date-space">~</span>
+                     <el-col v-show="accountForm.period_check" :md="9" :sm="24" class="birth-year">
                        <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
                          <el-row class="d-flex">
                            <el-col  :sm="12" :xs="12" class="birth-year">
-                             <el-autocomplete
+                             <el-select
                                ref="period_end"
-                               v-model.trim="accountForm.period_year_end"
+                               name="period_end"
+                               v-model="accountForm.period_year_end"
                                :placeholder="$t('YYYY')"
-                               :fetch-suggestions="queryYear"
-                               name="birthday"
-                               type="text"
-                               tabindex="2"
-                               :maxlength="4"
-                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                               pattern="[0-9]*"
-                               inputmode="numeric"
                                @focus="resetValidate('period_end')"
-                             />
+                               @blur="validate('period_end')"
+                             >
+                               <el-option
+                                 v-for="item in linksYear"
+                                 :key="item.value"
+                                 :label="item.value"
+                                 :value="item.value">
+                               </el-option>
+                             </el-select>
                            </el-col>
                            <span class="text-normal birthday">{{ $t('form.year') }}</span>
                            <el-col  :sm="12" :xs="10" class="birth-month">
-                             <el-autocomplete
+                             <el-select
                                ref="period_end"
-                               v-model.trim="accountForm.period_month_end"
+                               name="period_end"
+                               v-model="accountForm.period_month_end"
                                :placeholder="$t('MM')"
-                               :fetch-suggestions="queryMonth"
-                               name="birthday"
-                               type="text"
-                               :maxlength="2"
-                               tabindex="2"
-                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                               pattern="[0-9]*"
-                               inputmode="numeric"
                                @focus="resetValidate('period_end')"
-                             />
+                               @blur="validate('period_end')"
+                             >
+                               <el-option
+                                 v-for="item in linksMonth"
+                                 :key="item.value"
+                                 :label="item.value"
+                                 :value="item.value">
+                               </el-option>
+                             </el-select>
                            </el-col>
                            <span class="text-normal birthday">{{ $t('form.month') }}</span>
                          </el-row>
                        </el-form-item>
                      </el-col>
-                     <div class="text-normal date-space" v-else>{{ $t('career.current') }}</div>
                    </el-row>
                  </div>
                </el-col>
@@ -196,6 +199,7 @@
                            name="other_occupation"
                            type="text"
                            tabindex="2"
+                           maxlength="255"
                            @focus="resetValidate('other_occupation')"
                          />
                        </el-form-item>
@@ -260,6 +264,7 @@
                            name="other_status"
                            type="text"
                            tabindex="2"
+                           maxlength="255"
                            @focus="resetValidate('other_status')"
                          />
                        </el-form-item>
@@ -410,13 +415,13 @@ export default {
         callback()
       }
     }
-    // const validFullWidthLength = (rule, value, callback, message) => {
-    //   if (!validFullWidth(value)) {
-    //     callback(new Error(this.$t('validation.max_length', { _field_: message })))
-    //   } else {
-    //     callback()
-    //   }
-    // }
+    const validRequired = (rule, value, callback, message) => {
+      if (!value || value.trim() === '') {
+        callback(new Error(message))
+      } else {
+        callback()
+      }
+    }
     return {
       accountForm: {
         business_content: '',
@@ -444,7 +449,7 @@ export default {
       },
       accountRules: {
         store_name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.store_name') }), trigger: 'blur' },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('career.store_name') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('career.store_name') }), trigger: 'blur' }
         ],
         company_name: [
@@ -457,22 +462,24 @@ export default {
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
         ],
         other_occupation: [
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('career.occupation') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('career.occupation') }), trigger: 'blur' }
         ],
         other_status: [
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('career.status') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('career.status') }), trigger: 'blur' }
         ],
         period_start: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.period_start') }), trigger: 'blur' }
+          { required: true, message: this.$t('validation.required_select', { _field_: this.$t('career.period_start') }), trigger: 'change' }
         ],
         work_type_name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.status') }), trigger: 'blur' }
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.status') }), trigger: 'change' }
         ],
         job_type_name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.occupation') }), trigger: 'blur' }
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.occupation') }), trigger: 'change' }
         ],
         position_offices: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.position_offices') }), trigger: 'blur' }
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.position_offices') }), trigger: 'change' }
         ]
       },
       confirmModal: false,
@@ -533,7 +540,7 @@ export default {
           this.resetValidate('period_end')
         }
         this.accountRules.period_end = {
-          required: true, message: this.$t('validation.required', { _field_: this.$t('career.period_start') }), trigger: 'blur'
+          required: true, message: this.$t('validation.required_select', { _field_: this.$t('career.period_start') }), trigger: 'change'
         }
       } else {
         delete this.accountRules.period_end
@@ -587,6 +594,9 @@ export default {
     this.loadAllMonth()
   },
   methods: {
+    validate(ref) {
+      this.$refs.accountForm.validateField(ref)
+    },
     resetValidate(ref) {
       if (ref === this.error.key) {
         this.error = { key: null, value: '' }
