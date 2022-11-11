@@ -2,7 +2,7 @@
   <div class="favorite-job-element job-element">
     <div class="">
       <div class="job-title d-flex justify-between card-title-mobile">
-        <div class="card-primary-title">{{ $t('qualification.title') }}{{ index | toFullWidth(index) }}
+        <div class="card-primary-title">{{ $t('qualification.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}</span></div>
         </div>
         <div class="btn-option d-flex">
           <el-button class="btn-edit" @click="handleRouter('qualification/edit/' + index + '?id=' + job.id)"><img src="/assets/icon/edit.svg" alt="img-edit">{{ $t('my_page.edit') }}</el-button>
@@ -68,6 +68,12 @@ export default {
             })
             this.closeConfirmModal()
             this.reloadList()
+            break
+          case 500:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: this.$t('content.EXC_001')
+            })
             break
           default:
             await this.$store.commit(INDEX_SET_ERROR, {

@@ -1,7 +1,7 @@
 <template>
   <div class="right-content-element">
     <div class="edit-cv-element">
-      <div class="edit-cv-title">{{ $t('qualification.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
+      <div class="edit-cv-title">{{ $t('qualification.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}</span></div>{{ $t('my_page.edit') }}</div>
       <div class="edit-cv-content edit-form-content">
         <div class="card-text-title card-title-mobile"> {{ $t('qualification.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
         <el-form
@@ -47,43 +47,43 @@
                 </div>
               </el-col>
               <el-col :md="18" :sm="24">
-                <div class="content-input">
+                <div class="content-input content-datetime">
                   <el-row class="d-flex period">
                     <el-col :md="9" :sm="24" class="first-name">
-                      <el-form-item label="" prop="new_issuance_date" :error="(error.key === 'new_issuance_date') ? error.value : ''">
+                      <el-form-item label="" prop="new_issuance_date_edit" :error="(error.key === 'new_issuance_date') ? error.value : ''">
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
-                            <el-autocomplete
-                              ref="new_issuance_date"
-                              v-model.trim="accountForm.year"
+                            <el-select
+                              ref="new_issuance_date_edit"
+                              name="new_issuance_date_edit"
+                              v-model="accountForm.year"
                               :placeholder="$t('YYYY')"
-                              :fetch-suggestions="queryYear"
-                              name="year"
-                              type="text"
-                              tabindex="2"
-                              :maxlength="4"
-                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                              pattern="[0-9]*"
-                              inputmode="numeric"
-                              @focus="resetValidate('new_issuance_date')"
-                            />
+                              @focus="resetValidate('new_issuance_date_edit')"
+                              @blur="validate('new_issuance_date_edit')"
+                            >
+                              <el-option
+                                v-for="item in linksYear"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value">
+                              </el-option>
+                            </el-select>
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col :sm="12" :xs="10" class="birth-month">
-                            <el-autocomplete
-                              ref="new_issuance_date"
-                              v-model.trim="accountForm.month"
+                            <el-select
+                              v-model="accountForm.month"
                               :placeholder="$t('MM')"
-                              :fetch-suggestions="queryMonth"
-                              name="month"
-                              type="text"
-                              :maxlength="2"
-                              tabindex="2"
-                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                              pattern="[0-9]*"
-                              inputmode="numeric"
-                              @focus="resetValidate('new_issuance_date')"
-                            />
+                              @focus="resetValidate('new_issuance_date_edit')"
+                              @blur="validate('new_issuance_date_edit')"
+                            >
+                              <el-option
+                                v-for="item in linksMonth"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value">
+                              </el-option>
+                            </el-select>
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.month') }}</span>
                         </el-row>
@@ -155,6 +155,7 @@ export default {
         name: '',
         year: '',
         month: '',
+        new_issuance_date_edit: '',
         errors: {}
       },
       error: {
@@ -189,27 +190,23 @@ export default {
       }
     },
     'accountForm.year'() {
-      if ((this.accountForm.year && !this.accountForm.month) || (!this.accountForm.year && this.accountForm.month)) {
-        this.accountRules.new_issuance_date = [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('qualification.date') }), trigger: 'blur' }
-        ]
-        this.$refs.accountForm.validateField('new_issuance_date')
-      } else if (this.accountForm.year && this.accountForm.month) {
-        delete this.accountRules.new_issuance_date
-      } else if (this.accountForm.year === '' && this.accountForm.month === '') {
-        delete this.accountRules.new_issuance_date
+      const data = this.checkDateNow()
+      if (data) {
+        this.accountRules.new_issuance_date_edit = [{ required: true, message: data, trigger: 'blur' }]
+        this.$refs.accountForm.validateField('new_issuance_date_edit')
+      } else {
+        delete this.accountRules.new_issuance_date_edit
+        this.resetValidate('new_issuance_date_edit')
       }
     },
     'accountForm.month'() {
-      if ((this.accountForm.month && !this.accountForm.year) || (!this.accountForm.month && this.accountForm.year)) {
-        this.accountRules.new_issuance_date = [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('qualification.date') }), trigger: 'blur' }
-        ]
-        this.$refs.accountForm.validateField('new_issuance_date')
-      } else if (this.accountForm.year && this.accountForm.month) {
-        delete this.accountRules.new_issuance_date
-      } else if (this.accountForm.year === '' && this.accountForm.month === '') {
-        delete this.accountRules.new_issuance_date
+      const data = this.checkDateNow()
+      if (data) {
+        this.accountRules.new_issuance_date_edit = [{ required: true, message: data, trigger: 'blur' }]
+        this.$refs.accountForm.validateField('new_issuance_date_edit')
+      } else {
+        delete this.accountRules.new_issuance_date_edit
+        this.resetValidate('new_issuance_date_edit')
       }
     }
   },
@@ -218,6 +215,9 @@ export default {
     this.loadAllMonth()
   },
   methods: {
+    validate(ref) {
+      this.$refs.accountForm.validateField(ref)
+    },
     resetValidate(ref) {
       if (ref === this.error.key) {
         this.error = { key: null, value: '' }
@@ -229,7 +229,17 @@ export default {
       this.$router.push(route)
     },
     showConfirmModal() {
-      this.confirmModal = true
+      let check = false
+      for (const x in this.qualification) {
+        if (this.qualification[x] !== this.accountForm[x]) {
+          check = true
+        }
+      }
+      if (check) {
+        this.confirmModal = true
+      } else {
+        this.handleRouter('/my-page/qualification')
+      }
     },
     closeConfirmModal() {
       this.confirmModal = false
@@ -295,6 +305,12 @@ export default {
                   this.error = { key, value: response.data[key][0] }
                 }
                 break
+              case 500:
+                await this.$store.commit(INDEX_SET_ERROR, {
+                  show: true,
+                  text: this.$t('content.EXC_001')
+                })
+                break
               default:
                 await this.$store.commit(INDEX_SET_ERROR, {
                   show: true,
@@ -334,6 +350,19 @@ export default {
         await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    checkDateNow() {
+      if ((this.accountForm.month && !this.accountForm.year) || (!this.accountForm.month && this.accountForm.year)) {
+        return this.$t('validation.required', { _field_: this.$t('qualification.date') })
+      }
+      if ((this.accountForm.month && this.accountForm.year)) {
+        const dateYearNow = new Date().getFullYear()
+        const dateMonthNow = new Date().getMonth() + 1
+        if ((Number(this.accountForm.year) === dateYearNow) && (Number(this.accountForm.month) > dateMonthNow)) {
+          return this.$t('content.ERR_042')
+        }
+      }
+      return ''
     }
   }
 }
