@@ -17,22 +17,20 @@
 .edit-cv-element {
   margin-bottom: 24px;
   .text-count-career {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     border: 1px solid $color-black;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 50%;
-    line-height: 22px;
+    line-height: 20px;
     display: inline-flex;
     justify-content: center;
     vertical-align: middle;
     font-family: 'Zen Kaku Gothic New';
     font-weight: 700;
-    margin: auto 0;
+    margin: auto 2px;
     span {
       margin: auto;
-      font-size: 18px;
-      line-height: unset;
     }
   }
   .edit-cv-title {

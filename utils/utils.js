@@ -195,3 +195,19 @@ export function formatPrice(value) {
     return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
   }
 }
+export function formatNumberJapan(value) {
+  if (value) {
+    return tr(value, '０１２３４５６７８９　', '0123456789 ')
+  }
+}
+
+function tr(text, search, replace) {
+  const regex = RegExp('[' + search + ']', 'g')
+  return text.replace(
+    regex,
+    function(chr) {
+      const ind = search.indexOf(chr)
+      return replace.charAt(ind)
+    }
+  )
+}

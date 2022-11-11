@@ -28,7 +28,7 @@
                         <el-input
                           ref="store_name"
                           v-model="accountForm.name"
-                          :placeholder="$t('qualification.name')"
+                          :placeholder="$t('form.enter_none')"
                           name="name"
                           type="text"
                           tabindex="2"
@@ -177,23 +177,21 @@ export default {
   },
   watch: {
     'accountForm.year'() {
-      if ((this.accountForm.year && !this.accountForm.month) || (!this.accountForm.year && this.accountForm.month)) {
-        this.accountRules.new_issuance_date = [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('qualification.date') }), trigger: 'blur' }
-        ]
+      const data = this.checkDateNow()
+      if (data) {
+        this.accountRules.new_issuance_date = [{ required: true, message: data, trigger: 'blur' }]
         this.$refs.accountForm.validateField('new_issuance_date')
-      } else if (this.accountForm.year && this.accountForm.month) {
+      } else {
         delete this.accountRules.new_issuance_date
         this.resetValidate('new_issuance_date')
       }
     },
     'accountForm.month'() {
-      if ((this.accountForm.month && !this.accountForm.year) || (!this.accountForm.month && this.accountForm.year)) {
-        this.accountRules.new_issuance_date = [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('qualification.date') }), trigger: 'blur' }
-        ]
+      const data = this.checkDateNow()
+      if (data) {
+        this.accountRules.new_issuance_date = [{ required: true, message: data, trigger: 'blur' }]
         this.$refs.accountForm.validateField('new_issuance_date')
-      } else if (this.accountForm.year && this.accountForm.month) {
+      } else {
         delete this.accountRules.new_issuance_date
         this.resetValidate('new_issuance_date')
       }
@@ -243,7 +241,7 @@ export default {
       }
     },
     loadAllYear() {
-      for (let i = new Date().getFullYear() + 10; i >= 1970; i--) {
+      for (let i = new Date().getFullYear(); i >= 1970; i--) {
         this.linksYear.push({ value: i.toString() })
       }
     },
@@ -278,6 +276,12 @@ export default {
                   this.error = { key, value: response.data[key][0] }
                 }
                 break
+              case 500:
+                await this.$store.commit(INDEX_SET_ERROR, {
+                  show: true,
+                  text: this.$t('content.EXC_001')
+                })
+                break
               default:
                 await this.$store.commit(INDEX_SET_ERROR, {
                   show: true,
@@ -292,6 +296,19 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    checkDateNow() {
+      if ((this.accountForm.month && !this.accountForm.year) || (!this.accountForm.month && this.accountForm.year)) {
+        return this.$t('validation.required', { _field_: this.$t('qualification.date') })
+      }
+      if ((this.accountForm.month && this.accountForm.year)) {
+        const dateYearNow = new Date().getFullYear()
+        const dateMonthNow = new Date().getMonth() + 1
+        if ((Number(this.accountForm.year) === dateYearNow) && (Number(this.accountForm.month) > dateMonthNow)) {
+          return this.$t('content.ERR_042')
+        }
+      }
+      return ''
     }
   }
 }

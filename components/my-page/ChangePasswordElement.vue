@@ -122,7 +122,6 @@
                 <el-button
                   :loading="loading"
                   type="danger"
-                  :disabled="disabledButton"
                   @click="submit"
                 >
                   {{ $t('my_page.change') }}
@@ -270,6 +269,12 @@ export default {
                   show: true,
                   text: data.messages
                 })
+                this.accountForm = {
+                  current_password: '',
+                  new_password: '',
+                  new_password_confirmation: '',
+                  errors: {}
+                }
                 break
               case 422:
                 for (const [key] of Object.entries(data.data)) {
