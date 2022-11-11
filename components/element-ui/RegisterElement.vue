@@ -108,7 +108,7 @@ import {
   INDEX_SET_ERROR,
   AUTH_REGISTER
 } from '../../store/store.const'
-import { validEmail, validHalfWidth } from '@/utils/validate'
+import { validEmail, validHalfWidth, validOnlyHalfWidth } from '@/utils/validate'
 
 export default {
   name: 'LoginElement',
@@ -130,7 +130,7 @@ export default {
       if (value === '') {
         callback(new Error(this.$t('validation.required', { _field_: this.$t('login.password') }).toString()))
       } else {
-        if (!validHalfWidth(value)) {
+        if (!validOnlyHalfWidth(value)) {
           callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.password') })))
         }
         if (value.length < 4 || value.length > 12) {

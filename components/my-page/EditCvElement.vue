@@ -178,58 +178,55 @@
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
               <el-col :md="18" :sm="24">
-                <div class="content-input">
+                <div class="content-input content-datetime">
                   <el-form-item label="" prop="birthday" :error="(error.key === 'birthday') ? error.value : ''">
                     <el-row class="d-flex">
-                      <el-col :md="4" :sm="12" class="birth-year">
-                        <el-autocomplete
-                          ref="birthday"
-                          v-model.trim="accountForm.year"
-                          :placeholder="$t('YYYY')"
-                          :fetch-suggestions="queryYear"
-                          name="year"
-                          type="text"
-                          tabindex="2"
-                          :maxlength="4"
-                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                          pattern="[0-9]*"
-                          inputmode="numeric"
+                      <el-col :md="3" :sm="12" class="birth-year">
+                        <el-select
+                          v-model="accountForm.year"
+                          :placeholder="$t('MM')"
                           @focus="resetValidate('birthday')"
-                        />
+                          @blur="validate('birthday')"
+                        >
+                          <el-option
+                            v-for="item in linksYear"
+                            :key="item.value"
+                            :label="item.value"
+                            :value="item.value">
+                          </el-option>
+                        </el-select>
                       </el-col>
                       <span class="text-normal birthday">{{ $t('form.year') }}</span>
-                      <el-col :md="4" :sm="12" class="birth-month">
-                        <el-autocomplete
-                          ref="birthday"
-                          v-model.trim="accountForm.month"
+                      <el-col :md="3" :sm="12" class="birth-month">
+                        <el-select
+                          v-model="accountForm.month"
                           :placeholder="$t('MM')"
-                          :fetch-suggestions="queryMonth"
-                          name="month"
-                          type="text"
-                          :maxlength="2"
-                          tabindex="2"
-                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                          pattern="[0-9]*"
-                          inputmode="numeric"
                           @focus="resetValidate('birthday')"
-                        />
+                          @blur="validate('birthday')"
+                        >
+                          <el-option
+                            v-for="item in linksMonth"
+                            :key="item.value"
+                            :label="item.value"
+                            :value="item.value">
+                          </el-option>
+                        </el-select>
                       </el-col>
                       <span class="text-normal birthday">{{ $t('form.month') }}</span>
-                      <el-col :md="4" :sm="12" class="birth-day">
-                        <el-autocomplete
-                          ref="birthday"
-                          v-model.trim="accountForm.day"
-                          :placeholder="$t('DD')"
-                          :fetch-suggestions="queryDay"
-                          name="day"
-                          type="text"
-                          tabindex="2"
-                          :maxlength="2"
-                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                          pattern="[0-9]*"
-                          inputmode="numeric"
+                      <el-col :md="3" :sm="12" class="birth-day">
+                        <el-select
+                          v-model="accountForm.day"
+                          :placeholder="$t('MM')"
                           @focus="resetValidate('birthday')"
-                        />
+                          @blur="validate('birthday')"
+                        >
+                          <el-option
+                            v-for="item in linksDay"
+                            :key="item.value"
+                            :label="item.value"
+                            :value="item.value">
+                          </el-option>
+                        </el-select>
                       </el-col>
                       <span class="text-normal birthday">{{ $t('form.day') }}</span>
                     </el-row>
@@ -645,7 +642,7 @@ export default {
       }
     }
     const validRequired = (rule, value, callback, message) => {
-      if (value.trim() === '') {
+      if (!value || value.trim() === '') {
         callback(new Error(message))
       } else {
         callback()
@@ -968,6 +965,12 @@ export default {
               this.error = { key, value: data.data[key][0] }
             }
             break
+          case 500:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: this.$t('content.EXC_001')
+            })
+            break
           default:
             await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
             break
@@ -1088,6 +1091,7 @@ export default {
             const dto = this.accountForm
             dto.postal_code = dto.postal_code ? dto.postal_code.replace(/[^0-9]/g, '') : dto.postal_code
             const response = await this.$store.dispatch(USER_UPDATE_BASIC_INFO, dto)
+            this.zipCodeInput()
             if (response.status_code === 200) {
               await this.$store.commit(INDEX_SET_SUCCESS, {
                 show: true,

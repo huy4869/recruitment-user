@@ -87,7 +87,7 @@ import {
   AUTH_CHECK_TOKEN,
   AUTH_RESET_PASS
 } from '../../store/store.const'
-import { validEmail } from '@/utils/validate'
+import { validEmail, validOnlyHalfWidth } from '@/utils/validate'
 
 export default {
   name: 'ForgotElement',
@@ -103,11 +103,11 @@ export default {
       if (value === '') {
         callback(new Error(this.$t('validation.required', { _field_: this.$t('login.password') }).toString()))
       } else {
+        if (!validOnlyHalfWidth(value)) {
+          callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.password') })))
+        }
         if (value.length < 4 || value.length > 12) {
           callback(new Error(this.$t('validation.pass_format', { _field_: this.$t('login.password') })))
-        }
-        if (this.accountForm.password_confirmation !== '') {
-          this.$refs.accountForm.validateField('password_confirmation')
         }
         callback()
       }
@@ -147,7 +147,7 @@ export default {
           { required: true, message: this.$t('validation.required', { _field_: this.$t('register.password_confirmation') }), trigger: 'blur' },
           {
             validator: validateConfirmPass,
-            message: this.$t('validation.passNotMatch'),
+            message: this.$t('validation.passNotMatch', { _field_: this.$t('register.password_confirmation') }).toString(),
             trigger: 'blur'
           }
         ],
@@ -175,8 +175,7 @@ export default {
         token: this.token
       })
       if (data.status_code !== 200) {
-        this.$router.push('/')
-        this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
       }
     }
   },
