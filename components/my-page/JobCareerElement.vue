@@ -44,6 +44,7 @@
 import NoDataElement from '../element-ui/NoDataElement'
 import CareerElement from './CareerElement'
 import {
+  INDEX_SET_ERROR,
   INDEX_SET_LOADING,
   WORK_HISTORY_LIST
 } from '@/store/store.const'
@@ -71,6 +72,11 @@ export default {
         const { data, status_code } = response
         if (status_code === 200) {
           this.listJobs = data
+        } else if (status_code === 500) {
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: this.$t('content.EXC_001')
+          })
         }
       } catch (e) {
         this.$store.commit(INDEX_SET_LOADING, false)
