@@ -164,7 +164,7 @@ export default {
   created() {
     const dataBack = _.cloneDeep(this.$cookies.get('auth.redirect'))
     if (dataBack !== undefined) {
-      this.routerBack = dataBack
+      this.routerBack = this.$route.fullPath.replace('/login', dataBack)
     }
     if (this.$refs.accountForm !== undefined) {
       this.resetValidate('accountForm')
