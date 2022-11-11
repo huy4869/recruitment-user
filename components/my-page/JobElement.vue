@@ -1,5 +1,5 @@
 <template>
-  <div class="favorite-job-element job-element">
+  <div class="favorite-job-element job-element" @click="changeToDetail(job.id)">
     <div class="show-pc">
       <div class="job-title d-flex">
         <img src="/assets/images/favorite-job.png" alt="favorite-job">
@@ -34,7 +34,7 @@
       </div>
       <div class="d-flex justify-between cursor-pointer">
         <div class="text-last-updated"><span>{{ job.released_at }}</span></div>
-        <div class="d-flex" @click="removeFavoriteJob">
+        <div class="d-flex" @click.stop="removeFavoriteJob">
           <img class="union-icon" src="/assets/icon/union.svg" alt="union">
           <p class="text-primary-blue">{{ $t('favorite_job.remove') }}</p>
         </div>
@@ -77,7 +77,7 @@
           </p>
         </div>
       </div>
-      <div class="d-flex" @click="removeFavoriteJob">
+      <div class="d-flex" @click.stop="removeFavoriteJob">
         <img class="union-icon" src="/assets/icon/union.svg" alt="union">
         <p class="text-primary-blue">{{ $t('favorite_job.remove') }}</p>
       </div>
@@ -113,7 +113,7 @@ export default {
       if (this.job.address === undefined) {
         return ''
       }
-      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.district + this.job.address.city + this.job.address.address
+      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.district + this.job.address.address + (this.job.address.building ?? '')
     },
     showStation() {
       if (this.job.stations === undefined) {
@@ -134,6 +134,9 @@ export default {
     },
     removeFavoriteJob() {
       this.$emit('removeFavoriteJob', this.job)
+    },
+    changeToDetail(id) {
+      this.$router.push('/job/' + id)
     }
   }
 }

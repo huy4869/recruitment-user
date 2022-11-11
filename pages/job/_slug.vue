@@ -465,7 +465,7 @@ export default {
       if (this.job.address === undefined) {
         return ''
       }
-      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.district + this.job.address.city + this.job.address.address
+      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.district + this.job.address.address + this.job.address.building
     },
     showStation() {
       if (this.job.stations === undefined) {

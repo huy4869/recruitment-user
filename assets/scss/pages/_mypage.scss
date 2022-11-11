@@ -436,6 +436,7 @@
   }
   .favorite-job-page-content {
     .job-element {
+      cursor: pointer;
       margin-bottom: 24px;
       .schedule-button-status {
         display: inline-block;
