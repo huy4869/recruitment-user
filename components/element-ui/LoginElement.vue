@@ -163,7 +163,10 @@ export default {
     }
   },
   created() {
-    this.routerBack = _.cloneDeep(this.$cookies.get('auth.redirect'))
+    const dataBack = _.cloneDeep(this.$cookies.get('auth.redirect'))
+    if (dataBack !== undefined) {
+      this.routerBack = dataBack
+    }
     if (this.$refs.accountForm !== undefined) {
       this.resetValidate('accountForm')
     }
