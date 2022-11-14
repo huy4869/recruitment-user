@@ -24,7 +24,7 @@
               <span>{{ $t('condition.work_location') }}</span>
             </div>
             <div class="header-search-right">
-              <el-button type="danger" class="form-search" plain @click="workDialog = true">
+              <el-button type="danger" class="form-search" plain @click="jobDialog = true">
                 <img src="/assets/icon/icon_add_blue.svg" alt="">
                 {{ $t('condition.enter_work_location') }}
               </el-button>
@@ -139,7 +139,7 @@
             </el-button>
           </div>
         </el-dialog>
-        <el-dialog class="form-dialog-select form-work-dialog" :title="$t('condition.select_a_job')" :visible.sync="workDialog" width="84%">
+        <el-dialog class="form-dialog-select form-work-dialog" :title="$t('condition.select_a_job')" :visible.sync="jobDialog" width="84%">
           <div class="form-filter-location">
             <div class="district-item">
               <div class="district-name">
@@ -167,7 +167,7 @@
           <span class="total-record">{{ total + $t('common.subject') }}</span>
           <span>{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total }) }}</span>
         </div>
-        <div>
+        <div class="show-pc">
           <PaginationElement v-if="listJobs.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
         </div>
       </div>
@@ -185,6 +185,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import {
   INDEX_SET_TITLE_MENU,
   JOB_LIST_JOBS,
@@ -204,7 +205,7 @@ export default {
   components: { TitlePageElement, BannerElement, PaginationElement, RecommendJobElement, NoDataElement },
   data() {
     return {
-      workDialog: false,
+      jobDialog: false,
       occupationDialog: false,
       showAll: false,
       listJobs: [],
@@ -421,6 +422,38 @@ export default {
       { name: this.$t('page.search'), route: '/search' }
     ])
   },
+  watch: {
+    occupationDialog() {
+      this.workLocation = _.cloneDeep(this.condition.province_id)
+    },
+    workLocation() {
+      const listDistricts = []
+      this.listProvinceDistricts.forEach(district => {
+        let check = true
+        district.provinces.forEach(province => {
+          if (!this.workLocation.includes(province.id)) {
+            check = false
+          }
+        })
+        if (check) {
+          listDistricts.push(district.id)
+        }
+      })
+      this.districts = listDistricts
+    },
+    jobDialog() {
+      this.jobType = _.cloneDeep(this.condition.job_type_ids)
+    },
+    jobType() {
+      let check = true
+      this.listJobType.forEach(job => {
+        if (!this.jobType.includes(job.id)) {
+          check = false
+        }
+      })
+      this.jobTypeSelectAll = check
+    }
+  },
   methods: {
     async changePage(page) {
       this.page = page
@@ -553,7 +586,7 @@ export default {
     changeCondition(key, value) {
       this.condition[key] = value
       this.occupationDialog = false
-      this.workDialog = false
+      this.jobDialog = false
     },
     changeSortBy(value, type) {
       if (value) {

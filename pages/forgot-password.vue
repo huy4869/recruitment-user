@@ -15,6 +15,7 @@ export default {
     return {
       windowWidth: 0
     }
-  }
+  },
+  middleware: 'guest'
 }
 </script>

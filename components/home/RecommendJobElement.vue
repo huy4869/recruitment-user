@@ -104,6 +104,11 @@ export default {
       this.$router.push(link)
     },
     async addFavoriteJob() {
+      if (!this.$auth.loggedIn) {
+        this.$cookies.set('auth.redirect', this.$route.fullPath)
+        await this.$router.push('/login')
+        return
+      }
       await this.$store.commit(INDEX_SET_LOADING, true)
       const dataMessage = {
         job_posting_id: this.jobActive.id
@@ -113,6 +118,11 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     async removeFavoriteJob() {
+      if (!this.$auth.loggedIn) {
+        this.$cookies.set('auth.redirect', this.$route.fullPath)
+        await this.$router.push('/login')
+        return
+      }
       await this.$store.commit(INDEX_SET_LOADING, true)
       const response = await this.$store.dispatch(JOB_REMOVE_FAVORITE_JOB, this.jobActive.id)
       await this.changeStatusJob(response, false)
