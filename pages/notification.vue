@@ -26,7 +26,11 @@
 </template>
 
 <script>
-import { INDEX_SET_TITLE_MENU, NOTIFICATION_LIST } from '../store/store.const'
+import {
+  INDEX_SET_ERROR,
+  INDEX_SET_TITLE_MENU,
+  NOTIFICATION_LIST
+} from '../store/store.const'
 import TitlePageElement from '../components/layout/TitlePageElement'
 import BannerElement from '../components/layout/BannerElement'
 import PaginationElement from '../components/element-ui/PaginationElement'
@@ -55,10 +59,16 @@ export default {
     },
     async getDataNotifications() {
       const dataResponse = await this.$store.dispatch(NOTIFICATION_LIST, '')
-      if (dataResponse.data) {
+      if (dataResponse.status_code === 200) {
         this.listNotifications = dataResponse.data.data
         this.page = dataResponse.data.current_page
         this.lastPage = dataResponse.data.total_page
+      }
+      if (dataResponse.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
       }
     }
   }

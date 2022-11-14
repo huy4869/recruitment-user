@@ -70,6 +70,12 @@ export default {
       if (dataResponse.status_code === 200) {
         this.listScheduleHistory = dataResponse.data
       }
+      if (dataResponse.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
+      }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     cancelSchedule(id, history) {

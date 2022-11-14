@@ -106,14 +106,16 @@
           </div>
           <div v-if="Object.keys(listSearch).length" class="search-from-popular-content">
             <div v-for="(search, index) in listSearch" :key="index" class="search-from-popular-item">
-              <div class="search-from-popular-button">{{ index + $t('home.text_form_search') }}</div>
+              <div>
+                <div class="search-from-popular-button">{{ index + $t('home.text_form_search') }}</div>
+              </div>
               <div class="search-next">
                 <img src="/assets/icon/icon_next_search.svg" alt="">
               </div>
               <div class="search-list-category">
-                <div v-for="(name, key) in search" :key="key">
+                <a v-for="(name, key) in search" :key="key" :href="changeToSearchLink(name)">
                   {{ name.name }}
-                </div>
+                </a>
               </div>
             </div>
           </div>
@@ -130,9 +132,9 @@
           </div>
           <div v-if="listSearchEmployment.length" class="search-by-employment-content">
             <div class="search-by-employment-category">
-              <div v-for="(search, key) in listSearchEmployment" :key="key">
+              <a v-for="(search, key) in listSearchEmployment" :key="key" :href="changeToSearchWork(search)">
                 {{ search.name }}
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -143,7 +145,7 @@
         </div>
         <div class="form-list-new-content">
           <div v-if="listMostViewJobs.length">
-            <div v-for="(job, index) in listMostViewJobs" :key="index" class="new-item">
+            <div v-for="(job, index) in listMostViewJobs" :key="index" class="new-item cursor-pointer" @click="changeToLink('/job/' + job.id)">
               <div class="new-item-image">
                 <img :src="job.banner_image" alt="">
               </div>
@@ -235,6 +237,21 @@ export default {
       } else {
         this.$router.push('/search')
       }
+    },
+    changeToLink(link) {
+      this.$router.push(link)
+    },
+    changeToSearchLink(search) {
+      const condition = []
+      if (search.is_city) {
+        condition.push('province_city_id=' + search.id)
+      } else {
+        condition.push('province_id=' + search.id)
+      }
+      return '/search?' + condition.join('&')
+    },
+    changeToSearchWork(search) {
+      return '/search?work_type_ids=' + search.id
     }
   }
 }

@@ -29,7 +29,7 @@
         <div v-if="schedule.interview_approach">
           <span class="bold">{{ schedule.interview_approach.approach_label }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.approach }}</span>
           <div v-if="showStatus" class="open-google-map">
-            <a v-if="schedule.interview_approach.is_direct_interview" :href="'https://www.google.com/maps/place/' + schedule.interview_approach.approach" class="show-button-google-map" target="_blank">
+            <a v-if="schedule.interview_approach.is_direct_interview" :href="'https://www.google.com/maps/place/' + schedule.interview_approach.approach" class="show-button-google-map" target="_blank" @click.stop="openGoogleMap">
               <img src="/assets/icon/icon_google_map.svg" alt="">
               <span>{{ $t('schedule.open_google_map') }}</span>
             </a>
@@ -62,6 +62,9 @@ export default {
     },
     changeToDetail(id) {
       this.$router.push('/job/' + id)
+    },
+    openGoogleMap() {
+      this.loading = false
     }
   }
 }

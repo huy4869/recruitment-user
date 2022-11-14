@@ -510,6 +510,11 @@ export default {
         this.listJobs = dataResponse.data.data
         this.total = dataResponse.data.total
         this.lastPage = dataResponse.data.total_page
+      } else if (dataResponse.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
       } else {
         await this.$store.commit(INDEX_SET_ERROR, {
           show: true,
