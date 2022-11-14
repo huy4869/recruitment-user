@@ -225,7 +225,7 @@
             .search-from-popular-button {
               color: $color-white;
               background-color: $color-blue;
-              width: 326px;
+              min-width: 326px;
               text-align: center;
               padding: 5px 0;
               font-weight: 500;
@@ -242,17 +242,20 @@
             }
             .search-list-category {
               padding-top: 4px;
-              display: flex;
+              display: block;
               font-weight: 500;
               font-size: 16px;
               line-height: 24px;
               color: $color-blue;
-              height: 24px;
-              div {
+              min-height: 24px;
+              a {
+                display: inline-block;
+                color: $color-blue;
                 padding: 0 4px;
-                border-left: 1px solid $color-button-disable;
-                &:first-child {
-                  border-left: none;
+                border-right: 1px solid $color-button-disable;
+                margin-bottom: 2px;
+                &:last-child {
+                  border-right: none;
                 }
               }
             }
@@ -280,17 +283,18 @@
           border-radius: 4px;
           .search-by-employment-category {
             padding-top: 4px;
-            display: flex;
+            display: block;
             font-weight: 500;
             font-size: 16px;
             line-height: 24px;
-            color: $color-blue;
             height: 24px;
-            div {
+            a {
+              color: $color-blue;
               padding: 0 4px;
-              border-left: 1px solid $color-button-disable;
-              &:first-child {
-                border-left: none;
+              display: inline-block;
+              border-right: 1px solid $color-button-disable;
+              &:last-child {
+                border-right: none;
               }
             }
           }
@@ -433,6 +437,13 @@
       line-height: 22px;
       color: $color-text-3;
       margin: 3px 0 12px;
+      word-wrap: break-word;
+      white-space: normal;
+      overflow: hidden;
+      display: -webkit-box;
+      text-overflow: ellipsis;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
     }
     .job-info {
       display: flex;
@@ -478,6 +489,27 @@
         line-height: 22px;
         color: $color-blue;
         height: 24px;
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+      .button-dislike {
+        cursor: pointer;
+        display: flex;
+        padding: 7px 8px;
+        border: 1px solid $color-blue;
+        background: $color-blue;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        color: $color-white;
+        height: 24px;
+        margin-right: 16px;
+        span {
+          padding-top: 1px;
+        }
         img {
           width: 24px;
           height: 24px;

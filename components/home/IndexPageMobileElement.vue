@@ -126,13 +126,13 @@
       <div class="form-popular">
         <div v-for="(item, index) in listSearch" :key="index" class="form-popular-item">
           <div class="form-item-title" @click="showDetailPopular(index)">
-            <span>{{ item.name }}</span>
+            <span>{{ index }}</span>
             <img :class="{ 'show-detail': openPopular.includes(index) }" src="/assets/icon/icon_dropdown_full_active.svg" alt="">
           </div>
           <div v-show="openPopular.includes(index)" class="form-item-content">
-            <div v-for="(detail, key) in item.detail" :key="key" class="form-detail">
-              <span>{{ detail }}</span>
-            </div>
+            <a v-for="(detail, key) in item" :key="key" class="form-detail" :href="changeToSearchLink(detail)">
+              <span>{{ detail.name }}</span>
+            </a>
           </div>
         </div>
       </div>
@@ -140,15 +140,15 @@
     <el-drawer :title="$t('home.search_by_employment')" :visible.sync="dialogEmployment" size="100%" direction="ttb">
       <div class="form-popular">
         <div v-for="(item, index) in listSearchEmployment" :key="index" class="form-popular-item">
-          <div class="form-item-title">
+          <a class="form-item-title" :href="changeToSearchWork(item)">
             <span>{{ item.name }}</span>
-          </div>
+          </a>
         </div>
       </div>
     </el-drawer>
     <el-drawer :title="$t('home.most_popular_job')" :visible.sync="dialogMost" size="100%" direction="ttb">
       <div v-if="listMostViewJobs.length" class="form-popular form-most-popular">
-        <div v-for="(job, index) in listMostViewJobs" :key="index" class="form-popular-item new-item">
+        <div v-for="(job, index) in listMostViewJobs" :key="index" class="form-popular-item new-item" @click="changeToLink('/job/' + job.id)">
           <div class="new-item-image">
             <img :src="job.banner_image" alt="">
           </div>
@@ -219,8 +219,9 @@ export default {
   methods: {
     showDetailPopular(index) {
       if (this.openPopular.includes(index)) {
+        delete this.openPopular[index]
         const key = this.openPopular.indexOf(index)
-        if (index > -1) {
+        if (key > -1) {
           this.openPopular.splice(key, 1)
         }
       } else {
@@ -240,6 +241,21 @@ export default {
       } else {
         this.$router.push('/search')
       }
+    },
+    changeToLink(link) {
+      this.$router.push(link)
+    },
+    changeToSearchLink(search) {
+      const condition = []
+      if (search.is_city) {
+        condition.push('province_city_id=' + search.id)
+      } else {
+        condition.push('province_id=' + search.id)
+      }
+      return '/search?' + condition.join('&')
+    },
+    changeToSearchWork(search) {
+      return '/search?work_type_ids=' + search.id
     }
   }
 }

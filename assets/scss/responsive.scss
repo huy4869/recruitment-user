@@ -1754,7 +1754,9 @@
             line-height: 22px;
           }
         }
-
+        a {
+          color: $color-black;
+        }
         .form-item-content {
           padding: 5px 14px 16px 14px;
 

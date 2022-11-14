@@ -37,9 +37,9 @@
     "inquiry": "お問い合わせ"
   },
   "schedule": {
-    "date": "日時:",
-    "method": "方法:",
-    "place": "場所:",
+    "date": "日時：",
+    "method": "方法：",
+    "place": "場所：",
     "change": "希望面接時間を変更",
     "cancel": "キャンセル:",
     "created_at": "応募日時",

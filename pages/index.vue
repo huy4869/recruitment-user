@@ -40,7 +40,7 @@ import {
   JOB_LIST_MOST_VIEW_JOBS,
   JOB_LIST_RECOMMEND_JOBS,
   LOCATION_LIST_MOST_APPLY,
-  JOB_GET_TOTAL_JOB
+  JOB_GET_TOTAL_JOB, INDEX_SET_ERROR
 } from '../store/store.const'
 import { formatInteger } from '../utils/format'
 
@@ -76,10 +76,12 @@ export default {
         'resources[m_social_links]={}'
       ]
       const dataMasterData = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
-      this.listJobTypes = dataMasterData.data.m_job_types
-      this.listSearchEmployment = dataMasterData.data.m_work_types
-      this.listProvinceCities = dataMasterData.data.m_provinces_cities
-      this.listSocial = dataMasterData.data.m_social_links
+      if (dataMasterData.status_code === 200) {
+        this.listJobTypes = dataMasterData.data.m_job_types
+        this.listSearchEmployment = dataMasterData.data.m_work_types
+        this.listProvinceCities = dataMasterData.data.m_provinces_cities
+        this.listSocial = dataMasterData.data.m_social_links
+      }
       const dataLocation = await this.$store.dispatch(LOCATION_LIST_MOST_APPLY)
       if (dataLocation.status_code === 200) {
         this.listSearch = dataLocation.data
@@ -95,17 +97,35 @@ export default {
         this.listJobs = dataResponse.data.data
         this.totalNewJob = formatInteger(dataResponse.data.total_jobs)
       }
+      if (dataResponse.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
+      }
     },
     async getRecommendJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_RECOMMEND_JOBS, '')
       if (dataResponse.status_code === 200) {
         this.listRecommendJobs = dataResponse.data
       }
+      if (dataResponse.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
+      }
     },
     async getMostPopularJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_MOST_VIEW_JOBS, '')
       if (dataResponse.status_code === 200) {
         this.listMostViewJobs = dataResponse.data
+      }
+      if (dataResponse.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
       }
     }
   }
