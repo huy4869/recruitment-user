@@ -306,6 +306,19 @@
         }
       }
     }
+    .content-datetime-edu {
+      .period {
+        .el-input {
+          .el-input__inner {
+            padding-right: 16px;
+          }
+
+          .el-input__suffix {
+            display: none;
+          }
+        }
+      }
+    }
     .content-input {
       margin-left: 20px;
       padding: 20px 0;

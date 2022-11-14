@@ -2,7 +2,7 @@
   <div class="right-content-element">
     <div class="edit-cv-element">
       <div class="edit-cv-title">
-        {{ $t('my_page.job_career') + $route.params.id + $t('my_page.create') }}
+        {{ $t('my_page.job_career') }} <div class="text-count-career"><span>{{ $route.params.id }}</span></div> {{ $t('my_page.create') }}
       </div>
       <div class="edit-cv-content edit-form-content">
         <div class="card-text-title card-title-mobile"> {{ $t('my_page.job_career') + $route.params.id + $t('my_page.create') }}</div>
@@ -203,6 +203,7 @@
                           v-model="accountForm.other_occupation"
                           :placeholder="$t('career.enter_other_occupation')"
                           :fetch-suggestions="queryOccupation"
+                          :maxlength="255"
                           name="other_occupation"
                           type="text"
                           tabindex="2"
@@ -283,6 +284,7 @@
                           v-model="accountForm.other_status"
                           :placeholder="$t('career.enter_other_emp_status')"
                           :fetch-suggestions="queryStatus"
+                          :maxlength="255"
                           name="other_status"
                           type="text"
                           tabindex="2"
@@ -379,6 +381,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import BorderElement from './BorderElement'
 import {
   INDEX_SET_ERROR,
@@ -521,7 +524,8 @@ export default {
       linksMonth: [],
       index: this.$route.params.id || '',
       clonedOccupation: [],
-      deleteModal: false
+      deleteModal: false,
+      clonedAccountForm: {}
     }
   },
   computed: {
@@ -614,13 +618,23 @@ export default {
     },
     'accountForm.period_month_start'() {
       this.resetValidDate()
+    },
+    'accountForm.other_status'() {
+      if (this.accountForm.other_status) {
+        this.resetValidate('other_status')
+      }
+    },
+    'accountForm.other_occupation'() {
+      if (this.accountForm.other_occupation) {
+        this.resetValidate('other_occupation')
+      }
     }
   },
   async mounted() {
     await this.loadAllYear()
     await this.loadAllMonth()
-    this.accountForm.period_year_start = '2000'
-    this.accountForm.period_month_start = '01'
+    await this.getCarrerInfo()
+    this.clonedAccountForm = _.cloneDeep(this.accountForm)
   },
   methods: {
     validate(ref) {
@@ -637,7 +651,11 @@ export default {
       this.$router.push(route)
     },
     showConfirmModal() {
-      this.confirmModal = true
+      if (_.isEqual(this.accountForm, this.clonedAccountForm)) {
+        this.handleRouter('/my-page/job-career')
+      } else {
+        this.confirmModal = true
+      }
     },
     closeConfirmModal() {
       this.confirmModal = false
@@ -814,6 +832,10 @@ export default {
       } else {
         this.accountForm.period_start = ''
       }
+    },
+    getCarrerInfo() {
+      this.accountForm.period_year_start = '2000'
+      this.accountForm.period_month_start = '01'
     }
   }
 }

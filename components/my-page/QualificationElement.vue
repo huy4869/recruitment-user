@@ -4,8 +4,8 @@
       <div v-if="listQualification.length" class="favorite-job-page-content">
         <div id="career-mobile" class="d-flex justify-between">
           <el-button type="danger" class="card-button" @click="handleRouter('qualification/create/'+ (listQualification.length + 1))">
-            <img src="/assets/icon/add-white.svg" alt="">
-            {{ $t('my_page.add_experience') }}
+              <img src="/assets/icon/add-white.svg" alt="">
+              {{ $t('qualification.create') }}
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
@@ -15,7 +15,7 @@
         <div id="career" class="d-flex justify-between">
           <el-button type="danger"  class="card-button" @click="handleRouter('qualification/create/'+ (listQualification.length + 1))">
             <img src="/assets/icon/add-white.svg" alt="">
-            {{ $t('my_page.add_experience') }}
+            {{ $t('qualification.create') }}
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
         </div>
@@ -25,7 +25,7 @@
           <el-button type="danger" class="card-button" @click="handleRouter('qualification/create/'+ (listQualification.length + 1))">
             <span class="d-flex">
               <img src="/assets/icon/add-white.svg" alt="">
-              {{ $t('my_page.add_experience') }}
+              {{ $t('qualification.create') }}
             </span>
           </el-button>
           <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>

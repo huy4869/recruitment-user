@@ -2,7 +2,7 @@
   <div class="favorite-job-element job-element">
     <div class="">
       <div class="job-title d-flex justify-between card-title-mobile">
-        <div class="card-primary-title">{{ $t('education.title') }}{{ index | toFullWidth(index) }}
+        <div class="card-primary-title">{{ $t('education.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}</span></div>
         </div>
         <div class="btn-option d-flex">
           <el-button class="btn-edit" @click="handleRouter('education/edit/' + index + '?id=' + job.id)"><img src="/assets/icon/edit.svg" alt="img-edit">{{ $t('my_page.edit') }}</el-button>
