@@ -15,7 +15,9 @@
           <FormConditionElement :condition="condition" @removeSearchJob="removeSearchJob" @changeToSearch="changeToLink"></FormConditionElement>
         </div>
       </div>
-      <PaginationElement v-if="listConditions.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
+      <div v-if="listConditions.length">
+        <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
+      </div>
       <div v-else>
         <NoDataElement :text="$t('common.message_no_data.search_condition')"></NoDataElement>
       </div>

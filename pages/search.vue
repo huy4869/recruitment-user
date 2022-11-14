@@ -173,7 +173,7 @@
       </div>
       <div v-if="listJobs.length" class="search-list-job">
         <div v-for="(job, index) in listJobs" :key="index">
-          <RecommendJobElement :job="job"></RecommendJobElement>
+          <RecommendJobElement :job="job" @editApply="editApply(job)"></RecommendJobElement>
         </div>
       </div>
       <div v-else class="search-list-job">
@@ -181,6 +181,7 @@
       </div>
       <PaginationElement v-if="listJobs.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
     </div>
+    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :job="jobActive" :is-edit="false"></FormApplyJobElement>
   </div>
 </template>
 
@@ -198,11 +199,12 @@ import TitlePageElement from '../components/layout/TitlePageElement'
 import BannerElement from '../components/layout/BannerElement'
 import PaginationElement from '../components/element-ui/PaginationElement'
 import NoDataElement from '../components/element-ui/NoDataElement'
+import FormApplyJobElement from '../components/element-ui/FormApplyJobElement'
 import RecommendJobElement from '../components/home/RecommendJobElement'
 
 export default {
   name: 'SearchPage',
-  components: { TitlePageElement, BannerElement, PaginationElement, RecommendJobElement, NoDataElement },
+  components: { TitlePageElement, BannerElement, PaginationElement, RecommendJobElement, NoDataElement, FormApplyJobElement },
   data() {
     return {
       jobDialog: false,
@@ -389,7 +391,9 @@ export default {
       },
       search: '',
       sort_by: [],
-      query: this.$route.query
+      query: this.$route.query,
+      applyDialog: false,
+      jobActive: {}
     }
   },
   computed: {
@@ -592,6 +596,10 @@ export default {
       if (value) {
         this.sort_by = [type]
       }
+    },
+    editApply(value) {
+      this.applyDialog = true
+      this.jobActive = value
     }
   }
 }

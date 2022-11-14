@@ -2,11 +2,11 @@
   <div class="menu-left-element">
     <div class="show-pc">
       <div v-for="(menu, key) in menuLeft" :key="key" @click="changeToPage(menu.key)">
-        <div v-if="menu.key === statePage" class="menu-left menu-active">
+        <div v-show="menu.key === statePage" class="menu-left menu-active">
           <span class="menu-name">{{ menu.name }}</span>
           <img src="/assets/icon/icon_arrow_active.svg" alt="">
         </div>
-        <div v-else class="menu-left">
+        <div v-show="menu.key !== statePage" class="menu-left">
           <span class="menu-name">{{ menu.name }}</span>
           <img src="/assets/icon/icon_arrow.svg" alt="">
         </div>

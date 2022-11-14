@@ -10,7 +10,7 @@
             :schedule="schedule"
             :show-status="true"
             @cancelSchedule="(id) => { cancelSchedule(id, true) }"
-            @editApply="editApply(schedule)">
+            @editApply="editApply">
           </ScheduleHistoryElement>
         </div>
       </div>
@@ -103,6 +103,7 @@ export default {
         })
       }
       await this.getDataScheduleHistory()
+      this.dialogCancel = false
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     editApply(value) {

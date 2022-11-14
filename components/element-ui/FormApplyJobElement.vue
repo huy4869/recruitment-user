@@ -149,6 +149,11 @@ export default {
           })
           this.listDate = dataDate
           this.changeDay(dataResponse.data.application_user.date)
+        } else if (dataResponse.status_code === 500) {
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: this.$t('content.EXC_001')
+          })
         } else {
           await this.$store.commit(INDEX_SET_ERROR, {
             show: true,
@@ -166,40 +171,64 @@ export default {
           })
           this.listDate = dataDate
         }
+        if (dataResponse.status_code === 500) {
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: this.$t('content.EXC_001')
+          })
+        }
       }
     },
     async submitApply() {
       if (this.isEdit) {
         const dataForm = this.formApply
         const dataResponse = await this.$store.dispatch(APPLICATION_UPDATE_APPLICATION, { id: this.apply, form: dataForm })
-        if (dataResponse.status_code === 200) {
-          await this.$store.commit(INDEX_SET_SUCCESS, {
-            show: true,
-            text: dataResponse.messages
-          })
-        } else {
-          await this.$store.commit(INDEX_SET_ERROR, {
-            show: true,
-            text: dataResponse.messages
-          })
+        switch (dataResponse.status_code) {
+          case 200:
+            await this.$store.commit(INDEX_SET_SUCCESS, {
+              show: true,
+              text: dataResponse.messages
+            })
+            break
+          case 500:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: this.$t('content.EXC_001')
+            })
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: dataResponse.messages
+            })
+            break
         }
       } else {
         const dataForm = this.formApply
         dataForm.id = this.job.id
         await this.$store.commit(INDEX_SET_LOADING, true)
         const dataResponse = await this.$store.dispatch(APPLICATION_CREATE_APPLICATION, dataForm)
-        if (dataResponse.status_code === 200) {
-          await this.$store.commit(INDEX_SET_SUCCESS, {
-            show: true,
-            text: dataResponse.messages
-          })
-          this.closeDialog()
-          this.$emit('changeApply')
-        } else {
-          await this.$store.commit(INDEX_SET_ERROR, {
-            show: true,
-            text: dataResponse.messages
-          })
+        switch (dataResponse.status_code) {
+          case 200:
+            await this.$store.commit(INDEX_SET_SUCCESS, {
+              show: true,
+              text: dataResponse.messages
+            })
+            this.closeDialog()
+            this.$emit('changeApply')
+            break
+          case 500:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: this.$t('content.EXC_001')
+            })
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: dataResponse.messages
+            })
+            break
         }
         await this.$store.commit(INDEX_SET_LOADING, false)
       }

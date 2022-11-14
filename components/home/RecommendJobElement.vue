@@ -6,7 +6,10 @@
     </div>
     <div class="job-content">
       <div class="job-image">
-        <img :src="jobActive.banner_image" alt="">
+        <el-image
+          :src="jobActive.banner_image"
+          :preview-src-list="[jobActive.banner_image]">
+        </el-image>
       </div>
       <div class="job-description">
         <div class="job-info">
