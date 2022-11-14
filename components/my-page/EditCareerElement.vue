@@ -85,8 +85,8 @@
                            <el-col  :sm="12" :xs="12" class="birth-year">
                              <el-select
                                ref="period_start"
-                               name="period_start"
                                v-model="accountForm.period_year_start"
+                               name="period_start"
                                :placeholder="$t('YYYY')"
                                @focus="resetValidate('period_start')"
                                @blur="validate('period_start')"
@@ -103,8 +103,8 @@
                            <el-col :sm="12" :xs="10" class="birth-month">
                              <el-select
                                ref="period_start"
-                               name="period_start"
                                v-model="accountForm.period_month_start"
+                               name="period_start"
                                :placeholder="$t('MM')"
                                @focus="resetValidate('period_start')"
                                @blur="validate('period_start')"
@@ -128,8 +128,8 @@
                            <el-col  :sm="12" :xs="12" class="birth-year">
                              <el-select
                                ref="period_end"
-                               name="period_end"
                                v-model="accountForm.period_year_end"
+                               name="period_end"
                                :placeholder="$t('YYYY')"
                                @focus="resetValidate('period_end')"
                                @blur="validate('period_end')"
@@ -146,8 +146,8 @@
                            <el-col  :sm="12" :xs="10" class="birth-month">
                              <el-select
                                ref="period_end"
-                               name="period_end"
                                v-model="accountForm.period_month_end"
+                               name="period_end"
                                :placeholder="$t('MM')"
                                @focus="resetValidate('period_end')"
                                @blur="validate('period_end')"
@@ -179,7 +179,12 @@
                    <el-row class="">
                      <el-col :md="10" :sm="24">
                        <el-form-item label="" prop="job_type_name" :error="(error.key === 'job_type_name') ? error.value : ''">
-                         <el-select v-model="accountForm.job_type_name" :placeholder="$t('career.enter_occupation')">
+                         <el-select
+                           v-model="accountForm.job_type_name"
+                           :placeholder="$t('career.enter_occupation')"
+                           @blur="validate('job_type_name')"
+                           @focus="resetValidate('job_type_name')"
+                         >
                            <el-option
                              v-for="item in m_job_types"
                              :key="item.id"
@@ -219,7 +224,16 @@
                    <el-row class="d-flex">
                      <el-col :md="20" :sm="24">
                        <el-form-item label="" prop="position_offices" :error="(error.key === 'position_offices') ? error.value : ''">
-                         <el-select v-model="accountForm.position_offices" :placeholder="$t('career.position_offices')" size="large" multiple>
+                         <el-select
+                           v-model="accountForm.position_offices"
+                           :placeholder="$t('career.position_offices')"
+                           size="large"
+                           multiple
+                           filterable
+                           allow-create
+                           default-first-option
+                           @blur="validate('position_offices')"
+                           @focus="resetValidate('position_offices')">
                            <el-option
                              v-for="item in m_position_offices"
                              :key="item.id"
@@ -244,7 +258,12 @@
                    <el-row class="">
                      <el-col :md="10" :sm="24">
                        <el-form-item label="" prop="work_type_name" :error="(error.key === 'work_type_name') ? error.value : ''">
-                         <el-select v-model="accountForm.work_type_name" :placeholder="$t('career.enter_emp_status')">
+                         <el-select
+                           v-model="accountForm.work_type_name"
+                           :placeholder="$t('career.enter_emp_status')"
+                           @blur="validate('work_type_name')"
+                           @focus="resetValidate('work_type_name')"
+                         >
                            <el-option
                              v-for="item in m_work_types"
                              :key="item.id"
@@ -366,6 +385,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import BorderElement from './BorderElement'
 import {
   INDEX_SET_ERROR,
@@ -373,7 +393,8 @@ import {
   INDEX_SET_SUCCESS, WORK_HISTORY_DELETE,
   WORK_HISTORY_UPDATE
 } from '@/store/store.const'
-import { LINKS_MONTH } from '@/constants/store'
+import { getAllMonth } from '@/utils/handleDate'
+
 export default {
   name: 'EditCvElement',
   components: { BorderElement },
@@ -418,6 +439,16 @@ export default {
     const validRequired = (rule, value, callback, message) => {
       if (!value || value.trim() === '') {
         callback(new Error(message))
+      } else {
+        callback()
+      }
+    }
+    const validDate = (rule, value, callback, message) => {
+      const date = this.checkStartYear()
+      if (date.start.length === 7 && date.end.length === 7 && date.start > date.end) {
+        callback(new Error(this.$t('validation.err004')))
+      } else if (date.start > date.current) {
+        callback(new Error(this.$t('validation.err043')))
       } else {
         callback()
       }
@@ -470,13 +501,17 @@ export default {
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('career.status') }), trigger: 'blur' }
         ],
         period_start: [
-          { required: true, message: this.$t('validation.required_select', { _field_: this.$t('career.period_start') }), trigger: 'change' }
+          { required: true, message: this.$t('validation.required_select', { _field_: this.$t('career.period_start') }), trigger: 'change' },
+          { validator: validDate, trigger: 'change' }
+        ],
+        period_end: [
+          { validator: validDate, trigger: 'change' }
         ],
         work_type_name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.status') }), trigger: 'change' }
+          { required: true, message: this.$t('validation.required_select', { _field_: this.$t('career.status') }), trigger: 'change' }
         ],
         job_type_name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.occupation') }), trigger: 'change' }
+          { required: true, message: this.$t('validation.required_select', { _field_: this.$t('career.occupation') }), trigger: 'change' }
         ],
         position_offices: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.position_offices') }), trigger: 'change' }
@@ -489,7 +524,8 @@ export default {
       linksMonth: [],
       index: this.$route.params.id || '',
       clonedOccupation: [],
-      deleteModal: false
+      deleteModal: false,
+      clonedAccountForm: {}
     }
   },
   computed: {
@@ -524,9 +560,6 @@ export default {
     period_start() {
       if (this.accountForm.period_year_start && this.accountForm.period_month_start) {
         this.accountForm.period_start = this.accountForm.period_year_start + '/' + this.accountForm.period_month_start
-        this.resetValidate('period_start')
-      } else {
-        this.accountForm.period_start = ''
       }
     },
     period_end() {
@@ -539,26 +572,16 @@ export default {
         if (this.accountForm.period_year_end && this.accountForm.period_month_end) {
           this.resetValidate('period_end')
         }
-        this.accountRules.period_end = {
+        this.accountRules.period_end.push({
           required: true, message: this.$t('validation.required_select', { _field_: this.$t('career.period_start') }), trigger: 'change'
-        }
+        })
       } else {
-        delete this.accountRules.period_end
+        delete this.accountRules.period_end[this.accountRules.period_end.length - 1]
       }
     },
-    job() {
-      this.accountForm.job_type_name = this.job.job_types.id
-      this.accountForm.work_type_name = this.job.work_types.id
-      this.accountForm.other_occupation = this.job.job_types.name
-      this.accountForm.other_status = this.job.work_types.name
-      this.accountForm.period_check = !this.job.period_end
-      for (const item in this.job) {
-        this.accountForm[item] = this.job[item]
-      }
-      this.accountForm.position_offices = []
-      this.job.position_offices.forEach((element) => {
-        this.accountForm.position_offices.push(element.id)
-      })
+    async job() {
+      await this.getInfoJob()
+      this.clonedAccountForm = _.cloneDeep(this.accountForm)
     },
     'accountForm.job_type_name'() {
       if (this.accountForm.job_type_name !== 6) {
@@ -572,7 +595,7 @@ export default {
     },
     m_job_types() {
       this.m_job_types.forEach(element => {
-        if (element.id !== 'other') {
+        if (!element.is_other) {
           this.linksOccupation.push({
             value: element.name
           })
@@ -581,7 +604,7 @@ export default {
     },
     m_work_types() {
       this.m_work_types.forEach(element => {
-        if (element.id !== 'other') {
+        if (!element.is_other) {
           this.linksStatus.push({
             value: element.name
           })
@@ -594,6 +617,20 @@ export default {
     this.loadAllMonth()
   },
   methods: {
+    getInfoJob() {
+      this.accountForm.job_type_name = this.job.job_types.id
+      this.accountForm.work_type_name = this.job.work_types.id
+      this.accountForm.other_occupation = this.job.job_types.name
+      this.accountForm.other_status = this.job.work_types.name
+      this.accountForm.period_check = !!this.job.period_end
+      for (const item in this.job) {
+        this.accountForm[item] = this.job[item]
+      }
+      this.accountForm.position_offices = []
+      this.job.position_offices.forEach((element) => {
+        this.accountForm.position_offices.push(element.id)
+      })
+    },
     validate(ref) {
       this.$refs.accountForm.validateField(ref)
     },
@@ -608,7 +645,11 @@ export default {
       this.$router.push(route)
     },
     showConfirmModal() {
-      this.confirmModal = true
+      if (_.isEqual(this.accountForm, this.clonedAccountForm)) {
+        this.handleRouter('/my-page/job-career')
+      } else {
+        this.confirmModal = true
+      }
     },
     closeConfirmModal() {
       this.confirmModal = false
@@ -657,12 +698,12 @@ export default {
       return clonedStatus.splice(0, (clonedStatus.length - 1))
     },
     loadAllYear() {
-      for (let i = new Date().getFullYear(); i >= 1970; i--) {
+      for (let i = new Date().getFullYear(); i >= 1900; i--) {
         this.linksYear.push({ value: i.toString() })
       }
     },
     loadAllMonth() {
-      this.linksMonth = LINKS_MONTH
+      this.linksMonth = getAllMonth()
     },
     update() {
       this.error = { key: null, value: '' }
@@ -671,7 +712,7 @@ export default {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
-            dto.period_check = !this.accountForm.period_check ? 0 : 1
+            dto.period_check = this.accountForm.period_check ? 0 : 1
             dto.period_end = dto.period_check === 0 ? dto.period_end : ''
             if (this.accountForm.other_occupation) {
               dto.job_types.name = this.accountForm.other_occupation
@@ -702,17 +743,34 @@ export default {
                 })
               }
             })
+            this.accountForm.position_offices.forEach((element) => {
+              if (typeof element !== 'number') {
+                this.accountForm.position_full_offices.push({
+                  name: element
+                })
+              }
+            })
             dto.position_offices = this.accountForm.position_full_offices
             const response = await this.$store.dispatch(WORK_HISTORY_UPDATE, {
               id: this.$route.query.id,
               data: dto
             })
+            this.accountForm.period_check = dto.period_check === 0
             if (response.status_code === 200) {
               await this.$store.commit(INDEX_SET_SUCCESS, {
                 show: true,
                 text: response.messages
               })
               this.$router.push('/my-page/job-career')
+            } else if (response.status_code === 422) {
+              for (const [key] of Object.entries(response.data)) {
+                this.error = { key, value: response.data[key][0] }
+              }
+            } else if (response.status_code === 500) {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: this.$t('content.EXC_001')
+              })
             } else {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,
@@ -751,6 +809,23 @@ export default {
         await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    checkStartYear() {
+      const current = new Date().toISOString().slice(0, 7)
+      const start = this.accountForm.period_year_start + '-' + this.accountForm.period_month_start
+      const end = this.accountForm.period_year_end + '-' + this.accountForm.period_month_end
+      return { current, start, end }
+    },
+    resetValidDate() {
+      const date = this.checkStartYear()
+      if (this.accountForm.period_month_start && this.accountForm.period_year_start) {
+        if (date.start < date.end) {
+          this.resetValidate('period_start')
+          this.resetValidate('period_end')
+        }
+      } else {
+        this.accountForm.period_start = ''
+      }
     }
   }
 }
