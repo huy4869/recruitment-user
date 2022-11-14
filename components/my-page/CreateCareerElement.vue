@@ -78,7 +78,7 @@
               <el-col class="pb-8" :md="18" :sm="24">
                 <div class="content-input content-datetime">
                   <el-row class="enroll-checkbox">
-                    <el-checkbox class="time-checkbox" v-model="accountForm.period_check">{{ $t('my_page.enroll') }}</el-checkbox>
+                    <el-checkbox v-model="accountForm.period_check" class="time-checkbox">{{ $t('my_page.enroll') }}</el-checkbox>
                   </el-row>
                   <el-row class="d-flex period">
                     <el-col :md="9" :sm="24" class="first-name">
@@ -87,8 +87,8 @@
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-select
                               ref="period_start"
-                              name="period_start"
                               v-model="accountForm.period_year_start"
+                              name="period_start"
                               :placeholder="$t('YYYY')"
                               @focus="resetValidate('period_start')"
                               @blur="validate('period_start')"
@@ -105,8 +105,8 @@
                           <el-col :sm="12" :xs="10" class="birth-month">
                             <el-select
                               ref="period_start"
-                              name="period_start"
                               v-model="accountForm.period_month_start"
+                              name="period_start"
                               :placeholder="$t('MM')"
                               @focus="resetValidate('period_start')"
                               @blur="validate('period_start')"
@@ -130,8 +130,8 @@
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-select
                               ref="period_end"
-                              name="period_end"
                               v-model="accountForm.period_year_end"
+                              name="period_end"
                               :placeholder="$t('YYYY')"
                               @focus="resetValidate('period_end')"
                               @blur="validate('period_end')"
@@ -148,8 +148,8 @@
                           <el-col  :sm="12" :xs="10" class="birth-month">
                             <el-select
                               ref="period_end"
-                              name="period_end"
                               v-model="accountForm.period_month_end"
+                              name="period_end"
                               :placeholder="$t('MM')"
                               @focus="resetValidate('period_end')"
                               @blur="validate('period_end')"
@@ -181,7 +181,11 @@
                   <el-row class="">
                     <el-col :md="10" :sm="24">
                       <el-form-item label="" prop="job_type_name" :error="(error.key === 'job_type_name') ? error.value : ''">
-                        <el-select v-model="accountForm.job_type_name" :placeholder="$t('career.enter_occupation')">
+                        <el-select
+                          v-model="accountForm.job_type_name"
+                          :placeholder="$t('career.enter_occupation')"
+                          @blur="validate('job_type_name')"
+                          @focus="resetValidate('job_type_name')">
                           <el-option
                             v-for="item in m_job_types"
                             :key="item.id"
@@ -194,10 +198,11 @@
                     <el-col v-if="accountForm.job_type_name === 6" :md="20" :sm="24">
                       <div class="text-bold">{{ $t('career.other_occupation') }}</div>
                       <el-form-item label="" prop="other_occupation" :error="(error.key === 'other_occupation') ? error.value : ''">
-                        <el-input
+                        <el-autocomplete
                           ref="other_occupation"
                           v-model="accountForm.other_occupation"
                           :placeholder="$t('career.enter_other_occupation')"
+                          :fetch-suggestions="queryOccupation"
                           name="other_occupation"
                           type="text"
                           tabindex="2"
@@ -220,7 +225,17 @@
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="position_offices" :error="(error.key === 'position_offices') ? error.value : ''">
-                        <el-select v-model="accountForm.position_offices" :placeholder="$t('career.position_offices')" size="large" multiple>
+                        <el-select
+                          v-model="accountForm.position_offices"
+                          :placeholder="$t('career.position_offices')"
+                          size="large"
+                          multiple
+                          filterable
+                          allow-create
+                          default-first-option
+                          @blur="validate('position_offices')"
+                          @focus="resetValidate('position_offices')"
+                        >
                           <el-option
                             v-for="item in m_position_offices"
                             :key="item.id"
@@ -245,7 +260,12 @@
                   <el-row class="">
                     <el-col :md="10" :sm="24">
                       <el-form-item label="" prop="work_type_name" :error="(error.key === 'work_type_name') ? error.value : ''">
-                        <el-select v-model="accountForm.work_type_name" :placeholder="$t('career.enter_emp_status')">
+                        <el-select
+                          v-model="accountForm.work_type_name"
+                          :placeholder="$t('career.enter_emp_status')"
+                          @blur="validate('work_type_name')"
+                          @focus="resetValidate('work_type_name')"
+                        >
                           <el-option
                             v-for="item in m_work_types"
                             :key="item.id"
@@ -258,10 +278,11 @@
                     <el-col v-if="accountForm.work_type_name === 5" :md="20" :sm="24">
                       <div class="text-bold">{{ $t('career.other_emp_status') }}</div>
                       <el-form-item label="" prop="other_status" :error="(error.key === 'other_status') ? error.value : ''">
-                        <el-input
+                        <el-autocomplete
                           ref="other_status"
                           v-model="accountForm.other_status"
                           :placeholder="$t('career.enter_other_emp_status')"
+                          :fetch-suggestions="queryStatus"
                           name="other_status"
                           type="text"
                           tabindex="2"
@@ -366,7 +387,7 @@ import {
   WORK_HISTORY_DELETE,
   WORK_HISTORY_CREATE
 } from '@/store/store.const'
-import { LINKS_MONTH } from '@/constants/store'
+import { getAllMonth } from '@/utils/handleDate'
 export default {
   name: 'EditCvElement',
   components: { BorderElement },
@@ -456,7 +477,7 @@ export default {
       },
       accountRules: {
         store_name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.store_name') }), trigger: 'blur' },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('career.store_name') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('career.store_name') }), trigger: 'blur' }
         ],
         company_name: [
@@ -484,10 +505,10 @@ export default {
           { validator: validDate, trigger: 'change' }
         ],
         work_type_name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.status') }), trigger: 'change' }
+          { required: true, message: this.$t('validation.required_select', { _field_: this.$t('career.status') }), trigger: 'change' }
         ],
         job_type_name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('career.occupation') }), trigger: 'change' }
+          { required: true, message: this.$t('validation.required_select', { _field_: this.$t('career.occupation') }), trigger: 'change' }
         ],
         position_offices: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('career.position_offices') }), trigger: 'change' }
@@ -566,7 +587,7 @@ export default {
     },
     m_job_types() {
       this.m_job_types.forEach(element => {
-        if (element.id !== 'other') {
+        if (!element.is_other) {
           this.linksOccupation.push({
             value: element.name
           })
@@ -575,7 +596,7 @@ export default {
     },
     m_work_types() {
       this.m_work_types.forEach(element => {
-        if (element.id !== 'other') {
+        if (!element.is_other) {
           this.linksStatus.push({
             value: element.name
           })
@@ -595,9 +616,11 @@ export default {
       this.resetValidDate()
     }
   },
-  mounted() {
-    this.loadAllYear()
-    this.loadAllMonth()
+  async mounted() {
+    await this.loadAllYear()
+    await this.loadAllMonth()
+    this.accountForm.period_year_start = '2000'
+    this.accountForm.period_month_start = '01'
   },
   methods: {
     validate(ref) {
@@ -663,12 +686,12 @@ export default {
       return clonedStatus.splice(0, (clonedStatus.length - 1))
     },
     loadAllYear() {
-      for (let i = new Date().getFullYear(); i >= 1970; i--) {
+      for (let i = new Date().getFullYear(); i >= 1900; i--) {
         this.linksYear.push({ value: i.toString() })
       }
     },
     loadAllMonth() {
-      this.linksMonth = LINKS_MONTH
+      this.linksMonth = getAllMonth()
     },
     update() {
       this.error = { key: null, value: '' }
@@ -710,14 +733,27 @@ export default {
                 })
               }
             })
+            this.accountForm.position_offices.forEach((element) => {
+              if (typeof element !== 'number') {
+                this.accountForm.position_full_offices.push({
+                  name: element
+                })
+              }
+            })
             dto.position_offices = this.accountForm.position_full_offices
             const response = await this.$store.dispatch(WORK_HISTORY_CREATE, dto)
+            this.accountForm.period_check = dto.period_check === 0
+
             if (response.status_code === 200) {
               await this.$store.commit(INDEX_SET_SUCCESS, {
                 show: true,
                 text: response.messages
               })
               this.$router.push('/my-page/job-career')
+            } else if (response.status_code === 422) {
+              for (const [key] of Object.entries(response.data)) {
+                this.error = { key, value: response.data[key][0] }
+              }
             } else if (response.status_code === 500) {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,
@@ -764,8 +800,8 @@ export default {
     },
     checkStartYear() {
       const current = new Date().toISOString().slice(0, 7)
-      const start = this.accountForm.period_year_start + '-' + (Number(this.accountForm.period_month_start) <= 10 ? this.accountForm.period_month_start : ('0' + this.accountForm.period_month_start))
-      const end = this.accountForm.period_year_end + '-' + (Number(this.accountForm.period_month_end) <= 10 ? this.accountForm.period_month_end : ('0' + this.accountForm.period_month_end))
+      const start = this.accountForm.period_year_start + '-' + this.accountForm.period_month_start
+      const end = this.accountForm.period_year_end + '-' + this.accountForm.period_month_end
       return { current, start, end }
     },
     resetValidDate() {
