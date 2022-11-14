@@ -1,17 +1,37 @@
 <template>
   <div class="cv-page">
-    <TitlePageElement v-if="!showDetailMessage" class="show-pc"></TitlePageElement>
-    <BannerElement v-if="!showDetailMessage" :banner="titlePage[page]" :sub-banner="subTitle"></BannerElement>
-    <div class="cv-content">
-      <MenuLeftElement v-if="!showDetailMessage" :menu-active="page"></MenuLeftElement>
-      <TopPageElement v-if="page === 'top_page'"></TopPageElement>
-      <ApplicationHistoryElement v-if="page === 'application_history'"></ApplicationHistoryElement>
-      <FavoriteJobElement v-if="page === 'favorite_job'"></FavoriteJobElement>
-      <IndexCvElement v-if="page === 'web_cv'"></IndexCvElement>
-      <PastSearchConditionElement v-if="page === 'past_search_condition'"></PastSearchConditionElement>
-      <DesiredConditionElement v-if="page === 'desired_condition'"></DesiredConditionElement>
-      <ChangePasswordElement v-if="page === 'change_password'"></ChangePasswordElement>
-    </div>
+    <client-only>
+      <div v-show="!showDetailMessage">
+        <TitlePageElement class="show-pc"></TitlePageElement>
+        <BannerElement :banner="page ? titlePage[page] : ''" :sub-banner="subTitle"></BannerElement>
+      </div>
+      <div class="cv-content">
+        <div v-if="!showDetailMessage">
+          <MenuLeftElement :menu-active="page"></MenuLeftElement>
+        </div>
+        <div v-if="page === 'top_page'" class="vp-100">
+          <TopPageElement></TopPageElement>
+        </div>
+        <div v-if="page === 'application_history'" class="vp-100">
+          <ApplicationHistoryElement></ApplicationHistoryElement>
+        </div>
+        <div v-if="page === 'favorite_job'" class="vp-100">
+          <FavoriteJobElement></FavoriteJobElement>
+        </div>
+        <div v-if="page === 'web_cv'" class="vp-100">
+          <IndexCvElement></IndexCvElement>
+        </div>
+        <div v-if="page === 'past_search_condition'" class="vp-100">
+          <PastSearchConditionElement></PastSearchConditionElement>
+        </div>
+        <div v-if="page === 'desired_condition'" class="vp-100">
+          <DesiredConditionElement></DesiredConditionElement>
+        </div>
+        <div v-if="page === 'change_password'" class="vp-100">
+          <ChangePasswordElement></ChangePasswordElement>
+        </div>
+      </div>
+    </client-only>
   </div>
 </template>
 
@@ -27,7 +47,10 @@ import FavoriteJobElement from '../../components/my-page/FavoriteJobElement'
 import ChangePasswordElement from '../../components/my-page/ChangePasswordElement'
 import PastSearchConditionElement from '../../components/my-page/PastSearchConditionElement'
 import DesiredConditionElement from '../../components/my-page/DesiredConditionElement'
-import { INDEX_SET_TITLE_MENU } from '../../store/store.const'
+import {
+  INDEX_SET_TITLE_MENU,
+  MY_PAGE_SET_STATE_PAGE
+} from '../../store/store.const'
 
 export default {
   name: 'MyPage',
@@ -45,6 +68,7 @@ export default {
   },
   middleware: 'auth',
   data() {
+    const dataPage = this.$route.hash
     return {
       titlePage: {
         'top_page': this.$t('page.my_page'),
@@ -56,7 +80,7 @@ export default {
         'change_password': this.$t('page.my_page')
       },
       subTitle: this.$t('page.sub_web_cv'),
-      page: 'top_page'
+      page: dataPage ? dataPage.replace('#', '') : 'top_page'
     }
   },
   computed: {
@@ -74,6 +98,7 @@ export default {
     if (this.$route.hash) {
       const data = this.$route.hash
       this.page = data.replace('#', '')
+      this.$store.commit(MY_PAGE_SET_STATE_PAGE, data.replace('#', ''))
     }
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },

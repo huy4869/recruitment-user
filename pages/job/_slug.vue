@@ -179,7 +179,7 @@
             <span>{{ $t('job.gender') }}</span>
           </div>
           <div class="application-requirement-right">
-            <div>{{ job.genders ? job.genders.join('、') : '' }}</div>
+            <div>{{ showTextList('genders', 'name') }}</div>
           </div>
         </div>
         <div class="application-requirement-item">
@@ -196,10 +196,10 @@
           </div>
           <div class="application-requirement-right">
             <div class="break-word">{{ showAddress }}</div>
-            <div v-if="job.google_map" class="show-button-google-map">
-              <img src="/assets/icon/icon_arrow_secondary.svg" alt="">
+            <a v-if="job.address.address" :href="'https://www.google.com/maps/place/' + job.address.address" class="show-button-google-map" target="_blank">
+              <img src="/assets/icon/icon_google_map.svg" alt="">
               <span>{{ $t('schedule.open_google_map') }}</span>
-            </div>
+            </a>
           </div>
         </div>
         <div class="application-requirement-item">
@@ -304,9 +304,9 @@
         </div>
         <div class="find-other-job-content">
           <div class="find-other-job-item">
-            <div v-for="(type, key) in listJobTypes" :key="key">
-              {{ type.name }}
-            </div>
+            <a v-for="(search, key) in listJobTypes" :key="key" :href="changeToSearchWork(search)">
+              {{ search.name }}
+            </a>
           </div>
         </div>
       </div>
@@ -465,7 +465,7 @@ export default {
       if (this.job.address === undefined) {
         return ''
       }
-      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.district + this.job.address.address + this.job.address.building
+      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.district + this.job.address.address + (this.job.address.building || '')
     },
     showStation() {
       if (this.job.stations === undefined) {
@@ -595,6 +595,9 @@ export default {
         await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    changeToSearchWork(search) {
+      return '/search?work_type_ids=' + search.id
     }
   }
 }
