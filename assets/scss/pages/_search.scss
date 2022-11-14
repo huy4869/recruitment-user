@@ -3,6 +3,9 @@
     padding: 36px 64px;
     max-width: 1152px;
     margin: auto;
+    .el-checkbox {
+      width: max-content;
+    }
     .search-form-condition {
       border: 2px solid $border-focus;
       border-radius: 6px;
