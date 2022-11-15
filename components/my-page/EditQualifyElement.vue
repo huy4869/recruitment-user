@@ -54,6 +54,7 @@
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-select
+                              clearable
                               ref="new_issuance_date_edit"
                               name="new_issuance_date_edit"
                               v-model="accountForm.year"

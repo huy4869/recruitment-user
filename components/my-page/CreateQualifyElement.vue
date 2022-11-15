@@ -58,6 +58,7 @@
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-select
+                              clearable
                               ref="new_issuance_date"
                               v-model="accountForm.year"
                               name="new_issuance_date"
@@ -76,6 +77,7 @@
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col :sm="12" :xs="10" class="birth-month">
                             <el-select
+                              clearable
                               v-model="accountForm.month"
                               :placeholder="$t('MM')"
                               @focus="resetValidate('new_issuance_date')"
