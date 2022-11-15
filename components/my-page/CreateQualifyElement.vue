@@ -2,10 +2,12 @@
   <div class="right-content-element">
     <div class="edit-cv-element">
       <div class="edit-cv-title">
-        {{ $t('my_page.qualification') }}{{ $route.params.id | fullwidth }}{{ $t('my_page.create') }}
+        {{ $t('my_page.qualification') }}<div class="text-count-career"><span>{{ $route.params.id | fullwidth }}</span></div>{{ $t('my_page.create') }}
       </div>
       <div class="edit-cv-content edit-form-content">
-        <div class="card-text-title card-title-mobile"> {{ $t('my_page.qualification') }}</div>
+        <div class="card-text-title card-title-mobile">
+          {{ $t('my_page.qualification') }}<div class="text-count-career"><span>{{ $route.params.id | fullwidth }}</span></div>{{ $t('my_page.create') }}
+        </div>
         <el-form
           ref="accountForm"
           :model="accountForm"
@@ -57,8 +59,8 @@
                           <el-col  :sm="12" :xs="12" class="birth-year">
                             <el-select
                               ref="new_issuance_date"
-                              name="new_issuance_date"
                               v-model="accountForm.year"
+                              name="new_issuance_date"
                               :placeholder="$t('YYYY')"
                               @focus="resetValidate('new_issuance_date')"
                               @blur="validate('new_issuance_date')"
@@ -119,6 +121,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import BorderElement from './BorderElement'
 import {
   INDEX_SET_ERROR,
@@ -160,7 +163,8 @@ export default {
       linksYear: [],
       linksMonth: [],
       confirmModal: false,
-      deleteModal: false
+      deleteModal: false,
+      clonedAccountForm: {}
     }
   },
   computed: {
@@ -170,10 +174,6 @@ export default {
     disabledButton() {
       return this.accountForm.name === ''
     }
-  },
-  mounted() {
-    this.loadAllYear()
-    this.loadAllMonth()
   },
   watch: {
     'accountForm.year'() {
@@ -197,6 +197,11 @@ export default {
       }
     }
   },
+  async mounted() {
+    await this.loadAllYear()
+    await this.loadAllMonth()
+    this.clonedAccountForm = _.cloneDeep(this.accountForm)
+  },
   methods: {
     validate(ref) {
       this.$refs.accountForm.validateField(ref)
@@ -212,7 +217,11 @@ export default {
       this.$router.push(route)
     },
     showConfirmModal() {
-      this.confirmModal = true
+      if (_.isEqual(this.accountForm, this.clonedAccountForm)) {
+        this.handleRouter('/my-page/qualification')
+      } else {
+        this.confirmModal = true
+      }
     },
     closeConfirmModal() {
       this.confirmModal = false
@@ -299,7 +308,7 @@ export default {
     },
     checkDateNow() {
       if ((this.accountForm.month && !this.accountForm.year) || (!this.accountForm.month && this.accountForm.year)) {
-        return this.$t('validation.required', { _field_: this.$t('qualification.date') })
+        return this.$t('validation.err041')
       }
       if ((this.accountForm.month && this.accountForm.year)) {
         const dateYearNow = new Date().getFullYear()

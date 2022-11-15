@@ -115,6 +115,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import BorderElement from './BorderElement'
 import {
   INDEX_SET_ERROR,
@@ -162,7 +163,8 @@ export default {
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
         ]
       },
-      confirmModal: false
+      confirmModal: false,
+      clonedAccountForm: {}
     }
   },
   computed: {
@@ -177,10 +179,9 @@ export default {
     }
   },
   watch: {
-    self_pr() {
-      for (const item in this.self_pr) {
-        this.accountForm[item] = this.self_pr[item]
-      }
+    async self_pr() {
+      await this.getSelfPrData()
+      this.clonedAccountForm = _.cloneDeep(this.accountForm)
     }
   },
   methods: {
@@ -195,7 +196,11 @@ export default {
       this.$router.push(route)
     },
     showConfirmModal() {
-      this.confirmModal = true
+      if (_.isEqual(this.accountForm, this.clonedAccountForm)) {
+        this.handleRouter('/my-page/self-pr')
+      } else {
+        this.confirmModal = true
+      }
     },
     closeConfirmModal() {
       this.confirmModal = false
@@ -216,6 +221,11 @@ export default {
                 text: response.messages
               })
               this.handleRouter('/my-page/self-pr')
+            } else if (response.status_code === 500) {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: this.$t('content.EXC_001')
+              })
             } else {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,
@@ -229,6 +239,11 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    getSelfPrData() {
+      for (const item in this.self_pr) {
+        this.accountForm[item] = this.self_pr[item]
+      }
     }
   }
 }

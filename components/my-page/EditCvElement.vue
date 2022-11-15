@@ -23,7 +23,7 @@
                     <div class="d-flex show-avatar">
                       <div class="show-detail">
                         <img id="img-avatar" class="show-image" :src="imageAvatarShow ? imageAvatarShow : '/assets/icon/icon_user_default.svg'" alt="">
-                        <img v-if="imageAvatarShow" class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="imageAvatarShow = ''">
+                        <img v-if="imageAvatarShow" class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="removeAvatar">
                       </div>
                       <input id="upload-avatar" ref="fileUploadAvatar" class="d-none" type="file" @change="onFileChange">
                       <div class="button-upload">
@@ -184,7 +184,7 @@
                       <el-col :md="3" :sm="12" class="birth-year">
                         <el-select
                           v-model="accountForm.year"
-                          :placeholder="$t('MM')"
+                          :placeholder="$t('YYYY')"
                           @focus="resetValidate('birthday')"
                           @blur="validate('birthday')"
                         >
@@ -1010,6 +1010,10 @@ export default {
         return key !== index
       })
     },
+    removeAvatar() {
+      this.imageAvatarShow = ''
+      this.accountForm.avatar = ''
+    },
     handleRouter(route) {
       this.$router.push(route)
     },
@@ -1103,6 +1107,11 @@ export default {
               for (const [key] of Object.entries(response.data)) {
                 this.error = { key, value: response.data[key][0] }
               }
+            } else if (response.status_code === 500) {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: this.$t('content.EXC_001')
+              })
             } else {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,

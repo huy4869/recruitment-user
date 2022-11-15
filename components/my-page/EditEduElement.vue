@@ -1,7 +1,7 @@
 <template>
   <div class="right-content-element">
     <div class="edit-cv-element">
-      <div class="edit-cv-title">{{ $t('education.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
+      <div class="edit-cv-title">{{ $t('education.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}</span></div>{{ $t('my_page.edit') }}</div>
       <div class="edit-cv-content edit-form-content">
         <div class="card-text-title card-title-mobile"> {{ $t('education.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
         <el-form
@@ -48,43 +48,41 @@
                 <div class="required">{{ $t('form.required') }}</div>
               </el-col>
               <el-col :md="18" :sm="24">
-                <div class="content-input">
+                <div class="content-input content-datetime-edu">
                   <el-row class="d-flex period">
                     <el-col :md="9" :sm="24" class="first-name">
                       <el-form-item label="" prop="enrollment_period_start" :error="(error.key === 'enrollment_period_start') ? error.value : ''">
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
-                            <el-autocomplete
-                              ref="enrollment_period_start"
-                              v-model.trim="accountForm.enrollment_period_year_start"
+                            <el-select
+                              v-model="accountForm.enrollment_period_year_start"
                               :placeholder="$t('YYYY')"
-                              :fetch-suggestions="queryYear"
-                              name="year"
-                              type="text"
-                              tabindex="2"
-                              :maxlength="4"
-                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                              pattern="[0-9]*"
-                              inputmode="numeric"
                               @focus="resetValidate('enrollment_period_start')"
-                            />
+                              @blur="validate('enrollment_period_start')"
+                            >
+                              <el-option
+                                v-for="item in linksYear"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value">
+                              </el-option>
+                            </el-select>
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col :sm="12" :xs="10" class="birth-month">
-                            <el-autocomplete
-                              ref="enrollment_period_start"
-                              v-model.trim="accountForm.enrollment_period_month_start"
+                            <el-select
+                              v-model="accountForm.enrollment_period_month_start"
                               :placeholder="$t('MM')"
-                              :fetch-suggestions="queryMonth"
-                              name="enrollment_period_start"
-                              type="text"
-                              :maxlength="2"
-                              tabindex="2"
-                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                              pattern="[0-9]*"
-                              inputmode="numeric"
                               @focus="resetValidate('enrollment_period_start')"
-                            />
+                              @blur="validate('enrollment_period_start')"
+                            >
+                              <el-option
+                                v-for="item in linksMonth"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value">
+                              </el-option>
+                            </el-select>
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.month') }}</span>
                         </el-row>
@@ -95,37 +93,35 @@
                       <el-form-item label="" prop="enrollment_period_end" :error="(error.key === 'enrollment_period_end') ? error.value : ''">
                         <el-row class="d-flex">
                           <el-col  :sm="12" :xs="12" class="birth-year">
-                            <el-autocomplete
-                              ref="enrollment_period_end"
-                              v-model.trim="accountForm.enrollment_period_year_end"
+                            <el-select
+                              v-model="accountForm.enrollment_period_year_end"
                               :placeholder="$t('YYYY')"
-                              :fetch-suggestions="queryYear"
-                              name="birthday"
-                              type="text"
-                              tabindex="2"
-                              :maxlength="4"
-                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                              pattern="[0-9]*"
-                              inputmode="numeric"
                               @focus="resetValidate('enrollment_period_end')"
-                            />
+                              @blur="validate('enrollment_period_end')"
+                            >
+                              <el-option
+                                v-for="item in linksYear"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value">
+                              </el-option>
+                            </el-select>
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col  :sm="12" :xs="10" class="birth-month">
-                            <el-autocomplete
-                              ref="enrollment_period_end"
-                              v-model.trim="accountForm.enrollment_period_month_end"
+                            <el-select
+                              v-model="accountForm.enrollment_period_month_end"
                               :placeholder="$t('MM')"
-                              :fetch-suggestions="queryMonth"
-                              name="birthday"
-                              type="text"
-                              :maxlength="2"
-                              tabindex="2"
-                              oninput="this.value=this.value.replace(/[^0-9]/g,'');"
-                              pattern="[0-9]*"
-                              inputmode="numeric"
                               @focus="resetValidate('enrollment_period_end')"
-                            />
+                              @blur="validate('enrollment_period_end')"
+                            >
+                              <el-option
+                                v-for="item in linksMonth"
+                                :key="item.value"
+                                :label="item.value"
+                                :value="item.value">
+                              </el-option>
+                            </el-select>
                           </el-col>
                           <span class="text-normal birthday">{{ $t('form.month') }}</span>
                         </el-row>
@@ -208,7 +204,7 @@ export default {
     }
     const validDate = (rule, value, callback, message) => {
       const date = this.checkStartYear()
-      if (date.start > date.end) {
+      if (date.start.length === 7 && date.end.length === 7 && date.start > date.end) {
         callback(new Error(this.$t('validation.err004')))
       } else if (date.start > date.current) {
         callback(new Error(this.$t('validation.err043')))
@@ -239,12 +235,12 @@ export default {
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('education.name') }), trigger: 'blur' }
         ],
         enrollment_period_start: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' },
-          { validator: validDate, trigger: 'blur' }
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'change' },
+          { validator: validDate, trigger: 'change' }
         ],
         enrollment_period_end: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' },
-          { validator: validDate, trigger: 'blur' }
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'change' },
+          { validator: validDate, trigger: 'change' }
         ],
         learning_status_id: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
@@ -331,6 +327,9 @@ export default {
     this.loadAllMonth()
   },
   methods: {
+    validate(ref) {
+      this.$refs.accountForm.validateField(ref)
+    },
     resetValidate(ref) {
       if (ref === this.error.key) {
         this.error = { key: null, value: '' }
@@ -402,6 +401,12 @@ export default {
                   this.error = { key, value: response.data[key][0] }
                 }
                 break
+              case 500:
+                await this.$store.commit(INDEX_SET_ERROR, {
+                  show: true,
+                  text: this.$t('content.EXC_001')
+                })
+                break
               default:
                 await this.$store.commit(INDEX_SET_ERROR, {
                   show: true,
@@ -444,8 +449,8 @@ export default {
     },
     checkStartYear() {
       const current = new Date().toISOString().slice(0, 7)
-      const start = this.accountForm.enrollment_period_year_start + '-' + (Number(this.accountForm.enrollment_period_month_start) <= 10 ? this.accountForm.enrollment_period_month_start : ('0' + this.accountForm.enrollment_period_month_start))
-      const end = this.accountForm.enrollment_period_year_end + '-' + (Number(this.accountForm.enrollment_period_month_end) <= 10 ? this.accountForm.enrollment_period_month_end : ('0' + this.accountForm.enrollment_period_month_end))
+      const start = this.accountForm.enrollment_period_year_start + '-' + this.accountForm.enrollment_period_month_start
+      const end = this.accountForm.enrollment_period_year_end + '-' + this.accountForm.enrollment_period_month_end
       return { current, start, end }
     }
   }

@@ -3,7 +3,7 @@
     <div class="edit-cv-element">
       <div class="edit-cv-title">{{ $t('qualification.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}</span></div>{{ $t('my_page.edit') }}</div>
       <div class="edit-cv-content edit-form-content">
-        <div class="card-text-title card-title-mobile"> {{ $t('qualification.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
+        <div class="card-text-title card-title-mobile"> {{ $t('qualification.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}</span></div>{{ $t('my_page.edit') }}</div>
         <el-form
           ref="accountForm"
           :model="accountForm"
@@ -26,7 +26,7 @@
                         <el-input
                           ref="store_name"
                           v-model="accountForm.name"
-                          :placeholder="$t('qualification.name')"
+                          :placeholder="$t('form.enter_none')"
                           name="name"
                           type="text"
                           tabindex="2"
@@ -72,6 +72,7 @@
                           <span class="text-normal birthday">{{ $t('form.year') }}</span>
                           <el-col :sm="12" :xs="10" class="birth-month">
                             <el-select
+                              clearable
                               v-model="accountForm.month"
                               :placeholder="$t('MM')"
                               @focus="resetValidate('new_issuance_date_edit')"
@@ -353,7 +354,7 @@ export default {
     },
     checkDateNow() {
       if ((this.accountForm.month && !this.accountForm.year) || (!this.accountForm.month && this.accountForm.year)) {
-        return this.$t('validation.required', { _field_: this.$t('qualification.date') })
+        return this.$t('validation.err041')
       }
       if ((this.accountForm.month && this.accountForm.year)) {
         const dateYearNow = new Date().getFullYear()

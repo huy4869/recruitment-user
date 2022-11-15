@@ -197,14 +197,15 @@
                      <el-col v-if="accountForm.job_type_name === 6" :md="20" :sm="24">
                        <div class="text-bold">{{ $t('career.other_occupation') }}</div>
                        <el-form-item label="" prop="other_occupation" :error="(error.key === 'other_occupation') ? error.value : ''">
-                         <el-input
+                         <el-autocomplete
                            ref="other_occupation"
                            v-model="accountForm.other_occupation"
                            :placeholder="$t('career.enter_other_occupation')"
+                           :fetch-suggestions="queryOccupation"
                            name="other_occupation"
                            type="text"
                            tabindex="2"
-                           maxlength="255"
+                           :maxlength="255"
                            @focus="resetValidate('other_occupation')"
                          />
                        </el-form-item>
@@ -276,14 +277,15 @@
                      <el-col v-if="accountForm.work_type_name === 5" :md="20" :sm="24">
                        <div class="text-bold">{{ $t('career.other_emp_status') }}</div>
                        <el-form-item label="" prop="other_status" :error="(error.key === 'other_status') ? error.value : ''">
-                         <el-input
+                         <el-autocomplete
                            ref="other_status"
                            v-model="accountForm.other_status"
                            :placeholder="$t('career.enter_other_emp_status')"
+                           :fetch-suggestions="queryStatus"
                            name="other_status"
                            type="text"
                            tabindex="2"
-                           maxlength="255"
+                           :maxlength="255"
                            @focus="resetValidate('other_status')"
                          />
                        </el-form-item>
@@ -610,6 +612,16 @@ export default {
           })
         }
       })
+    },
+    'accountForm.other_status'() {
+      if (this.accountForm.other_status) {
+        this.resetValidate('other_status')
+      }
+    },
+    'accountForm.other_occupation'() {
+      if (this.accountForm.other_occupation) {
+        this.resetValidate('other_occupation')
+      }
     }
   },
   mounted() {
