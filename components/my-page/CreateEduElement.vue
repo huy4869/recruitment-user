@@ -1,7 +1,7 @@
 <template>
   <div class="right-content-element">
     <div class="edit-cv-element">
-      <div class="edit-cv-title">{{ $t('education.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</span></div></div>
+      <div class="edit-cv-title">{{ $t('education.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}</span></div>{{ $t('my_page.edit') }}</div>
       <div class="edit-cv-content edit-form-content">
         <div class="card-text-title card-title-mobile"> {{ $t('education.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
         <el-form

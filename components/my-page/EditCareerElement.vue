@@ -233,7 +233,7 @@
                            filterable
                            allow-create
                            default-first-option
-                           @blur="validate('position_offices')"
+                           @visible-change="validatePositionOffice"
                            @focus="resetValidate('position_offices')">
                            <el-option
                              v-for="item in m_position_offices"
@@ -474,6 +474,7 @@ export default {
         period_month_end: '',
         period_year_start: '',
         period_month_start: '',
+        cloned: '',
         errors: {}
       },
       error: {
@@ -495,11 +496,11 @@ export default {
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
         ],
         other_occupation: [
-          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('career.occupation') }), trigger: 'blur' },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('career.other_occupation') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('career.occupation') }), trigger: 'blur' }
         ],
         other_status: [
-          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('career.status') }), trigger: 'blur' },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('career.other_emp_status') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('career.status') }), trigger: 'blur' }
         ],
         period_start: [
@@ -571,6 +572,12 @@ export default {
     },
     'accountForm.period_check'() {
       if (this.accountForm.period_check) {
+        if (!this.accountForm.period_year_end) {
+          this.accountForm.period_year_end = '2000'
+        }
+        if (!this.accountForm.period_month_end) {
+          this.accountForm.period_month_end = '01'
+        }
         if (this.accountForm.period_year_end && this.accountForm.period_month_end) {
           this.resetValidate('period_end')
         }
@@ -579,6 +586,8 @@ export default {
         })
       } else {
         delete this.accountRules.period_end[this.accountRules.period_end.length - 1]
+        this.accountForm.period_year_end = ''
+        this.accountForm.period_month_end = ''
       }
     },
     async job() {
@@ -622,6 +631,23 @@ export default {
       if (this.accountForm.other_occupation) {
         this.resetValidate('other_occupation')
       }
+    },
+    'accountForm.period_year_end'() {
+      this.resetValidDate()
+    },
+    'accountForm.period_month_end'() {
+      this.resetValidDate()
+    },
+    'accountForm.period_year_start'() {
+      this.resetValidDate()
+      if (this.accountForm.period_year_start === new Date().getFullYear().toString()) {
+        this.linksMonth = this.linksMonth.splice(0, this.linksMonth.length - 1)
+      } else {
+        this.linksMonth = getAllMonth()
+      }
+    },
+    'accountForm.period_month_start'() {
+      this.resetValidDate()
     }
   },
   mounted() {
@@ -629,6 +655,11 @@ export default {
     this.loadAllMonth()
   },
   methods: {
+    validatePositionOffice(val) {
+      if (!val) {
+        this.validate('position_offices')
+      }
+    },
     getInfoJob() {
       this.accountForm.job_type_name = this.job.job_types.id
       this.accountForm.work_type_name = this.job.work_types.id
@@ -835,8 +866,12 @@ export default {
           this.resetValidate('period_start')
           this.resetValidate('period_end')
         }
+        this.accountForm.period_start = this.accountForm.period_year_start + '/' + this.accountForm.period_month_start
       } else {
         this.accountForm.period_start = ''
+      }
+      if (this.accountForm.period_year_end && this.accountForm.period_month_end) {
+        this.accountForm.period_end = this.accountForm.period_year_end + '/' + this.accountForm.period_month_end
       }
     }
   }

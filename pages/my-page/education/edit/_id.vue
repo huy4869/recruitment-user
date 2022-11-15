@@ -18,6 +18,7 @@ import EditEduElement from '~/components/my-page/EditEduElement'
 export default {
   name: 'JobCareerPage',
   components: { EditEduElement, TitlePageElement, BannerElement, MenuLeftElement },
+  middleware: 'auth',
   data() {
     return {
       edu: {},
