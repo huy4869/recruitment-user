@@ -25,7 +25,7 @@
       </div>
       <div v-if="listScheduleHistory.length" class="top-page-content">
         <div v-for="(schedule, index) in listScheduleHistory" :key="index">
-          <ScheduleHistoryElement :schedule="schedule" @cancelSchedule="(id) => { cancelSchedule(id, true) }" @editApply="editApply(schedule)"></ScheduleHistoryElement>
+          <ScheduleHistoryElement :schedule="schedule" @cancelSchedule="(id) => { cancelSchedule(id, true) }" @editApply="editApply"></ScheduleHistoryElement>
         </div>
         <div v-if="showViewAllScheduleHistory" class="button-view-all" @click="getDataScheduleHistory(true)">
           <img src="/assets/icon/icon_add.svg" alt="">
