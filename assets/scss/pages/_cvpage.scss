@@ -311,7 +311,7 @@
       }
     }
     .content-datetime-edu {
-      .period {
+      .period, .period-desired {
         .el-input {
           .el-input__inner {
             padding-right: 16px;
@@ -321,6 +321,9 @@
           .el-input__suffix-inner {
             .el-icon-arrow-up::before {
               background-image: none;
+            }
+            .el-select__caret::before {
+              right: 10px;
             }
           }
         }

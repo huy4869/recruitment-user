@@ -47,12 +47,12 @@
                 </div>
               </el-col>
               <el-col :md="18" :sm="24">
-                <div class="content-input content-datetime">
+                <div class="content-input content-datetime-edu">
                   <el-row class="d-flex period">
-                    <el-col :md="9" :sm="24" class="first-name">
+                    <el-col :md="10" :sm="24" class="first-name">
                       <el-form-item label="" prop="new_issuance_date_edit" :error="(error.key === 'new_issuance_date') ? error.value : ''">
                         <el-row class="d-flex">
-                          <el-col  :sm="12" :xs="12" class="birth-year">
+                          <el-col :xl="24" :sm="12" :xs="12" class="birth-year">
                             <el-select
                               clearable
                               ref="new_issuance_date_edit"

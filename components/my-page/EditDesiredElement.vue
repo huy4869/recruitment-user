@@ -216,7 +216,7 @@
                 <div class="label"><span>{{ $t('desired_condition.working_day') }}</span></div>
               </el-col>
               <el-col :md="18" :sm="24">
-                <div class="content-input content-datetime">
+                <div class="content-input content-datetime-edu">
                   <el-row class="d-flex period-desired">
                     <el-col :md="12" :sm="24" class="start-time">
                       <el-form-item label="" prop="start_working_time" :error="(error.key === 'start_working_time') ? error.value : ''">
@@ -487,10 +487,10 @@ export default {
       this.checkStartTime()
     },
     'accountForm.working_hours.end_hours'() {
-      this.checkEndtime()
+      this.checkStartTime()
     },
     'accountForm.working_hours.end_minutes'() {
-      this.checkEndtime()
+      this.checkStartTime()
     }
   },
   created() {
@@ -533,8 +533,7 @@ export default {
               dto.salary_min = ''
               dto.salary_type_id = ''
             }
-            this.checkEndtime()
-            this.checkStartTime()
+            this.computedTime()
             const response = await this.$store.dispatch(DESIRED_UPDATE, dto)
             switch (response.status_code) {
               case 200:
@@ -569,7 +568,7 @@ export default {
         }
       })
     },
-    checkEndtime() {
+    computedTime() {
       if (this.accountForm.working_hours.end_hours && this.accountForm.working_hours.end_minutes) {
         this.accountForm.end_working_time = this.accountForm.working_hours.end_hours + '' + this.accountForm.working_hours.end_minutes
       } else if (this.accountForm.working_hours.end_hours && !this.accountForm.working_hours.end_minutes) {
@@ -577,15 +576,6 @@ export default {
       } else {
         this.accountForm.end_working_time = ''
       }
-      this.resetValidate('end_working_time')
-      if (!this.accountForm.working_hours.end_hours && this.accountForm.working_hours.end_minutes) {
-        this.accountRules.end_working_time = [
-          { required: true, message: this.$t('validation.select_time'), trigger: 'change' }
-        ]
-        this.$refs.accountForm.validateField('end_working_time')
-      }
-    },
-    checkStartTime() {
       if (this.accountForm.working_hours.start_hours && this.accountForm.working_hours.start_minutes) {
         this.accountForm.start_working_time = this.accountForm.working_hours.start_hours + '' + this.accountForm.working_hours.start_minutes
       } else if (this.accountForm.working_hours.start_hours && !this.accountForm.working_hours.start_minutes) {
@@ -593,12 +583,25 @@ export default {
       } else {
         this.accountForm.start_working_time = ''
       }
-      this.resetValidate('start_working_time')
-      if (!this.accountForm.working_hours.start_hours && this.accountForm.working_hours.start_minutes) {
-        this.accountRules.start_working_time = [
-          { required: true, message: this.$t('validation.select_time'), trigger: 'change' }
-        ]
+    },
+    checkEndtime() {
+      const data = this.checkTime()
+      if (data) {
+        this.accountRules.end_working_time = [{ required: true, message: data, trigger: 'blur' }]
+        this.$refs.accountForm.validateField('end_working_time')
+      } else {
+        delete this.accountRules.end_working_time
+        this.resetValidate('end_working_time')
+      }
+    },
+    checkStartTime() {
+      const data = this.checkTime()
+      if (data) {
+        this.accountRules.start_working_time = [{ required: true, message: data, trigger: 'blur' }]
         this.$refs.accountForm.validateField('start_working_time')
+      } else {
+        delete this.accountRules.start_working_time
+        this.resetValidate('start_working_time')
       }
     },
     getDesiredInfo() {
@@ -628,6 +631,26 @@ export default {
       }
       if (!this.desired.working_hours.end_minutes) {
         this.accountForm.working_hours.end_minutes = '00'
+      }
+    },
+    checkTime() {
+      const end_hour = this.accountForm.working_hours.end_hours
+      const end_min = this.accountForm.working_hours.end_minutes
+      const start_hour = this.accountForm.working_hours.start_hours
+      const start_min = this.accountForm.working_hours.start_minutes
+      if (start_hour && start_min && !end_hour) {
+        return this.$t('validation.com023')
+      }
+      if (!start_hour && end_hour && end_min) {
+        return this.$t('validation.com022')
+      }
+      if ((!start_hour && start_min) || (!end_hour && end_min)) {
+        return this.$t('validation.com024')
+      }
+      if (start_hour && end_hour && Number(start_hour) > Number(end_hour)) {
+        return this.$t('validation.com021')
+      } else if (start_hour && end_hour && Number(start_hour) === Number(end_hour) && Number(start_min) > Number(end_min)) {
+        return this.$t('validation.com021')
       }
     }
   }
