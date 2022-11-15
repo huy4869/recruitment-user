@@ -97,7 +97,9 @@ export default {
     checkCondition() {
       let check = true
       for (const index in this.condition) {
-        if (this.condition[index]) {
+        if (this.condition[index] && this.condition.working_hours.start_hours &&
+          this.condition.working_hours.start_minutes && this.condition.working_hours.end_hours &&
+          this.condition.working_hours.end_minutes && this.condition.working_hours.working_hours_format) {
           check = false
         }
       }

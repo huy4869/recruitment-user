@@ -412,6 +412,9 @@
       }
       .checkbox-item {
         margin-bottom: 30px;
+        .el-checkbox {
+          width: max-content;
+        }
         .el-checkbox .el-checkbox__label {
           white-space: normal;
         }
