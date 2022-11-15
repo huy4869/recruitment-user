@@ -298,7 +298,7 @@ export default {
               this.message = ''
               this.scrollToElement()
             }
-            if (response.status_code === 500) {
+            if (dataResponse.status_code === 500) {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,
                 text: this.$t('content.EXC_001')
