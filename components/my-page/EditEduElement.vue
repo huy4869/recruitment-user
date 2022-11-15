@@ -172,6 +172,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import BorderElement from './BorderElement'
 import { LINKS_MONTH } from '@/constants/store'
 import { INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS, EDU_UPDATE, EDU_DELETE } from '@/store/store.const'
@@ -250,6 +251,7 @@ export default {
       linksMonth: [],
       index: this.$route.params.id || '',
       confirmModal: false,
+      clonedAccountForm: {},
       deleteModal: false
     }
   },
@@ -267,10 +269,9 @@ export default {
     }
   },
   watch: {
-    edu() {
-      for (const item in this.edu) {
-        this.accountForm[item] = this.edu[item]
-      }
+    async edu() {
+      await this.getEduInfo()
+      this.clonedAccountForm = _.cloneDeep(this.accountForm)
     },
     m_learning_status() {
       this.typeList = this.m_learning_status
@@ -341,7 +342,11 @@ export default {
       this.$router.push(route)
     },
     showConfirmModal() {
-      this.confirmModal = true
+      if (_.isEqual(this.accountForm, this.clonedAccountForm)) {
+        this.handleRouter('/my-page/education')
+      } else {
+        this.confirmModal = true
+      }
     },
     closeConfirmModal() {
       this.confirmModal = false
@@ -452,6 +457,11 @@ export default {
       const start = this.accountForm.enrollment_period_year_start + '-' + this.accountForm.enrollment_period_month_start
       const end = this.accountForm.enrollment_period_year_end + '-' + this.accountForm.enrollment_period_month_end
       return { current, start, end }
+    },
+    getEduInfo() {
+      for (const item in this.edu) {
+        this.accountForm[item] = this.edu[item]
+      }
     }
   }
 }

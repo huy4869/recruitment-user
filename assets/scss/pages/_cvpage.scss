@@ -301,8 +301,12 @@
         .el-input__inner {
           padding-right: 16px;
         }
-        .el-input__suffix {
-          display: none;
+      }
+      .el-input__suffix {
+        .el-input__suffix-inner {
+          .el-icon-arrow-up::before {
+            background-image: none;
+          }
         }
       }
     }
@@ -312,9 +316,12 @@
           .el-input__inner {
             padding-right: 16px;
           }
-
-          .el-input__suffix {
-            display: none;
+        }
+        .el-input__suffix {
+          .el-input__suffix-inner {
+            .el-icon-arrow-up::before {
+              background-image: none;
+            }
           }
         }
       }
