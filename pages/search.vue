@@ -181,7 +181,7 @@
       </div>
       <PaginationElement v-if="listJobs.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
     </div>
-    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :job="jobActive" :is-edit="false"></FormApplyJobElement>
+    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = !applyDialog" :job="jobActive" :is-edit="false"></FormApplyJobElement>
   </div>
 </template>
 
@@ -598,7 +598,7 @@ export default {
       }
     },
     editApply(value) {
-      this.applyDialog = true
+      this.applyDialog = !this.applyDialog
       this.jobActive = value
     }
   }

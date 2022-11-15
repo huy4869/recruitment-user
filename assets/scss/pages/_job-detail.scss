@@ -502,6 +502,9 @@
         margin-left: 16px;
         border-bottom: 1px solid $border-default;
         padding: 12px 0;
+        .el-form-item {
+          margin-bottom: 0;
+        }
       }
       .interview-time {
         font-weight: 500;

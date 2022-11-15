@@ -201,6 +201,13 @@ export default {
   async created() {
     await this.getDataUser()
     this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, false)
+    if (this.$route.query.store) {
+      this.listUsers.forEach((item, index) => {
+        if (Number(this.$route.query.store) === item.store_id) {
+          this.changeActive(item, index, false)
+        }
+      })
+    }
   },
   methods: {
     resetValidate(ref) {
