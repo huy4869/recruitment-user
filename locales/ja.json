@@ -66,6 +66,7 @@
     "min_value": "こちらに{min}以上の数字を入力してください。",
     "pass_format": "{_field_}は半角英数字で4桁~12桁で入力してください。",
     "max_length": "{_field_}は255文字以内で入力してください。",
+    "max_length_text": "{_field_}は{_max_}文字以内で入力してください。",
     "fullwidth_length": "{_field_}は全角カナの255文字以内で入力してください。",
     "halfwidth_length": "{_field_}は半角英数字で入力してください。",
     "halfwidth_email_length": "{_field_}は半角の255英数字以内で入力してください。",
