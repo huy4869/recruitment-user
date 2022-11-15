@@ -10,7 +10,7 @@
 
 <script>
 import LoadingBar from '../components/LoadingBar'
-import NotificationBlock from '@/components/NotificationBlock'
+import NotificationBlock from '../components/NotificationBlock'
 
 export default {
   name: 'NoneLayout',
