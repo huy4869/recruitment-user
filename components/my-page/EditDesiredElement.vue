@@ -22,7 +22,7 @@
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
                       <el-form-item label="" prop="province_id" :error="(error.key === 'province_id') ? error.value : ''">
-                        <el-select v-model="accountForm.province_id" :placeholder="$t('desired_condition.enter_location')">
+                        <el-select clearable v-model="accountForm.province_id" :placeholder="$t('desired_condition.enter_location')">
                           <el-option
                             v-for="item in listProvince"
                             :key="item.id"
@@ -92,7 +92,7 @@
               <el-col :md="18" :sm="24">
                 <div class="content-input">
                   <el-row class="d-flex">
-                    <el-col :md="6" :sm="24">
+                    <el-col :md="7" :sm="24">
                       <el-form-item class="salary-select" label="" prop="salary_type_id" :error="(error.key === 'salary_type_id') ? error.value : ''">
                         <el-select v-model="accountForm.salary_type_id" :placeholder="$t('desired_condition.enter_salary')">
                           <el-option
@@ -113,7 +113,10 @@
                           name="salary_min"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="8"
+                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                          pattern="[0-9]*"
+                          inputmode="numeric"
                         />
                       </el-form-item>
                     </el-col>
@@ -127,7 +130,10 @@
                           name="salary_max"
                           type="text"
                           tabindex="2"
-                          show-word-limit
+                          maxlength="8"
+                          oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                          pattern="[0-9]*"
+                          inputmode="numeric"
                         />
                       </el-form-item>
                     </el-col>
@@ -347,6 +353,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import BorderElement from './BorderElement'
 import { INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS, DESIRED_UPDATE } from '@/store/store.const'
 
@@ -426,7 +433,8 @@ export default {
       listStoreFeatures: [],
       confirmModal: false,
       ListWorkType: [],
-      ListJobType: []
+      ListJobType: [],
+      clonedAccountForm: {}
     }
   },
   computed: {
@@ -442,24 +450,19 @@ export default {
   },
   watch: {
     listWorkTypes() {
-      this.ListWorkType = this.listWorkTypes.filter(function(obj) {
-        return !obj.is_other
-      })
+      this.ListWorkType = this.listWorkTypes
     },
     listJobTypes() {
-      this.ListJobType = this.listJobTypes.filter(function(obj) {
-        return !obj.is_other
-      })
+      this.ListJobType = this.listJobTypes
     },
     listJobFeatures() {
       this.listRecruitmentFeatures = this.listJobFeatures[0].feature
       this.listCompanyFeatures = this.listJobFeatures[1].feature
       this.listStoreFeatures = this.listJobFeatures[2].feature
     },
-    desired() {
-      for (const item in this.desired) {
-        this.accountForm[item] = this.desired[item]
-      }
+    async desired() {
+      await this.getDesiredInfo()
+      this.clonedAccountForm = _.cloneDeep(this.accountForm)
     },
     'accountForm.salary_min'() {
       if (!this.accountForm.min && !this.accountForm) {
@@ -491,7 +494,11 @@ export default {
       this.$router.push(route)
     },
     showConfirmModal() {
-      this.confirmModal = true
+      if (_.isEqual(this.accountForm, this.clonedAccountForm)) {
+        this.handleRouter('/my-page#desired_condition')
+      } else {
+        this.confirmModal = true
+      }
     },
     closeConfirmModal() {
       this.confirmModal = false
@@ -574,6 +581,35 @@ export default {
           { required: true, message: this.$t('validation.select_time'), trigger: 'blur' }
         ]
         this.$refs.accountForm.validateField('start_working_time')
+      }
+    },
+    getDesiredInfo() {
+      for (const item in this.desired) {
+        this.accountForm[item] = this.desired[item]
+      }
+      if (!this.desired.age_id) {
+        this.accountForm.age_id = 1
+      }
+      if (!this.desired.salary_type_id) {
+        this.accountForm.salary_type_id = 3
+      }
+      if (!this.desired.salary_max) {
+        this.accountForm.salary_max = 2000
+      }
+      if (!this.desired.salary_min) {
+        this.accountForm.salary_min = 1000
+      }
+      if (!this.desired.working_hours.start_hours) {
+        this.accountForm.working_hours.start_hours = '09'
+      }
+      if (!this.desired.working_hours.start_minutes) {
+        this.accountForm.working_hours.start_minutes = '00'
+      }
+      if (!this.desired.working_hours.end_hours) {
+        this.accountForm.working_hours.end_hours = '15'
+      }
+      if (!this.desired.working_hours.end_minutes) {
+        this.accountForm.working_hours.end_minutes = '00'
       }
     }
   }

@@ -3,7 +3,7 @@
     <div v-if="notification && notification.show" id="toast">
       <div :class="'toast toast--' + notification.type">
         <div class="toast__icon">
-          <img :src="notification.image" :alt="notification.type" />
+          <img v-if="notification.text !== this.$t('content.EXC_001')" :src="notification.image" :alt="notification.type" />
         </div>
         <div class="toast__body">
           <h3 class="toast__title">{{ notification.text }}</h3>
