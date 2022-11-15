@@ -72,7 +72,7 @@
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
         <div class="button-detail">
-          <div v-if="!job.is_apply" class="el-button" @click="applyDialog = true">
+          <div v-if="!job.is_apply" class="el-button" @click="applyDialog = !applyDialog">
             {{ $t('button.apply') }}
           </div>
           <div v-else class="el-button el-disabled">
@@ -253,7 +253,7 @@
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div class="button-detail">
-            <div v-if="!job.is_apply" class="el-button" @click="applyDialog = true">
+            <div v-if="!job.is_apply" class="el-button" @click="applyDialog = !applyDialog">
               {{ $t('button.apply') }}
             </div>
             <div v-else class="el-button el-disabled">
@@ -353,7 +353,7 @@
         </div>
       </el-dialog>
     </div>
-    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :job="job" :is-edit="false" @changeApply="getDetailJob"></FormApplyJobElement>
+    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = !applyDialog" :job="job" :is-edit="false" @changeApply="getDetailJob"></FormApplyJobElement>
   </div>
 </template>
 

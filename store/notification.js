@@ -9,7 +9,7 @@ export const mutations = {}
 export const actions = {
   listNotification(context, query) {
     return new Promise((resolve, reject) => {
-      handleApi(resolve, reject, this.$axios.get('/notifications'), context)
+      handleApi(resolve, reject, this.$axios.get('/notifications' + query), context)
     })
   }
 }

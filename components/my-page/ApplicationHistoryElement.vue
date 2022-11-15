@@ -29,7 +29,7 @@
           <el-button type="danger" @click="cancelSchedulePost(applyActive, dialogHistory)">{{ $t('confirm_modal.yes') }}</el-button>
         </div>
       </el-dialog>
-      <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = false" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
+      <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = !applyDialog" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
     </div>
   </div>
 </template>
@@ -107,7 +107,7 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     editApply(value) {
-      this.applyDialog = true
+      this.applyDialog = !this.applyDialog
       this.applyActive = value
     }
   }
