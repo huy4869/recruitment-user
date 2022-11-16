@@ -15,7 +15,7 @@
           <FormConditionElement :condition="condition" @removeSearchJob="removeSearchJob" @changeToSearch="changeToLink"></FormConditionElement>
         </div>
       </div>
-      <div v-if="listConditions.length">
+      <div v-if="lastPage > 1">
         <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
       </div>
       <div v-else>
@@ -55,6 +55,7 @@ export default {
     },
     changePage(page) {
       this.page = page
+      this.getDataConditions()
     },
     async getDataConditions() {
       await this.$store.commit(INDEX_SET_LOADING, true)
@@ -67,6 +68,12 @@ export default {
         this.listConditions = dataResponse.data.data
         this.lastPage = dataResponse.data.total_page
       }
+      if (dataResponse.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
+      }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     async removeSearchJob(id) {
@@ -77,10 +84,11 @@ export default {
           show: true,
           text: response.messages
         })
-      } else {
+      }
+      if (response.status_code === 500) {
         await this.$store.commit(INDEX_SET_ERROR, {
           show: true,
-          text: response.messages
+          text: this.$t('content.EXC_001')
         })
       }
       await this.getDataConditions()

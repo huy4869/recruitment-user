@@ -49,7 +49,7 @@ export default {
   props: ['condition'],
   methods: {
     showTextList(key) {
-      if (key === 'text') {
+      if (key === 'search') {
         return this.condition.content[key]
       }
       if (this.condition.content[key] === undefined) {
@@ -57,11 +57,24 @@ export default {
       }
       return this.condition.content[key].map((item) => item.name).join('、')
     },
+    showTextSearch(key) {
+      if (key === 'search') {
+        return this.condition.content[key]
+      }
+      if (this.condition.content[key] === undefined) {
+        return ''
+      }
+      return this.condition.content[key].map((item) => item.name).join(',')
+    },
     removeSearchJob(id) {
       this.$emit('removeSearchJob', id)
     },
     changeToSearch() {
-      this.$emit('changeToSearch', '/search')
+      const dataSearch = []
+      for (const key in this.condition.content) {
+        dataSearch.push(key + '=' + this.showTextSearch(key))
+      }
+      this.$emit('changeToSearch', '/search?' + dataSearch.join('&'))
     }
   }
 }
