@@ -41,18 +41,18 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="12" class="col-label">
+              <el-col :xl="6" :md="6" :sm="12" class="col-label">
                 <div class="label">
                   <span>{{ $t('qualification.date') }}</span>
                 </div>
               </el-col>
-              <el-col :md="18" :sm="24">
+              <el-col :xl="18" :md="18" :sm="24">
                 <div class="content-input content-datetime-edu">
                   <el-row class="d-flex period">
                     <el-col :md="10" :sm="24" class="first-name">
                       <el-form-item label="" prop="new_issuance_date_edit" :error="(error.key === 'new_issuance_date') ? error.value : ''">
                         <el-row class="d-flex">
-                          <el-col :xl="24" :sm="12" :xs="12" class="birth-year">
+                          <el-col :sm="12" :xs="12" class="birth-year">
                             <el-select
                               clearable
                               ref="new_issuance_date_edit"

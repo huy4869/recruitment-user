@@ -115,7 +115,7 @@ export default {
   data() {
     const validFormEmail = (rule, value, callback) => {
       if (value && value.length > 255) {
-        callback(new Error(this.$t('validation.max_length', { _field_: this.$t('login.email') })))
+        callback(new Error(this.$t('validation.halfwidth_email_length', { _field_: this.$t('login.email') })))
       }
       if (!validHalfWidth(value)) {
         callback(new Error(this.$t('validation.halfwidth_email_length', { _field_: this.$t('login.email') })))

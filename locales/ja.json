@@ -164,7 +164,8 @@
       "date": "日時",
       "method": "方法",
       "status": "ステータス"
-    }
+    },
+    "enter_AboutForm": "フォームが入力されていません。"
   },
   "form": {
     "required": "必須",
