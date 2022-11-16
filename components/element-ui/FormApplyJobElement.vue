@@ -88,7 +88,7 @@
         </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" plain @click="closeDialog">
+        <el-button type="primary" plain @click="cancelModal">
           {{ $t('button.close_up') }}
         </el-button>
         <el-button type="danger" @click="submitApply">
@@ -324,6 +324,17 @@ export default {
       })
         .then(_ => {
           done()
+        })
+        .catch(_ => {})
+    },
+    cancelModal() {
+      this.$confirm(this.$t('content.CON_002'), {
+        confirmButtonText: this.$t('confirm_modal.yes'),
+        cancelButtonText: this.$t('confirm_modal.no'),
+        type: 'warning'
+      })
+        .then(_ => {
+          this.$emit('closeDialog')
         })
         .catch(_ => {})
     }
