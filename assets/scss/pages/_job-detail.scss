@@ -521,6 +521,9 @@
       .form-change-method {
         .method-content {
           margin-top: 20px;
+          .el-checkbox {
+            width: max-content;
+          }
           .el-radio-group {
             .el-radio {
               display: block;

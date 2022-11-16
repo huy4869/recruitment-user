@@ -51,7 +51,7 @@
                 </div>
               </el-col>
               <el-col :md="18" :sm="24">
-                <div class="content-input content-datetime">
+                <div class="content-input content-datetime-edu">
                   <el-row class="d-flex period">
                     <el-col :md="9" :sm="24" class="first-name">
                       <el-form-item label="" prop="new_issuance_date" :error="(error.key === 'new_issuance_date') ? error.value : ''">

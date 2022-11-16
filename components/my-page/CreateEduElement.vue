@@ -1,9 +1,9 @@
 <template>
   <div class="right-content-element">
     <div class="edit-cv-element">
-      <div class="edit-cv-title">{{ $t('education.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}</span></div>{{ $t('my_page.edit') }}</div>
+      <div class="edit-cv-title">{{ $t('education.title') }}<div class="text-count-career"><span>{{ index | toFullWidth(index) }}</span></div>{{ $t('my_page.create') }}</div>
       <div class="edit-cv-content edit-form-content">
-        <div class="card-text-title card-title-mobile"> {{ $t('education.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.edit') }}</div>
+        <div class="card-text-title card-title-mobile"> {{ $t('education.title') }}{{ index | toFullWidth(index) }}{{ $t('my_page.create') }}</div>
         <el-form
           ref="accountForm"
           :model="accountForm"
@@ -170,6 +170,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import BorderElement from './BorderElement'
 import { LINKS_MONTH } from '@/constants/store'
 import { EDU_CREATE, INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS } from '@/store/store.const'
@@ -244,7 +245,8 @@ export default {
       linksMonth: [],
       index: this.$route.params.id || '',
       confirmModal: false,
-      deleteModal: false
+      deleteModal: false,
+      clonedAccountForm: {}
     }
   },
   computed: {
@@ -314,6 +316,7 @@ export default {
   mounted() {
     this.loadAllYear()
     this.loadAllMonth()
+    this.clonedAccountForm = _.cloneDeep(this.accountForm)
   },
   methods: {
     validate(ref) {
@@ -330,7 +333,11 @@ export default {
       this.$router.push(route)
     },
     showConfirmModal() {
-      this.confirmModal = true
+      if (_.isEqual(this.accountForm, this.clonedAccountForm)) {
+        this.handleRouter('/my-page/education')
+      } else {
+        this.confirmModal = true
+      }
     },
     closeConfirmModal() {
       this.confirmModal = false

@@ -70,6 +70,12 @@ export default {
             this.closeConfirmModal()
             this.reloadList()
             break
+          case 500:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: this.$t('content.EXC_001')
+            })
+            break
           default:
             await this.$store.commit(INDEX_SET_ERROR, {
               show: true,
