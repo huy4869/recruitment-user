@@ -13,7 +13,7 @@
     <div class="job-detail-content">
       <div class="button-pickup">
         <div class="show-sp">
-          <div v-if="jobStatus" class="about-job" @click="aboutDialog = true">
+          <div v-if="jobStatus" class="about-job" @click="openAboutDialog">
             <img src="/assets/icon/icon_email.svg" alt="">
             <span>{{ $t('job.about_job') }}</span>
           </div>
@@ -32,7 +32,7 @@
             <div class="sub-detail-title-sp">{{ job.pick_up_point }}</div>
           </div>
         </div>
-        <div class="about-job show-pc" @click="aboutDialog = true">
+        <div class="about-job show-pc" @click="openAboutDialog">
           <img src="/assets/icon/icon_email.svg" alt="">
           <span>{{ $t('job.about_job') }}</span>
         </div>
@@ -310,12 +310,26 @@
           </div>
         </div>
       </div>
-      <el-dialog class="form-dialog-apply form-dialog-about" :title="$t('job.about_job')" :visible.sync="aboutDialog" width="84%" top="5vh">
+      <el-dialog
+        class="form-dialog-apply form-dialog-about"
+        :title="$t('job.about_job')"
+        :visible.sync="aboutDialog"
+        width="84%"
+        top="5vh"
+        :before-close="closeAboutDialog"
+      >
         <div>
           <div class="interview-time">
             {{ $t('job.text_about_note') }}
           </div>
-          <div class="form-change-method">
+          <el-form
+            ref="accountForm"
+            :model="formAbout"
+            :rules="formAboutRules"
+            autocomplete="off"
+            label-position="left"
+          >
+            <div class="form-change-method">
             <div class="title-form">
               <span>{{ $t('job.inquiry_content_selection') }}</span>
             </div>
@@ -329,31 +343,35 @@
               </el-checkbox-group>
             </div>
           </div>
-          <div class="form-question">
+            <div class="form-question">
             <div class="title-form">
               <span>{{ $t('job.inquiry_details') }}</span>
             </div>
             <div class="question-content">
-              <el-input
-                type="textarea"
-                :rows="4"
-                :placeholder="$t('job.enter_inquiry_details')"
-                v-model="formAbout.content">
-              </el-input>
+              <el-form-item label="" prop="content">
+                <el-input
+                  v-model="formAbout.content"
+                  type="textarea"
+                  :rows="4"
+                  maxlength="1000"
+                  :placeholder="$t('job.enter_inquiry_details')">
+                </el-input>
+              </el-form-item>
             </div>
           </div>
+          </el-form>
         </div>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="aboutDialog = false" type="primary" plain>
+          <el-button type="primary" plain @click="closeAboutDialog">
             {{ $t('button.close_up') }}
           </el-button>
-          <el-button @click="createFeedback" type="danger">
+          <el-button type="danger" @click="createFeedback">
             {{ $t('button.confirm') }}
           </el-button>
         </div>
       </el-dialog>
     </div>
-    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = !applyDialog" :job="job" :is-edit="false" @changeApply="getDetailJob"></FormApplyJobElement>
+    <FormApplyJobElement :apply-dialog="applyDialog" :job="job" :is-edit="false" @closeDialog="applyDialog = !applyDialog" @changeApply="getDetailJob"></FormApplyJobElement>
   </div>
 </template>
 
@@ -361,6 +379,7 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import _ from 'lodash'
 import FormApplyJobElement from '../../components/element-ui/FormApplyJobElement'
 import NoDataElement from '../../components/element-ui/NoDataElement'
 import HomeJobElement from '../../components/home/HomeJobElement'
@@ -383,9 +402,15 @@ import {
 
 export default {
   name: 'JobDetailPage',
-  middleware: 'auth',
   components: { TitlePageElement, VueSlickCarousel, HomeJobElement, RecommendJobElement, RecentJobMobileElement, FormApplyJobElement, NoDataElement },
   data() {
+    const validAreaLength = (rule, value, callback, message) => {
+      if (value && value.length > 1000) {
+        callback(new Error(this.$t('validation.short_area_length', { _field_: message })))
+      } else {
+        callback()
+      }
+    }
     return {
       id: this.$route.params.slug,
       applyDialog: false,
@@ -439,6 +464,12 @@ export default {
         'slidesToShow': 1,
         'slidesToScroll': 1,
         'touchThreshold': 5
+      },
+      clonedformAbout: {},
+      formAboutRules: {
+        content: [
+          { validator: validAreaLength, message: this.$t('validation.area_length_2', { _field_: this.$t('job.inquiry_details') }), trigger: 'blur' }
+        ]
       }
     }
   },
@@ -490,6 +521,7 @@ export default {
       { name: this.job.name, route: '/' }
     ])
     await this.$store.commit(INDEX_SET_LOADING, false)
+    this.clonedformAbout = _.cloneDeep(this.formAbout)
   },
   methods: {
     async getDetailJob() {
@@ -582,6 +614,10 @@ export default {
             for (const [key] of Object.entries(response.data)) {
               this.error = { key, value: response.data[key][0] }
             }
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: this.$t('job.enter_AboutForm')
+            })
             break
           case 500:
             await this.$store.commit(INDEX_SET_ERROR, {
@@ -604,6 +640,31 @@ export default {
     },
     changeToSearchWork(search) {
       return '/search?work_type_ids=' + search.id
+    },
+    handleClose() {
+      this.$confirm(this.$t('content.CON_002'), {
+        confirmButtonText: this.$t('confirm_modal.yes'),
+        cancelButtonText: this.$t('confirm_modal.no'),
+        type: 'warning'
+      })
+        .then(_ => {
+          this.aboutDialog = false
+        })
+        .catch(_ => {})
+    },
+    closeAboutDialog() {
+      if (_.isEqual(this.formAbout, this.clonedformAbout)) {
+        this.aboutDialog = false
+      } else {
+        this.handleClose()
+      }
+    },
+    openAboutDialog() {
+      this.aboutDialog = true
+      this.formAbout = {
+        feedback_type_ids: [],
+        content: ''
+      }
     }
   }
 }

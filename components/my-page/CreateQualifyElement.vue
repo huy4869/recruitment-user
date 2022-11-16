@@ -45,12 +45,12 @@
             </el-row>
             <BorderElement :middle="true"></BorderElement>
             <el-row class="d-flex form-label-input">
-              <el-col :md="6" :sm="12" class="col-label">
+              <el-col :xl="6" :md="6" :sm="12" class="col-label">
                 <div class="label">
                   <span>{{ $t('qualification.date') }}</span>
                 </div>
               </el-col>
-              <el-col :md="18" :sm="24">
+              <el-col :xl="18" :md="18" :sm="24">
                 <div class="content-input content-datetime-edu">
                   <el-row class="d-flex period">
                     <el-col :md="9" :sm="24" class="first-name">
