@@ -4,7 +4,7 @@
       <div v-if="listJobs.length" class="favorite-job-page-content">
         <div id="career-mobile" class="d-flex justify-between">
           <el-button type="danger" class="card-button" @click="handleRouter('job-career/create/' + (listJobs.length + 1))">
-            <span class="d-flex">
+            <span class="d-flex items-center">
               <img src="/assets/icon/add-white.svg" alt="">
               {{ $t('my_page.add_job_career') }}
             </span>
@@ -27,7 +27,7 @@
       <div v-else>
         <div id="career-mobile" class="d-flex justify-between">
           <el-button type="danger" class="card-button" @click="handleRouter('job-career/create/' + (listJobs.length + 1))">
-            <span class="d-flex">
+            <span class="d-flex items-center">
               <img src="/assets/icon/add-white.svg" alt="">
               {{ $t('my_page.add_job_career') }}
             </span>

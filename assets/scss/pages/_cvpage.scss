@@ -17,7 +17,8 @@
 .edit-cv-element {
   margin-bottom: 24px;
   .text-count-career {
-    width: 22px;
+    min-width: 24px;
+    width: max-content;
     height: 22px;
     border: 1px solid $color-black;
     font-size: 16px;
@@ -30,7 +31,8 @@
     font-weight: 700;
     margin: auto 2px;
     span {
-      margin: auto;
+      letter-spacing: -4px;
+      margin-left: -4px;
     }
   }
   .edit-cv-title {
