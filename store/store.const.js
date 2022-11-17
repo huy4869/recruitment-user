@@ -5,6 +5,7 @@ export const INDEX_SET_WARNING = 'setNotifyWarning'
 export const INDEX_SET_LOADING = 'setLoading'
 export const INDEX_SET_TITLE_MENU = 'setTitleMenu'
 export const MASTER_GET_DATA = 'getMasterData'
+export const GET_ZIPCODE = 'getZipcode'
 
 // user
 export const USER_UPDATE_PROFILE = 'user/updateProfile'

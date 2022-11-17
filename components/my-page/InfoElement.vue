@@ -4,8 +4,11 @@
       <div class="card-text-title card-title-mobile"> {{ $t('my_page.basic_information') }}</div>
       <div class="card-main d-flex">
         <div class="job-title">
-          <img v-if="!info.avatar" class="avatar-img" src="/assets/icon/icon_user_default.svg" alt="favorite-job">
-          <img v-else id="avatar-img"  class="avatar-img" :src="info.avatar" alt="favorite-job">
+          <el-image
+            class="avatar-img"
+            :src="info.avatar ? info.avatar : '/assets/icon/icon_user_default.svg'"
+            :preview-src-list="[(info.avatar ? info.avatar : '/assets/icon/icon_user_default.svg')]">
+          </el-image>
           <br>
         </div>
         <div class="img-detail-mobile">

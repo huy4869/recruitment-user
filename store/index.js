@@ -42,6 +42,14 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.get(`/master-data?${resource}`), context)
     })
   },
+  getZipcode(context, code) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${code}`, { headers: {
+        DataType: 'jsonp',
+        'Access-Control-Allow-Origin': '*'
+      }}), context)
+    })
+  },
   uploadFile(context, data) {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.post('/upload-image', data), context)
