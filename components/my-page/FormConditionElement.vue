@@ -64,7 +64,7 @@ export default {
       if (this.condition.content[key] === undefined) {
         return ''
       }
-      return this.condition.content[key].map((item) => item.name).join(',')
+      return this.condition.content[key].map((item) => item.id).join(',')
     },
     removeSearchJob(id) {
       this.$emit('removeSearchJob', id)

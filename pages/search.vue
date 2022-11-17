@@ -512,6 +512,13 @@ export default {
             dataSearch.push(`filters[${key}][key]=${query}&filters[${key}][data]=${this.query[query]}`)
           } else {
             dataSearch.push(`filters[${key}][key]=${query}&filters[${key}][data]=[${this.query[query]}]`)
+            if ((this.condition[query] !== undefined)) {
+              let data = this.query[query].split(',')
+              data = data.map(item => {
+                return Number(item)
+              })
+              this.condition[query] = data
+            }
           }
           key++
         }
