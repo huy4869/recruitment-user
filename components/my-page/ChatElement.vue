@@ -295,14 +295,14 @@ export default {
         if (valid) {
           try {
             const dataMessage = {
-              content: this.message,
+              content: this.chatForm.message,
               store_id: this.userActive.store_id
             }
             const dataResponse = await this.$store.dispatch(CHAT_CREATE_MESSAGE, dataMessage)
             if (dataResponse.status_code === 200) {
               await this.listMessages.push(dataResponse.data)
-              this.listUsers[this.indexActive].content = this.message
-              this.message = ''
+              this.listUsers[this.indexActive].content = this.chatForm.message
+              this.chatForm.message = ''
               this.scrollToElement()
             }
             if (dataResponse.status_code === 500) {
