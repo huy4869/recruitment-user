@@ -471,6 +471,7 @@
                               pattern="[0-9]*"
                               @input="zipCodeInput"
                               @focus="resetValidate('postal_code')"
+                              @blur="checkPostalCode"
                             />
                           </el-form-item>
                         </el-col>
@@ -617,6 +618,7 @@ import TitlePageElement from '../../../components/layout/TitlePageElement'
 import MenuLeftElement from '../../../components/my-page/MenuLeftElement'
 import BorderElement from '../../../components/my-page/BorderElement'
 import {
+  GET_ZIPCODE,
   INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS,
   INDEX_SET_TITLE_MENU, MASTER_GET_DATA,
   MY_PAGE_SET_STATE_PAGE, USER_UPDATE_BASIC_INFO, USER_UPLOAD_AVATAR
@@ -952,6 +954,11 @@ export default {
     this.clonedAccountForm = _.cloneDeep(this.accountForm)
   },
   methods: {
+    validateForm() {
+      this.$refs.accountForm.validate(valid => {
+        this.isValid = valid
+      })
+    },
     resetValidate(ref) {
       if (ref === this.error.key) {
         this.error = { key: null, value: '' }
@@ -1206,6 +1213,18 @@ export default {
     },
     daysInMonth(month, year) {
       return new Date(Number(year), Number(month), 0).getDate()
+    },
+    async checkPostalCode() {
+      this.validateForm()
+      if (!this.isValid) {
+        return
+      }
+      try {
+        const response = await this.$store.dispatch(GET_ZIPCODE, this.accountForm.postal_code)
+        console.log(response)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
     }
   },
   async beforeRouteLeave(to, from, next) {

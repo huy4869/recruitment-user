@@ -63,7 +63,7 @@
             </div>
             <el-dropdown-menu slot="dropdown" class="show-dropdown-user">
               <el-dropdown-item>
-                <div class="d-flex cursor-pointer show-action" @click="changeToLink('/my-page')">
+                <div class="d-flex cursor-pointer show-action" @click="changeToLink('/my-page/top-page')">
                   <img src="/assets/icon/icon_my_page.svg" alt="">
                   <span>{{ $t('page.my_page') }}</span>
                 </div>

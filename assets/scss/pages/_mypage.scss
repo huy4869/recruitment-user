@@ -577,10 +577,11 @@
     display: flex;
     height: 32px;
     .text-count-career {
-      width: 24px;
+      min-width: 24px;
+      width: max-content;
       height: 24px;
       border: 1px solid $color-black;
-      font-size: 18px;
+      font-size: 16px;
       border-radius: 50%;
       line-height: 22px;
       display: flex;
@@ -589,7 +590,10 @@
       font-family: 'Zen Kaku Gothic New';
       font-weight: 700;
       margin: auto 0;
-
+      span {
+        letter-spacing: -4px;
+        margin-left: -4px;
+      }
     }
   }
   .job-title {
