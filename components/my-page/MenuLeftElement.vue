@@ -36,13 +36,13 @@ export default {
     return {
       menuActiveSelect: '',
       menuLeft: [
-        { name: this.$t('my_page.top_page'), key: 'top_page' },
-        { name: this.$t('my_page.history'), key: 'application_history' },
-        { name: this.$t('my_page.favorite_job'), key: 'favorite_job' },
-        { name: this.$t('my_page.web_cv'), key: 'web_cv' },
-        { name: this.$t('my_page.past_search_condition'), key: 'past_search_condition' },
-        { name: this.$t('my_page.desired_condition'), key: 'desired_condition' },
-        { name: this.$t('my_page.change_password'), key: 'change_password' }
+        { name: this.$t('my_page.top_page'), key: 'top-page' },
+        { name: this.$t('my_page.history'), key: 'application-history' },
+        { name: this.$t('my_page.favorite_job'), key: 'favorite-job' },
+        { name: this.$t('my_page.web_cv'), key: 'web-cv' },
+        { name: this.$t('my_page.past_search_condition'), key: 'past-search-condition' },
+        { name: this.$t('my_page.desired_condition'), key: 'desired-condition' },
+        { name: this.$t('my_page.change_password'), key: 'change-password' }
       ]
     }
   },
@@ -71,7 +71,7 @@ export default {
   methods: {
     changeToPage(page) {
       this.$store.commit(MY_PAGE_SET_STATE_PAGE, page)
-      this.$router.push('/my-page#' + page)
+      this.$router.push('/my-page/' + page)
     }
   }
 }
