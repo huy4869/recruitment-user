@@ -66,7 +66,7 @@ export default {
         return '/chat?store=' + notification.noti_object_ids.store_id
       }
       if ([1, 2, 4, 5].includes(notification.notice_type_id)) {
-        return '/job/' + notification.noti_object_ids.store_id
+        return '/job/' + notification.noti_object_ids.job_id
       }
       return ''
     },

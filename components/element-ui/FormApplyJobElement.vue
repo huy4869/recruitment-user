@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="interview-time">
-          {{ $t('job.interview_time') }}: {{ formApply.date ? listDate[formApply.date].date_format : '' + ' ' + formApply.hours }}
+          {{ $t('job.interview_time') }}: {{ (formApply.date ? listDate[formApply.date].date_format : '') + ' ' + formApply.hours }}
         </div>
         <el-form-item prop="interview_approaches_id">
           <div class="form-change-method">
@@ -249,6 +249,9 @@ export default {
       }
     },
     submitApply() {
+      if (this.error.key) {
+        return
+      }
       this.$refs.formApply.validate(async valid => {
         if (valid) {
           if (this.isEdit) {

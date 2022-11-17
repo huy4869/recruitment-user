@@ -197,11 +197,10 @@ export default {
       if (value === '') {
         callback(new Error(this.$t('validation.required', { _field_: this.$t('my_page.new_password_confirmation') }).toString()))
       } else {
-        if (value !== this.accountForm.new_password) {
-          callback(new Error(this.$t('validation.passNotMatch', { _field_: this.$t('my_page.new_password_confirmation') }).toString()))
-        }
         if (!validOnlyHalfWidth(value)) {
           callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('my_page.new_password_confirmation') })))
+        } else if (value !== this.accountForm.new_password) {
+          callback(new Error(this.$t('validation.passNotMatch', { _field_: this.$t('my_page.new_password_confirmation') }).toString()))
         }
         callback()
       }

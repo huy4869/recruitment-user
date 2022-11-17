@@ -12,15 +12,27 @@
       </div>
       <div v-if="listConditions.length" class="past-search-condition-form">
         <div class="form-condition-list" v-for="(condition, key) in listConditions" :key="key">
-          <FormConditionElement :condition="condition" @removeSearchJob="removeSearchJob" @changeToSearch="changeToLink"></FormConditionElement>
+          <FormConditionElement :condition="condition" @removeSearchJob="confirmRemoveSearchJob" @changeToSearch="changeToLink"></FormConditionElement>
         </div>
-      </div>
-      <div v-if="lastPage > 1">
-        <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
       </div>
       <div v-else>
         <NoDataElement :text="$t('common.message_no_data.search_condition')"></NoDataElement>
       </div>
+      <div v-if="lastPage > 1">
+        <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
+      </div>
+      <el-dialog class="popup-confirm" :visible.sync="dialogCancel" width="570px">
+        <div class="image-confirm text-center">
+          <img src="/assets/icon/Cancel.svg" alt="">
+        </div>
+        <div class="content-confirm text-center">
+          {{ $t('content.CON_003') }}
+        </div>
+        <div slot="footer" class="dialog-footer text-center">
+          <el-button @click="dialogCancel = false">{{ $t('confirm_modal.no') }}</el-button>
+          <el-button type="danger" @click="removeSearchJob(applyActive)">{{ $t('confirm_modal.yes') }}</el-button>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -41,6 +53,8 @@ export default {
   components: { PaginationElement, FormConditionElement, NoDataElement },
   data() {
     return {
+      dialogCancel: false,
+      applyActive: '',
       listConditions: [],
       page: 1,
       lastPage: 1
@@ -76,6 +90,10 @@ export default {
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
+    confirmRemoveSearchJob(id) {
+      this.applyActive = id
+      this.dialogCancel = true
+    },
     async removeSearchJob(id) {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const response = await this.$store.dispatch(JOB_REMOVE_SEARCH_JOB, id)
@@ -84,6 +102,8 @@ export default {
           show: true,
           text: response.messages
         })
+        this.applyActive = ''
+        this.dialogCancel = false
       }
       if (response.status_code === 500) {
         await this.$store.commit(INDEX_SET_ERROR, {
