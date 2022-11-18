@@ -210,8 +210,8 @@ export default {
     return {
       accountForm: {
         school_name: '',
-        enrollment_period_start: '',
-        enrollment_period_end: '',
+        enrollment_period_start: new Date().getFullYear() + '/04',
+        enrollment_period_end: new Date().getFullYear() + '/04',
         enrollment_period_year_start: new Date().getFullYear(),
         enrollment_period_month_start: '04',
         enrollment_period_year_end: new Date().getFullYear(),

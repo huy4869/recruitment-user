@@ -33,7 +33,6 @@
               tabindex="3"
               maxlength="12"
               autocomplete="off"
-              @keydown.native.enter="login"
               @focus="resetValidate('password')"
             >
               <i slot="suffix" class="cursor-pointer" @click="displayPass('pass')">
@@ -52,7 +51,6 @@
               tabindex="3"
               maxlength="12"
               autocomplete="off"
-              @keydown.native.enter="login"
               @keydown.native.tab.prevent="$refs.email.focus()"
               @focus="resetValidate('password_confirmation')"
             >
@@ -118,7 +116,7 @@ export default {
         callback(new Error(this.$t('validation.halfwidth_email_length', { _field_: this.$t('login.email') })))
       }
       if (!validHalfWidth(value)) {
-        callback(new Error(this.$t('validation.halfwidth_email_length', { _field_: this.$t('login.email') })))
+        callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.email') })))
       }
       if (!validEmail(value)) {
         callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))

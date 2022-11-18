@@ -28,8 +28,8 @@ export default {
   created() {
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },
-      { name: this.$t('page.my_page'), route: '/my-page' },
-      { name: this.$t('page.web_cv'), route: '/my-page#web_cv' },
+      { name: this.$t('page.my_page'), route: '/my-page/top-page' },
+      { name: this.$t('page.web_cv'), route: '/my-page/web-cv' },
       { name: this.$t('education.title'), route: '/my-page/education' },
       { name: this.$t('education.title') + this.$route.params.id + this.$t('my_page.edit') }
     ])

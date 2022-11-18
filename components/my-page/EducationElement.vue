@@ -9,7 +9,7 @@
               {{ $t('my_page.add_education') }}
             </div>
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
         <div v-for="(job, index) in listEdu" :key="index">
           <EduElement :job="job" :index="index + 1" :show-status="true" @reloadList="reloadList"></EduElement>
@@ -21,7 +21,7 @@
               {{ $t('my_page.add_education') }}
             </div>
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
       </div>
       <div v-else>
@@ -32,7 +32,7 @@
               {{ $t('my_page.add_education') }}
             </div>
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
         <NoDataElement :text="$t('common.message_no_data.education_background')" :type="'career'"></NoDataElement>
       </div>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import NoDataElement from '../element-ui/NoDataElement'
 import EduElement from './EduElement'
 export default {

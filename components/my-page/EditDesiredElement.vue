@@ -355,7 +355,7 @@
       v-show="confirmModal"
       :text="$t('confirm_modal.back_confirm')"
       @close="closeConfirmModal"
-      @handleRouter="handleRouter('/my-page#desired_condition')">
+      @handleRouter="handleRouter('/my-page/desired-condition')">
     </ConfirmModal>
   </div>
 </template>
@@ -513,7 +513,7 @@ export default {
     },
     showConfirmModal() {
       if (_.isEqual(this.accountForm, this.clonedAccountForm)) {
-        this.handleRouter('/my-page#desired_condition')
+        this.handleRouter('/my-page/desired-condition')
       } else {
         this.confirmModal = true
       }
@@ -541,7 +541,7 @@ export default {
                   show: true,
                   text: response.messages
                 })
-                this.$router.push('/my-page#desired_condition')
+                this.$router.push('/my-page/desired-condition')
                 break
               case 422:
                 for (const [key] of Object.entries(response.data)) {

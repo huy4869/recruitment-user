@@ -5,7 +5,7 @@
         <div v-if="checkCondition" >
           <NoDataElement :text="$t('common.message_no_data.preference')"></NoDataElement>
           <div id="btn-no-data" class="text-center">
-            <el-button class="card-button btn-right" type="danger" @click="handleRouter('/my-page/desired-condition/edit')" >{{ $t('my_page.register') }}</el-button>
+            <el-button class="card-button btn-right" type="danger" @click="handleRouter('/my-page/desired/edit')" >{{ $t('my_page.register') }}</el-button>
           </div>
         </div>
         <div v-else id="desired" >
@@ -61,8 +61,8 @@
             </div>
           </div>
           <div id="btn-center" class="text-center">
-            <el-button class="card-button" @click="handleRouter('/my-page#desired_condition ')">{{ $t('my_page.back') }}</el-button>
-            <el-button class="card-button btn-right" type="danger" @click="handleRouter('my-page/desired-condition/edit')" >{{ $t('my_page.edit') }}</el-button>
+            <el-button class="card-button" @click="handleRouter('/my-page/desired')">{{ $t('my_page.back') }}</el-button>
+            <el-button class="card-button btn-right" type="danger" @click="handleRouter('/my-page/desired/edit')" >{{ $t('my_page.edit') }}</el-button>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@
               <img src="/assets/icon/add-white.svg" alt="">
               {{ $t('qualification.create') }}
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
         <div v-for="(job, index) in listQualification" :key="index">
           <QualifyElement :job="job" :index="index + 1" :show-status="true" @reloadList="reloadList"></QualifyElement>
@@ -17,7 +17,7 @@
             <img src="/assets/icon/add-white.svg" alt="">
             {{ $t('qualification.create') }}
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
       </div>
       <div v-else>
@@ -28,7 +28,7 @@
               {{ $t('qualification.create') }}
             </span>
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
         <NoDataElement :text="$t('common.message_no_data.qualification')" :type="'career'"></NoDataElement>
       </div>

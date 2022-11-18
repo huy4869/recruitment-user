@@ -67,7 +67,7 @@
         </div>
       </div>
       <div id="btn-center" class="text-center">
-        <el-button class="card-button" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+        <el-button class="card-button" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         <el-button class="card-button btn-right" type="danger" @click="handleRouter('self-pr/edit')" >{{ $t('my_page.edit') }}</el-button>
       </div>
     </div>

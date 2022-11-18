@@ -110,7 +110,9 @@
                                  v-for="item in linksMonth"
                                  :key="item.value"
                                  :label="item.value"
-                                 :value="item.value">
+                                 :value="item.value"
+                                 :disabled="item.disabled"
+                               >
                                </el-option>
                              </el-select>
                            </el-col>
@@ -151,7 +153,9 @@
                                  v-for="item in linksMonth"
                                  :key="item.value"
                                  :label="item.value"
-                                 :value="item.value">
+                                 :value="item.value"
+                                 :disabled="item.disabled"
+                               >
                                </el-option>
                              </el-select>
                            </el-col>
@@ -653,8 +657,16 @@ export default {
     },
     'accountForm.period_year_start'() {
       this.resetValidDate()
-      if (this.accountForm.period_year_start === new Date().getFullYear().toString()) {
-        this.linksMonth = this.linksMonth.splice(0, this.linksMonth.length - 1)
+      const current_year = new Date().getFullYear().toString()
+      let current_month = new Date().getMonth() + 1
+      if (current_month < 10) {
+        current_month = '0' + current_month
+      }
+      if (this.accountForm.period_year_start === current_year) {
+        const index = this.linksMonth.findIndex(element => element.value === current_month.toString())
+        for (let i = index + 1; i < this.linksMonth.length; i++) {
+          this.linksMonth[i].disabled = true
+        }
       } else {
         this.linksMonth = getAllMonth()
       }

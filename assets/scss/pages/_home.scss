@@ -480,6 +480,7 @@
       display: flex;
       justify-content: space-between;
       .button-like {
+        cursor: pointer;
         display: flex;
         padding: 7px 8px;
         border: 1px solid $color-blue;

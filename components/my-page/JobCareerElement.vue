@@ -9,7 +9,7 @@
               {{ $t('my_page.add_job_career') }}
             </span>
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
         <div v-for="(job, index) in listJobs" :key="index">
           <CareerElement :job="job" :index="index + 1" :show-status="true" @reloadList="getDataJob"></CareerElement>
@@ -21,7 +21,7 @@
               {{ $t('my_page.add_job_career') }}
             </span>
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
       </div>
       <div v-else>
@@ -32,7 +32,7 @@
               {{ $t('my_page.add_job_career') }}
             </span>
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page#web_cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
         <NoDataElement :text="$t('common.message_no_data.work_history')"></NoDataElement>
       </div>
