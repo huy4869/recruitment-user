@@ -3,7 +3,7 @@
     <TitlePageElement class="show-pc"></TitlePageElement>
     <BannerElement :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
-      <MenuLeftElement menu-active="web_cv"></MenuLeftElement>
+      <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
       <QualificationElement :listQualification="listQualification" @reloadList="getListQualification"></QualificationElement>
     </div>
   </div>

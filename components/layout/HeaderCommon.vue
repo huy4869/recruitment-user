@@ -92,6 +92,14 @@ export default {
       loggedIn: this.$auth.loggedIn
     }
   },
+  watch: {
+    '$auth.user': {
+      handler() {
+        this.user = this.$auth.user
+      },
+      deep: true
+    }
+  },
   methods: {
     changeToLink(link) {
       this.$router.push(link)

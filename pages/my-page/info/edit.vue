@@ -3,7 +3,7 @@
     <TitlePageElement class="show-pc"></TitlePageElement>
     <BannerElement :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
-      <MenuLeftElement menu-active="web_cv"></MenuLeftElement>
+      <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
       <div class="right-content-element">
         <div class="edit-cv-element">
           <div class="edit-cv-title">{{ $t('my_page.edit_basic_information') }}</div>
@@ -625,7 +625,7 @@ import {
 } from '../../../store/store.const'
 import {
   validEmail,
-  validFullWidth, validHalfWidth, validOnlyHalfWidth
+  validFullWidth, validHalfWidth
 } from '../../../utils/validate'
 import { LINKS_MONTH } from '@/constants/store'
 
@@ -658,7 +658,7 @@ export default {
       }
     }
     const validCheckHalfWidth = (rule, value, callback, message) => {
-      if (!validOnlyHalfWidth(value)) {
+      if (value && !validHalfWidth(value)) {
         callback(new Error(this.$t('validation.com003', { _field_: message })))
       } else {
         callback()
@@ -951,6 +951,9 @@ export default {
     await this.getGenderMaster()
     await this.getProvinceMaster()
     await this.getBirthDay()
+    await this.loadAllDay()
+    await this.loadAllMonth()
+    await this.loadAllYear()
     this.clonedAccountForm = _.cloneDeep(this.accountForm)
   },
   methods: {
@@ -1213,11 +1216,6 @@ export default {
       return new Date(Number(year), Number(month), 0).getDate()
     },
     async checkPostalCode() {
-      this.error = { key: null, value: '' }
-      this.validateForm()
-      if (!this.isValid) {
-        return
-      }
       try {
         let dto = _.cloneDeep(this.accountForm.postal_code)
         dto = dto.replace(/[^0-9]/g, '')
@@ -1284,7 +1282,7 @@ export default {
         .catch(function() {
           next(false)
         })
-      await this.$store.commit(MY_PAGE_SET_STATE_PAGE, 'web_cv')
+      await this.$store.commit(MY_PAGE_SET_STATE_PAGE, 'web-cv')
     } else {
       next()
     }

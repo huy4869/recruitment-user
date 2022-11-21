@@ -3,7 +3,7 @@
     <TitlePageElement class="show-pc"></TitlePageElement>
     <BannerElement :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
-      <MenuLeftElement menu-active="web_cv"></MenuLeftElement>
+      <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
       <InfoElement :info="info"></InfoElement>
     </div>
   </div>
@@ -21,7 +21,8 @@ export default {
   components: { TitlePageElement, BannerElement, MenuLeftElement, InfoElement },
   data() {
     return {
-      info: {}
+      info: {},
+      user: this.$auth.user
     }
   },
   created() {
@@ -32,6 +33,11 @@ export default {
       { name: this.$t('my_page.basic_information'), route: '/my-page/info' }
     ])
     this.getBasicInfo()
+  },
+  watch: {
+    user() {
+      this.$auth.fetchUser()
+    }
   },
   methods: {
     async getBasicInfo() {
