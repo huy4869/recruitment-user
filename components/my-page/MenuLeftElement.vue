@@ -41,7 +41,7 @@ export default {
         { name: this.$t('my_page.favorite_job'), key: 'favorite-job' },
         { name: this.$t('my_page.web_cv'), key: 'web-cv' },
         { name: this.$t('my_page.past_search_condition'), key: 'past-search-condition' },
-        { name: this.$t('my_page.desired_condition'), key: 'desired' },
+        { name: this.$t('my_page.desired_condition'), key: 'desired-condition' },
         { name: this.$t('my_page.change_password'), key: 'change-password' }
       ]
     }
