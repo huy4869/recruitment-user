@@ -154,13 +154,13 @@ export default {
       },
       accountRules: {
         favorite_skill: [
-          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.business_content') }), trigger: 'blur' }
+          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('self_pr.business_content') }), trigger: 'blur' }
         ],
         experience_knowledge: [
-          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
+          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('self_pr.experience_knowledge') }), trigger: 'blur' }
         ],
         self_pr: [
-          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('career.experience') }), trigger: 'blur' }
+          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('self_pr.pr') }), trigger: 'blur' }
         ]
       },
       confirmModal: false,

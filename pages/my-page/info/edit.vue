@@ -810,19 +810,19 @@ export default {
         ],
         line: [
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.line') }), trigger: 'blur' },
-          { validator: validCheckHalfWidth, message: this.$t('my_page.line'), trigger: 'blur' }
+          { validator: validCheckHalfWidth, message: this.$t('validation.com003', { _field_: this.$t('my_page.line') }), trigger: 'blur' }
         ],
         facebook: [
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.facebook') }), trigger: 'blur' },
-          { validator: validCheckHalfWidth, message: this.$t('my_page.facebook'), trigger: 'blur' }
+          { validator: validCheckHalfWidth, message: this.$t('validation.com003', { _field_: this.$t('my_page.facebook') }), trigger: 'blur' }
         ],
         instagram: [
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.instagram') }), trigger: 'blur' },
-          { validator: validCheckHalfWidth, message: this.$t('my_page.instagram'), trigger: 'blur' }
+          { validator: validCheckHalfWidth, message: this.$t('validation.com003', { _field_: this.$t('my_page.instagram') }), trigger: 'blur' }
         ],
         twitter: [
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.twitter') }), trigger: 'blur' },
-          { validator: validCheckHalfWidth, message: this.$t('my_page.twitter'), trigger: 'blur' }
+          { validator: validCheckHalfWidth, message: this.$t('validation.com003', { _field_: this.$t('my_page.twitter') }), trigger: 'blur' }
         ],
         postal_code: [
           { validator: validPostCode, message: this.$t('validation.postcode_length', { _field_: this.$t('my_page.post_code') }), trigger: 'blur' }
@@ -832,7 +832,7 @@ export default {
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
         ],
         building: [
-          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.building_name') }), trigger: 'blur' }
         ]
 
       },
@@ -1068,9 +1068,6 @@ export default {
       this.imageDetailShow = this.imageDetailShow.filter(function(item, key) {
         return key !== index
       })
-      this.accountForm.images = this.accountForm.images.filter(function(item, key) {
-        return key !== index
-      })
     },
     removeAvatar() {
       this.imageAvatarShow = ''
@@ -1160,6 +1157,7 @@ export default {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
+            dto.images = this.imageDetailShow
             dto.postal_code = dto.postal_code ? dto.postal_code.replace(/[^0-9]/g, '') : dto.postal_code
             const response = await this.$store.dispatch(USER_UPDATE_BASIC_INFO, dto)
             this.zipCodeInput()
@@ -1215,13 +1213,55 @@ export default {
       return new Date(Number(year), Number(month), 0).getDate()
     },
     async checkPostalCode() {
+      this.error = { key: null, value: '' }
       this.validateForm()
       if (!this.isValid) {
         return
       }
       try {
-        const response = await this.$store.dispatch(GET_ZIPCODE, this.accountForm.postal_code)
-        console.log(response)
+        let dto = _.cloneDeep(this.accountForm.postal_code)
+        dto = dto.replace(/[^0-9]/g, '')
+        const data = await this.$store.dispatch(GET_ZIPCODE, dto)
+        let province_id = 0
+        let province_city_id = 0
+        switch (data.status_code) {
+          case 200:
+            if (data.data.length > 0) {
+              for (const key in this.listProvinces) {
+                if (this.listProvinces[key].name === data.data[0].address1) {
+                  province_id = Number(key)
+                }
+              }
+              this.accountForm.province_id = province_id
+              this.listProvinceCity = this.listProvinces[province_id].province_city
+              for (const key in this.listProvinceCity) {
+                if (this.listProvinceCity[key].name === data.data[0].address2) {
+                  province_city_id = Number(key)
+                }
+              }
+              this.accountForm.province_city_id = this.listProvinceCity[province_city_id].id
+            } else {
+              this.error = {
+                key: 'postal_code',
+                value: this.$t('validation.com015', { _field_: this.$t('my_page.post_code') })
+              }
+            }
+            break
+          case 422:
+            for (const [key] of Object.entries(data.data)) {
+              this.error = { key, value: data.data[key][0] }
+            }
+            break
+          case 500:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: this.$t('content.EXC_001')
+            })
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+            break
+        }
       } catch (err) {
         await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
       }

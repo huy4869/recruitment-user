@@ -75,7 +75,7 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const dataRequest = [
         'page=' + this.page,
-        'per_page=5'
+        'per_page=10'
       ]
       const dataResponse = await this.$store.dispatch(JOB_LIST_SEARCH_JOB, dataRequest.join('&'))
       if (dataResponse.status_code === 200) {

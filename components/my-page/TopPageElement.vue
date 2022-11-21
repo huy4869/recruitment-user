@@ -27,7 +27,7 @@
         <div v-for="(schedule, index) in listScheduleHistory" :key="index">
           <ScheduleHistoryElement :schedule="schedule" @cancelSchedule="(id) => { cancelSchedule(id, true) }" @editApply="editApply"></ScheduleHistoryElement>
         </div>
-        <div v-if="showViewAllScheduleHistory" class="button-view-all" @click="getDataScheduleHistory(true)">
+        <div v-if="showViewAllScheduleHistory" class="button-view-all" @click="handleRouter('/my-page/application-history')">
           <img src="/assets/icon/icon_add.svg" alt="">
           <span>{{ $t('button.view_all') }}</span>
         </div>
@@ -196,6 +196,9 @@ export default {
     editApply(value) {
       this.applyDialog = !this.applyDialog
       this.applyActive = value
+    },
+    handleRouter(route) {
+      this.$router.push(route)
     }
   }
 }

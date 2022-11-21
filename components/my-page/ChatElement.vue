@@ -69,7 +69,7 @@
                     <div class="d-flex justify-between">
                       <el-input
                         ref="message"
-                        v-model.trim="chatForm.message"
+                        v-model="chatForm.message"
                         :placeholder="$t('login.email')"
                         name="message"
                         type="text"

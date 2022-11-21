@@ -150,7 +150,7 @@ export default {
       listMethod: [],
       formApplyRules: {
         interview_approaches_id: [
-          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('job.choose_preferred_method') }), trigger: 'blur' }
+          { validator: validRequired, message: this.$t('validation.com010'), trigger: 'blur' }
         ],
         note: [
           { validator: validFormLength, trigger: 'blur' }

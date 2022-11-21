@@ -13,6 +13,7 @@
           :rules="accountRules"
           autocomplete="off"
           label-position="left"
+          @submit.native.prevent
         >
           <el-form-item class="email-login" prop="email" :error="(error.key === 'email') ? error.value : ''">
             <div class="label">{{ $t('login.email') }}</div>

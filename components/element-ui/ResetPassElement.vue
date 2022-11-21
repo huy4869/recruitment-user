@@ -12,6 +12,7 @@
           :rules="accountRules"
           autocomplete="off"
           label-position="left"
+          @submit.native.prevent
         >
           <el-form-item class="password-login" prop="password">
             <div class="label">{{ $t('login.password') }}</div>
@@ -24,7 +25,6 @@
               tabindex="3"
               maxlength="12"
               autocomplete="off"
-              @keydown.native.enter="login"
               @focus="resetValidate('password')"
             >
               <i slot="suffix" class="cursor-pointer" @click="displayPass('pass')">
@@ -44,7 +44,6 @@
               tabindex="3"
               maxlength="12"
               autocomplete="off"
-              @keydown.native.enter="login"
               @keydown.native.tab.prevent="$refs.email.focus()"
               @focus="resetValidate('password_confirmation')"
             >

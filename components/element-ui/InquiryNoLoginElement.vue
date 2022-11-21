@@ -153,7 +153,7 @@ import {
   INQUIRY_CREATE,
   INQUIRY_PHONE_NUMBER
 } from '~/store/store.const'
-import { validEmail, validOnlyHalfWidth, validPhoneNumber } from '~/utils/validate'
+import { validEmail, validHalfWidth, validOnlyHalfWidth, validPhoneNumber } from '~/utils/validate'
 
 export default {
   name: 'InquiryNoLoginElement',
@@ -168,13 +168,13 @@ export default {
     }
     const validFormEmail = (rule, value, callback) => {
       if (value && value.length > 255) {
-        callback(new Error(this.$t('validation.max_length', { _field_: this.$t('login.email') })))
+        callback(new Error(this.$t('validation.halfwidth_email_length', { _field_: this.$t('login.email') })))
       }
       if (value.search(' ') !== -1) {
         callback(new Error(this.$t('validation.com002', { _field_: this.$t('login.email') })))
       }
-      if (!validOnlyHalfWidth(value)) {
-        callback(new Error(this.$t('validation.halfwidth_email_length', { _field_: this.$t('login.email') })))
+      if (!validHalfWidth(value)) {
+        callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('login.email') })))
       }
       if (!validEmail(value)) {
         callback(new Error(this.$t('validation.email', { _field_: this.$t('login.email') })))
