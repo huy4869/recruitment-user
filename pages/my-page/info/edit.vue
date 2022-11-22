@@ -522,6 +522,7 @@
                         <el-col :md="20" :sm="24">
                           <el-form-item label="" prop="province_city_id" :error="(error.key === 'province_city_id') ? error.value : ''">
                             <el-select
+                              :disabled="disabledProvinceCity"
                               v-model="accountForm.province_city_id"
                               :placeholder="$t('my_page.enter_province_city')"
                               @blur="validate('province_city_id')"
@@ -853,7 +854,8 @@ export default {
       },
       confirmModal: false,
       clonedAccountForm: {},
-      checkZipcode: false
+      checkZipcode: false,
+      disabledProvinceCity: false
     }
   },
   computed: {
@@ -937,6 +939,13 @@ export default {
           this.error.value = ''
         }
       }
+    },
+    'accountForm.province_id'() {
+      if (!this.accountForm.province_id) {
+        this.disabledProvinceCity = true
+      } else {
+        this.disabledProvinceCity = false
+      }
     }
   },
   async created() {
@@ -955,6 +964,9 @@ export default {
     await this.loadAllMonth()
     await this.loadAllYear()
     this.clonedAccountForm = _.cloneDeep(this.accountForm)
+    if (!this.accountForm.province_id) {
+      this.disabledProvinceCity = true
+    }
   },
   methods: {
     validateForm() {
@@ -1217,49 +1229,47 @@ export default {
     },
     async checkPostalCode() {
       try {
-        let dto = _.cloneDeep(this.accountForm.postal_code)
-        dto = dto.replace(/[^0-9]/g, '')
-        const data = await this.$store.dispatch(GET_ZIPCODE, dto)
-        let province_id = 0
-        let province_city_id = 0
-        switch (data.status_code) {
-          case 200:
-            if (data.data.length > 0) {
-              for (const key in this.listProvinces) {
-                if (this.listProvinces[key].name === data.data[0].address1) {
-                  province_id = Number(key)
+        if (this.accountForm.postal_code.length === 8) {
+          await this.$store.commit(INDEX_SET_LOADING, true)
+          let dto = _.cloneDeep(this.accountForm.postal_code)
+          dto = dto.replace(/[^0-9]/g, '')
+          const data = await this.$store.dispatch(GET_ZIPCODE, dto)
+          let province_city_id = 0
+          switch (data.status_code) {
+            case 200:
+              if (data.data.length === undefined) {
+                this.accountForm.province_id = data.data.province_id
+                this.listProvinceCity = this.listProvinces[data.data.province_id].province_city
+                for (const key in this.listProvinceCity) {
+                  if (this.listProvinceCity[key].id === data.data.province_city_id) {
+                    province_city_id = Number(key)
+                  }
+                }
+                this.accountForm.province_city_id = this.listProvinceCity[province_city_id].id
+              } else if (data.data.length === 0) {
+                this.error = {
+                  key: 'postal_code',
+                  value: this.$t('validation.com015', { _field_: this.$t('my_page.post_code') })
                 }
               }
-              this.accountForm.province_id = province_id
-              this.listProvinceCity = this.listProvinces[province_id].province_city
-              for (const key in this.listProvinceCity) {
-                if (this.listProvinceCity[key].name === data.data[0].address2) {
-                  province_city_id = Number(key)
-                }
+              break
+            case 422:
+              for (const [key] of Object.entries(data.data)) {
+                this.error = { key, value: data.data[key][0] }
               }
-              this.accountForm.province_city_id = this.listProvinceCity[province_city_id].id
-            } else {
-              this.error = {
-                key: 'postal_code',
-                value: this.$t('validation.com015', { _field_: this.$t('my_page.post_code') })
-              }
-            }
-            break
-          case 422:
-            for (const [key] of Object.entries(data.data)) {
-              this.error = { key, value: data.data[key][0] }
-            }
-            break
-          case 500:
-            await this.$store.commit(INDEX_SET_ERROR, {
-              show: true,
-              text: this.$t('content.EXC_001')
-            })
-            break
-          default:
-            await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
-            break
+              break
+            case 500:
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: this.$t('content.EXC_001')
+              })
+              break
+            default:
+              await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+              break
+          }
         }
+        await this.$store.commit(INDEX_SET_LOADING, false)
       } catch (err) {
         await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
       }

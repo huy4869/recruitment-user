@@ -244,7 +244,7 @@ export default {
                 message.show_date = true
               }
               if (check !== dataResponse.data[y][i + 1].initial_time) {
-                message.show_date = false
+                message.show_date = true
               }
             } else {
               message.show_date = true

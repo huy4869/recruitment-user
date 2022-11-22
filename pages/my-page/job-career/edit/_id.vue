@@ -462,6 +462,8 @@ export default {
         callback(new Error(this.$t('validation.err004')))
       } else if (date.start > date.current) {
         callback(new Error(this.$t('validation.err043')))
+      } else if (date.end > date.current) {
+        callback(new Error(this.$t('validation.err043')))
       } else {
         callback()
       }
