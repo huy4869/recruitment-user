@@ -30,7 +30,7 @@
                   <div v-if="checkSearch(user.store_name)" :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': !user.be_readed}]">
                     <div class="d-flex">
                       <div class="user-avatar">
-                        <ShowAvatarElement :user="{ avatar: user.store_banner, name: user.store_name }"></ShowAvatarElement>
+                        <ShowAvatarElement :user="{ avatar: user.store_banner, name: user.store_name, color: user.color }"></ShowAvatarElement>
                       </div>
                       <div class="message-content">
                         <div class="d-flex justify-between">
@@ -108,7 +108,7 @@
                   <div v-if="checkSearch(user.store_name)" :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': !user.be_readed}]">
                     <div class="d-flex">
                       <div class="user-avatar">
-                        <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name }"></ShowAvatarElement>
+                        <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name, color: user.color }"></ShowAvatarElement>
                       </div>
                       <div class="message-content">
                         <div class="d-flex justify-between">
@@ -195,7 +195,15 @@ export default {
         message: [
           { validator: validFormLength, trigger: 'blur' }
         ]
-      }
+      },
+      listColor: [
+        '#AB4CF5',
+        '#E83434',
+        '#11D35F',
+        '#F017C0',
+        '#F9B126',
+        '#266EF9'
+      ]
     }
   },
   async created() {
@@ -236,6 +244,7 @@ export default {
           dataMessages.push({ is_date_now: true, date_show: y })
           for (let i = 0; i <= dataResponse.data[y].length - 1; i++) {
             message = dataResponse.data[y][i]
+            message.color = this.userActive.color
             check = dataResponse.data[y][i].initial_time
             user = dataResponse.data[y][i].is_from_user
             if (i < dataResponse.data[y].length - 1) {
@@ -254,6 +263,7 @@ export default {
         }
         this.listMessages = dataMessages
         this.listUsers[index].be_readed = 1
+        console.log(dataMessages)
       }
       if (mobile) {
         this.showDetailMessage = true
@@ -268,7 +278,12 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const dataResponse = await this.$store.dispatch(CHAT_LIST)
       if (dataResponse.status_code === 200) {
-        this.listUsers = dataResponse.data
+        const listUsers = []
+        dataResponse.data.forEach((item) => {
+          item.color = this.listColor[Math.floor(Math.random() * 6)]
+          listUsers.push(item)
+        })
+        this.listUsers = listUsers
         await this.changeActive(this.listUsers[0], 0, false)
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
@@ -304,6 +319,7 @@ export default {
               this.listUsers[this.indexActive].content = this.chatForm.message
               this.chatForm.message = ''
               this.scrollToElement()
+              await this.changeActive(this.listUsers[0], 0, false)
             }
             if (dataResponse.status_code === 500) {
               await this.$store.commit(INDEX_SET_ERROR, {

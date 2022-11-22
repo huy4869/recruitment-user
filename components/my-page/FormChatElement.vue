@@ -16,7 +16,7 @@
       <div class="d-flex justify-start">
         <div class="d-flex">
           <div class="show-user-image">
-            <ShowAvatarElement :user="{ avatar: message.store_banner, name: message.store_name }"></ShowAvatarElement>
+            <ShowAvatarElement :user="{ avatar: message.store_banner, name: message.store_name, color: message.color }"></ShowAvatarElement>
           </div>
           <div class="show-message">
             <div class="user-name">{{ message.store_name }}</div>

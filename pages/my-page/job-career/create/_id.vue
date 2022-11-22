@@ -866,6 +866,7 @@ export default {
                 show: true,
                 text: response.messages
               })
+              this.accountForm = this.clonedAccountForm
               this.$router.push('/my-page/job-career')
             } else if (response.status_code === 422) {
               for (const [key] of Object.entries(response.data)) {
