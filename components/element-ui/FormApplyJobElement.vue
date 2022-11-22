@@ -77,13 +77,16 @@
           </div>
           <div class="question-note">({{ $t('job.question_request_note') }})</div>
           <div class="question-content">
-            <el-input
-              v-model="formApply.note"
-              type="textarea"
-              :rows="4"
-              :placeholder="$t('job.enter_your_question')"
-              >
-            </el-input>
+            <el-form-item prop="note">
+              <el-input
+                v-model="formApply.note"
+                type="textarea"
+                :rows="4"
+                maxlength="1000"
+                :placeholder="$t('job.enter_your_question')"
+                >
+              </el-input>
+            </el-form-item>
           </div>
         </div>
       </el-form>
@@ -117,7 +120,7 @@ export default {
   data() {
     const validFormLength = (rule, value, callback) => {
       if (value && value.length > 1000) {
-        callback(new Error(this.$t('validation.max_length_text', { _field_: this.$t('job.question_request_note'), _max_: 1000 })))
+        callback(new Error(this.$t('validation.max_length_text', { _field_: this.$t('job.question_request'), _max_: 1000 })))
       } else {
         callback()
       }

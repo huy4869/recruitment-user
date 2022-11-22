@@ -196,7 +196,7 @@
           </div>
           <div class="application-requirement-right">
             <div class="break-word">{{ showAddress }}</div>
-            <a v-if="job.address.address" :href="'https://www.google.com/maps/place/' + job.address.address" class="show-button-google-map" target="_blank">
+            <a v-if="job.address.address" :href="'https://www.google.com/maps/place/' + showAddress" class="show-button-google-map" target="_blank">
               <img src="/assets/icon/icon_google_map.svg" alt="">
               <span>{{ $t('schedule.open_google_map') }}</span>
             </a>
