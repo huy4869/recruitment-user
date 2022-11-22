@@ -169,7 +169,7 @@ export default {
   data() {
     const validFormLength = (rule, value, callback) => {
       if (value && value.length > 1000) {
-        callback(new Error(this.$t('validation.max_length_text', { _field_: this.$t('my_page.enter_message'), _max_: 1000 })))
+        callback(new Error(this.$t('validation.max_length_text', { _field_: this.$t('my_page.message'), _max_: 1000 })))
       } else {
         callback()
       }

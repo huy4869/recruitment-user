@@ -301,6 +301,12 @@ export default {
                   text: this.$t('content.EXC_001')
                 })
                 break
+              case 422:
+                await this.$store.commit(INDEX_SET_ERROR, {
+                  show: true,
+                  text: dataResponse.data.date[0]
+                })
+                break
               default:
                 await this.$store.commit(INDEX_SET_ERROR, {
                   show: true,
