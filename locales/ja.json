@@ -306,7 +306,7 @@
     "list": {
       "job_type_ids": "職種",
       "province_id": "勤務地",
-      "text": "キーワード",
+      "search": "キーワード",
       "employment_status": "雇用形態",
       "experience_ids": "経験",
       "order_by_ids": "並び替え",
