@@ -11,5 +11,10 @@ export const actions = {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.get('/notifications' + query), context)
     })
+  },
+  readNotification(context, id) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post(`/notifications/read/${id}`), context)
+    })
   }
 }

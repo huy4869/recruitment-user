@@ -93,6 +93,7 @@ export const JOB_GET_TOTAL_JOB = 'job/getTotalJob'
 
 // notification
 export const NOTIFICATION_LIST = 'notification/listNotification'
+export const NOTIFICATION_UPDATE_READ = 'notification/readNotification'
 
 // location
 export const LOCATION_LIST_MOST_APPLY = 'location/listLocationMostApply'

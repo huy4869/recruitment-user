@@ -64,6 +64,7 @@
                   :rules="chatRules"
                   autocomplete="off"
                   label-position="left"
+                  @submit.native.prevent
                 >
                   <el-form-item class="message-login" label="" prop="message" :error="(error.key === 'message') ? error.value : ''">
                     <div class="d-flex justify-between">
@@ -263,7 +264,6 @@ export default {
         }
         this.listMessages = dataMessages
         this.listUsers[index].be_readed = 1
-        console.log(dataMessages)
       }
       if (mobile) {
         this.showDetailMessage = true
