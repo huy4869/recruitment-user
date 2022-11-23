@@ -75,6 +75,7 @@
                         name="message"
                         type="text"
                         tabindex="2"
+                        @keyup.enter.native="sendMessage"
                         @focus="resetValidate('message')"
                         maxlength="1000"
                       />
