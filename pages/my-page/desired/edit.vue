@@ -421,19 +421,19 @@ export default {
       accountForm: {
         province_ids: [],
         work_type_ids: [],
-        age_id: '',
-        salary_type_id: '',
+        age_id: 1,
+        salary_type_id: 3,
         job_type_ids: [],
         job_experience_ids: [],
         job_feature_ids: [],
-        salary_min: '',
-        salary_max: '',
+        salary_min: 1000,
+        salary_max: 2000,
         working_days: [],
         working_hours: {
-          start_hours: '',
-          start_minutes: '',
-          end_hours: '',
-          end_minutes: '',
+          start_hours: '09',
+          start_minutes: '00',
+          end_hours: '15',
+          end_minutes: '00',
           working_hours_format: ''
         },
         start_working_time: '',
@@ -502,16 +502,17 @@ export default {
       this.checkEndTime()
     }
   },
-  created() {
+  async created() {
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },
       { name: this.$t('page.my_page'), route: '/my-page/top-page' },
       { name: this.$t('page.web_cv'), route: '/my-page/web-cv' }
     ])
-    this.getMasterData()
-    this.getDesired()
+    await this.getMasterData()
+    await this.getDesired()
     this.linksMinutes = LINKS_MINUTES
     this.linksHours = LINKS_HOURS
+    this.clonedAccountForm = _.cloneDeep(this.accountForm)
   },
   methods: {
     async getMasterData() {

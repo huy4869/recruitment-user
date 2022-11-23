@@ -323,7 +323,7 @@
             {{ $t('job.text_about_note') }}
           </div>
           <el-form
-            ref="accountForm"
+            ref="formAbout"
             :model="formAbout"
             :rules="formAboutRules"
             autocomplete="off"
@@ -470,7 +470,8 @@ export default {
         content: [
           { validator: validAreaLength, message: this.$t('validation.area_length_2', { _field_: this.$t('job.inquiry_details') }), trigger: 'blur' }
         ]
-      }
+      },
+      isValid: false
     }
   },
   computed: {
@@ -599,6 +600,10 @@ export default {
       }
     },
     async createFeedback() {
+      this.validateFormAbout()
+      if (!this.isValid) {
+        return
+      }
       try {
         await this.$store.commit(INDEX_SET_LOADING, true)
         const dto = this.formAbout
@@ -670,6 +675,11 @@ export default {
         feedback_type_ids: [],
         content: ''
       }
+    },
+    validateFormAbout() {
+      this.$refs.formAbout.validate(valid => {
+        this.isValid = valid
+      })
     }
   }
 }

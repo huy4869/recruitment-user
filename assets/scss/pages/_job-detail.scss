@@ -558,10 +558,6 @@
         .question-content {
           textarea {
             border-radius: 4px;
-            border: 2px solid $border-default;
-            &:hover {
-              border: 2px solid $border-default;
-            }
             &::placeholder {
               color: $color-placeholder;
             }
