@@ -21,7 +21,7 @@
                   <img slot="prefix" src="/assets/icon/icon_search_input.svg" alt="">
                 </el-input>
               </div>
-              <div class="list-user">
+              <div ref="scrollListUser" class="list-user">
                 <div
                   v-for="(user, index) in listUsers"
                   :key="index"
@@ -105,7 +105,7 @@
                   <img slot="prefix" src="/assets/icon/icon_search_input.svg" alt="">
                 </el-input>
               </div>
-              <div class="list-user">
+              <div ref="scrollListUserMobile" class="list-user">
                 <div v-for="(user, index) in listUsers" :key="index" @click="changeActive(user, index, true)">
                   <div v-if="checkSearch(user.store_name)" :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': !user.be_readed}]">
                     <div class="d-flex">
@@ -209,6 +209,7 @@ export default {
     }
   },
   async created() {
+    await this.$store.commit(INDEX_SET_LOADING, true)
     await this.getDataUser()
     this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, false)
     if (this.$route.query.store) {
@@ -218,6 +219,7 @@ export default {
         }
       })
     }
+    await this.$store.commit(INDEX_SET_LOADING, false)
   },
   methods: {
     resetValidate(ref) {
@@ -276,7 +278,6 @@ export default {
       this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, false)
     },
     async getDataUser() {
-      await this.$store.commit(INDEX_SET_LOADING, true)
       const dataResponse = await this.$store.dispatch(CHAT_LIST)
       if (dataResponse.status_code === 200) {
         const listUsers = []
@@ -287,7 +288,6 @@ export default {
         this.listUsers = listUsers
         await this.changeActive(this.listUsers[0], 0, false)
       }
-      await this.$store.commit(INDEX_SET_LOADING, false)
     },
     scrollToElement() {
       const messageDisplayMobile = this.$refs.scrollListMessageMobile
@@ -298,6 +298,12 @@ export default {
       if (messageDisplayMobile) {
         messageDisplayMobile.scrollTop = messageDisplayMobile.scrollHeight
       }
+    },
+    scrollToElementListUser() {
+      const userDisplayMobile = this.$refs.scrollListUserMobile
+      const userDisplay = this.$refs.scrollListUser
+      userDisplay.scrollTop = 0
+      userDisplayMobile.scrollTop = 0
     },
     checkSearch(name) {
       if (this.search) {
@@ -320,7 +326,8 @@ export default {
               this.listUsers[this.indexActive].content = this.chatForm.message
               this.chatForm.message = ''
               this.scrollToElement()
-              await this.changeActive(this.listUsers[0], 0, false)
+              await this.getDataUser()
+              this.scrollToElementListUser()
             }
             if (dataResponse.status_code === 500) {
               await this.$store.commit(INDEX_SET_ERROR, {
