@@ -1,5 +1,5 @@
 <template>
-  <div class="home-job-element">
+  <div class="home-job-element" @click="changeToLink('/job/' + job.id)">
     <div class="job-image">
       <img :src="job.banner_image" alt="favorite-job">
       <div class="background-new"></div>
@@ -30,11 +30,11 @@
         </div>
       </div>
       <div class="job-button">
-        <div v-if="jobActive.is_favorite" class="button-dislike" @click="removeFavoriteJob">
+        <div v-if="jobActive.is_favorite" class="button-dislike" @click.stop="removeFavoriteJob">
           <img src="/assets/icon/icon_dislike.svg" alt="">
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
-        <div v-else class="button-like" @click="addFavoriteJob">
+        <div v-else class="button-like" @click.stop="addFavoriteJob">
           <img src="/assets/icon/icon_like.svg" alt="">
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
@@ -120,6 +120,11 @@ export default {
           text: response.messages
         })
         this.jobActive.is_favorite = state
+      } else if (response.status_code === 500) {
+        await this.$store.commit(INDEX_SET_ERROR, {
+          show: true,
+          text: this.$t('content.EXC_001')
+        })
       } else {
         await this.$store.commit(INDEX_SET_ERROR, {
           show: true,
