@@ -710,3 +710,15 @@
     padding:0 0 32px;
   }
 }
+
+.not-found-page {
+  text-align: center;
+  padding-top: 127px;
+  .text-not-found {
+    margin-top: 32px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 32px;
+    color: $color-dark-50;
+  }
+}
