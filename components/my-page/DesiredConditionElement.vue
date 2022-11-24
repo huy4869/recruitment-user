@@ -96,9 +96,17 @@ export default {
     checkCondition() {
       let check = true
       for (const index in this.condition) {
-        if (this.condition[index] && this.condition.working_hours.start_hours &&
+        if (['working_hours'].includes(index)) {
+          if (this.condition.working_hours.start_hours &&
           this.condition.working_hours.start_minutes && this.condition.working_hours.end_hours &&
           this.condition.working_hours.end_minutes && this.condition.working_hours.working_hours_format) {
+            check = false
+          }
+        } else if (['job_experience_ids', 'job_feature_ids', 'job_type_ids', 'work_type_ids', 'working_days'].includes(index)) {
+          if (this.condition[index].length) {
+            check = false
+          }
+        } else if (![null, ''].includes(this.condition[index]) && (index !== 'id')) {
           check = false
         }
       }
