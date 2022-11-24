@@ -36,7 +36,33 @@
                   </el-col>
                 </el-row>
                 <BorderElement :col-size="7" :middle="true"></BorderElement>
-                <el-row class="d-flex form-label-input">
+                <el-row v-if="!user.first_name" class="d-flex form-label-input">
+                  <el-col :md="7" :sm="16" class="col-label">
+                    <div class="label"><span>{{ $t('inquiry.name') }}</span></div>
+                    <div class="required">{{ $t('form.required') }}</div>
+                  </el-col>
+                  <el-col :md="17" :sm="24">
+                    <div class="content-input">
+                      <el-row class="d-flex">
+                        <el-col :md="22" :sm="24">
+                          <el-form-item label="" prop="name" :error="(error.key === 'name') ? error.value : ''">
+                            <el-input
+                              ref="name"
+                              v-model="accountForm.name"
+                              :placeholder="$t('inquiry.enter_name')"
+                              name="name"
+                              type="text"
+                              tabindex="2"
+                              maxlength="255"
+                              @focus="resetValidate('name')"
+                            />
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row v-else class="d-flex form-label-input">
                   <el-col :md="7" :sm="16" class="col-label">
                     <div class="label"><span>{{ $t('inquiry.name') }}</span></div>
                   </el-col>
@@ -55,7 +81,33 @@
                   </el-col>
                 </el-row>
                 <BorderElement :col-size="7" :middle="true"></BorderElement>
-                <el-row class="d-flex form-label-input">
+                <el-row v-if="!user.tel" class="d-flex form-label-input">
+                  <el-col :md="7" :sm="16" class="col-label">
+                    <div class="label"><span>{{ $t('inquiry.phone') }}</span></div>
+                    <div class="required">{{ $t('form.required') }}</div>
+                  </el-col>
+                  <el-col :md="17" :sm="24">
+                    <div class="content-input">
+                      <el-row class="d-flex">
+                        <el-col :md="22" :sm="24">
+                          <el-form-item label="" prop="tel" :error="(error.key === 'tel') ? error.value : ''">
+                            <el-input
+                              ref="tel"
+                              v-model.trim="accountForm.tel"
+                              :placeholder="$t('inquiry.enter_phone')"
+                              name="tel"
+                              type="text"
+                              tabindex="2"
+                              maxlength="13"
+                              @focus="resetValidate('tel')"
+                            />
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
+                    </div>
+                  </el-col>
+                </el-row>
+                <el-row v-else class="d-flex form-label-input">
                   <el-col :md="7" :sm="16" class="col-label">
                     <div class="label"><span>{{ $t('inquiry.phone') }}</span></div>
                   </el-col>
@@ -130,7 +182,7 @@ import {
   INQUIRY_CREATE,
   INQUIRY_PHONE_NUMBER
 } from '~/store/store.const'
-import { validEmail, validHalfWidth } from '~/utils/validate'
+import { validEmail, validHalfWidth, validOnlyHalfWidth, validPhoneNumber } from '~/utils/validate'
 
 export default {
   name: 'InquiryElement',
@@ -139,6 +191,25 @@ export default {
     const validAreaLength = (rule, value, callback, message) => {
       if (value && value.length > 1000) {
         callback(new Error(this.$t('validation.short_area_length', { _field_: message })))
+      } else {
+        callback()
+      }
+    }
+    const validFormLength = (rule, value, callback, message) => {
+      if (value && value.length > 255) {
+        callback(new Error(this.$t('validation.max_length', { _field_: message })))
+      } else {
+        callback()
+      }
+    }
+    const validPhone = (rule, value, callback) => {
+      if (!validOnlyHalfWidth(value)) {
+        callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('inquiry.phone') })))
+      }
+      if (value && (value.length > 13 || value.length < 10 || !value.startsWith(0))) {
+        callback(new Error(this.$t('validation.phone_length', { _field_: this.$t('inquiry.phone') })))
+      } else if (!validPhoneNumber(value)) {
+        callback(new Error(this.$t('validation.phone', { _field_: this.$t('inquiry.phone') })))
       } else {
         callback()
       }
@@ -163,7 +234,7 @@ export default {
       accountForm: {
         email: this.$auth.user.email,
         tel: this.$auth.user.tel,
-        name: this.$auth.user.full_name,
+        name: this.$auth.user.full_name.trim() !== '' ? this.$auth.user.full_name : '',
         content: '',
         errors: {}
       },
@@ -176,18 +247,33 @@ export default {
           { required: true, message: this.$t('validation.required', { _field_: this.$t('inquiry.email') }), trigger: 'blur' },
           { validator: validFormEmail, trigger: 'blur' }
         ],
-        name: [],
-        tel: [],
+        name: [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('inquiry.name') }), trigger: 'blur' },
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('inquiry.name') }), trigger: 'blur' }
+        ],
+        tel: [
+          { required: true, message: this.$t('validation.required', { _field_: this.$t('inquiry.phone') }), trigger: 'blur' },
+          { validator: validPhone, trigger: 'blur' }
+        ],
         content: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('inquiry.content') }), trigger: 'blur' },
           { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('inquiry.content') }), trigger: 'blur' }
         ]
       },
-      phone: ''
+      phone: '',
+      user: this.$auth.user
     }
   },
   created() {
     this.getPhoneNumber()
+  },
+  watch: {
+    '$auth.user': {
+      handler() {
+        this.user = this.$auth.user
+      },
+      deep: true
+    }
   },
   methods: {
     resetValidate(ref) {
@@ -212,8 +298,18 @@ export default {
                 show: true,
                 text: response.messages
               })
-              this.accountForm.note = ''
-              this.accountForm.errors = {}
+              this.accountForm = {
+                email: this.$auth.user.email,
+                tel: this.$auth.user.tel,
+                name: this.$auth.user.full_name.trim() !== '' ? this.$auth.user.full_name : '',
+                content: '',
+                errors: {}
+              }
+            } else if (response.status_code === 500) {
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: this.$t('content.EXC_001')
+              })
             } else {
               await this.$store.commit(INDEX_SET_ERROR, {
                 show: true,

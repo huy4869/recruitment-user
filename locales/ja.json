@@ -436,7 +436,7 @@
     "name" : "お名前",
     "enter_name" : "お名前を入力",
     "phone" : "電話番号",
-    "enter_phone" : "お名前を入力",
+    "enter_phone" : "電話番号を入力",
     "content" : "お問い合わせ内容",
     "enter_content" : "お問い合わせ内容を入力",
     "send" : "送信",
