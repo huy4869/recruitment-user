@@ -352,14 +352,19 @@ export default {
         .then(_ => {
           this.$emit('closeDialog')
           this.error = { key: null, value: '' }
+          if (this.$refs.formApply) {
+            this.$refs.formApply.resetFields()
+          }
         })
         .catch(_ => {})
     },
     closeAboutDialog() {
-      console.log(this.formApply)
-      console.log(this.clonedformApply)
+      this.formApply.errors = {}
       if (_.isEqual(this.formApply, this.clonedformApply)) {
         this.$emit('closeDialog')
+        if (this.$refs.formApply) {
+          this.$refs.formApply.resetFields()
+        }
         this.error = { key: null, value: '' }
       } else {
         this.cancelModal()
