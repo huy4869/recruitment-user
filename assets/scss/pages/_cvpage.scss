@@ -21,9 +21,9 @@
     width: max-content;
     height: 32px;
     border: 1px solid $color-text-primary;
-    font-size: 26px;
+    font-size: 24px;
     border-radius: 50%;
-    line-height: 30px;
+    line-height: 28px;
     display: inline-flex;
     justify-content: center;
     vertical-align: middle;
@@ -31,8 +31,7 @@
     font-weight: 700;
     margin-top: 5px;
     span {
-      letter-spacing: -4px;
-      margin-left: -4px;
+      letter-spacing: 0;
     }
   }
   .edit-cv-title {
