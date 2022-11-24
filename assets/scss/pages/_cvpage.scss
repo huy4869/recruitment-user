@@ -17,19 +17,19 @@
 .edit-cv-element {
   margin-bottom: 24px;
   .text-count-career {
-    min-width: 24px;
+    min-width: 32px;
     width: max-content;
-    height: 22px;
+    height: 32px;
     border: 1px solid $color-text-primary;
-    font-size: 16px;
+    font-size: 26px;
     border-radius: 50%;
-    line-height: 20px;
+    line-height: 30px;
     display: inline-flex;
     justify-content: center;
     vertical-align: middle;
     font-family: 'Zen Kaku Gothic New';
     font-weight: 700;
-    margin: auto 2px;
+    margin-top: 5px;
     span {
       letter-spacing: -4px;
       margin-left: -4px;
@@ -170,8 +170,8 @@
       }
       .sm-text {
         font-weight: 500;
-        font-size: 14px;
-        line-height: 22px;
+        font-size: 12px;
+        line-height: 20px;
         color: $color-text-3;
         margin-top: 10px;
       }

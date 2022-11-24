@@ -701,3 +701,25 @@ hr {
 .disabledImg {
   cursor: not-allowed !important;
 }
+
+.text-count {
+  min-width: 12px;
+  width: max-content;
+  height: 12px;
+  border: 1px solid $color-black;
+  font-size: 12px;
+  border-radius: 50%;
+  line-height: 12px;
+  display: inline-flex;
+  justify-content: center;
+  vertical-align: middle;
+  font-family: 'Zen Kaku Gothic New';
+  font-weight: 700;
+  margin: 0 2px;
+  top: -1px;
+  position: relative;
+  span {
+    letter-spacing: -4px;
+    margin-left: -4px;
+  }
+}

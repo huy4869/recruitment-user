@@ -10,7 +10,7 @@
       </div>
       <div class="d-flex" v-else-if="key === (listMenu.length - 1)">
         <div class="title-not-link">
-          <span>{{ title.name }}</span>
+          <span v-html="title.name"></span>
         </div>
       </div>
       <div class="d-flex" v-else>

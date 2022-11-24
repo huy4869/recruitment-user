@@ -720,7 +720,7 @@ export default {
       { name: this.$t('page.my_page'), route: '/my-page/top-page' },
       { name: this.$t('page.web_cv'), route: '/my-page/web-cv' },
       { name: this.$t('my_page.job_career'), route: '/my-page/job-career' },
-      { name: this.$t('my_page.job_career') + this.$route.params.id + this.$t('my_page.edit') }
+      { name: (this.$t('my_page.job_career') + '<span class="text-count">' + this.$route.params.id + '</span>' + this.$t('my_page.edit')) }
     ])
     this.getDataJob()
     this.getMasterData()
