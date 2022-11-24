@@ -30,7 +30,8 @@
 .banner-element {
   height: 150px;
   text-align: left;
-  background: url('~/assets/images/banner.svg') center;
+  background: url('~/assets/images/banner.svg') no-repeat;
+  background-size: cover;
   padding-left: 90px;
   .banner-title {
     font-weight: 700;
