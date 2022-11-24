@@ -529,14 +529,16 @@ export default {
       if (this.page) {
         dataSearch.push(`page=${this.page}`)
       }
+      if (key === 0) {
+        for (const index in this.condition) {
+          if (this.condition[index].length) {
+            dataSearch.push(`filters[${key}][key]=${index}&filters[${key}][data]=[${this.condition[index].join(',')}]`)
+            key++
+          }
+        }
+      }
       if (this.sort_by.length) {
         dataSearch.push(`orders[${key}][key]=${(this.sort_by[0] === 1) ? 'created_at' : 'updated_at'}&filters[${key}][dir]=asc`)
-      }
-      for (const index in this.condition) {
-        if (this.condition[index].length) {
-          dataSearch.push(`filters[${key}][key]=${index}&filters[${key}][data]=[${this.condition[index].join(',')}]`)
-          key++
-        }
       }
       return dataSearch
     },

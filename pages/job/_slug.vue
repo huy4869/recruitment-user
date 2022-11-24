@@ -285,8 +285,8 @@
       <div class="jobs-similar-job">
         <div class="jobs-similar-job-title">
           <div class="title-component">{{ $t('job.jobs_similar') }}</div>
-          <div class="button-see-all" @click="changeToLink('/search')">
-            <span>{{ $t('home.see_all_job') }}</span>
+          <div class="button-see-all">
+            <a :href="changeToSearch">{{ $t('home.see_all_job') }}</a>
           </div>
         </div>
         <div v-if="listSuggestJobs.length" class="jobs-similar-job-content">
@@ -426,16 +426,8 @@ export default {
         feedback_type_ids: [],
         content: ''
       },
-      listDate: [
-        '2022年09月02日（月）',
-        '2022年09月03日（火）',
-        '2022年09月04日（水）',
-        '2022年09月05日（木）',
-        '2022年09月06日（金) ',
-        '2022年09月07日（土）',
-        '2022年09月08日（日）'
-      ],
-      listTime: ['12:00', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30'],
+      listDate: [],
+      listTime: [],
       listMethod: [
         { id: 1, value: 'オンライン面接（2営業日以内にZoomURLをメールにて送付いたします）' },
         { id: 2, value: '対面（東京都港区虎ノ門１－２－３)' },
@@ -508,8 +500,19 @@ export default {
       }
       return ''
     },
-    disabledInput() {
-      return !this.formAbout.feedback_type_ids.includes('1')
+    changeToSearch() {
+      const condition = []
+      if (this.job.address) {
+        condition.push('province_id=' + this.job.address.province_id)
+      }
+      if (this.job.job_types) {
+        const type = []
+        this.job.job_types.forEach(jobType => {
+          type.push(jobType.id)
+        })
+        condition.push('job_type_ids=' + type.join(','))
+      }
+      return '/search?' + condition.join('&')
     }
   },
   async created() {
@@ -561,9 +564,6 @@ export default {
     async getSuggestJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_SUGGEST_JOBS, this.id)
       this.listSuggestJobs = dataResponse.data
-    },
-    changeToLink(link) {
-      this.$router.push(link)
     },
     async addFavoriteJob() {
       if (!this.$auth.loggedIn) {
