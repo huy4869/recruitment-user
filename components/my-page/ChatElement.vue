@@ -244,6 +244,7 @@ export default {
         let check = ''
         let user = ''
         let message = {}
+        let send_time = ''
         for (const y in dataResponse.data) {
           dataMessages.push({ is_date_now: true, date_show: y })
           for (let i = 0; i <= dataResponse.data[y].length - 1; i++) {
@@ -251,13 +252,16 @@ export default {
             message.color = this.userActive.color
             check = dataResponse.data[y][i].initial_time
             user = dataResponse.data[y][i].is_from_user
+            send_time = dataResponse.data[y][i].send_time
             if (i < dataResponse.data[y].length - 1) {
               message.show_date = false
               if (user !== dataResponse.data[y][i + 1].is_from_user) {
                 message.show_date = true
               }
               if (check !== dataResponse.data[y][i + 1].initial_time) {
-                message.show_date = true
+                if (send_time !== dataResponse.data[y][i + 1].send_time) {
+                  message.show_date = true
+                }
               }
             } else {
               message.show_date = true
@@ -302,8 +306,8 @@ export default {
     scrollToElementListUser() {
       const userDisplayMobile = this.$refs.scrollListUserMobile
       const userDisplay = this.$refs.scrollListUser
-      userDisplay.scrollTop = 0
-      userDisplayMobile.scrollTop = 0
+      userDisplay.scrollTo({ top: 0, behavior: 'smooth' })
+      userDisplayMobile.scrollTo({ top: 0, behavior: 'smooth' })
     },
     checkSearch(name) {
       if (this.search) {
