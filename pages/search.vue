@@ -128,7 +128,7 @@
                 <div class="list-province">
                   <el-checkbox-group v-model="workLocation">
                     <div v-for="(province, key) in district.provinces" :key="key" class="province-item">
-                      <el-checkbox :label="province.id">{{ province.name }} <span class="total-record">({{ province.record + $t('common.subject') }})</span></el-checkbox>
+                      <el-checkbox :label="province.id">{{ province.name }} <span class="total-record" @click.stop="changeFilter('province_id', [province.id])">({{ province.record + $t('common.subject') }})</span></el-checkbox>
                     </div>
                   </el-checkbox-group>
                 </div>
@@ -150,7 +150,7 @@
               <div class="list-province">
                 <el-checkbox-group v-model="jobType">
                   <div v-for="(type, key) in listJobType" :key="key" class="province-item form-work">
-                    <el-checkbox :label="type.id">{{ type.name }} <span class="total-record">(12{{ $t('common.subject') }})</span></el-checkbox>
+                    <el-checkbox :label="type.id">{{ type.name }} <span class="total-record" @click.stop="changeFilter('job_type_ids', [type.id])">({{ type.record + $t('common.subject') }})</span></el-checkbox>
                   </div>
                 </el-checkbox-group>
               </div>
@@ -600,6 +600,21 @@ export default {
       this.condition[key] = value
       this.occupationDialog = false
       this.jobDialog = false
+    },
+    changeFilter(key, value) {
+      this.condition = {
+        work_type_ids: [],
+        job_type_ids: [],
+        experience_ids: [],
+        feature_ids: [],
+        province_id: [],
+        province_city_id: []
+      }
+      this.search = ''
+      this.sort_by = []
+      this.changeCondition(key, value)
+      this.searchJob()
+      this.showAll = false
     },
     changeSortBy(value, type) {
       if (value) {
