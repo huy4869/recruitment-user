@@ -2,8 +2,8 @@
   <div class="home-job-element" @click="changeToLink('/job/' + job.id)">
     <div class="job-image">
       <img :src="job.banner_image" alt="favorite-job">
-      <div class="background-new"></div>
-      <div class="show-new">NEW</div>
+      <div v-if="job.is_new" class="background-new"></div>
+      <div v-if="job.is_new" class="show-new">NEW</div>
     </div>
     <div class="job-content">
       <div class="job-name">{{ job.name }}</div>
