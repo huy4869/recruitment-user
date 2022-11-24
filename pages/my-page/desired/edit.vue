@@ -221,6 +221,8 @@
                     <div class="label"><span>{{ $t('desired_condition.working_day') }}</span></div>
                   </el-col>
                   <el-col :md="18" :sm="24">
+                    <div ref="start_working_time"></div>
+                    <div ref="end_working_time"></div>
                     <div class="content-input content-datetime-edu">
                       <el-row class="d-flex period-desired">
                         <el-col :md="12" :sm="24" class="start-time">
@@ -570,7 +572,7 @@ export default {
     },
     handleUpdate() {
       this.error = { key: null, value: '' }
-      this.$refs.accountForm.validate(async valid => {
+      this.$refs.accountForm.validate(async(valid, key) => {
         if (valid) {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
@@ -613,6 +615,8 @@ export default {
             await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
           }
           await this.$store.commit(INDEX_SET_LOADING, false)
+        } else {
+          this.scrollToElement(Object.keys(key)[0])
         }
       })
     },
@@ -688,18 +692,15 @@ export default {
       const end_min = this.accountForm.working_hours.end_minutes
       const start_hour = this.accountForm.working_hours.start_hours
       const start_min = this.accountForm.working_hours.start_minutes
-      if (start_hour && start_min && !end_hour) {
-        return this.$t('validation.com023')
-      }
-      if ((!start_hour && start_min) || (!end_hour && end_min)) {
+      if ((!start_hour && start_min)) {
         return this.$t('validation.com024')
       }
       if (!start_hour && end_hour && end_min) {
         return this.$t('validation.com022')
       }
-      if (start_hour && end_hour && Number(start_hour) > Number(end_hour)) {
-        return this.$t('validation.com021')
-      } else if (start_hour && end_hour && Number(start_hour) === Number(end_hour) && Number(start_min) > Number(end_min)) {
+      if (start_hour && end_hour && ((start_hour + start_min) >= (end_hour + end_min))) {
+        delete this.accountRules.end_working_time
+        this.resetValidate('end_working_time')
         return this.$t('validation.com021')
       }
     },
@@ -708,18 +709,15 @@ export default {
       const end_min = this.accountForm.working_hours.end_minutes
       const start_hour = this.accountForm.working_hours.start_hours
       const start_min = this.accountForm.working_hours.start_minutes
-      if (start_hour && start_min && !end_hour) {
-        return this.$t('validation.com023')
-      }
-      if ((!start_hour && start_min) || (!end_hour && end_min)) {
+      if (!end_hour && end_min) {
         return this.$t('validation.com024')
       }
-      if (!start_hour && end_hour && end_min) {
-        return this.$t('validation.com022')
+      if (start_hour && !end_hour) {
+        return this.$t('validation.com023')
       }
-      if (start_hour && end_hour && Number(start_hour) > Number(end_hour)) {
-        return this.$t('validation.com021')
-      } else if (start_hour && end_hour && Number(start_hour) === Number(end_hour) && Number(start_min) > Number(end_min)) {
+      if (start_hour && end_hour && ((start_hour + start_min) >= (end_hour + end_min))) {
+        delete this.accountRules.start_working_time
+        this.resetValidate('start_working_time')
         return this.$t('validation.com021')
       }
     },
@@ -734,11 +732,17 @@ export default {
         delete this.accountRules.start_working_time
         this.resetValidate('start_working_time')
       }
-      if (start_hour && end_hour) {
+      if (start_hour && end_hour && ((start_hour + start_min) < (end_hour + end_min))) {
         delete this.accountRules.end_working_time
         this.resetValidate('end_working_time')
         delete this.accountRules.start_working_time
         this.resetValidate('start_working_time')
+      }
+    },
+    scrollToElement(key) {
+      const el = this.$refs[key]
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
       }
     }
   }
