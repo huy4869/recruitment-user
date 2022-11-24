@@ -41,22 +41,15 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import NoDataElement from '../element-ui/NoDataElement'
 import EduElement from './EduElement'
 export default {
-  name: 'FavoriteJobElement',
+  name: 'EducationElement',
   components: { EduElement, NoDataElement },
   props: {
     listEdu: {
       type: Array,
       default: () => []
-    }
-  },
-  data() {
-    return {
-      showViewAllJob: true,
-      lastUpdated: '2022年09月26日更新'
     }
   },
   methods: {
