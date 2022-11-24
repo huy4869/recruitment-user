@@ -413,7 +413,7 @@ export default {
   middleware: 'auth',
   data() {
     const validFormLength = (rule, value, callback, message) => {
-      if (value && value.length > 8) {
+      if (value && String(value).length > 8) {
         callback(new Error(this.$t('validation.com017', { _field_: message })))
       } else {
         callback()
@@ -678,6 +678,9 @@ export default {
       const end_min = this.accountForm.working_hours.end_minutes
       const start_hour = this.accountForm.working_hours.start_hours
       const start_min = this.accountForm.working_hours.start_minutes
+      if ((end_hour || end_min) && (!start_hour && !start_hour)) {
+        return this.$t('validation.com024')
+      }
       if ((!start_hour && start_min)) {
         return this.$t('validation.com024')
       }
@@ -735,8 +738,10 @@ export default {
       }
     },
     checkNumber(value, key) {
-      if (value !== Number(value)) {
-        this.accountForm[key] = Number(value)
+      if (value) {
+        if (value !== Number(value)) {
+          this.accountForm[key] = Number(value)
+        }
       }
     }
   }
