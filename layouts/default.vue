@@ -1,6 +1,5 @@
 <template>
   <div>
-    <client-only>
     <HeaderCommon></HeaderCommon>
     <NotificationBlock />
     <div class="home">
@@ -8,7 +7,6 @@
     </div>
     <FooterCommon v-if="!showDetailMessage"></FooterCommon>
     <LoadingBar></LoadingBar>
-    </client-only>
   </div>
 </template>
 
