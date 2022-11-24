@@ -410,6 +410,13 @@ export default {
   },
   middleware: 'auth',
   data() {
+    const validFormLength = (rule, value, callback, message) => {
+      if (value && value.length > 8) {
+        callback(new Error(this.$t('validation.com017', { _field_: message })))
+      } else {
+        callback()
+      }
+    }
     return {
       listProvince: [],
       listWorkTypes: [],
@@ -447,6 +454,12 @@ export default {
         value: ''
       },
       accountRules: {
+        salary_max: [
+          { validator: validFormLength, trigger: 'blur' }
+        ],
+        salary_min: [
+          { validator: validFormLength, trigger: 'blur' }
+        ]
       },
       listRecruitmentFeatures: [],
       listCompanyFeatures: [],

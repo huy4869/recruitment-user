@@ -62,6 +62,11 @@ export const actions = {
       handleApi(resolve, reject, this.$axios.get('/job/total'), context)
     })
   },
+  getJobTypeAmount(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get('/job-type/amount-job-in-job-type'), context)
+    })
+  },
   // search job
   listSearchJob(context, data) {
     return new Promise((resolve, reject) => {
