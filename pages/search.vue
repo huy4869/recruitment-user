@@ -371,14 +371,7 @@ export default {
           ]
         }
       ],
-      listJobType: [
-        // { id: 1, name: 'ヘア', record: 12 },
-        // { id: 2, name: 'ネイル・マツゲ ', record: 12 },
-        // { id: 3, name: '美容クリニック', record: 12 },
-        // { id: 4, name: '整体・カイロ・酸素・温浴', record: 12 },
-        // { id: 5, name: 'フェイシャル・ボディ・脱毛', record: 12 },
-        // { id: 6, name: 'その他', record: 12 }
-      ],
+      listJobType: [],
       jobType: [],
       jobTypeSelectAll: false,
       workLocation: [],
