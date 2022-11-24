@@ -10,12 +10,12 @@
               <span>{{ $t('condition.occupation') }}</span>
             </div>
             <div class="header-search-right">
-              <el-button type="danger" class="form-search" plain @click="occupationDialog = true">
+              <el-button type="danger" class="form-search" plain @click="jobDialog = true">
                 <img src="/assets/icon/icon_add_blue.svg" alt="">
                 {{ $t('condition.enter_occupation') }}
               </el-button>
-              <div v-if="showProvince" class="show-result-condition">
-                {{ showProvince }}
+              <div v-if="showJobType" class="show-result-condition">
+                {{ showJobType }}
               </div>
             </div>
           </div>
@@ -24,12 +24,12 @@
               <span>{{ $t('condition.work_location') }}</span>
             </div>
             <div class="header-search-right">
-              <el-button type="danger" class="form-search" plain @click="jobDialog = true">
+              <el-button type="danger" class="form-search" plain @click="occupationDialog = true">
                 <img src="/assets/icon/icon_add_blue.svg" alt="">
                 {{ $t('condition.enter_work_location') }}
               </el-button>
-              <div v-if="showJobType" class="show-result-condition">
-                {{ showJobType }}
+              <div v-if="showProvince" class="show-result-condition">
+                {{ showProvince }}
               </div>
             </div>
           </div>
@@ -150,7 +150,7 @@
               <div class="list-province">
                 <el-checkbox-group v-model="jobType">
                   <div v-for="(type, key) in listJobType" :key="key" class="province-item form-work">
-                    <el-checkbox :label="type.id">{{ type.name }} <span class="total-record" @click.stop="changeFilter('job_type_ids', [type.id])">({{ type.record + $t('common.subject') }})</span></el-checkbox>
+                    <el-checkbox :label="type.id">{{ type.name }} <span class="total-record" @click.stop="changeFilter('job_type_ids', [type.id])">({{ type.amount + $t('common.subject') }})</span></el-checkbox>
                   </div>
                 </el-checkbox-group>
               </div>
@@ -195,7 +195,7 @@ import {
   MASTER_GET_DATA,
   LOCATION_LIST_AMOUNT,
   INDEX_SET_LOADING,
-  INDEX_SET_ERROR
+  INDEX_SET_ERROR, JOB_TYPE_AMOUNT
 } from '../store/store.const'
 import TitlePageElement from '../components/layout/TitlePageElement'
 import BannerElement from '../components/layout/BannerElement'
@@ -372,12 +372,12 @@ export default {
         }
       ],
       listJobType: [
-        { id: 1, name: 'ヘア', record: 12 },
-        { id: 2, name: 'ネイル・マツゲ ', record: 12 },
-        { id: 3, name: '美容クリニック', record: 12 },
-        { id: 4, name: '整体・カイロ・酸素・温浴', record: 12 },
-        { id: 5, name: 'フェイシャル・ボディ・脱毛', record: 12 },
-        { id: 6, name: 'その他', record: 12 }
+        // { id: 1, name: 'ヘア', record: 12 },
+        // { id: 2, name: 'ネイル・マツゲ ', record: 12 },
+        // { id: 3, name: '美容クリニック', record: 12 },
+        // { id: 4, name: '整体・カイロ・酸素・温浴', record: 12 },
+        // { id: 5, name: 'フェイシャル・ボディ・脱毛', record: 12 },
+        // { id: 6, name: 'その他', record: 12 }
       ],
       jobType: [],
       jobTypeSelectAll: false,
@@ -502,6 +502,10 @@ export default {
           })
         })
         this.listProvinceDistricts = dataListProvince
+      }
+      const dataJobTypeAmount = await this.$store.dispatch(JOB_TYPE_AMOUNT)
+      if (dataJobTypeAmount.status_code === 200) {
+        this.listJobType = dataJobTypeAmount.data
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
