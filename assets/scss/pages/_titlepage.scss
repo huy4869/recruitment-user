@@ -1,6 +1,8 @@
 .title-page-element {
   display: flex;
-  padding: 11px 0 11px 64px;
+  padding: 11px 90px;
+  max-width: 1152px;
+  margin: auto;
   .title-link {
     display: flex;
     background-color: $color-white;
@@ -26,20 +28,31 @@
   }
 }
 .banner-element {
-  padding: 24px 0;
-  text-align: center;
-  background-color: $color-primary;
+  height: 150px;
+  text-align: left;
+  background: url('~/assets/images/banner.svg') center;
+  padding-left: 90px;
   .banner-title {
     font-weight: 700;
-    font-size: 32px;
+    font-size: 20px;
     line-height: 40px;
-    color: $color-text-primary;
+    color: $color-white;
+    padding-top: 26px;
   }
-  .sub-banner-title {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color: $color-blue;
-    margin-top: 16px;
+  .sub-title {
+    color: $color-white;
+    display: flex;
+    span {
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 40px;
+    }
+    .sub-banner-title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      padding-top: 14px;
+      margin-left: 16px;
+    }
   }
 }

@@ -1,19 +1,22 @@
 .el-form-item__error {
   color: $color-red-primary;
+  font-size: 13px;
+  padding-top: 6px;
+  position: relative;
 }
 .el-form-item.is-error {
   .el-input {
     .el-input__inner {
-      border: 2px solid $color-red-primary;
+      border: 1px solid $color-red-primary;
     }
   }
 }
 .el-input {
-  height: 44px;
+  height: 40px;
   .el-input__inner {
-    border: 2px solid $border-default;
+    border: 1px solid $border-default;
     &:focus {
-      border: 2px solid $color-text-primary;
+      border: 1px solid $color-text-primary;
       outline: 0;
     }
     &:hover {
@@ -21,26 +24,30 @@
     }
   }
   input {
-    height: 44px;
+    height: 40px;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 22px;
     padding: 10px 16px;
     &::placeholder {
       color: $color-placeholder;
       font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
+      font-size: 14px;
+      line-height: 22px;
       top: 10px;
     }
   }
 }
 
+.el-form-item__content {
+  line-height: 38px;
+}
+
 .el-textarea {
   .el-textarea__inner {
-    border: 2px solid $border-default;
+    border: 1px solid $border-default;
     &:focus {
-      border: 2px solid $color-text-primary;
+      border: 1px solid $color-text-primary;
       outline: 0;
     }
     &:hover {
@@ -51,8 +58,8 @@
     &::placeholder {
       color: $color-placeholder;
       font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
+      font-size: 14px;
+      line-height: 22px;
       top: 10px;
     }
   }
@@ -65,11 +72,11 @@
     width: 24px;
     height: 24px;
     background: $color-white;
-    border: 2px solid $border-focus;
+    border: 1px solid $border-default;
     border-radius: 4px;
     outline: none;
     &:focus-visible {
-      border: 2px solid $border-focus;
+      border: 1px solid $border-default;
     }
   }
   .el-checkbox__input.is-checked .el-checkbox__inner {
@@ -86,49 +93,53 @@
   }
   .el-checkbox__label {
     font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 22px;
     color: $color-black;
     padding-left: 8px;
   }
 }
 
 .el-button {
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 22px;
 }
 
 .el-button--danger {
   font-weight: 700;
+  height: 48px;
+  background-color: $color-blue;
+  text-align: center;
+  border-radius: 24px;
   font-size: 16px;
   line-height: 24px;
-  height: 48px;
-  background-color: $color-button-danger;
-  border-radius: 4px;
-  border: none;
-  text-align: center;
+  border: 1px solid $color-blue;
   &:hover {
-    background-color: $color-button-hover;
+    background-color: $color-blue;
+    border: 1px solid $color-blue;
   }
   &:focus {
-    background-color: $color-button-focus;
+    background-color: $color-blue;
+    border: 1px solid $color-blue;
   }
 }
 
 .el-button--default {
   background: $color-white;
-  border-radius: 4px;
-  line-height: 22px;
-  border-color: $color-button-danger;
-  color: $color-button-danger;
+  color: $color-blue;
+  border: 1px solid $color-blue;
+  border-radius: 24px;
+  font-size: 16px;
+  line-height: 24px;
   &:hover {
-    border-color: $color-button-hover;
+    border-color: $color-blue;
     background: $color-white;
-    color: $color-button-hover;
+    color: $color-blue;
   }
   &:focus {
     background-color: $color-white;
-    border-color: $color-button-focus;
-    color: $color-button-focus;
+    border-color: $color-blue;
+    color: $color-blue;
   }
 }
 
@@ -181,6 +192,21 @@
       height: auto;
     }
   }
+  .el-tag.el-tag--info {
+    background: $color-bg-footer;
+    border-radius: 2px;
+    border: none;
+    .el-tag__close {
+      background-image: url('/assets/icon/icon_remove_select.svg');
+      background-color: unset;
+      border-radius: 0;
+      width: 20px;
+      height: 20px;
+      &:before {
+        content: '';
+      }
+    }
+  }
 }
 
 .el-input {
@@ -209,12 +235,12 @@
 .el-textarea .el-textarea__inner {
   font-weight: 500;
   color: $color-black;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .el-select .el-select__tags .el-select__tags-text,
 .el-select-dropdown__wrap .el-select-dropdown__list .el-select-dropdown__item {
-  font-size: 16px;
+  font-size: 14px;
   color: $color-black;
   font-weight: 500;
   &.is-disabled {
@@ -227,7 +253,7 @@
 
 .el-checkbox__input.is-focus {
   .el-checkbox__inner {
-    border-color: $border-focus;
+    border-color: $border-default;
   }
 }
 .el-checkbox__input.is-checked+.el-checkbox__label {
@@ -244,7 +270,7 @@
         width: 24px;
         height: 24px;
         position: relative;
-        top: 7px;
+        top: 5px;
       }
       .el-icon-arrow-up::before {
         background-image: url('/assets/icon/icon_dropdown.svg');

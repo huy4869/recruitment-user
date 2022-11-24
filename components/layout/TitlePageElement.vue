@@ -6,7 +6,7 @@
           <img src="/assets/icon/icon_home.svg"/>
           <span>{{ title.name }}</span>
         </router-link>
-        <span>・</span>
+        <span class="icon-between">/</span>
       </div>
       <div class="d-flex" v-else-if="key === (listMenu.length - 1)">
         <div class="title-not-link">
@@ -17,7 +17,7 @@
         <router-link class="title-link" :to="title.route" tag="button">
           <span>{{ title.name }}</span>
         </router-link>
-        <span>・</span>
+        <span class="icon-between">/</span>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="cv-page">
+    <BannerElement :banner="$t('page.my_page')" title="my page" :subBanner="$t('content.web_cv')"></BannerElement>
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
       <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
       <div class="right-content-element">
@@ -17,7 +17,6 @@
               label-position="left"
             >
               <div class="edit-form-input">
-                <BorderElement :middle="true"></BorderElement>
                 <el-row class="d-flex form-label-input">
                   <el-col :md="6" :sm="12" class="col-label">
                     <div class="label"><span>{{ $t('career.store_name') }}</span></div>
@@ -76,7 +75,7 @@
                     </div>
                     <div class="required">{{ $t('form.required') }}</div>
                   </el-col>
-                  <el-col class="pb-8" :md="18" :sm="24">
+                  <el-col :md="18" :sm="24">
                     <div ref="period_end"></div>
                     <div ref="period_start" class="content-input content-datetime">
                       <el-row class="enroll-checkbox">

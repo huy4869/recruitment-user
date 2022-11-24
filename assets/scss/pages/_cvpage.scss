@@ -1,7 +1,7 @@
 .cv-page {
   .cv-content {
     display: flex;
-    padding: 54px 64px;
+    padding: 8px 90px;
     max-width: 1152px;
     margin: auto;
   }
@@ -20,7 +20,7 @@
     min-width: 24px;
     width: max-content;
     height: 22px;
-    border: 1px solid $color-black;
+    border: 1px solid $color-text-primary;
     font-size: 16px;
     border-radius: 50%;
     line-height: 20px;
@@ -36,28 +36,28 @@
     }
   }
   .edit-cv-title {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 32px;
-    color: $color-black;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: 0.1em;
+    color: $color-text-primary;
     display: flex;
+    margin-bottom: 18px;
   }
   .edit-cv-content {
+    border-top: 3px solid $color-text-primary;
     .card-title-mobile {
       display: none;
     }
     .edit-form-input {
-      margin-top: 24px;
+      margin-top: 20px;
       .border-form-middle {
-        height: 3px;
+        display: none;
         .border-middle {
-          height: 2px;
         }
       }
       .border-input {
         .border-middle {
-          border-bottom: 1px solid $border-default;
-          margin-left: 20px;
         }
       }
       .el-form-item {
@@ -173,10 +173,10 @@
         font-size: 14px;
         line-height: 22px;
         color: $color-text-3;
-        margin-top: 16px;
+        margin-top: 10px;
       }
       .enroll-checkbox {
-        margin-bottom: 20px;
+        margin-bottom: 14px;
         width: fit-content;
         .time-checkbox {
           width: fit-content;
@@ -209,6 +209,11 @@
 .edit-form-content {
   .edit-form-input {
     margin-top: 24px;
+    .form-label-input {
+      &:first-child .content-input {
+        border-top: 1px solid $border-default;
+      }
+    }
     .border-form-middle {
       height: 3px;
       .border-middle {
@@ -228,28 +233,27 @@
       position: relative;
       min-height: 100%;
       .label {
-        background: $color-blue-3;
-        border-radius: 4px;
+        background: $color-bg-footer;
         font-weight: 700;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 14px;
+        line-height: 22px;
         height: 100%;
         span {
-          padding: 24px 16px;
+          padding: 22px 16px 24px;
           display: block;
         }
       }
     }
     .required {
       position: absolute;
-      top: 24px;
-      right: 16px;
+      top: 22px;
+      right: 22px;
       border-radius: 2px;
       background: $color-red-primary;
       color: $color-white;
       font-weight: 500;
       font-size: 14px;
-      line-height: 24px;
+      line-height: 22px;
       padding: 1px 6px;
       text-align: center;
     }
@@ -331,14 +335,16 @@
         }
       }
     }
+
     .content-input {
-      margin-left: 20px;
-      padding: 20px 0;
+      margin-left: 24px;
+      padding: 13px 0;
+      border-bottom: 1px solid $border-default;
       .el-input__suffix {
         display: flex;
         align-items: center;
         cursor: pointer;
-        right: 17px;
+        right: 16px;
         .icon-show-pass {
           display: flex;
         }
@@ -386,14 +392,14 @@
         padding: 0 10px;
       }
       .text-normal {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
       }
       .gender {
         padding: 0 36px 0 8px;
       }
       .date-space {
-        margin: 10px 20px 0 0
+        margin: 10px 22px 0 2px
       }
       .edu-status {
         margin-top: 32px;
@@ -508,24 +514,27 @@
 
 .menu-left-element {
   margin-right: 29px;
+  margin-top: 58px;
+  border-top: 1px solid $border-primary;
+
   .menu-left {
     text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    padding: 16px 14px 16px 24px;
-    margin-bottom: 3px;
-    color: $color-text-primary;
-    background-color: $color-primary;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 5px 0 5px 4px;
+    border-bottom: 1px solid $border-primary;
+    color: $color-black;
+    background-color: $color-white;
     width: 203px;
     display: flex;
     justify-content: space-between;
-    border-radius: 4px;
     cursor: pointer;
   }
   .menu-active {
-    background-color: $color-text-primary;
-    color: $color-primary;
+    font-weight: 700;
+
+    color: $color-text-primary;
   }
 }
 
