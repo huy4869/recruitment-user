@@ -586,7 +586,8 @@ export default {
       this.confirmModal = false
     },
     handleUpdate() {
-      this.error = { key: null, value: '' }
+      this.checkStartTime()
+      this.checkEndTime()
       this.$refs.accountForm.validate(async(valid, key) => {
         if (valid) {
           try {
