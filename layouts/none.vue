@@ -1,10 +1,12 @@
 <template>
   <div>
+    <client-only>
     <NotificationBlock />
     <div class="home">
       <nuxt />
     </div>
     <LoadingBar></LoadingBar>
+    </client-only>
   </div>
 </template>
 

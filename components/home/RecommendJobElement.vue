@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend-job-element" @click="changeToLink('/job/' + jobActive.id)">
+  <div class="recommend-job-element cursor-pointer" @click="changeToLink('/job/' + jobActive.id)">
     <div class="job-title">
       <div class="title-main">{{ jobActive.name }}</div>
       <div class="sub-title">{{ jobActive.store_name }}</div>
