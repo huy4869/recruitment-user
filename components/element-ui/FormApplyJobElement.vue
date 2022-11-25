@@ -209,7 +209,7 @@ export default {
             dataDate[date.date] = date
           })
           this.listDate = dataDate
-          this.changeDay(dataResponse.data.application_user.date)
+          this.listTime = this.listDate[dataResponse.data.application_user.date].times
         } else if (dataResponse.status_code === 500) {
           await this.$store.commit(INDEX_SET_ERROR, {
             show: true,

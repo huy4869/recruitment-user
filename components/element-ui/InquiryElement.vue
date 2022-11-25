@@ -190,7 +190,7 @@ export default {
   data() {
     const validAreaLength = (rule, value, callback, message) => {
       if (value && value.length > 1000) {
-        callback(new Error(this.$t('validation.short_area_length', { _field_: message })))
+        callback(new Error(this.$t('validation.short_area_length_2', { _field_: message })))
       } else {
         callback()
       }
@@ -257,7 +257,7 @@ export default {
         ],
         content: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('inquiry.content') }), trigger: 'blur' },
-          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('inquiry.content') }), trigger: 'blur' }
+          { validator: validAreaLength, message: this.$t('validation.area_length_2', { _field_: this.$t('inquiry.content') }), trigger: 'blur' }
         ]
       },
       phone: '',
