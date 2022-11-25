@@ -266,8 +266,8 @@ export default {
           { validator: validPhone, trigger: 'blur' }
         ],
         content: [
-          { validator: validAreaLength, message: this.$t('validation.area_length_2', { _field_: this.$t('inquiry.content') }), trigger: 'blur' },
-          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('inquiry.content') }), trigger: 'blur' }
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('inquiry.content') }), trigger: 'blur' },
+          { validator: validAreaLength, message: this.$t('validation.area_length_2', { _field_: this.$t('inquiry.content') }), trigger: 'blur' }
         ]
       },
       phone: '',
