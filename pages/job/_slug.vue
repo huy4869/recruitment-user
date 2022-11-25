@@ -72,7 +72,7 @@
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
         <div class="button-detail">
-          <div v-if="!job.is_apply" class="el-button" @click="applyDialog = !applyDialog">
+          <div v-if="!job.is_apply" class="el-button" @click="openApplyDialog">
             {{ $t('button.apply') }}
           </div>
           <div v-else class="el-button el-disabled">
@@ -253,7 +253,7 @@
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div class="button-detail">
-            <div v-if="!job.is_apply" class="el-button" @click="applyDialog = !applyDialog">
+            <div v-if="!job.is_apply" class="el-button" @click="openApplyDialog">
               {{ $t('button.apply') }}
             </div>
             <div v-else class="el-button el-disabled">
@@ -463,7 +463,8 @@ export default {
           { validator: validAreaLength, message: this.$t('validation.area_length_2', { _field_: this.$t('job.inquiry_details') }), trigger: 'blur' }
         ]
       },
-      isValid: false
+      isValid: false,
+      loggedIn: this.$auth.loggedIn
     }
   },
   computed: {
@@ -680,6 +681,13 @@ export default {
       this.$refs.formAbout.validate(valid => {
         this.isValid = valid
       })
+    },
+    openApplyDialog() {
+      if (this.loggedIn) {
+        this.applyDialog = !this.applyDialog
+      } else {
+        this.$router.push('/login')
+      }
     }
   }
 }
