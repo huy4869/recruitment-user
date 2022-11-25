@@ -188,9 +188,19 @@ export default {
   name: 'InquiryElement',
   components: { BorderElement },
   data() {
+    const validRequired = (rule, value, callback, message) => {
+      if (!value || value.trim() === '') {
+        callback(new Error(message))
+      } else {
+        callback()
+      }
+    }
     const validAreaLength = (rule, value, callback, message) => {
+      if (value && value.trim() === '') {
+        callback(new Error(this.$t('validation.short_area_length_2', { _field_: message })))
+      }
       if (value && value.length > 1000) {
-        callback(new Error(this.$t('validation.short_area_length', { _field_: message })))
+        callback(new Error(this.$t('validation.short_area_length_2', { _field_: message })))
       } else {
         callback()
       }
@@ -248,7 +258,7 @@ export default {
           { validator: validFormEmail, trigger: 'blur' }
         ],
         name: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('inquiry.name') }), trigger: 'blur' },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('inquiry.name') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('inquiry.name') }), trigger: 'blur' }
         ],
         tel: [
@@ -256,8 +266,8 @@ export default {
           { validator: validPhone, trigger: 'blur' }
         ],
         content: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('inquiry.content') }), trigger: 'blur' },
-          { validator: validAreaLength, message: this.$t('validation.area_length', { _field_: this.$t('inquiry.content') }), trigger: 'blur' }
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('inquiry.content') }), trigger: 'blur' },
+          { validator: validAreaLength, message: this.$t('validation.area_length_2', { _field_: this.$t('inquiry.content') }), trigger: 'blur' }
         ]
       },
       phone: '',
@@ -266,6 +276,9 @@ export default {
   },
   created() {
     this.getPhoneNumber()
+    if (this.$auth.loggedIn) {
+      this.accountRules.tel = []
+    }
   },
   watch: {
     '$auth.user': {

@@ -1,12 +1,16 @@
 <template>
   <div>
-    <HeaderCommon></HeaderCommon>
-    <NotificationBlock />
-    <div class="home">
-      <nuxt />
-    </div>
-    <FooterCommon v-if="!showDetailMessage"></FooterCommon>
-    <LoadingBar></LoadingBar>
+    <client-only>
+      <HeaderCommon />
+      <NotificationBlock />
+      <div class="home">
+        <nuxt />
+      </div>
+      <div v-if="!showDetailMessage">
+        <FooterCommon />
+      </div>
+      <LoadingBar />
+    </client-only>
   </div>
 </template>
 

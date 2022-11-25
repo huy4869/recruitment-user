@@ -40,24 +40,36 @@
       <div class="sub-detail-title">{{ job.pick_up_point }}</div>
       <div class="show-sp">
         <div class="detail-job-image">
-          <div class="job-avatar">
-            <img :src="job.banner_image" alt="">
+          <div v-if="job.banner_image" class="job-avatar">
+            <el-image
+              :src="job.banner_image"
+              :preview-src-list="[job.banner_image]">
+            </el-image>
           </div>
           <div class="job-detail">
             <div v-for="(image, index) in job.detail_images" :key="index" class="image-detail">
-              <img :src="image.url" alt="">
+              <el-image
+                :src="image.url"
+                :preview-src-list="[image.url]">
+              </el-image>
             </div>
           </div>
         </div>
       </div>
       <div class="show-pc">
         <div class="detail-job-image-pc">
-          <div class="job-avatar">
-            <img :src="job.banner_image" alt="">
+          <div v-if="job.banner_image" class="job-avatar">
+            <el-image
+              :src="job.banner_image"
+              :preview-src-list="[job.banner_image]">
+            </el-image>
           </div>
           <div class="job-detail">
             <div v-for="(image, index) in job.detail_images" :key="index" class="image-detail">
-              <img :src="image.url" alt="">
+              <el-image
+                :src="image.url"
+                :preview-src-list="[image.url]">
+              </el-image>
             </div>
           </div>
         </div>
@@ -602,17 +614,26 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     async changeStatusJob(response, state) {
-      if (response.status_code === 200) {
-        await this.$store.commit(INDEX_SET_SUCCESS, {
-          show: true,
-          text: response.messages
-        })
-        this.job.is_favorite = state
-      } else {
-        await this.$store.commit(INDEX_SET_ERROR, {
-          show: true,
-          text: response.messages
-        })
+      switch (response.status_code) {
+        case 200:
+          await this.$store.commit(INDEX_SET_SUCCESS, {
+            show: true,
+            text: response.messages
+          })
+          this.job.is_favorite = state
+          break
+        case 500:
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: this.$t('content.EXC_001')
+          })
+          break
+        default:
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: response.messages
+          })
+          break
       }
     },
     async createFeedback() {
@@ -665,7 +686,7 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     changeToSearchWork(search) {
-      return '/search?work_type_ids=' + search.id
+      return '/search?job_type_ids=' + search.id
     },
     handleClose() {
       this.$confirm(this.$t('content.CON_002'), {
