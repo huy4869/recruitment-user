@@ -40,7 +40,7 @@
       <div class="sub-detail-title">{{ job.pick_up_point }}</div>
       <div class="show-sp">
         <div class="detail-job-image">
-          <div class="job-avatar">
+          <div v-if="job.banner_image" class="job-avatar">
             <el-image
               :src="job.banner_image"
               :preview-src-list="[job.banner_image]">
@@ -58,7 +58,7 @@
       </div>
       <div class="show-pc">
         <div class="detail-job-image-pc">
-          <div class="job-avatar">
+          <div v-if="job.banner_image" class="job-avatar">
             <el-image
               :src="job.banner_image"
               :preview-src-list="[job.banner_image]">
