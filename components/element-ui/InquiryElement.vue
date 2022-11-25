@@ -189,6 +189,9 @@ export default {
   components: { BorderElement },
   data() {
     const validAreaLength = (rule, value, callback, message) => {
+      if (value && value.trim() === '') {
+        callback(new Error(this.$t('validation.short_area_length_2', { _field_: message })))
+      }
       if (value && value.length > 1000) {
         callback(new Error(this.$t('validation.short_area_length_2', { _field_: message })))
       } else {
@@ -266,6 +269,9 @@ export default {
   },
   created() {
     this.getPhoneNumber()
+    if (this.$auth.loggedIn) {
+      this.accountRules.tel = []
+    }
   },
   watch: {
     '$auth.user': {

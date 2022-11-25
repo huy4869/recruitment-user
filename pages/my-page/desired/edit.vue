@@ -695,8 +695,8 @@ export default {
       const end_min = this.accountForm.working_hours.end_minutes
       const start_hour = this.accountForm.working_hours.start_hours
       const start_min = this.accountForm.working_hours.start_minutes
-      if ((end_hour || end_min) && (!start_hour && !start_hour)) {
-        return this.$t('validation.com024')
+      if ((end_hour || end_min) && (!start_hour && !start_min)) {
+        return this.$t('validation.com022')
       }
       if ((!start_hour && start_min)) {
         return this.$t('validation.com024')
@@ -716,7 +716,7 @@ export default {
       const start_hour = this.accountForm.working_hours.start_hours
       const start_min = this.accountForm.working_hours.start_minutes
       if ((start_hour || start_min) && (!end_hour && !end_min)) {
-        return this.$t('validation.com024')
+        return this.$t('validation.com023')
       }
       if (!end_hour && end_min) {
         return this.$t('validation.com024')
@@ -766,6 +766,10 @@ export default {
       const salary_min = this.accountForm.salary_min
       if (!salary_max && !salary_min) {
         this.accountForm.salary_type_id = ''
+      }
+      if (salary_min >= salary_max) {
+        this.$refs.accountForm.validateField('salary_min')
+        this.$refs.accountForm.validateField('salary_max')
       }
     },
     resetValidateSalary() {

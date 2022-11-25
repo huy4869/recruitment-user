@@ -103,8 +103,10 @@ export default {
             check = false
           }
         } else if (['job_experience_ids', 'job_feature_ids', 'job_type_ids', 'work_type_ids', 'working_days', 'province_ids'].includes(index)) {
-          if (this.condition[index].length) {
-            check = false
+          if (![null, ''].includes(this.condition[index])) {
+            if (this.condition[index].length) {
+              check = false
+            }
           }
         } else if (![null, ''].includes(this.condition[index]) && (index !== 'id')) {
           check = false
