@@ -498,7 +498,7 @@ export default {
       if (this.job.address === undefined) {
         return ''
       }
-      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.district + this.job.address.address + (this.job.address.building || '')
+      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.province_city.name + this.job.address.address + (this.job.address.building || '')
     },
     showStation() {
       if (this.job.stations === undefined) {
@@ -675,6 +675,7 @@ export default {
       })
         .then(_ => {
           this.aboutDialog = false
+          this.resetDataForm()
         })
         .catch(_ => {})
     },
@@ -682,6 +683,7 @@ export default {
       this.formAbout.errors = {}
       if (_.isEqual(this.formAbout, this.clonedformAbout)) {
         this.aboutDialog = false
+        this.resetDataForm()
       } else {
         this.handleClose()
       }
@@ -705,6 +707,12 @@ export default {
       } else {
         this.$router.push('/login')
       }
+    },
+    resetDataForm() {
+      if (this.$refs.formAbout) {
+        this.$refs.formAbout.resetFields()
+      }
+      this.error = { key: null, value: '' }
     }
   }
 }

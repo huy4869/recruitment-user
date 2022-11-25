@@ -82,7 +82,7 @@
                       <el-row class="enroll-checkbox">
                         <el-checkbox v-model="accountForm.period_check">{{ $t('my_page.enroll') }}</el-checkbox>
                       </el-row>
-                      <el-row class="d-flex period">
+                      <el-row class="d-flex period items-center">
                         <el-col :md="9" :sm="24" class="first-name">
                           <el-form-item label="" prop="period_start" :error="(error.key === 'period_start') ? error.value : ''">
                             <el-row class="d-flex">
@@ -125,8 +125,9 @@
                             </el-row>
                           </el-form-item>
                         </el-col>
-                        <span v-show="accountForm.period_check" class="date-space">~</span>
-                        <el-col v-show="accountForm.period_check" :md="9" :sm="24" class="birth-year">
+                        <span class="date-space"> ～ </span>
+                        <span v-show="accountForm.period_check" class="text-normal">{{ $t('career.current') }}</span>
+                        <el-col v-show="!accountForm.period_check" :md="9" :sm="24" class="birth-year">
                           <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
                             <el-row class="d-flex">
                               <el-col  :sm="12" :xs="12" class="birth-year">
@@ -476,7 +477,7 @@ export default {
       accountForm: {
         business_content: '',
         experience_accumulation: '',
-        period_check: false,
+        period_check: true,
         store_name: '',
         company_name: '',
         period_start: '',
@@ -589,7 +590,7 @@ export default {
       }
     },
     'accountForm.period_check'() {
-      if (this.accountForm.period_check) {
+      if (!this.accountForm.period_check) {
         if (!this.accountForm.period_year_end) {
           this.accountForm.period_year_end = this.accountForm.period_year_start
         }
@@ -769,7 +770,7 @@ export default {
       this.accountForm.work_type_name = this.job.work_types.id
       this.accountForm.other_occupation = this.job.job_types.name
       this.accountForm.other_status = this.job.work_types.name
-      this.accountForm.period_check = !!this.job.period_end
+      this.accountForm.period_check = !this.job.period_end
       for (const item in this.job) {
         this.accountForm[item] = this.job[item]
       }
@@ -860,7 +861,7 @@ export default {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
-            dto.period_check = this.accountForm.period_check ? 0 : 1
+            dto.period_check = !this.accountForm.period_check ? 0 : 1
             dto.period_end = dto.period_check === 0 ? dto.period_end : ''
             if (this.accountForm.other_occupation) {
               dto.job_types.name = this.accountForm.other_occupation
@@ -903,7 +904,7 @@ export default {
               id: this.$route.query.id,
               data: dto
             })
-            this.accountForm.period_check = dto.period_check === 0
+            this.accountForm.period_check = dto.period_check === 1
             if (response.status_code === 200) {
               await this.$store.commit(INDEX_SET_SUCCESS, {
                 show: true,
