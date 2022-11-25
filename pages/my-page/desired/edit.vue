@@ -126,7 +126,7 @@
                             />
                           </el-form-item>
                         </el-col>
-                        <span class="salary-range">~</span>
+                        <span class="salary-range"> ～ </span>
                         <el-col :md="5" :sm="15" :xs="15">
                           <el-form-item label="" prop="salary_max" :error="(error.key === 'salary_max') ? error.value : ''">
                             <el-input
