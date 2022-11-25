@@ -194,7 +194,9 @@
                                 v-for="item in m_job_types"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -243,7 +245,9 @@
                                 v-for="item in m_position_offices"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -273,7 +277,9 @@
                                 v-for="item in m_work_types"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -752,6 +758,25 @@ export default {
         this.m_job_types = res.data.m_job_types
         this.m_position_offices = res.data.m_position_offices
         this.m_work_types = res.data.m_work_types
+
+        if (res.status_code === 200) {
+          this.m_job_types = res.data.m_job_types.length ? res.data.m_job_types : [{ name: this.$t('career.enter_occupation'), disabled: true }]
+          this.m_position_offices = res.data.m_position_offices.length ? res.data.m_position_offices : [{ name: this.$t('career.position_offices'), disabled: true }]
+          this.m_work_types = res.data.m_work_types.length ? res.data.m_work_types : [{ name: this.$t('career.enter_emp_status'), disabled: true }]
+        } else if (res.status_code === 500) {
+          this.m_job_types = [{
+            name: this.$t('career.enter_occupation'),
+            disabled: true
+          }]
+          this.m_position_offices = [{
+            name: this.$t('career.position_offices'),
+            disabled: true
+          }]
+          this.m_work_types = [{
+            name: this.$t('career.enter_emp_status'),
+            disabled: true
+          }]
+        }
       })
     },
     scrollToElement(key) {
