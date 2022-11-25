@@ -351,10 +351,13 @@
               <el-form-item label="" prop="content">
                 <el-input
                   v-model="formAbout.content"
+                  ref="content"
                   type="textarea"
                   :rows="4"
                   maxlength="1000"
-                  :placeholder="$t('job.enter_inquiry_details')">
+                  :placeholder="$t('job.enter_inquiry_details')"
+                  @focus="resetValidate('content')"
+                >
                 </el-input>
               </el-form-item>
             </div>
@@ -424,7 +427,12 @@ export default {
       },
       formAbout: {
         feedback_type_ids: [],
-        content: ''
+        content: '',
+        errors: {}
+      },
+      error: {
+        key: null,
+        value: ''
       },
       listDate: [],
       listTime: [],
@@ -529,6 +537,13 @@ export default {
     this.clonedformAbout = _.cloneDeep(this.formAbout)
   },
   methods: {
+    resetValidate(ref) {
+      if (ref === this.error.key) {
+        this.error = { key: null, value: '' }
+      }
+      this.$refs.formAbout.fields.find((f) => f.prop === ref).clearValidate()
+      this.formAbout.errors[ref] = ''
+    },
     async getDetailJob() {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const dataResponse = await this.$store.dispatch(JOB_GET_DETAIL_JOB, this.$route.params.slug)
@@ -619,7 +634,7 @@ export default {
               text: response.messages
             })
             this.aboutDialog = false
-            this.formAbout = { feedback_type_ids: [], content: '' }
+            this.formAbout = { feedback_type_ids: [], content: '', errors: {}}
             break
           case 422:
             for (const [key] of Object.entries(response.data)) {
@@ -664,6 +679,7 @@ export default {
         .catch(_ => {})
     },
     closeAboutDialog() {
+      this.formAbout.errors = {}
       if (_.isEqual(this.formAbout, this.clonedformAbout)) {
         this.aboutDialog = false
       } else {
@@ -674,7 +690,8 @@ export default {
       this.aboutDialog = true
       this.formAbout = {
         feedback_type_ids: [],
-        content: ''
+        content: '',
+        errors: {}
       }
     },
     validateFormAbout() {
