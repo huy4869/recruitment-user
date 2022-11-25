@@ -88,7 +88,7 @@ export default {
       if (this.jobActive.salary === undefined) {
         return ''
       }
-      return this.jobActive.salary.min + '~' + this.jobActive.salary.max + this.jobActive.salary.type
+      return this.jobActive.salary.min + ' ～ ' + this.jobActive.salary.max + this.jobActive.salary.type
     }
   },
   created() {
