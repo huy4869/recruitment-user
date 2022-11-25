@@ -604,6 +604,7 @@ export default {
       this.checkStartTime()
       this.checkEndTime()
       const check = this.checkSalary()
+      console.log(check)
       if (check) {
         this.scrollToElement('salary_min')
         return
@@ -766,12 +767,13 @@ export default {
       }
     },
     checkSalary() {
+      const salary_type_id = this.accountForm.salary_type_id
       const salary_max = this.accountForm.salary_max
       const salary_min = this.accountForm.salary_min
       if (!salary_max && !salary_min) {
         this.accountForm.salary_type_id = ''
       }
-      if (salary_min >= salary_max) {
+      if (salary_type_id && (salary_min >= salary_max)) {
         this.$refs.accountForm.validateField('salary_min')
         this.$refs.accountForm.validateField('salary_max')
         return true
