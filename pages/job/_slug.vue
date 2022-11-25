@@ -614,17 +614,26 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     async changeStatusJob(response, state) {
-      if (response.status_code === 200) {
-        await this.$store.commit(INDEX_SET_SUCCESS, {
-          show: true,
-          text: response.messages
-        })
-        this.job.is_favorite = state
-      } else {
-        await this.$store.commit(INDEX_SET_ERROR, {
-          show: true,
-          text: response.messages
-        })
+      switch (response.status_code) {
+        case 200:
+          await this.$store.commit(INDEX_SET_SUCCESS, {
+            show: true,
+            text: response.messages
+          })
+          this.job.is_favorite = state
+          break
+        case 500:
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: this.$t('content.EXC_001')
+          })
+          break
+        default:
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: response.messages
+          })
+          break
       }
     },
     async createFeedback() {
