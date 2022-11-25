@@ -603,7 +603,11 @@ export default {
     handleUpdate() {
       this.checkStartTime()
       this.checkEndTime()
-      this.checkSalary()
+      const check = this.checkSalary()
+      if (check) {
+        this.scrollToElement('salary_min')
+        return
+      }
       this.$refs.accountForm.validate(async(valid, key) => {
         if (valid) {
           try {
@@ -770,7 +774,9 @@ export default {
       if (salary_min >= salary_max) {
         this.$refs.accountForm.validateField('salary_min')
         this.$refs.accountForm.validateField('salary_max')
+        return true
       }
+      return false
     },
     resetValidateSalary() {
       if (this.accountForm.salary_min < this.accountForm.salary_max) {
