@@ -56,7 +56,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              {{ info.birthday }}
+              {{ info.birthday_format }}
             </p>
           </div>
           <div class="left-item">

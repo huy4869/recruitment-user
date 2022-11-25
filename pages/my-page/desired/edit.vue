@@ -126,7 +126,7 @@
                             />
                           </el-form-item>
                         </el-col>
-                        <span class="salary-range">~</span>
+                        <span class="salary-range"> ～ </span>
                         <el-col :md="5" :sm="15" :xs="15">
                           <el-form-item label="" prop="salary_max" :error="(error.key === 'salary_max') ? error.value : ''">
                             <el-input
@@ -523,7 +523,7 @@ export default {
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },
       { name: this.$t('page.my_page'), route: '/my-page/top-page' },
-      { name: this.$t('page.web_cv'), route: '/my-page/web-cv' }
+      { name: this.$t('desired_condition.edit'), route: '/my-page/web-cv' }
     ])
     await this.getMasterData()
     await this.getDesired()
