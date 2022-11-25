@@ -665,7 +665,7 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     changeToSearchWork(search) {
-      return '/search?work_type_ids=' + search.id
+      return '/search?job_type_ids=' + search.id
     },
     handleClose() {
       this.$confirm(this.$t('content.CON_002'), {
