@@ -102,7 +102,7 @@ export default {
           this.condition.working_hours.end_minutes && this.condition.working_hours.working_hours_format) {
             check = false
           }
-        } else if (['job_experience_ids', 'job_feature_ids', 'job_type_ids', 'work_type_ids', 'working_days'].includes(index)) {
+        } else if (['job_experience_ids', 'job_feature_ids', 'job_type_ids', 'work_type_ids', 'working_days', 'province_ids'].includes(index)) {
           if (this.condition[index].length) {
             check = false
           }
