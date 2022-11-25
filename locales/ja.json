@@ -42,7 +42,7 @@
     "place": "場所：",
     "change": "希望面接時間を変更",
     "cancel": "キャンセル:",
-    "created_at": "応募日時",
+    "created_at": "応募日時:",
     "interview": "面接",
     "open_google_map": "グーグルマップを開く",
     "status": {
@@ -234,6 +234,7 @@
   },
   "my_page": {
     "top_page": "TOPページ",
+    "top": "TOP",
     "history": "応募履歴",
     "favorite_job": "お気に入り求人",
     "web_cv": "Web履歴書",
@@ -302,7 +303,11 @@
     "sns_social": "SNSアカウント",
     "add_job_career": "資格を追加する",
     "add_education": "学歴を追加する",
-    "register": "登録"
+    "register": "登録",
+    "interview": "面接",
+    "schedule": "予定",
+    "application": "応募",
+    "app_history": "履歴"
   },
   "condition": {
     "list": {

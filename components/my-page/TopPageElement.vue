@@ -2,8 +2,9 @@
   <div class="my-page-top-element">
     <div class="schedule-interview">
       <div class="top-page-title">
-        <img src="/assets/icon/icon_title_calendar.svg" alt="">
-        <span>{{ $t('my_page.schedule_interview') }}</span>
+        <span class="text-focus">{{ $t('my_page.interview') }}</span>
+        <span>{{ $t('my_page.schedule') }}</span>
+        <span class="sub-title">Interview Schedule</span>
       </div>
       <div v-if="listSchedule.length" class="top-page-content">
         <div v-for="(schedule, index) in listSchedule" :key="index">
@@ -20,8 +21,9 @@
     </div>
     <div class="application-history">
       <div class="top-page-title">
-        <img src="/assets/icon/icon_title_calendar.svg" alt="">
-        <span>{{ $t('my_page.application_history') }}</span>
+        <span class="text-focus">{{ $t('my_page.application') }}</span>
+        <span>{{ $t('my_page.app_history') }}</span>
+        <span class="sub-title">Application History</span>
       </div>
       <div v-if="listScheduleHistory.length" class="top-page-content">
         <div v-for="(schedule, index) in listScheduleHistory" :key="index">
@@ -42,21 +44,21 @@
           <img src="/assets/icon/icon_history.svg" alt="">
           <span>{{ $t('my_page.history') }}</span>
         </div>
-        <img class="icon-arrow" src="/assets/icon/icon_arrow_active.svg" alt="">
+        <img class="icon-arrow" src="/assets/icon/icon_arrow_white.svg" alt="">
       </div>
       <div class="button-item" @click="changeToPage('favorite_job')">
         <div class="d-flex">
           <img src="/assets/icon/icon_heart.svg" alt="">
           <span>{{ $t('my_page.favorite_job') }}</span>
         </div>
-        <img class="icon-arrow" src="/assets/icon/icon_arrow_active.svg" alt="">
+        <img class="icon-arrow" src="/assets/icon/icon_arrow_white.svg" alt="">
       </div>
       <div class="button-item" @click="changeToPage('web_cv')">
         <div class="d-flex">
           <img src="/assets/icon/icon_user.svg" alt="">
           <span>{{ $t('my_page.web_cv') }}</span>
         </div>
-        <img class="icon-arrow" src="/assets/icon/icon_arrow_active.svg" alt="">
+        <img class="icon-arrow" src="/assets/icon/icon_arrow_white.svg" alt="">
       </div>
     </div>
     <el-dialog class="popup-confirm" :visible.sync="dialogCancel" width="570px">
