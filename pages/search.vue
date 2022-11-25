@@ -169,8 +169,8 @@
           <span class="total-record">{{ total + $t('common.subject') }}</span>
           <span>{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total }) }}</span>
         </div>
-        <div class="show-pc">
-          <PaginationElement v-if="listJobs.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
+        <div v-if="listJobs.length" class="show-pc">
+          <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
         </div>
       </div>
       <div v-if="listJobs.length" class="search-list-job">
@@ -181,7 +181,9 @@
       <div v-else class="search-list-job">
         <NoDataElement :text="$t('common.message_no_data.specified_criteria')"></NoDataElement>
       </div>
-      <PaginationElement v-if="listJobs.length" :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
+      <div v-if="listJobs.length">
+        <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
+      </div>
     </div>
     <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = !applyDialog" :job="jobActive" :is-edit="false"></FormApplyJobElement>
   </div>

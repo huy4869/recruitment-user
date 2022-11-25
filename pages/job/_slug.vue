@@ -41,11 +41,17 @@
       <div class="show-sp">
         <div class="detail-job-image">
           <div class="job-avatar">
-            <img :src="job.banner_image" alt="">
+            <el-image
+              :src="job.banner_image"
+              :preview-src-list="[job.banner_image]">
+            </el-image>
           </div>
           <div class="job-detail">
             <div v-for="(image, index) in job.detail_images" :key="index" class="image-detail">
-              <img :src="image.url" alt="">
+              <el-image
+                :src="image.url"
+                :preview-src-list="[image.url]">
+              </el-image>
             </div>
           </div>
         </div>
@@ -53,11 +59,17 @@
       <div class="show-pc">
         <div class="detail-job-image-pc">
           <div class="job-avatar">
-            <img :src="job.banner_image" alt="">
+            <el-image
+              :src="job.banner_image"
+              :preview-src-list="[job.banner_image]">
+            </el-image>
           </div>
           <div class="job-detail">
             <div v-for="(image, index) in job.detail_images" :key="index" class="image-detail">
-              <img :src="image.url" alt="">
+              <el-image
+                :src="image.url"
+                :preview-src-list="[image.url]">
+              </el-image>
             </div>
           </div>
         </div>
