@@ -157,7 +157,7 @@ import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
   INDEX_SET_ERROR,
-  CHANGE_PASS, MY_PAGE_SET_STATE_PAGE
+  CHANGE_PASS, MY_PAGE_SET_STATE_PAGE, INDEX_SET_TITLE_MENU
 } from '../../store/store.const'
 
 export default {
@@ -250,6 +250,10 @@ export default {
   },
   async created() {
     await this.$store.commit(INDEX_SET_LOADING, false)
+    this.$store.commit(INDEX_SET_TITLE_MENU, [
+      { name: this.$t('page.home'), route: '/' },
+      { name: this.$t('page.my_page'), route: '/my-page' }
+    ])
   },
   methods: {
     resetValidate(ref) {
