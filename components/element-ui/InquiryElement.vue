@@ -276,7 +276,7 @@ export default {
   },
   created() {
     this.getPhoneNumber()
-    if (this.$auth.loggedIn) {
+    if (this.$auth.loggedIn && this.$auth.user.tel) {
       this.accountRules.tel = []
     }
   },
