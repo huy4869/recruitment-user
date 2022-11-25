@@ -173,6 +173,7 @@ export default {
       if (this.applyDialogState) {
         await this.getDetailJob()
       }
+      this.formApply.errors = {}
       this.clonedformApply = _.cloneDeep(this.formApply)
     }
   },
