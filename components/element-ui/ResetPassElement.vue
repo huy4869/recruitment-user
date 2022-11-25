@@ -173,8 +173,18 @@ export default {
       const data = await this.$store.dispatch(AUTH_CHECK_TOKEN, {
         token: this.token
       })
-      if (data.status_code !== 200) {
-        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+      switch (data.status_code) {
+        case 500:
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: this.$t('content.EXC_001')
+          })
+          await this.$router.push('/404-not-found')
+          break
+        default:
+          this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+          await this.$router.push('/404-not-found')
+          break
       }
     }
   },

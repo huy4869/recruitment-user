@@ -72,7 +72,7 @@
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
         <div class="button-detail">
-          <div v-if="!job.is_apply" class="el-button" @click="applyDialog = !applyDialog">
+          <div v-if="!job.is_apply" class="el-button" @click="openApplyDialog">
             {{ $t('button.apply') }}
           </div>
           <div v-else class="el-button el-disabled">
@@ -253,7 +253,7 @@
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div class="button-detail">
-            <div v-if="!job.is_apply" class="el-button" @click="applyDialog = !applyDialog">
+            <div v-if="!job.is_apply" class="el-button" @click="openApplyDialog">
               {{ $t('button.apply') }}
             </div>
             <div v-else class="el-button el-disabled">
@@ -285,8 +285,8 @@
       <div class="jobs-similar-job">
         <div class="jobs-similar-job-title">
           <div class="title-component">{{ $t('job.jobs_similar') }}</div>
-          <div class="button-see-all" @click="changeToLink('/search')">
-            <span>{{ $t('home.see_all_job') }}</span>
+          <div class="button-see-all">
+            <a :href="changeToSearch">{{ $t('home.see_all_job') }}</a>
           </div>
         </div>
         <div v-if="listSuggestJobs.length" class="jobs-similar-job-content">
@@ -351,10 +351,13 @@
               <el-form-item label="" prop="content">
                 <el-input
                   v-model="formAbout.content"
+                  ref="content"
                   type="textarea"
                   :rows="4"
                   maxlength="1000"
-                  :placeholder="$t('job.enter_inquiry_details')">
+                  :placeholder="$t('job.enter_inquiry_details')"
+                  @focus="resetValidate('content')"
+                >
                 </el-input>
               </el-form-item>
             </div>
@@ -424,18 +427,15 @@ export default {
       },
       formAbout: {
         feedback_type_ids: [],
-        content: ''
+        content: '',
+        errors: {}
       },
-      listDate: [
-        '2022年09月02日（月）',
-        '2022年09月03日（火）',
-        '2022年09月04日（水）',
-        '2022年09月05日（木）',
-        '2022年09月06日（金) ',
-        '2022年09月07日（土）',
-        '2022年09月08日（日）'
-      ],
-      listTime: ['12:00', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30'],
+      error: {
+        key: null,
+        value: ''
+      },
+      listDate: [],
+      listTime: [],
       listMethod: [
         { id: 1, value: 'オンライン面接（2営業日以内にZoomURLをメールにて送付いたします）' },
         { id: 2, value: '対面（東京都港区虎ノ門１－２－３)' },
@@ -471,7 +471,8 @@ export default {
           { validator: validAreaLength, message: this.$t('validation.area_length_2', { _field_: this.$t('job.inquiry_details') }), trigger: 'blur' }
         ]
       },
-      isValid: false
+      isValid: false,
+      loggedIn: this.$auth.loggedIn
     }
   },
   computed: {
@@ -485,13 +486,13 @@ export default {
       if (this.job.salary === undefined) {
         return ''
       }
-      return this.job.salary.min + '~' + this.job.salary.max + this.job.salary.type
+      return this.job.salary.min + ' ～ ' + this.job.salary.max + this.job.salary.type
     },
     showAge() {
       if (this.job.age === undefined) {
         return ''
       }
-      return this.job.age.min + '~' + this.job.age.max + this.$t('common.age')
+      return this.job.age.min + ' ～ ' + this.job.age.max + this.$t('common.age')
     },
     showAddress() {
       if (this.job.address === undefined) {
@@ -508,8 +509,19 @@ export default {
       }
       return ''
     },
-    disabledInput() {
-      return !this.formAbout.feedback_type_ids.includes('1')
+    changeToSearch() {
+      const condition = []
+      if (this.job.address) {
+        condition.push('province_id=' + this.job.address.province_id)
+      }
+      if (this.job.job_types) {
+        const type = []
+        this.job.job_types.forEach(jobType => {
+          type.push(jobType.id)
+        })
+        condition.push('job_type_ids=' + type.join(','))
+      }
+      return '/search?' + condition.join('&')
     }
   },
   async created() {
@@ -525,6 +537,13 @@ export default {
     this.clonedformAbout = _.cloneDeep(this.formAbout)
   },
   methods: {
+    resetValidate(ref) {
+      if (ref === this.error.key) {
+        this.error = { key: null, value: '' }
+      }
+      this.$refs.formAbout.fields.find((f) => f.prop === ref).clearValidate()
+      this.formAbout.errors[ref] = ''
+    },
     async getDetailJob() {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const dataResponse = await this.$store.dispatch(JOB_GET_DETAIL_JOB, this.$route.params.slug)
@@ -561,9 +580,6 @@ export default {
     async getSuggestJob() {
       const dataResponse = await this.$store.dispatch(JOB_LIST_SUGGEST_JOBS, this.id)
       this.listSuggestJobs = dataResponse.data
-    },
-    changeToLink(link) {
-      this.$router.push(link)
     },
     async addFavoriteJob() {
       if (!this.$auth.loggedIn) {
@@ -618,7 +634,7 @@ export default {
               text: response.messages
             })
             this.aboutDialog = false
-            this.formAbout = { feedback_type_ids: [], content: '' }
+            this.formAbout = { feedback_type_ids: [], content: '', errors: {}}
             break
           case 422:
             for (const [key] of Object.entries(response.data)) {
@@ -663,6 +679,7 @@ export default {
         .catch(_ => {})
     },
     closeAboutDialog() {
+      this.formAbout.errors = {}
       if (_.isEqual(this.formAbout, this.clonedformAbout)) {
         this.aboutDialog = false
       } else {
@@ -673,13 +690,21 @@ export default {
       this.aboutDialog = true
       this.formAbout = {
         feedback_type_ids: [],
-        content: ''
+        content: '',
+        errors: {}
       }
     },
     validateFormAbout() {
       this.$refs.formAbout.validate(valid => {
         this.isValid = valid
       })
+    },
+    openApplyDialog() {
+      if (this.loggedIn) {
+        this.applyDialog = !this.applyDialog
+      } else {
+        this.$router.push('/login')
+      }
     }
   }
 }

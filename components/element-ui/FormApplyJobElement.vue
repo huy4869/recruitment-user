@@ -6,7 +6,7 @@
       :visible.sync="applyDialogState"
       width="84%"
       top="5vh"
-      :before-close="handleClose"
+      :before-close="closeAboutDialog"
     >
       <el-form
         ref="formApply"
@@ -84,14 +84,15 @@
                 :rows="4"
                 maxlength="1000"
                 :placeholder="$t('job.enter_your_question')"
-                >
+                @focus="resetValidate('note')"
+              >
               </el-input>
             </el-form-item>
           </div>
         </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" plain @click="cancelModal">
+        <el-button type="primary" plain @click="closeAboutDialog">
           {{ $t('button.close_up') }}
         </el-button>
         <el-button type="danger" @click="submitApply">
@@ -103,6 +104,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import {
   INDEX_SET_ERROR,
   INDEX_SET_LOADING,
@@ -158,7 +160,8 @@ export default {
         note: [
           { validator: validFormLength, trigger: 'blur' }
         ]
-      }
+      },
+      clonedformApply: {}
     }
   },
   async created() {
@@ -170,6 +173,7 @@ export default {
       if (this.applyDialogState) {
         await this.getDetailJob()
       }
+      this.clonedformApply = _.cloneDeep(this.formApply)
     }
   },
   methods: {
@@ -347,8 +351,24 @@ export default {
       })
         .then(_ => {
           this.$emit('closeDialog')
+          this.error = { key: null, value: '' }
+          if (this.$refs.formApply) {
+            this.$refs.formApply.resetFields()
+          }
         })
         .catch(_ => {})
+    },
+    closeAboutDialog() {
+      this.formApply.errors = {}
+      if (_.isEqual(this.formApply, this.clonedformApply)) {
+        this.$emit('closeDialog')
+        if (this.$refs.formApply) {
+          this.$refs.formApply.resetFields()
+        }
+        this.error = { key: null, value: '' }
+      } else {
+        this.cancelModal()
+      }
     }
   }
 }

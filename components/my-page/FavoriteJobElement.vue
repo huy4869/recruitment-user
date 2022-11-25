@@ -2,13 +2,13 @@
   <div class="favorite-job-page-element">
     <div>
       <div class="favorite-job-page-title">
-        <span>{{ $t('my_page.application_history') }}</span>
+        <span>{{ $t('my_page.favorite_job') }}</span>
       </div>
       <div class="show-paginate-data">
         <div class="d-flex form-text-all">
           <span>{{ $t('common.all') }}</span>
           <span class="total-record">{{ total + $t('common.subject') }}</span>
-          <span>{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total } ) }}</span>
+          <span v-show="listJobs.length">{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total } ) }}</span>
         </div>
         <div v-if="listJobs.length">
           <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>

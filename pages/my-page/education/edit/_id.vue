@@ -93,7 +93,7 @@
                             </el-row>
                           </el-form-item>
                         </el-col>
-                        <span class="date-space">~</span>
+                        <span class="date-space"> ～ </span>
                         <el-col :md="9" :sm="24" class="birth-year">
                           <el-form-item label="" prop="enrollment_period_end" :error="(error.key === 'enrollment_period_end') ? error.value : ''">
                             <el-row class="d-flex">

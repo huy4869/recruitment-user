@@ -120,7 +120,7 @@
                         </el-row>
                       </el-form-item>
                     </el-col>
-                    <span v-show="accountForm.period_check" class="date-space">~</span>
+                    <span v-show="accountForm.period_check" class="date-space"> ～ </span>
                     <el-col v-show="accountForm.period_check" :md="9" :sm="24" class="birth-year">
                       <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
                         <el-row class="d-flex">

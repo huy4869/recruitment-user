@@ -120,12 +120,13 @@
                               tabindex="2"
                               maxlength="8"
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                              @change="(value) => { checkNumber(value, 'salary_min') }"
                               pattern="[0-9]*"
                               inputmode="numeric"
                             />
                           </el-form-item>
                         </el-col>
-                        <span class="salary-range">~</span>
+                        <span class="salary-range"> ～ </span>
                         <el-col :md="5" :sm="15" :xs="15">
                           <el-form-item label="" prop="salary_max" :error="(error.key === 'salary_max') ? error.value : ''">
                             <el-input
@@ -137,6 +138,7 @@
                               tabindex="2"
                               maxlength="8"
                               oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                              @change="(value) => { checkNumber(value, 'salary_max') }"
                               pattern="[0-9]*"
                               inputmode="numeric"
                             />
@@ -410,6 +412,13 @@ export default {
   },
   middleware: 'auth',
   data() {
+    const validFormLength = (rule, value, callback, message) => {
+      if (value && String(value).length > 8) {
+        callback(new Error(this.$t('validation.com017', { _field_: message })))
+      } else {
+        callback()
+      }
+    }
     return {
       listProvince: [],
       listWorkTypes: [],
@@ -423,19 +432,19 @@ export default {
       accountForm: {
         province_ids: [],
         work_type_ids: [],
-        age_id: 1,
-        salary_type_id: 3,
+        age_id: '',
+        salary_type_id: '',
         job_type_ids: [],
         job_experience_ids: [],
         job_feature_ids: [],
-        salary_min: 1000,
-        salary_max: 2000,
+        salary_min: '',
+        salary_max: '',
         working_days: [],
         working_hours: {
-          start_hours: '09',
-          start_minutes: '00',
-          end_hours: '15',
-          end_minutes: '00',
+          start_hours: '',
+          start_minutes: '',
+          end_hours: '',
+          end_minutes: '',
           working_hours_format: ''
         },
         start_working_time: '',
@@ -447,6 +456,12 @@ export default {
         value: ''
       },
       accountRules: {
+        salary_max: [
+          { validator: validFormLength, trigger: 'blur' }
+        ],
+        salary_min: [
+          { validator: validFormLength, trigger: 'blur' }
+        ]
       },
       listRecruitmentFeatures: [],
       listCompanyFeatures: [],
@@ -571,17 +586,13 @@ export default {
       this.confirmModal = false
     },
     handleUpdate() {
-      this.error = { key: null, value: '' }
+      this.checkStartTime()
+      this.checkEndTime()
       this.$refs.accountForm.validate(async(valid, key) => {
         if (valid) {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
             const dto = this.accountForm
-            if (!(this.accountForm.salary_min && this.accountForm.salary_max && this.accountForm.salary_type_id)) {
-              dto.salary_max = ''
-              dto.salary_min = ''
-              dto.salary_type_id = ''
-            }
             this.computedTime()
             const response = await this.$store.dispatch(DESIRED_UPDATE, dto)
             switch (response.status_code) {
@@ -662,36 +673,15 @@ export default {
       for (const item in this.desired) {
         this.accountForm[item] = this.desired[item]
       }
-      if (!this.desired.age_id) {
-        this.accountForm.age_id = 1
-      }
-      if (!this.desired.salary_type_id) {
-        this.accountForm.salary_type_id = 3
-      }
-      if (!this.desired.salary_max) {
-        this.accountForm.salary_max = 2000
-      }
-      if (!this.desired.salary_min) {
-        this.accountForm.salary_min = 1000
-      }
-      if (!this.desired.working_hours.start_hours) {
-        this.accountForm.working_hours.start_hours = '09'
-      }
-      if (!this.desired.working_hours.start_minutes) {
-        this.accountForm.working_hours.start_minutes = '00'
-      }
-      if (!this.desired.working_hours.end_hours) {
-        this.accountForm.working_hours.end_hours = '15'
-      }
-      if (!this.desired.working_hours.end_minutes) {
-        this.accountForm.working_hours.end_minutes = '00'
-      }
     },
     checkTime() {
       const end_hour = this.accountForm.working_hours.end_hours
       const end_min = this.accountForm.working_hours.end_minutes
       const start_hour = this.accountForm.working_hours.start_hours
       const start_min = this.accountForm.working_hours.start_minutes
+      if ((end_hour || end_min) && (!start_hour && !start_hour)) {
+        return this.$t('validation.com024')
+      }
       if ((!start_hour && start_min)) {
         return this.$t('validation.com024')
       }
@@ -709,6 +699,9 @@ export default {
       const end_min = this.accountForm.working_hours.end_minutes
       const start_hour = this.accountForm.working_hours.start_hours
       const start_min = this.accountForm.working_hours.start_minutes
+      if ((start_hour || start_min) && (!end_hour && !end_min)) {
+        return this.$t('validation.com024')
+      }
       if (!end_hour && end_min) {
         return this.$t('validation.com024')
       }
@@ -743,6 +736,13 @@ export default {
       const el = this.$refs[key]
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' })
+      }
+    },
+    checkNumber(value, key) {
+      if (value) {
+        if (value !== Number(value)) {
+          this.accountForm[key] = Number(value)
+        }
       }
     }
   }

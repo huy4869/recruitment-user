@@ -155,6 +155,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import {
   INDEX_SET_LOADING,
   CHAT_LIST,
@@ -319,16 +320,21 @@ export default {
       this.error = { key: null, value: '' }
       this.$refs.chatForm.validate(async valid => {
         if (valid) {
+          const message = _.cloneDeep(this.chatForm.message)
+          this.chatForm.message = ''
+          if (message === '') {
+            return
+          }
           try {
+            await this.$store.commit(INDEX_SET_LOADING, true)
             const dataMessage = {
-              content: this.chatForm.message,
+              content: message,
               store_id: this.userActive.store_id
             }
             const dataResponse = await this.$store.dispatch(CHAT_CREATE_MESSAGE, dataMessage)
             if (dataResponse.status_code === 200) {
               await this.listMessages.push(dataResponse.data)
               this.listUsers[this.indexActive].content = this.chatForm.message
-              this.chatForm.message = ''
               this.scrollToElement()
               await this.getDataUser()
               this.scrollToElementListUser()
