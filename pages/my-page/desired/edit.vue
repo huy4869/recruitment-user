@@ -454,7 +454,7 @@ export default {
         province_ids: [],
         work_type_ids: [],
         age_id: '',
-        salary_type_id: '',
+        salary_type_id: 1,
         job_type_ids: [],
         job_experience_ids: [],
         job_feature_ids: [],
@@ -717,6 +717,9 @@ export default {
       for (const item in this.desired) {
         this.accountForm[item] = this.desired[item]
       }
+      if (!this.desired.salary_type_id) {
+        this.accountForm.salary_type_id = 1
+      }
     },
     checkTime() {
       const end_hour = this.accountForm.working_hours.end_hours
@@ -793,7 +796,7 @@ export default {
       const salary_type_id = this.accountForm.salary_type_id
       const salary_max = this.accountForm.salary_max
       const salary_min = this.accountForm.salary_min
-      if (salary_type_id && (salary_min >= salary_max)) {
+      if (salary_min && salary_max && salary_type_id && (salary_min >= salary_max)) {
         this.$refs.accountForm.validateField('salary_min')
         this.$refs.accountForm.validateField('salary_max')
         return true

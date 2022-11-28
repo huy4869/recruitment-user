@@ -52,6 +52,9 @@ export default {
       if (key === 'search') {
         return this.condition.content[key]
       }
+      if (key === 'order_by_id') {
+        return this.condition.content[key].name
+      }
       if (this.condition.content[key] === undefined) {
         return ''
       }
@@ -60,6 +63,9 @@ export default {
     showTextSearch(key) {
       if (key === 'search') {
         return this.condition.content[key]
+      }
+      if (key === 'order_by_id') {
+        return this.condition.content[key].id
       }
       if (this.condition.content[key] === undefined) {
         return ''

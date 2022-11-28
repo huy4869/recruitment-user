@@ -301,7 +301,7 @@
     "characters": "文字/2000",
     "search_by_other_condition": "他の条件で検索する",
     "sns_social": "SNSアカウント",
-    "add_job_career": "資格を追加する",
+    "add_job_career": "職務経歴を追加する",
     "add_education": "学歴を追加する",
     "register": "登録"
   },
@@ -312,7 +312,7 @@
       "search": "キーワード",
       "employment_status": "雇用形態",
       "experience_ids": "経験",
-      "order_by_ids": "並び替え",
+      "order_by_id": "並び替え",
       "feature_ids": "特徴"
     },
     "occupation": "職種",
