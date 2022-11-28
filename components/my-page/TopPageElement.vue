@@ -71,7 +71,7 @@
         <el-button type="danger" @click="cancelSchedulePost(applyActive, dialogHistory)">{{ $t('confirm_modal.yes') }}</el-button>
       </div>
     </el-dialog>
-    <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = !applyDialog" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
+    <FormApplyJobElement @getListHistory="getListHistory" :apply-dialog="applyDialog" @closeDialog="applyDialog = !applyDialog" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
   </div>
 </template>
 
@@ -199,6 +199,9 @@ export default {
     },
     handleRouter(route) {
       this.$router.push(route)
+    },
+    async getListHistory() {
+      await this.getDataScheduleHistory(false)
     }
   }
 }

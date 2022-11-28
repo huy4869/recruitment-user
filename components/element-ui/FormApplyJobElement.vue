@@ -282,6 +282,7 @@ export default {
                   text: dataResponse.messages
                 })
                 this.closeDialog()
+                await this.$emit('getListHistory')
                 break
               case 500:
                 await this.$store.commit(INDEX_SET_ERROR, {
