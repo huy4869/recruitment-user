@@ -49,8 +49,18 @@ export default {
   components: { IndexPageMobileElement, IndexPageElement },
   data() {
     return {
-      listJobTypes: [],
-      listProvinceCities: [],
+      listJobTypes: [
+        {
+          name: this.$t('home.choose_a_job'),
+          disabled: true
+        }
+      ],
+      listProvinceCities: [
+        {
+          name: this.$t('home.search_by_prefecture'),
+          disabled: true
+        }
+      ],
       totalJob: 0,
       totalNewJob: 0,
       listJobs: [],
@@ -77,9 +87,9 @@ export default {
       ]
       const dataMasterData = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
       if (dataMasterData.status_code === 200) {
-        this.listJobTypes = dataMasterData.data.m_job_types
+        this.listJobTypes = dataMasterData.data.m_job_types.length ? dataMasterData.data.m_job_types : [{ name: this.$t('home.choose_a_job'), disabled: true }]
         this.listSearchEmployment = dataMasterData.data.m_work_types
-        this.listProvinceCities = dataMasterData.data.m_provinces_cities
+        this.listProvinceCities = dataMasterData.data.m_provinces_cities.length ? dataMasterData.data.m_provinces_cities : [{ name: this.$t('home.search_by_prefecture'), disabled: true }]
         this.listSocial = dataMasterData.data.m_social_links
       }
       const dataLocation = await this.$store.dispatch(LOCATION_LIST_MOST_APPLY)

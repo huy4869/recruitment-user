@@ -1142,14 +1142,22 @@ export default {
         'resources[province_districts]={}'
       ]
       this.$store.dispatch(MASTER_GET_DATA, dataResources).then(res => {
-        this.listProvinceDistrict = res.data.province_districts
-        const listCity = {}
-        this.listProvinceDistrict.forEach((district) => {
-          district.provinces.forEach((provinces) => {
-            listCity[provinces.id] = provinces
-          })
-        })
-        this.listProvinces = listCity
+        if (res.status_code === 200) {
+          if (res.data.province_districts.length) {
+            this.listProvinceDistrict = res.data.province_districts
+            const listCity = {}
+            this.listProvinceDistrict.forEach((district) => {
+              district.provinces.forEach((provinces) => {
+                listCity[provinces.id] = provinces
+              })
+            })
+            this.listProvinces = listCity
+          } else {
+            this.listProvinces = [{ name: this.$t('my_page.prefectures'), disabled: true }]
+          }
+        } else if (res.status_code === 500) {
+          this.listProvinces = [{ name: this.$t('my_page.prefectures'), disabled: true }]
+        }
       })
     },
     getBirthDay() {

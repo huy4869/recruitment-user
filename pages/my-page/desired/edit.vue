@@ -32,7 +32,9 @@
                                 v-for="item in listProvince"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -56,7 +58,9 @@
                                 v-for="item in ListWorkType"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -80,7 +84,9 @@
                                 v-for="item in listAge"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -106,7 +112,9 @@
                                 v-for="item in listSalary"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -163,7 +171,9 @@
                                 v-for="item in ListJobType"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -187,7 +197,9 @@
                                 v-for="item in listJobExperience"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -504,9 +516,11 @@ export default {
       this.ListJobType = this.listJobTypes
     },
     listJobFeatures() {
-      this.listRecruitmentFeatures = this.listJobFeatures[0].feature
-      this.listCompanyFeatures = this.listJobFeatures[1].feature
-      this.listStoreFeatures = this.listJobFeatures[2].feature
+      if (this.listJobFeatures) {
+        this.listRecruitmentFeatures = this.listJobFeatures[0].feature
+        this.listCompanyFeatures = this.listJobFeatures[1].feature
+        this.listStoreFeatures = this.listJobFeatures[2].feature
+      }
     },
     async desired() {
       await this.getDesiredInfo()
@@ -559,14 +573,23 @@ export default {
         'resources[days_of_week]={}'
       ]
       const dataMasterData = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
-      this.listJobTypes = dataMasterData.data.m_job_types
-      this.listWorkTypes = dataMasterData.data.m_work_types
-      this.listProvince = dataMasterData.data.m_provinces
-      this.listSalary = dataMasterData.data.m_salary_types
-      this.listJobExperience = dataMasterData.data.m_job_experiences
-      this.listJobFeatures = dataMasterData.data.m_job_features
-      this.listAge = dataMasterData.data.age
-      this.listDays = dataMasterData.data.days_of_week
+      if (dataMasterData.status_code === 200) {
+        this.listJobTypes = dataMasterData.data.m_job_types.length ? dataMasterData.data.m_job_types : [{ name: this.$t('desired_condition.enter_position'), disabled: true }]
+        this.listWorkTypes = dataMasterData.data.m_work_types.length ? dataMasterData.data.m_work_types : [{ name: this.$t('desired_condition.enter_type'), disabled: true }]
+        this.listProvince = dataMasterData.data.m_provinces.length ? dataMasterData.data.m_provinces : [{ name: this.$t('desired_condition.enter_location'), disabled: true }]
+        this.listSalary = dataMasterData.data.m_salary_types.length ? dataMasterData.data.m_salary_types : [{ name: this.$t('desired_condition.enter_salary'), disabled: true }]
+        this.listJobExperience = dataMasterData.data.m_job_experiences.length ? dataMasterData.data.m_job_experiences : [{ name: this.$t('desired_condition.enter_experience'), disabled: true }]
+        this.listAge = dataMasterData.data.age.length ? dataMasterData.data.age : [{ name: this.$t('desired_condition.enter_age'), disabled: true }]
+        this.listJobFeatures = dataMasterData.data.m_job_features
+        this.listDays = dataMasterData.data.days_of_week
+      } else if (dataMasterData.status_code === 500) {
+        this.listProvince = [{ name: this.$t('desired_condition.enter_location'), disabled: true }]
+        this.listWorkTypes = [{ name: this.$t('desired_condition.enter_type'), disabled: true }]
+        this.listAge = [{ name: this.$t('desired_condition.enter_age'), disabled: true }]
+        this.listSalary = [{ name: this.$t('desired_condition.enter_salary'), disabled: true }]
+        this.listJobTypes = [{ name: this.$t('desired_condition.enter_position'), disabled: true }]
+        this.listJobExperience = [{ name: this.$t('desired_condition.enter_experience'), disabled: true }]
+      }
     },
     async getDesired() {
       this.$store.commit(INDEX_SET_LOADING, true)
