@@ -540,7 +540,7 @@ export default {
         }
       }
       if (this.sort_by.length) {
-        dataSearch.push(`orders[${key}][key]=${(this.sort_by[0] === 1) ? 'created_at' : 'updated_at'}&filters[${key}][dir]=asc`)
+        dataSearch.push(`filters[${key}][key]=order_by_id&filters[${key}][data]=${this.sort_by[0]}`)
       }
       return dataSearch
     },
