@@ -167,7 +167,7 @@
         <div>
           <span>{{ $t('page.search') }}</span>
           <span class="total-record">{{ total + $t('common.subject') }}</span>
-          <span>{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total }) }}</span>
+          <span v-if="total">{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total }) }}</span>
         </div>
         <div v-if="listJobs.length" class="show-pc">
           <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
