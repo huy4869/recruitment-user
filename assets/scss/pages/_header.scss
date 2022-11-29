@@ -65,7 +65,7 @@
         }
       }
       .show-action-user {
-        padding: 22px 0;
+        padding: 19px 0;
         margin-left: 40px;
         .content-user {
           display: flex;
@@ -75,6 +75,14 @@
             line-height: 24px;
             margin: 4px 8px;
             color: $color-black;
+            word-wrap: break-word;
+            white-space: normal;
+            overflow: hidden;
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            width: 100px;
           }
           img {
             width: 24px;
