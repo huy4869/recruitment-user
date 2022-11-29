@@ -369,6 +369,7 @@ export default {
         'resources[m_learning_status]={"model": "MLearningStatus"}'
       ]
       await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&')).then(res => {
+        this.m_learning_status = res.data.m_learning_status
         if (res.status_code === 200) {
           this.m_learning_status = res.data.m_learning_status.length ? this.m_learning_status : [{ name: this.$t('education.enter_type'), disabled: true }]
         } else if (res.status_code === 500) {
