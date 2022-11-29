@@ -21,6 +21,20 @@
             font-size: 16px;
             line-height: 24px;
             margin-top: 12px;
+            .district-item {
+              color: $color-blue;
+              margin-top: 10px;
+            }
+            .province-item {
+              margin-top: 4px;
+              word-wrap: break-word;
+              white-space: normal;
+              overflow: hidden;
+              display: -webkit-box;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+            }
           }
           .el-button {
             height: 48px;
@@ -215,6 +229,47 @@
         }
         .list-province {
           padding: 8px 16px 18px;
+          .city-item {
+            width: 100%;
+            .list-city {
+              position: relative;
+              border-radius: 4px;
+              background: $color-blue-3;
+              padding: 16px 20px;
+            }
+            .show-province-active {
+              position: absolute;
+              top: -10px;
+              width: 0;
+              height: 0;
+              border-left: 11.5px solid transparent;
+              border-right: 11.5px solid transparent;
+              border-bottom: 13.75px solid $color-blue-3;
+            }
+            .position-0 {
+              left: 4px;
+            }
+            .position-1 {
+              left: calc(25% - 4px);
+            }
+            .position-2 {
+              left: 50%;
+            }
+            .position-3 {
+              left: 75%;
+            }
+            .province-city-item {
+              width: 25%;
+              display: inline-block;
+              margin: 0;
+            }
+          }
+          .form-show-city {
+            cursor: pointer;
+            margin-left: 10px;
+            width: 24px;
+            height: 24px;
+          }
           .province-item {
             width: 25%;
             display: inline-block;
@@ -223,6 +278,7 @@
               white-space: normal;
             }
           }
+
           .form-work {
             width: 33%;
           }

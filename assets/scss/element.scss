@@ -65,7 +65,7 @@
     width: 24px;
     height: 24px;
     background: $color-white;
-    border: 2px solid $border-focus;
+    border: 2px solid $border-default;
     border-radius: 4px;
     outline: none;
     &:focus-visible {
@@ -81,6 +81,21 @@
     height: 24px;
     border: none;
     &::after {
+      display: none;
+    }
+  }
+  .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+    background-color: unset;
+    background-image: url('/assets/icon/icon_uncheck.svg');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    width: 24px;
+    height: 24px;
+    border: none;
+    &::after {
+      display: none;
+    }
+    &::before {
       display: none;
     }
   }
