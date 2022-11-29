@@ -831,7 +831,7 @@ export default {
           { validator: validPostCode, message: this.$t('validation.postcode_length', { _field_: this.$t('my_page.post_code') }), trigger: 'blur' }
         ],
         address: [
-          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.phone') }), trigger: 'blur' },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.city') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
         ],
         building: [
