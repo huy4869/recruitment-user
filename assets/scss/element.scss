@@ -107,12 +107,12 @@
 
 .el-button--danger {
   font-weight: 700;
-  height: 48px;
+  height: 40px;
   background-color: $color-blue;
   text-align: center;
   border-radius: 24px;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 22px;
   border: 1px solid $color-blue;
   &:hover {
     background-color: $color-blue;
@@ -129,8 +129,8 @@
   color: $color-blue;
   border: 1px solid $color-blue;
   border-radius: 24px;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 22px;
   &:hover {
     border-color: $color-blue;
     background: $color-white;

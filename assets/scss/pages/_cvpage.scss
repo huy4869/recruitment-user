@@ -4,6 +4,10 @@
     padding: 8px 90px;
     max-width: 1152px;
     margin: auto;
+    #btn-center {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 .right-content-element {
@@ -172,7 +176,7 @@
         font-size: 12px;
         line-height: 20px;
         color: $color-text-3;
-        margin-top: 10px;
+        margin-top: 6px;
       }
       .enroll-checkbox {
         margin-bottom: 14px;
@@ -209,8 +213,8 @@
   .edit-form-input {
     margin-top: 24px;
     .form-label-input {
-      &:first-child .content-input {
-        border-top: 1px solid $border-default;
+      .last-input {
+        padding-bottom: 0;
       }
     }
     .border-form-middle {
@@ -238,14 +242,14 @@
         line-height: 22px;
         height: 100%;
         span {
-          padding: 22px 16px 24px;
+          padding: 14px 16px;
           display: block;
         }
       }
     }
     .required {
       position: absolute;
-      top: 22px;
+      top: 14px;
       right: 22px;
       border-radius: 2px;
       background: $color-red-primary;
@@ -337,8 +341,7 @@
 
     .content-input {
       margin-left: 24px;
-      padding: 13px 0;
-      border-bottom: 1px solid $border-default;
+      padding: 5px 0;
       .el-input__suffix {
         display: flex;
         align-items: center;

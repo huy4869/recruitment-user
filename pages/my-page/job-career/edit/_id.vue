@@ -338,7 +338,7 @@
                     </div>
                   </el-col>
                   <el-col :md="18" :sm="24">
-                    <div ref="experience_accumulation" class="content-input">
+                    <div ref="experience_accumulation" class="content-input last-input">
                       <el-row class="d-flex">
                         <el-col :md="20" :sm="24">
                           <el-form-item label="" prop="experience_accumulation" :error="(error.key === 'experience_accumulation') ? error.value : ''">
