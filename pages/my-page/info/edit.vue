@@ -529,6 +529,7 @@
                               :placeholder="$t('my_page.enter_province_city')"
                               @blur="validate('province_city_id')"
                               @focus="resetValidate('province_city_id')"
+                              @visible-change="(event) => { checkValidate('province_city_id', event) }"
                             >
                               <el-option
                                 v-for="item in listProvinceCity"
@@ -808,7 +809,7 @@ export default {
           {
             required: true,
             message: this.$t('validation.required_select', { _field_: this.$t('my_page.province_city') }),
-            trigger: 'change'
+            trigger: 'blur'
           }
         ],
         line: [
@@ -985,6 +986,11 @@ export default {
     },
     validate(ref) {
       this.$refs.accountForm.validateField(ref)
+    },
+    checkValidate(ref, event) {
+      if (!event) {
+        this.$refs.accountForm.validateField(ref)
+      }
     },
     checkFile(file) {
       const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i
@@ -1232,7 +1238,7 @@ export default {
     },
     selectCity(value) {
       this.listProvinceCity = this.listProvinces[value].province_city
-      this.accountForm.province_city_id = this.listProvinceCity[0].id
+      this.accountForm.province_city_id = ''
     },
     daysInMonth(month, year) {
       return new Date(Number(year), Number(month), 0).getDate()
