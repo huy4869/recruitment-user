@@ -107,7 +107,7 @@
                       <el-row class="d-flex">
                         <el-col :md="7" :sm="24">
                           <el-form-item class="salary-select" label="" prop="salary_type_id" :error="(error.key === 'salary_type_id') ? error.value : ''">
-                            <el-select v-model="accountForm.salary_type_id" clearable :placeholder="$t('desired_condition.enter_salary')">
+                            <el-select v-model="accountForm.salary_type_id" :placeholder="$t('desired_condition.enter_salary')">
                               <el-option
                                 v-for="item in listSalary"
                                 :key="item.id"
