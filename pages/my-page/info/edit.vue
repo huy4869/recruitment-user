@@ -496,8 +496,8 @@
                               v-model="accountForm.province_id"
                               :placeholder="$t('my_page.prefectures')"
                               @change="selectCity"
-                              @blur="validate('province_id')"
                               @focus="resetValidate('province_id')"
+                              @visible-change="(event) => { checkValidate('province_id', event) }"
                             >
                               <el-option
                                 v-for="item in listProvinces"
@@ -527,7 +527,6 @@
                               :disabled="disabledProvinceCity"
                               v-model="accountForm.province_city_id"
                               :placeholder="$t('my_page.enter_province_city')"
-                              @blur="validate('province_city_id')"
                               @focus="resetValidate('province_city_id')"
                               @visible-change="(event) => { checkValidate('province_city_id', event) }"
                             >
@@ -802,7 +801,7 @@ export default {
           {
             required: true,
             message: this.$t('validation.required_select', { _field_: this.$t('my_page.prefectures') }),
-            trigger: 'change'
+            trigger: 'blur'
           }
         ],
         province_city_id: [
