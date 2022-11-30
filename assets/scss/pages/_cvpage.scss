@@ -43,6 +43,20 @@
     display: flex;
   }
   .edit-cv-content {
+    &#skill-sheet {
+      margin-bottom: 40px;
+    }
+    &.skill-sheet-index {
+      .el-slider__runway.disabled {
+        .el-slider__button {
+          display: none;
+        }
+        .el-slider__bar {
+          background: rgba(56, 180, 184, 1);
+          border-radius: 4px;
+        }
+      }
+    }
     .card-title-mobile {
       display: none;
     }
@@ -197,6 +211,9 @@
       border-bottom: 2px solid $color-text-primary;
       margin-bottom: 2px;
     }
+    .skill-slider {
+      margin-left: 101px;
+    }
   }
   .btn-right {
     margin-left: 22px;
@@ -332,6 +349,12 @@
       }
     }
     .content-input {
+      &.pr-slider {
+        padding: 0px 0 30px;
+      }
+      .skill-slider {
+        margin-left: 71px;
+      }
       margin-left: 20px;
       padding: 20px 0;
       .el-input__suffix {

@@ -6,16 +6,53 @@
       <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
       <div class="right-content-element">
         <div class="edit-cv-element">
-          <div class="edit-cv-title">{{ $t('self_pr.edit') }}</div>
-          <div class="edit-cv-content edit-form-content">
-            <div class="card-text-title card-title-mobile"> {{ $t('self_pr.edit') }}</div>
-            <el-form
-              ref="accountForm"
-              :model="accountForm"
-              :rules="accountRules"
-              autocomplete="off"
-              label-position="left"
-            >
+          <el-form
+            ref="accountForm"
+            :model="accountForm"
+            :rules="accountRules"
+            autocomplete="off"
+            label-position="left"
+          >
+            <!-- EDIT SKILL SHEET -->
+            <div class="edit-cv-title">{{ $t('self_pr.skill_sheet') }}</div>
+            <div class="edit-cv-content edit-form-content" id="skill-sheet">
+              <div class="card-text-title card-title-mobile"> {{ $t('self_pr.skill_sheet') }}</div>
+              <div class="edit-form-input">
+                <div  v-for="(skill, key) in accountForm.skills" :key="key">
+                  <BorderElement :col-size="5" :middle="true"></BorderElement>
+                  <el-row class="form-label-input self-skill">
+                    <div class="skill-item">
+                      <el-col :md="5" :sm="24" class="col-label">
+                        <div class="label"><span>{{ skill.name }}</span></div>
+                      </el-col>
+                      <el-col :md="19" :sm="24">
+                        <div class="content-input pr-slider">
+                          <el-row class="d-flex">
+                            <el-col :md="20" :sm="24">
+                              <el-form-item class="skill-slider" label="" :error="(error.key === 'skills') ? error.value : ''">
+                                <el-slider
+                                  v-model="skill.level"
+                                  :step="1"
+                                  :max="5"
+                                  :min="1"
+                                  :marks="marks"
+                                >
+                                </el-slider>
+                              </el-form-item>
+                            </el-col>
+                          </el-row>
+                        </div>
+                      </el-col>
+                    </div>
+                  </el-row>
+                </div>
+                <BorderElement :col-size="5" :middle="true"></BorderElement>
+              </div>
+            </div>
+            <!-- EDIT SELF PR -->
+            <div class="edit-cv-title">{{ $t('self_pr.edit') }}</div>
+            <div class="edit-cv-content edit-form-content">
+              <div class="card-text-title card-title-mobile"> {{ $t('self_pr.edit') }}</div>
               <div class="edit-form-input">
                 <BorderElement :middle="true"></BorderElement>
                 <el-row class="d-flex form-label-input">
@@ -25,7 +62,7 @@
                   <el-col :md="18" :sm="24">
                     <div class="content-input">
                       <el-row class="d-flex">
-                        <el-col :md="20" :sm="24">
+                        <el-col :md="24" :sm="24">
                           <el-form-item label="" prop="favorite_skill" :error="(error.key === 'favorite_skill') ? error.value : ''">
                             <el-input
                               ref="favorite_skill"
@@ -53,7 +90,7 @@
                   <el-col :md="18" :sm="24">
                     <div class="content-input">
                       <el-row class="d-flex">
-                        <el-col :md="20" :sm="24">
+                        <el-col :md="24" :sm="24">
                           <el-form-item label="" prop="experience_knowledge" :error="(error.key === 'experience_knowledge') ? error.value : ''">
                             <el-input
                               ref="alias_name"
@@ -81,7 +118,7 @@
                   <el-col :md="18" :sm="24">
                     <div class="content-input">
                       <el-row class="d-flex">
-                        <el-col :md="20" :sm="24">
+                        <el-col :md="24" :sm="24">
                           <el-form-item label="" prop="self_pr" :error="(error.key === 'self_pr') ? error.value : ''">
                             <el-input
                               ref="self_pr"
@@ -103,8 +140,8 @@
                 </el-row>
                 <BorderElement :middle="true"></BorderElement>
               </div>
-            </el-form>
           </div>
+          </el-form>
         </div>
         <div id="btn-center" class="text-center">
           <el-button class="card-button" @click="handleRouter('/my-page/self-pr')">{{ $t('my_page.back') }}</el-button>
@@ -170,10 +207,26 @@ export default {
     }
     return {
       self_pr: {},
+      marks: {
+        1: this.$t('self_pr.weak'),
+        2: '',
+        3: this.$t('self_pr.normal'),
+        4: '',
+        5: this.$t('self_pr.good')
+      },
       accountForm: {
         favorite_skill: '',
         experience_knowledge: '',
         self_pr: '',
+        level: '',
+        listType: { 1: [], 2: [], 3: [], 4: [], 5: [] },
+        skills: [
+          { type: 1, name: this.$t('self_pr.cut'), level: 1 },
+          { type: 2, name: this.$t('self_pr.eyebrows'), level: 1 },
+          { type: 3, name: this.$t('self_pr.perm'), level: 1 },
+          { type: 4, name: this.$t('self_pr.plow'), level: 1 },
+          { type: 5, name: this.$t('self_pr.shampoo'), level: 1 }
+        ],
         errors: {}
       },
       error: {
