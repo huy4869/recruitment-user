@@ -1163,6 +1163,23 @@
         margin-left: 6px;
       }
 
+      .self-skill {
+        border: 1px solid $border-default;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        .skill-item {
+          margin: 12px 25px 15px 20px;
+          .label span{
+            font-size: 16px !important;
+          }
+          .pr-slider {
+            padding: 10px 0 0;
+            .skill-slider {
+              margin-left: 0;
+            }
+          }
+        }
+      }
       .content-input {
         margin: 5px 0 24px;
         padding: 0;
@@ -2655,6 +2672,9 @@
         }
       }
     }
+  }
+  #btn-no-data {
+    margin-top: -35px;
   }
 }
 @media only screen and (max-width: 414px) {
