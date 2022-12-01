@@ -42,7 +42,7 @@
                 </div>
               </div>
               <div class="button-filter">
-                <button type="button" class="el-button el-button--danger">
+                <button type="button" class="el-button el-button--danger" @click="changeToSearch(true)">
                   <img src="/assets/icon/icon_search_button.svg" alt="">
                   <span>{{ $t('common.search') }}</span>
                 </button>
