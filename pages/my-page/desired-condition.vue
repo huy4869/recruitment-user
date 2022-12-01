@@ -3,7 +3,7 @@
     <client-only>
       <div>
         <TitlePageElement class="show-pc"></TitlePageElement>
-        <BannerElement :banner="$t('page.my_page')" :sub-banner="$t('page.sub_web_cv')"></BannerElement>
+        <BannerElement class="show-pc" :banner="$t('page.my_page')" :sub-banner="$t('page.sub_web_cv')"></BannerElement>
       </div>
       <div class="cv-content">
         <MenuLeftElement menu-active="desired-condition"></MenuLeftElement>

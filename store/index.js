@@ -6,6 +6,7 @@ export const state = () => ({
   notifyWarning: { show: false, text: '' },
   loading: false,
   hideFooter: false,
+  showModalSp: false,
   openSidebar: 0,
   titleMenu: [{ name: '', route: '/' }]
 })
@@ -33,6 +34,9 @@ export const mutations = {
   },
   setTitleMenu(state, titleMenu) {
     state.titleMenu = titleMenu
+  },
+  setShowModalSp(state, showModalSp) {
+    state.showModalSp = showModalSp
   }
 }
 

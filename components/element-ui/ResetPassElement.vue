@@ -174,6 +174,8 @@ export default {
         token: this.token
       })
       switch (data.status_code) {
+        case 200:
+          break
         case 500:
           await this.$store.commit(INDEX_SET_ERROR, {
             show: true,

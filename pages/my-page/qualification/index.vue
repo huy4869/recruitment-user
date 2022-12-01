@@ -1,9 +1,9 @@
 <template>
   <div class="cv-page">
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="$t('page.web_cv')"></BannerElement>
+    <BannerElement class="show-pc" :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
-      <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
+      <MenuLeftElement menu-active="web-cv" sub-active="qualification"></MenuLeftElement>
       <QualificationElement :listQualification="listQualification" @reloadList="getListQualification"></QualificationElement>
     </div>
   </div>
