@@ -6,6 +6,25 @@
     .login-title {
       margin: 0 auto 1.5em;
     }
+    .required {
+      margin-left: 6px;
+      width: 40px;
+      height: 24px;
+      border-radius: 2px;
+      background: $color-red-primary;
+      color: $color-white;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 22px;
+      padding: 1px 0 0;
+      text-align: center;
+    }
+    .first-name {
+      margin-right: 10px;
+    }
+    .last-name {
+      margin-left: 10px;
+    }
   }
   #forgot-des {
     width: 550px;
