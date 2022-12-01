@@ -250,6 +250,7 @@
     "name": "名前",
     "alias_name": "表示名",
     "furigana": "フリガナ",
+    "furigana_name": "名前 (フリガナ)",
     "birth": "生年月日",
     "age": "年齢",
     "gender": "性別",
