@@ -38,13 +38,17 @@
   text-align: left;
   background: url('~/assets/images/banner.svg') no-repeat;
   background-size: cover;
-  padding-left: 90px;
   .banner-title {
     font-weight: 700;
     font-size: 20px;
     line-height: 40px;
     color: $color-white;
     padding-top: 26px;
+  }
+  .banner-content {
+    max-width: 1190px;
+    margin: 0 auto;
+    padding-left: 90px;
   }
   .sub-title {
     color: $color-white;
