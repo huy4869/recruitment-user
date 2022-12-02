@@ -550,6 +550,12 @@
     background-color: $color-text-primary;
     color: $color-primary;
   }
+  .hamburger-title {
+    width: max-content;
+    .hamburger-name {
+      margin-left: 6px;
+    }
+  }
 }
 
 #btn-no-data {

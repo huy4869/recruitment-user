@@ -4,7 +4,7 @@
       <div v-if="listEdu.length" class="favorite-job-page-content">
         <div id="career-mobile" class="d-flex justify-between">
           <el-button type="danger" class="card-button" @click="handleRouter('education/create/' + (listEdu.length + 1))">
-            <div class="d-flex">
+            <div class="">
               <img src="/assets/icon/add-white.svg" alt="">
               {{ $t('my_page.add_education') }}
             </div>

@@ -631,6 +631,7 @@ export default {
       return dataSearch
     },
     async searchJob() {
+      this.showAll = false
       await this.$router.push('/search')
       this.query = []
       await this.getJobs()
