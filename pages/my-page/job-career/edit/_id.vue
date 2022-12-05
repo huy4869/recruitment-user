@@ -309,7 +309,7 @@
                             <el-input
                               v-model="accountForm.business_content"
                               :placeholder="$t('career.business_content')"
-                              :autosize="{ minRows: 5, maxRows: 10}"
+                              :autosize="{ minRows: 3, maxRows: 10}"
                               name="business_content"
                               type="textarea"
                               maxlength="2000"
@@ -343,7 +343,7 @@
                             <el-input
                               v-model="accountForm.experience_accumulation"
                               :placeholder="$t('career.experience')"
-                              :autosize="{ minRows: 5, maxRows: 10}"
+                              :autosize="{ minRows: 3, maxRows: 10}"
                               name="experience"
                               type="textarea"
                               maxlength="2000"
