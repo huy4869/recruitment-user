@@ -328,9 +328,7 @@
                   <el-col :md="6" :sm="12" class="col-label">
                     <div class="label show-pc">
                    <span>
-                     {{ $t('career.experience_accumulation1') }}<br>
-                     {{ $t('career.experience_accumulation2') }}<br>
-                     {{ $t('career.experience_accumulation3') }}
+                     {{ $t('career.experience') }}
                    </span>
                       <div class="show-sp">
                         {{ $t('career.experience') }}

@@ -6,7 +6,11 @@
     margin: auto;
     #btn-center {
       display: flex;
-      justify-content: center;
+      padding-left: 244px;
+      .el-button {
+        margin-left: 0;
+        margin-right: 16px;
+      }
     }
   }
 }
@@ -248,7 +252,7 @@
         line-height: 22px;
         height: 100%;
         span {
-          padding: 10px 16px;
+          padding: 10px 5px 10px 16px;
           display: block;
         }
       }
