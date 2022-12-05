@@ -1,6 +1,6 @@
 .title-page-element {
   display: flex;
-  padding: 11px 90px;
+  padding: 8px 90px;
   max-width: 1152px;
   margin: auto;
   .title-link {
@@ -34,7 +34,7 @@
   }
 }
 .banner-element {
-  height: 150px;
+  height: 90px;
   text-align: left;
   background: url('~/assets/images/banner.svg') no-repeat;
   background-size: cover;
@@ -43,7 +43,7 @@
     font-size: 20px;
     line-height: 40px;
     color: $color-white;
-    padding-top: 26px;
+    padding-top: 7px;
   }
   .banner-content {
     max-width: 1190px;
@@ -53,6 +53,8 @@
   .sub-title {
     color: $color-white;
     display: flex;
+    position: relative;
+    top: -11px;
     span {
       font-weight: 700;
       font-size: 36px;

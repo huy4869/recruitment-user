@@ -1,7 +1,7 @@
 .cv-page {
   .cv-content {
     display: flex;
-    padding: 8px 90px;
+    padding: 10px 90px 0;
     max-width: 1152px;
     margin: auto;
     #btn-center {
@@ -19,15 +19,15 @@
   }
 }
 .edit-cv-element {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   .text-count-career {
-    min-width: 32px;
+    min-width: 22px;
     width: max-content;
-    height: 32px;
+    height: 22px;
     border: 1px solid $color-text-primary;
-    font-size: 24px;
+    font-size: 16px;
     border-radius: 50%;
-    line-height: 28px;
+    line-height: 20px;
     display: inline-flex;
     justify-content: center;
     vertical-align: middle;
@@ -40,12 +40,12 @@
   }
   .edit-cv-title {
     font-weight: 400;
-    font-size: 32px;
-    line-height: 40px;
+    font-size: 24px;
+    line-height: 32px;
     letter-spacing: 0.1em;
     color: $color-text-primary;
     display: flex;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
   }
   .edit-cv-content {
     border-top: 3px solid $color-text-primary;
@@ -53,7 +53,7 @@
       display: none;
     }
     .edit-form-input {
-      margin-top: 20px;
+      margin-top: 12px;
       .border-form-middle {
         display: none;
         .border-middle {
@@ -69,6 +69,11 @@
       .el-form-item__content {
         .el-select {
           width: 100%;
+        }
+        .el-select--large {
+          .el-select__tags {
+            padding: 0 10px;
+          }
         }
         .el-input__inner {
           color: $color-black;
@@ -172,14 +177,15 @@
         }
       }
       .sm-text {
-        font-weight: 500;
+        font-weight: 400;
         font-size: 12px;
         line-height: 20px;
         color: $color-text-3;
-        margin-top: 6px;
+        margin-top: 2px;
+        margin-bottom: 1px;
       }
       .enroll-checkbox {
-        margin-bottom: 14px;
+        margin-bottom: 6px;
         width: fit-content;
         .time-checkbox {
           width: fit-content;
@@ -214,7 +220,7 @@
     margin-top: 24px;
     .form-label-input {
       .last-input {
-        padding-bottom: 0;
+        padding-bottom: 4px;
       }
     }
     .border-form-middle {
@@ -242,22 +248,25 @@
         line-height: 22px;
         height: 100%;
         span {
-          padding: 14px 16px;
+          padding: 10px 16px;
           display: block;
         }
       }
     }
+    .el-col-md-6 {
+      min-width: 220px;
+    }
     .required {
       position: absolute;
-      top: 14px;
-      right: 22px;
+      top: 11px;
+      right: 16px;
       border-radius: 2px;
       background: $color-red-primary;
       color: $color-white;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 22px;
-      padding: 1px 6px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 20px;
+      padding: 0 6px;
       text-align: center;
     }
     .image-avatar {
@@ -341,7 +350,7 @@
 
     .content-input {
       margin-left: 24px;
-      padding: 5px 0;
+      padding: 3px 0;
       .el-input__suffix {
         display: flex;
         align-items: center;
@@ -385,13 +394,13 @@
         }
       }
       .first-name {
-        padding-right: 10px;
+        padding-right: 4px;
       }
       .last-name {
-        padding-left: 10px;
+        padding-left: 9px;
       }
       .birthday {
-        padding: 0 10px;
+        padding: 0 14px;
       }
       .text-normal {
         font-size: 14px;
@@ -401,7 +410,7 @@
         padding: 0 36px 0 8px;
       }
       .date-space {
-        margin: 0 20px 0 0
+        margin: 0 18px 0 0
       }
       .edu-status {
         margin-top: 32px;
@@ -516,15 +525,15 @@
 
 .menu-left-element {
   margin-right: 29px;
-  margin-top: 58px;
+  margin-top: 44px;
   border-top: 1px solid $border-primary;
 
   .menu-left {
     text-decoration: none;
     font-weight: 300;
     font-size: 14px;
-    line-height: 40px;
-    padding: 5px 0 5px 4px;
+    line-height: 22px;
+    padding: 11px 0 11px 4px;
     border-bottom: 1px solid $border-primary;
     color: $color-black;
     background-color: $color-white;

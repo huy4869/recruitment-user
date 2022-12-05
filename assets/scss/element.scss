@@ -1,6 +1,6 @@
 .el-form-item__error {
   color: $color-red-primary;
-  font-size: 13px;
+  font-size: 12px;
   padding-top: 6px;
   position: relative;
 }
@@ -12,7 +12,7 @@
   }
 }
 .el-input {
-  height: 40px;
+  height: 36px;
   .el-input__inner {
     border: 1px solid $border-default;
     &:focus {
@@ -24,11 +24,11 @@
     }
   }
   input {
-    height: 40px;
-    font-weight: 500;
+    height: 36px;
+    font-weight: 400;
     font-size: 14px;
     line-height: 22px;
-    padding: 10px 16px;
+    padding: 6px 16px;
     &::placeholder {
       color: $color-placeholder;
       font-weight: 500;
