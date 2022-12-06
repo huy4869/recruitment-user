@@ -30,7 +30,7 @@
                   <div v-if="checkSearch(user.store_name)" :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': !user.be_readed}]">
                     <div class="d-flex">
                       <div class="user-avatar">
-                        <ShowAvatarElement :user="{ avatar: user.store_banner, name: user.store_name, color: user.color }"></ShowAvatarElement>
+                        <ShowAvatarElement :user="{ avatar: user.store_banner, name: user.store_name, id: user.store_id }"></ShowAvatarElement>
                       </div>
                       <div class="message-content">
                         <div class="d-flex justify-between">
@@ -54,7 +54,7 @@
             <div class="content-form-chat">
               <div class="form-message" ref="scrollListMessage">
                 <div v-for="(message, index) in listMessages" :key="index">
-                  <FormChatElement :message="message"></FormChatElement>
+                  <FormChatElement :message="message" :store_id="userActive.store_id"></FormChatElement>
                 </div>
               </div>
               <div class="input-chat">
@@ -110,7 +110,7 @@
                   <div v-if="checkSearch(user.store_name)" :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': !user.be_readed}]">
                     <div class="d-flex">
                       <div class="user-avatar">
-                        <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name, color: user.color }"></ShowAvatarElement>
+                        <ShowAvatarElement :user="{ avatar: user.avatar, name: user.store_name, id: user.store_id }"></ShowAvatarElement>
                       </div>
                       <div class="message-content">
                         <div class="d-flex justify-between">
@@ -134,7 +134,7 @@
             <div v-else class="content-form-chat">
               <div class="form-message" ref="scrollListMessageMobile">
                 <div v-for="(message, index) in listMessages" :key="index">
-                  <FormChatElement :message="message"></FormChatElement>
+                  <FormChatElement :message="message" :store_id="userActive.store_id"></FormChatElement>
                 </div>
               </div>
               <div class="input-chat">
@@ -198,15 +198,7 @@ export default {
         message: [
           { validator: validFormLength, trigger: 'blur' }
         ]
-      },
-      listColor: [
-        '#AB4CF5',
-        '#E83434',
-        '#11D35F',
-        '#F017C0',
-        '#F9B126',
-        '#266EF9'
-      ]
+      }
     }
   },
   async created() {
@@ -287,7 +279,6 @@ export default {
       if (dataResponse.status_code === 200) {
         const listUsers = []
         dataResponse.data.forEach((item) => {
-          item.color = this.listColor[Math.floor(Math.random() * 6)]
           listUsers.push(item)
         })
         this.listUsers = listUsers
