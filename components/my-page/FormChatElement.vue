@@ -16,7 +16,7 @@
       <div class="d-flex justify-start">
         <div class="d-flex">
           <div class="show-user-image">
-            <ShowAvatarElement :user="{ avatar: message.store_banner, name: message.store_name, color: message.color }"></ShowAvatarElement>
+            <ShowAvatarElement :user="{ avatar: message.store_banner, name: message.store_name, id: store_id }"></ShowAvatarElement>
           </div>
           <div class="show-message">
             <div class="user-name">{{ message.store_name }}</div>
@@ -33,7 +33,7 @@
 import ShowAvatarElement from '../element-ui/ShowAvatarElement'
 export default {
   name: 'FormChatElement',
-  props: ['message'],
+  props: ['message', 'store_id'],
   components: { ShowAvatarElement }
 }
 </script>

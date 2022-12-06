@@ -29,7 +29,7 @@
               {{ $t('job.pick_up_point2') }}
             </span>
             </el-button>
-            <div class="sub-detail-title-sp">{{ job.pick_up_point }}</div>
+            <div class="sub-detail-title-sp" v-html="job.pick_up_point"></div>
           </div>
         </div>
         <div class="about-job show-pc" @click="openAboutDialog">
@@ -37,7 +37,8 @@
           <span>{{ $t('job.about_job') }}</span>
         </div>
       </div>
-      <div class="sub-detail-title">{{ job.pick_up_point }}</div>
+      <div class="sub-detail-title" v-html="job.pick_up_point">
+      </div>
       <div class="show-sp">
         <div class="detail-job-image">
           <div v-if="job.banner_image" class="job-avatar">
@@ -239,7 +240,10 @@
             <span>{{ $t('job.feature') }}</span>
           </div>
           <div class="application-requirement-right">
-            <div>{{ job.welfare_treatment_description }}</div>
+            <div v-for="(feature, index) in job.feature_types" :key="index" class="form-list-feature">
+              <div>{{ feature.category_name }}</div>
+              <div>{{ feature.features }}</div>
+            </div>
           </div>
         </div>
         <div class="application-requirement-item">
