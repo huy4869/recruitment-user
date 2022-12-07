@@ -722,3 +722,14 @@ hr {
     letter-spacing: 0;
   }
 }
+
+.required {
+  background: $color-red-primary;
+  color: $color-white;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 2px;
+}

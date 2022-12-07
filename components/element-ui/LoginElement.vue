@@ -1,85 +1,81 @@
 <template>
   <div class="login-element">
-    <el-row>
-      <el-col class="col-mobile" :span="12">
-        <div class="login-title">{{ $t('login.title') }}</div>
-        <el-form
-          ref="accountForm"
-          :model="accountForm"
-          :rules="accountRules"
-          autocomplete="off"
-          label-position="left"
-        >
-          <el-form-item class="email-login" label="" prop="email" :error="(error.key === 'email') ? error.value : ''">
-            <div class="label">{{ $t('login.email') }}</div>
-            <el-input
-              ref="email"
-              v-model.trim="accountForm.email"
-              :placeholder="$t('login.email')"
-              name="email"
-              maxlength="255"
-              type="text"
-              tabindex="2"
-              @focus="resetValidate('email')"
-            />
-          </el-form-item>
-          <el-form-item class="password-login" label="" prop="password" :error="(error.key === 'password') ? error.value : ''">
-            <div class="label">{{ $t('login.password') }}</div>
-            <el-input
-              ref="password"
-              v-model.trim="accountForm.password"
-              :placeholder="$t('login.password')"
-              name="password"
-              :type="showPass?'text':'password'"
-              tabindex="3"
-              maxlength="12"
-              autocomplete="off"
-              @keydown.enter="login"
-              @keydown.native.tab.prevent="$refs.email.focus()"
-              @focus="resetValidate('password')"
-            >
-              <i slot="suffix" class="cursor-pointer" @click="displayPass()">
-                <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
-                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
-              </i>
-            </el-input>
-          </el-form-item>
-          <div class="d-flex align-items-center check-remember">
-            <el-checkbox v-model="accountForm.remember" :label="$t('login.remember_me')" size="large"></el-checkbox>
-            <div class="login-here">
-              <span>{{ $t('login.forgot_password') }}</span>
-              <span class="forgot-password underline-hover" @click="changeLink('forgot-password')">
+    <img class="logo-login" src="/assets/images/logo_white.svg" alt="">
+    <div>
+      <div class="login-title">{{ $t('login.title') }}</div>
+      <el-form
+        ref="accountForm"
+        :model="accountForm"
+        :rules="accountRules"
+        autocomplete="off"
+        label-position="left"
+      >
+        <el-form-item class="email-login" label="" prop="email" :error="(error.key === 'email') ? error.value : ''">
+          <div class="label">{{ $t('login.email') }}</div>
+          <el-input
+            ref="email"
+            v-model.trim="accountForm.email"
+            :placeholder="$t('login.email')"
+            name="email"
+            maxlength="255"
+            type="text"
+            tabindex="2"
+            @focus="resetValidate('email')"
+          />
+        </el-form-item>
+        <el-form-item class="password-login" label="" prop="password" :error="(error.key === 'password') ? error.value : ''">
+          <div class="label">{{ $t('login.password') }}</div>
+          <el-input
+            ref="password"
+            v-model.trim="accountForm.password"
+            :placeholder="$t('login.password')"
+            name="password"
+            :type="showPass?'text':'password'"
+            tabindex="3"
+            maxlength="12"
+            autocomplete="off"
+            @keydown.enter="login"
+            @keydown.native.tab.prevent="$refs.email.focus()"
+            @focus="resetValidate('password')"
+          >
+            <i slot="suffix" class="cursor-pointer" @click="displayPass()">
+              <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
+              <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
+            </i>
+          </el-input>
+        </el-form-item>
+        <div class="d-flex align-items-center check-remember">
+          <el-checkbox v-model="accountForm.remember" :label="$t('login.remember_me')" size="large"></el-checkbox>
+          <div class="login-here">
+            <span>{{ $t('login.forgot_password') }}</span>
+            <span class="forgot-password underline-hover" @click="changeLink('forgot-password')">
                 {{ $t('login.here') }}
               </span>
-            </div>
           </div>
-          <el-form-item class="button-login">
-            <div :class="{'disabled' : disabledButton}">
-              <el-button
-                v-loading.fullscreen.lock="fullscreenLoading"
-                :loading="loading"
-                type="danger"
-                @click.native.prevent="login"
-              >
-                {{ $t('login.title') }}
-              </el-button>
-            </div>
-          </el-form-item>
-          <div class="link-register">
-            <span class="underline-hover register-button" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
+        </div>
+        <el-form-item class="button-login">
+          <div :class="{'disabled' : disabledButton}">
+            <el-button
+              v-loading.fullscreen.lock="fullscreenLoading"
+              :loading="loading"
+              type="danger"
+              @click.native.prevent="login"
+            >
+              {{ $t('login.title') }}
+            </el-button>
           </div>
-          <div id="here-login" class="here-mobile text-center">
-            <span class="text-primary-black">{{ $t('login.forgot_password') }}</span>
-            <span class="underline-hover text-primary-pink cursor-pointer" @click="changeLink('forgot-password')">
+        </el-form-item>
+        <div class="link-register">
+          <span class="underline-hover register-button" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
+        </div>
+        <div id="here-login" class="here-mobile text-center">
+          <span class="text-primary-black">{{ $t('login.forgot_password') }}</span>
+          <span class="underline-hover text-primary-pink cursor-pointer" @click="changeLink('forgot-password')">
               {{ $t('login.here') }}
             </span>
-          </div>
-        </el-form>
-      </el-col>
-      <el-col :span="12" class="col-mobile image-login">
-        <img class="img-login" src="/assets/images/login.svg" alt="">
-      </el-col>
-    </el-row>
+        </div>
+      </el-form>
+    </div>
   </div>
 </template>
 
