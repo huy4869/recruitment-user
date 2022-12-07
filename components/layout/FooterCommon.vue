@@ -2,13 +2,15 @@
   <footer class="footer">
     <div class="container-footer">
       <div class="show-pc">
+        <div class="top-arrow">
+          <img src="@/static/assets/icon/top-arrow.svg" @click="scrollToTop">
+        </div>
         <div class="footer-item">
           <div class="show-sp-center cursor-pointer">{{ $t('footer.company') }}</div>
           <div class="show-sp-center cursor-pointer">{{ $t('footer.faq') }}</div>
           <div class="cursor-pointer">{{ $t('footer.terms') }}</div>
           <div class="cursor-pointer">{{ $t('footer.privacy') }}</div>
           <div class="cursor-pointer" @click="handleRouter('/inquiry')">{{ $t('footer.inquiry') }}</div>
-          <img class="top-arrow" src="@/static/assets/icon/top-arrow.svg" alt="top-arrow" @click="scrollToTop">
         </div>
         <div class="logo">
           <img src="/assets/images/logo.svg" alt="">

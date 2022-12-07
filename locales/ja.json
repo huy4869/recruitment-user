@@ -42,7 +42,7 @@
     "place": "場所：",
     "change": "希望面接時間を変更",
     "cancel": "キャンセル:",
-    "created_at": "応募日時",
+    "created_at": "応募日時:",
     "interview": "面接",
     "open_google_map": "グーグルマップを開く",
     "status": {
@@ -103,7 +103,7 @@
     "name": "こんにちは、"
   },
   "page": {
-    "home": "ホームページ",
+    "home": "ホーム",
     "my_page": "マイページ",
     "web_cv": "Web履歴書",
     "sub_web_cv": "美容室オーナが探すため、WEB履歴書を更新しましょう！",
@@ -221,7 +221,8 @@
       "preference": "希望条件が登録されていません。"
     },
     "unread": "未読",
-    "not_found": "お探しのページは見つかりませんでした。"
+    "not_found": "お探しのページは見つかりませんでした。",
+    "dear": "さん"
   },
   "button": {
     "cancel": "キャンセル",
@@ -234,7 +235,8 @@
     "apply": "応募する"
   },
   "my_page": {
-    "top_page": "TOPマイページ",
+    "top_page": "TOPページ",
+    "top": "TOP",
     "history": "応募履歴",
     "favorite_job": "お気に入り求人",
     "web_cv": "Web履歴書",
@@ -304,7 +306,11 @@
     "sns_social": "SNSアカウント",
     "add_job_career": "職務経歴を追加する",
     "add_education": "学歴を追加する",
-    "register": "登録"
+    "register": "登録",
+    "interview": "面接",
+    "schedule": "予定",
+    "application": "応募",
+    "app_history": "履歴"
   },
   "condition": {
     "list": {
@@ -461,6 +467,7 @@
     "message_error" : "不明なエラーが発生しました。"
   },
   "content": {
+    "web_cv": "美容室オーナーがあなたを見つけられるように、WEB履歴書を更新しましょう！",
     "CON_002": "編集中のデータが保存されません。よろしいですか？",
     "CON_003": "削除します。よろしいですか？",
     "CON_005": "応募をキャンセルします。よろしいです？",

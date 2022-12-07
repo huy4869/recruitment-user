@@ -1,7 +1,7 @@
 <template>
   <div class="my-page-schedule-element schedule-history" @click="changeToDetail(schedule.job_id)">
     <div class="title-create">
-      {{ schedule.submission_date_label }}{{ schedule.created_at }}
+      {{ $t('schedule.created_at') }} {{ schedule.created_at }}
     </div>
     <div class="schedule-title">
       <div class="title-main">

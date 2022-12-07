@@ -6,18 +6,18 @@
           <img src="/assets/icon/icon_home.svg"/>
           <span>{{ title.name }}</span>
         </router-link>
-        <span>・</span>
+        <span class="icon-between">/</span>
       </div>
       <div class="d-flex" v-else-if="key === (listMenu.length - 1)">
         <div class="title-not-link">
-          <span>{{ title.name }}</span>
+          <span v-html="title.name"></span>
         </div>
       </div>
       <div class="d-flex" v-else>
         <router-link class="title-link" :to="title.route" tag="button">
           <span>{{ title.name }}</span>
         </router-link>
-        <span>・</span>
+        <span class="icon-between">/</span>
       </div>
     </div>
   </div>

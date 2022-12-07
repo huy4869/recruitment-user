@@ -1,7 +1,7 @@
 <template>
   <div class="cv-page">
+    <BannerElement :banner="$t('page.my_page')" title="my page" :subBanner="$t('content.web_cv')"></BannerElement>
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
       <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
       <div class="right-content-element">
@@ -17,7 +17,6 @@
               label-position="left"
             >
               <div class="edit-form-input">
-                <BorderElement :middle="true"></BorderElement>
                 <el-row class="d-flex form-label-input">
                   <el-col :md="6" :sm="12" class="col-label">
                     <div class="label"><span>{{ $t('career.store_name') }}</span></div>
@@ -76,7 +75,7 @@
                     </div>
                     <div class="required">{{ $t('form.required') }}</div>
                   </el-col>
-                  <el-col class="pb-8" :md="18" :sm="24">
+                  <el-col :md="18" :sm="24">
                     <div ref="period_end"></div>
                     <div ref="period_start" class="content-input content-datetime">
                       <el-row class="enroll-checkbox">
@@ -125,7 +124,7 @@
                             </el-row>
                           </el-form-item>
                         </el-col>
-                        <span class="date-space"> ～ </span>
+                        <span class="date-space">~</span>
                         <span v-show="accountForm.period_check" class="text-normal">{{ $t('career.current') }}</span>
                         <el-col v-show="!accountForm.period_check" :md="9" :sm="24" class="birth-year">
                           <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
@@ -316,7 +315,7 @@
                             <el-input
                               v-model="accountForm.business_content"
                               :placeholder="$t('career.business_content')"
-                              :autosize="{ minRows: 5, maxRows: 10}"
+                              :autosize="{ minRows: 3, maxRows: 10}"
                               name="business_content"
                               type="textarea"
                               maxlength="2000"
@@ -335,9 +334,7 @@
                   <el-col :md="6" :sm="12" class="col-label">
                     <div class="label show-pc">
                    <span>
-                     {{ $t('career.experience_accumulation1') }}<br>
-                     {{ $t('career.experience_accumulation2') }}<br>
-                     {{ $t('career.experience_accumulation3') }}
+                     {{ $t('career.experience') }}
                    </span>
                       <div class="show-sp">
                         {{ $t('career.experience') }}
@@ -345,14 +342,14 @@
                     </div>
                   </el-col>
                   <el-col :md="18" :sm="24">
-                    <div ref="experience_accumulation" class="content-input">
+                    <div ref="experience_accumulation" class="content-input last-input">
                       <el-row class="d-flex">
                         <el-col :md="20" :sm="24">
                           <el-form-item label="" prop="experience_accumulation" :error="(error.key === 'experience_accumulation') ? error.value : ''">
                             <el-input
                               v-model="accountForm.experience_accumulation"
                               :placeholder="$t('career.experience')"
-                              :autosize="{ minRows: 5, maxRows: 10}"
+                              :autosize="{ minRows: 3, maxRows: 10}"
                               name="experience"
                               type="textarea"
                               maxlength="2000"
@@ -728,7 +725,7 @@ export default {
       { name: this.$t('page.my_page'), route: '/my-page/top-page' },
       { name: this.$t('page.web_cv'), route: '/my-page/web-cv' },
       { name: this.$t('my_page.job_career'), route: '/my-page/job-career' },
-      { name: this.$t('my_page.job_career') + this.$route.params.id + this.$t('my_page.edit') }
+      { name: (this.$t('my_page.job_career') + '<span class="text-count">' + this.$route.params.id + '</span>' + this.$t('my_page.edit')) }
     ])
     this.getDataJob()
     this.getMasterData()

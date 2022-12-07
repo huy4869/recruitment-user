@@ -26,7 +26,6 @@
           </div>
         </div>
         <div v-if="!loggedIn" class="button-action show-pc">
-          <div class="border-default"></div>
           <div class="form-icon" @click="changeToLink('/register')">
             <img src="/assets/icon/icon_register.svg" alt="">
             <span>{{ $t('header.member_register') }}</span>
@@ -57,7 +56,7 @@
             <div class="content-user">
               <div class="d-flex cursor-pointer">
                 <img class="avatar" :src="user.avatar ? user.avatar : '/assets/images/user_default.svg'" alt="">
-                <span>{{ $t('header.name') + (user.alias_name || user.email)}}</span>
+                <span>{{ checkName(user.alias_name || user.email) + $t('common.dear') }}</span>
               </div>
               <img class="cursor-pointer" src="/assets/icon/icon_drop_more.svg" alt="">
             </div>
@@ -109,6 +108,13 @@ export default {
       await this.$auth.logout()
       await this.$router.go('/')
       this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    checkName(value) {
+      const name = value
+      if (name.length > 6) {
+        return name.slice(0, 6) + '...'
+      }
+      return name
     }
   }
 }

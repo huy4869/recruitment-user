@@ -1,6 +1,8 @@
 .title-page-element {
   display: flex;
-  padding: 11px 0 11px 64px;
+  padding: 8px 90px;
+  max-width: 1152px;
+  margin: auto;
   .title-link {
     display: flex;
     background-color: $color-white;
@@ -8,11 +10,17 @@
     cursor: pointer;
     border: none;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 22px;
     img {
       margin-right: 11px;
+      width: 20px;
+      height: 20px;
     }
+  }
+  .icon-between {
+    font-size: 12px;
+    line-height: 22px;
   }
   .title-not-link{
     display: flex;
@@ -20,26 +28,44 @@
     color: $color-black;
     border: none;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 22px;
     padding: 1px 6px;
   }
 }
 .banner-element {
-  padding: 24px 0;
-  text-align: center;
-  background-color: $color-primary;
+  height: 90px;
+  text-align: left;
+  background: url('~/assets/images/banner.svg') no-repeat;
+  background-size: cover;
   .banner-title {
     font-weight: 700;
-    font-size: 32px;
+    font-size: 20px;
     line-height: 40px;
-    color: $color-text-primary;
+    color: $color-white;
+    padding-top: 7px;
   }
-  .sub-banner-title {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color: $color-blue;
-    margin-top: 16px;
+  .banner-content {
+    max-width: 1190px;
+    margin: 0 auto;
+    padding-left: 90px;
+  }
+  .sub-title {
+    color: $color-white;
+    display: flex;
+    position: relative;
+    top: -11px;
+    span {
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 40px;
+    }
+    .sub-banner-title {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      padding-top: 14px;
+      margin-left: 16px;
+    }
   }
 }

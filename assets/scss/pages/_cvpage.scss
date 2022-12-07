@@ -1,9 +1,17 @@
 .cv-page {
   .cv-content {
     display: flex;
-    padding: 54px 64px;
+    padding: 10px 90px 0;
     max-width: 1152px;
     margin: auto;
+    #btn-center {
+      display: flex;
+      padding-left: 244px;
+      .el-button {
+        margin-left: 0;
+        margin-right: 16px;
+      }
+    }
   }
 }
 .right-content-element {
@@ -15,12 +23,12 @@
   }
 }
 .edit-cv-element {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   .text-count-career {
-    min-width: 24px;
+    min-width: 22px;
     width: max-content;
     height: 22px;
-    border: 1px solid $color-black;
+    border: 1px solid $color-text-primary;
     font-size: 16px;
     border-radius: 50%;
     line-height: 20px;
@@ -29,20 +37,22 @@
     vertical-align: middle;
     font-family: 'Zen Kaku Gothic New';
     font-weight: 700;
-    margin: auto 2px;
+    margin-top: 5px;
     span {
-      letter-spacing: -4px;
-      margin-left: -4px;
+      letter-spacing: 0;
     }
   }
   .edit-cv-title {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 24px;
     line-height: 32px;
-    color: $color-black;
+    letter-spacing: 0.1em;
+    color: $color-text-primary;
     display: flex;
+    margin-bottom: 12px;
   }
   .edit-cv-content {
+    border-top: 3px solid $color-text-primary;
     &#skill-sheet {
       margin-bottom: 40px;
     }
@@ -61,17 +71,14 @@
       display: none;
     }
     .edit-form-input {
-      margin-top: 24px;
+      margin-top: 12px;
       .border-form-middle {
-        height: 3px;
+        display: none;
         .border-middle {
-          height: 2px;
         }
       }
       .border-input {
         .border-middle {
-          border-bottom: 1px solid $border-default;
-          margin-left: 20px;
         }
       }
       .el-form-item {
@@ -80,6 +87,11 @@
       .el-form-item__content {
         .el-select {
           width: 100%;
+        }
+        .el-select--large {
+          .el-select__tags {
+            padding: 0 10px;
+          }
         }
         .el-input__inner {
           color: $color-black;
@@ -183,14 +195,15 @@
         }
       }
       .sm-text {
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 22px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
         color: $color-text-3;
-        margin-top: 16px;
+        margin-top: 2px;
+        margin-bottom: 1px;
       }
       .enroll-checkbox {
-        margin-bottom: 20px;
+        margin-bottom: 6px;
         width: fit-content;
         .time-checkbox {
           width: fit-content;
@@ -226,6 +239,11 @@
 .edit-form-content {
   .edit-form-input {
     margin-top: 24px;
+    .form-label-input {
+      .last-input {
+        padding-bottom: 4px;
+      }
+    }
     .border-form-middle {
       height: 3px;
       .border-middle {
@@ -245,29 +263,31 @@
       position: relative;
       min-height: 100%;
       .label {
-        background: $color-blue-3;
-        border-radius: 4px;
+        background: $color-bg-footer;
         font-weight: 700;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 14px;
+        line-height: 22px;
         height: 100%;
         span {
-          padding: 24px 16px;
+          padding: 10px 5px 10px 16px;
           display: block;
         }
       }
     }
+    .el-col-md-6 {
+      min-width: 220px;
+    }
     .required {
       position: absolute;
-      top: 24px;
+      top: 11px;
       right: 16px;
       border-radius: 2px;
       background: $color-red-primary;
       color: $color-white;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 24px;
-      padding: 1px 6px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 20px;
+      padding: 0 6px;
       text-align: center;
     }
     .image-avatar {
@@ -348,20 +368,21 @@
         }
       }
     }
+
     .content-input {
+      margin-left: 24px;
+      padding: 3px 0;
       &.pr-slider {
         padding: 0px 0 30px;
       }
       .skill-slider {
         margin-left: 71px;
       }
-      margin-left: 20px;
-      padding: 20px 0;
       .el-input__suffix {
         display: flex;
         align-items: center;
         cursor: pointer;
-        right: 17px;
+        right: 16px;
         .icon-show-pass {
           display: flex;
         }
@@ -400,23 +421,23 @@
         }
       }
       .first-name {
-        padding-right: 10px;
+        padding-right: 4px;
       }
       .last-name {
-        padding-left: 10px;
+        padding-left: 9px;
       }
       .birthday {
-        padding: 0 10px;
+        padding: 0 14px;
       }
       .text-normal {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
       }
       .gender {
         padding: 0 36px 0 8px;
       }
       .date-space {
-        margin: 0 20px 0 0
+        margin: 0 18px 0 0
       }
       .edu-status {
         margin-top: 32px;
@@ -531,24 +552,27 @@
 
 .menu-left-element {
   margin-right: 29px;
+  margin-top: 44px;
+  border-top: 1px solid $border-primary;
+
   .menu-left {
     text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    padding: 16px 14px 16px 24px;
-    margin-bottom: 3px;
-    color: $color-text-primary;
-    background-color: $color-primary;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 11px 0 11px 4px;
+    border-bottom: 1px solid $border-primary;
+    color: $color-black;
+    background-color: $color-white;
     width: 203px;
     display: flex;
     justify-content: space-between;
-    border-radius: 4px;
     cursor: pointer;
   }
   .menu-active {
-    background-color: $color-text-primary;
-    color: $color-primary;
+    font-weight: 700;
+
+    color: $color-text-primary;
   }
   .hamburger-title {
     width: max-content;
