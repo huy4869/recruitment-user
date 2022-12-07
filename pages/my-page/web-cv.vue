@@ -1,9 +1,9 @@
 <template>
-  <div class="cv-page">
+  <div class="cv-page web-cv-page">
     <client-only>
       <div>
+        <BannerElement :banner="$t('page.my_page')" title="my page" :subBanner="$t('content.web_cv')"></BannerElement>
         <TitlePageElement class="show-pc"></TitlePageElement>
-        <BannerElement class="show-pc" :banner="this.$t('page.web_cv')" :sub-banner="this.$t('page.sub_web_cv')"></BannerElement>
       </div>
       <div class="cv-content">
         <MenuLeftElement menu-active="web-cv"></MenuLeftElement>

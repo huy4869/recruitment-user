@@ -1,7 +1,7 @@
 .cv-page {
   .cv-content {
     display: flex;
-    padding: 10px 90px 0;
+    padding: 12px 90px 0;
     max-width: 1152px;
     margin: auto;
     #btn-center {
@@ -14,6 +14,16 @@
     }
   }
 }
+
+.web-cv-page {
+  .cv-content {
+    padding-top: 32px;
+    .menu-left-element {
+      margin-top: 0;
+    }
+  }
+}
+
 .right-content-element {
   width: 100%;
   #self-pr {
@@ -551,7 +561,7 @@
 
 
 .menu-left-element {
-  margin-right: 29px;
+  margin-right: 40px;
   margin-top: 44px;
   border-top: 1px solid $border-primary;
 
@@ -564,7 +574,7 @@
     border-bottom: 1px solid $border-primary;
     color: $color-black;
     background-color: $color-white;
-    width: 203px;
+    width: 196px;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
@@ -577,7 +587,7 @@
   .hamburger-title {
     width: max-content;
     .hamburger-name {
-      margin-left: 6px;
+      margin-left: 12px;
     }
   }
 }

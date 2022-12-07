@@ -130,12 +130,12 @@
   line-height: 22px;
   border: 1px solid $color-blue;
   &:hover {
-    background-color: $color-blue;
-    border: 1px solid $color-blue;
+    background-color: $color-blue-hover;
+    border: 1px solid $color-blue-hover;
   }
   &:focus {
-    background-color: $color-blue;
-    border: 1px solid $color-blue;
+    background-color: $color-blue-focus;
+    border: 1px solid $color-blue-focus;
   }
 }
 
@@ -147,14 +147,14 @@
   font-size: 14px;
   line-height: 22px;
   &:hover {
-    border-color: $color-blue;
+    border-color: $color-blue-hover;
     background: $color-white;
-    color: $color-blue;
+    color: $color-blue-hover;
   }
   &:focus {
     background-color: $color-white;
-    border-color: $color-blue;
-    color: $color-blue;
+    border-color: $color-blue-focus;
+    color: $color-blue-focus;
   }
 }
 

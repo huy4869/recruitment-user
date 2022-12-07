@@ -70,7 +70,7 @@
       .index-page {
         .tab-index{
           width: 76%;
-          padding-left: 10px;
+          padding-left: 21px;
           padding-right: 32px;
         }
       }
@@ -204,9 +204,8 @@
     overflow: hidden;
     .container-footer {
       .footer-item {
-        grid-gap: 8px;
-        gap: 8px;
-        justify-content: space-between;
+        grid-gap: 32px;
+        gap: 32px;
       }
     }
   }
@@ -283,17 +282,24 @@
 }
 
 @media screen and (max-width: 900px) {
+  .banner-element {
+    .banner-content {
+      padding-left: 20px;
+    }
+  }
   .header-common {
     .header-container {
       .header-logo {
-        margin: 24px 20px;
+        margin: 12px;
       }
       .header-content {
         padding-right: 20px;
+        height: 48px;
         .button-action {
           margin-right: 10px;
           .border-default {
             margin: auto 4px;
+            top: 2px;
           }
         }
         .content-user {
@@ -665,19 +671,20 @@
     margin-bottom: 90px;
 
     .container-footer {
-      background: $color-dark;
+      background: $color-text-1;
       .footer-item {
         display: grid;
         grid-template-columns: 40% 40% 20%;
-        background: $color-dark;
+        background: $color-text-1;
         color: $color-white;
         padding: 16px 35px 5px 36px;
+        grid-gap: 18px;
+        gap: 18px;
         div {
           display: inline-block;
           font-weight: 500;
           font-size: 14px;
           line-height: 22px;
-          margin-bottom: 18px;
           span {
             width: 150%;
             display: block;
@@ -868,6 +875,7 @@
   }
   .banner-element {
     padding: 16px 0;
+    display: none;
 
     .banner-title {
       font-weight: 700;
@@ -893,25 +901,25 @@
     padding: 8px 12px;
     border: none;
     width: auto;
+    box-shadow: none;
 
     .index-cv-title {
       display: block;
 
       .title-page {
-        font-weight: 700;
-        font-size: 16px;
+        font-weight: 400;
+        font-size: 20px;
         line-height: 24px;
         color: $color-text-primary;
-        background-color: $color-primary;
-        border-left: 5px solid $color-text-primary;
-        padding: 9px 11px;
+        border-bottom: 2px solid $color-text-primary;
+        padding-bottom: 9px;
       }
 
       .last-updated {
         font-weight: 500;
         font-size: 14px;
         line-height: 22px;
-        margin-top: 12px;
+        margin-top: 18px;
       }
     }
 
@@ -921,6 +929,7 @@
 
       .complete-status {
         .complete-item {
+          font-weight: 400;
           font-size: 16px;
           line-height: 24px;
         }
@@ -934,16 +943,18 @@
           .item-completed {
             font-size: 14px;
             line-height: 22px;
+            padding-top: 5px;
+            padding-right: 3px;
           }
         }
       }
 
       .index-page {
-        margin-top: 24px;
+        margin-top: 32px;
 
         .tab-index {
           margin: auto auto 14px;
-          padding: 21px 12px 18px;
+          padding: 21px 12px 18px 14px;
           font-size: 16px;
           line-height: 24px;
 
@@ -951,7 +962,10 @@
             margin-left: 8px;
             padding-top: 0;
           }
-
+          .icon-done {
+            top: 21px;
+            right: 12px;
+          }
           img {
             width: 24px;
             height: 24px;
@@ -967,7 +981,7 @@
   }
   .menu-left-element {
     margin-right: 0;
-    padding: 16px 12px 24px;
+    padding: 16px 12px 20px;
 
     .el-select {
       width: 100%;
