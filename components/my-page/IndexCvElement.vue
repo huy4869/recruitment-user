@@ -16,8 +16,8 @@
             <svg class="image-percent" xmlns="http://www.w3.org/2000/svg" version="1.1" width="162px" height="162px">
               <defs>
                 <linearGradient id="GradientColor">
-                  <stop offset="0%" stop-color="#FFB0B2" />
-                  <stop offset="100%" stop-color="#F8879C" />
+                  <stop offset="0%" stop-color="#DDA2DE" />
+                  <stop offset="100%" stop-color="#E739EB" />
                 </linearGradient>
               </defs>
               <circle cx="80" cy="80" r="70" stroke-linecap="round" :style="{'stroke-dashoffset': percent}" />

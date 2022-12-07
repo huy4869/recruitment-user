@@ -1,14 +1,15 @@
 .index-cv-element {
-  margin-left: 29px;
-  border: 2px solid $border-focus;
-  border-radius: 4px;
-  padding: 32px;
+  margin-left: 4px;
+  box-shadow: 0 2px 9px rgba(33, 16, 16, 0.25);
+  border-radius: 10px;
+  padding: 32px 28px 50px 32px;
+  margin-bottom: 28px;
   width: 100%;
   .index-cv-title {
     display: flex;
     justify-content: space-between;
     .title-page {
-      font-weight: 700;
+      font-weight: 400;
       font-size: 24px;
       line-height: 32px;
       color: $color-black;
@@ -26,9 +27,11 @@
     margin-top: 32px;
     .index-percent {
       min-width: 204px;
-      color: $color-blue;
+      color: $color-text-primary;
       .percent-circle {
         display: flex;
+        top: 12px;
+        position: relative;
       }
       .skill {
         width: 162px;
@@ -56,7 +59,7 @@
         align-items: center;
       }
       .number {
-        color: $color-blue;
+        color: $color-text-primary;
         font-family: 'Inter';
         font-style: normal;
         font-weight: 700;
@@ -90,7 +93,7 @@
       }
     }
     .complete-status {
-      margin-top: 22px;
+      margin-top: 51px;
       .complete-item {
         color: $color-blue;
         text-align: center;
@@ -119,6 +122,7 @@
         }
         .item-completed {
           padding-top: 4px;
+          padding-left: 1px;
         }
       }
     }
@@ -131,10 +135,10 @@
       .tab-index{
         width: 62%;
         display: flex;
-        padding: 21px 32px;
-        background: $color-blue;
-        border-bottom: 3px solid $color-blue-4;
-        border-radius: 8px;
+        padding: 21px 32px 18px;
+        background: $color-dark-200;
+        border-bottom: 3px solid $color-dark-100;
+        border-radius: 39px;
         margin-bottom: 30px;
         float: right;
         cursor: pointer;
@@ -145,8 +149,8 @@
         }
         .icon-done {
           position: absolute;
-          top: 10px;
-          right: 10px;
+          top: 23px;
+          right: 20px;
         }
       }
     }
@@ -169,9 +173,9 @@
     position: relative;
     border-bottom: 3px solid $color-text-primary;
     .sub-title {
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 40px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
       letter-spacing: 0.05em;
       color: $color-text-4;
       margin-left: 12px;
@@ -186,10 +190,10 @@
       width: calc(33.33% - 6px);
       position: relative;
       border-bottom: 3px solid $color-blue-4;
-      padding: 13px 0 15px;
+      padding: 14px 0 11px;
       display: flex;
       justify-content: center;
-      height: 29px;
+      height: 32px;
       cursor: pointer;
       background: $color-dark-200;
       border-bottom: 3px solid $color-dark-100;
@@ -201,6 +205,11 @@
         color: $color-white;
         margin-left: 6px;
         padding-top: 2px;
+        padding-right: 14px;
+      }
+      img {
+        width: 32px;
+        height: 32px;
       }
       .icon-arrow {
         width: 24px;
@@ -213,27 +222,27 @@
   }
   .top-page-content {
     margin-bottom: 40px;
-    margin-top: 20px;
+    margin-top: 24px;
   }
 }
 
 .my-page-schedule-element {
   box-shadow: 0px 2px 9px rgba(33, 16, 16, 0.25);
   border-radius: 4px;
-  padding: 20px 24px;
+  padding: 24px;
   margin-bottom: 20px;
   cursor: pointer;
   .schedule-title {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     .title-main {
       font-weight: 700;
       font-size: 16px;
       line-height: 24px;
     }
     .sub-title {
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 22px;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 20px;
       color: $color-text-3;
       margin-top: 3px;
     }
@@ -262,19 +271,24 @@
       font-size: 14px;
       line-height: 22px;
       div {
-        margin-bottom: 7px;
+        margin-bottom: 6px;
       }
       .schedule-button {
+        margin-bottom: 0;
         .el-button {
-          margin-top: 12px;
+          margin-top: 10px;
+          font-weight: 400;
           font-size: 14px;
-          line-height: 24px;
+          line-height: 22px;
           padding: 8px 24px;
           border-radius: 24px;
+          margin-left: 0;
+          margin-right: 13px;
         }
       }
       .bold {
         margin-right: 4px;
+        min-height: 22px;
       }
       .desc-date {
         color: $color-text-primary;
@@ -412,9 +426,14 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
-  margin: 32px 0 40px;
+  margin: 32px 0 50px;
   img {
     margin-right: 8px;
+  }
+  span {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
