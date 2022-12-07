@@ -22,7 +22,7 @@
             </div>
             <div class="header-search-right">
               <el-form-item prop="date" :error="(error.key === 'date') ? error.value : ''">
-                <el-select v-model="formApply.date" ref="date" @change="changeDay" @focus="resetValidate('date')">
+                <el-select v-model="formApply.date" ref="date" :placeholder="$t('job.preferred_date')" @change="changeDay" @focus="resetValidate('date')">
                   <el-option
                     v-for="(item, index) in listDays"
                     :key="index"
@@ -40,7 +40,7 @@
             </div>
             <div class="header-search-right">
               <el-form-item prop="hours" :error="(error.key === 'hours') ? error.value : ''">
-                <el-select v-model="formApply.hours" ref="hours" @focus="resetValidate('hours')">
+                <el-select v-model="formApply.hours" ref="hours" :placeholder="$t('job.desired_time')" @focus="resetValidate('hours')">
                   <el-option
                     v-for="(item, index) in listTime"
                     :key="index"
@@ -149,9 +149,19 @@ export default {
         key: null,
         value: ''
       },
-      listDays: [],
+      listDays: [
+        {
+          date_format: this.$t('job.preferred_date'),
+          is_enable: false
+        }
+      ],
       listDate: {},
-      listTime: [],
+      listTime: [
+        {
+          hours: this.$t('job.desired_time'),
+          is_enable_time: 0
+        }
+      ],
       listMethod: [],
       formApplyRules: {
         interview_approaches_id: [
@@ -272,6 +282,7 @@ export default {
                   text: dataResponse.messages
                 })
                 this.closeDialog()
+                await this.$emit('getListHistory')
                 break
               case 500:
                 await this.$store.commit(INDEX_SET_ERROR, {

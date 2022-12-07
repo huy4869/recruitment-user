@@ -40,6 +40,11 @@
             <div class="button-footer" @click="handleRouter('/')">
               <img src="/assets/icon/icon_home.png" alt="">
             </div>
+            <div v-if="loggedIn" class="button-footer">
+              <div @click="handleRouter('/chat')">
+                <img src="/assets/icon/icon_chat.svg" alt="">
+              </div>
+            </div>
             <div class="button-footer" @click="handleRouter('/search')">
               <img src="/assets/icon/icon_search.svg" alt="">
             </div>
@@ -47,7 +52,7 @@
               <img src="/assets/icon/icon_notification_mobile.svg" alt="">
             </div>
           </div>
-          <div class="button-home" @click="handleRouter('/my-page')">
+          <div class="button-home" @click="handleRouter('/my-page/top-page')">
             <img src="/assets/icon/icon_user_mobile.png" alt=""><span>{{ $t('page.my_page') }}</span>
           </div>
         </div>
@@ -58,6 +63,11 @@
 <script>
 export default {
   name: 'FooterCommon',
+  data() {
+    return {
+      loggedIn: this.$auth.loggedIn
+    }
+  },
   methods: {
     handleRouter(route) {
       this.$router.push(route)

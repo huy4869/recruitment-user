@@ -83,6 +83,7 @@
                               type="text"
                               tabindex="2"
                               maxlength="255"
+                              @change="setAliasName"
                               @focus="resetValidate('first_name')"
                             />
                           </el-form-item>
@@ -96,6 +97,7 @@
                               type="text"
                               tabindex="2"
                               maxlength="255"
+                              @change="setAliasName"
                               @focus="resetValidate('last_name')"
                             />
                           </el-form-item>
@@ -473,7 +475,8 @@
                               title=""
                               @input="zipCodeInput"
                               @focus="resetValidate('postal_code')"
-                              @blur="checkPostalCode"
+                              @blur="checkPostalCodeValid"
+                              @change="checkPostalCode"
                             />
                           </el-form-item>
                         </el-col>
@@ -496,8 +499,8 @@
                               v-model="accountForm.province_id"
                               :placeholder="$t('my_page.prefectures')"
                               @change="selectCity"
-                              @blur="validate('province_id')"
                               @focus="resetValidate('province_id')"
+                              @visible-change="(event) => { checkValidate('province_id', event) }"
                             >
                               <el-option
                                 v-for="item in listProvinces"
@@ -527,8 +530,8 @@
                               :disabled="disabledProvinceCity"
                               v-model="accountForm.province_city_id"
                               :placeholder="$t('my_page.enter_province_city')"
-                              @blur="validate('province_city_id')"
                               @focus="resetValidate('province_city_id')"
+                              @visible-change="(event) => { checkValidate('province_city_id', event) }"
                             >
                               <el-option
                                 v-for="item in listProvinceCity"
@@ -801,14 +804,14 @@ export default {
           {
             required: true,
             message: this.$t('validation.required_select', { _field_: this.$t('my_page.prefectures') }),
-            trigger: 'change'
+            trigger: 'blur'
           }
         ],
         province_city_id: [
           {
             required: true,
             message: this.$t('validation.required_select', { _field_: this.$t('my_page.province_city') }),
-            trigger: 'change'
+            trigger: 'blur'
           }
         ],
         line: [
@@ -831,7 +834,7 @@ export default {
           { validator: validPostCode, message: this.$t('validation.postcode_length', { _field_: this.$t('my_page.post_code') }), trigger: 'blur' }
         ],
         address: [
-          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.phone') }), trigger: 'blur' },
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.city') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.city') }), trigger: 'blur' }
         ],
         building: [
@@ -985,6 +988,11 @@ export default {
     },
     validate(ref) {
       this.$refs.accountForm.validateField(ref)
+    },
+    checkValidate(ref, event) {
+      if (!event) {
+        this.$refs.accountForm.validateField(ref)
+      }
     },
     checkFile(file) {
       const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.svg)$/i
@@ -1142,14 +1150,22 @@ export default {
         'resources[province_districts]={}'
       ]
       this.$store.dispatch(MASTER_GET_DATA, dataResources).then(res => {
-        this.listProvinceDistrict = res.data.province_districts
-        const listCity = {}
-        this.listProvinceDistrict.forEach((district) => {
-          district.provinces.forEach((provinces) => {
-            listCity[provinces.id] = provinces
-          })
-        })
-        this.listProvinces = listCity
+        if (res.status_code === 200) {
+          if (res.data.province_districts.length) {
+            this.listProvinceDistrict = res.data.province_districts
+            const listCity = {}
+            this.listProvinceDistrict.forEach((district) => {
+              district.provinces.forEach((provinces) => {
+                listCity[provinces.id] = provinces
+              })
+            })
+            this.listProvinces = listCity
+          } else {
+            this.listProvinces = [{ name: this.$t('my_page.prefectures'), disabled: true }]
+          }
+        } else if (res.status_code === 500) {
+          this.listProvinces = [{ name: this.$t('my_page.prefectures'), disabled: true }]
+        }
       })
     },
     getBirthDay() {
@@ -1224,10 +1240,19 @@ export default {
     },
     selectCity(value) {
       this.listProvinceCity = this.listProvinces[value].province_city
-      this.accountForm.province_city_id = this.listProvinceCity[0].id
+      this.accountForm.province_city_id = ''
     },
     daysInMonth(month, year) {
       return new Date(Number(year), Number(month), 0).getDate()
+    },
+    setAliasName() {
+      this.accountForm.first_name = this.accountForm.first_name.trim()
+      this.accountForm.last_name = this.accountForm.last_name.trim()
+      let fullName = this.accountForm.first_name + ' ' + this.accountForm.last_name
+      if (fullName.length > 255) {
+        fullName = fullName.slice(0, 255)
+      }
+      this.accountForm.alias_name = fullName
     },
     async checkPostalCode() {
       try {
@@ -1272,6 +1297,41 @@ export default {
           }
         }
         await this.$store.commit(INDEX_SET_LOADING, false)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+    },
+    async checkPostalCodeValid() {
+      try {
+        if (this.accountForm.postal_code.length === 8) {
+          let dto = _.cloneDeep(this.accountForm.postal_code)
+          dto = dto.replace(/[^0-9]/g, '')
+          const data = await this.$store.dispatch(GET_ZIPCODE, dto)
+          switch (data.status_code) {
+            case 200:
+              if (data.data.length === 0) {
+                this.error = {
+                  key: 'postal_code',
+                  value: this.$t('validation.com015', { _field_: this.$t('my_page.post_code') })
+                }
+              }
+              break
+            case 422:
+              for (const [key] of Object.entries(data.data)) {
+                this.error = { key, value: data.data[key][0] }
+              }
+              break
+            case 500:
+              await this.$store.commit(INDEX_SET_ERROR, {
+                show: true,
+                text: this.$t('content.EXC_001')
+              })
+              break
+            default:
+              await this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
+              break
+          }
+        }
       } catch (err) {
         await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
       }

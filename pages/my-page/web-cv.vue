@@ -3,7 +3,7 @@
     <client-only>
       <div>
         <TitlePageElement class="show-pc"></TitlePageElement>
-        <BannerElement :banner="this.$t('page.web_cv')" :sub-banner="this.$t('page.sub_web_cv')"></BannerElement>
+        <BannerElement class="show-pc" :banner="this.$t('page.web_cv')" :sub-banner="this.$t('page.sub_web_cv')"></BannerElement>
       </div>
       <div class="cv-content">
         <MenuLeftElement menu-active="web-cv"></MenuLeftElement>

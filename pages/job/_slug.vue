@@ -29,7 +29,7 @@
               {{ $t('job.pick_up_point2') }}
             </span>
             </el-button>
-            <div class="sub-detail-title-sp">{{ job.pick_up_point }}</div>
+            <div class="sub-detail-title-sp" v-html="job.pick_up_point"></div>
           </div>
         </div>
         <div class="about-job show-pc" @click="openAboutDialog">
@@ -37,7 +37,8 @@
           <span>{{ $t('job.about_job') }}</span>
         </div>
       </div>
-      <div class="sub-detail-title">{{ job.pick_up_point }}</div>
+      <div class="sub-detail-title" v-html="job.pick_up_point">
+      </div>
       <div class="show-sp">
         <div class="detail-job-image">
           <div v-if="job.banner_image" class="job-avatar">
@@ -239,7 +240,10 @@
             <span>{{ $t('job.feature') }}</span>
           </div>
           <div class="application-requirement-right">
-            <div>{{ job.welfare_treatment_description }}</div>
+            <div v-for="(feature, index) in job.feature_types" :key="index" class="form-list-feature">
+              <div>{{ feature.category_name }}</div>
+              <div>{{ feature.features }}</div>
+            </div>
           </div>
         </div>
         <div class="application-requirement-item">
@@ -427,6 +431,7 @@ export default {
       }
     }
     return {
+      user: this.$auth.user,
       id: this.$route.params.slug,
       applyDialog: false,
       aboutDialog: false,
@@ -688,6 +693,17 @@ export default {
     changeToSearchWork(search) {
       return '/search?job_type_ids=' + search.id
     },
+    handleApplyForm() {
+      this.$confirm(this.$t('content.CON_018'), {
+        confirmButtonText: this.$t('confirm_modal.yes'),
+        cancelButtonText: this.$t('confirm_modal.no'),
+        type: 'warning'
+      })
+        .then(_ => {
+          this.applyDialog = !this.applyDialog
+        })
+        .catch(_ => {})
+    },
     handleClose() {
       this.$confirm(this.$t('content.CON_002'), {
         confirmButtonText: this.$t('confirm_modal.yes'),
@@ -724,7 +740,20 @@ export default {
     },
     openApplyDialog() {
       if (this.loggedIn) {
-        this.applyDialog = !this.applyDialog
+        let check = false
+        for (const index in this.user) {
+          if (index === 'first_name' || index === 'last_name' || index === 'furi_first_name' || index === 'furi_last_name' ||
+          index === 'birthday' || index === 'gender_id' || index === 'tel' || index === 'province_city_id' || index === 'province_id' || index === 'address') {
+            if (['', null].includes(this.user[index])) {
+              check = true
+            }
+          }
+        }
+        if (check) {
+          this.handleApplyForm()
+        } else {
+          this.applyDialog = !this.applyDialog
+        }
       } else {
         this.$router.push('/login')
       }

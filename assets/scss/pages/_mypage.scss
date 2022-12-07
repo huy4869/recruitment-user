@@ -161,10 +161,11 @@
   width: 100%;
   .top-page-title {
     font-weight: 400;
-    font-size: 32px;
+    font-size: 24px;
     line-height: 32px;
+    height: 32px;
     color: $color-black;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
     position: relative;
     border-bottom: 3px solid $color-text-primary;
     .sub-title {

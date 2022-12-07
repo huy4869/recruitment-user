@@ -54,7 +54,7 @@
                   </el-col>
                   <el-col :md="18" :sm="24">
                     <div class="content-input content-datetime-edu">
-                      <el-row class="d-flex period">
+                      <el-row class="d-flex period items-center">
                         <el-col :md="9" :sm="24" class="first-name">
                           <el-form-item label="" prop="enrollment_period_start" :error="(error.key === 'enrollment_period_start') ? error.value : ''">
                             <el-row class="d-flex">
@@ -141,7 +141,9 @@
                                 v-for="item in typeList"
                                 :key="item.id"
                                 :label="item.name"
-                                :value="item.id">
+                                :value="item.id"
+                                :disabled="item.disabled"
+                              >
                               </el-option>
                             </el-select>
                           </el-form-item>
@@ -389,6 +391,14 @@ export default {
       ]
       await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&')).then(res => {
         this.m_learning_status = res.data.m_learning_status
+        if (res.status_code === 200) {
+          this.m_learning_status = res.data.m_learning_status.length ? this.m_learning_status : [{ name: this.$t('education.enter_type'), disabled: true }]
+        } else if (res.status_code === 500) {
+          this.m_learning_status = [{
+            name: this.$t('education.enter_type'),
+            disabled: true
+          }]
+        }
       })
     },
     validate(ref) {

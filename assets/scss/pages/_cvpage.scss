@@ -53,6 +53,20 @@
   }
   .edit-cv-content {
     border-top: 3px solid $color-text-primary;
+    &#skill-sheet {
+      margin-bottom: 40px;
+    }
+    &.skill-sheet-index {
+      .el-slider__runway.disabled {
+        .el-slider__button {
+          display: none;
+        }
+        .el-slider__bar {
+          background: rgba(56, 180, 184, 1);
+          border-radius: 4px;
+        }
+      }
+    }
     .card-title-mobile {
       display: none;
     }
@@ -210,6 +224,9 @@
       border-bottom: 2px solid $color-text-primary;
       margin-bottom: 2px;
     }
+    .skill-slider {
+      margin-left: 101px;
+    }
   }
   .btn-right {
     margin-left: 22px;
@@ -355,6 +372,12 @@
     .content-input {
       margin-left: 24px;
       padding: 3px 0;
+      &.pr-slider {
+        padding: 0px 0 30px;
+      }
+      .skill-slider {
+        margin-left: 71px;
+      }
       .el-input__suffix {
         display: flex;
         align-items: center;
@@ -550,6 +573,12 @@
     font-weight: 700;
 
     color: $color-text-primary;
+  }
+  .hamburger-title {
+    width: max-content;
+    .hamburger-name {
+      margin-left: 6px;
+    }
   }
 }
 

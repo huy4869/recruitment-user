@@ -21,7 +21,9 @@
                       v-for="item in listProvinceCities"
                       :key="item.province_id"
                       :label="item.name"
-                      :value="item.province_id">
+                      :value="item.province_id"
+                      :disabled="item.disabled"
+                    >
                     </el-option>
                     <img slot="suffix" src="/assets/icon/icon_dropdown_full.svg" alt="">
                   </el-select>
@@ -32,13 +34,15 @@
                       v-for="item in listJobTypes"
                       :key="item.id"
                       :label="item.name"
-                      :value="item.id">
+                      :value="item.id"
+                      :disabled="item.disabled"
+                    >
                     </el-option>
                   </el-select>
                 </div>
               </div>
               <div class="button-filter">
-                <button type="button" class="el-button el-button--danger">
+                <button type="button" class="el-button el-button--danger" @click="changeToSearch(true)">
                   <img src="/assets/icon/icon_search_button.svg" alt="">
                   <span>{{ $t('common.search') }}</span>
                 </button>

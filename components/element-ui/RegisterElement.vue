@@ -10,6 +10,81 @@
           autocomplete="off"
           label-position="left"
         >
+          <el-row class="d-flex">
+            <div class="label"><span>{{ $t('my_page.name') }}</span></div>
+            <div class="required">{{ $t('form.required') }}</div>
+          </el-row>
+          <el-row class="d-flex form-label-input">
+            <div ref="first_name"></div>
+            <div class="content-input" ref="last_name">
+              <el-row class="d-flex">
+                <el-col :md="24" :sm="12" class="first-name">
+                  <el-form-item label="" prop="first_name" :error="(error.key === 'first_name') ? error.value : ''">
+                    <el-input
+                      v-model="accountForm.first_name"
+                      :placeholder="$t('my_page.first_name')"
+                      name="first_name"
+                      type="text"
+                      tabindex="2"
+                      maxlength="255"
+                      @focus="resetValidate('first_name')"
+                    />
+                  </el-form-item>
+                </el-col>
+                <el-col :md="24" :sm="12" class="last-name">
+                  <el-form-item label="" prop="last_name" :error="(error.key === 'last_name') ? error.value : ''">
+                    <el-input
+                      v-model="accountForm.last_name"
+                      :placeholder="$t('my_page.last_name')"
+                      name="last_name"
+                      type="text"
+                      tabindex="2"
+                      maxlength="255"
+                      @focus="resetValidate('last_name')"
+                    />
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </div>
+          </el-row>
+
+          <el-row class="d-flex">
+            <div class="label"><span>{{ $t('my_page.furigana_name') }}</span></div>
+            <div class="required">{{ $t('form.required') }}</div>
+          </el-row>
+          <el-row class="d-flex form-label-input">
+            <div ref="first_name"></div>
+            <div class="content-input" ref="first_name">
+              <el-row class="d-flex">
+                <el-col :md="24" :sm="12" class="first-name">
+                  <el-form-item label="" prop="furi_first_name" :error="(error.key === 'furi_first_name') ? error.value : ''">
+                    <el-input
+                      v-model="accountForm.furi_first_name"
+                      :placeholder="$t('my_page.furi_first_name')"
+                      name="furi_first_name"
+                      type="text"
+                      tabindex="2"
+                      maxlength="255"
+                      @focus="resetValidate('furi_first_name')"
+                    />
+                  </el-form-item>
+                </el-col>
+                <el-col :md="24" :sm="12" class="last-name">
+                  <el-form-item label="" prop="furi_last_name" :error="(error.key === 'furi_last_name') ? error.value : ''">
+                    <el-input
+                      v-model="accountForm.furi_last_name"
+                      :placeholder="$t('my_page.furi_last_name')"
+                      name="furi_last_name"
+                      type="text"
+                      tabindex="2"
+                      maxlength="255"
+                      @focus="resetValidate('furi_last_name')"
+                    />
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </div>
+          </el-row>
           <el-form-item class="email-login" :label="$t('login.email')" prop="email" :error="(error.key === 'email') ? error.value : ''">
 <!--            <div class="label">{{ $t('login.email') }}</div>-->
             <el-input
@@ -100,13 +175,14 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
   INDEX_SET_ERROR,
   AUTH_REGISTER
 } from '../../store/store.const'
-import { validEmail, validHalfWidth, validOnlyHalfWidth } from '@/utils/validate'
+import { validEmail, validFullWidth, validHalfWidth, validOnlyHalfWidth } from '@/utils/validate'
 
 export default {
   name: 'LoginElement',
@@ -146,8 +222,33 @@ export default {
         callback()
       }
     }
+    const validRequired = (rule, value, callback, message) => {
+      if (!value || value.trim() === '') {
+        callback(new Error(message))
+      } else {
+        callback()
+      }
+    }
+    const validFormLength = (rule, value, callback, message) => {
+      if (value && value.length > 255) {
+        callback(new Error(this.$t('validation.max_length', { _field_: message })))
+      } else {
+        callback()
+      }
+    }
+    const validFullWidthLength = (rule, value, callback, message) => {
+      if (!validFullWidth(value)) {
+        callback(new Error(this.$t('validation.max_length', { _field_: message })))
+      } else {
+        callback()
+      }
+    }
     return {
       accountForm: {
+        first_name: '',
+        last_name: '',
+        furi_first_name: '',
+        furi_last_name: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -175,6 +276,22 @@ export default {
             message: this.$t('validation.passNotMatch', { _field_: this.$t('register.password_confirmation') }),
             trigger: 'blur'
           }
+        ],
+        first_name: [
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.first_name') }), trigger: 'blur' },
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.first_name') }), trigger: 'blur' }
+        ],
+        last_name: [
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.last_name') }), trigger: 'blur' },
+          { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('my_page.last_name') }), trigger: 'blur' }
+        ],
+        furi_first_name: [
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.furi_first_name') }), trigger: 'blur' },
+          { validator: validFullWidthLength, message: this.$t('validation.fullwidth_length', { _field_: this.$t('my_page.furi_first_name') }), trigger: 'blur' }
+        ],
+        furi_last_name: [
+          { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('my_page.furi_last_name') }), trigger: 'blur' },
+          { validator: validFullWidthLength, message: this.$t('validation.fullwidth_length', { _field_: this.$t('my_page.furi_last_name') }), trigger: 'blur' }
         ],
         remember: []
       },
@@ -210,11 +327,8 @@ export default {
         if (valid) {
           try {
             await this.$store.commit(INDEX_SET_LOADING, true)
-            const dto = {
-              email: this.accountForm.email,
-              password: this.accountForm.password,
-              password_confirmation: this.accountForm.password_confirmation
-            }
+            const dto = _.cloneDeep(this.accountForm)
+            delete dto.errors
             const data = await this.$store.dispatch(AUTH_REGISTER, {
               ...dto
             })

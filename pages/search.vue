@@ -28,8 +28,15 @@
                 <img src="/assets/icon/icon_add_blue.svg" alt="">
                 {{ $t('condition.enter_work_location') }}
               </el-button>
-              <div v-if="showProvince" class="show-result-condition">
-                {{ showProvince }}
+              <div v-if="showProvince.length" class="show-result-condition">
+                <div v-for="(item, index) in showProvince" :key="index" class="show-result-item">
+                  <div v-if="item.key === 'district'">
+                    <div class="district-item">{{ item.value }}</div>
+                  </div>
+                  <div v-else>
+                    <div class="province-item">{{ item.value }}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -119,24 +126,91 @@
           </el-button>
         </div>
         <el-dialog class="form-dialog-select" :title="$t('condition.select_work_location')" :visible.sync="occupationDialog" width="84%">
-          <el-checkbox-group v-model="districts">
-            <div class="form-filter-location">
-              <div v-for="(district, index) in listProvinceDistricts" :key="index" class="district-item">
-                <div class="district-name">
-                  <el-checkbox :label="district.id" @change="changeDistrict(district)">{{ district.name }}</el-checkbox>
-                </div>
-                <div class="list-province">
-                  <el-checkbox-group v-model="workLocation">
-                    <div v-for="(province, key) in district.provinces" :key="key" class="province-item">
-                      <el-checkbox :label="province.id">{{ province.name }} <span class="total-record" @click.stop="changeFilter('province_id', [province.id])">({{ province.record + $t('common.subject') }})</span></el-checkbox>
-                    </div>
-                  </el-checkbox-group>
+          <div class="show-pc">
+            <el-checkbox-group v-model="districts">
+              <div class="form-filter-location">
+                <div v-for="(district, index) in listProvinceDistricts" :key="index" class="district-item">
+                  <div class="district-name">
+                    <el-checkbox :label="district.id" @change="changeDistrict(district)">{{ district.name }}</el-checkbox>
+                  </div>
+                  <div class="list-province">
+                    <el-checkbox-group v-model="workLocation">
+                      <div v-for="(province, key) in convertListProvince(district.provinces)" :key="key" :class="(province.status === 'province') ? 'province-item' : 'city-item'">
+                        <div v-if="province.status === 'province'" class="d-flex">
+                          <el-checkbox :label="province.data.id" @change="changeProvince(province.data)" :indeterminate="listProvinceIndeterminate.includes(province.data.id)">
+                            {{ province.data.name }} <span class="total-record" @click.stop="changeFilterProvince(province.data)"> ({{ province.data.record + $t('common.subject') }}) </span>
+                          </el-checkbox>
+                          <div class="form-show-city" @click.stop="changeActiveProvince(province.data.id)">
+                            <img v-if="provinceActive.includes(province.data.id)" class="image-hide-city" src="/assets/icon/icon_remove_province.svg" alt="">
+                            <img v-else class="image-show-city" src="/assets/icon/icon_add_province.svg" alt="">
+                          </div>
+                        </div>
+                        <div v-if="(province.status === 'city')">
+                          <div v-for="(cities, index) in province.data" :key="index">
+                            <div v-if="provinceActive.includes(cities.id)" class="list-city">
+                              <div :class="'show-province-active position-' + index"></div>
+                              <el-checkbox-group v-model="cityLocation" @change="changeCity">
+                                <div v-for="city in cities.province_city" :key="city.id" class="province-city-item">
+                                  <div class="city-item">
+                                    <div class="d-flex">
+                                      <el-checkbox :label="city.id">{{ city.name }}</el-checkbox>
+                                    </div>
+                                  </div>
+                                </div>
+                              </el-checkbox-group>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </el-checkbox-group>
+                  </div>
                 </div>
               </div>
-            </div>
-          </el-checkbox-group>
+            </el-checkbox-group>
+          </div>
+          <div class="show-sp">
+            <el-checkbox-group v-model="districts">
+              <div class="form-filter-location">
+                <div v-for="(district, index) in listProvinceDistricts" :key="index" class="district-item">
+                  <div class="district-name" @click.stop="showDetailDistrict(district.id)">
+                    <el-checkbox :label="district.id" :indeterminate="listDistrictIndeterminate.includes(district.id)" @change="changeDistrict(district)">{{ district.name }}</el-checkbox>
+                    <img :class="{ 'img-dropdown': true, 'show-detail': showDistrictModal === district.id }" src="/assets/icon/icon_drop_more.svg" alt="">
+                  </div>
+                  <div v-show="showDistrictModal === district.id" class="list-province">
+                    <el-checkbox-group v-model="workLocation">
+                      <div v-for="(province, key) in district.provinces" :key="key" class="province-item">
+                        <div class="province-name">
+                          <el-checkbox :label="province.id" @change="changeProvince(province)" :indeterminate="listProvinceIndeterminate.includes(province.id)">
+                            {{ province.name }} <span class="total-record" @click.stop="changeFilterProvince(province)"> ({{ province.record + $t('common.subject') }}) </span>
+                          </el-checkbox>
+                          <div class="form-show-city" @click.stop="changeActiveProvince(province.id)">
+                            <img v-if="provinceActive.includes(province.id)" class="image-hide-city" src="/assets/icon/icon_remove_province.svg" alt="">
+                            <img v-else class="image-show-city" src="/assets/icon/icon_add_province.svg" alt="">
+                          </div>
+                        </div>
+                        <div class="list-select-city">
+                          <div v-if="provinceActive.includes(province.id)" class="list-city">
+                            <div :class="'show-province-active position-' + index"></div>
+                            <el-checkbox-group v-model="cityLocation" @change="changeCity">
+                              <div v-for="city in province.province_city" :key="city.id" class="province-city-item">
+                                <div class="city-item">
+                                  <div class="d-flex">
+                                    <el-checkbox :label="city.id">{{ city.name }}</el-checkbox>
+                                  </div>
+                                </div>
+                              </div>
+                            </el-checkbox-group>
+                          </div>
+                        </div>
+                      </div>
+                    </el-checkbox-group>
+                  </div>
+                </div>
+              </div>
+            </el-checkbox-group>
+          </div>
           <div slot="footer" class="dialog-footer">
-            <el-button type="danger" @click="changeCondition('province_id', workLocation)">
+            <el-button type="danger" @click="changeCondition('province_city_id', cityLocation)">
               {{ $t('button.decide') }}
             </el-button>
           </div>
@@ -167,7 +241,7 @@
         <div>
           <span>{{ $t('page.search') }}</span>
           <span class="total-record">{{ total + $t('common.subject') }}</span>
-          <span>{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total }) }}</span>
+          <span v-if="total">{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total }) }}</span>
         </div>
         <div v-if="listJobs.length" class="show-pc">
           <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
@@ -377,6 +451,7 @@ export default {
       jobType: [],
       jobTypeSelectAll: false,
       workLocation: [],
+      cityLocation: [],
       districts: [],
       condition: {
         work_type_ids: [],
@@ -390,20 +465,44 @@ export default {
       sort_by: [],
       query: this.$route.query,
       applyDialog: false,
-      jobActive: {}
+      jobActive: {},
+      provinceActive: [],
+      showDistrictModal: '',
+      listProvinceIndeterminate: [],
+      listDistrictIndeterminate: []
     }
   },
   computed: {
     showProvince() {
-      const text = []
-      this.listProvinceDistricts.forEach(district => {
-        district.provinces.forEach(province => {
-          if (this.condition.province_id.includes(province.id)) {
-            text.push(province.name)
+      const dataShow = []
+      if (this.condition.province_city_id.length) {
+        this.listProvinceDistricts.forEach(district => {
+          if (this.districts.includes(district.id)) {
+            dataShow.push({ key: 'district', value: district.name })
           }
         })
-      })
-      return text.join('、')
+        this.listProvinceDistricts.forEach(district => {
+          if (!this.districts.includes(district.id)) {
+            if (this.listDistrictIndeterminate.includes(district.id)) {
+              dataShow.push({ key: 'district', value: district.name + ':' })
+            }
+            district.provinces.forEach(province => {
+              const listCity = []
+              if (province.province_city) {
+                province.province_city.forEach(city => {
+                  if (this.cityLocation.includes(city.id)) {
+                    listCity.push(city.name)
+                  }
+                })
+              }
+              if (listCity.length) {
+                dataShow.push({ key: 'province', value: province.name + ': ' + listCity.join('、') })
+              }
+            })
+          }
+        })
+      }
+      return dataShow
     },
     showJobType() {
       const text = []
@@ -426,21 +525,7 @@ export default {
   watch: {
     occupationDialog() {
       this.workLocation = _.cloneDeep(this.condition.province_id)
-    },
-    workLocation() {
-      const listDistricts = []
-      this.listProvinceDistricts.forEach(district => {
-        let check = true
-        district.provinces.forEach(province => {
-          if (!this.workLocation.includes(province.id)) {
-            check = false
-          }
-        })
-        if (check) {
-          listDistricts.push(district.id)
-        }
-      })
-      this.districts = listDistricts
+      this.cityLocation = _.cloneDeep(this.condition.province_city_id)
     },
     jobDialog() {
       this.jobType = _.cloneDeep(this.condition.job_type_ids)
@@ -491,7 +576,8 @@ export default {
               return {
                 id: province.id,
                 name: province.name,
-                record: dataProvince[province.id]
+                record: dataProvince[province.id],
+                province_city: province.province_city
               }
             })
           })
@@ -540,11 +626,12 @@ export default {
         }
       }
       if (this.sort_by.length) {
-        dataSearch.push(`orders[${key}][key]=${(this.sort_by[0] === 1) ? 'created_at' : 'updated_at'}&filters[${key}][dir]=asc`)
+        dataSearch.push(`filters[${key}][key]=order_by_id&filters[${key}][data]=${this.sort_by[0]}`)
       }
       return dataSearch
     },
     async searchJob() {
+      this.showAll = false
       await this.$router.push('/search')
       this.query = []
       await this.getJobs()
@@ -571,20 +658,41 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     changeDistrict(district) {
-      if (!this.districts.includes(district.id)) {
-        district.provinces.forEach((province) => {
-          const key = this.workLocation.indexOf(province.id)
-          if (key > -1) {
-            this.workLocation.splice(key, 1)
-          }
-        })
-      } else {
-        district.provinces.forEach((province) => {
-          if (!this.workLocation.includes(province.id)) {
-            this.workLocation.push(province.id)
-          }
-        })
+      if (this.occupationDialog) {
+        if (!this.districts.includes(district.id)) {
+          district.provinces.forEach((province) => {
+            const key = this.workLocation.indexOf(province.id)
+            if (key > -1) {
+              this.workLocation.splice(key, 1)
+            }
+          })
+        } else {
+          district.provinces.forEach((province) => {
+            if (!this.workLocation.includes(province.id)) {
+              this.workLocation.push(province.id)
+            }
+          })
+        }
       }
+    },
+    changeProvince(province) {
+      if (this.occupationDialog) {
+        if (!this.workLocation.includes(province.id)) {
+          province.province_city.forEach((city) => {
+            const key = this.cityLocation.indexOf(city.id)
+            if (key > -1) {
+              this.cityLocation.splice(key, 1)
+            }
+          })
+        } else {
+          province.province_city.forEach((city) => {
+            if (!this.cityLocation.includes(city.id)) {
+              this.cityLocation.push(city.id)
+            }
+          })
+        }
+      }
+      this.changeProvinceModal()
     },
     changeJobType() {
       if (this.jobTypeSelectAll) {
@@ -601,6 +709,9 @@ export default {
       this.condition[key] = value
       this.occupationDialog = false
       this.jobDialog = false
+      if (key === 'province_city_id') {
+        this.condition.province_id = this.workLocation
+      }
     },
     changeFilter(key, value) {
       this.condition = {
@@ -617,6 +728,28 @@ export default {
       this.searchJob()
       this.showAll = false
     },
+    changeFilterProvince(province) {
+      this.search = ''
+      this.sort_by = []
+      const data = []
+      province.province_city.forEach(city => {
+        data.push(city.id)
+      })
+      this.cityLocation = data
+      this.workLocation = [province.id]
+      this.condition = {
+        work_type_ids: [],
+        job_type_ids: [],
+        experience_ids: [],
+        feature_ids: [],
+        province_id: [province.id],
+        province_city_id: data
+      }
+      this.occupationDialog = false
+      this.jobDialog = false
+      this.searchJob()
+      this.showAll = false
+    },
     changeSortBy(value, type) {
       if (value) {
         this.sort_by = [type]
@@ -625,6 +758,105 @@ export default {
     editApply(value) {
       this.applyDialog = !this.applyDialog
       this.jobActive = value
+    },
+    convertListProvince(provinces) {
+      const data = []
+      let listCity = []
+      provinces.forEach((province, key) => {
+        data.push({
+          status: 'province',
+          data: province
+        })
+        if (province.province_city) {
+          if ([3, 7, 11].includes(key)) {
+            listCity.push(province)
+            data.push({
+              status: 'city',
+              data: listCity
+            })
+            listCity = []
+          } else {
+            listCity.push(province)
+          }
+        }
+      })
+      if (listCity.length) {
+        data.push({
+          status: 'city',
+          data: listCity
+        })
+      }
+      return data
+    },
+    changeActiveProvince(province) {
+      const array = this.provinceActive
+      if (array.includes(province)) {
+        const index = array.indexOf(province)
+        if (index > -1) {
+          array.splice(index, 1)
+        }
+        this.provinceActive = []
+      } else {
+        array.push(province)
+        this.provinceActive = [province]
+      }
+    },
+    changeCity() {
+      const listProvinces = []
+      const listProvinceIndeterminate = []
+      this.listProvinceDistricts.forEach(district => {
+        district.provinces.forEach(province => {
+          let check = true
+          let isIndeterminate = false
+          province.province_city.forEach(city => {
+            if (!this.cityLocation.includes(city.id)) {
+              check = false
+            } else {
+              isIndeterminate = true
+            }
+          })
+          if (check) {
+            listProvinces.push(province.id)
+          } else if (isIndeterminate) {
+            listProvinceIndeterminate.push(province.id)
+          }
+        })
+      })
+      this.workLocation = listProvinces
+      this.listProvinceIndeterminate = listProvinceIndeterminate
+    },
+    changeProvinceModal() {
+      const listDistricts = []
+      const listDistrictIndeterminate = []
+      let listData = this.condition.province_id
+      if (this.occupationDialog) {
+        listData = this.workLocation
+      }
+      this.listProvinceDistricts.forEach(district => {
+        let check = true
+        let isIndeterminate = false
+        district.provinces.forEach(province => {
+          if (!listData.includes(province.id)) {
+            check = false
+          } else {
+            isIndeterminate = true
+          }
+        })
+        if (check) {
+          listDistricts.push(district.id)
+        } else if (isIndeterminate) {
+          listDistrictIndeterminate.push(district.id)
+        }
+      })
+      this.districts = listDistricts
+      this.listDistrictIndeterminate = listDistrictIndeterminate
+    },
+    showDetailDistrict(index) {
+      if (this.showDistrictModal === index) {
+        this.showDistrictModal = ''
+      } else {
+        this.showDistrictModal = index
+      }
     }
   }
 }

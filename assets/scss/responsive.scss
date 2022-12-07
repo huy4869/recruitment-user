@@ -588,11 +588,79 @@
 }
 
 @media only screen and (max-width: 540px) {
+  .show-modal-sp {
+    max-height: 100vh;
+    overflow: hidden;
+  }
   .show-pc {
     display: none !important;
   }
   .show-sp {
     display: block;
+  }
+  header-main-menu-mobile {
+    display: block !important;
+    cursor: pointer;
+  }
+  .nav_mobile {
+    position: fixed;
+    background-color: rgba(20, 20, 22, 0.5);
+    background-repeat: repeat;
+    height: 100%;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    z-index: 21;
+  }
+  .nav-box {
+    top: 50px;
+    left: 0;
+    position: fixed;
+    background-repeat: repeat;
+    max-width: 100%;
+    transform: translateX(-100%);
+    transition: all linear 0.25s;
+    height: 100%;
+    //padding: 0 12px 0 12px;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 1);
+    width: 65%;
+  }
+  .nav_mobile .nav-item {
+    display: block;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0px !important;
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 28px;
+  }
+  .nav-input:checked~.nav-overlay {
+    display: block !important;
+    position: fixed;
+  }
+  .nav-input:checked~.nav_mobile {
+    transform: translateX(0%);
+  }
+  .nav-input:checked~.nav-box {
+    transform: translateX(0%);
+  }
+  .icon-close {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 10px;
+    right: 18%;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
   .footer {
     margin-top: 40px;
@@ -1160,6 +1228,23 @@
         margin-left: 6px;
       }
 
+      .self-skill {
+        border: 1px solid $border-default;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        .skill-item {
+          margin: 12px 25px 15px 20px;
+          .label span{
+            font-size: 16px !important;
+          }
+          .pr-slider {
+            padding: 10px 0 0;
+            .skill-slider {
+              margin-left: 0;
+            }
+          }
+        }
+      }
       .content-input {
         margin: 5px 0 24px;
         padding: 0;
@@ -2127,6 +2212,63 @@
         .button-search {
           margin-top: 16px;
         }
+        .el-dialog {
+          height: 100vh;
+          overflow: hidden;
+        }
+        .el-dialog__body {
+          padding: 0;
+          max-height: calc(100vh - 124px);
+          min-height: calc(100vh - 124px);
+          overflow: auto;
+          .form-filter-location {
+            .district-item {
+              .district-name {
+                border-bottom: 1px solid $border-default;
+                background: $color-white;
+                padding: 15px 14px 15px 16px;
+                display: flex;
+                justify-content: space-between;
+                .show-detail {
+                  transform: rotate(180deg);
+                }
+              }
+              .list-province {
+                padding: 0;
+                .province-item {
+                  display: block;
+                  width: unset;
+                  border-bottom: 1px solid $border-default;
+                  padding: 0;
+                  margin: 0;
+                  .province-name {
+                    padding: 15px 16px;
+                    margin: 0;
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid $border-default;
+                  }
+                }
+                .form-work {
+                  padding: 15px 16px;
+                }
+                .list-select-city {
+                  .list-city {
+                    padding: 7px 0 2px 50px;
+                    .province-city-item {
+                      margin-bottom: 15px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .el-dialog__footer {
+          padding: 12px 0;
+          text-align: center;
+          background: $color-blue-3;
+        }
       }
       .search-result {
         span {
@@ -2276,6 +2418,7 @@
           font-size: 13px;
           word-break: break-word;
           line-height: 20px;
+          white-space: break-spaces;
         }
       }
       .sub-detail-title {
@@ -2595,6 +2738,9 @@
         }
       }
     }
+  }
+  #btn-no-data {
+    margin-top: -35px;
   }
 }
 @media only screen and (max-width: 414px) {
