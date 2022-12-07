@@ -1,176 +1,183 @@
 <template>
   <div id="register-element" class="login-element">
-    <el-row>
-      <el-col class="col-mobile"  :span="12">
-        <div class="login-title">{{ $t('register.title') }}</div>
-        <el-form
-          ref="accountForm"
-          :model="accountForm"
-          :rules="accountRules"
-          autocomplete="off"
-          label-position="left"
-        >
-          <el-row class="d-flex">
-            <div class="label"><span>{{ $t('my_page.name') }}</span></div>
-            <div class="required">{{ $t('form.required') }}</div>
-          </el-row>
-          <el-row class="d-flex form-label-input">
-            <div ref="first_name"></div>
-            <div class="content-input" ref="last_name">
-              <el-row class="d-flex">
-                <el-col :md="24" :sm="12" class="first-name">
-                  <el-form-item label="" prop="first_name" :error="(error.key === 'first_name') ? error.value : ''">
-                    <el-input
-                      v-model="accountForm.first_name"
-                      :placeholder="$t('my_page.first_name')"
-                      name="first_name"
-                      type="text"
-                      tabindex="2"
-                      maxlength="255"
-                      @focus="resetValidate('first_name')"
-                    />
-                  </el-form-item>
-                </el-col>
-                <el-col :md="24" :sm="12" class="last-name">
-                  <el-form-item label="" prop="last_name" :error="(error.key === 'last_name') ? error.value : ''">
-                    <el-input
-                      v-model="accountForm.last_name"
-                      :placeholder="$t('my_page.last_name')"
-                      name="last_name"
-                      type="text"
-                      tabindex="2"
-                      maxlength="255"
-                      @focus="resetValidate('last_name')"
-                    />
-                  </el-form-item>
-                </el-col>
-              </el-row>
-            </div>
-          </el-row>
+    <img class="logo-login" src="/assets/images/logo_white.svg" alt="">
+    <div>
+      <div class="login-title">{{ $t('register.title') }}</div>
+      <el-form
+        ref="accountForm"
+        :model="accountForm"
+        :rules="accountRules"
+        autocomplete="off"
+        label-position="left"
+      >
+        <el-row class="d-flex">
+          <div class="label"><span>{{ $t('my_page.name') }}</span></div>
+          <div class="required">{{ $t('form.required') }}</div>
+        </el-row>
+        <el-row class="d-flex form-label-input">
+          <div ref="first_name"></div>
+          <div class="content-input" ref="last_name">
+            <el-row class="d-flex">
+              <el-col :md="24" :sm="12" class="first-name">
+                <el-form-item label="" prop="first_name" :error="(error.key === 'first_name') ? error.value : ''">
+                  <el-input
+                    v-model="accountForm.first_name"
+                    :placeholder="$t('my_page.first_name')"
+                    name="first_name"
+                    type="text"
+                    tabindex="2"
+                    maxlength="255"
+                    @focus="resetValidate('first_name')"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :md="24" :sm="12" class="last-name">
+                <el-form-item label="" prop="last_name" :error="(error.key === 'last_name') ? error.value : ''">
+                  <el-input
+                    v-model="accountForm.last_name"
+                    :placeholder="$t('my_page.last_name')"
+                    name="last_name"
+                    type="text"
+                    tabindex="2"
+                    maxlength="255"
+                    @focus="resetValidate('last_name')"
+                  />
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </div>
+        </el-row>
 
+        <el-row class="d-flex">
+          <div class="label"><span>{{ $t('my_page.furigana_name') }}</span></div>
+          <div class="required">{{ $t('form.required') }}</div>
+        </el-row>
+        <el-row class="d-flex form-label-input">
+          <div ref="first_name"></div>
+          <div class="content-input" ref="first_name">
+            <el-row class="d-flex">
+              <el-col :md="24" :sm="12" class="first-name">
+                <el-form-item label="" prop="furi_first_name" :error="(error.key === 'furi_first_name') ? error.value : ''">
+                  <el-input
+                    v-model="accountForm.furi_first_name"
+                    :placeholder="$t('my_page.furi_first_name')"
+                    name="furi_first_name"
+                    type="text"
+                    tabindex="2"
+                    maxlength="255"
+                    @focus="resetValidate('furi_first_name')"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :md="24" :sm="12" class="last-name">
+                <el-form-item label="" prop="furi_last_name" :error="(error.key === 'furi_last_name') ? error.value : ''">
+                  <el-input
+                    v-model="accountForm.furi_last_name"
+                    :placeholder="$t('my_page.furi_last_name')"
+                    name="furi_last_name"
+                    type="text"
+                    tabindex="2"
+                    maxlength="255"
+                    @focus="resetValidate('furi_last_name')"
+                  />
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </div>
+        </el-row>
+        <el-form-item class="email-login" label="" prop="email" :error="(error.key === 'email') ? error.value : ''">
           <el-row class="d-flex">
-            <div class="label"><span>{{ $t('my_page.furigana_name') }}</span></div>
+            <div class="label"><span>{{ $t('login.email') }}</span></div>
             <div class="required">{{ $t('form.required') }}</div>
           </el-row>
-          <el-row class="d-flex form-label-input">
-            <div ref="first_name"></div>
-            <div class="content-input" ref="first_name">
-              <el-row class="d-flex">
-                <el-col :md="24" :sm="12" class="first-name">
-                  <el-form-item label="" prop="furi_first_name" :error="(error.key === 'furi_first_name') ? error.value : ''">
-                    <el-input
-                      v-model="accountForm.furi_first_name"
-                      :placeholder="$t('my_page.furi_first_name')"
-                      name="furi_first_name"
-                      type="text"
-                      tabindex="2"
-                      maxlength="255"
-                      @focus="resetValidate('furi_first_name')"
-                    />
-                  </el-form-item>
-                </el-col>
-                <el-col :md="24" :sm="12" class="last-name">
-                  <el-form-item label="" prop="furi_last_name" :error="(error.key === 'furi_last_name') ? error.value : ''">
-                    <el-input
-                      v-model="accountForm.furi_last_name"
-                      :placeholder="$t('my_page.furi_last_name')"
-                      name="furi_last_name"
-                      type="text"
-                      tabindex="2"
-                      maxlength="255"
-                      @focus="resetValidate('furi_last_name')"
-                    />
-                  </el-form-item>
-                </el-col>
-              </el-row>
-            </div>
+          <el-input
+            ref="email"
+            v-model.trim="accountForm.email"
+            :placeholder="$t('login.email')"
+            name="email"
+            type="text"
+            tabindex="2"
+            maxlength="255"
+            @focus="resetValidate('email')"
+          />
+        </el-form-item>
+        <el-form-item class="password-login" label="" prop="password" :error="(error.key === 'password') ? error.value : ''">
+          <el-row class="d-flex">
+            <div class="label"><span>{{ $t('login.password') }}</span></div>
+            <div class="required">{{ $t('form.required') }}</div>
           </el-row>
-          <el-form-item class="email-login" :label="$t('login.email')" prop="email" :error="(error.key === 'email') ? error.value : ''">
-<!--            <div class="label">{{ $t('login.email') }}</div>-->
-            <el-input
-              ref="email"
-              v-model.trim="accountForm.email"
-              :placeholder="$t('login.email')"
-              name="email"
-              type="text"
-              tabindex="2"
-              maxlength="255"
-              @focus="resetValidate('email')"
-            />
-          </el-form-item>
-          <el-form-item class="password-login" :label="$t('login.password')" prop="password" :error="(error.key === 'password') ? error.value : ''">
-            <el-input
-              ref="password"
-              v-model.trim="accountForm.password"
-              :placeholder="$t('login.password')"
-              name="password"
-              :type="showPass?'text':'password'"
-              tabindex="3"
-              maxlength="12"
-              autocomplete="off"
-              @focus="resetValidate('password')"
-            >
-              <i slot="suffix" class="cursor-pointer" @click="displayPass('pass')">
-                <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
-                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
-              </i>
-            </el-input>
-          </el-form-item>
-          <el-form-item class="password-login" :label="$t('register.password_confirmation')" prop="password_confirmation" :error="(error.key === 'password_confirmation') ? error.value : ''">
-            <el-input
-              ref="password_confirmation"
-              v-model.trim="accountForm.password_confirmation"
-              :placeholder="$t('register.password')"
-              name="password_confirmation"
-              :type="showPassConfirm?'text':'password'"
-              tabindex="3"
-              maxlength="12"
-              autocomplete="off"
-              @keydown.native.tab.prevent="$refs.email.focus()"
-              @focus="resetValidate('password_confirmation')"
-            >
-              <i slot="suffix" class="cursor-pointer" @click="displayPass('passConfirm')">
-                <img v-if="showPassConfirm" class="icon-show-pass" src="/assets/icon/eye-input.svg"/>
-                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg"/>
-              </i>
-            </el-input>
-          </el-form-item>
-          <div class="d-flex align-items-center">
-            <el-checkbox v-model="accountForm.has_terms" size="large"></el-checkbox>
-            <div class="terms cursor-pointer">
+          <el-input
+            ref="password"
+            v-model.trim="accountForm.password"
+            :placeholder="$t('login.password')"
+            name="password"
+            :type="showPass?'text':'password'"
+            tabindex="3"
+            maxlength="12"
+            autocomplete="off"
+            @focus="resetValidate('password')"
+          >
+            <i slot="suffix" class="cursor-pointer" @click="displayPass('pass')">
+              <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
+              <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
+            </i>
+          </el-input>
+        </el-form-item>
+        <el-form-item class="password-login" label="" prop="password_confirmation" :error="(error.key === 'password_confirmation') ? error.value : ''">
+          <el-row class="d-flex">
+            <div class="label"><span>{{ $t('register.password_confirmation') }}</span></div>
+            <div class="required">{{ $t('form.required') }}</div>
+          </el-row>
+          <el-input
+            ref="password_confirmation"
+            v-model.trim="accountForm.password_confirmation"
+            :placeholder="$t('register.password_confirmation')"
+            name="password_confirmation"
+            :type="showPassConfirm?'text':'password'"
+            tabindex="3"
+            maxlength="12"
+            autocomplete="off"
+            @keydown.native.tab.prevent="$refs.email.focus()"
+            @focus="resetValidate('password_confirmation')"
+          >
+            <i slot="suffix" class="cursor-pointer" @click="displayPass('passConfirm')">
+              <img v-if="showPassConfirm" class="icon-show-pass" src="/assets/icon/eye-input.svg"/>
+              <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg"/>
+            </i>
+          </el-input>
+        </el-form-item>
+        <div class="d-flex align-items-center">
+          <el-checkbox v-model="accountForm.has_terms" size="large"></el-checkbox>
+          <div class="terms cursor-pointer">
               <span class="text-primary-pink text-mobile">
                 {{ $t('register.terms') }}
               </span>
-              <span class="text-primary-black text-mobile" @click="accountForm.has_terms = !accountForm.has_terms">{{ $t('register.agree') }}</span>
-            </div>
+            <span class="text-primary-black text-mobile" @click="accountForm.has_terms = !accountForm.has_terms">{{ $t('register.agree') }}</span>
           </div>
-          <div class="description">
-            <el-checkbox v-model="accountForm.has_agreement" :label="$t('register.description')" size="large"></el-checkbox>
-          </div>
+        </div>
+        <div class="description">
+          <el-checkbox v-model="accountForm.has_agreement" :label="$t('register.description')" size="large"></el-checkbox>
+        </div>
 
-          <el-form-item class="button-login">
-            <div :class="{'disabled' : disabledButton}">
-              <el-button
-                v-loading.fullscreen.lock="fullscreenLoading"
-                :loading="loading"
-                :disabled="disabledButton"
-                type="danger"
-                @click.native.prevent="login"
-              >
-                {{ $t('register.send') }}
-              </el-button>
-            </div>
-          </el-form-item>
-          <div class="register-here text-primary-black text-center">
-            <span class="text-mobile">{{ $t('register.have_account') }}</span>
-            <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('login')">{{ $t('register.here') }}</span>
+        <el-form-item class="button-login">
+          <div :class="{'disabled' : disabledButton}">
+            <el-button
+              v-loading.fullscreen.lock="fullscreenLoading"
+              :loading="loading"
+              :disabled="disabledButton"
+              type="danger"
+              @click.native.prevent="login"
+            >
+              {{ $t('register.send') }}
+            </el-button>
           </div>
-        </el-form>
-      </el-col>
-      <el-col :span="12" class="col-mobile image-login">
-        <img class="img-login" src="/assets/images/login.svg" alt="">
-      </el-col>
-    </el-row>
+        </el-form-item>
+        <div class="link-register text-center">
+          <span class="text-mobile text-primary-black">{{ $t('register.have_account') }}</span>
+          <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('login')">{{ $t('register.here') }}</span>
+        </div>
+      </el-form>
+    </div>
   </div>
 </template>
 

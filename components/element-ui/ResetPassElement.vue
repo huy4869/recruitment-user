@@ -1,80 +1,76 @@
 <template>
-  <div class="login-element">
-    <el-row>
-      <el-col class="col-mobile"  :span="12">
-        <div class="login-title">{{ $t('forgot_pass.reset') }}</div>
-        <div id="forgot-des" class="text-center">
-          <div class="text-primary-black text-mobile">{{ $t('forgot_pass.reset_des') }}</div>
-        </div>
-        <el-form
-          ref="accountForm"
-          :model="accountForm"
-          :rules="accountRules"
-          autocomplete="off"
-          label-position="left"
-          @submit.native.prevent
-        >
-          <el-form-item class="password-login" prop="password">
-            <div class="label">{{ $t('login.password') }}</div>
-            <el-input
-              ref="password"
-              v-model.trim="accountForm.password"
-              :placeholder="$t('login.password')"
-              name="password"
-              :type="showPass?'text':'password'"
-              tabindex="3"
-              maxlength="12"
-              autocomplete="off"
-              @focus="resetValidate('password')"
-            >
-              <i slot="suffix" class="cursor-pointer" @click="displayPass('pass')">
-                <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
-                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
-              </i>
-            </el-input>
-          </el-form-item>
-          <el-form-item class="password-login" prop="password_confirmation">
-            <div class="label">{{ $t('register.password_confirmation') }}</div>
-            <el-input
-              ref="password_confirmation"
-              v-model.trim="accountForm.password_confirmation"
-              :placeholder="$t('register.password_confirmation')"
-              name="password_confirmation"
-              :type="showPassConfirm?'text':'password'"
-              tabindex="3"
-              maxlength="12"
-              autocomplete="off"
-              @keydown.native.tab.prevent="$refs.email.focus()"
-              @focus="resetValidate('password_confirmation')"
-            >
-              <i slot="suffix" class="cursor-pointer" @click="displayPass('passConfirm')">
-                <img v-if="showPassConfirm" class="icon-show-pass" src="/assets/icon/eye-input.svg"/>
-                <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg"/>
-              </i>
-            </el-input>
-          </el-form-item>
+  <div class="login-element reset-password-element">
+    <img class="logo-login" src="/assets/images/logo_white.svg" alt="">
+    <div>
+      <div class="login-title">{{ $t('forgot_pass.reset') }}</div>
+      <div id="forgot-des" class="text-center">
+        <div class="text-primary-black text-mobile">{{ $t('forgot_pass.reset_des') }}</div>
+      </div>
+      <el-form
+        ref="accountForm"
+        :model="accountForm"
+        :rules="accountRules"
+        autocomplete="off"
+        label-position="left"
+        @submit.native.prevent
+      >
+        <el-form-item class="password-login" prop="password">
+          <div class="label">{{ $t('login.password') }}</div>
+          <el-input
+            ref="password"
+            v-model.trim="accountForm.password"
+            :placeholder="$t('login.password')"
+            name="password"
+            :type="showPass?'text':'password'"
+            tabindex="3"
+            maxlength="12"
+            autocomplete="off"
+            @focus="resetValidate('password')"
+          >
+            <i slot="suffix" class="cursor-pointer" @click="displayPass('pass')">
+              <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
+              <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg" alt="hidepass"/>
+            </i>
+          </el-input>
+        </el-form-item>
+        <el-form-item class="password-login" prop="password_confirmation">
+          <div class="label">{{ $t('register.password_confirmation') }}</div>
+          <el-input
+            ref="password_confirmation"
+            v-model.trim="accountForm.password_confirmation"
+            :placeholder="$t('register.password_confirmation')"
+            name="password_confirmation"
+            :type="showPassConfirm?'text':'password'"
+            tabindex="3"
+            maxlength="12"
+            autocomplete="off"
+            @keydown.native.tab.prevent="$refs.email.focus()"
+            @focus="resetValidate('password_confirmation')"
+          >
+            <i slot="suffix" class="cursor-pointer" @click="displayPass('passConfirm')">
+              <img v-if="showPassConfirm" class="icon-show-pass" src="/assets/icon/eye-input.svg"/>
+              <img v-else class="icon-show-pass" src="/assets/icon/hide-eye.svg"/>
+            </i>
+          </el-input>
+        </el-form-item>
 
-          <el-form-item class="button-login">
-            <div :class="{'disabled' : disabledButton}">
-              <el-button
-                v-loading.fullscreen.lock="fullscreenLoading"
-                :loading="loading"
-                type="danger"
-                @click.native.prevent="login"
-              >
-                {{ $t('register.send') }}
-              </el-button>
-            </div>
-          </el-form-item>
-          <div class="here-mobile text-center">
-            <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
+        <el-form-item class="button-login">
+          <div :class="{'disabled' : disabledButton}">
+            <el-button
+              v-loading.fullscreen.lock="fullscreenLoading"
+              :loading="loading"
+              type="danger"
+              @click.native.prevent="login"
+            >
+              {{ $t('forgot_pass.reset') }}
+            </el-button>
           </div>
-        </el-form>
-      </el-col>
-      <el-col :span="12" class="col-mobile image-login">
-        <img class="img-login" src="/assets/images/login.svg" alt="">
-      </el-col>
-    </el-row>
+        </el-form-item>
+        <div class="link-register text-center">
+          <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
+        </div>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -89,7 +85,7 @@ import {
 import { validEmail, validOnlyHalfWidth } from '@/utils/validate'
 
 export default {
-  name: 'ForgotElement',
+  name: 'ResetPasswordElement',
   data() {
     const validFormEmail = (rule, value, callback) => {
       if (!validEmail(value)) {
@@ -168,7 +164,7 @@ export default {
   async created() {
     this.token = this.$route.query.token
     if (this.token == null || this.token === '') {
-      this.$router.push('/')
+      await this.$router.push('/')
     } else {
       const data = await this.$store.dispatch(AUTH_CHECK_TOKEN, {
         token: this.token
@@ -181,11 +177,11 @@ export default {
             show: true,
             text: this.$t('content.EXC_001')
           })
-          await this.$router.push('/404-not-found')
+          // await this.$router.push('/404-not-found')
           break
         default:
           this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
-          await this.$router.push('/404-not-found')
+          // await this.$router.push('/404-not-found')
           break
       }
     }

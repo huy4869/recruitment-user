@@ -32,22 +32,10 @@
 @media screen and (max-width: 1150px) {
   // login-page
   .login-page {
-    height: unset;
-    &#register-layout {
-    }
-    #register-element {
-      .login-title {
-        margin: 90px auto 1.5em;
-      }
-      .image-login {
-        display: none;
-      }
-    }
     .login-element {
-      .login-title {
-        font-size: 24px;
-        margin: 0 auto 1.5em;
-      }
+      width: unset;
+      padding: 40px;
+      margin: 20px auto;
       .col-mobile {
         float: none;
       }
@@ -142,6 +130,14 @@
 }
 
 @media screen  and (max-width: 1024px) {
+  .login-page {
+    .login-element {
+      margin-top: 70px;
+      .logo-login {
+        left: calc(50% - 44px);
+      }
+    }
+  }
   .card-component {
     .card-text-normal, .card-text-primary, .card-text-title {
       font-size: 14px;
@@ -352,6 +348,7 @@
     font-size: 14px;
   }
 }
+
 @media screen and (max-width: 720px) {
   .my-page-schedule-element {
     padding: 12px;
@@ -588,6 +585,7 @@
 }
 
 @media only screen and (max-width: 540px) {
+
   .show-modal-sp {
     max-height: 100vh;
     overflow: hidden;
@@ -737,13 +735,18 @@
       }
     }
   }
+  #register-layout {
+    padding: 40px 0;
+  }
   .login-page {
     #forgot-des {
-      width: 94%;
-      margin: 32px 12px;
-      font-size: 14px;
-      line-height: 22px;
+      width: 100%;
+      margin: 32px 0;
       text-align: unset;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 20px;
+      padding-bottom: 0;
     }
 
     #register-element {
@@ -754,16 +757,27 @@
 
     .login-element {
       width: 100%;
-      margin-top: 90px;
-      .check-remember {
-        justify-content: center;
+      margin: 0 12px;
+      padding: 24px 12px;
+      .logo-login {
+        display: none;
       }
       .login-title {
         width: 100%;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 28px;
       }
 
       .description {
-        margin-bottom: 48px;
+        height: max-content;
+        margin-bottom: 32px;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        .el-checkbox {
+          height: max-content;
+        }
       }
       .col-mobile {
         width: 100%;
@@ -774,15 +788,24 @@
       }
 
       form {
-        width: calc(100% - 3rem);
-        padding: 0 1.5rem;
+        width: 100%;
       }
-      .password-login {
-        margin-bottom: 25px;
+      .el-form-item {
+        margin-bottom: 32px;
       }
       .button-login {
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 28px;
+      }
+    }
+    .reset-password-element {
+      #forgot-des, .link-register {
+        display: none;
+      }
+      .login-title {
+        margin-bottom: 21px;
+      }
+      .button-login {
+        margin-bottom: 0;
       }
     }
   }
