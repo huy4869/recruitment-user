@@ -34,7 +34,7 @@
                 <div v-for="(item, key) in menuLeft" :key="key">
                   <el-submenu v-if="item.key === 'web-cv'" :index="item.key" :class="menuActive === 'web-cv' ? 'mobile-menu-active' : ''">
                     <template slot="title">
-                      <span>{{ item.name }}</span>
+                      <span @click="changeToPage(item.key)">{{ item.name }}</span>
                     </template>
                     <el-menu-item :index="web.key" v-for="(web, key) in menuWebCv" :key="key" :class="subActive === web.key ? 'sub-menu-active' : ''" @click="changeToPage(web.key)" >
                       <div class="d-flex items-center justify-between">
