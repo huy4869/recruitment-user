@@ -17,6 +17,7 @@ export const AUTH_RESET_PASS = 'authentication/resetPass'
 // authentication
 export const AUTH_REGISTER = 'authentication/register'
 export const CHANGE_PASS = 'authentication/changePassword'
+export const AUTH_CHECK_REGISTER = 'authentication/checkRegisterToken'
 
 // chat
 export const CHAT_FETCH_MESSAGE = 'chat/fetchMessage'
