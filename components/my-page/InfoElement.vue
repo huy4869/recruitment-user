@@ -11,23 +11,18 @@
           </el-image>
           <br>
         </div>
-        <div class="img-detail-mobile">
-          <span class="img-title-mobile card-text-primary">{{ $t('my_page.image_detail') }}</span>
-          <div class="img-detail">
-            <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="">
-          </div>
-
-        </div>
         <div class="job-box items-center">
-          <div class="left-item avatar-pc">
+          <div class="left-item">
             <p class="card-text-primary">
               {{ $t('my_page.image_detail') }}
             </p>
           </div>
-          <div class="right-item first-right-item avatar-pc">
-          <div class="img-detail">
-            <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="img-detail">
-          </div>
+          <div class="right-item first-right-item">
+            <div class="img-detail">
+              <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="img-detail">
+              <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="img-detail">
+              <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="img-detail">
+            </div>
           </div>
           <div class="left-item">
             <p class="card-text-primary">
@@ -36,7 +31,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              {{ info.full_name }}
+              <span class="bold">{{ info.full_name }}</span>({{ info.full_name_furi }})
             </p>
           </div>
           <div class="left-item">
@@ -66,7 +61,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              {{ info.age }}
+              {{ info.age ? (info.age) : '0' + $t('common.age')}}
             </p>
           </div>
           <div class="left-item">

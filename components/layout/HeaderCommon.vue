@@ -81,7 +81,6 @@
   </div>
 </template>
 <script>
-import { INDEX_SET_LOADING } from '../../store/store.const'
 
 export default {
   name: 'HeaderCommon',
@@ -104,10 +103,7 @@ export default {
       this.$router.push(link)
     },
     async logout() {
-      this.$store.commit(INDEX_SET_LOADING, true)
-      await this.$auth.logout()
-      await this.$router.go('/')
-      this.$store.commit(INDEX_SET_LOADING, false)
+      await this.$router.push('/logout')
     },
     checkName(value) {
       const name = value

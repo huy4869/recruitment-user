@@ -1,5 +1,5 @@
 body {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Noto Sans JP';
   margin: 0;
   font-style: normal;
   color: $color-black;
@@ -467,7 +467,7 @@ hr {
 
 .card-button {
   height: 40px;
-  padding: 9px 55px;
+  padding: 8px 55px;
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
@@ -561,25 +561,26 @@ hr {
           transition: none;
           width: 12px;
           height: 12px;
-          top: 4px;
-          left: 4px;
+          top: 5px;
+          left: 5px;
         }
       }
     }
     .el-radio__inner{
       width: 24px;
       height: 24px;
-      border: 2px solid $border-focus;
+      border: 1px solid $border-default;
       background: $color-white;
     }
   }
   .el-radio__label {
     color: $color-black;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    vertical-align: middle;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
     white-space: normal;
+    padding-left: 8px;
+    display: inline-block;
   }
 }
 

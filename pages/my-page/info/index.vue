@@ -1,7 +1,7 @@
 <template>
-  <div class="cv-page">
+  <div class="cv-page web-cv-page">
+    <BannerElement :banner="$t('page.my_page')" title="my page" :subBanner="$t('content.web_cv')"></BannerElement>
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement class="show-pc" :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
       <MenuLeftElement sub-active="info" menu-active="web-cv"></MenuLeftElement>
       <InfoElement :info="info"></InfoElement>
