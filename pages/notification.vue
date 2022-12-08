@@ -69,6 +69,9 @@ export default {
       if ([1, 2, 4, 5].includes(notification.notice_type_id)) {
         return '/job/' + notification.noti_object_ids.job_id
       }
+      if (notification.notice_type_id === 9) {
+        return '/job/' + notification.noti_object_ids.job_id + '?notification=9'
+      }
     },
     async getDataNotifications() {
       const dataResponse = await this.$store.dispatch(NOTIFICATION_LIST, '?page=' + this.page)

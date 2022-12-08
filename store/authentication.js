@@ -71,5 +71,10 @@ export const actions = {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.post('/auth/change-password', data), context)
     })
+  },
+  checkRegisterToken(context, data) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.post('/auth/verify-register', data), context)
+    })
   }
 }

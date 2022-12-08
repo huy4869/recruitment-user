@@ -366,8 +366,8 @@
             <div class="question-content">
               <el-form-item label="" prop="content">
                 <el-input
-                  v-model="formAbout.content"
                   ref="content"
+                  v-model="formAbout.content"
                   type="textarea"
                   :rows="4"
                   maxlength="1000"
@@ -552,6 +552,13 @@ export default {
     ])
     await this.$store.commit(INDEX_SET_LOADING, false)
     this.clonedformAbout = _.cloneDeep(this.formAbout)
+  },
+  mounted() {
+    if (this.$route.query.notification === '9') {
+      if (!this.job.is_apply) {
+        this.openApplyDialog()
+      }
+    }
   },
   methods: {
     resetValidate(ref) {
