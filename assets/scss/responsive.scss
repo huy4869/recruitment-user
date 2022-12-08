@@ -130,6 +130,51 @@
 }
 
 @media screen  and (max-width: 1024px) {
+  .cv-page .cv-content #btn-center {
+    display: flex;
+    padding-left: 0;
+    justify-content: center;
+  }
+  .edit-form-content .edit-form-input {
+    .content-datetime {
+      .el-form-item {
+        .el-select {
+          width: 64px;
+        }
+        .el-col-md-3 {
+          width: 64px;
+        }
+        .birthday {
+          padding: 0 10px;
+        }
+        .birth-month, .birth-day {
+          width: 50px;
+          .el-select {
+            width: 50px;
+          }
+        }
+      }
+    }
+    .form-label-input .content-gender .form-gender-checkbox div {
+      margin-right: 8px;
+    }
+    .detail-image {
+      .list-image-detail {
+        display: inline-block;
+        .d-flex {
+          display: inline-block;
+        }
+      }
+    }
+    .image-avatar {
+      .show-avatar {
+        display: inline-block;
+        .show-detail {
+          display: inline-flex;
+        }
+      }
+    }
+  }
   .login-page {
     .login-element {
       margin-top: 70px;
@@ -358,7 +403,7 @@
   .card-component {
     .favorite-job-element {
       .job-box {
-        grid-template-columns: 120px calc(100% - 110px);
+        grid-template-columns: 120px calc(100% - 120px);
         .right-item{
           &#img-detail {
             img {
@@ -1088,24 +1133,41 @@
   }
   // cv-element-start
   .card-component {
-    width: 95%;
 
     .favorite-job-element {
-      margin-left: 12px;
-      padding: 0;
+      margin: 0;
+      padding: 0 12px 8px;
       border: none;
-
+      width: auto;
+      box-shadow: none;
       .card-title-mobile {
-        background-color: $color-primary;
-        padding: 9px 0 9px 16px;
-        font-weight: 700;
-        font-size: 16px;
+        font-weight: 400;
+        font-size: 20px;
         line-height: 24px;
-        color: $--color-primary;
-        border-left: 5px solid $--color-primary;
-        width: 99%;
+        color: #E739EB;
+        border-bottom: 2px solid #E739EB;
+        padding-bottom: 9px;
+        margin-bottom: 14px;
       }
-
+      .job-title {
+        .avatar-img {
+          width: 144px;
+          height: 144px;
+        }
+      }
+      .job-box {
+        .right-item {
+          margin-left: 7px;
+          .img-detail {
+            display: flex;
+            img {
+              width: 60px;
+              height: 60px;
+              padding-right: 0;
+            }
+          }
+        }
+      }
       .card-main {
         .job-title {
           display: flex;
@@ -1164,33 +1226,40 @@
     }
   }
   .edit-cv-element {
-    margin-top: -20px;
-
-    .edit-cv-content .card-title-mobile {
-      display: block;
-      background-color: $color-primary;
-      padding: 9px 0 9px 16px;
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 24px;
-      color: $--color-primary;
-      border-left: 5px solid $--color-primary;
-      margin-top: 24px
-    }
-
     .edit-cv-title {
-      display: none;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      color: $color-text-primary;
+      border-bottom: 2px solid $color-text-primary;
+      padding-bottom: 8px;
+      margin: 0 12px;
     }
-
     .edit-cv-content {
       padding: 0 12px;
-
+      border-top: none;
       .basic-information {
-        font-size: 16px !important;
+        font-weight: 400;
+        font-size: 20px;
         line-height: 24px;
         margin-top: 0;
         padding-bottom: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 14px;
+      }
+      .form-image {
+        .col-label .label span {
+          padding-top: 0;
+        }
+      }
+      .content-datetime {
+        .el-form-item {
+          .el-col-md-3 {
+            width: 72px;
+            .el-select {
+              width: 72px;
+            }
+          }
+        }
       }
     }
     .text-count-career {
@@ -1198,8 +1267,15 @@
       vertical-align: bottom;
     }
   }
+  .edit-cv-element {
+    margin-bottom: 16px;
+    .edit-form-content .edit-form-input .form-label-input .content-gender .form-gender-checkbox div {
+      margin-right: 36px;
+    }
+  }
+
   #btn-center {
-    margin: 24px 0 0 0;
+    margin: 8px 0 0 0;
 
     .triple-btn {
       padding: 12px 35px;
@@ -1251,8 +1327,6 @@
         top: 0;
         left: 0;
         padding: 0 6px;
-        font-size: 13px;
-        line-height: 22px;
         margin-left: 6px;
       }
 
@@ -1274,11 +1348,22 @@
         }
       }
       .content-input {
-        margin: 5px 0 24px;
+        margin: 8px 0 20px;
         padding: 0;
-
         .button-upload {
           margin-left: 0;
+          display: block;
+          margin-top: 8px;
+          button label {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 20px;
+          }
+        }
+        .detail-image {
+          .button-upload {
+            margin-bottom: -4px;
+          }
         }
 
         .show-image {
@@ -1323,9 +1408,10 @@
             bottom: 0;
 
             label {
-              width: 242px;
+              font-weight: 400;
+              font-size: 13px;
+              line-height: 20px;
               display: block;
-              padding: 4px 0;
               text-align: center;
             }
           }
@@ -2790,9 +2876,6 @@
 @media only screen and (max-width: 414px) {
   .card-component {
     .favorite-job-element {
-      .card-title-mobile {
-        width: 96%;
-      }
       .card-main {
         .job-title {
           .social-media {
