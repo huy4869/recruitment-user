@@ -354,37 +354,6 @@
     font-size: 14px;
   }
 }
-
-@media screen and (max-width: 720px) {
-  .my-page-schedule-element {
-    padding: 12px;
-    .schedule-content {
-      display: block;
-      .schedule-description {
-        padding-left: 0;
-        .schedule-button {
-          display: flex;
-          .el-button--default {
-            padding: 12px 37px;
-          }
-        }
-        span {
-          word-break: break-all;
-        }
-      }
-      .schedule-image{
-        width: 100%;
-        height: auto;
-        margin-bottom: 12px;
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 820px) {
   .card-component {
     .favorite-job-element {
@@ -562,7 +531,10 @@
 }
 @media screen and (max-width: 720px) {
   .my-page-schedule-element {
-    padding: 12px;
+    padding: 14px 12px;
+    .schedule-title {
+      margin-bottom: 14px;
+    }
     .schedule-content {
       display: block;
       .schedule-description {
@@ -571,6 +543,11 @@
           display: flex;
           .el-button--default {
             padding: 12px 37px;
+            span {
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
+            }
           }
         }
         span {
@@ -581,6 +558,7 @@
         width: 100%;
         height: auto;
         margin-bottom: 12px;
+        display: flex;
         img {
           width: 100%;
           height: auto;
@@ -680,6 +658,7 @@
         padding: 16px 35px 5px 36px;
         grid-gap: 18px;
         gap: 18px;
+        margin-top: 0;
         div {
           display: inline-block;
           font-weight: 500;
@@ -981,6 +960,7 @@
   }
   .menu-left-element {
     margin-right: 0;
+    margin-top: 0;
     padding: 16px 12px 20px;
 
     .el-select {
@@ -1009,28 +989,38 @@
   .my-page-top-element {
     .top-page-content {
       padding: 0 12px;
-
+      margin-top: 16px;
+      margin-bottom: 32px;
       .button-view-all {
-        margin-bottom: 50px;
+        margin-top: 16px;
+        margin-bottom: 32px;
+        span {
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 20px;
+          padding-top: 3px;
+        }
       }
     }
 
     .top-page-title {
-      margin-top: 13px;
+      margin-bottom: 12px;
       margin-left: 12px;
-      font-size: 16px;
+      margin-right: 12px;
+      font-weight: 400;
+      font-size: 20px;
       line-height: 24px;
-      padding-left: 73px;
-
-      img {
-        top: -17px;
-        width: 68px;
-        height: 68px;
+      height: 24px;
+      .sub-title {
+        margin-left: 8px;
+        bottom: -2px;
+        position: relative;
       }
     }
 
     .button-footer {
       padding: 0 12px;
+      margin-bottom: 40px;
 
       .button-item {
         width: auto;
@@ -1039,8 +1029,9 @@
 
         span {
           font-weight: 700;
-          font-size: 14px;
-          line-height: 22px;
+          font-size: 13px;
+          line-height: 20px;
+          padding-right: 0;
         }
 
         img {
@@ -2779,6 +2770,22 @@
   #btn-no-data {
     margin-top: -35px;
   }
+  .my-page-schedule-element {
+    .schedule-content {
+      .schedule-description {
+        .schedule-button {
+          justify-content: space-between;
+          .el-button {
+            padding: 8px 24px;
+            margin-right: 0;
+          }
+          .el-button--default {
+            padding: 8px 32px;
+          }
+        }
+      }
+    }
+  }
 }
 @media only screen and (max-width: 414px) {
   .card-component {
@@ -2808,19 +2815,6 @@
   }
 }
 
-@media screen and (max-width: 390px) {
-  .my-page-schedule-element {
-    .schedule-content {
-      .schedule-description {
-        .schedule-button {
-          .el-button--default {
-            padding: 12px 24px;
-          }
-        }
-      }
-    }
-  }
-}
 @media screen and (max-width: 280px) {
   .my-page-schedule-element {
     .schedule-content {
