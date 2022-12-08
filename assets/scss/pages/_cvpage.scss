@@ -4,6 +4,17 @@
     padding: 12px 90px 0;
     max-width: 1152px;
     margin: auto;
+    .card-component {
+      #btn-center {
+        .el-button {
+          width: 150px;
+          margin-right: 8px;
+          margin-left: 8px;
+        }
+        justify-content: center;
+        padding-left: 0;
+      }
+    }
     #btn-center {
       display: flex;
       padding-left: 244px;
@@ -11,6 +22,12 @@
         margin-left: 0;
         margin-right: 16px;
       }
+    }
+  }
+  .el-input {
+    height: 40px;
+    input {
+      height: 40px;
     }
   }
 }
@@ -59,10 +76,15 @@
     letter-spacing: 0.1em;
     color: $color-text-primary;
     display: flex;
-    margin-bottom: 12px;
+    margin-bottom: 9px;
   }
   .edit-cv-content {
     border-top: 3px solid $color-text-primary;
+    .form-image {
+      .col-label .label span {
+        padding-top: 12px;
+      }
+    }
     &#skill-sheet {
       margin-bottom: 40px;
     }
@@ -224,7 +246,7 @@
       }
     }
     .basic-information {
-      margin-top: 23px;
+      margin-top: 20px;
       font-weight: 700;
       font-size: 20px;
       line-height: 28px;
@@ -232,7 +254,7 @@
       padding-bottom: 10px;
       color:  $color-text-primary;
       border-bottom: 2px solid $color-text-primary;
-      margin-bottom: 2px;
+      margin-bottom: 12px;
     }
     .skill-slider {
       margin-left: 101px;
@@ -279,7 +301,7 @@
         line-height: 22px;
         height: 100%;
         span {
-          padding: 10px 5px 10px 16px;
+          padding: 12px 5px 12px 16px;
           display: block;
         }
       }
@@ -289,16 +311,8 @@
     }
     .required {
       position: absolute;
-      top: 11px;
+      top: 13px;
       right: 16px;
-      border-radius: 2px;
-      background: $color-red-primary;
-      color: $color-white;
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 20px;
-      padding: 0 6px;
-      text-align: center;
     }
     .image-avatar {
       img {
@@ -329,8 +343,7 @@
       }
       .show-detail {
         position: relative;
-        margin-top: 18px;
-        margin-right: 20px;
+        margin-right: 14px;
         display: flex;
         .image-close {
           position: absolute;
@@ -345,12 +358,37 @@
         margin-left: 0;
       }
     }
+    .content-age {
+      .el-input {
+        width: 80px;
+      }
+    }
+    .form-label-input {
+      .content-gender {
+        padding: 11px 0;
+        .form-gender-checkbox {
+          display: flex;
+          div {
+            margin-right: 36px;
+          }
+        }
+      }
+    }
     .content-datetime {
       .el-input {
         .el-input__inner {
           padding-right: 16px;
         }
       }
+      .el-form-item {
+        .el-col-md-3 {
+          width: 80px;
+        }
+        .el-select {
+          width: 80px;
+        }
+      }
+
       .el-input__suffix {
         .el-input__suffix-inner {
           .el-icon-arrow-up::before {
@@ -425,16 +463,16 @@
             padding: 4px 16px;
             background: $color-white;
             cursor: pointer;
-            border: 1px solid $border-focus;
+            border: 1px solid $border-default;
             border-radius: 4px;
           }
         }
       }
       .first-name {
-        padding-right: 4px;
+        padding-right: 12px;
       }
       .last-name {
-        padding-left: 9px;
+        padding-left: 12px;
       }
       .birthday {
         padding: 0 14px;

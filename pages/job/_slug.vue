@@ -416,7 +416,8 @@ import {
   JOB_ADD_FAVORITE_JOB,
   JOB_REMOVE_FAVORITE_JOB,
   INDEX_SET_SUCCESS,
-  JOB_CREATE_FEEDBACK
+  JOB_CREATE_FEEDBACK,
+  SET_JOB_ERROR
 } from '../../store/store.const'
 
 export default {
@@ -573,12 +574,11 @@ export default {
       const dataResponse = await this.$store.dispatch(JOB_GET_DETAIL_JOB, this.$route.params.slug)
       if (dataResponse.status_code === 200) {
         this.job = dataResponse.data
+      } else if (dataResponse.status_code === 400) {
+        await this.$store.commit(SET_JOB_ERROR, dataResponse.messages)
+        this.$router.push('/404-not-found?error=job')
       } else {
-        await this.$store.commit(INDEX_SET_ERROR, {
-          show: true,
-          text: dataResponse.messages
-        })
-        this.$router.push('/')
+        this.$router.push('/404-not-found')
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },

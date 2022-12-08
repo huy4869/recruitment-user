@@ -1,14 +1,13 @@
 <template>
-  <div class="cv-page">
+  <div class="cv-page edit-info-element">
+    <BannerElement :banner="$t('page.my_page')" title="my page" :subBanner="$t('content.web_cv')"></BannerElement>
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
       <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
       <div class="right-content-element">
         <div class="edit-cv-element">
           <div class="edit-cv-title">{{ $t('my_page.edit_basic_information') }}</div>
           <div class="edit-cv-content edit-form-content">
-            <div class="card-text-title card-title-mobile"> {{ $t('my_page.edit_basic_information') }}</div>
             <el-form
               ref="accountForm"
               :model="accountForm"
@@ -17,8 +16,7 @@
               label-position="left"
             >
               <div class="edit-form-input">
-                <BorderElement :middle="false"></BorderElement>
-                <el-row class="d-flex form-label-input">
+                <el-row class="d-flex form-label-input form-image">
                   <el-col :md="6" :sm="14" class="col-label">
                     <div class="label"><span>{{ $t('my_page.image_avatar') }}</span></div>
                   </el-col>
@@ -39,8 +37,7 @@
                     </div>
                   </el-col>
                 </el-row>
-                <BorderElement :middle="true"></BorderElement>
-                <el-row class="d-flex form-label-input">
+                <el-row class="d-flex form-label-input form-image">
                   <el-col :md="6" :sm="14" class="col-label">
                     <div class="label"><span>{{ $t('my_page.image_detail') }}</span></div>
                   </el-col>
@@ -48,20 +45,21 @@
                     <div class="content-input detail-image">
                       <el-form-item label="" prop="imageDetail" ref="imageDetail" :error="(error.key === 'image') ? error.value : ''">
                         <input id="upload-detail" ref="fileUploadDetail" :class="{'disabledImg' : disableImgUp}" :disabled="disableImgUp" class="d-none" type="file" max="3" multiple @change="onFileChangeDetail" accept=".jpeg, .jpg, .png, .svg">
-                        <div class="button-upload">
-                          <button type="button"><label :class="{'disabledImg' : disableImgUp}" for="upload-detail">{{ $t('my_page.upload_image_detail') }}</label></button>
-                        </div>
-                        <div v-if="imageDetailShow.length" class="d-flex">
-                          <div v-for="(detail, index) in imageDetailShow" :key="index" class="show-detail">
-                            <img id="img-intro" class="show-image" :src="detail ? detail.url : '/assets/icon/icon_user_default.svg'" alt="">
-                            <img class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="removeImage(index)">
+                        <div class="d-flex list-image-detail">
+                          <div v-if="imageDetailShow.length" class="d-flex">
+                            <div v-for="(detail, index) in imageDetailShow" :key="index" class="show-detail">
+                              <img id="img-intro" class="show-image" :src="detail ? detail.url : '/assets/icon/icon_user_default.svg'" alt="">
+                              <img class="image-close" src="/assets/icon/icon_close_image.svg" alt="" @click="removeImage(index)">
+                            </div>
+                          </div>
+                          <div class="button-upload">
+                            <button type="button"><label :class="{'disabledImg' : disableImgUp}" for="upload-detail">{{ $t('my_page.upload_image_detail') }}</label></button>
                           </div>
                         </div>
                       </el-form-item>
                     </div>
                   </el-col>
                 </el-row>
-                <BorderElement :middle="false"></BorderElement>
                 <div class="basic-information">
                   <span>{{ $t('my_page.basic_information') }}</span>
                 </div>
@@ -135,7 +133,7 @@
                 <el-row class="d-flex form-label-input">
                   <el-col :md="6" :sm="14" class="col-label">
                     <div class="label">
-                      <span>{{ $t('my_page.name') }}<br class="show-pc"/>({{ $t('my_page.furigana') }})</span>
+                      <span>{{ $t('my_page.name') }}({{ $t('my_page.furigana') }})</span>
                     </div>
                     <div class="required">{{ $t('form.required') }}</div>
                   </el-col>
@@ -244,7 +242,7 @@
                     <div class="label"><span>{{ $t('my_page.age') }}</span></div>
                   </el-col>
                   <el-col :md="18" :sm="24">
-                    <div class="content-input" ref="age">
+                    <div class="content-input content-age" ref="age">
                       <el-row class="d-flex">
                         <el-col :md="4" :sm="24">
                           <el-form-item label="" prop="age" :error="(error.key === 'age') ? error.value : ''">
@@ -274,23 +272,25 @@
                     <div class="required">{{ $t('form.required') }}</div>
                   </el-col>
                   <el-col :md="18" :sm="24">
-                    <div class="content-input" ref="gender_id">
+                    <div class="content-input content-gender" ref="gender_id">
                       <el-row class="">
                         <el-form-item label="" prop="gender_id" :error="(error.key === 'gender_id') ? error.value : ''">
                           <el-radio-group class="d-flex" v-model="accountForm.gender_id">
-                            <el-col v-for="(gender, key) in listGender" :key="key" :xl="4" :md="4"  :sm="7" :xs="6" class="birth-year">
-                              <el-radio
-                                :label="gender.id"
-                                class="round-checkbox"
-                                name="gender"
-                                type="text"
-                                tabindex="2"
-                                show-word-limit
-                                @focus="resetValidate('gender_id')"
-                              >
-                                {{ gender.name }}
-                              </el-radio>
-                            </el-col>
+                            <div class="form-gender-checkbox">
+                              <el-col v-for="(gender, key) in listGender" :key="key" class="birth-year">
+                                <el-radio
+                                  :label="gender.id"
+                                  class="round-checkbox"
+                                  name="gender"
+                                  type="text"
+                                  tabindex="2"
+                                  show-word-limit
+                                  @focus="resetValidate('gender_id')"
+                                >
+                                  {{ gender.name }}
+                                </el-radio>
+                              </el-col>
+                            </div>
                           </el-radio-group>
                         </el-form-item>
                       </el-row>
