@@ -8,6 +8,7 @@ export const state = () => ({
   hideFooter: false,
   showModalSp: false,
   openSidebar: 0,
+  errorJob: '',
   titleMenu: [{ name: '', route: '/' }]
 })
 
@@ -37,6 +38,9 @@ export const mutations = {
   },
   setShowModalSp(state, showModalSp) {
     state.showModalSp = showModalSp
+  },
+  setErrorJob(state, errorJob) {
+    state.errorJob = errorJob
   }
 }
 
