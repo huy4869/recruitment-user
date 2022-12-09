@@ -255,9 +255,10 @@
 
 .el-select .el-select__tags .el-select__tags-text,
 .el-select-dropdown__wrap .el-select-dropdown__list .el-select-dropdown__item {
-  font-size: 14px;
   color: $color-black;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
   &.is-disabled {
     color: $color-text-2;
   }
@@ -379,6 +380,7 @@
       &:nth-child(2) {
         margin-left: 12px;
         background-color: $color-text-primary;
+        border-color: $color-text-primary;
         color: $color-white;
       }
     }

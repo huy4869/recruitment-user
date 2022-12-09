@@ -51,24 +51,6 @@
 }
 .edit-cv-element {
   margin-bottom: 32px;
-  .text-count-career {
-    min-width: 22px;
-    width: max-content;
-    height: 22px;
-    border: 1px solid $color-text-primary;
-    font-size: 16px;
-    border-radius: 50%;
-    line-height: 20px;
-    display: inline-flex;
-    justify-content: center;
-    vertical-align: middle;
-    font-family: 'Zen Kaku Gothic New';
-    font-weight: 700;
-    margin-top: 5px;
-    span {
-      letter-spacing: 0;
-    }
-  }
   .edit-cv-title {
     font-weight: 400;
     font-size: 24px;
@@ -85,9 +67,6 @@
         padding-top: 12px;
       }
     }
-    &#skill-sheet {
-      margin-bottom: 40px;
-    }
     &.skill-sheet-index {
       .el-slider__runway.disabled {
         .el-slider__button {
@@ -95,7 +74,7 @@
         }
         .el-slider__bar {
           background: rgba(56, 180, 184, 1);
-          border-radius: 4px;
+          border-radius: 100px;
         }
       }
     }
@@ -268,6 +247,25 @@
   }
 }
 
+.text-count-career {
+  min-width: 22px;
+  width: max-content;
+  height: 22px;
+  border: 1px solid $color-text-primary;
+  font-size: 16px;
+  border-radius: 50%;
+  line-height: 20px;
+  display: inline-flex;
+  justify-content: center;
+  vertical-align: middle;
+  font-family: 'Zen Kaku Gothic New';
+  font-weight: 700;
+  margin-top: 5px;
+  span {
+    letter-spacing: 0;
+  }
+}
+
 .edit-form-content {
   .edit-form-input {
     margin-top: 24px;
@@ -377,7 +375,7 @@
     .content-datetime {
       .el-input {
         .el-input__inner {
-          padding-right: 16px;
+          padding-right: 14px;
         }
       }
       .el-form-item {
@@ -421,10 +419,11 @@
       margin-left: 24px;
       padding: 3px 0;
       &.pr-slider {
-        padding: 0px 0 30px;
+        padding: 8px 0 34px;
+        margin-left: 0;
       }
       .skill-slider {
-        margin-left: 71px;
+        margin-left: 40px;
       }
       .el-input__suffix {
         display: flex;

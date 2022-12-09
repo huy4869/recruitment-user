@@ -1,7 +1,7 @@
 <template>
   <div class="cv-page">
+    <BannerElement :banner="$t('page.my_page')" title="my page" :subBanner="$t('content.web_cv')"></BannerElement>
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
       <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
       <div class="right-content-element">
@@ -127,7 +127,7 @@
                             </el-row>
                           </el-form-item>
                         </el-col>
-                        <span class="date-space"> ～ </span>
+                        <span class="date-space">~</span>
                         <span v-show="accountForm.period_check" class="text-normal">{{ $t('career.current') }}</span>
                         <el-col v-show="!accountForm.period_check" :md="9" :sm="24" class="birth-year">
                           <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">

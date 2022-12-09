@@ -283,7 +283,7 @@
                             </el-select>
                           </el-form-item>
                         </el-col>
-                        <el-col v-if="accountForm.work_type_name === 5" :md="20" :sm="24">
+                        <el-col v-show="accountForm.work_type_name === 5" :md="20" :sm="24">
                           <div ref="other_status" class="text-bold">{{ $t('career.other_emp_status') }}</div>
                           <el-form-item label="" prop="other_status" :error="(error.key === 'other_status') ? error.value : ''">
                             <el-autocomplete
@@ -332,13 +332,10 @@
                 <BorderElement :middle="true"></BorderElement>
                 <el-row class="d-flex form-label-input">
                   <el-col :md="6" :sm="12" class="col-label">
-                    <div class="label show-pc">
-                   <span>
-                     {{ $t('career.experience') }}
-                   </span>
-                      <div class="show-sp">
+                    <div class="label">
+                      <span>
                         {{ $t('career.experience') }}
-                      </div>
+                      </span>
                     </div>
                   </el-col>
                   <el-col :md="18" :sm="24">
@@ -555,10 +552,10 @@ export default {
   },
   computed: {
     contentLength() {
-      return this.accountForm.business_content ? this.accountForm.business_content.length : ''
+      return this.showLengthTextarea(this.accountForm.business_content)
     },
     experienceLength() {
-      return this.accountForm.experience_accumulation ? this.accountForm.experience_accumulation.length : ''
+      return this.showLengthTextarea(this.accountForm.experience_accumulation)
     },
     period_start() {
       return this.accountForm.period_year_start && this.accountForm.period_month_start
@@ -732,6 +729,12 @@ export default {
     this.clonedAccountForm = _.cloneDeep(this.accountForm)
   },
   methods: {
+    showLengthTextarea(value) {
+      if (value) {
+        return ('000' + value.length).slice(-4)
+      }
+      return '0000'
+    },
     async getDataJob() {
       this.$store.commit(INDEX_SET_LOADING, true)
       try {
