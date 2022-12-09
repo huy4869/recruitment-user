@@ -638,20 +638,11 @@
   .card-primary-title {
     display: flex;
     height: 32px;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
     .text-count-career {
-      min-width: 24px;
-      width: max-content;
-      height: 24px;
       border: 1px solid $color-black;
-      display: flex;
-      justify-content: center;
-      vertical-align: middle;
-      font-family: 'Zen Kaku Gothic New';
-      font-weight: 700;
-      margin: auto 0;
-      font-size: 24px;
-      border-radius: 50%;
-      line-height: 28px;
       span {
         letter-spacing: 0;
       }
@@ -686,13 +677,16 @@
   .job-box {
     .left-item {
       font-weight: 700;
-      font-size: 16px;
-      line-height: 24px;
+      font-size: 14px;
+      line-height: 22px;
+      height: 100%;
+      background-color: $color-bg-footer;
+      p {
+        margin: 8px 0 8px 24px;
+      }
     }
     .right-item {
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
+      height: max-content;
       .item-status {
         padding-top: 14px;
         .text-status {
@@ -700,6 +694,13 @@
           margin-right: 10px;
           margin-top: 0;
         }
+      }
+      p {
+        margin: 8px 0 8px 1px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        min-height: 22px;
       }
     }
   }
@@ -1012,3 +1013,64 @@
   }
 }
 
+.self-pr-page {
+  .edit-cv-element {
+    .edit-pr-item {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      padding: 24px 24px 8px;
+      margin-bottom: 24px;
+      .edit-cv-title {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 32px;
+        color: $color-black;
+        border-bottom: none;
+      }
+      .edit-cv-content {
+        border-top: none;
+        .self-skill {
+          .skill-item {
+            border: 1px solid $border-default;
+            border-radius: 4px;
+            display: flex;
+            margin-bottom: 16px;
+            .left-item {
+              height: auto;
+              max-width: 170px;
+              .label {
+                display: flex;
+                align-items: center;
+              }
+            }
+            .pr-slider {
+              .skill-slider {
+                max-width: 451px;
+              }
+            }
+          }
+        }
+        .col-label {
+          .label {
+            span {
+              padding: 9px 0 9px 24px;
+            }
+          }
+        }
+        .content-pr {
+          padding: 9px 0 9px 1px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+          border-top: 1px solid $border-default;
+        }
+        .last-input {
+          margin-bottom: 16px;
+          .content-pr {
+            border-bottom: 1px solid $border-default;
+          }
+        }
+      }
+    }
+  }
+}

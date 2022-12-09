@@ -9,11 +9,7 @@
     padding-left: 0;
   }
   .favorite-job-element {
-    padding: 24px;
     margin-bottom: 24px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border: none;
     .card-text-title {
       font-weight: 400;
       font-size: 24px;
@@ -144,14 +140,16 @@
   }
 }
 .favorite-job-element {
+  padding: 24px;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
   .card-text-title {
     margin-bottom: 1em;
   }
 
   .job-title {
-
-    margin-bottom: 21px;
-
+    margin-bottom: 16px;
     .title-left {
       margin-left: 1.5rem;
 
@@ -173,7 +171,7 @@
 
   .job-box {
     display: grid;
-    grid-template-columns: 170px calc(100% - 160px);
+    grid-template-columns: 170px calc(100% - 170px);
 
     .left-item {
       p {
@@ -185,14 +183,17 @@
       border-bottom: 1px solid $border-default;
       margin-left: 20px;
       height: 100%;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
 
       &.first-right-item {
         border-top: 1px solid $border-default;
       }
 
       .text-wide {
-        min-height: 80px;
-        margin-top: 16px;
+        min-height: 68px;
+        margin-top: 8px;
       }
 
       .text-ellipsis {
@@ -235,7 +236,11 @@
     display: none;
   }
   .btn-option {
-    margin-top: -8px;
+    .el-button {
+      border-radius: 30px;
+      padding: 6px 20px;
+      height: 36px;
+    }
     img {
       width: 20px;
       height: 20px;
@@ -248,8 +253,8 @@
       color: $color-blue;
     }
     .btn-remove {
-      border-radius: 4px;
       color: $color-red;
+      border-color: $border-default;
     }
     .btn-green, .btn-red {
       line-height: 20px;
@@ -279,8 +284,14 @@
     }
 
     #career {
+      margin-bottom: 32px;
       .el-button--danger {
+        font-weight: 400;
+        padding: 8px 24px;
+      }
+      .el-button--default {
         font-weight: 500;
+        padding: 8px 56px;
       }
       img {
         vertical-align: text-top;

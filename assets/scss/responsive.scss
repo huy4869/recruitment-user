@@ -257,6 +257,19 @@
 }
 
 @media only screen and (max-width: 912px) {
+  .self-pr-page .edit-cv-element .edit-pr-item .edit-cv-content {
+    .self-skill .skill-item {
+      .pr-slider .skill-slider {
+        max-width: 350px;
+      }
+      .left-item {
+        max-width: 150px;
+      }
+    }
+    .left-item {
+      max-width: 150px;
+    }
+  }
   .edit-form-content {
     .edit-form-input {
       .content-input {
@@ -281,6 +294,19 @@
 }
 
 @media only screen and (min-width: 768px) and (max-width: 912px) {
+  .self-pr-page .edit-cv-element .edit-pr-item .edit-cv-content {
+    .self-skill .skill-item {
+      .pr-slider .skill-slider {
+        max-width: 300px;
+      }
+      .left-item {
+        max-width: 130px;
+      }
+    }
+    .left-item {
+      max-width: 130px;
+    }
+  }
   .edit-form-content {
     .edit-form-input {
       .content-input {
@@ -389,6 +415,19 @@
 }
 
 @media screen and (max-width: 768px) {
+  .self-pr-page .edit-cv-element .edit-pr-item .edit-cv-content {
+    .self-skill .skill-item {
+      .pr-slider .skill-slider {
+        max-width: 250px;
+      }
+      .left-item {
+        max-width: 120px;
+      }
+    }
+    .left-item {
+      max-width: 120px;
+    }
+  }
   .edit-cv-element .edit-cv-content .edit-form-input .el-form-item__content .el-input__inner::placeholder {
     font-size: 14px;
   }
@@ -1238,6 +1277,9 @@
     .edit-cv-content {
       padding: 0 12px;
       border-top: none;
+      .edit-form-input {
+        margin-top: 14px;
+      }
       .basic-information {
         font-weight: 400;
         font-size: 20px;
@@ -1265,12 +1307,18 @@
     .text-count-career {
       border: 1px solid $color-text-primary;
       vertical-align: bottom;
+      margin-top: 0;
     }
   }
   .edit-cv-element {
     margin-bottom: 16px;
-    .edit-form-content .edit-form-input .form-label-input .content-gender .form-gender-checkbox div {
-      margin-right: 36px;
+    .edit-form-content .edit-form-input {
+      .sm-text {
+        margin-bottom: 0;
+      }
+      .form-label-input .content-gender .form-gender-checkbox div {
+        margin-right: 36px;
+      }
     }
   }
 
@@ -1278,7 +1326,7 @@
     margin: 8px 0 0 0;
 
     .triple-btn {
-      padding: 12px 35px;
+      padding: 8px 35px;
     }
     .btn-right {
       margin-left: 14px;
@@ -1365,6 +1413,9 @@
             margin-bottom: -4px;
           }
         }
+        &.last-input {
+          margin-bottom: 8px;
+        }
 
         .show-image {
           &#img-avatar {
@@ -1377,9 +1428,20 @@
             height: 70px;
           }
         }
-
-        .birthday {
-          padding: 0 3px;
+        &.content-datetime {
+          .birthday {
+            padding: 0 5px;
+          }
+          .birth-year {
+            width: 64px;
+          }
+          .first-name {
+            width: max-content;
+            padding-right: 0;
+          }
+          .date-space {
+            margin: 0 8px 0 6px;
+          }
         }
 
         .date-space {
@@ -1419,6 +1481,7 @@
       }
     }
   }
+
   .favorite-job-page-element {
     .favorite-job-page-title {
       display: none;
@@ -1515,12 +1578,7 @@
       display: flex;
       height: 32px;
       .text-count-career {
-        width: auto;
-        height: 20px;
-        border: none;
-        font-size: 14px;
-        line-height: 22px;
-        font-family: 'Noto Sans JP', sans-serif;
+        border-color: $color-text-primary;
       }
     }
 
@@ -1641,7 +1699,7 @@
     .favorite-job-page-content {
       #career-mobile {
         display: flex;
-        margin: 0 12px;
+        margin: -4px 12px 0;
       }
 
       #career {
@@ -1649,8 +1707,10 @@
       }
 
       .favorite-job-element {
-        padding: 12px;
+        padding: 12px 12px 0;
         border: none;
+        box-shadow: none;
+        margin-bottom: 8px;
 
         .btn-option {
           display: none;
@@ -1659,7 +1719,7 @@
         .btn-option-mobile {
           display: flex;
           justify-content: center;
-          margin-top: 24px;
+          margin-top: 16px;
 
           img {
             width: 20px;
@@ -1675,8 +1735,12 @@
           }
 
           .btn-remove {
-            border-radius: 4px;
             color: $color-red;
+            border-color: $border-default;
+          }
+          .el-button {
+            padding: 6px 18px;
+            border-radius: 30px;
           }
 
           .btn-green, .btn-red {
@@ -1685,16 +1749,93 @@
         }
 
         .card-title-mobile {
-          background-color: $color-primary;
-          padding: 9px 0 9px 16px;
-          font-weight: 700;
-          font-size: 16px;
+          font-weight: 400;
+          font-size: 20px;
           line-height: 24px;
-          color: $--color-primary;
-          border-left: 5px solid $--color-primary;
-          .card-primary-title {
-            font-weight: 700;
-            font-size: 14px;
+          color: $color-text-primary;
+          border-bottom: 2px solid $color-text-primary;
+          padding-bottom: 8px;
+          margin-bottom: 14px;
+        }
+        .job-box {
+          grid-template-columns: 120px calc(100% - 120px);
+          .left-item {
+            p {
+              margin: 8px 0 8px 12px;
+            }
+          }
+          .right-item {
+            margin-left: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .self-pr-page {
+    .edit-cv-element {
+      .edit-pr-item {
+        box-shadow: none;
+        padding: 0;
+        .edit-cv-title {
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 24px;
+          color: $color-text-primary;
+          border-bottom: 2px solid $color-text-primary;
+          padding-bottom: 8px;
+          margin: 0 12px;
+        }
+        .edit-cv-content {
+          border-top: none;
+          .self-skill {
+            padding-bottom: 14px;
+            .skill-item {
+              display: block;
+              border: none;
+              .left-item {
+                display: inline-block;
+                position: relative;
+                top: -12px;
+                left: -18px;
+                background-color: $color-white;
+                .label {
+                  background-color: $color-white;
+                  span {
+                    padding: 12px 0 2px 18px;
+                  }
+                }
+              }
+              .pr-slider {
+                padding-top: 0;
+                margin-top: 0;
+                .skill-slider {
+                  max-width: unset;
+                  .el-slider__runway.disabled {
+                    margin-top: 0;
+                  }
+                }
+              }
+            }
+          }
+          .left-item {
+            .label {
+              background-color: $color-bg-footer;
+            }
+            background-color: $color-bg-footer;
+          }
+          .col-label {
+            .label {
+              span {
+                padding: 9px 0 9px 24px;
+              }
+            }
+          }
+          .el-col-xs-15 {
+            width: calc(100% - 120px);
+          }
+          .content-pr {
+            margin-left: 6px;
           }
         }
       }
@@ -2872,6 +3013,20 @@
       }
     }
   }
+  #career-mobile {
+    display: flex;
+    margin: 0 12px;
+    .card-button.el-button--default {
+      padding: 8px 56px;
+    }
+    .card-button {
+      padding: 8px 24px;
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
 }
 @media only screen and (max-width: 414px) {
   .card-component {
@@ -2882,17 +3037,6 @@
             margin-right: -5px;
           }
         }
-      }
-    }
-  }
-  #career-mobile {
-    display: flex;
-    margin: 0 12px;
-    .card-button {
-      padding: 12px 42px;
-      img {
-        width: 14px;
-        height: 14px;
       }
     }
   }

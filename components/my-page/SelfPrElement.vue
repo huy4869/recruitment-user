@@ -10,53 +10,55 @@
     <div v-else>
       <div class="edit-cv-element">
         <!-- EDIT SKILL SHEET -->
-        <div class="edit-cv-title">{{ $t('self_pr.skill_sheet') }}</div>
-        <div class="edit-cv-content edit-form-content skill-sheet-index" id="skill-sheet">
-          <div class="card-text-title card-title-mobile"> {{ $t('self_pr.skill_sheet') }}</div>
-          <div class="edit-form-input">
-            <div v-for="(skill, key) in self_pr.skills" :key="key">
+        <div class="edit-pr-item">
+          <div class="edit-cv-title">{{ $t('self_pr.skill_sheet') }}</div>
+          <div class="edit-cv-content edit-form-content skill-sheet-index" id="skill-sheet">
+            <div class="card-text-title card-title-mobile"> {{ $t('self_pr.skill_sheet') }}</div>
+            <div class="edit-form-input">
+              <div v-for="(skill, key) in self_pr.skills" :key="key">
+                <BorderElement :col-size="5" :middle="true"></BorderElement>
+                <el-row class="form-label-input self-skill">
+                  <div class="skill-item">
+                    <el-col :md="5" :sm="24" class="col-label left-item">
+                      <div class="label"><span>{{ skill.name }}</span></div>
+                    </el-col>
+                    <el-col :md="19" :sm="24">
+                      <div class="content-input pr-slider">
+                        <el-row class="d-flex">
+                          <el-col :md="20" :sm="24">
+                            <div class="skill-slider">
+                              <el-slider
+                                disabled
+                                v-model="skill.level"
+                                :step="1"
+                                :max="5"
+                                :min="1"
+                                :marks="marks"
+                              >
+                              </el-slider>
+                            </div>
+                          </el-col>
+                        </el-row>
+                      </div>
+                    </el-col>
+                  </div>
+                </el-row>
+              </div>
               <BorderElement :col-size="5" :middle="true"></BorderElement>
-              <el-row class="form-label-input self-skill">
-                <div class="skill-item">
-                  <el-col :md="5" :sm="24" class="col-label">
-                    <div class="label"><span>{{ skill.name }}</span></div>
-                  </el-col>
-                  <el-col :md="19" :sm="24">
-                    <div class="content-input pr-slider">
-                      <el-row class="d-flex">
-                        <el-col :md="20" :sm="24">
-                          <div class="skill-slider">
-                            <el-slider
-                              disabled
-                              v-model="skill.level"
-                              :step="1"
-                              :max="5"
-                              :min="1"
-                              :marks="marks"
-                            >
-                            </el-slider>
-                          </div>
-                        </el-col>
-                      </el-row>
-                    </div>
-                  </el-col>
-                </div>
-              </el-row>
             </div>
-            <BorderElement :col-size="5" :middle="true"></BorderElement>
           </div>
         </div>
         <!-- EDIT SELF PR -->
-        <div class="edit-cv-title">{{ $t('self_pr.title') }}</div>
-        <div class="edit-cv-content edit-info-content">
-          <div class="card-text-title card-title-mobile"> {{ $t('self_pr.title') }}</div>
+        <div class="edit-pr-item">
+          <div class="edit-cv-title">{{ $t('self_pr.title') }}</div>
+          <div class="edit-cv-content edit-form-content edit-info-content">
+            <div class="card-text-title card-title-mobile"> {{ $t('self_pr.title') }}</div>
             <div class="edit-form-input">
-              <BorderElement :middle="true"></BorderElement>
               <el-row class="d-flex">
-                <el-col :md="6" :sm="12" :xs="9" class="col-label-pr">
+                <el-col :md="5" :sm="12" :xs="9" class="col-label left-item">
                   <div class="label"><span>{{ $t('self_pr.business_content') }}</span></div>
                 </el-col>
-                <el-col :md="18" :sm="24" :xs="15">
+                <el-col :md="19" :sm="24" :xs="15">
                   <div class="content-pr">
                     <el-row class="">
                       <el-col :md="20" :sm="24">
@@ -66,17 +68,15 @@
                   </div>
                 </el-col>
               </el-row>
-              <BorderElement :middle="true"></BorderElement>
               <el-row class="d-flex">
-                <el-col :md="6" :sm="12" :xs="9" class="col-label-pr">
+                <el-col :md="5" :sm="12" :xs="9" class="col-label left-item">
                   <div class="label">
                     <span>
-                      {{ $t('self_pr.experience') }}<br>
-                      {{ $t('self_pr.skill') }}
+                      {{ $t('career.period_start') }}<br>
                     </span>
                   </div>
                 </el-col>
-                <el-col :md="18" :sm="24" :xs="15">
+                <el-col :md="19" :sm="24" :xs="15">
                   <div class="content-pr">
                     <el-row class="d-flex">
                       <el-col :md="20" :sm="24">
@@ -86,12 +86,11 @@
                   </div>
                 </el-col>
               </el-row>
-              <BorderElement :middle="true"></BorderElement>
-              <el-row class="d-flex">
-                <el-col :md="6" :sm="12" :xs="9" class="col-label-pr">
+              <el-row class="d-flex last-input">
+                <el-col :md="5" :sm="12" :xs="9" class="col-label left-item">
                   <div class="label"><span>{{ $t('self_pr.pr') }}</span></div>
                 </el-col>
-                <el-col :md="18" :sm="24" :xs="15">
+                <el-col :md="19" :sm="24" :xs="15">
                   <div class="content-pr">
                     <el-row class="d-flex">
                       <el-col :md="20" :sm="24">
@@ -101,8 +100,8 @@
                   </div>
                 </el-col>
               </el-row>
-              <BorderElement :middle="true"></BorderElement>
             </div>
+          </div>
         </div>
       </div>
       <div id="btn-center" class="text-center">
