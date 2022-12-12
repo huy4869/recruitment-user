@@ -11,7 +11,7 @@
       <div class="edit-cv-element">
         <!-- EDIT SKILL SHEET -->
         <div class="edit-pr-item">
-          <div class="edit-cv-title">{{ $t('self_pr.skill_sheet') }}</div>
+          <div class="edit-pr-title">{{ $t('self_pr.skill_sheet') }}</div>
           <div class="edit-cv-content edit-form-content skill-sheet-index" id="skill-sheet">
             <div class="card-text-title card-title-mobile"> {{ $t('self_pr.skill_sheet') }}</div>
             <div class="edit-form-input">
@@ -50,7 +50,7 @@
         </div>
         <!-- EDIT SELF PR -->
         <div class="edit-pr-item">
-          <div class="edit-cv-title">{{ $t('self_pr.title') }}</div>
+          <div class="edit-pr-title">{{ $t('self_pr.title') }}</div>
           <div class="edit-cv-content edit-form-content edit-info-content">
             <div class="card-text-title card-title-mobile"> {{ $t('self_pr.title') }}</div>
             <div class="edit-form-input">
@@ -71,9 +71,7 @@
               <el-row class="d-flex">
                 <el-col :md="5" :sm="12" :xs="9" class="col-label left-item">
                   <div class="label">
-                    <span>
-                      {{ $t('career.period_start') }}<br>
-                    </span>
+                    <span>{{ $t('self_pr.experience') }}{{ $t('self_pr.skill') }}</span>
                   </div>
                 </el-col>
                 <el-col :md="19" :sm="24" :xs="15">

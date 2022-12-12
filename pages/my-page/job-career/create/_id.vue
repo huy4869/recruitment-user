@@ -558,10 +558,10 @@ export default {
   },
   computed: {
     contentLength() {
-      return this.accountForm.business_content.length
+      return this.showLengthTextarea(this.accountForm.business_content)
     },
     experienceLength() {
-      return this.accountForm.experience_accumulation.length
+      return this.showLengthTextarea(this.accountForm.experience_accumulation)
     },
     period_start() {
       return this.accountForm.period_year_start && this.accountForm.period_month_start
@@ -705,6 +705,12 @@ export default {
     this.clonedAccountForm = _.cloneDeep(this.accountForm)
   },
   methods: {
+    showLengthTextarea(value) {
+      if (value) {
+        return ('000' + value.length).slice(-4)
+      }
+      return '0000'
+    },
     async getDataJob() {
       this.$store.commit(INDEX_SET_LOADING, true)
       try {

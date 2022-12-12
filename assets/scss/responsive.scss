@@ -257,7 +257,7 @@
 }
 
 @media only screen and (max-width: 912px) {
-  .self-pr-page .edit-cv-element .edit-pr-item .edit-cv-content {
+  .self-pr-page .edit-cv-element .edit-cv-content {
     .self-skill .skill-item {
       .pr-slider .skill-slider {
         max-width: 350px;
@@ -294,7 +294,7 @@
 }
 
 @media only screen and (min-width: 768px) and (max-width: 912px) {
-  .self-pr-page .edit-cv-element .edit-pr-item .edit-cv-content {
+  .self-pr-page .edit-cv-element .edit-cv-content {
     .self-skill .skill-item {
       .pr-slider .skill-slider {
         max-width: 300px;
@@ -415,7 +415,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .self-pr-page .edit-cv-element .edit-pr-item .edit-cv-content {
+  .self-pr-page .edit-cv-element .edit-cv-content {
     .self-skill .skill-item {
       .pr-slider .skill-slider {
         max-width: 250px;
@@ -1773,11 +1773,58 @@
   }
 
   .self-pr-page {
+    .edit-pr-form {
+      .edit-cv-element {
+        .edit-form-content {
+          .self-skill {
+            padding-bottom: 14px;
+            .skill-item {
+              display: block;
+              border: none;
+              .left-item {
+                display: inline-block;
+                position: relative;
+                top: -12px;
+                left: -18px;
+                background-color: $color-white;
+                .label {
+                  background-color: $color-white;
+                  span {
+                    padding: 12px 0 2px 20px;
+                    line-height: 24px;
+                  }
+                }
+              }
+              .pr-slider {
+                padding-top: 0;
+                margin-top: 0;
+                .skill-slider {
+                  max-width: unset;
+                  .el-slider__runway {
+                    margin-top: 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     .edit-cv-element {
       .edit-pr-item {
         box-shadow: none;
         padding: 0;
         .edit-cv-title {
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 24px;
+          color: $color-text-primary;
+          border-bottom: 2px solid $color-text-primary;
+          padding-bottom: 8px;
+          margin: 0 12px;
+        }
+        .edit-pr-title {
           font-weight: 400;
           font-size: 20px;
           line-height: 24px;
@@ -1802,7 +1849,8 @@
                 .label {
                   background-color: $color-white;
                   span {
-                    padding: 12px 0 2px 18px;
+                    padding: 12px 0 2px 20px;
+                    line-height: 24px;
                   }
                 }
               }
