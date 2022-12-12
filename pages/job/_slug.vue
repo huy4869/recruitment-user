@@ -13,7 +13,7 @@
     <div class="job-detail-content">
       <div class="button-pickup">
         <div class="show-sp">
-          <div v-if="jobStatus" class="about-job" @click="openAboutDialog">
+          <div v-if="loggedIn" class="about-job" @click="openAboutDialog">
             <img src="/assets/icon/icon_email.svg" alt="">
             <span>{{ $t('job.about_job') }}</span>
           </div>
@@ -32,7 +32,7 @@
             <div class="sub-detail-title-sp" v-html="job.pick_up_point"></div>
           </div>
         </div>
-        <div class="about-job show-pc" @click="openAboutDialog">
+        <div v-if="loggedIn" class="about-job show-pc" @click="openAboutDialog">
           <img src="/assets/icon/icon_email.svg" alt="">
           <span>{{ $t('job.about_job') }}</span>
         </div>
