@@ -234,6 +234,7 @@
   cursor: pointer;
   .schedule-title {
     margin-bottom: 8px;
+    word-break: break-all;
     .title-main {
       font-weight: 700;
       font-size: 16px;
@@ -270,6 +271,7 @@
       font-weight: 500;
       font-size: 14px;
       line-height: 22px;
+      word-break: break-all;
       div {
         margin-bottom: 6px;
       }
@@ -337,8 +339,11 @@
   .schedule-status {
     .schedule-button-status {
       position: absolute;
-      top: 12px;
+      top: 20px;
       right: 24px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
     }
     .status-3 {
       background-color: $color-orange;
@@ -440,10 +445,51 @@
 .application-history-element {
   width: 100%;
   .application-history-title {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 32px;
-    margin-bottom: 24px;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 40px;
+    color: $color-text-primary;
+    border-bottom: 3px solid $color-text-primary;
+    padding-bottom: 9px;
+    margin-bottom: 20px;
+  }
+}
+
+.application-history-page {
+  .application-history-element {
+    width: 100%;
+    margin-bottom: -8px;
+    .application-history-title {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 32px;
+      color: $color-text-primary;
+      border-bottom: 3px solid $color-text-primary;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      span {
+        height: 40px;
+      }
+    }
+  }
+}
+
+.change-password-page {
+  .change-password-element {
+    width: 100%;
+    margin-bottom: -8px;
+    .change-password-title {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 32px;
+      color: $color-text-primary;
+      border-bottom: 3px solid $color-text-primary;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      span {
+        height: 40px;
+      }
+    }
   }
 }
 
@@ -459,10 +505,10 @@
       margin-top: 24px;
       padding-left: 31px;
       .el-button {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        padding: 12px 43px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        padding: 8px 53px;
       }
     }
   }

@@ -709,6 +709,9 @@
   }
   .el-dialog__footer {
     padding:0 0 32px;
+    .el-button {
+      height: 48px;
+    }
   }
 }
 
