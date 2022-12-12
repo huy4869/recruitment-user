@@ -1070,6 +1070,10 @@
       gap: 14px;
       .button {
         width: 128px;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
       }
     }
   }
@@ -1133,6 +1137,7 @@
           }
         }
         .content-pr {
+          word-break: break-all;
           padding: 9px 0 9px 1px;
           font-weight: 400;
           font-size: 14px;
@@ -1142,6 +1147,7 @@
         .last-input {
           margin-bottom: 16px;
           .content-pr {
+            word-break: break-all;
             border-bottom: 1px solid $border-default;
           }
         }

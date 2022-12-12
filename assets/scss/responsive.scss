@@ -78,7 +78,7 @@
   }
   .cv-page {
     .cv-content {
-      padding: 32px;
+      padding: 19px;
     }
   }
   .menu-left-element {
@@ -673,7 +673,7 @@
     background-color: rgba(20, 20, 22, 0.5);
     background-repeat: repeat;
     height: 100%;
-    top: 50px;
+    top: 49px;
     left: 0;
     width: 100%;
     max-width: 100%;
@@ -773,7 +773,7 @@
       bottom: 0;
       width: 100vw;
       background: $color-white;
-      border-top: 1px solid $color-text-primary;
+      border-top: 1px solid $border-default;
       z-index: 3;
       .content-button {
         display: flex;
@@ -1470,11 +1470,17 @@
         }
 
         .date-space {
-          margin: 10px 5px 0 -10px;
+          margin: 0 5px 0 -14px;
         }
 
         .checkbox-item {
           margin-bottom: 20px;
+        }
+        .birthday {
+          padding: 0 5px;
+        }
+        .edu-status {
+          margin-top: 14px;
         }
       }
 
@@ -1915,6 +1921,9 @@
           .col-label {
             .label {
               span {
+                &.label-moti {
+                  padding: 9px 0 9px 12px;
+                }
                 padding: 9px 0 9px 24px;
               }
             }

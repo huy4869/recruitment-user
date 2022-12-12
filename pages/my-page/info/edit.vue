@@ -183,7 +183,7 @@
                     <div class="content-input content-datetime" ref="birthday">
                       <el-form-item label="" prop="birthday" :error="(error.key === 'birthday') ? error.value : ''">
                         <el-row class="d-flex">
-                          <el-col :md="3" :sm="12" class="birth-year">
+                          <el-col :md="3" :sm="12" class="birth-year-info">
                             <el-select
                               v-model="accountForm.year"
                               :placeholder="$t('YYYY')"
