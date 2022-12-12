@@ -1,10 +1,10 @@
 <template>
-  <div class="cv-page">
+  <div class="cv-page self-pr-page">
     <BannerElement :banner="$t('page.my_page')" title="my page" :subBanner="$t('content.web_cv')"></BannerElement>
     <TitlePageElement class="show-pc"></TitlePageElement>
     <div class="cv-content">
-      <MenuLeftElement menu-active="web-cv"></MenuLeftElement>
-      <div class="right-content-element">
+      <MenuLeftElement menu-active="web-cv" sub-active="self-pr"></MenuLeftElement>
+      <div class="right-content-element edit-pr-form">
         <div class="edit-cv-element">
           <el-form
             ref="accountForm"
@@ -16,131 +16,133 @@
             <!-- EDIT SKILL SHEET -->
             <div class="edit-cv-title">{{ $t('self_pr.skill_sheet') }}</div>
             <div class="edit-cv-content edit-form-content" id="skill-sheet">
-              <div class="card-text-title card-title-mobile"> {{ $t('self_pr.skill_sheet') }}</div>
-              <div class="edit-form-input">
-                <div  v-for="(skill, key) in accountForm.skills" :key="key">
+                <div class="card-text-title card-title-mobile"> {{ $t('self_pr.skill_sheet') }}</div>
+                <div class="edit-form-input">
+                  <div  v-for="(skill, key) in accountForm.skills" :key="key">
+                    <BorderElement :col-size="5" :middle="true"></BorderElement>
+                    <el-row class="form-label-input self-skill">
+                      <div class="skill-item">
+                        <el-col :md="5" :sm="24" class="col-label left-item">
+                          <div class="label"><span>{{ skill.name }}</span></div>
+                        </el-col>
+                        <el-col :md="19" :sm="24">
+                          <div class="content-input pr-slider">
+                            <el-row class="d-flex">
+                              <el-col :md="20" :sm="24">
+                                <el-form-item class="skill-slider" label="" :error="(error.key === 'skills') ? error.value : ''">
+                                  <el-slider
+                                    v-model="skill.level"
+                                    :step="1"
+                                    :max="5"
+                                    :min="1"
+                                    :marks="marks"
+                                  >
+                                  </el-slider>
+                                </el-form-item>
+                              </el-col>
+                            </el-row>
+                          </div>
+                        </el-col>
+                      </div>
+                    </el-row>
+                  </div>
                   <BorderElement :col-size="5" :middle="true"></BorderElement>
-                  <el-row class="form-label-input self-skill">
-                    <div class="skill-item">
-                      <el-col :md="5" :sm="24" class="col-label">
-                        <div class="label"><span>{{ skill.name }}</span></div>
-                      </el-col>
-                      <el-col :md="19" :sm="24">
-                        <div class="content-input pr-slider">
-                          <el-row class="d-flex">
-                            <el-col :md="20" :sm="24">
-                              <el-form-item class="skill-slider" label="" :error="(error.key === 'skills') ? error.value : ''">
-                                <el-slider
-                                  v-model="skill.level"
-                                  :step="1"
-                                  :max="5"
-                                  :min="1"
-                                  :marks="marks"
-                                >
-                                </el-slider>
-                              </el-form-item>
-                            </el-col>
-                          </el-row>
-                        </div>
-                      </el-col>
-                    </div>
-                  </el-row>
                 </div>
-                <BorderElement :col-size="5" :middle="true"></BorderElement>
               </div>
-            </div>
             <!-- EDIT SELF PR -->
             <div class="edit-cv-title">{{ $t('self_pr.edit') }}</div>
             <div class="edit-cv-content edit-form-content">
-              <div class="card-text-title card-title-mobile"> {{ $t('self_pr.edit') }}</div>
-              <div class="edit-form-input">
-                <BorderElement :middle="true"></BorderElement>
-                <el-row class="d-flex form-label-input">
-                  <el-col :md="6" :sm="24" class="col-label">
-                    <div class="label"><span>{{ $t('self_pr.business_content') }}</span></div>
-                  </el-col>
-                  <el-col :md="18" :sm="24">
-                    <div class="content-input">
-                      <el-row class="d-flex">
-                        <el-col :md="24" :sm="24">
-                          <el-form-item label="" prop="favorite_skill" :error="(error.key === 'favorite_skill') ? error.value : ''">
-                            <el-input
-                              ref="favorite_skill"
-                              v-model="accountForm.favorite_skill"
-                              :placeholder="$t('self_pr.enter_business_content')"
-                              :autosize="{ minRows: 5, maxRows: 12}"
-                              name="favorite_skill"
-                              type="textarea"
-                              maxlength="2000"
-                              tabindex="2"
-                              @focus="resetValidate('favorite_skill')"
-                            />
-                          </el-form-item>
-                          <div class="sm-text">{{ $t('my_page.currently') }}{{ contentLength }}{{ $t('my_page.characters') }}</div>
-                        </el-col>
-                      </el-row>
-                    </div>
-                  </el-col>
-                </el-row>
-                <BorderElement :middle="true"></BorderElement>
-                <el-row class="d-flex form-label-input">
-                  <el-col :md="6" :sm="24" class="col-label">
-                    <div class="label"><span>{{ $t('self_pr.experience') }}{{ $t('self_pr.skill') }}</span></div>
-                  </el-col>
-                  <el-col :md="18" :sm="24">
-                    <div class="content-input">
-                      <el-row class="d-flex">
-                        <el-col :md="24" :sm="24">
-                          <el-form-item label="" prop="experience_knowledge" :error="(error.key === 'experience_knowledge') ? error.value : ''">
-                            <el-input
-                              ref="alias_name"
-                              v-model="accountForm.experience_knowledge"
-                              :placeholder="$t('self_pr.enter_experience')"
-                              :autosize="{ minRows: 5, maxRows: 12}"
-                              name="experience_knowledge"
-                              type="textarea"
-                              maxlength="2000"
-                              tabindex="2"
-                              @focus="resetValidate('experience_knowledge')"
-                            />
-                          </el-form-item>
-                          <div class="sm-text">{{ $t('my_page.currently') }}{{ experienceLength }}{{ $t('my_page.characters') }}</div>
-                        </el-col>
-                      </el-row>
-                    </div>
-                  </el-col>
-                </el-row>
-                <BorderElement :middle="true"></BorderElement>
-                <el-row class="d-flex form-label-input">
-                  <el-col :md="6" :sm="24" class="col-label">
-                    <div class="label"><span>{{ $t('self_pr.pr') }}</span></div>
-                  </el-col>
-                  <el-col :md="18" :sm="24">
-                    <div class="content-input">
-                      <el-row class="d-flex">
-                        <el-col :md="24" :sm="24">
-                          <el-form-item label="" prop="self_pr" :error="(error.key === 'self_pr') ? error.value : ''">
-                            <el-input
-                              ref="self_pr"
-                              v-model="accountForm.self_pr"
-                              :placeholder="$t('self_pr.enter_pr')"
-                              :autosize="{ minRows: 5, maxRows: 12}"
-                              name="self_pr"
-                              type="textarea"
-                              maxlength="2000"
-                              tabindex="2"
-                              @focus="resetValidate('self_pr')"
-                            />
-                          </el-form-item>
-                          <div class="sm-text">{{ $t('my_page.currently') }}{{ prLength }}{{ $t('my_page.characters') }}</div>
-                        </el-col>
-                      </el-row>
-                    </div>
-                  </el-col>
-                </el-row>
-                <BorderElement :middle="true"></BorderElement>
-              </div>
-          </div>
+                <div class="card-text-title card-title-mobile"> {{ $t('self_pr.edit') }}</div>
+                <div class="edit-form-input">
+                  <BorderElement :middle="true"></BorderElement>
+                  <el-row class="d-flex form-label-input">
+                    <el-col :md="6" :sm="24" class="col-label">
+                      <div class="label"><span>{{ $t('self_pr.business_content') }}</span></div>
+                    </el-col>
+                    <el-col :md="18" :sm="24">
+                      <div class="content-input">
+                        <el-row class="d-flex">
+                          <el-col :md="24" :sm="24">
+                            <el-form-item label="" prop="favorite_skill" :error="(error.key === 'favorite_skill') ? error.value : ''">
+                              <el-input
+                                ref="favorite_skill"
+                                v-model="accountForm.favorite_skill"
+                                :placeholder="$t('self_pr.enter_business_content')"
+                                :autosize="{ minRows: 5, maxRows: 12}"
+                                name="favorite_skill"
+                                type="textarea"
+                                maxlength="2000"
+                                tabindex="2"
+                                @focus="resetValidate('favorite_skill')"
+                              />
+                            </el-form-item>
+                            <div class="sm-text">{{ $t('my_page.currently') }}{{ contentLength }}{{ $t('my_page.characters') }}</div>
+                          </el-col>
+                        </el-row>
+                      </div>
+                    </el-col>
+                  </el-row>
+                  <BorderElement :middle="true"></BorderElement>
+                  <el-row class="d-flex form-label-input">
+                    <el-col :md="6" :sm="24" class="col-label">
+                      <div class="label">
+                        <span>{{ $t('self_pr.experience') }}{{ $t('self_pr.skill') }}</span>
+                      </div>
+                    </el-col>
+                    <el-col :md="18" :sm="24">
+                      <div class="content-input">
+                        <el-row class="d-flex">
+                          <el-col :md="24" :sm="24">
+                            <el-form-item label="" prop="experience_knowledge" :error="(error.key === 'experience_knowledge') ? error.value : ''">
+                              <el-input
+                                ref="alias_name"
+                                v-model="accountForm.experience_knowledge"
+                                :placeholder="$t('self_pr.enter_experience')"
+                                :autosize="{ minRows: 5, maxRows: 12}"
+                                name="experience_knowledge"
+                                type="textarea"
+                                maxlength="2000"
+                                tabindex="2"
+                                @focus="resetValidate('experience_knowledge')"
+                              />
+                            </el-form-item>
+                            <div class="sm-text">{{ $t('my_page.currently') }}{{ experienceLength }}{{ $t('my_page.characters') }}</div>
+                          </el-col>
+                        </el-row>
+                      </div>
+                    </el-col>
+                  </el-row>
+                  <BorderElement :middle="true"></BorderElement>
+                  <el-row class="d-flex form-label-input">
+                    <el-col :md="6" :sm="24" class="col-label">
+                      <div class="label"><span>{{ $t('self_pr.pr') }}</span></div>
+                    </el-col>
+                    <el-col :md="18" :sm="24">
+                      <div class="content-input">
+                        <el-row class="d-flex">
+                          <el-col :md="24" :sm="24">
+                            <el-form-item label="" prop="self_pr" :error="(error.key === 'self_pr') ? error.value : ''">
+                              <el-input
+                                ref="self_pr"
+                                v-model="accountForm.self_pr"
+                                :placeholder="$t('self_pr.enter_pr')"
+                                :autosize="{ minRows: 5, maxRows: 12}"
+                                name="self_pr"
+                                type="textarea"
+                                maxlength="2000"
+                                tabindex="2"
+                                @focus="resetValidate('self_pr')"
+                              />
+                            </el-form-item>
+                            <div class="sm-text">{{ $t('my_page.currently') }}{{ prLength }}{{ $t('my_page.characters') }}</div>
+                          </el-col>
+                        </el-row>
+                      </div>
+                    </el-col>
+                  </el-row>
+                  <BorderElement :middle="true"></BorderElement>
+                </div>
+            </div>
           </el-form>
         </div>
         <div id="btn-center" class="text-center">
@@ -250,13 +252,13 @@ export default {
   },
   computed: {
     contentLength() {
-      return this.accountForm.favorite_skill ? this.accountForm.favorite_skill.length : ''
+      return this.showLengthTextarea(this.accountForm.favorite_skill)
     },
     experienceLength() {
-      return this.accountForm.experience_knowledge ? this.accountForm.experience_knowledge.length : ''
+      return this.showLengthTextarea(this.accountForm.experience_knowledge)
     },
     prLength() {
-      return this.accountForm.self_pr ? this.accountForm.self_pr.length : ''
+      return this.showLengthTextarea(this.accountForm.self_pr)
     }
   },
   watch: {
@@ -276,6 +278,12 @@ export default {
     this.getSelfPr()
   },
   methods: {
+    showLengthTextarea(value) {
+      if (value) {
+        return ('000' + value.length).slice(-4)
+      }
+      return '0000'
+    },
     async getSelfPr() {
       this.$store.commit(INDEX_SET_LOADING, true)
       try {
