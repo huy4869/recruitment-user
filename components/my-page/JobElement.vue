@@ -34,7 +34,7 @@
       </div>
       <div class="d-flex justify-between cursor-pointer">
         <div class="text-last-updated"><span>{{ job.released_at }}</span></div>
-        <div class="d-flex" @click.stop="removeFavoriteJob">
+        <div class="d-flex button-remove-job" @click.stop="removeFavoriteJob">
           <img class="union-icon" src="/assets/icon/union.svg" alt="union">
           <p class="text-primary-blue">{{ $t('favorite_job.remove') }}</p>
         </div>
@@ -49,14 +49,14 @@
         <div class="job-image">
           <img src="/assets/images/favorite-job.png" alt="favorite-job">
         </div>
-        <div class="d-flex justify-between">
+        <div class="d-flex justify-between show-status-time">
           <div v-if="job.interview_status" :class="['schedule-button-status', 'status-1']">
             {{ job.interview_status }}
           </div>
           <div class="text-last-updated"><span>{{ job.released_at }}</span></div>
         </div>
       </div>
-      <div class="job-box items-center">
+      <div class="job-box">
         <div class="left-item"><p class="card-text-primary">{{ $t('favorite_job.place') }}:</p></div>
         <div class="right-item first-right-item"><p class="card-text-normal">{{ showAddress }}</p></div>
         <div class="left-item"><p class="card-text-primary">{{ $t('favorite_job.recruitment_type') }}:</p></div>
@@ -77,7 +77,7 @@
           </p>
         </div>
       </div>
-      <div class="d-flex" @click.stop="removeFavoriteJob">
+      <div class="d-flex button-remove-job" @click.stop="removeFavoriteJob">
         <img class="union-icon" src="/assets/icon/union.svg" alt="union">
         <p class="text-primary-blue">{{ $t('favorite_job.remove') }}</p>
       </div>
@@ -113,7 +113,7 @@ export default {
       if (this.job.address === undefined) {
         return ''
       }
-      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.district + this.job.address.address + (this.job.address.building ?? '')
+      return (this.job.postal_code ? ('〒' + this.job.postal_code) : '') + this.job.address.province + this.job.address.district + this.job.address.address + (this.job.address.building ?? '')
     },
     showStation() {
       if (this.job.stations === undefined) {

@@ -52,6 +52,7 @@
     cursor: not-allowed;
     border-color: $color-button-disable;
     background-color: $color-button-disable;
+    opacity: 0.5;
     .icon-next {
       background: url('~assets/icons/arrow_next_disable.svg') center no-repeat;
     }

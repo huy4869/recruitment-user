@@ -10,9 +10,6 @@
           <span class="total-record">{{ total + $t('common.subject') }}</span>
           <span v-show="listJobs.length">{{ $t('common.display_item', { min: this.per_page * (this.page - 1) + 1, max: (this.total > (this.per_page * this.page)) ? (this.per_page * this.page) : this.total } ) }}</span>
         </div>
-        <div v-if="listJobs.length">
-          <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
-        </div>
       </div>
       <div v-if="listJobs.length" class="favorite-job-page-content">
         <div v-for="(job, index) in listJobs" :key="index">
