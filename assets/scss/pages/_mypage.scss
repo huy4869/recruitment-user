@@ -485,10 +485,25 @@
       color: $color-text-primary;
       border-bottom: 3px solid $color-text-primary;
       padding-bottom: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
       span {
         height: 40px;
       }
+    }
+    .change-password-content {
+      .button-change {
+        margin-top: 24px;
+        padding-left: 31px;
+        .el-button {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+          padding: 8px 53px;
+        }
+      }
+    }
+    .edit-form-input {
+      margin-top: 12px;
     }
   }
 }
@@ -500,18 +515,7 @@
     font-size: 24px;
     line-height: 32px;
   }
-  .change-password-content {
-    .button-change {
-      margin-top: 24px;
-      padding-left: 31px;
-      .el-button {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 22px;
-        padding: 8px 53px;
-      }
-    }
-  }
+
 }
 
 .favorite-job-page-element {
@@ -772,6 +776,7 @@
   /* width */
   ::-webkit-scrollbar {
     width: 5px;
+    display: none;
   }
 
   /* Handle */
@@ -780,29 +785,33 @@
     border-radius: 5px;
   }
   .chat-page-content {
-    border: 1px solid $border-focus;
-    border-radius: 6px;
-    margin: 54px auto;
+    margin: 22px auto;
     max-width: 1152px;
+    background: $color-bg-footer;
+    box-shadow: 0 2px 9px rgba(33, 16, 16, 0.25);
+    border-radius: 6px;
     .form-chat {
       display: flex;
       justify-content: space-between;
       height: 535px;
       .list-form-chat {
-        width: 358px;
+        width: 318px;
         border-right: 1px solid $border-default;
         .form-search {
           margin: 16px;
           .el-input{
+            height: 40px;
             input {
-              border: 2px solid $border-focus;
+              height: 40px;
               border-radius: 4px;
-              padding-left: 48px;
+              padding-left: 44px;
             }
             .el-input__prefix {
               display: flex;
               left: 16px;
               img {
+                width: 20px;
+                height: 20px;
                 margin: auto;
               }
             }
@@ -812,21 +821,16 @@
           height: 455px;
           overflow: auto;
           margin-top: 8px;
-          .user-active {
-            background-color: $color-bg-btn;
-          }
-          .user-unread {
-            background-color: $color-primary;
-          }
           .user-message-item {
             position: relative;
-            padding: 10px 12px;
+            padding: 11px 7px 11px 16px;
             cursor: pointer;
-            margin-bottom: 1px;
+            background-color: $color-white;
             .user-avatar {
-              min-width: 36px;
-              width: 36px;
-              height: 36px;
+              min-width: 32px;
+              width: 32px;
+              height: 32px;
+              padding-top: 5px;
             }
             .message-content {
               margin-left: 10px;
@@ -835,20 +839,20 @@
                 font-weight: 700;
                 font-size: 13px;
                 line-height: 20px;
-                color: $color-dark;
+                color: $color-black;
               }
               .message-date {
                 font-weight: 500;
                 font-size: 11px;
                 line-height: 16px;
                 height: 16px;
-                color: $color-dark-50;
+                color: $color-text-3;
                 margin: 3px 0;
                 min-width: 48px;
                 text-align: right;
               }
               .last-message {
-                font-weight: 500;
+                font-weight: 400;
                 font-size: 12px;
                 line-height: 20px;
                 word-break: break-all;
@@ -859,6 +863,7 @@
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 1;
                 color: $color-black;
+                margin-top: 2px;
               }
               .message-status {
                 background-color: $color-text-primary;
@@ -866,17 +871,23 @@
                 min-width: 12px;
                 height: 12px;
                 position: absolute;
-                right: 16px;
-                bottom: 12px;
+                right: 7px;
+                top: 40px;
               }
             }
+          }
+          .user-active {
+            background-color: $color-primary-50;
+          }
+          .user-unread {
+            background-color: $color-primary-100;
           }
         }
       }
       .content-form-chat {
-        width: calc(100% - 406px);
+        width: calc(100% - 344px);
         border-radius: 5px;
-        padding: 24px;
+        padding: 24px 16px 24px 8px;
         .form-message {
           height: calc(100% - 66px);
           overflow: auto;
@@ -922,6 +933,7 @@
             }
           }
           .content-chat-left {
+            padding-left: 13px;
             .show-message {
               margin-left: 8px;
               .user-name {
@@ -944,7 +956,7 @@
               font-weight: 500;
               font-size: 13px;
               line-height: 22px;
-              background: $color-white;
+              background: $color-bg-footer;
               padding: 0 23px;
               margin: auto;
               z-index: 2;
@@ -958,14 +970,17 @@
             }
           }
         }
+        .message-chat-input {
+        }
         .input-chat {
           height: 54px;
           border: 1px solid $border-default;
           border-radius: 27px;
           background: $color-white;
+          margin-left: 13px;
           .button-send {
-            padding: 8px 10px;
-            background: $color-button-danger;
+            padding: 7px 10px;
+            background: $color-text-primary;
             border-radius: 19px;
             margin: 7px 10px;
             display: flex;
@@ -985,16 +1000,17 @@
           .el-input {
             width: calc(100% - 110px);
             input {
-              font-weight: 500;
-              font-size: 16px;
-              line-height: 24px;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
               border: none;
               height: 24px;
               margin: 15px 0 15px 16px;
+              padding: 0;
               &::placeholder {
-                font-weight: 500;
-                font-size: 16px;
-                line-height: 24px;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 22px;
                 color: $color-placeholder;
               }
             }
