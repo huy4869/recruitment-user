@@ -151,7 +151,7 @@
   .job-title {
     margin-bottom: 16px;
     .title-left {
-      margin-left: 1.5rem;
+      margin-left: 18px;
 
       .card-subtitle {
         margin: 0.5rem 0 18px 0
@@ -181,7 +181,7 @@
 
     .right-item {
       border-bottom: 1px solid $border-default;
-      margin-left: 20px;
+      margin-left: 24px;
       height: 100%;
       font-weight: 400;
       font-size: 14px;
@@ -196,24 +196,17 @@
         margin-top: 8px;
       }
 
-      .text-ellipsis {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        //white-space: nowrap;
-        width: 90%;
-      }
-
       .item-status {
         gap: 0.625rem;
 
         .text-status {
-          color: $color-text-primary;
-          border: 1px solid $color-text-primary;
+          color: $color-blue;
+          border: 1px solid $color-blue;
           border-radius: 2px;
           font-weight: 500;
           font-size: 14px;
           line-height: 22px;
-          padding: 3px 8px;
+          padding: 2px 8px;
           width: fit-content;
         }
       }
@@ -228,9 +221,27 @@
       }
     }
   }
+  .text-last-updated {
+    margin-top: 16px;
+    span {
+      margin: 0;
+    }
+  }
+  .button-remove-job {
+    margin-top: 16px;
+    p {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      align-items: center;
+      margin: 0;
+    }
+  }
 
   .union-icon {
-    margin-right: 0.75rem;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
   }
   .img-detail-mobile {
     display: none;
@@ -277,7 +288,7 @@
   }
   .favorite-job-page-content {
     .job-element {
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
     #btn-center {
       margin: 24px 0 0 29px;
@@ -287,7 +298,8 @@
     }
 
     #career {
-      margin-bottom: 32px;
+      margin-top: 8px;
+      margin-bottom: 12px;
       .el-button--danger {
         font-weight: 400;
         padding: 8px 24px;
