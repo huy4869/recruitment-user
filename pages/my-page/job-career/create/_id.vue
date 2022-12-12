@@ -722,12 +722,12 @@ export default {
       const dataResources = [
         'resources[m_job_types]={}',
         'resources[m_work_types]={}',
-        'resources[m_position_offices]={"model": "MPositionOffice"}'
+        'resources[m_position_offices_user]={}'
       ]
       await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&')).then(res => {
         if (res.status_code === 200) {
           this.m_job_types = res.data.m_job_types.length ? res.data.m_job_types : [{ name: this.$t('career.enter_occupation'), disabled: true }]
-          this.m_position_offices = res.data.m_position_offices.length ? res.data.m_position_offices : [{ name: this.$t('career.position_offices'), disabled: true }]
+          this.m_position_offices = res.data.m_position_offices_user.length ? res.data.m_position_offices_user : [{ name: this.$t('career.position_offices'), disabled: true }]
           this.m_work_types = res.data.m_work_types.length ? res.data.m_work_types : [{ name: this.$t('career.enter_emp_status'), disabled: true }]
         } else if (res.status_code === 500) {
           this.m_job_types = [{

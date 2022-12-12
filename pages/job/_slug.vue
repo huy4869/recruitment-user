@@ -707,7 +707,7 @@ export default {
         type: 'warning'
       })
         .then(_ => {
-          this.applyDialog = !this.applyDialog
+          this.$router.push('/my-page/web-cv')
         })
         .catch(_ => {})
     },
