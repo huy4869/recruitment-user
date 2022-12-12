@@ -78,7 +78,7 @@
   }
   .cv-page {
     .cv-content {
-      padding: 32px;
+      padding: 19px;
     }
   }
   .menu-left-element {
@@ -673,7 +673,7 @@
     background-color: rgba(20, 20, 22, 0.5);
     background-repeat: repeat;
     height: 100%;
-    top: 50px;
+    top: 49px;
     left: 0;
     width: 100%;
     max-width: 100%;
@@ -773,7 +773,7 @@
       bottom: 0;
       width: 100vw;
       background: $color-white;
-      border-top: 1px solid $color-text-primary;
+      border-top: 1px solid $border-default;
       z-index: 3;
       .content-button {
         display: flex;
@@ -1470,11 +1470,17 @@
         }
 
         .date-space {
-          margin: 10px 5px 0 -10px;
+          margin: 0 5px 0 -14px;
         }
 
         .checkbox-item {
           margin-bottom: 20px;
+        }
+        .birthday {
+          padding: 0 5px;
+        }
+        .edu-status {
+          margin-top: 14px;
         }
       }
 
@@ -1626,7 +1632,7 @@
 
   .chat-page-element {
     width: 100%;
-    margin-top: -20px;
+    border-top: 1px solid $border-primary;
 
     .chat-page-title {
       display: none;
@@ -1635,9 +1641,13 @@
     .chat-page-content {
       padding: 0;
       border: none;
-      margin: 16px auto;
+      margin: 0;
+      box-shadow: none;
+      background-color: $color-white;
+      height: calc(100vh - 309px);
 
       .form-chat {
+        height: max-content;
         .list-form-chat {
           width: 100%;
 
@@ -1647,6 +1657,7 @@
           }
 
           .list-user {
+            height: calc(100vh - 350px);
             .user-message-item {
               border-radius: 0;
               .message-content {
@@ -1673,20 +1684,31 @@
           width: 100%;
           background: $color-white;
           padding: 0;
-          margin-top: -12px;
-
           .form-message {
-            height: calc(100vh - 216px);
+            height: calc(100vh - 173px);
             padding: 0 12px;
+            .show-date {
+              .date-time {
+                background-color: $color-white;
+              }
+            }
+            .content-chat-left {
+              padding-left: 0;
+            }
           }
 
           .input-chat {
             margin: 8px 12px 0;
-
-            input {
-              width: 70%;
+            height: 48px;
+            .el-input {
+              input {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 22px;
+                height: 22px;
+                margin: 14px 8px 14px 14px;
+              }
             }
-
             .button-send {
               margin: 5px;
             }
@@ -1696,7 +1718,6 @@
     }
 
     .back-to-list-user {
-      margin-top: 20px;
       background: $color-primary;
       display: flex;
       padding: 8px 12px;
@@ -1900,6 +1921,9 @@
           .col-label {
             .label {
               span {
+                &.label-moti {
+                  padding: 9px 0 9px 12px;
+                }
                 padding: 9px 0 9px 24px;
               }
             }

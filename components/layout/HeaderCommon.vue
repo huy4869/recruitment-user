@@ -53,7 +53,7 @@
         </div>
         <div v-if="loggedIn" class="show-action-user">
           <el-dropdown trigger="click">
-            <div class="content-user">
+            <div class="content-user items-center">
               <div class="d-flex cursor-pointer">
                 <img class="avatar" :src="user.avatar ? user.avatar : '/assets/images/user_default.svg'" alt="">
                 <span>{{ checkName(user.alias_name || user.email) + $t('common.dear') }}</span>

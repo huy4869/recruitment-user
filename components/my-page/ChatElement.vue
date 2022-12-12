@@ -2,7 +2,7 @@
   <div class="chat-page-element">
     <div>
       <div v-if="showDetailMessage" class="back-to-list-user" @click="backToListUser">
-        <img src="/assets/icon/icon_arrow.svg" alt="">
+        <img src="/assets/icon/icon_arrow_back.svg" alt="">
         <span>{{ userActive.store_name }}</span>
       </div>
       <div class="chat-page-content">
@@ -41,7 +41,7 @@
                           <div class="last-message">
                             {{ user.content }}
                           </div>
-                          <div v-if="!user.be_readed" class="message-status">
+                          <div v-if="user.be_readed" class="message-status">
                             <span></span>
                           </div>
                         </div>
@@ -66,7 +66,7 @@
                   label-position="left"
                   @submit.native.prevent
                 >
-                  <el-form-item class="message-login" label="" prop="message" :error="(error.key === 'message') ? error.value : ''">
+                  <el-form-item class="message-chat-input" label="" prop="message" :error="(error.key === 'message') ? error.value : ''">
                     <div class="d-flex justify-between">
                       <el-input
                         ref="message"
@@ -86,7 +86,7 @@
                     </div>
                   </el-form-item>
                 </el-form>
-                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -138,13 +138,34 @@
                 </div>
               </div>
               <div class="input-chat">
-                <div class="d-flex justify-between">
-                  <input v-model="message" type="text" :placeholder="$t('my_page.enter_message')">
-                  <div class="button-send" @click="sendMessage">
-                    <span>{{ $t('my_page.send') }}</span>
-                    <img src="/assets/icon/icon_send_message.svg" alt="">
-                  </div>
-                </div>
+                <el-form
+                  ref="chatForm"
+                  :model="chatForm"
+                  :rules="chatRules"
+                  autocomplete="off"
+                  label-position="left"
+                  @submit.native.prevent
+                >
+                  <el-form-item class="message-chat-input" label="" prop="message" :error="(error.key === 'message') ? error.value : ''">
+                    <div class="d-flex justify-between">
+                      <el-input
+                        ref="message"
+                        v-model="chatForm.message"
+                        :placeholder="$t('login.email')"
+                        name="message"
+                        type="text"
+                        tabindex="2"
+                        @keyup.enter.native="sendMessage"
+                        @focus="resetValidate('message')"
+                        maxlength="1000"
+                      />
+                      <div class="button-send" @click="sendMessage">
+                        <span>{{ $t('my_page.send') }}</span>
+                        <img src="/assets/icon/icon_send_message.svg" alt="">
+                      </div>
+                    </div>
+                  </el-form-item>
+                </el-form>
               </div>
             </div>
           </div>
