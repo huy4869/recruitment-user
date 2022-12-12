@@ -1,11 +1,10 @@
 <template>
-  <div class="cv-page">
-    <client-only>
-      <div>
-        <TitlePageElement class="show-pc"></TitlePageElement>
-        <BannerElement class="show-pc" :banner="$t('page.my_page')" :sub-banner="$t('page.sub_web_cv')"></BannerElement>
-      </div>
-      <div class="cv-content">
+  <div class="cv-page change-password-page">
+    <div>
+      <BannerElement :banner="$t('page.my_page')" title="my page" :subBanner="$t('content.web_cv')"></BannerElement>
+      <TitlePageElement class="show-pc"></TitlePageElement>
+    </div>
+    <div class="cv-content">
         <MenuLeftElement menu-active="change-password"></MenuLeftElement>
         <div class="change-password-element">
           <div>
@@ -21,7 +20,6 @@
                 label-position="left"
               >
                 <div class="edit-form-input">
-                  <BorderElement :middle="false"></BorderElement>
                   <el-row class="d-flex form-label-input">
                     <el-col :md="6" :sm="24" class="col-label">
                       <div class="label"><span>{{ $t('my_page.current_password') }}</span></div>
@@ -53,7 +51,6 @@
                       </div>
                     </el-col>
                   </el-row>
-                  <BorderElement :middle="true"></BorderElement>
                   <el-row class="d-flex form-label-input">
                     <el-col :md="6" :sm="24" class="col-label">
                       <div class="label"><span>{{ $t('my_page.new_password') }}</span></div>
@@ -85,7 +82,6 @@
                       </div>
                     </el-col>
                   </el-row>
-                  <BorderElement :middle="true"></BorderElement>
                   <el-row class="d-flex form-label-input">
                     <el-col :md="6" :sm="24" class="col-label">
                       <div class="label">
@@ -120,7 +116,6 @@
                       </div>
                     </el-col>
                   </el-row>
-                  <BorderElement :middle="true"></BorderElement>
                 </div>
                 <el-row class="d-flex form-label-input">
                   <el-col :md="6" :sm="24" class="show-pc">
@@ -142,7 +137,6 @@
           </div>
         </div>
       </div>
-    </client-only>
   </div>
 </template>
 
@@ -152,17 +146,18 @@ import { validOnlyHalfWidth } from '../../utils/validate'
 import BannerElement from '../../components/layout/BannerElement'
 import TitlePageElement from '../../components/layout/TitlePageElement'
 import MenuLeftElement from '../../components/my-page/MenuLeftElement'
-import BorderElement from '../../components/my-page/BorderElement'
 import {
   INDEX_SET_LOADING,
   INDEX_SET_SUCCESS,
   INDEX_SET_ERROR,
-  CHANGE_PASS, MY_PAGE_SET_STATE_PAGE, INDEX_SET_TITLE_MENU
+  CHANGE_PASS,
+  MY_PAGE_SET_STATE_PAGE,
+  INDEX_SET_TITLE_MENU
 } from '../../store/store.const'
 
 export default {
   name: 'ChangePasswordPage',
-  components: { BorderElement, BannerElement, TitlePageElement, MenuLeftElement },
+  components: { BannerElement, TitlePageElement, MenuLeftElement },
   data() {
     const validatePass = (rule, value, callback) => {
       if (value === '') {

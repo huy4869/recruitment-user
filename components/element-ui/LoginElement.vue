@@ -1,7 +1,7 @@
 <template>
   <div class="login-element">
     <img class="logo-login" src="/assets/images/logo_white.svg" alt="">
-    <div>
+    <div class="login-form">
       <div class="login-title">{{ $t('login.title') }}</div>
       <el-form
         ref="accountForm"
