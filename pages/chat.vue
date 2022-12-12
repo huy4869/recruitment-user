@@ -1,7 +1,7 @@
 <template>
   <div class="notification-history-page">
+    <BannerElement :banner="$t('page.chat')" title="chat" :subBanner="$t('content.web_cv')"></BannerElement>
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="$t('page.chat')"></BannerElement>
     <ChatElement></ChatElement>
   </div>
 </template>
