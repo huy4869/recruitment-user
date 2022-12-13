@@ -1,7 +1,6 @@
 <template>
   <div class="notification-history-page">
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="$t('page.notification_history')"></BannerElement>
     <div v-if="listNotifications.length" class="notification-history-content">
       <div class="notification-list">
         <div v-for="(notification, index) in listNotifications" :key="index" :class="['notification-item', { 'notification-unread': !notification.be_read }]">
@@ -9,11 +8,12 @@
             <div v-if="!notification.be_read" class="show-status">{{ $t('common.unread') }}</div>
             <div class="notification-title cursor-pointer">
               <a @click="updateRead(notification)" :href="getLinkNotification(notification)">{{ notification.title }}</a>
-              <div class="notification-date">{{ notification.created_at }}</div>
+              <div class="show-pc notification-date">{{ notification.created_at }}</div>
             </div>
             <div class="notification-detail">
               {{ notification.content }}
             </div>
+            <div class="show-sp notification-date">{{ notification.created_at }}</div>
           </div>
         </div>
       </div>
@@ -35,13 +35,12 @@ import {
   NOTIFICATION_UPDATE_READ
 } from '../store/store.const'
 import TitlePageElement from '../components/layout/TitlePageElement'
-import BannerElement from '../components/layout/BannerElement'
 import PaginationElement from '../components/element-ui/PaginationElement'
 import NoDataElement from '../components/element-ui/NoDataElement'
 
 export default {
   name: 'NotificationHistoryPage',
-  components: { TitlePageElement, BannerElement, PaginationElement, NoDataElement },
+  components: { TitlePageElement, PaginationElement, NoDataElement },
   middleware: 'auth',
   data() {
     return {

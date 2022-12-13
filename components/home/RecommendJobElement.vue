@@ -34,18 +34,16 @@
           </div>
         </div>
         <div class="job-button">
-          <div v-if="jobActive.is_favorite" class="button-dislike" @click.stop="removeFavoriteJob">
+          <div v-if="jobActive.is_favorite" class="button-dislike el-button el-button--danger" @click.stop="removeFavoriteJob">
             <img src="/assets/icon/icon_dislike.svg" alt="">
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
-          <div v-else class="button-like" @click.stop="addFavoriteJob">
+          <div v-else class="button-like el-button el-button--default" @click.stop="addFavoriteJob">
             <img src="/assets/icon/icon_like.svg" alt="">
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
-          <div class="button-detail">
-            <div class="el-button" @click="changeToLink('/job/' + jobActive.id)">
-              {{ $t('home.view_job_detail') }}
-            </div>
+          <div class="button-detail el-button el-button--primary" @click="changeToLink('/job/' + jobActive.id)">
+            {{ $t('home.view_job_detail') }}
           </div>
         </div>
       </div>

@@ -198,6 +198,10 @@
     }
   }
   .index-home-page {
+    .index-banner {
+      padding-left: 46px;
+      padding-top: 32px;
+    }
     .index-home-content {
       padding: 58px 12px;
       .form-list-job {
@@ -1971,28 +1975,37 @@
     .index-banner {
       padding: 0;
       height: auto;
-      background: $color-primary;
-      margin-bottom: 128px;
+      margin-bottom: 176px;
 
       .banner-page-element {
+        padding: 14px;
+        height: 107px;
         .banner-title {
-          background: $color-text-primary;
-          color: $color-white;
           font-weight: 700;
-          font-size: 14px;
-          line-height: 22px;
-          padding: 4px 0;
-          text-align: center;
+          font-size: 20px;
+          line-height: 28px;
         }
 
         .form-search-banner {
           padding: 12px 0 0;
-          margin: auto;
-          bottom: -104px;
+          width: calc(100% - 8px);
+          margin: 14px auto 0;
           position: relative;
+          box-shadow: 0px 2px 9px rgba(33, 16, 16, 0.25);
 
           .form-select-search {
-            padding: 20px 16px 16px;
+            padding: 18px 16px 16px;
+            .select-title {
+              font-weight: 700;
+              font-size: 16px;
+              line-height: 24px;
+              .choose-job {
+                font-weight: 400;
+                font-size: 13px;
+                line-height: 20px;
+                margin-top: 4px;
+              }
+            }
 
             .form-select {
               display: block;
@@ -2014,9 +2027,10 @@
               .button-filter {
                 margin-left: 0;
                 display: block;
-                margin-top: 18px;
-
+                margin-top: 16px;
                 button {
+                  height: 44px;
+                  padding: 10px;
                   width: 100%;
                   justify-content: center;
                 }
@@ -2025,18 +2039,24 @@
           }
 
           .all-job {
+            padding: 2px 16px;
             span {
-              font-size: 14px;
-              line-height: 22px;
+              font-weight: 400;
+              font-size: 13px;
+              line-height: 20px;
               padding-top: 0;
             }
             .all-subject {
-              font-size: 14px;
-              line-height: 22px;
+              font-weight: 700;
+              font-size: 13px;
+              line-height: 20px;
             }
           }
         }
       }
+    }
+    .home-job-element {
+      box-shadow: 0px 1px 7px rgba(177, 175, 175, 0.25);
     }
 
     .index-home-content {
@@ -2045,9 +2065,9 @@
 
       .form-more-info {
         .button-more-info {
-          background: $color-primary;
+          background: $color-primary-200;
           color: $color-text-primary;
-          border: 1px solid $border-focus;
+          border: 1px solid $color-primary-300;
           border-radius: 4px;
           text-align: center;
           font-weight: 700;
@@ -2065,30 +2085,35 @@
 
       .form-list-job {
         width: 100%;
-
+        padding-top: 12px;
         .title {
-          padding-left: 11px;
-          font-weight: 700;
-          font-size: 16px;
-          line-height: 24px;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 28px;
+          margin-bottom: 10px;
 
           .total-new-job {
-            font-weight: 500;
-            font-size: 13px;
-            line-height: 22px;
-            margin-top: 2px;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            margin-top: 8px;
           }
 
           .all-job {
             font-weight: 700;
             font-size: 13px;
             line-height: 20px;
-            margin-top: 4px;
+            margin-top: 9px;
           }
+        }
+
+        .button-see-all {
+          padding-bottom: 10px;
         }
 
         .new-job-posting {
           .new-job-title {
+            border-bottom-width: 2px;
             height: 40px;
           }
 
@@ -2117,9 +2142,10 @@
         }
 
         .recommended-job {
-          margin-top: 16px;
+          margin-top: -8px;
 
           .recommended-job-title {
+            border-bottom-width: 2px;
             height: 40px;
             margin-bottom: 16px;
           }
@@ -2146,8 +2172,8 @@
       }
 
       .form-list-new {
-        margin-left: 0;
-
+        width: max-content;
+        margin: auto;
         .form-list-new-social {
           justify-content: center;
           margin-top: 32px;
@@ -2169,7 +2195,7 @@
     .el-drawer__wrapper {
       .el-drawer__header {
         margin-bottom: 0;
-        background: $color-text-primary;
+        background: $color-black;
         font-weight: 700;
         font-size: 16px;
         line-height: 24px;
@@ -2184,6 +2210,7 @@
           right: 15px;
           width: 24px;
           height: 24px;
+          padding: 0;
 
           i {
             font-size: 24px;
@@ -2195,7 +2222,7 @@
 
     .form-popular {
       .form-popular-item {
-        background-color: $color-primary;
+        background-color: $color-bg-footer;
 
         &:nth-of-type(odd) {
           background-color: $color-white;
@@ -2208,7 +2235,7 @@
         .form-item-title {
           display: flex;
           justify-content: space-between;
-          padding: 15px 14px;
+          padding: 16px 14px;
 
           span {
             padding-top: 1px;
@@ -2221,7 +2248,7 @@
           color: $color-black;
         }
         .form-item-content {
-          padding: 5px 14px 16px 14px;
+          padding: 0 14px 16px 14px;
 
           .form-detail {
             display: inline-block;
@@ -2229,7 +2256,7 @@
             font-weight: 500;
             font-size: 14px;
             line-height: 22px;
-            color: $color-text-primary;
+            color: $color-blue;
             border-right: 1px solid $color-button-disable;
 
             &:last-child {
@@ -2258,7 +2285,7 @@
             font-weight: 700;
             font-size: 12px;
             line-height: 18px;
-            color: $color-text-primary;
+            color: $color-blue;
           }
 
           .store-name {
@@ -2347,6 +2374,8 @@
   }
   .recommend-job-element {
     padding: 12px;
+    box-shadow: 0px 1px 7px rgba(177, 175, 175, 0.25);
+    margin-bottom: 16px;
 
     .job-content {
       display: block;
@@ -2373,16 +2402,14 @@
             margin-right: 0;
             width: 48%;
             justify-content: center;
-            padding: 12px 0;
           }
 
           .button-detail {
             width: 48%;
-
+            padding: 8px 0;
             .el-button {
               width: 100%;
               text-align: center;
-              padding: 13px 0;
             }
           }
         }
@@ -2409,27 +2436,34 @@
       .notification-list {
         .notification-item {
           display: block;
-          padding: 12px 6px 12px 18px;
+          padding: 8px 10px 8px 40px;
           .notification-form {
             padding-left: 0;
             .show-status {
-              width: 10px;
-              height: 10px;
-              top: 7px;
-              left: -18px;
+              top: 2px;
+              left: -34px;
+              padding: 0 3px;
+              font-weight: 500;
+              font-size: 12px;
+              line-height: 20px;
             }
             .notification-title {
-              font-size: 16px;
-              line-height: 24px;
-            }
-            .notification-detail {
               font-size: 14px;
               line-height: 22px;
-              margin: 8px 0;
+              margin-bottom: 0;
+            }
+            .notification-detail {
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 20px;
+              margin: 6px 0;
             }
           }
           .notification-date {
             text-align: left;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 20px;
           }
         }
       }

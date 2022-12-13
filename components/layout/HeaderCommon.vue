@@ -46,7 +46,7 @@
           </div>
         </div>
         <div v-if="!loggedIn" class="button-login show-pc">
-          <el-button type="danger" @click="changeToLink('/login')">
+          <el-button type="primary" @click="changeToLink('/login')">
             <img src="/assets/icon/icon_login.svg" alt="">
             {{ $t('login.title') }}
           </el-button>
