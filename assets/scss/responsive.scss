@@ -575,6 +575,13 @@
           }
         }
       }
+      .jobs-similar-job {
+        .recommend-job-element {
+          .job-content .job-description .job-button {
+            display: flex;
+          }
+        }
+      }
     }
   }
   .edit-form-content {
@@ -2416,6 +2423,12 @@
             justify-content: center;
           }
 
+          .button-dislike {
+            margin-right: 0;
+            width: 48%;
+            justify-content: center;
+          }
+
           .button-detail {
             width: 48%;
             padding: 8px 0;
@@ -2840,30 +2853,37 @@
     }
   }
   .job-detail-page {
+    padding-top: 0;
     .title-page-element {
       display: none;
     }
     .job-detail-header {
-      margin: 12px;
+      margin: 0;
+      padding: 12px 12px 4px;
       .job-detail-title {
         font-weight: 700;
         font-size: 16px;
         line-height: 24px;
       }
       .job-detail-store-name {
-        font-weight: 500;
+        font-weight: 400;
         font-size: 13px;
-        line-height: 22px;
-        margin: 2px 0 9px;
+        line-height: 20px;
+        margin: 2px 0 0;
         display: block;
+        color: $color-text-3;
+        div {
+          margin-bottom: 12px;
+        }
         .show-sp {
           display: flex;
           justify-content: space-between;
         }
         .last-updated {
-          font-weight: 500;
+          font-weight: 400;
           font-size: 13px;
-          line-height: 22px;
+          line-height: 20px;
+          margin-bottom: 0;
         }
         .form-list-new-social {
           display: flex;
@@ -2903,18 +2923,24 @@
       }
       .job-button-detail {
         margin-top: 8px;
-        .button-detail {
-        }
-        .button-like {
-        }
         .form-list-new-social {
           display: none;
         }
+        .el-button {
+          height: 40px;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          margin: 8px;
+        }
       }
       .title-component {
-        padding: 9px 16px;
-        font-size: 16px;
-        line-height: 24px;
+        padding: 0 0 10px;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 28px;
+        color: $color-text-primary;
+        border-bottom-width: 2px;
+        margin-bottom: 16px;
       }
       .button-pickup {
         display: block;
@@ -2926,6 +2952,15 @@
         .about-job {
           margin-top: 12px;
           margin-bottom: 14px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+          img {
+            margin-right: 5px;
+          }
+        }
+        .sub-detail-title-sp {
+          margin-left: 14px;
         }
       }
       .form-application {
@@ -2965,6 +3000,7 @@
         }
       }
       .recently-viewed-job {
+        margin-top: 28px;
         .view-job-content {
           margin: 0;
           .recent-job {
@@ -3015,8 +3051,12 @@
             }
           }
         }
+        .view-job-title {
+          padding-bottom: 10px;
+        }
       }
       .application-requirement {
+         margin-top: 16px;
         .application-requirement-item {
           .application-requirement-left {
             width: 90px;
@@ -3031,13 +3071,21 @@
             font-size: 14px;
             line-height: 22px;
             padding: 13px 0;
+            margin-left: 10px;
           }
         }
       }
       .find-other-job {
+        margin-top: 36px;
+        .find-other-job-title {
+          .title-component {
+            padding-bottom: 10px;
+          }
+        }
         .find-other-job-content{
           padding: 16px;
           .find-other-job-item {
+            padding-top: 0;
             span {
               margin: 0 4px;
               color: $color-button-disable;
@@ -3048,17 +3096,25 @@
       .jobs-similar-job {
         margin-top: 40px;
         .jobs-similar-job-title {
-          height: 42px;
           margin-bottom: 16px;
+          padding-bottom: 10px;
+          div {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 28px;
+          }
           .button-see-all {
-            margin: 10px 16px;
-            img {
+            margin-bottom: 0;
+            span {
               display: none;
             }
           }
         }
         .recommend-job-element {
           margin-bottom: 16px;
+          .job-content .job-description .job-button {
+            display: flex;
+          }
         }
       }
     }
@@ -3105,11 +3161,9 @@
         .el-dialog__title {
           font-size: 16px;
           line-height: 24px;
-          padding: 10px 0;
+          padding: 0 0 10px;
         }
         .el-dialog__headerbtn {
-          top: 10px;
-          right: 0px;
           i {
             width: 24px;
             height: 24px;
@@ -3123,6 +3177,7 @@
         }
       }
       .el-dialog__body {
+        padding-top: 14px;
         .header-search {
           display: block;
           .search-apply {
@@ -3130,6 +3185,7 @@
             display: block;
           }
           .search-work-location {
+            margin-top: 2px;
             width: 100%;
             display: block;
           }
@@ -3140,9 +3196,13 @@
         .header-search-left {
           width: 100%;
           padding: 0;
+          background-color: $color-white;
           span {
             display: block;
-            padding: 8px 10px;
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            line-height: 22px;
           }
         }
         .header-search-right {
@@ -3152,17 +3212,20 @@
           border: 0;
           .el-select {
             display: block;
-            padding: 12px 12px 12px 10px;
+            padding: 5px 0 14px;
           }
         }
         .interview-time {
-          margin: 2px 0 12px;
+          margin: 0 0 22px;
           font-weight: 400;
           font-size: 13px;
           line-height: 20px;
         }
         .title-form {
           margin-top: 12px;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 24px;
           span {
             font-weight: 700;
             font-size: 16px;
@@ -3174,15 +3237,23 @@
             margin-top: 12px;
             .el-radio-group {
               .el-radio {
+                display: flex;
+                align-items: center;
                 margin-bottom: 12px;
                 font-size: 14px;
                 line-height: 22px;
+                .el-radio__label {
+                  width: 90%;
+                }
               }
             }
           }
           .method-note {
-            font-size: 13px;
-            line-height: 20px;
+            span {
+              font-weight: 400;
+              font-size: 13px;
+              line-height: 20px;
+            }
           }
         }
         .form-question {
@@ -3191,8 +3262,19 @@
           }
           .question-note {
             margin: 4px 0 16px;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 20px;
+          }
+          .question-content {
+            textarea {
+              padding: 10px 16px;
+            }
           }
         }
+      }
+      .el-dialog__footer {
+        margin-top: 2px;
       }
     }
   }

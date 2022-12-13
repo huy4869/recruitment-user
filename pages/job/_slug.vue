@@ -5,9 +5,7 @@
       <div class="job-detail-title">{{ job.name }}</div>
       <div class="job-detail-store-name">
         <div>{{ job.store_name }}</div>
-        <div class="show-pc">
-          <div class="last-updated">{{ job.updated_at }}</div>
-        </div>
+        <div class="last-updated">{{ job.updated_at }}</div>
       </div>
     </div>
     <div class="job-detail-content">
@@ -76,21 +74,19 @@
         </div>
       </div>
       <div class="job-button-detail">
-        <div v-if="job.is_favorite" class="button-dislike" @click="removeFavoriteJob">
+        <div v-if="job.is_favorite" class="button-dislike el-button el-button--danger" @click="removeFavoriteJob">
           <img src="/assets/icon/icon_dislike.svg" alt="">
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
-        <div v-else class="button-like" @click="addFavoriteJob">
+        <div v-else class="button-like el-button el-button--default" @click="addFavoriteJob">
           <img src="/assets/icon/icon_like.svg" alt="">
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
-        <div class="button-detail">
-          <div v-if="!job.is_apply" class="el-button" @click="openApplyDialog">
-            {{ $t('button.apply') }}
-          </div>
-          <div v-else class="el-button el-disabled">
-            {{ $t('button.applied') }}
-          </div>
+        <div v-if="!job.is_apply" class="button-detail el-button el-button--primary" @click="openApplyDialog">
+          {{ $t('button.apply') }}
+        </div>
+        <div v-else class="button-detail el-button el-disabled el-button--primary">
+          {{ $t('button.applied') }}
         </div>
       </div>
       <div v-if="job.application ? job.application.id : false" class="form-application">
@@ -136,7 +132,7 @@
         <div class="application-requirement-title title-component">
           <span>{{ $t('job.application_requirement') }}</span>
         </div>
-        <div class="application-requirement-item">
+        <div class="application-requirement-item first-input">
           <div class="application-requirement-left">
             <span>{{ $t('job.recruitment_type') }}</span>
           </div>
@@ -260,21 +256,19 @@
           </div>
         </div>
         <div class="job-button-detail">
-          <div v-if="job.is_favorite" class="button-dislike" @click="removeFavoriteJob">
+          <div v-if="job.is_favorite" class="button-dislike el-button el-button--danger" @click="removeFavoriteJob">
             <img src="/assets/icon/icon_dislike.svg" alt="">
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
-          <div v-else class="button-like" @click="addFavoriteJob">
+          <div v-else class="button-like el-button el-button--default" @click="addFavoriteJob">
             <img src="/assets/icon/icon_like.svg" alt="">
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
-          <div class="button-detail">
-            <div v-if="!job.is_apply" class="el-button" @click="openApplyDialog">
-              {{ $t('button.apply') }}
-            </div>
-            <div v-else class="el-button el-disabled">
-              {{ $t('button.applied') }}
-            </div>
+          <div v-if="!job.is_apply" class="button-detail el-button el-button--primary" @click="openApplyDialog">
+            {{ $t('button.apply') }}
+          </div>
+          <div v-else class="button-detail el-button el-disabled el-button--primary">
+            {{ $t('button.applied') }}
           </div>
         </div>
       </div>
@@ -299,10 +293,11 @@
         </div>
       </div>
       <div class="jobs-similar-job">
-        <div class="jobs-similar-job-title">
-          <div class="title-component">{{ $t('job.jobs_similar') }}</div>
-          <div class="button-see-all">
-            <a :href="changeToSearch">{{ $t('home.see_all_job') }}</a>
+        <div class="jobs-similar-job-title title-component">
+          <div>{{ $t('job.jobs_similar') }}</div>
+          <div class="button-see-all" @click="$router.push(changeToSearch)">
+              <span>{{ $t('home.see_all_job') }}</span>
+              <img src="/assets/icon/icon_arrow.svg" alt="">
           </div>
         </div>
         <div v-if="listSuggestJobs.length" class="jobs-similar-job-content">
@@ -464,7 +459,7 @@ export default {
       listSuggestJobs: [],
       listJobTypes: [],
       settings: {
-        'arrows': false,
+        'arrows': true,
         'dots': true,
         'focusOnSelect': true,
         'infinite': false,
@@ -510,13 +505,16 @@ export default {
       if (this.job.age === undefined) {
         return ''
       }
-      return this.job.age.min + ' ～ ' + this.job.age.max + this.$t('common.age')
+      if (this.job.age.min && this.job.age.max) {
+        return this.job.age.min + ' ～ ' + this.job.age.max + this.$t('common.age')
+      }
+      return ''
     },
     showAddress() {
       if (this.job.address === undefined) {
         return ''
       }
-      return '〒' + this.job.postal_code + this.job.address.province + this.job.address.province_city.name + this.job.address.address + (this.job.address.building || '')
+      return (this.job.postal_code ? ('〒' + this.job.postal_code) : '') + this.job.address.province + this.job.address.province_city.name + this.job.address.address + (this.job.address.building || '')
     },
     showStation() {
       if (this.job.stations === undefined) {
