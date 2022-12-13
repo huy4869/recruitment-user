@@ -18,12 +18,12 @@
         .header-search-right {
           .show-result-condition {
             font-weight: 700;
-            font-size: 16px;
-            line-height: 24px;
+            font-size: 14px;
+            line-height: 22px;
             margin-top: 12px;
             .district-item {
               color: $color-blue;
-              margin-top: 10px;
+              margin-top: 8px;
             }
             .province-item {
               margin-top: 4px;
@@ -156,16 +156,6 @@
       margin-top: 24px;
     }
   }
-  .form-search {
-    background-color: $color-white;
-    border: 1px solid $color-blue;
-    color: $color-blue;
-    &:hover, &:focus {
-      background-color: $color-white;
-      border: 1px solid $color-blue;
-      color: $color-blue;
-    }
-  }
   .header-search-left {
     width: 146px;
     background-color: $color-bg-footer;
@@ -180,8 +170,31 @@
   }
   .header-search-right {
     width: calc(100% - 194px);
-    margin-left: 24px;
+    margin-left: 20px;
     padding: 3px 0;
+  }
+  .recommend-job-element {
+    .job-title {
+      margin-bottom: 14px;
+    }
+    .job-content {
+      .job-image {
+        display: flex;
+        img {
+          width: 366px;
+          height: 244px;
+        }
+      }
+      .job-description {
+        .job-info {
+          margin-bottom: 12px;
+        }
+        .feature-item {
+          margin-top: 8px;
+          margin-bottom: 12px;
+        }
+      }
+    }
   }
 }
 

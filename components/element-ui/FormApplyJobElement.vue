@@ -67,7 +67,7 @@
               </el-radio-group>
             </div>
             <div class="method-note">
-              <span class="danger">※</span><span>{{ $t('job.note_choose_method') }}</span>
+              <span><span class="danger">※</span>{{ $t('job.note_choose_method') }}</span>
             </div>
           </div>
         </el-form-item>
@@ -81,7 +81,7 @@
               <el-input
                 v-model="formApply.note"
                 type="textarea"
-                :rows="4"
+                :rows="7"
                 maxlength="1000"
                 :placeholder="$t('job.enter_your_question')"
                 @focus="resetValidate('note')"
@@ -92,12 +92,19 @@
         </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" plain @click="closeAboutDialog">
+        <el-button type="default" @click="closeAboutDialog">
           {{ $t('button.close_up') }}
         </el-button>
-        <el-button type="danger" @click="submitApply">
-          {{ $t('button.confirm') }}
-        </el-button>
+        <div class="show-pc">
+          <el-button type="primary" @click="submitApply">
+            {{ $t('button.confirm') }}
+          </el-button>
+        </div>
+        <div class="show-sp">
+          <el-button type="danger" @click="submitApply">
+            {{ $t('button.confirm') }}
+          </el-button>
+        </div>
       </div>
     </el-dialog>
   </div>

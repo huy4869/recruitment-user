@@ -9,7 +9,7 @@
               <span>{{ $t('condition.occupation') }}</span>
             </div>
             <div class="header-search-right">
-              <el-button type="danger" class="form-search" plain @click="jobDialog = true">
+              <el-button type="default" class="form-search" @click="jobDialog = true">
                 <img src="/assets/icon/icon_add_blue.svg" alt="">
                 {{ $t('condition.enter_occupation') }}
               </el-button>
@@ -23,7 +23,7 @@
               <span>{{ $t('condition.work_location') }}</span>
             </div>
             <div class="header-search-right">
-              <el-button type="danger" class="form-search" plain @click="occupationDialog = true">
+              <el-button type="default" class="form-search" @click="occupationDialog = true">
                 <img src="/assets/icon/icon_add_blue.svg" alt="">
                 {{ $t('condition.enter_work_location') }}
               </el-button>
