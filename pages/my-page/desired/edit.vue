@@ -1,5 +1,5 @@
 <template>
-  <div class="cv-page">
+  <div class="cv-page desired-edit">
     <TitlePageElement class="show-pc"></TitlePageElement>
     <BannerElement :banner="$t('page.web_cv')"></BannerElement>
     <div class="cv-content">
@@ -119,7 +119,7 @@
                             </el-select>
                           </el-form-item>
                         </el-col>
-                        <el-col :md="5" :sm="15" :xs="15">
+                        <el-col :md="3" :sm="15" :xs="12">
                           <el-form-item class="salary-start" label="" prop="salary_min" :error="(error.key === 'salary_min') ? error.value : ''">
                             <el-input
                               v-model="accountForm.salary_min"
@@ -135,8 +135,8 @@
                             />
                           </el-form-item>
                         </el-col>
-                        <span class="salary-range"> ～ </span>
-                        <el-col :md="5" :sm="15" :xs="15">
+                        <span class="salary-range"> ~ </span>
+                        <el-col :md="3" :sm="15" :xs="12">
                           <el-form-item label="" prop="salary_max" :error="(error.key === 'salary_max') ? error.value : ''">
                             <el-input
                               v-model="accountForm.salary_max"
@@ -215,7 +215,7 @@
                   </el-col>
                   <el-col :md="18" :sm="24">
                     <div class="content-input">
-                      <el-row class="">
+                      <el-row class="desired-working-day">
                         <el-form-item label="" prop="working_days" :error="(error.key === 'working_days') ? error.value : ''">
                           <el-checkbox-group v-model="accountForm.working_days">
                             <div class="checkbox-days">
@@ -239,11 +239,11 @@
                     <div ref="end_working_time"></div>
                     <div class="content-input content-datetime-edu">
                       <el-row class="d-flex period-desired">
-                        <el-col :md="12" :sm="24" class="start-time">
+                        <el-col :md="11" :sm="24" class="start-time">
                           <el-form-item label="" prop="start_working_time" :error="(error.key === 'start_working_time') ? error.value : ''">
                             <el-row class="d-flex">
-                              <span class="text-normal birthday">{{ $t('desired_condition.start_time') }}</span>
-                              <el-col :sm="7" :xs="9" class="birth-year">
+                              <span class="text-normal birthday birth-text">{{ $t('desired_condition.start_time') }}</span>
+                              <el-col :md="5" :sm="7" :xs="6" class="birth-year">
                                 <el-select
                                   v-model="accountForm.working_hours.start_hours"
                                   clearable
@@ -259,8 +259,8 @@
                                   </el-option>
                                 </el-select>
                               </el-col>
-                              <span class="text-normal birthday">:</span>
-                              <el-col :sm="7" :xs="9" class="birth-month">
+                              <span class="text-normal birthday birth-space">:</span>
+                              <el-col :md="5" :sm="7" :xs="6" class="birth-month">
                                 <el-select
                                   v-model="accountForm.working_hours.start_minutes"
                                   clearable
@@ -279,11 +279,11 @@
                             </el-row>
                           </el-form-item>
                         </el-col>
-                        <el-col :md="12" :sm="24" class="birth-year">
+                        <el-col :md="11" :sm="24" class="birth-year">
                           <el-form-item label="" prop="end_working_time" :error="(error.key === 'end_working_time') ? error.value : ''">
                             <el-row class="d-flex">
-                              <span class="text-normal birthday">{{ $t('desired_condition.end_time') }}</span>
-                              <el-col  :sm="7" :xs="9" class="birth-year">
+                              <span class="text-normal birthday birth-text">{{ $t('desired_condition.end_time') }}</span>
+                              <el-col :md="5" :sm="7" :xs="6" class="birth-year">
                                 <el-select
                                   v-model="accountForm.working_hours.end_hours"
                                   clearable
@@ -299,8 +299,8 @@
                                   </el-option>
                                 </el-select>
                               </el-col>
-                              <span class="text-normal birthday">:</span>
-                              <el-col  :sm="7" :xs="9" class="birth-month">
+                              <span class="text-normal birthday birth-space">:</span>
+                              <el-col :md="5" :sm="7" :xs="6" class="birth-month">
                                 <el-select
                                   v-model="accountForm.working_hours.end_minutes"
                                   clearable
@@ -332,27 +332,27 @@
                     <div class="content-input">
                       <el-row class="">
                         <el-form-item label="" prop="job_features_ids" :error="(error.key === 'job_features_ids') ? error.value : ''">
-                          <el-checkbox-group v-model="accountForm.job_feature_ids">
+                          <el-checkbox-group class="feature-cb-group" v-model="accountForm.job_feature_ids">
                             <div class="feature-group">
-                              <div class="feature-title">※{{ $t('condition.recruitment_feature') }}</div>
+                              <div class="feature-title">{{ $t('condition.recruitment_feature') }}</div>
                               <div class="checkbox-group">
-                                <div v-for="(feature, index) in listRecruitmentFeatures" :key="index" class="checkbox-item">
+                                <div v-for="(feature, index) in listRecruitmentFeatures" :key="index" class="checkbox-item desired-cb">
                                   <el-checkbox :label="feature.id">{{ feature.name }}</el-checkbox>
                                 </div>
                               </div>
                             </div>
                             <div class="feature-group">
-                              <div class="feature-title">※{{ $t('condition.company_feature') }}</div>
+                              <div class="feature-title">{{ $t('condition.company_feature') }}</div>
                               <div class="checkbox-group">
-                                <div v-for="(feature, index) in listCompanyFeatures" :key="index" class="checkbox-item">
+                                <div v-for="(feature, index) in listCompanyFeatures" :key="index" class="checkbox-item desired-cb">
                                   <el-checkbox :label="feature.id">{{ feature.name }}</el-checkbox>
                                 </div>
                               </div>
                             </div>
                             <div class="feature-group">
-                              <div class="feature-title">※{{ $t('condition.store_feature') }}</div>
+                              <div class="feature-title">{{ $t('condition.store_feature') }}</div>
                               <div class="checkbox-group">
-                                <div v-for="(feature, index) in listStoreFeatures" :key="index" class="checkbox-item">
+                                <div v-for="(feature, index) in listStoreFeatures" :key="index" class="checkbox-item desired-cb">
                                   <el-checkbox :label="feature.id">{{ feature.name }}</el-checkbox>
                                 </div>
                               </div>

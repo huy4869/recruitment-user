@@ -5,7 +5,7 @@
     </div>
     <div class="past-search-condition-content">
       <div class="past-search-button">
-        <el-button type="danger" @click="changeToLink('/search')">
+        <el-button class="d-flex items-center" type="danger" @click="changeToLink('/search')">
           <img src="/assets/icon/icon_search_button.svg" alt="">
           {{ $t('my_page.search_by_other_condition') }}
         </el-button>

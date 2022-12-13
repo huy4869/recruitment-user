@@ -1,9 +1,9 @@
 <template>
-  <div class="cv-page">
+  <div class="cv-page web-cv-page">
     <client-only>
       <div>
+        <BannerElement :banner="$t('page.my_page')" title="my page" :subBanner="$t('content.web_cv')"></BannerElement>
         <TitlePageElement class="show-pc"></TitlePageElement>
-        <BannerElement class="show-pc" :banner="$t('page.my_page')" :sub-banner="$t('page.sub_web_cv')"></BannerElement>
       </div>
       <div class="cv-content">
         <MenuLeftElement menu-active="desired-condition"></MenuLeftElement>
@@ -34,7 +34,7 @@ export default {
   created() {
     this.$store.commit(INDEX_SET_TITLE_MENU, [
       { name: this.$t('page.home'), route: '/' },
-      { name: this.$t('page.my_page'), route: '/my-page' }
+      { name: this.$t('my_page.desired_condition'), route: '/my-page/desired-condition' }
     ])
   }
 }

@@ -369,7 +369,7 @@
                   ref="content"
                   v-model="formAbout.content"
                   type="textarea"
-                  :rows="4"
+                  :rows="6"
                   maxlength="1000"
                   :placeholder="$t('job.enter_inquiry_details')"
                   @focus="resetValidate('content')"
@@ -384,7 +384,7 @@
           <el-button type="primary" plain @click="closeAboutDialog">
             {{ $t('button.close_up') }}
           </el-button>
-          <el-button type="danger" @click="createFeedback">
+          <el-button type="primary" @click="createFeedback">
             {{ $t('button.confirm') }}
           </el-button>
         </div>
