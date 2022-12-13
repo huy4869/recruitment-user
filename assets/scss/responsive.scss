@@ -240,6 +240,7 @@
     .edit-form-input {
       .content-input {
         .checkbox-days {
+          width: 90%;
           display: grid;
           grid-template-columns: auto auto auto auto;
         }
@@ -282,12 +283,14 @@
           border: none;
           margin-bottom: 0;
           .feature-title {
-            margin-bottom: 12px;
+            margin-bottom: 12px;font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
           }
         }
         .period-desired {
           display: grid;
-          gap: 20px;
+          gap: 16px;
           .first-name {
             margin-bottom: 20px;
           }
@@ -578,10 +581,10 @@
     .edit-form-input {
       .content-input {
         .salary-range {
-          margin: 12px 12px 0 12px;
+          margin: 10px 10px 0 10px;
         }
         .salary-select {
-          margin-right: 14px;
+          margin-right: 22px;
         }
       }
     }
@@ -1211,8 +1214,8 @@
         font-weight: 400;
         font-size: 20px;
         line-height: 24px;
-        color: #E739EB;
-        border-bottom: 2px solid #E739EB;
+        color: $color-text-primary;
+        border-bottom: 2px solid $color-text-primary;
         padding-bottom: 9px;
         margin-bottom: 14px;
       }
@@ -1478,13 +1481,22 @@
         }
 
         .checkbox-item {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
+        }
+        .desired-cb {
+          .el-checkbox {
+            width: fit-content;
+            height: fit-content;
+          }
         }
         .birthday {
-          padding: 0 5px;
+          padding: 0 10px;
         }
         .edu-status {
           margin-top: 14px;
+        }
+        .birth-text {
+          margin-right: 20px;
         }
       }
 
@@ -2476,64 +2488,109 @@
     }
     .past-search-condition-content {
       padding: 12px;
+      border-top: none;
       .past-search-button {
-
+        margin-top: 12px;
       }
       .past-search-condition-form {
-        margin-top: 20px;
+        margin-top: 34px;
+      }
+      .past-search-button .el-button span img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  .desired-element {
+    #desired {
+      .form-condition-element {
+        box-shadow: none;
+        padding: 0;
+        margin-bottom: 24px;
+        .form-condition-content {
+          .form-condition-item {
+            .form-left {
+              font-size: 14px;
+              line-height: 22px;
+              width: 108px;
+              padding: 9px 0 9px 12px;
+            }
+            .form-right {
+              width: calc(100% - 128px);
+              border-top: none;
+              span {
+                font-size: 14px;
+                line-height: 22px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .desired-nodata {
+      .no-data-element {
+        padding: 75px 0 60px;
       }
     }
   }
   .form-condition-element {
+    box-shadow: 0px 1px 7px rgba(177, 175, 175, 0.25);
+    border-radius: 4px;
     padding: 12px 8px;
     margin-bottom: 16px;
     &#desired {
+      box-shadow: none;
       border: none;
       box-shadow: none;
       padding: 12px 0;
     }
     .card-title-mobile {
-      display: block;
-      background-color: $color-primary;
-      padding: 9px 0 9px 16px;
-      font-weight: 700;
-      font-size: 16px;
+      font-weight: 400;
+      font-size: 20px;
       line-height: 24px;
-      color: $--color-primary;
-      border-left: 5px solid $--color-primary;
-      margin: 8px 0 16px;
+      letter-spacing: .1em;
+      color: $color-text-primary;
+      display: flex;
+      margin-bottom: 9px;
+      margin-top: 20px;
+    }
+    .desired-content {
+      border-top: 3px solid $color-text-primary;
+      .form-condition-content {
+        margin-top: 14px
+      }
     }
     .form-condition-title {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 8px;
+      margin-bottom: 16px;
       .form-condition-date {
         font-size: 13px;
-        line-height: 22px;
+        line-height: 20px;
         margin-top: 9px;
       }
       .form-condition-button {
         .el-button {
+          border-radius: 4px;
           height: 36px;
           padding: 6px 16px;
+          span img {
+            width: 20px;
+            height: 20px;
+          }
         }
       }
     }
     .form-condition-content {
-      .form-right {
-        width: calc(100% - 110px);
-        border-top: 1px solid $border-default;
-      }
       .form-condition-item {
         .form-left {
-          border-top: none;
           font-size: 14px;
           line-height: 22px;
-          width: 78px;
-          padding: 16px 8px;
+          width: 88px;
+          padding: 9px 0 9px 12px;
         }
         .form-right {
-          width: calc(100% - 110px);
+          width: calc(100% - 108px);
           border-top: none;
           span {
             font-size: 14px;
@@ -3037,6 +3094,7 @@
   }
   .form-dialog-apply {
     .el-dialog {
+      border-radius: 0;
       width: 100% !important;
       margin-top: 0 !important;
       margin-bottom: 0;
@@ -3047,11 +3105,11 @@
         .el-dialog__title {
           font-size: 16px;
           line-height: 24px;
-          padding: 8px 14px;
+          padding: 10px 0;
         }
         .el-dialog__headerbtn {
           top: 10px;
-          right: 14px;
+          right: 0px;
           i {
             width: 24px;
             height: 24px;
@@ -3098,10 +3156,15 @@
           }
         }
         .interview-time {
-          margin: 8px 0 22px;
+          margin: 2px 0 12px;
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 20px;
         }
         .title-form {
+          margin-top: 12px;
           span {
+            font-weight: 700;
             font-size: 16px;
             line-height: 24px;
           }
@@ -3123,6 +3186,9 @@
           }
         }
         .form-question {
+          .question-content {
+            margin-top: 8px;
+          }
           .question-note {
             margin: 4px 0 16px;
           }
@@ -3188,6 +3254,31 @@
         width: 24px;
         height: 24px;
       }
+    }
+  }
+  .el-dialog {
+    width: 90% !important;
+  }
+  .el-button--danger {
+    font-weight: 400;
+  }
+  .desired-edit {
+    .edit-cv-element {
+      margin-bottom: 0;
+    }
+    .edit-form-content {
+      .edit-form-input {
+        .content-input {
+          padding: 0px;
+
+        }
+      }
+      .checkbox-group {
+        margin-bottom: 10px;
+      }
+    }
+    .feature-group {
+      margin-top: -10px;
     }
   }
 }

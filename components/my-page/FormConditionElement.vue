@@ -29,8 +29,9 @@
       </div>
     </div>
     <div class="form-condition-content">
-      <div class="d-flex justify-end">
-        <div class="form-right"></div>
+      <div class="d-flex justify-end form-condition-item">
+        <div class=""></div>
+        <div class="form-right first-right-search"></div>
       </div>
       <div v-for="(detail, index) in $t('condition.list')" :key="index">
         <div v-if="condition.content[index]" class="form-condition-item">

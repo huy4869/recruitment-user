@@ -578,19 +578,23 @@
 .past-search-condition-element {
   width: 100%;
   .past-search-condition-title {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 24px;
     line-height: 32px;
-    margin-bottom: 14px;
+    letter-spacing: .1em;
+    color: $color-text-primary;
+    display: flex;
+    margin-bottom: 10px;
   }
   .past-search-condition-content {
+    border-top: 3px solid $color-text-primary;
     .past-search-button {
-      margin-top: 20px;
+      margin-top: 16px;
       .el-button {
         span {
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 24px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
           display: flex;
           justify-content: center;
           img {
@@ -604,13 +608,36 @@
     .past-search-condition-form {
       margin-top: 24px;
     }
+    .pagination-common .pagination {
+      margin-top: 4px;
+    }
+  }
+}
+.desired-element {
+  .past-search-condition-content {
+    border-top: none;
+  }
+  #desired {
+    #btn-center {
+      margin-top: 24px;
+    }
+    .past-search-condition-title {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 32px;
+      color: $color-black;
+    }
+  }
+  .form-condition-element {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+
   }
 }
 
 .form-condition-element {
-  box-shadow: 0 1px 7px rgba(177, 175, 175, 0.25);
-  border-radius: 4px;
-  padding: 20px;
+  box-shadow: 0px 2px 9px rgba(33, 16, 16, 0.25);
+  border-radius: 10px;
+  padding: 24px;
   margin-bottom: 20px;
   &#desired {
     border: 2px solid $border-focus;
@@ -624,7 +651,7 @@
     justify-content: space-between;
     margin-bottom: 16px;
     .form-condition-date {
-      font-weight: 500;
+      font-weight: 400;
       font-size: 14px;
       line-height: 22px;
       color: $color-text-3;
@@ -632,6 +659,7 @@
     }
     .form-condition-button {
       .el-button {
+        border-radius: 30px;
         height: 40px;
         padding: 8px 16px;
         span {
@@ -659,34 +687,34 @@
     }
   }
   .form-condition-content {
-    .form-right {
-      border-bottom: 1px solid $border-default;
-      width: calc(100% - 184px);
-    }
     .form-condition-item {
       display: flex;
       justify-content: space-between;
       .form-left {
-        background: $color-blue-3;
+        background: $color-bg-footer;
         border-radius: 4px;
-        width: 140px;
-        padding: 16px 0 16px 24px;
-        border-top: 1px solid $color-white;
-        border-bottom: 1px solid $color-white;
+        width: 146px;
+        padding: 9px 0 9px 24px;
         font-weight: 700;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 14px;
+        line-height: 22px;
       }
       .form-right {
         border-bottom: 1px solid $border-default;
-        width: calc(100% - 184px);
-        display: flex;
+        width: calc(100% - 194px);
+        padding: 9px 0 9px 1px;
         span {
           margin: 17px 0;
-          font-weight: 500;
+          font-weight: 400;
           font-size: 16px;
           line-height: 24px;
         }
+      }
+      .first-right-item {
+        border-top: 1px solid $border-default;
+      }
+      .first-right-search {
+        padding: 0;
       }
     }
   }
@@ -727,7 +755,7 @@
         margin: 8px 0 16px;
       }
       .btn-blue {
-        background-color: $color-blue-2;
+        background-color: $color-text-primary;
         padding: 3px 16px;
         border: none;
         span {

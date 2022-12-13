@@ -1,8 +1,8 @@
 <template>
-  <div class="past-search-condition-element">
+  <div class="past-search-condition-element desired-element">
     <div class="past-search-condition-content">
       <div class="">
-        <div v-if="checkCondition" >
+        <div v-if="checkCondition" class="desired-nodata">
           <NoDataElement :text="$t('common.message_no_data.preference')"></NoDataElement>
           <div id="btn-no-data" class="text-center">
             <el-button class="card-button btn-right" type="danger" @click="handleRouter('/my-page/desired/edit')" >{{ $t('my_page.register') }}</el-button>
@@ -18,13 +18,14 @@
               </div>
             </div>
             <div class="card-title-mobile"> {{ $t('my_page.desired_condition') }}</div>
-            <div class="form-condition-content">
+            <div class="desired-content">
+              <div class="form-condition-content">
               <div class="d-flex justify-end">
                 <div class="form-right"></div>
               </div>
               <div class="form-condition-item">
                 <div class="form-left">{{ $t('desired_condition.location') }}</div>
-                <div class="form-right"><span>{{ condition.list_province }}</span></div>
+                <div class="form-right first-right-item"><span>{{ condition.list_province }}</span></div>
               </div>
               <div class="form-condition-item">
                 <div class="form-left">{{ $t('desired_condition.type') }}</div>
@@ -59,9 +60,10 @@
                 <div class="form-right"><span>{{ condition.job_feature_string }}</span></div>
               </div>
             </div>
+            </div>
           </div>
           <div id="btn-center" class="text-center">
-            <el-button class="card-button btn-right" type="danger" @click="handleRouter('/my-page/desired/edit')" >{{ $t('my_page.edit') }}</el-button>
+            <el-button class="card-button btn-right" type="primary" @click="handleRouter('/my-page/desired/edit')" >{{ $t('my_page.edit') }}</el-button>
           </div>
         </div>
       </div>

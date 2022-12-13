@@ -17,8 +17,9 @@
     }
     #btn-center {
       display: flex;
-      padding-left: 244px;
+      justify-content: center;
       .el-button {
+        width: 150px;
         margin-left: 0;
         margin-right: 16px;
       }
@@ -38,6 +39,12 @@
     .menu-left-element {
       margin-top: 0;
     }
+  }
+}
+
+.past-search-page {
+  .cv-content {
+    padding: 0;
   }
 }
 
@@ -489,17 +496,19 @@
       .edu-status {
         margin-top: 32px;
       }
+      .feature-cb-group {
+        margin-top: 14px;
+      }
       .feature-title {
         font-weight: 700;
         font-size: 16px;
         line-height: 24px;
-        margin-right: 48px;
+        margin-right: 34px;
       }
       .feature-group {
         display: grid;
-        grid-template-columns: 25% 75%;
-        border-bottom: 1px solid $border-default;
-        margin-bottom: 20px;
+        grid-template-columns: 20% 80%;
+        margin-bottom: 8px;
       }
       .feature-group:last-child {
         border-bottom: none;
@@ -510,11 +519,12 @@
         grid-template-columns: 50% 50%;
       }
       .checkbox-days {
+        margin-top: 10px;
         display: flex;
-        gap: 5%;
+        gap: 18px;
       }
       .checkbox-item {
-        margin-bottom: 30px;
+        margin-bottom: 16px;
         .el-checkbox {
           width: max-content;
         }
@@ -523,10 +533,10 @@
         }
       }
       .salary-range {
-        margin: 12px 16px 0 16px;
+        margin: 12px 14px 0 14px;
       }
       .salary-select {
-        margin-right: 24px;
+        margin-right: 16px;
       }
     }
   }
@@ -633,3 +643,21 @@
   margin-top: -55px;
 }
 
+.desired-edit {
+  .edit-form-content {
+    .edit-form-input {
+      .desired-working-day {
+        margin-bottom: -14px;
+      }
+      .birthday {
+        padding: 0;
+      }
+      .birth-text {
+        margin-right: 12px;
+      }
+      .birth-space {
+        padding: 0 10px;
+      }
+    }
+  }
+}
