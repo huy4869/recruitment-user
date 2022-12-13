@@ -116,6 +116,7 @@
             maxlength="12"
             autocomplete="off"
             @focus="resetValidate('password')"
+            @change="checkPassword"
           >
             <i slot="suffix" class="cursor-pointer" @click="displayPass('pass')">
               <img v-if="showPass" class="icon-show-pass" src="/assets/icon/eye-input.svg" alt="showpass"/>
@@ -321,6 +322,14 @@ export default {
     }
   },
   methods: {
+    checkPassword() {
+      if (this.accountForm.password_confirmation) {
+        this.validate('password_confirmation')
+      }
+    },
+    validate(ref) {
+      this.$refs.accountForm.validateField(ref)
+    },
     resetValidate(ref) {
       if (ref === this.error.key) {
         this.error = { key: null, value: '' }
