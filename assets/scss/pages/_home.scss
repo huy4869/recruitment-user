@@ -1,52 +1,47 @@
 .index-home-page {
   .index-banner {
-    background: url('~assets/images/home_banner1.svg') center no-repeat;
-    height: 366px;
+    background: url('~assets/images/banner_background.png') center no-repeat, url('~assets/images/banner_home.png') center no-repeat;
+    background-size: cover;
+    height: 322px;
     background-position-x: right;
     background-position-y: bottom;
-    padding: 18px 28.13px 24px 64px;
+    padding: 46px 0 32px 90px;
+
     .banner-page-element {
-      background: url('~assets/images/home_banner.svg') center no-repeat;
-      background-position-x: right;
-      background-position-y: top;
       height: 100%;
       .banner-title {
         font-weight: 700;
         font-size: 38px;
-        line-height: 54px;
-        color: $color-text-primary;
+        line-height: 52px;
+        color: $color-white;
         font-family: 'Zen Kaku Gothic New';
       }
       .form-search-banner {
         box-shadow: 0px 1px 8px rgba(255, 172, 187, 0.25);
         border-radius: 8px;
-        padding: 12px 24px 20px 0;
-        margin-top: 40px;
+        padding: 14px 24px 24px 0;
+        margin-top: 46px;
         width: max-content;
         background: $color-white;
         .all-job {
-          background: $color-blue;
+          background: $color-text-primary;
           border-radius: 0px 10px 10px 0px;
-          font-weight: 500;
+          font-weight: 400;
           font-size: 16px;
           line-height: 24px;
-          padding: 2px 24px;
+          padding: 3px 24px;
           display: flex;
           width: max-content;
           color: $color-white;
-          span {
-            padding-top: 1px;
-          }
           .all-subject {
+            padding-top: 1px;
             margin-left: 2px;
-            padding: 0;
             font-weight: 700;
-            line-height: 28px;
-            color: $color-yellow;
+            font-family: 'Inter';
           }
         }
         .form-select-search {
-          padding: 16px 0 0 24px;
+          padding: 15px 0 0 24px;
           .select-title {
             display: flex;
             justify-content: space-between;
@@ -54,9 +49,10 @@
             font-size: 24px;
             line-height: 32px;
             .choose-job {
-              font-weight: 500;
-              font-size: 16px;
-              line-height: 24px;
+              margin-top: 10px;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
               color: $color-text-primary;
               cursor: pointer;
             }
@@ -66,34 +62,27 @@
             display: flex;
             .el-input {
               .el-input__inner {
-                border-color: $border-focus;
+                border-color: $color-black;
               }
             }
             .el-select {
-              width: 198px;
-            }
-            .form-condition {
-
+              width: 210px;
             }
             .image-form-search {
-              margin: auto 14px;
-              img {
-                transform: rotate(45deg);
-              }
-            }
-            .form-prefecture {
-
+              margin: auto 12px;
+              display: flex;
             }
             .button-filter {
-              margin-left: 16px;
+              margin-left: 24px;
               .el-button {
-                height: 44px;
-                padding: 10px 44px;
+                padding: 9px 45px;
                 display: flex;
-                font-weight: 500;
-                font-size: 16px;
-                line-height: 24px;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 22px;
+                border-radius: 4px;
                 img {
+                  margin-top: -1px;
                   width: 24px;
                   height: 24px;
                   margin-right: 6px;
@@ -106,21 +95,23 @@
     }
   }
   .index-home-content {
-    padding: 58px 64px;
+    padding: 42px 90px;
     display: flex;
-    max-width: 1152px;
+    max-width: 1100px;
     margin: auto;
     .form-list-job {
       width: 74.48%;
       .title {
-        margin: auto 0;
+        margin-bottom: 18px;
         display: flex;
-        padding-left: 84px;
         position: relative;
-        color: $color-text-primary;
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 32px;
+        color: $color-black;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 40px;
+        span {
+          margin-right: 36px;
+        }
         img {
           position: absolute;
           left: 0;
@@ -132,34 +123,39 @@
           font-size: 16px;
           line-height: 24px;
           color: $color-black;
-          margin-top: 3px;
+          margin-top: 15px;
         }
         .all-job {
-          margin-top: 2px;
+          margin-top: 16px;
           font-family: 'Product Sans';
           font-weight: 700;
           font-size: 16px;
-          line-height: 28px;
+          line-height: 24px;
           color: $color-blue;
+          margin-left: 2px;
         }
       }
       .button-see-all {
         display: flex;
-        margin: auto 15px;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        color: $color-text-primary;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
         cursor: pointer;
+        align-items: flex-end;
+        padding-bottom: 19px;
+        img {
+          width: 24px;
+          height: 24px;
+          margin-bottom: -1px;
+        }
       }
       .new-job-posting {
         .new-job-title {
           height: 54px;
           display: flex;
           justify-content: space-between;
-          background: $color-primary;
-          border-left: 5px solid $color-text-primary;
           margin-bottom: 24px;
+          border-bottom: 3px solid $color-text-primary;
         }
         .new-job-content {
           margin: 0 -12px 0 -12px;
@@ -169,7 +165,7 @@
                 width: 12px;
                 height: 12px;
                 border-radius: 50%;
-                background-color: $border-focus;
+                background-color: $color-dark-300;
                 margin: auto;
                 &::before {
                   content: '';
@@ -178,21 +174,20 @@
             }
             .slick-active{
               button {
-                background-color: $color-text-primary;
+                background-color: $color-dark-100;
               }
             }
           }
         }
       }
       .recommended-job {
-        margin-top: 70px;
+        margin-top: 50px;
         .recommended-job-title {
           height: 54px;
           display: flex;
           justify-content: space-between;
-          background: $color-primary;
-          border-left: 5px solid $color-text-primary;
           margin-bottom: 24px;
+          border-bottom: 3px solid $color-text-primary;
           .title {
             img {
               left: 3px;
@@ -201,14 +196,13 @@
         }
       }
       .search-from-popular {
-        margin-top: 70px;
+        margin-top: 50px;
         .search-from-popular-title {
           height: 54px;
           display: flex;
           justify-content: space-between;
-          background: $color-primary;
-          border-left: 5px solid $color-text-primary;
           margin-bottom: 24px;
+          border-bottom: 3px solid $color-text-primary;
           .title {
             img {
               left: 3px;
@@ -217,7 +211,7 @@
         }
         .search-from-popular-content {
           padding: 24px 8px 4px 24px;
-          border: 2px solid $border-focus;
+          box-shadow: 0 2px 9px rgba(33, 16, 16, 0.25);
           border-radius: 4px;
           .search-from-popular-item {
             display: flex;
@@ -263,14 +257,13 @@
         }
       }
       .search-by-employment {
-        margin-top: 70px;
+        margin-top: 50px;
         .search-by-employment-title {
           height: 54px;
           display: flex;
           justify-content: space-between;
-          background: $color-primary;
-          border-left: 5px solid $color-text-primary;
           margin-bottom: 24px;
+          border-bottom: 3px solid $color-text-primary;
           .title {
             img {
               left: 3px;
@@ -279,7 +272,7 @@
         }
         .search-by-employment-content {
           padding: 24px;
-          border: 2px solid $border-focus;
+          box-shadow: 0px 2px 9px rgba(33, 16, 16, 0.25);
           border-radius: 4px;
           .search-by-employment-category {
             padding-top: 4px;
@@ -306,7 +299,7 @@
       margin-left: 24px;
       border-radius: 15px;
       .form-list-new-title {
-        background: $color-blue;
+        background: $color-black;
         color: $color-white;
         font-weight: 700;
         font-size: 16px;
@@ -315,12 +308,12 @@
         padding: 18px 10px;
       }
       .form-list-new-content {
-        border: 2px solid $color-blue;
+        border: 2px solid $color-black;
         border-bottom: none;
         .new-item {
           display: flex;
           padding: 12px 15px 12px 10px;
-          background-color: $color-blue-3;
+          background-color: $color-bg-footer;
           &:nth-of-type(odd) {
             background-color: $color-white;
           }
@@ -335,7 +328,7 @@
               font-weight: 700;
               font-size: 12px;
               line-height: 18px;
-              color: $color-text-primary;
+              color: $color-blue;
             }
             .store-name {
               font-weight: 500;
@@ -351,7 +344,7 @@
                 height: 16px;
               }
               span {
-                font-weight: 500;
+                font-weight: 400;
                 font-size: 12px;
                 line-height: 16px;
                 margin-left: 4px;
@@ -362,10 +355,10 @@
         }
       }
       .form-list-new-see-all {
-        border: 2px solid $color-blue;
+        border: 2px solid $color-black;
         border-top: none;
         border-radius: 0px 0px 13px 13px;
-        color: $color-blue;
+        color: $color-black;
         padding: 10px 12px;
         .button-see-all {
           font-weight: 500;
@@ -386,7 +379,8 @@
 }
 
 .home-job-element {
-  box-shadow: 0px 1px 7px rgba(177, 175, 175, 0.25);
+  box-shadow: 0px 2px 9px rgba(33, 16, 16, 0.25);
+  border-radius: 4px;
   margin: 0 12px 24px;
   border-radius: 4px;
   cursor: pointer;
@@ -394,6 +388,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 4px 4px 0px 0px;
+    display: flex;
     .show-new {
       font-weight: 500;
       font-size: 14px;
@@ -404,7 +399,7 @@
       color: $color-white;
     }
     .background-new {
-      background: $color-red-primary;
+      background: $color-text-primary;
       transform: rotate(45deg);
       position: absolute;
       top: -60px;
@@ -419,12 +414,12 @@
     }
   }
   .job-content {
-    padding: 7px 12px 18px;
+    padding: 16px 12px 17px;
     .job-name {
       font-weight: 700;
       font-size: 16px;
       line-height: 24px;
-      color: $color-text-primary;
+      color: $color-blue;
       word-wrap: break-word;
       white-space: normal;
       overflow: hidden;
@@ -434,11 +429,11 @@
       -webkit-line-clamp: 2;
     }
     .store-name {
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 22px;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 20px;
       color: $color-text-3;
-      margin: 3px 0 12px;
+      margin: 3px 0 14px;
       word-wrap: break-word;
       white-space: normal;
       overflow: hidden;
@@ -449,10 +444,15 @@
     }
     .job-info {
       display: flex;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 14px;
       line-height: 22px;
       margin-bottom: 8px;
+      img {
+        width: 20px;
+        height: 20px;
+        margin-top: 1px;
+      }
       span {
         margin-left: 10px;
         word-wrap: break-word;
@@ -465,10 +465,10 @@
       }
     }
     .feature-item {
-      color: $color-text-primary;
-      border: 1px solid $color-text-primary;
+      color: $color-blue;
+      border: 1px solid $color-blue;
       border-radius: 2px;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 14px;
       line-height: 22px;
       padding: 3px 8px;
@@ -481,79 +481,55 @@
       margin-top: 13px;
       display: flex;
       justify-content: space-between;
+      .el-button {
+        border-radius: 20px;
+      }
       .button-like {
-        cursor: pointer;
+        width: calc(50% - 4px);
         display: flex;
-        padding: 7px 8px;
-        border: 1px solid $color-blue;
-        border-radius: 4px;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 22px;
-        color: $color-blue;
-        height: 24px;
+        padding: 8px;
         img {
           width: 24px;
           height: 24px;
         }
       }
       .button-dislike {
-        cursor: pointer;
         display: flex;
-        padding: 7px 8px;
-        border: 1px solid $color-blue;
-        background: $color-blue;
-        border-radius: 4px;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 22px;
-        color: $color-white;
-        height: 24px;
-        margin-right: 16px;
-        span {
-          padding-top: 1px;
-        }
+        padding: 8px;
+        font-weight: 400;
+        width: calc(50% - 4px);
         img {
           width: 24px;
           height: 24px;
         }
       }
       .button-detail {
-        display: inline-block;
-        width: 45.5%;
-        .el-button {
-          width: 100%;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 22px;
-          color: $color-white;
-          background-color: $color-button-danger;
-          padding: 9px 0;
-          border: none;
-        }
+        display: flex;
+        width: calc(50% - 4px);
+        font-weight: 500;
       }
     }
   }
 }
 
 .recommend-job-element {
-  box-shadow: 0px 1px 7px rgba(177, 175, 175, 0.25);
+  box-shadow: 0px 2px 9px rgba(33, 16, 16, 0.25);
   border-radius: 4px;
   padding: 24px;
   margin-bottom: 24px;
   .job-title {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     .title-main {
       font-weight: 700;
       font-size: 20px;
       line-height: 28px;
     }
     .sub-title {
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
       color: $color-text-3;
-      margin-top: 3px;
+      margin-top: 8px;
     }
   }
   .job-content {
@@ -567,30 +543,32 @@
     }
     .job-description {
       padding-left: 16px;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
       width: 100%;
       .job-info {
         display: flex;
-        margin-bottom: 16px;
+        margin-bottom: 10px;
+        align-items: flex-start;
         span {
           margin-left: 10px;
           word-break: break-all;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
         }
       }
       .feature-item {
-        color: $color-text-primary;
-        border: 1px solid $color-text-primary;
+        color: $color-blue;
+        border: 1px solid $color-blue;
         border-radius: 2px;
-        font-weight: 500;
+        font-weight: 400;
         font-size: 14px;
         line-height: 22px;
-        padding: 3px 8px;
+        padding: 2px 8px;
         width: fit-content;
         display: inline-block;
         margin-right: 8px;
         margin-bottom: 8px;
+        margin-top: 6px;
       }
       .bold {
         margin-right: 4px;
@@ -609,21 +587,11 @@
         padding: 1px 6px;
       }
       .job-button {
-        margin-top: 29px;
+        margin-top: 12px;
         display: flex;
         justify-content: flex-end;
         .button-like {
-          cursor: pointer;
           display: flex;
-          padding: 11px 25px;
-          border: 1px solid $color-blue;
-          border-radius: 4px;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 22px;
-          color: $color-blue;
-          height: 24px;
-          margin-right: 16px;
           span {
             padding-top: 1px;
           }
@@ -633,18 +601,7 @@
           }
         }
         .button-dislike {
-          cursor: pointer;
           display: flex;
-          padding: 11px 25px;
-          border: 1px solid $color-blue;
-          background: $color-blue;
-          border-radius: 4px;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 22px;
-          color: $color-white;
-          height: 24px;
-          margin-right: 16px;
           span {
             padding-top: 1px;
           }
@@ -654,16 +611,8 @@
           }
         }
         .button-detail {
-          display: inline-block;
-          .el-button {
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
-            color: $color-white;
-            background-color: $color-button-danger;
-            padding: 12px 40px;
-            border: none;
-          }
+          font-weight: 500;
+          padding: 8px 38px;
         }
       }
     }

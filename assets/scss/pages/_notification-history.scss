@@ -1,29 +1,29 @@
 .notification-history-page {
   .notification-history-content {
-    padding: 40px 140px;
+    padding: 28px 0 12px;
     margin: auto;
-    max-width: 1000px;
+    max-width: 1100px;
     .notification-list {
       margin-bottom: 24px;
       .notification-item {
-        padding: 14px;
+        padding: 14px 16px 16px;
         display: flex;
         justify-content: space-between;
         border-radius: 8px;
         margin-bottom: 2px;
         .notification-form {
           position: relative;
-          padding-left: 34px;
+          padding-left: 32px;
           width: 100%;
           .show-status {
-            font-weight: 500;
-            font-size: 13px;
+            font-weight: 400;
+            font-size: 12px;
             line-height: 20px;
             background-color: $color-text-primary;
             position: absolute;
             color: $color-white;
             top: 2px;
-            left: -6px;
+            left: -8px;
             padding: 0 5px;
             border-radius: 2px;
           }

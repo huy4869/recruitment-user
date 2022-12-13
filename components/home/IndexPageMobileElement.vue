@@ -2,7 +2,7 @@
   <div class="index-home-page">
     <div class="index-banner">
       <div class="banner-page-element">
-        <div class="banner-title" v-html="$t('home.banner_title_mobile')"></div>
+        <div class="banner-title" v-html="$t('home.banner_title')"></div>
         <div class="form-search-banner">
           <div class="all-job">
             <span>{{ $t('home.all_job_opening') }}</span>
@@ -42,7 +42,7 @@
                 </div>
               </div>
               <div class="button-filter">
-                <button type="button" class="el-button el-button--danger" @click="changeToSearch(true)">
+                <button type="button" class="el-button el-button--primary" @click="changeToSearch(true)">
                   <img src="/assets/icon/icon_search_button.svg" alt="">
                   <span>{{ $t('common.search') }}</span>
                 </button>
@@ -56,11 +56,11 @@
       <div class="form-more-info">
         <div class="d-flex justify-between">
           <div class="button-more-info" @click="dialogPopular = true">
-            <img src="/assets/icon/icon_place.svg" alt="">
+            <img src="/assets/icon/icon_place_primary.svg" alt="">
             <div>{{ $t('home.search_from_popular') }}</div>
           </div>
           <div class="button-more-info" @click="dialogEmployment = true">
-            <img src="/assets/icon/icon_save.svg" alt="">
+            <img src="/assets/icon/icon_save_primary.svg" alt="">
             <div>{{ $t('home.search_by_employment') }}</div>
           </div>
         </div>

@@ -28,7 +28,7 @@
                 </el-select>
               </div>
               <div class="image-form-search">
-                <img src="/assets/icon/icon_add_primary.svg" alt="">
+                <img src="/assets/icon/icon_add_search.svg" alt="">
               </div>
               <div class="form-prefecture">
                 <el-select v-model="jobType" :placeholder="$t('home.choose_a_job')">
@@ -43,7 +43,7 @@
                 </el-select>
               </div>
               <div class="button-filter">
-                <button type="button" class="el-button el-button--danger" @click="changeToSearch(true)">
+                <button type="button" class="el-button el-button--primary" @click="changeToSearch(true)">
                   <img src="/assets/icon/icon_search_button.svg" alt="">
                   <span>{{ $t('common.search') }}</span>
                 </button>
@@ -58,8 +58,7 @@
         <div class="new-job-posting">
           <div class="new-job-title">
             <div class="title">
-              <img src="/assets/images/icon_home_sub_title.svg" alt="">
-              {{ $t('home.new_job_posting') }}
+              <span>{{ $t('home.new_job_posting') }}</span>
               <div class="total-new-job">
                 {{ $t('home.new_job') }}
               </div>
@@ -84,7 +83,6 @@
         <div class="recommended-job">
           <div class="recommended-job-title">
             <div class="title">
-              <img src="/assets/images/icon_home_sub_title1.svg" alt="">
               {{ $t('home.recommended_job') }}
             </div>
             <div class="button-see-all" @click="changeToSearch(false, 'recommend')">
@@ -104,7 +102,6 @@
         <div class="search-from-popular">
           <div class="search-from-popular-title">
             <div class="title">
-              <img src="/assets/images/icon_home_sub_title2.svg" alt="">
               {{ $t('home.search_from_popular') }}
             </div>
           </div>
@@ -130,7 +127,6 @@
         <div class="search-by-employment">
           <div class="search-by-employment-title">
             <div class="title">
-              <img src="/assets/images/icon_home_sub_title3.svg" alt="">
               {{ $t('home.search_by_employment') }}
             </div>
           </div>
@@ -170,7 +166,7 @@
         <div class="form-list-new-see-all" @click="changeToSearch(false, 'most_view')">
           <div class="button-see-all">
             <span>{{ $t('home.see_all_job') }}</span>
-            <img src="/assets/icon/icon_arrow_secondary.svg" alt="">
+            <img src="/assets/icon/icon_arrow.svg" alt="">
           </div>
         </div>
         <div class="form-list-new-social">

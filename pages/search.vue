@@ -1,7 +1,6 @@
 <template>
   <div class="search-page">
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="$t('page.search')"></BannerElement>
     <div class="search-content">
       <div class="search-form-condition">
         <div class="header-search">
@@ -45,13 +44,13 @@
           <div v-if="showAll" class="form-all-condition">
             <div class="form-condition-item">
               <div class="header-search-left">
-                <span>{{ $t('condition.occupation') }}</span>
+                <span>{{ $t('condition.keyword') }}</span>
               </div>
               <div class="header-search-right">
                 <el-input
                   v-model.trim="search"
                   class="input-keyword"
-                  :placeholder="$t('common.search')"
+                  :placeholder="$t('condition.keyword')"
                   name="search"
                   type="text"
                   tabindex="2"
@@ -86,7 +85,7 @@
               </div>
             </div>
             <div class="form-condition-item form-item-50">
-              <div class="header-search-left">
+              <div class="header-search-left header-search-sort">
                 <span>{{ $t('condition.sort_by') }}</span>
               </div>
               <div class="header-search-right">
@@ -274,7 +273,6 @@ import {
   INDEX_SET_ERROR, JOB_TYPE_AMOUNT
 } from '../store/store.const'
 import TitlePageElement from '../components/layout/TitlePageElement'
-import BannerElement from '../components/layout/BannerElement'
 import PaginationElement from '../components/element-ui/PaginationElement'
 import NoDataElement from '../components/element-ui/NoDataElement'
 import FormApplyJobElement from '../components/element-ui/FormApplyJobElement'
@@ -282,7 +280,7 @@ import RecommendJobElement from '../components/home/RecommendJobElement'
 
 export default {
   name: 'SearchPage',
-  components: { TitlePageElement, BannerElement, PaginationElement, RecommendJobElement, NoDataElement, FormApplyJobElement },
+  components: { TitlePageElement, PaginationElement, RecommendJobElement, NoDataElement, FormApplyJobElement },
   data() {
     return {
       jobDialog: false,

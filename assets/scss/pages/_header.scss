@@ -1,5 +1,6 @@
 .header-common {
   height: 48px;
+  border-bottom: 1px solid $border-default;
   .header-container {
     display: flex;
     max-width: 1280px;
@@ -57,17 +58,18 @@
         }
       }
       .button-login {
-        margin: 16px 60px 16px 40px;
+        margin: 6px 90px 6px 0;
         button {
-          padding: 8px 12px;
+          padding: 6px 12px;
+          height: 36px;
           img {
             margin-right: 6px;
           }
           span {
             display: flex;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 24px;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
           }
         }
       }

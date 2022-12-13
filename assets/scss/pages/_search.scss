@@ -1,21 +1,21 @@
 .search-page {
+  padding-top: 30px;
   .search-content {
-    padding: 36px 64px;
-    max-width: 1152px;
+    padding: 31px 90px;
+    max-width: 1100px;
     margin: auto;
     .el-checkbox {
       width: max-content;
     }
     .search-form-condition {
-      border: 2px solid $border-focus;
+      box-shadow: 0px 2px 9px rgba(33, 16, 16, 0.25);
       border-radius: 6px;
-      padding: 24px;
+      padding: 21px 16px 32px;
+      position: relative;
       .header-search {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 4px;
         .header-search-right {
-          border-top: 1px solid $border-default;
           .show-result-condition {
             font-weight: 700;
             font-size: 16px;
@@ -37,18 +37,18 @@
             }
           }
           .el-button {
-            height: 48px;
-            padding: 11px 21px;
+            height: 36px;
+            padding: 6px 20px;
             span {
               display: flex;
               justify-content: center;
-              font-weight: 500;
-              font-size: 16px;
-              line-height: 24px;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
               img {
-                width: 24px;
-                height: 24px;
-                margin-right: 6px;
+                width: 20px;
+                height: 20px;
+                margin-top: 1px;
               }
             }
           }
@@ -66,6 +66,9 @@
       }
       .all-condition {
         .button-see-all {
+          position: absolute;
+          right: 20px;
+          bottom: 40px;
           font-weight: 500;
           font-size: 16px;
           line-height: 24px;
@@ -86,7 +89,6 @@
           .form-condition-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 2px;
             .input-keyword {
               width: calc(50% + 85px);
               .el-input__prefix {
@@ -106,8 +108,7 @@
               .checkbox-item {
                 width: 33%;
                 display: inline-block;
-                margin-bottom: 20px;
-                margin-top: 10px;
+                margin: 3px 0;
                 .el-checkbox__label {
                   white-space: normal;
                 }
@@ -118,7 +119,7 @@
               font-weight: 700;
               font-size: 16px;
               line-height: 24px;
-              margin-bottom: 6px;
+              margin-bottom: 3px;
             }
           }
         }
@@ -126,14 +127,14 @@
       .button-search {
         justify-content: center;
         display: flex;
-        margin-top: 20px;
+        margin-top: 32px;
         .el-button {
-          padding: 12px 24px;
+          padding: 8px 52px;
         }
         span {
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 24px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
         }
       }
     }
@@ -141,7 +142,7 @@
       font-weight: 700;
       font-size: 20px;
       line-height: 28px;
-      margin-top: 24px;
+      margin-top: 32px;
       .total-record {
         font-family: 'Inter';
         font-weight: 700;
@@ -167,18 +168,20 @@
   }
   .header-search-left {
     width: 146px;
-    background-color: $color-blue-3;
+    background-color: $color-bg-footer;
     font-weight: 700;
-    font-size: 16px;
-    line-height: 24px;
-    padding: 16px 0 16px 24px;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 9px 0 9px 24px;
     border-radius: 4px;
+  }
+  .header-search-sort {
+    padding: 7px 0 7px 24px;
   }
   .header-search-right {
     width: calc(100% - 194px);
     margin-left: 24px;
-    border-bottom: 1px solid $border-default;
-    padding: 12px 0;
+    padding: 3px 0;
   }
 }
 
@@ -186,7 +189,7 @@
   .el-dialog__header {
     padding: 30px 32px 32px;
     .el-dialog__title {
-      font-weight: 700;
+      font-weight: 400;
       font-size: 32px;
       line-height: 40px;
       height: 40px;
@@ -219,12 +222,14 @@
       font-weight: 500;
       .district-item {
         .district-name {
-          background: $color-primary;
+          background: $color-primary-200;
           border-radius: 4px;
           padding: 15px 16px;
           .el-checkbox__label {
             font-weight: 700;
             padding-left: 10px;
+            font-size: 16px;
+            line-height: 24px;
           }
         }
         .list-province {
@@ -294,12 +299,7 @@
     padding: 0 0 30px;
     .dialog-footer {
       .el-button {
-        padding: 12px 43px;
-        span {
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 24px;
-        }
+        padding: 8px 43px;
       }
     }
   }
