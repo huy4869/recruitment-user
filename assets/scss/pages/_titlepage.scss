@@ -5,6 +5,7 @@
   margin: auto;
   .title-link {
     display: flex;
+    width: max-content;
     background-color: $color-white;
     color: $color-text-primary;
     cursor: pointer;
@@ -35,6 +36,9 @@
     padding: 0 6px;
     bottom: -1px;
     position: relative;
+    span {
+      word-break: break-all;
+    }
   }
 }
 .banner-element {

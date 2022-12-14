@@ -104,7 +104,9 @@ export default {
     }
   },
   created() {
-    this.countNotification()
+    if (this.loggedIn) {
+      this.countNotification()
+    }
   },
   methods: {
     changeToLink(link) {

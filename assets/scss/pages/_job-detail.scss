@@ -6,6 +6,7 @@
     margin: 28px 90px 16px;
     border-bottom: 1px solid $border-default;
     .job-detail-title {
+      word-break: break-all;
       font-weight: 700;
       font-size: 24px;
       line-height: 32px;
@@ -79,6 +80,7 @@
       font-size: 16px;
       line-height: 24px;
       margin: 24px 0 28px;
+      word-break: break-all;
       white-space: break-spaces;
     }
     .detail-job-image-pc {
@@ -266,6 +268,7 @@
           }
         }
         .application-requirement-right {
+          word-break: break-all;
           width: calc(100% - 170px);
           margin-left: 24px;
           border-bottom: 1px solid $border-default;
