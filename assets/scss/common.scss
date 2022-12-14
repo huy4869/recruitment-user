@@ -694,6 +694,10 @@ hr {
   word-break: break-word;
 }
 
+.break-space {
+  white-space: break-spaces;
+}
+
 .underline-hover:hover {
   border-bottom-width: 1px;
   border-bottom-style: solid;
