@@ -97,12 +97,12 @@
       .complete-item {
         color: $color-blue;
         text-align: center;
-        font-weight: 700;
+        font-weight: 500;
         font-size: 20px;
         line-height: 28px;
       }
       .result-item {
-        font-weight: 500;
+        font-weight: 400;
         font-size: 16px;
         line-height: 24px;
         color: $color-black;
@@ -177,7 +177,7 @@
       font-size: 14px;
       line-height: 22px;
       letter-spacing: 0.05em;
-      color: $color-text-4;
+      color: $color-text-3;
       margin-left: 12px;
     }
   }
@@ -295,6 +295,9 @@
       .desc-date {
         color: $color-text-primary;
         font-weight: 700;
+        &:hover {
+          color: $color-primary-hover;
+        }
       }
       .desc-state {
         display: inline-block;
@@ -1115,7 +1118,7 @@
     .title {
       font-size: 20px;
       line-height: 28px;
-      font-weight: 500;
+      font-weight: 400;
       margin: 8px 0 24px;
     }
     .btn-group {

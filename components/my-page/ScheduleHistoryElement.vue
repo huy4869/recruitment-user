@@ -1,7 +1,8 @@
 <template>
   <div class="my-page-schedule-element schedule-history" @click="changeToDetail(schedule.job_id)">
     <div class="title-create">
-      {{ $t('schedule.created_at') }} {{ schedule.created_at }}
+      <span class="bold">{{ $t('schedule.created_at') }}</span>
+      <span class="">{{ schedule.created_at }}</span>
     </div>
     <div class="schedule-title">
       <div class="title-main">
@@ -36,7 +37,7 @@
           </div>
         </div>
         <div class="schedule-button">
-          <el-button v-if="schedule.allow_edit" :loading="loading" type="danger" @click.stop="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
+          <el-button class="" v-if="schedule.allow_edit" :loading="loading" type="danger" @click.stop="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
           <el-button v-if="schedule.allow_cancel" :loading="loading" @click.stop="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
         </div>
       </div>
