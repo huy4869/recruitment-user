@@ -34,7 +34,7 @@
       </div>
       <div class="d-flex justify-between cursor-pointer">
         <div class="text-last-updated"><span>{{ job.released_at }}</span></div>
-        <div class="d-flex button-remove-job" @click.stop="removeFavoriteJob">
+        <div class="d-flex button-remove-job text-blue-hover" @click.stop="removeFavoriteJob">
           <img class="union-icon" src="/assets/icon/union.svg" alt="union">
           <p class="text-primary-blue">{{ $t('favorite_job.remove') }}</p>
         </div>

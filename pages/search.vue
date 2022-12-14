@@ -113,7 +113,7 @@
             </div>
           </div>
           <div class="d-flex justify-end">
-            <div class="button-see-all" @click="showAll = !showAll">
+            <div class="button-see-all text-blue-hover" @click="showAll = !showAll">
               <span>{{ $t('condition.specify_detailed_conditions') }}</span>
               <img :class="{ 'hide-show-all':showAll }" src="/assets/icon/icon_double_next.svg" alt="">
             </div>

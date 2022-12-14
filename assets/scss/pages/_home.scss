@@ -55,6 +55,9 @@
               line-height: 22px;
               color: $color-text-primary;
               cursor: pointer;
+              &:hover {
+                color: $color-primary-hover
+              }
             }
           }
           .form-select {
@@ -143,6 +146,12 @@
         cursor: pointer;
         align-items: flex-end;
         padding-bottom: 19px;
+        &:hover {
+          color: $color-icon-link-hover;
+          img {
+            opacity: 0.6;
+          }
+        }
         img {
           width: 24px;
           height: 24px;

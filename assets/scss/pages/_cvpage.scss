@@ -471,6 +471,12 @@
             cursor: pointer;
             border: 1px solid $border-default;
             border-radius: 4px;
+            &:hover  {
+              background-color: $color-bg-footer;
+            }
+            &:focus {
+              background-color: $color-placeholder;
+            }
           }
         }
       }
@@ -625,10 +631,15 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+    &:hover {
+      background: $color-primary-200;
+    }
+    &:focus {
+      background: $color-primary-200;
+    }
   }
   .menu-active {
     font-weight: 700;
-
     color: $color-text-primary;
   }
   .hamburger-title {

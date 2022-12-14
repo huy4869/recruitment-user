@@ -703,6 +703,7 @@ hr {
 .underline-hover:focus {
   border-bottom-width: 1px;
   border-bottom-style: solid;
+  color: $color-primary-focus !important;
 }
 
 .disabledImg {
@@ -739,4 +740,33 @@ hr {
   height: 20px;
   padding: 0 6px;
   border-radius: 2px;
+}
+
+.menu-hover {
+  &:hover {
+    background: $color-menu-black-hover !important;
+  }
+  &:focus {
+    background: $color-menu-black-hover !important;
+  }
+}
+
+.text-blue-hover {
+  &:hover {
+    color: $color-blue-hover !important;
+    p, span{
+      color: $color-blue-hover !important;
+    }
+    img {
+      opacity: 0.6;
+    }
+  }
+  &focus {
+    p, div{
+      color: $color-blue-focus !important;
+    }
+    img {
+      opacity: 0.6;
+    }
+  }
 }

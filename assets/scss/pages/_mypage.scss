@@ -268,7 +268,7 @@
     }
     .schedule-description {
       padding-left: 16px;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 14px;
       line-height: 22px;
       word-break: break-all;
@@ -313,7 +313,7 @@
 .schedule-history {
   position: relative;
   .title-create {
-    font-weight: 500;
+    font-weight: 400;
     font-size: 13px;
     line-height: 20px;
     color: $color-text-primary;
@@ -392,7 +392,7 @@
           border-radius: 24px;
           height: 40px;
           span {
-            font-weight: 500;
+            font-weight: 400;
             font-size: 14px;
             line-height: 22px
           }
@@ -427,7 +427,7 @@
   background-color: $color-placeholder;
 }
 .button-view-all {
-  color: $color-dark-100;
+  color: $color-black;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -439,6 +439,12 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
+  }
+  &:hover {
+    color: $color-icon-link-hover;
+    img {
+      opacity: 0.6;
+    }
   }
 }
 
@@ -706,7 +712,7 @@
         span {
           margin: 17px 0;
           font-weight: 400;
-          font-size: 16px;
+          font-size: 14px;
           line-height: 24px;
         }
       }

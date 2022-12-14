@@ -45,7 +45,7 @@
       <div class="index-page">
         <el-row>
           <el-col v-for="(tab, key) in listTab" :key="key" :span="12">
-            <div class="tab-index" @click="handleRouter(tab.link)">
+            <div class="tab-index menu-hover" @click="handleRouter(tab.link)">
               <img :src="tab.icon" alt="">
               <div>{{ tab.name }}</div>
               <img v-if="tab.state" class="icon-done" src="/assets/icon/mypage_done.svg" alt="">

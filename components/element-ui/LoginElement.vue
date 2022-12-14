@@ -58,7 +58,7 @@
             <el-button
               v-loading.fullscreen.lock="fullscreenLoading"
               :loading="loading"
-              type="danger"
+              type="primary"
               @click.native.prevent="login"
             >
               {{ $t('login.title') }}

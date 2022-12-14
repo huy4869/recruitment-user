@@ -19,6 +19,9 @@
       line-height: 24px;
       padding-right: 90px;
       .button-action {
+        &:hover {
+          color: $color-icon-link-hover;
+        }
         display: flex;
         position: relative;
         span {
