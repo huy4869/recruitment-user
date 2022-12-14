@@ -28,12 +28,27 @@
           </div>
         </div>
         <div v-if="!loggedIn" class="button-action show-pc">
+          <div class="border-default"></div>
           <div class="form-icon" @click="changeToLink('/register')">
             <img src="/assets/icon/icon_register.svg" alt="">
             <span>{{ $t('header.member_register') }}</span>
           </div>
         </div>
-        <div v-if="!loggedIn" class="button-login">
+        <div v-if="!loggedIn" class="show-sp header-sp">
+          <div class="button-action">
+            <div class="form-icon" @click="changeToLink('/register')">
+              <img src="/assets/icon/icon_register.svg" alt="">
+              <span>{{ $t('header.member_register_mobile') }}</span>
+            </div>
+          </div>
+          <div class="button-action">
+            <div class="form-icon" @click="changeToLink('/login')">
+              <img src="/assets/icon/icon_login_mobile.svg" alt="">
+              <span>{{ $t('login.title') }}</span>
+            </div>
+          </div>
+        </div>
+        <div v-if="!loggedIn" class="button-login show-pc">
           <el-button type="primary" @click="changeToLink('/login')">
             <img src="/assets/icon/icon_login.svg" alt="">
             {{ $t('login.title') }}

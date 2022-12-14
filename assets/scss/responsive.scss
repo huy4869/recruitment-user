@@ -940,8 +940,11 @@
         }
         .button-action {
           border-left: 1px solid $border-default;
-          padding: 1px 8px 7px;
+          padding: 0px 8px 5px;
           margin: 0;
+          div{
+            padding-right: 0;
+          }
           .form-icon {
             display: flex;
             flex-direction: column;
