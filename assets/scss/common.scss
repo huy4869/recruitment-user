@@ -696,7 +696,13 @@ hr {
 
 .underline-hover:hover {
   border-bottom-width: 1px;
-  border-bottom-style: solid
+  border-bottom-style: solid;
+  color: $color-primary-hover !important;
+}
+
+.underline-hover:focus {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
 }
 
 .disabledImg {

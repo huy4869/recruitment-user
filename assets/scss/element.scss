@@ -87,6 +87,9 @@
     width: 24px;
     height: 24px;
     border: none;
+    &:hover {
+      background-image: url('/assets/icon/icon_checked_hover.svg');
+    }
     &::after {
       display: none;
     }
