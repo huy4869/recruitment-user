@@ -787,8 +787,7 @@
       border-top: 1px solid $border-default;
       z-index: 3;
       .content-button {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
         padding: 17px;
         .button-home {
           padding: 6px 10px;
@@ -804,7 +803,6 @@
           }
         }
         .list-icon {
-          width: 55%;
           .button-footer {
             img {
               margin-top: 6px;
