@@ -110,9 +110,17 @@
       font-size: 14px;
       line-height: 22px;
       background-color: $color-text-primary;
-      border: none;
+      border: 1px solid $color-text-primary;
       &:hover {
-        opacity: 0.8;
+        background-color: $color-primary-hover;
+        border: 1px solid $color-primary-hover;
+        img {
+          opacity: 0.8;
+        }
+      }
+      &:focus {
+        background-color: $color-primary-focus;
+        border: 1px solid $color-primary-focus;
       }
     }
     .description {

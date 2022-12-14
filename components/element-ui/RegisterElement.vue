@@ -175,7 +175,7 @@
         </el-form-item>
         <div class="link-register text-center">
           <span class="text-mobile text-primary-black">{{ $t('register.have_account') }}</span>
-          <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('login')">{{ $t('register.here') }}</span>
+          <span class="text-mobile cursor-pointer underline-hover text-primary-pink" @click="changeLink('login')">{{ $t('register.here') }}</span>
         </div>
       </el-form>
     </div>

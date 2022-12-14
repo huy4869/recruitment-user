@@ -39,21 +39,21 @@
       </div>
     </div>
     <div class="button-footer">
-      <div class="button-item">
+      <div class="button-item menu-hover">
         <div class="d-flex" @click="changeToPage('application-history')">
           <img src="/assets/icon/icon_history.svg" alt="">
           <span>{{ $t('my_page.history') }}</span>
         </div>
         <img class="icon-arrow" src="/assets/icon/icon_arrow_white.svg" alt="">
       </div>
-      <div class="button-item" @click="changeToPage('favorite-job')">
+      <div class="button-item menu-hover" @click="changeToPage('favorite-job')">
         <div class="d-flex">
           <img src="/assets/icon/icon_heart.svg" alt="">
           <span>{{ $t('my_page.favorite_job') }}</span>
         </div>
         <img class="icon-arrow" src="/assets/icon/icon_arrow_white.svg" alt="">
       </div>
-      <div class="button-item" @click="changeToPage('web-cv')">
+      <div class="button-item menu-hover" @click="changeToPage('web-cv')">
         <div class="d-flex">
           <img src="/assets/icon/icon_user.svg" alt="">
           <span>{{ $t('my_page.web_cv') }}</span>

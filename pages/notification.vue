@@ -7,7 +7,7 @@
           <div class="notification-form">
             <div v-if="!notification.be_read" class="show-status">{{ $t('common.unread') }}</div>
             <div class="notification-title cursor-pointer">
-              <a @click="updateRead(notification)" :href="getLinkNotification(notification)">{{ notification.title }}</a>
+              <a class="text-blue-hover" @click="updateRead(notification)" :href="getLinkNotification(notification)">{{ notification.title }}</a>
               <div class="show-pc notification-date">{{ notification.created_at }}</div>
             </div>
             <div class="notification-detail">

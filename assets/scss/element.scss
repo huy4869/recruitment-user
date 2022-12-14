@@ -7,7 +7,7 @@
 .el-form-item.is-error {
   .el-input {
     .el-input__inner {
-      border: 1px solid $color-red-primary;
+      border: 1px solid $color-red;
     }
   }
 }
@@ -20,7 +20,7 @@
       outline: 0;
     }
     &:hover {
-      border-color: $color-text-primary;
+      border-color: $color-primary-hover;
     }
   }
   input {
@@ -31,7 +31,7 @@
     padding: 6px 16px;
     &::placeholder {
       color: $color-placeholder;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 14px;
       line-height: 22px;
       top: 10px;
@@ -160,16 +160,16 @@
   padding: 8px 24px;
   &:hover {
     border-color: $color-blue-hover;
-    background: $color-white;
-    color: $color-blue-hover;
+    background: $color-blue-3;
+    color: $color-blue;
     img {
       opacity: 0.8;
     }
   }
   &:focus {
-    background-color: $color-white;
-    border-color: $color-blue-focus;
-    color: $color-blue-focus;
+    background-color: $color-blue;
+    border-color: $color-blue;
+    color: $color-white;
   }
 }
 
@@ -362,6 +362,10 @@
   width: 570px;
   .el-message-box__status+.el-message-box__message {
     padding: 0;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;
+    margin-top: 16px;
   }
 }
 .el-message-box {
@@ -405,20 +409,27 @@
     justify-content: center;
     margin: 24px 0 22px;
     button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 128px;
       padding: 12px 0;
       text-align: center;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 24px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
       &:nth-child(1) {
         margin-right: 12px;
       }
       &:nth-child(2) {
         margin-left: 12px;
-        background-color: $color-text-primary;
-        border-color: $color-text-primary;
+        background-color: $color-blue;
+        border-color: $color-blue;
         color: $color-white;
+        &:hover {
+          background-color: $color-blue-hover;
+          color: $color-white;
+        }
       }
     }
   }

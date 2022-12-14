@@ -13,8 +13,11 @@
       color: $color-text-1;
       font-weight: 300;
       font-size: 14px;
-      line-height: 24px;
+      line-height: 22px;
       margin: 28px 0 16px;
+      div:hover {
+        color: $color-icon-link-hover;
+      }
     }
     .logo {
       text-align: center;
@@ -25,9 +28,9 @@
       text-align: center;
       margin-top: 7px;
       color: $color-text-3;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 12px;
-      line-height: 22px;
+      line-height: 20px;
       padding-bottom: 1px;
     }
     .top-arrow {
@@ -40,6 +43,9 @@
       img {
         width: 64px;
         height: 64px;
+        &:hover {
+          opacity: 0.6;
+        }
       }
     }
   }

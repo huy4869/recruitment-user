@@ -30,7 +30,7 @@
             <div class="sub-detail-title-sp" v-html="job.pick_up_point"></div>
           </div>
         </div>
-        <div v-if="loggedIn" class="about-job show-pc" @click="openAboutDialog">
+        <div v-if="loggedIn" class="about-job show-pc text-blue-hover" @click="openAboutDialog">
           <img src="/assets/icon/icon_email.svg" alt="">
           <span>{{ $t('job.about_job') }}</span>
         </div>
