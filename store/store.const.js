@@ -98,6 +98,7 @@ export const JOB_TYPE_AMOUNT = 'job/getJobTypeAmount'
 // notification
 export const NOTIFICATION_LIST = 'notification/listNotification'
 export const NOTIFICATION_UPDATE_READ = 'notification/readNotification'
+export const NOTIFICATION_COUNT = 'notification/countNotification'
 
 // location
 export const LOCATION_LIST_MOST_APPLY = 'location/listLocationMostApply'
