@@ -95,16 +95,9 @@
         <el-button type="default" @click="closeAboutDialog">
           {{ $t('button.close_up') }}
         </el-button>
-        <div class="show-pc">
-          <el-button type="primary" @click="submitApply">
-            {{ $t('button.confirm') }}
-          </el-button>
-        </div>
-        <div class="show-sp">
-          <el-button type="danger" @click="submitApply">
-            {{ $t('button.confirm') }}
-          </el-button>
-        </div>
+        <el-button type="danger" @click="submitApply">
+          {{ $t('button.confirm') }}
+        </el-button>
       </div>
     </el-dialog>
   </div>

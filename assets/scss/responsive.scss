@@ -334,7 +334,7 @@
   }
   .inquiry-page {
     .inquiry-content {
-      padding: 54px 24px;
+      padding: 0px 24px;
       .inquiry-container {
         .left-container {
           .description, .description2 {
@@ -391,9 +391,6 @@
             max-width: 150px;
             word-break: break-all;
           }
-        }
-        .button-login {
-          margin: 16px;
         }
       }
     }
@@ -876,6 +873,13 @@
 
       form {
         width: 100%;
+        .here-mobile#here-login {
+          span {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 22px;
+          }
+        }
       }
       .el-form-item {
         margin-bottom: 32px;
@@ -941,6 +945,7 @@
           .form-icon {
             display: flex;
             flex-direction: column;
+            margin-top: 5px;
             img {
               margin:0 auto;
             }
@@ -949,6 +954,9 @@
               line-height: 20px
             }
           }
+        }
+        .button-login {
+          margin-right: 12px;
         }
       }
     }
@@ -3121,22 +3129,37 @@
   }
   .inquiry-page {
     .inquiry-content {
-      padding: 24px 6px;
+      padding: 12px;
+      margin: 0;
       .inquiry-container {
         display: block;
         .left-container {
-          margin-bottom: 42px;
           .inquiry-title {
-            font-size: 16px;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 24px;
+            color: $color-text-primary;
+            padding-bottom: 10px;
           }
           .description, .description2 {
+            font-weight: 400;
             font-size: 14px;
+            line-height: 22px;
           }
           .description {
             margin-top: 12px;
           }
+          .description2 {
+            margin: 15px 0 24px;
+          }
           .edit-form-input {
-            margin-top: 40px;
+            margin-top: 24px;
+            .content-input {
+              margin: 5px 0 24px;
+            }
+            .required {
+              top: 1px;
+            }
           }
           .edit-cv-element {
             margin-bottom: -20px;
@@ -3144,6 +3167,23 @@
               padding: 0
             }
           }
+          #btn-center {
+            margin-top: 24px;
+          }
+          .show-data-user {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 1px solid $border-default;
+            background-color: $color-bg-footer;
+            cursor: not-allowed;
+          }
+        }
+        .right-container {
+          padding-top: 40px;
+          border-radius: 4px;
         }
       }
     }

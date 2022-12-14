@@ -24,7 +24,7 @@
                   <el-col :md="17" :sm="24">
                     <div class="content-input">
                       <el-row class="d-flex">
-                        <el-col :md="22" :sm="24">
+                        <el-col :md="24" :sm="24">
                           <el-form-item label="" prop="email" :error="(error.key === 'email') ? error.value : ''">
                             <el-input
                               ref="email"
@@ -51,7 +51,7 @@
                   <el-col :md="17" :sm="24">
                     <div class="content-input">
                       <el-row class="d-flex">
-                        <el-col :md="22" :sm="24">
+                        <el-col :md="24" :sm="24">
                           <el-form-item label="" prop="name" :error="(error.key === 'name') ? error.value : ''">
                             <el-input
                               ref="name"
@@ -78,7 +78,7 @@
                   <el-col :md="17" :sm="24">
                     <div class="content-input">
                       <el-row class="d-flex">
-                        <el-col :md="22" :sm="24">
+                        <el-col :md="24" :sm="24">
                           <el-form-item label="" prop="tel" :error="(error.key === 'tel') ? error.value : ''">
                             <el-input
                               ref="tel"
@@ -105,7 +105,7 @@
                   <el-col :md="17" :sm="24">
                     <div class="content-input">
                       <el-row class="d-flex">
-                        <el-col :md="22" :sm="24">
+                        <el-col :md="24" :sm="24">
                           <el-form-item label="" prop="content" :error="(error.key === 'content') ? error.value : ''">
                             <el-input
                               ref="pr"

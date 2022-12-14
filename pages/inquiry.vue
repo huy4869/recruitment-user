@@ -1,7 +1,6 @@
 <template>
   <div class="inquiry-page">
     <TitlePageElement class="show-pc"></TitlePageElement>
-    <BannerElement :banner="$t('page.inquiry')"></BannerElement>
     <div v-if="loggedIn">
       <InquiryElement></InquiryElement>
     </div>
@@ -14,7 +13,6 @@
 <script>
 import InquiryElement from '../components/element-ui/InquiryElement'
 import InquiryNoLoginElement from '../components/element-ui/InquiryNoLoginElement'
-import BannerElement from '~/components/layout/BannerElement'
 import TitlePageElement from '~/components/layout/TitlePageElement'
 import {
   INDEX_SET_TITLE_MENU
@@ -22,7 +20,7 @@ import {
 
 export default {
   name: 'InquiryPage',
-  components: { InquiryNoLoginElement, TitlePageElement, BannerElement, InquiryElement },
+  components: { InquiryNoLoginElement, TitlePageElement, InquiryElement },
   data() {
     return {
       loggedIn: this.$auth.loggedIn
