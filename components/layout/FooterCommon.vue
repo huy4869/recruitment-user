@@ -40,13 +40,13 @@
             <div class="button-footer" @click="handleRouter('/')">
               <img src="/assets/icon/icon_home.png" alt="">
             </div>
+            <div class="button-footer" @click="handleRouter('/search')">
+              <img src="/assets/icon/icon_search.svg" alt="">
+            </div>
             <div v-if="loggedIn" class="button-footer">
               <div @click="handleRouter('/chat')">
                 <img src="/assets/icon/icon_chat.svg" alt="">
               </div>
-            </div>
-            <div class="button-footer" @click="handleRouter('/search')">
-              <img src="/assets/icon/icon_search.svg" alt="">
             </div>
             <div class="button-footer" @click="handleRouter('/notification')">
               <img src="/assets/icon/icon_notification_mobile.svg" alt="">

@@ -21,8 +21,10 @@
         <div class="button-action show-pc">
           <div class="border-default"></div>
           <div @click="changeToLink('/notification')">
-            <img src="/assets/icon/icon_notification.svg" alt="">
-            <span>{{ $t('header.notification') }}</span>
+            <el-badge class="mark" :value="totalNotification">
+              <img src="/assets/icon/icon_notification.svg" alt="">
+            </el-badge>
+            <span class="noti-text">{{ $t('header.notification') }}</span>
           </div>
         </div>
         <div v-if="!loggedIn" class="button-action show-pc">
@@ -82,12 +84,15 @@
 </template>
 <script>
 
+import { INDEX_SET_ERROR, INDEX_SET_LOADING, NOTIFICATION_COUNT } from '@/store/store.const'
+
 export default {
   name: 'HeaderCommon',
   data() {
     return {
       user: this.$auth.user,
-      loggedIn: this.$auth.loggedIn
+      loggedIn: this.$auth.loggedIn,
+      totalNotification: ''
     }
   },
   watch: {
@@ -97,6 +102,9 @@ export default {
       },
       deep: true
     }
+  },
+  created() {
+    this.countNotification()
   },
   methods: {
     changeToLink(link) {
@@ -111,6 +119,33 @@ export default {
         return name.slice(0, 6) + '...'
       }
       return name
+    },
+    async countNotification() {
+      try {
+        await this.$store.commit(INDEX_SET_LOADING, true)
+        const response = await this.$store.dispatch(NOTIFICATION_COUNT)
+        switch (response.status_code) {
+          case 200:
+            this.totalNotification = response.data.count
+            break
+          case 500:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: this.$t('content.EXC_001')
+            })
+            break
+          default:
+            await this.$store.commit(INDEX_SET_ERROR, {
+              show: true,
+              text: response.messages
+            })
+            break
+        }
+        await this.$store.commit(INDEX_SET_LOADING, false)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }
