@@ -81,11 +81,11 @@
                       <el-row class="enroll-checkbox">
                         <el-checkbox v-model="accountForm.period_check">{{ $t('my_page.enroll') }}</el-checkbox>
                       </el-row>
-                      <el-row class="d-flex period items-center">
-                        <el-col :md="9" :sm="24" class="first-name">
+                      <el-row class="d-flex period items-center period-career">
+                        <el-col :md="9" :sm="24" :xs="11" class="">
                           <el-form-item label="" prop="period_start" :error="(error.key === 'period_start') ? error.value : ''">
-                            <el-row class="d-flex">
-                              <el-col  :sm="12" :xs="12" class="birth-year">
+                            <el-row class="d-flex items-center">
+                              <el-col  :sm="8" :xs="12" class="birth-year">
                                 <el-select
                                   v-model="accountForm.period_year_start"
                                   name="period_start"
@@ -102,7 +102,7 @@
                                 </el-select>
                               </el-col>
                               <span class="text-normal birthday">{{ $t('form.year') }}</span>
-                              <el-col :sm="12" :xs="10" class="birth-month">
+                              <el-col :sm="8" :xs="10" class="birth-month">
                                 <el-select
                                   v-model="accountForm.period_month_start"
                                   name="period_start"
@@ -124,12 +124,12 @@
                             </el-row>
                           </el-form-item>
                         </el-col>
-                        <span class="date-space">~</span>
+                        <span class="date-space date-space-career">~</span>
                         <span v-show="accountForm.period_check" class="text-normal">{{ $t('career.current') }}</span>
-                        <el-col v-show="!accountForm.period_check" :md="9" :sm="24" class="birth-year">
+                        <el-col v-show="!accountForm.period_check" :md="9" :sm="24" :xs="11" class="birth-year">
                           <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
-                            <el-row class="d-flex">
-                              <el-col  :sm="12" :xs="12" class="birth-year">
+                            <el-row class="d-flex items-center">
+                              <el-col  :sm="8" :xs="12" class="birth-year">
                                 <el-select
                                   v-model="accountForm.period_year_end"
                                   name="period_end"
@@ -146,7 +146,7 @@
                                 </el-select>
                               </el-col>
                               <span class="text-normal birthday">{{ $t('form.year') }}</span>
-                              <el-col  :sm="12" :xs="10" class="birth-month">
+                              <el-col  :sm="8" :xs="10" class="birth-month">
                                 <el-select
                                   v-model="accountForm.period_month_end"
                                   name="period_end"
@@ -283,7 +283,7 @@
                             </el-select>
                           </el-form-item>
                         </el-col>
-                        <el-col v-show="accountForm.work_type_name === 5" :md="20" :sm="24">
+                        <el-col v-if="accountForm.work_type_name === 5" :md="20" :sm="24">
                           <div ref="other_status" class="text-bold">{{ $t('career.other_emp_status') }}</div>
                           <el-form-item label="" prop="other_status" :error="(error.key === 'other_status') ? error.value : ''">
                             <el-autocomplete
@@ -361,15 +361,20 @@
                   </el-col>
                 </el-row>
                 <BorderElement :middle="true"></BorderElement>
-
+                <el-row class="d-flex form-label-input">
+                  <el-col :md="6" :sm="12" class="col-label">
+                  </el-col>
+                  <el-col :md="18" :sm="24">
+                    <div id="career-btn" class="justify-start text-center">
+                      <el-button class="card-button triple-btn" @click="handleRouter('/my-page/job-career')">{{ $t('my_page.back') }}</el-button>
+                      <el-button class="card-button triple-btn" @click="showDeleteModal">{{ $t('my_page.remove') }}</el-button>
+                      <el-button class="card-button triple-btn" type="danger" @click="update" >{{ $t('my_page.save') }}</el-button>
+                    </div>
+                  </el-col>
+                </el-row>
               </div>
             </el-form>
           </div>
-        </div>
-        <div id="btn-center" class="text-center">
-          <el-button class="card-button triple-btn" @click="handleRouter('/my-page/job-career')">{{ $t('my_page.back') }}</el-button>
-          <el-button class="card-button triple-btn" @click="showDeleteModal">{{ $t('my_page.remove') }}</el-button>
-          <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
         </div>
         <ConfirmModal
           v-show="confirmModal"

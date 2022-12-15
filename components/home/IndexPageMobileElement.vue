@@ -11,7 +11,7 @@
           <div class="form-select-search">
             <div class="select-title">
               <div>{{ $t('home.find_a_job') }}</div>
-              <div class="choose-job">{{ $t('home.search_by_condition') }}</div>
+              <div class="choose-job" @click="changeToSearch(false)">{{ $t('home.search_by_condition') }}</div>
             </div>
             <div class="form-select">
               <div class="d-flex">
