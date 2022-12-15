@@ -53,7 +53,7 @@
         height: 100%;
 
         p {
-          margin: 9px 0 0 24px;
+          margin: 9px 0 9px 24px;
           font-weight: 700;
           font-size: 14px;
           line-height: 22px;
@@ -65,6 +65,7 @@
         margin-left: 16px;
         padding: 9px 0;
         height: max-content;
+        min-height: 20px;
         p {
           margin: 0;
           font-weight: 400;
@@ -265,8 +266,17 @@
       color: $color-blue;
     }
     .btn-remove {
-      color: $color-red;
+      color: $color-red-primary;
       border-color: $border-default;
+      &:hover {
+        background-color: $color-bg-error;
+        color: $color-red-primary;
+      }
+      &:focus {
+        background-color: $color-bg-error;
+        border: $color-red !important;
+        color: $color-red-primary !important;
+      }
     }
     .btn-green, .btn-red {
       line-height: 20px;
@@ -279,7 +289,7 @@
 .career-job-page-element {
   width: 100%;
   .card-button {
-    padding: 12px 24px;
+    padding: 12px 23px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -300,6 +310,7 @@
 
     #career {
       margin-top: 8px;
+      margin-top: 8px;
       margin-bottom: 12px;
       .el-button--danger {
         font-weight: 400;
@@ -307,7 +318,7 @@
       }
       .el-button--default {
         font-weight: 500;
-        padding: 8px 56px;
+        padding: 8px 55px;
       }
       img {
         vertical-align: text-top;
@@ -316,5 +327,8 @@
     #career-mobile {
       display: none;
     }
+  }
+  #btn-nodata {
+      padding: 8px 55px;
   }
 }

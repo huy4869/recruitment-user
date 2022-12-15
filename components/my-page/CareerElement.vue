@@ -23,16 +23,14 @@
         <div class="left-item"><p class="card-text-primary">{{ $t('career.status') }}</p></div>
         <div class="right-item"><p class="card-text-normal text-ellipsis">{{ job.work_type_name }}</p></div>
         <div class="left-item"><p class="card-text-primary">{{ $t('career.business_content') }}</p></div>
-        <div class="right-item"><p class="card-text-normal break-word">{{ job.business_content }}</p></div>
+        <div class="right-item"><p class="card-text-normal break-word break-space">{{ job.business_content }}</p></div>
         <div class="left-item"><p class="card-text-primary">
           {{ $t('career.experience_accumulation1') }}<br>
           {{ $t('career.experience_accumulation2') }}<br>
           {{ $t('career.experience_accumulation3') }}</p>
         </div>
         <div class="right-item">
-          <div class="break-word text-wide">
-            {{ job.experience_accumulation }}
-          </div>
+          <p class="card-text-normal text-wide break-word break-space">{{ job.experience_accumulation }}</p>
         </div>
       </div>
       <div class="btn-option-mobile d-flex">

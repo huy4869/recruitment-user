@@ -169,7 +169,10 @@
   &:focus {
     background-color: $color-blue;
     border-color: $color-blue;
-    color: $color-white;
+    color: $color-white !important;
+    img {
+      background-color: $color-white;
+    }
   }
 }
 

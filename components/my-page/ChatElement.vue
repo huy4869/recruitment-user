@@ -41,7 +41,7 @@
                           <div class="last-message">
                             {{ user.content }}
                           </div>
-                          <div v-if="user.be_readed" class="message-status">
+                          <div v-if="!user.be_readed" class="message-status">
                             <span></span>
                           </div>
                         </div>

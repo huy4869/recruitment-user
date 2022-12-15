@@ -117,6 +117,10 @@ export function validFullWidth(str) {
   return reg.test(str)
 }
 
+export function validFurigana(str) {
+  const reg = /^([ァ-ン]|一){0,255}$/
+  return reg.test(str)
+}
 export function validHalfWidth(str) {
   const reg = /^[a-zA-Z0-9\*\.\#\!\@\$\%\^\&\(\)\{\}\[\]\:\;\<\>\,\.\?\/\~\_\+\-\=\|\\]+$/
   return reg.test(str)

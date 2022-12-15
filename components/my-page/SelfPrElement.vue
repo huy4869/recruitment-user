@@ -71,7 +71,7 @@
               <el-row class="d-flex">
                 <el-col :md="5" :sm="12" :xs="9" class="col-label left-item">
                   <div class="label">
-                    <span>{{ $t('self_pr.experience') }}{{ $t('self_pr.skill') }}</span>
+                    <span class="break-space">{{ $t('self_pr.experience_knowledge') }}</span>
                   </div>
                 </el-col>
                 <el-col :md="19" :sm="24" :xs="15">
