@@ -652,6 +652,12 @@
 
 #btn-no-data {
   margin-top: -55px;
+  .btn-back {
+    min-width: 140px;
+  }
+  .btn-register {
+    min-width: 136px;
+  }
 }
 
 .desired-edit {

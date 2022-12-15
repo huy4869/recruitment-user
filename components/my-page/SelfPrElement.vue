@@ -3,8 +3,8 @@
     <div v-if="checkNoData" >
       <NoDataElement :text="$t('common.message_no_data.self_pr')"></NoDataElement>
       <div id="btn-no-data" class="text-center">
-        <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')" >{{ $t('my_page.back') }}</el-button>
-        <el-button class="card-button btn-right" type="danger" @click="handleRouter('self-pr/edit')" >{{ $t('my_page.register') }}</el-button>
+        <el-button class="card-button btn-right btn-back" @click="handleRouter('/my-page/web-cv')" >{{ $t('my_page.back') }}</el-button>
+        <el-button class="card-button btn-right btn-register" type="danger" @click="handleRouter('self-pr/edit')" >{{ $t('my_page.register') }}</el-button>
       </div>
     </div>
     <div v-else>
