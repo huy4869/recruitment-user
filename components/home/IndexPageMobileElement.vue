@@ -161,7 +161,7 @@
             <div class="store-name">{{ job.store_name }}</div>
             <div class="job-info">
               <img src="/assets/icon/icon_place.svg" alt="">
-              <span>{{ job.address.address }}</span>
+              <span>{{ showAddress(job) }}</span>
             </div>
           </div>
         </div>
@@ -260,6 +260,12 @@ export default {
     },
     changeToSearchWork(search) {
       return '/search?work_type_ids=' + search.id
+    },
+    showAddress(job) {
+      if (job.address === undefined) {
+        return ''
+      }
+      return (job.address.province + job.address.province_city + job.address.address)
     }
   }
 }

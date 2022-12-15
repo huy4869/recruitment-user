@@ -14,7 +14,7 @@
       <div class="job-description">
         <div class="job-info">
           <img src="/assets/icon/icon_place.svg" alt="">
-          <span>{{ jobActive.address ? jobActive.address.address : '' }}</span>
+          <span>{{ showAddress }}</span>
         </div>
         <div class="job-info">
           <img src="/assets/icon/icon_save.svg" alt="">
@@ -87,6 +87,12 @@ export default {
         return ''
       }
       return this.jobActive.salary.min + ' ～ ' + this.jobActive.salary.max + this.jobActive.salary.type
+    },
+    showAddress() {
+      if (this.jobActive.address === undefined) {
+        return ''
+      }
+      return (this.jobActive.address.province + this.jobActive.address.province_city + this.jobActive.address.address)
     }
   },
   created() {

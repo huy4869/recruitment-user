@@ -20,8 +20,6 @@
           <div class="right-item first-right-item">
             <div class="img-detail">
               <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="img-detail">
-              <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="img-detail">
-              <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="img-detail">
             </div>
           </div>
           <div class="left-item">

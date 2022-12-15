@@ -10,7 +10,7 @@
       <div class="store-name">{{ job.store_name }}</div>
       <div class="job-info">
         <img src="/assets/icon/icon_place.svg" alt="">
-        <span>{{ job.address ? job.address.address : '' }}</span>
+        <span>{{ showAddress }}</span>
       </div>
       <div class="job-info">
         <img src="/assets/icon/icon_save.svg" alt="">
@@ -82,6 +82,12 @@ export default {
         return ''
       }
       return this.job.salary.min + ' ～ ' + this.job.salary.max + this.job.salary.type
+    },
+    showAddress() {
+      if (this.job.address === undefined) {
+        return ''
+      }
+      return (this.job.address.province + this.job.address.province_city + this.job.address.address)
     }
   },
   created() {
