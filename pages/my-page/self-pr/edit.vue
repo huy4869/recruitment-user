@@ -56,10 +56,10 @@
                 <div class="edit-form-input">
                   <BorderElement :middle="true"></BorderElement>
                   <el-row class="d-flex form-label-input">
-                    <el-col :md="6" :sm="24" class="col-label">
+                    <el-col :md="5" :sm="24" class="col-label">
                       <div class="label"><span>{{ $t('self_pr.business_content') }}</span></div>
                     </el-col>
-                    <el-col :md="18" :sm="24">
+                    <el-col :md="19" :sm="24">
                       <div class="content-input">
                         <el-row class="d-flex">
                           <el-col :md="24" :sm="24">
@@ -84,12 +84,12 @@
                   </el-row>
                   <BorderElement :middle="true"></BorderElement>
                   <el-row class="d-flex form-label-input">
-                    <el-col :md="6" :sm="24" class="col-label">
+                    <el-col :md="5" :sm="24" class="col-label">
                       <div class="label">
-                        <span>{{ $t('self_pr.experience') }}{{ $t('self_pr.skill') }}</span>
+                        <span class="break-space">{{ $t('self_pr.experience_knowledge') }}</span>
                       </div>
                     </el-col>
-                    <el-col :md="18" :sm="24">
+                    <el-col :md="19" :sm="24">
                       <div class="content-input">
                         <el-row class="d-flex">
                           <el-col :md="24" :sm="24">
@@ -114,10 +114,10 @@
                   </el-row>
                   <BorderElement :middle="true"></BorderElement>
                   <el-row class="d-flex form-label-input">
-                    <el-col :md="6" :sm="24" class="col-label">
+                    <el-col :md="5" :sm="24" class="col-label">
                       <div class="label"><span>{{ $t('self_pr.pr') }}</span></div>
                     </el-col>
-                    <el-col :md="18" :sm="24">
+                    <el-col :md="19" :sm="24">
                       <div class="content-input">
                         <el-row class="d-flex">
                           <el-col :md="24" :sm="24">

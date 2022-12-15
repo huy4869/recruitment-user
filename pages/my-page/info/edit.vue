@@ -41,7 +41,7 @@
                   <el-col :md="6" :sm="14" class="col-label">
                     <div class="label"><span>{{ $t('my_page.image_detail') }}</span></div>
                   </el-col>
-                  <el-col :md="18" :sm="24">
+                  <el-col class="d-flex items-center" :md="18" :sm="24">
                     <div class="content-input detail-image">
                       <el-form-item label="" prop="imageDetail" ref="imageDetail" :error="(error.key === 'image') ? error.value : ''">
                         <input id="upload-detail" ref="fileUploadDetail" :class="{'disabledImg' : disableImgUp}" :disabled="disableImgUp" class="d-none" type="file" max="3" multiple @change="onFileChangeDetail" accept=".jpeg, .jpg, .png, .svg">

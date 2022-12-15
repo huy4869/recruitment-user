@@ -2,7 +2,7 @@
   <div class="no-data-element">
     <div class="no-data-content">
       <img src="/assets/images/no_data.svg" alt="">
-      <div class="text-center">{{ text }}</div>
+      <div class="text-center text-nodata">{{ text }}</div>
     </div>
   </div>
 </template>

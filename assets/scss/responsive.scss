@@ -1335,6 +1335,7 @@
         margin-top: 0;
         padding-bottom: 8px;
         margin-bottom: 14px;
+        border-bottom: 2px solid $color-text-primary;
       }
       .form-image {
         .col-label .label span {
@@ -3362,7 +3363,7 @@
     display: flex;
     margin: 0 12px;
     .card-button.el-button--default {
-      padding: 8px 56px;
+      padding: 8px 53px;
     }
     .card-button {
       padding: 9px 24px;

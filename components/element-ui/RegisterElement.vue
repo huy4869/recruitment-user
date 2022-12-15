@@ -190,7 +190,7 @@ import {
   INDEX_SET_ERROR,
   AUTH_REGISTER
 } from '../../store/store.const'
-import { validEmail, validFullWidth, validHalfWidth, validOnlyHalfWidth } from '@/utils/validate'
+import { validEmail, validFurigana, validHalfWidth, validOnlyHalfWidth } from '@/utils/validate'
 
 export default {
   name: 'LoginElement',
@@ -245,7 +245,7 @@ export default {
       }
     }
     const validFullWidthLength = (rule, value, callback, message) => {
-      if (!validFullWidth(value)) {
+      if (!validFurigana(value)) {
         callback(new Error(this.$t('validation.max_length', { _field_: message })))
       } else {
         callback()

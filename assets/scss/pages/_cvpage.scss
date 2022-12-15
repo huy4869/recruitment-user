@@ -233,13 +233,13 @@
     }
     .basic-information {
       margin-top: 20px;
-      font-weight: 700;
-      font-size: 20px;
+      font-weight: 400;
+      font-size: 24px;
       line-height: 28px;
       width: 100%;
       padding-bottom: 10px;
       color:  $color-text-primary;
-      border-bottom: 2px solid $color-text-primary;
+      border-bottom: 3px solid $color-text-primary;
       margin-bottom: 12px;
     }
     .skill-slider {
@@ -463,8 +463,8 @@
           bottom: 4px;
           display: inline-block;
           label {
-            font-weight: 500;
-            font-size: 14px;
+            font-weight: 400;
+            font-size: 13px;
             line-height: 22px;
             padding: 4px 16px;
             background: $color-white;

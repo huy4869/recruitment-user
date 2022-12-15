@@ -32,7 +32,7 @@
               {{ $t('my_page.add_job_career') }}
             </span>
           </el-button>
-          <el-button class="card-button btn-right" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button btn-right" id="btn-nodata" @click="handleRouter('/my-page/web-cv')">{{ $t('my_page.back') }}</el-button>
         </div>
         <NoDataElement :text="$t('common.message_no_data.work_history')"></NoDataElement>
       </div>
