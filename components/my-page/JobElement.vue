@@ -2,7 +2,7 @@
   <div class="favorite-job-element job-element" @click="changeToDetail(job.id)">
     <div class="show-pc">
       <div class="job-title d-flex">
-        <img src="/assets/images/favorite-job.png" alt="favorite-job">
+        <img class="favorite-job-img" :src="job.banner_image" alt="favorite-job">
         <div class="title-left">
           <div class="card-title">{{ job.name }}</div>
           <div class="card-subtitle">{{ job.store_name }}</div>
@@ -47,7 +47,7 @@
           <div class="card-subtitle">{{ job.store_name }}</div>
         </div>
         <div class="job-image">
-          <img src="/assets/images/favorite-job.png" alt="favorite-job">
+          <img class="favorite-job-img" :src="job.banner_image" alt="favorite-job">
         </div>
         <div class="d-flex justify-between show-status-time">
           <div v-if="job.interview_status" :class="['schedule-button-status', 'status-1']">

@@ -588,7 +588,7 @@
   width: 100%;
   .past-search-condition-title {
     font-weight: 400;
-    font-size: 24px;
+    font-size: 32px;
     line-height: 32px;
     letter-spacing: .1em;
     color: $color-text-primary;
@@ -791,7 +791,7 @@
     }
     .right-item {
       height: max-content;
-      word-break: break-all;
+      word-break: break-word;
       .item-status {
         padding-top: 14px;
         .text-status {
@@ -1202,6 +1202,7 @@
         .last-input {
           margin-bottom: 16px;
           .content-pr {
+            min-height: 22px;
             word-break: break-all;
             border-bottom: 1px solid $border-default;
           }

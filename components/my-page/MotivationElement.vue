@@ -23,7 +23,7 @@
                 <div class="content-pr">
                   <el-row class="">
                     <el-col :md="20" :sm="24">
-                      {{ motivation.motivation }}
+                      <span class="break-word break-space"> {{ motivation.motivation }}</span>
                     </el-col>
                   </el-row>
                 </div>
@@ -41,7 +41,7 @@
                 <div class="content-pr">
                   <el-row class="d-flex">
                     <el-col :md="20" :sm="24">
-                      {{ motivation.noteworthy }}
+                      <span class="break-word break-space"> {{ motivation.noteworthy }}</span>
                     </el-col>
                   </el-row>
                 </div>
