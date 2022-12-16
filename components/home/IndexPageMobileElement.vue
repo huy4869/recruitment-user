@@ -117,6 +117,42 @@
           </div>
         </div>
       </div>
+      <div class="search-from-popular">
+        <div class="search-from-popular-title">
+          <div class="title">
+            {{ $t('home.search_from_popular') }}
+          </div>
+        </div>
+        <div v-if="Object.keys(listSearch).length" class="search-from-popular-content">
+          <div v-for="(search, index) in listSearch" :key="index" class="search-from-popular-item">
+            <div>
+              <div class="search-from-popular-button">{{ index + $t('home.text_form_search') }}</div>
+            </div>
+            <div class="search-list-category">
+              <a v-for="(name, key) in search" :key="key" :href="changeToSearchLink(name)">
+                {{ name.name }}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <NoDataElement :text="$t('common.message_no_data.popular_area')"></NoDataElement>
+        </div>
+      </div>
+      <div class="search-by-employment">
+        <div class="search-by-employment-title">
+          <div class="title">
+            {{ $t('home.search_by_employment') }}
+          </div>
+        </div>
+        <div v-if="listSearchEmployment.length" class="search-by-employment-content">
+          <div class="search-by-employment-category">
+            <a v-for="(search, key) in listSearchEmployment" :key="key" :href="changeToSearchWork(search)">
+              {{ search.name }}
+            </a>
+          </div>
+        </div>
+      </div>
       <div class="form-list-new">
         <div class="form-list-new-social">
         <a :href="listSocial.facebook" target="_blank"><img src="/assets/icon/icon_facebook.svg" alt=""></a>

@@ -571,6 +571,32 @@ hr {
       height: 24px;
       border: 1px solid $border-default;
       background: $color-white;
+      &:hover {
+        border: 1px solid $color-primary-hover;
+        background: $color-white;
+        &::after {
+          background: $color-primary-hover;
+          transform: none;
+          transition: none;
+          width: 12px;
+          height: 12px;
+          top: 5px;
+          left: 5px;
+        }
+      }
+      &:focus {
+        border: 1px solid $color-primary-focus;
+        background: $color-white;
+        &::after {
+          background: $color-primary-focus;
+          transform: none;
+          transition: none;
+          width: 12px;
+          height: 12px;
+          top: 5px;
+          left: 5px;
+        }
+      }
     }
   }
   .el-radio__label {
@@ -765,12 +791,9 @@ hr {
       opacity: 0.6;
     }
   }
-  &focus {
+  &:focus {
     p, div{
       color: $color-blue-focus !important;
-    }
-    img {
-      opacity: 0.6;
     }
   }
 }

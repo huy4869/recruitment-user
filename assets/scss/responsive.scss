@@ -2261,7 +2261,7 @@
         margin: auto;
         .form-list-new-social {
           justify-content: center;
-          margin-top: 32px;
+          margin-top: 60px;
           a {
             margin: 0 8px;
           }
@@ -2502,6 +2502,74 @@
               width: 100%;
               text-align: center;
             }
+          }
+        }
+      }
+    }
+  }
+  .search-from-popular {
+    margin-top: 40px;
+    .search-from-popular-title {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 28px;
+      height: 38px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid $color-text-primary;
+    }
+    .search-from-popular-content {
+      .search-from-popular-item {
+        margin-bottom: 16px;
+        .search-from-popular-button {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+        }
+        .search-list-category {
+          padding-top: 8px;
+          display: block;
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 20px;
+          color: $color-blue;
+          a {
+            display: inline-block;
+            color: $color-blue;
+            padding: 0 4px;
+            border-right: 1px solid $color-button-disable;
+            margin-bottom: 2px;
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .search-by-employment {
+    margin-top: 40px;
+    .search-by-employment-title {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 28px;
+      height: 38px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid $color-text-primary;
+    }
+    .search-by-employment-content {
+      .search-by-employment-category {
+        display: block;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        color: $color-blue;
+        a {
+          color: $color-blue;
+          padding: 0 4px;
+          display: inline-block;
+          border-right: 1px solid $color-button-disable;
+          &:last-child {
+            border-right: none;
           }
         }
       }

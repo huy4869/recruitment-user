@@ -14,7 +14,7 @@
       </div>
       <div class="job-info">
         <img src="/assets/icon/icon_save.svg" alt="">
-        <span>{{ showJobType }}</span>
+        <span class="job-address">{{ showJobType }}</span>
       </div>
       <div class="job-info">
         <img src="/assets/icon/icon_yen.svg" alt="">
@@ -24,7 +24,7 @@
         <img src="/assets/icon/icon_time.svg" alt="">
         <span>{{ showDate }}</span>
       </div>
-      <div class="">
+      <div class="feature-group">
         <div v-for="(work, index) in job.work_types" :key="index" class="feature-item">
           {{ work.name }}
         </div>

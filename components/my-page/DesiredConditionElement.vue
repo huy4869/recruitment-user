@@ -43,6 +43,10 @@
                 <div class="form-left">{{ $t('desired_condition.position') }}</div>
                 <div class="form-right"><span>{{ condition.job_type_string }}</span></div>
               </div>
+                <div class="form-condition-item">
+                  <div class="form-left">{{ $t('desired_condition.experience') }}</div>
+                  <div class="form-right"><span>{{ condition.job_experience_strings }}</span></div>
+                </div>
               <div class="form-condition-item">
                 <div class="form-left">{{ $t('desired_condition.working_day') }}</div>
                 <div class="form-right"><span>{{ workingDay }}</span></div>
@@ -52,10 +56,6 @@
                 <div class="form-right"><span>{{ workingHour }}</span></div>
               </div>
               <div class="form-condition-item">
-                <div class="form-left">{{ $t('desired_condition.experience') }}</div>
-                <div class="form-right"><span>{{ condition.job_experience_strings }}</span></div>
-              </div>
-              <div class="form-condition-item">
                 <div class="form-left">{{ $t('desired_condition.features') }}</div>
                 <div class="form-right"><span>{{ condition.job_feature_string }}</span></div>
               </div>
@@ -63,7 +63,7 @@
             </div>
           </div>
           <div id="btn-center" class="text-center">
-            <el-button class="card-button btn-right" type="primary" @click="handleRouter('/my-page/desired/edit')" >{{ $t('my_page.edit') }}</el-button>
+            <el-button class="card-button btn-right" type="danger" @click="handleRouter('/my-page/desired/edit')" >{{ $t('my_page.edit') }}</el-button>
           </div>
         </div>
       </div>
