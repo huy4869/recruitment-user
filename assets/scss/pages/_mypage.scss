@@ -588,7 +588,7 @@
   width: 100%;
   .past-search-condition-title {
     font-weight: 400;
-    font-size: 24px;
+    font-size: 32px;
     line-height: 32px;
     letter-spacing: .1em;
     color: $color-text-primary;
@@ -674,9 +674,9 @@
         span {
           display: flex;
           justify-content: center;
-          font-weight: 700;
-          font-size: 16px;
-          line-height: 24px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
           img {
             width: 24px;
             height: 24px;
@@ -791,7 +791,7 @@
     }
     .right-item {
       height: max-content;
-      word-break: break-all;
+      word-break: break-word;
       .item-status {
         padding-top: 14px;
         .text-status {
@@ -1192,6 +1192,9 @@
               padding: 9px 0 9px 24px;
               white-space: pre-wrap;
             }
+            .label-moti {
+              white-space: inherit;
+            }
           }
         }
         .content-pr {
@@ -1205,6 +1208,7 @@
         .last-input {
           margin-bottom: 16px;
           .content-pr {
+            min-height: 22px;
             word-break: break-all;
             border-bottom: 1px solid $border-default;
           }

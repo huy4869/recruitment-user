@@ -114,7 +114,7 @@
                 <img src="/assets/icon/icon_next_search.svg" alt="">
               </div>
               <div class="search-list-category">
-                <a v-for="(name, key) in search" :key="key" :href="changeToSearchLink(name)">
+                <a class="text-blue-hover" v-for="(name, key) in search" :key="key" :href="changeToSearchLink(name)">
                   {{ name.name }}
                 </a>
               </div>
@@ -132,7 +132,7 @@
           </div>
           <div v-if="listSearchEmployment.length" class="search-by-employment-content">
             <div class="search-by-employment-category">
-              <a v-for="(search, key) in listSearchEmployment" :key="key" :href="changeToSearchWork(search)">
+              <a class="text-blue-hover" v-for="(search, key) in listSearchEmployment" :key="key" :href="changeToSearchWork(search)">
                 {{ search.name }}
               </a>
             </div>
@@ -217,7 +217,7 @@ export default {
         'slidesToScroll': 3,
         'touchThreshold': 5,
         'autoplay': true,
-        'autoplaySpeed': 5000
+        'autoplaySpeed': 50000000
       }
     }
   },

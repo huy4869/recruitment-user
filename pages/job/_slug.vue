@@ -48,7 +48,7 @@
           <div class="job-detail">
             <div v-for="(image, index) in job.detail_images" :key="index" class="image-detail">
               <el-image
-                :src="image.url"
+                :src="image.uurl"
                 :preview-src-list="[image.url]">
               </el-image>
             </div>
@@ -383,7 +383,7 @@
           <el-button type="primary" plain @click="closeAboutDialog">
             {{ $t('button.close_up') }}
           </el-button>
-          <el-button type="primary" @click="createFeedback">
+          <el-button type="danger" @click="createFeedback">
             {{ $t('button.confirm') }}
           </el-button>
         </div>

@@ -1,4 +1,5 @@
 .notification-history-page {
+  margin-top: 30px;
   .notification-history-content {
     padding: 28px 0 12px;
     margin: auto;
@@ -39,7 +40,7 @@
             }
           }
           .notification-detail {
-            font-weight: 500;
+            font-weight: 400;
             font-size: 14px;
             line-height: 22px;
             color: $color-black;
@@ -49,12 +50,12 @@
           font-weight: 500;
           font-size: 13px;
           line-height: 20px;
-          color: $color-text-3;
+          color: $color-text-2;
           text-align: right;
         }
       }
       .notification-unread {
-        background: $color-primary;
+        background: $color-primary-200;
       }
     }
   }

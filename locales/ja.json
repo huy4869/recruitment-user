@@ -392,7 +392,7 @@
   "education": {
     "title": "学歴",
     "name": "学校名",
-    "enter_name": "美容師国家資格",
+    "enter_name": "学校名を入力",
     "enter_type": "在学ステータスを選択",
     "date": "在学期間"
   },

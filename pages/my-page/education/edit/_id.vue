@@ -73,7 +73,7 @@
                                   </el-option>
                                 </el-select>
                               </el-col>
-                              <span class="text-normal birthday">{{ $t('form.year') }}</span>
+                              <span class="text-normal birthday birthday-edu">{{ $t('form.year') }}</span>
                               <el-col :sm="12" :xs="10" class="birth-month">
                                 <el-select
                                   v-model="accountForm.enrollment_period_month_start"
@@ -89,7 +89,7 @@
                                   </el-option>
                                 </el-select>
                               </el-col>
-                              <span class="text-normal birthday">{{ $t('form.month') }}</span>
+                              <span class="text-normal birthday birthday-edu">{{ $t('form.month') }}</span>
                             </el-row>
                           </el-form-item>
                         </el-col>
@@ -112,7 +112,7 @@
                                   </el-option>
                                 </el-select>
                               </el-col>
-                              <span class="text-normal birthday">{{ $t('form.year') }}</span>
+                              <span class="text-normal birthday birthday-edu">{{ $t('form.year') }}</span>
                               <el-col  :sm="12" :xs="10" class="birth-month">
                                 <el-select
                                   v-model="accountForm.enrollment_period_month_end"
@@ -128,7 +128,7 @@
                                   </el-option>
                                 </el-select>
                               </el-col>
-                              <span class="text-normal birthday">{{ $t('form.month') }}</span>
+                              <span class="text-normal birthday birthday-edu">{{ $t('form.month') }}</span>
                             </el-row>
                           </el-form-item>
                         </el-col>
@@ -153,14 +153,20 @@
                   </el-col>
                 </el-row>
                 <BorderElement :middle="true"></BorderElement>
+                <el-row class="d-flex form-label-input">
+                  <el-col :md="6" :sm="12" class="col-label">
+                  </el-col>
+                  <el-col :md="18" :sm="24">
+                    <div id="career-btn" class="justify-start text-center">
+                      <el-button class="card-button triple-btn" @click="handleRouter('/my-page/education')">{{ $t('my_page.back') }}</el-button>
+                      <el-button class="card-button tripl|e-btn" @click="showDeleteModal">{{ $t('my_page.remove') }}</el-button>
+                      <el-button :disabled="disabledButton" class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
+                    </div>
+                  </el-col>
+                </el-row>
               </div>
             </el-form>
           </div>
-        </div>
-        <div id="btn-center" class="text-center">
-          <el-button class="card-button triple-btn" @click="handleRouter('/my-page/education')">{{ $t('my_page.back') }}</el-button>
-          <el-button class="card-button triple-btn" @click="showDeleteModal">{{ $t('my_page.remove') }}</el-button>
-          <el-button :disabled="disabledButton" class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
         </div>
         <ConfirmModal
           v-show="confirmModal"

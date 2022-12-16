@@ -120,7 +120,7 @@
           </div>
         </div>
         <div class="button-search">
-          <el-button type="danger" @click="searchJob">
+          <el-button type="danger" >
             {{ $t('button.search_again') }}
           </el-button>
         </div>
@@ -235,6 +235,106 @@
             </el-button>
           </div>
         </el-dialog>
+        <el-dialog class="form-dialog-select form-select-all-dialog show-sp" :title="$t('condition.specify_detailed_conditions')" :visible.sync="showAllSp" width="84%">
+          <div class="form-condition-item">
+            <div class="header-search-left">
+              <span>{{ $t('condition.keyword') }}</span>
+            </div>
+            <div class="header-search-right">
+              <el-input
+                v-model.trim="search"
+                class="input-keyword"
+                :placeholder="$t('condition.keyword')"
+                name="search"
+                type="text"
+                tabindex="2"
+                show-word-limit
+              >
+                <img slot="prefix" src="/assets/icon/icon_search_input.svg" alt="">
+              </el-input>
+            </div>
+          </div>
+          <div class="form-condition-item">
+            <div class="header-search-left">
+              <span>{{ $t('condition.employment_status') }}</span>
+            </div>
+            <div class="header-search-right">
+              <el-checkbox-group v-model="condition.work_type_ids">
+                <div v-for="(employment, index) in listWorkTypes" :key="index" class="checkbox-item">
+                  <el-checkbox :label="employment.id">{{ employment.name }}</el-checkbox>
+                </div>
+              </el-checkbox-group>
+            </div>
+          </div>
+          <div class="form-condition-item form-item-50">
+            <div class="header-search-left">
+              <span>{{ $t('condition.experience') }}</span>
+            </div>
+            <div class="header-search-right">
+              <el-checkbox-group v-model="condition.experience_ids">
+                <div v-for="(experience, index) in listExperiences" :key="index" class="checkbox-item">
+                  <el-checkbox :label="experience.id">{{ experience.name }}</el-checkbox>
+                </div>
+              </el-checkbox-group>
+            </div>
+          </div>
+          <div class="form-condition-item form-item-50">
+            <div class="header-search-left header-search-sort">
+              <span>{{ $t('condition.sort_by') }}</span>
+            </div>
+            <div class="header-search-right">
+              <el-checkbox-group v-model="sort_by">
+                <div v-for="(sort, index) in listSortBy" :key="index" class="checkbox-item">
+                  <el-checkbox :label="sort.id" @change="(value) => { changeSortBy(value, sort.id) }">{{ sort.name }}</el-checkbox>
+                </div>
+              </el-checkbox-group>
+            </div>
+          </div>
+          <div class="form-condition-item form-item-50">
+            <div class="header-search-left">
+              <span>{{ $t('condition.feature') }}</span>
+            </div>
+            <div class="header-search-right">
+              <el-checkbox-group v-model="condition.feature_ids">
+                <div v-for="(list, key) in listJobFeatures" :key="key">
+                  <div class="feature-title">※{{ list.category_name }}</div>
+                  <div v-for="(feature, index) in list.feature" :key="index" class="checkbox-item">
+                    <el-checkbox :label="feature.id">{{ feature.name }}</el-checkbox>
+                  </div>
+                </div>
+              </el-checkbox-group>
+            </div>
+          </div>
+          <div slot="footer" class="dialog-footer">
+            <el-button type="danger" @click="searchJob">
+              {{ $t('button.search_again') }}
+            </el-button>
+          </div>
+        </el-dialog>
+      </div>
+      <div class="search-form-condition-sp show-sp">
+        <div class="button-filter">
+          <el-button @click="showAllSp = !showAllSp">
+            <div class="d-flex justify-center items-center">
+              <img src="/assets/icon/icon-search-green.svg" alt="">
+              <span>{{ $t('condition.specify_detailed_conditions') }}</span>
+            </div>
+          </el-button>
+        </div>
+        <div class="btn-condition d-flex justify-between">
+          <el-button @click="jobDialog = true">
+            <div class="d-flex items-center">
+              <img src="/assets/icon/icon-plus.svg" alt="">
+              <span>{{ $t('condition.enter_occupation') }}</span>
+            </div>
+          </el-button>
+          <el-button @click="occupationDialog = true">
+            <div class="d-flex items-center">
+              <img src="/assets/icon/icon-plus.svg" alt="">
+              <span>{{ $t('condition.enter_work_location') }}</span>
+            </div>
+          </el-button>
+        </div>
       </div>
       <div class="search-result d-flex justify-between">
         <div>
@@ -286,6 +386,7 @@ export default {
       jobDialog: false,
       occupationDialog: false,
       showAll: false,
+      showAllSp: false,
       listJobs: [],
       total: 0,
       per_page: 10,
@@ -630,6 +731,7 @@ export default {
     },
     async searchJob() {
       this.showAll = false
+      this.showAllSp = false
       await this.$router.push('/search')
       this.query = []
       await this.getJobs()

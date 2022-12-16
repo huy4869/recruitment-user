@@ -161,6 +161,10 @@
     margin-bottom: 1em;
   }
 
+  .favorite-job-img {
+    width: 186px;
+    height: 124px;
+  }
   .job-title {
     margin-bottom: 16px;
     .title-left {
@@ -216,7 +220,7 @@
           color: $color-blue;
           border: 1px solid $color-blue;
           border-radius: 2px;
-          font-weight: 500;
+          font-weight: 400;
           font-size: 14px;
           line-height: 22px;
           padding: 2px 8px;
@@ -328,7 +332,7 @@
         padding: 8px 24px;
       }
       .el-button--default {
-        font-weight: 500;
+        font-weight: 400;
         padding: 8px 55px;
       }
       img {

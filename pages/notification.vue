@@ -1,6 +1,7 @@
 <template>
   <div class="notification-history-page">
     <TitlePageElement class="show-pc"></TitlePageElement>
+    <div class="show-sp notification-title-sp">{{ $t('page.notification_history')}}</div>
     <div v-if="listNotifications.length" class="notification-history-content">
       <div class="notification-list">
         <div v-for="(notification, index) in listNotifications" :key="index" :class="['notification-item', { 'notification-unread': !notification.be_read }]">

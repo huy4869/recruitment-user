@@ -148,9 +148,9 @@
           padding: 0 10px;
         }
         .birth-month, .birth-day {
-          width: 50px;
+          width: 56px;
           .el-select {
-            width: 50px;
+            width: 56px;
           }
         }
       }
@@ -259,6 +259,18 @@
       }
     }
   }
+  .notification-history-page {
+    margin-top: 12px;
+    .title-page-element {
+        padding: 8px 40px;
+    }
+    .notification-title-sp {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      padding: 0 10px;
+    }
+  }
 }
 
 @media only screen and (max-width: 912px) {
@@ -300,6 +312,21 @@
   }
 }
 
+@media only screen and (min-width: 540px) and (max-width: 912px) {
+  .edit-form-content {
+    .edit-form-input {
+      .content-input {
+        .period {
+          display: grid;
+        }
+        .period-career {
+          grid-template-columns: 60%;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (min-width: 768px) and (max-width: 912px) {
   .self-pr-page .edit-cv-element .edit-cv-content {
     .self-skill .skill-item {
@@ -322,6 +349,9 @@
         }
         .period {
           display: grid;
+        }
+        .period-career {
+          grid-template-columns: 60%;
         }
         .first-name {
           padding-right: 0;
@@ -991,6 +1021,22 @@
     .cv-content {
       padding: 0;
       display: block;
+      #career-btn {
+        margin: 24px 0 0 0px;
+
+        .el-button {
+          span {
+            padding: 8px 14px;
+          }
+        }
+      }
+      #career-btn-create {
+        .el-button {
+          span {
+            padding: 8px 14px;
+          }
+        }
+      }
     }
   }
   .index-cv-element {
@@ -1499,6 +1545,10 @@
           .date-space {
             margin: 0 8px 0 6px;
           }
+          .date-space-career {
+            margin: 0 9px 0 9px;
+
+          }
         }
 
         .date-space {
@@ -1516,6 +1566,9 @@
         }
         .birthday {
           padding: 0 10px;
+        }
+        .birthday-edu {
+          padding: 0 5px;
         }
         .edu-status {
           margin-top: 14px;
@@ -1602,6 +1655,9 @@
                 width: 100%;
               }
             }
+            .favorite-job-img {
+              width: 327px;
+            }
           }
 
           .job-box {
@@ -1675,7 +1731,7 @@
       margin-top: 0;
       span {
         margin: auto;
-        font-weight: 500;
+        font-weight: 400;
         font-size: 13px;
         line-height: 22px;
       }
@@ -2213,7 +2269,7 @@
         margin: auto;
         .form-list-new-social {
           justify-content: center;
-          margin-top: 32px;
+          margin-top: 60px;
           a {
             margin: 0 8px;
           }
@@ -2459,6 +2515,74 @@
       }
     }
   }
+  .search-from-popular {
+    margin-top: 40px;
+    .search-from-popular-title {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 28px;
+      height: 38px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid $color-text-primary;
+    }
+    .search-from-popular-content {
+      .search-from-popular-item {
+        margin-bottom: 16px;
+        .search-from-popular-button {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+        }
+        .search-list-category {
+          padding-top: 8px;
+          display: block;
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 20px;
+          color: $color-blue;
+          a {
+            display: inline-block;
+            color: $color-blue;
+            padding: 0 4px;
+            border-right: 1px solid $color-button-disable;
+            margin-bottom: 2px;
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .search-by-employment {
+    margin-top: 40px;
+    .search-by-employment-title {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 28px;
+      height: 38px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid $color-text-primary;
+    }
+    .search-by-employment-content {
+      .search-by-employment-category {
+        display: block;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 20px;
+        color: $color-blue;
+        a {
+          color: $color-blue;
+          padding: 0 4px;
+          display: inline-block;
+          border-right: 1px solid $color-button-disable;
+          &:last-child {
+            border-right: none;
+          }
+        }
+      }
+    }
+  }
   // confirm-modal
   .modal-backdrop {
     .confirm-modal {
@@ -2638,13 +2762,14 @@
     }
   }
   .search-page {
+    padding-top: 0;
     .search-content {
-      padding: 16px 12px;
+      padding: 0 12px;
       .search-form-condition {
         padding: 0;
         border: none;
         .header-search {
-          display: block;
+          display: none;
           .search-occupation, .search-work-location {
             width: 100%;
             display: block;
@@ -2670,6 +2795,7 @@
           }
         }
         .all-condition {
+          display: none;
           .form-all-condition {
             border-bottom: 1px solid $color-placeholder;
             .form-condition-item {
@@ -2709,6 +2835,7 @@
           }
         }
         .button-search {
+          display: none;
           margin-top: 16px;
         }
         .el-dialog {
@@ -2722,6 +2849,9 @@
           overflow: auto;
           .form-filter-location {
             .district-item {
+              .el-checkbox .el-checkbox__inner {
+                border: 2px solid $border-default
+              }
               .district-name {
                 border-bottom: 1px solid $border-default;
                 background: $color-white;
@@ -2764,9 +2894,35 @@
           }
         }
         .el-dialog__footer {
-          padding: 12px 0;
+          padding: 15px 0;
           text-align: center;
-          background: $color-blue-3;
+          background: $color-bg-footer;
+        }
+      }
+      .search-form-condition-sp {
+        border-bottom: 1px solid $border-default;
+        .el-button {
+          border: 1px solid $border-default;
+          width: 100%;
+          height: 40px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+          border-radius: 6px;
+        }
+        .button-filter {
+          padding-top: 18px;
+          .d-flex {
+            gap: 7px;
+          }
+        }
+        .btn-condition {
+          padding-bottom: 18px;
+          margin-top: 16px;
+          gap: 16px;
+          .d-flex {
+            gap: 7px;
+          }
         }
       }
       .search-result {
@@ -2792,6 +2948,10 @@
       line-height: 22px;
       span {
         padding-left: 10px;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 22px;
+        color: $color-black;
       }
     }
     .header-search-right {
@@ -2800,6 +2960,9 @@
       margin-left: 0;
       border: none;
       padding: 12px;
+      .el-input__prefix, .el-input__suffix {
+        top: 5px;
+      }
     }
   }
   .form-dialog-select {
@@ -2809,9 +2972,10 @@
       margin: 0;
       .el-dialog__header {
         padding: 15px 0 15px;
-        background-color: $color-text-primary;
+        background-color: $color-black;
         text-align: center;
         .el-dialog__title {
+          font-weight: 700;
           font-size: 16px;
           line-height: 24px;
           border: 0;
@@ -2838,6 +3002,11 @@
               font-size: 12px;
               line-height: 22px;
               padding: 12px;
+              .el-checkbox__label {
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 22px;
+              }
             }
             .list-province {
               padding: 3px 12px;
@@ -2845,13 +3014,84 @@
                 width: 33%;
                 margin: 9px 0;
                 .el-checkbox__label {
-                  font-size: 12px;
-                  line-height: 22px;
+                  font-weight: 500;
+                  font-size: 13px;
+                  line-height: 20px;
                   padding-left: 6px;
                 }
               }
             }
           }
+        }
+      }
+    }
+  }
+  .form-select-all-dialog {
+    .form-condition-item {
+      display: flex;
+      justify-content: space-between;
+      .input-keyword {
+        width: calc(50% + 85px);
+        .el-input__prefix {
+          margin: 10px 16px;
+          width: 24px;
+          height: 24px;
+          img {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        input {
+          padding-left: 48px;
+        }
+      }
+      .el-checkbox-group {
+        .checkbox-item {
+          width: 33%;
+          display: inline-block;
+          margin: 3px 0;
+          .el-checkbox__label {
+            white-space: normal;
+          }
+        }
+      }
+      .feature-title {
+        width: 100%;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 22px;
+        color: $color-black;
+        margin-bottom: 3px;
+      }
+    }
+    .form-condition-item {
+      display: block;
+      .header-search-right {
+        padding: 3px 0 3px 10px;
+        width: calc(100% - 10px);
+      }
+      .input-keyword {
+        width: calc(100% - 14px);
+        margin: 9px 12px 9px 2px;
+      }
+      .el-checkbox-group {
+        .checkbox-item {
+          margin: 9px 0;
+          .el-checkbox__label {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 22px;
+          }
+        }
+      }
+      .feature-title {
+        margin: 9px 0 1px;
+      }
+    }
+    .form-item-50 {
+      .el-checkbox-group {
+        .checkbox-item {
+          width: 50%;
         }
       }
     }

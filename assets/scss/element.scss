@@ -57,7 +57,7 @@
   textarea {
     &::placeholder {
       color: $color-placeholder;
-      font-weight: 500;
+      font-weight: 400;
       font-size: 14px;
       line-height: 22px;
       top: 10px;
@@ -237,6 +237,13 @@
 }
 
 .el-select {
+  &:hover {
+    .el-input {
+      .el-input__inner {
+        border-color: $color-text-primary;
+      }
+    }
+  }
   .el-input {
     .el-select__caret {
       color: $color-text-primary;
