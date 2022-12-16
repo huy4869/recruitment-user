@@ -37,7 +37,7 @@
       <div class="footer-mobile">
         <div class="content-button">
           <div class="d-flex justify-between list-icon">
-            <div v-if="$route.path === '/' || $route.path.includes('/job')">
+            <div v-if="$route.path === '/'">
               <div class="button-home" @click="handleRouter('/')">
                 <img src="/assets/icon/icon_home_active.svg" alt=""><span>{{ $t('header.home') }}</span>
               </div>
@@ -45,18 +45,16 @@
             <div v-else class="button-footer" @click="handleRouter('/')">
               <img src="/assets/icon/icon_home.png" alt="">
             </div>
-            <div v-if="!$route.path.includes('/search')">
-              <div class="button-footer" @click="handleRouter('/search')">
-                <img src="/assets/icon/icon_search.svg" alt="">
-              </div>
-            </div>
-            <div v-else class="button-home" @click="handleRouter('/search')">
+            <div v-if="$route.path.includes('/search') || $route.path.includes('/job')" class="button-home" @click="handleRouter('/search')">
               <img src="/assets/icon/icon-search-active.svg" alt=""><span>{{ $t('header.search') }}</span>
+            </div>
+            <div v-else class="button-footer" @click="handleRouter('/search')">
+              <img src="/assets/icon/icon_search.svg" alt="">
             </div>
             <div v-if="!$route.path.includes('chat')">
               <div class="button-footer">
                 <div @click="handleRouter('/chat')">
-                  <img src="/assets/icon/icon_chat.svg" alt="">
+                  <img src="/assets/icon/icon-chat.svg" alt="">
                 </div>
               </div>
             </div>
