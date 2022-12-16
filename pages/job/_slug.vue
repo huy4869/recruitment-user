@@ -164,7 +164,7 @@
           </div>
           <div class="application-requirement-right">
             <div class="show-salary">{{ showSalary }}</div>
-            <div v-html="$t('job.salary_note')"></div>
+            <div class="break-space">{{ job.salary.description }}</div>
           </div>
         </div>
         <div class="application-requirement-item">

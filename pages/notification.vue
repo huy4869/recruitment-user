@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      <div v-if="lastPage > 1">
+      <div v-if="lastPage >= 1">
         <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
       </div>
     </div>

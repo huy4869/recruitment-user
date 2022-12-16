@@ -132,6 +132,7 @@
                               @change="(value) => { checkNumber(value, 'salary_min') }"
                               pattern="[0-9]*"
                               inputmode="numeric"
+                              @focus="resetValidate('salary_min')"
                             />
                           </el-form-item>
                         </el-col>
@@ -149,6 +150,7 @@
                               @change="(value) => { checkNumber(value, 'salary_max') }"
                               pattern="[0-9]*"
                               inputmode="numeric"
+                              @focus="resetValidate('salary_max')"
                             />
                           </el-form-item>
                         </el-col>
