@@ -311,7 +311,8 @@
     "interview": "面接",
     "schedule": "予定",
     "application": "応募",
-    "app_history": "履歴"
+    "app_history": "履歴",
+    "show_public_avatar": "応募済みやマッチングを除き、オーナはあなたのアバター、紹介写真が見えないです。"
   },
   "condition": {
     "list": {

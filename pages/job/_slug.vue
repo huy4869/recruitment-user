@@ -114,7 +114,11 @@
                 <span>{{ job.application.interview_approaches.approach_label }}</span>
               </div>
               <div class="application-item-right">
-                <span>{{ job.application.interview_approaches.approach }}</span>
+                <span v-if="job.application.interview_approaches" class="show-pc">{{ job.application.interview_approaches.approach }}</span>
+                <span v-if="job.application.interview_approaches" class="show-sp">
+                  <span v-if="job.application.interview_approaches.id !== 3">{{ job.application.interview_approaches.approach }}</span>
+                  <a v-else :href="'tel:' + job.application.interview_approaches.approach" @click.stop="">{{ job.application.interview_approaches.approach }}</a>
+                </span>
               </div>
             </div>
             <div class="application-item">

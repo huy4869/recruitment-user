@@ -28,7 +28,12 @@
           <span class="bold">{{ $t('schedule.method') }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.method }}</span>
         </div>
         <div v-if="schedule.interview_approach">
-          <span class="bold">{{ schedule.interview_approach.approach_label }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.approach }}</span>
+          <span class="bold">{{ schedule.interview_approach.approach_label }}</span>
+          <span v-if="schedule.interview_approach" class="show-pc">{{ schedule.interview_approach.approach }}</span>
+          <span v-if="schedule.interview_approach" class="show-sp">
+            <span v-if="schedule.interview_approach.id !== 3">{{ schedule.interview_approach.approach }}</span>
+            <a v-else :href="'tel:' + schedule.interview_approach.approach" @click.stop="">{{ schedule.interview_approach.approach }}</a>
+          </span>
           <div v-if="showStatus" class="open-google-map">
             <a v-if="schedule.interview_approach.is_direct_interview" :href="'https://www.google.com/maps/place/' + schedule.interview_approach.approach" class="show-button-google-map text-blue-hover" target="_blank" @click.stop="openGoogleMap">
               <img src="/assets/icon/icon_google_map.svg" alt="">

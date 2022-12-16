@@ -481,5 +481,23 @@
   }
 }
 
-
+.el-switch {
+  &.is-checked {
+    .el-switch__core {
+      background-color: $color-green-50;
+      &::after {
+        margin-left: -16px;
+      }
+    }
+  }
+  .el-switch__core {
+    border: none;
+    &::after {
+      width: 13px;
+      height: 13px;
+      top: 3px;
+      margin-left: 2px;
+    }
+  }
+}
 
