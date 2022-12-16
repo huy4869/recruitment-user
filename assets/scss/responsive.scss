@@ -648,6 +648,14 @@
         span {
           word-break: break-all;
         }
+        div {
+          .show-sp {
+            display: inline-block;
+            a {
+              color: $color-black;
+            }
+          }
+        }
       }
       .schedule-image{
         width: 100%;

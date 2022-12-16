@@ -2,6 +2,12 @@
   <div class="card-component">
     <div class="favorite-job-element">
       <div class="card-text-title card-title-mobile"> {{ $t('my_page.basic_information') }}</div>
+      <div class="show-public-avatar">
+        <span>
+          {{ $t('my_page.show_public_avatar') }}
+           <el-switch v-model="showAvatar" />
+        </span>
+      </div>
       <div class="card-main d-flex">
         <div class="job-title">
           <el-image
@@ -141,6 +147,11 @@ export default {
     info: {
       type: Object,
       default: () => {}
+    }
+  },
+  data() {
+    return {
+      showAvatar: false
     }
   },
   methods: {
