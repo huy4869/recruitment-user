@@ -112,7 +112,6 @@ import {
   APPLICATION_GET_DATA_DETAIL_APPLICATION,
   APPLICATION_CREATE_APPLICATION,
   APPLICATION_UPDATE_APPLICATION,
-  MASTER_GET_DATA,
   INDEX_SET_SUCCESS
 } from '../../store/store.const'
 
@@ -175,7 +174,6 @@ export default {
     }
   },
   async created() {
-    await this.getMasterData()
   },
   watch: {
     async applyDialog() {
@@ -198,13 +196,6 @@ export default {
       this.$refs.formApply.fields.find((f) => f.prop === ref).clearValidate()
       this.formApply.errors[ref] = ''
     },
-    async getMasterData() {
-      const dataResources = [
-        'resources[m_interview_approaches]={"model": "MInterviewApproach"}'
-      ]
-      const dataMasterData = await this.$store.dispatch(MASTER_GET_DATA, dataResources.join('&'))
-      this.listMethod = dataMasterData.data.m_interview_approaches
-    },
     async getDetailJob() {
       if (this.isEdit) {
         const dataResponse = await this.$store.dispatch(APPLICATION_GET_DATA_DETAIL_APPLICATION, this.apply)
@@ -213,10 +204,11 @@ export default {
           this.formApply.hours = dataResponse.data.application_user.hours
           this.formApply.interview_approaches_id = dataResponse.data.application_user.interview_approaches.id
           this.formApply.note = dataResponse.data.application_user.interview_approaches.approach
-          this.listDays = dataResponse.data.list_time
+          this.listDays = dataResponse.data.list_time.time
+          this.listMethod = dataResponse.data.list_time.approach
           this.listTime = []
           const dataDate = {}
-          dataResponse.data.list_time.forEach(date => {
+          dataResponse.data.list_time.time.forEach(date => {
             dataDate[date.date] = date
           })
           this.listDate = dataDate
@@ -235,7 +227,7 @@ export default {
       } else {
         const dataResponse = await this.$store.dispatch(APPLICATION_GET_DATA_APPLICATION, this.job.id)
         if (dataResponse.status_code === 200) {
-          this.listDays = dataResponse.data
+          this.listDays = dataResponse.data.time
           this.listTime = []
           const dataDate = {}
           for (let x = 0; x < this.listDays.length; x++) {
@@ -253,10 +245,11 @@ export default {
           }
           this.formApply.interview_approaches_id = ''
           this.formApply.note = ''
-          dataResponse.data.forEach(date => {
+          dataResponse.data.time.forEach(date => {
             dataDate[date.date] = date
           })
           this.listDate = dataDate
+          this.listMethod = dataResponse.data.approach
         }
         if (dataResponse.status_code === 500) {
           await this.$store.commit(INDEX_SET_ERROR, {
