@@ -564,6 +564,11 @@
       .salary-select {
         margin-right: 16px;
       }
+      textarea {
+        &::placeholder {
+          font-weight: 400;
+        }
+      }
     }
   }
   .basic-information {

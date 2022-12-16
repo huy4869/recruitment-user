@@ -165,10 +165,10 @@ export default {
   },
   computed: {
     contentLength() {
-      return this.accountForm.motivation ? this.accountForm.motivation.length : ''
+      return this.showLengthTextarea(this.accountForm.motivation)
     },
     experienceLength() {
-      return this.accountForm.noteworthy ? this.accountForm.noteworthy.length : ''
+      return this.showLengthTextarea(this.accountForm.noteworthy)
     }
   },
   watch: {
@@ -188,6 +188,12 @@ export default {
     this.getMotivation()
   },
   methods: {
+    showLengthTextarea(value) {
+      if (value) {
+        return ('000' + value.length).slice(-4)
+      }
+      return '0000'
+    },
     async getMotivation() {
       this.$store.commit(INDEX_SET_LOADING, true)
       try {
