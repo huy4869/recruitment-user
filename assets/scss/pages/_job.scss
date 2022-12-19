@@ -266,7 +266,7 @@
   .btn-option {
     .el-button {
       border-radius: 30px;
-      padding: 6px 20px;
+      padding: 6px 18px;
       height: 36px;
     }
     img {
@@ -289,18 +289,25 @@
         .hide-focus {
           display: none;
         }
+
         .show-focus {
           display: inline-block;
         }
+
         img {
           background-color: $color-blue;
         }
+      }
+      &:hover {
+        border-color: $color-blue-hover;
+        color: $color-blue-hover;
       }
     }
     .btn-remove {
       color: $color-red-primary;
       border-color: $border-default;
       &:hover {
+        border-color: $border-default;
         background-color: $color-bg-error;
         color: $color-red-primary;
       }
@@ -341,7 +348,6 @@
     }
 
     #career {
-      margin-top: 8px;
       margin-top: 8px;
       margin-bottom: 12px;
       .el-button--danger {
