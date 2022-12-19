@@ -319,6 +319,8 @@
     .col-label {
       position: relative;
       min-height: 100%;
+      min-width: 220px;
+      max-width: 220px;
       .label {
         background: $color-bg-footer;
         font-weight: 700;
