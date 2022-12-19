@@ -5,8 +5,8 @@
         <div class="form-condition-date">{{ condition.created_at }}</div>
         <div class="form-condition-button">
           <el-button type="primary" class="form-search" plain @click="changeToSearch">
-            <img src="/assets/icon/icon_search_blue.svg" alt="">
-            {{ $t('common.search') }}
+            <img class="hide-focus" src="/assets/icon/icon_search_blue.svg" alt="img-edit">
+            <img class="show-focus" src="/assets/icon/icon-search-blue-active.svg" alt="img-edit">{{ $t('common.search') }}
           </el-button>
           <el-button type="danger" class="form-delete" plain @click="removeSearchJob(condition.id)">
             <img src="/assets/icon/icon_delete.svg" alt="">

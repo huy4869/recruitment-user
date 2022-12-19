@@ -20,10 +20,14 @@
         </div>
         <div class="button-action show-pc">
           <div class="border-default"></div>
-          <div @click="changeToLink('/notification')">
+          <div v-if="mark" @click="changeToLink('/notification')">
             <el-badge class="mark" :value="totalNotification">
               <img src="/assets/icon/icon_notification.svg" alt="">
             </el-badge>
+            <span class="noti-text-badge">{{ $t('header.notification') }}</span>
+          </div>
+          <div v-else @click="changeToLink('/notification')">
+            <img src="/assets/icon/icon_notification.svg" alt="">
             <span class="noti-text">{{ $t('header.notification') }}</span>
           </div>
         </div>

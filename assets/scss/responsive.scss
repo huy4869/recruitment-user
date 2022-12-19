@@ -830,7 +830,7 @@
         .button-home {
           padding: 6px 10px;
           display: flex;
-          background: $color-primary;
+          background: $color-primary-200;
           border-radius: 18px;
           span {
             margin: 2px 0 2px 2px;
@@ -1916,6 +1916,9 @@
               background-color: $color-bg-error;
               border-color: $color-red !important;
               color: $color-red-primary !important;
+              img {
+                background-color: $color-bg-error;
+              }
             }
           }
           .el-button {
@@ -2197,7 +2200,7 @@
           font-weight: 700;
           font-size: 14px;
           line-height: 22px;
-          width: 49%;
+          width: 47.9%;
           padding: 8px 0;
         }
 
@@ -2898,16 +2901,21 @@
                 .province-item {
                   display: block;
                   width: unset;
-                  border-bottom: 1px solid $border-default;
                   padding: 0;
                   margin: 0;
                   .province-name {
-                    padding: 15px 16px;
+                    padding: 7px 50px;
                     margin: 0;
                     display: flex;
                     justify-content: space-between;
-                    border-bottom: 1px solid $border-default;
+                    .el-checkbox {
+                      align-items: center;
+                    }
                   }
+                }
+                .province-item:last-child {
+                  padding-bottom: 10px;
+                  border-bottom: 1px solid $border-default;
                 }
                 .form-work {
                   padding: 15px 16px;
@@ -3049,6 +3057,9 @@
                   font-size: 13px;
                   line-height: 20px;
                   padding-left: 6px;
+                  .total-record {
+                    padding-left: 6px;
+                  }
                 }
               }
             }
@@ -3249,7 +3260,7 @@
           }
         }
         .sub-detail-title-sp {
-          margin-left: 14px;
+          margin-left: 0;
         }
       }
       .form-application {

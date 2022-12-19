@@ -280,9 +280,6 @@ export default {
         enrollment_period_end: [
           { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'change' },
           { validator: validDate, trigger: 'change' }
-        ],
-        learning_status_id: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('education.date') }), trigger: 'blur' }
         ]
       },
       linksYear: [],

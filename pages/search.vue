@@ -10,7 +10,8 @@
             </div>
             <div class="header-search-right">
               <el-button type="default" class="form-search" @click="jobDialog = true">
-                <img src="/assets/icon/icon_add_blue.svg" alt="">
+                <img class="hide-focus" src="/assets/icon/icon_add_blue.svg" alt="">
+                <img class="show-focus" src="/assets/icon/icon_add_white.svg" alt="">
                 {{ $t('condition.enter_occupation') }}
               </el-button>
               <div v-if="showJobType" class="show-result-condition">
@@ -24,7 +25,8 @@
             </div>
             <div class="header-search-right">
               <el-button type="default" class="form-search" @click="occupationDialog = true">
-                <img src="/assets/icon/icon_add_blue.svg" alt="">
+                <img class="hide-focus" src="/assets/icon/icon_add_blue.svg" alt="">
+                <img class="show-focus" src="/assets/icon/icon_add_white.svg" alt="">
                 {{ $t('condition.enter_work_location') }}
               </el-button>
               <div v-if="showProvince.length" class="show-result-condition">
@@ -120,7 +122,7 @@
           </div>
         </div>
         <div class="button-search">
-          <el-button type="danger" >
+          <el-button type="danger" @click="searchJob">
             {{ $t('button.search_again') }}
           </el-button>
         </div>

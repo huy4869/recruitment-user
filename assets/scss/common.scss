@@ -584,7 +584,7 @@ hr {
           left: 5px;
         }
       }
-      &:focus {
+      &:active {
         border: 1px solid $color-primary-focus;
         background: $color-white;
         &::after {
@@ -784,7 +784,7 @@ hr {
 .text-blue-hover {
   &:hover {
     color: $color-blue-hover !important;
-    p, span{
+    p, span, div {
       color: $color-blue-hover !important;
     }
     img {
@@ -792,8 +792,20 @@ hr {
     }
   }
   &:focus {
-    p, div{
+    p, div, span {
       color: $color-blue-focus !important;
+    }
+    img {
+      opacity: 1;
+    }
+  }
+  &:active {
+    color: $color-blue-focus !important;
+    p, div, span {
+      color: $color-blue-focus !important;
+    }
+    img {
+      opacity: 1;
     }
   }
 }

@@ -315,6 +315,9 @@
         background-color: $color-bg-error;
         border-color: $color-red !important;
         color: $color-red-primary !important;
+        img {
+          background-color: $color-bg-error;
+        }
       }
     }
     .btn-green, .btn-red {

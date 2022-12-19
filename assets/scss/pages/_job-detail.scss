@@ -214,6 +214,21 @@
           width: 24px;
           height: 24px;
         }
+        .hide-active {
+          display: none;
+        }
+        &:active {
+          .show-active {
+            display: none;
+          }
+          .hide-active {
+            display: inline-block;
+            opacity: 1;
+          }
+          background-color: $color-blue-focus;
+          border-color: $color-blue-focus;
+          color: $color-white;
+        }
       }
       .button-dislike {
         img {
@@ -223,9 +238,11 @@
       }
       .button-detail {
         padding: 12px 43px;
-        .el-disabled {
-          background-color: $color-button-disable;
+        &.el-disabled {
+          background-color: $border-default;
           cursor: not-allowed;
+          border: none;
+          color: $color-white;
         }
       }
     }

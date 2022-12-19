@@ -79,7 +79,8 @@
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
         <div v-else class="button-like el-button el-button--default" @click="addFavoriteJob">
-          <img src="/assets/icon/icon_like.svg" alt="">
+          <img class="show-active" src="/assets/icon/icon_like.svg" alt="">
+          <img class="hide-active" src="/assets/icon/icon_dislike.svg" alt="">
           <span>{{ $t('home.job_favorite') }}</span>
         </div>
         <div v-if="!job.is_apply" class="button-detail el-button el-button--primary" @click="openApplyDialog">
@@ -265,7 +266,8 @@
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div v-else class="button-like el-button el-button--default" @click="addFavoriteJob">
-            <img src="/assets/icon/icon_like.svg" alt="">
+            <img class="show-active" src="/assets/icon/icon_like.svg" alt="">
+            <img class="hide-active" src="/assets/icon/icon_dislike.svg" alt="">
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div v-if="!job.is_apply" class="button-detail el-button el-button--primary" @click="openApplyDialog">
@@ -319,7 +321,7 @@
         </div>
         <div class="find-other-job-content">
           <div class="find-other-job-item">
-            <a v-for="(search, key) in listJobTypes" :key="key" :href="changeToSearchWork(search)">
+            <a class="text-blue-hover" v-for="(search, key) in listJobTypes" :key="key" :href="changeToSearchWork(search)">
               {{ search.name }}
             </a>
           </div>

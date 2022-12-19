@@ -687,11 +687,45 @@
         background-color: $color-white;
         border-color: $color-blue;
         color: $color-blue;
+        &:hover {
+          border-color: $color-blue-hover;
+          background-color: $color-blue-3;
+          color: $color-blue;
+        }
+        .hide-focus {
+          display: inline-block;
+        }
+        .show-focus {
+          display: none;
+        }
+        &:focus {
+          background-color: $color-blue;
+          color: white;
+          .hide-focus {
+            display: none;
+          }
+
+          .show-focus {
+            display: inline-block;
+          }
+
+          img {
+            background-color: $color-blue;
+          }
+        }
       }
       .form-delete {
         background-color: $color-white;
         border: 1px solid $border-default;
         color: $color-red-primary;
+        &:hover {
+          background-color: $color-bg-error;
+          border-color: $border-default;
+        }
+        &:focus {
+          background-color: $color-bg-error;
+          border-color: $color-red;
+        }
       }
     }
   }
