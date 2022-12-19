@@ -1546,7 +1546,7 @@
             margin: 0 8px 0 6px;
           }
           .date-space-career {
-            margin: 0 9px 0 9px;
+            margin: 8px 9px 0 9px;
 
           }
         }
@@ -1566,6 +1566,9 @@
         }
         .birthday {
           padding: 0 10px;
+        }
+        .birth-text {
+          padding-left: 0px;
         }
         .birthday-edu {
           padding: 0 5px;
@@ -1905,6 +1908,15 @@
           .btn-remove {
             color: $color-red;
             border-color: $border-default;
+            &:hover {
+              background-color: $color-bg-error;
+              color: $color-red-primary;
+            }
+            &:focus {
+              background-color: $color-bg-error;
+              border-color: $color-red !important;
+              color: $color-red-primary !important;
+            }
           }
           .el-button {
             padding: 6px 18px;
@@ -1913,6 +1925,25 @@
 
           .btn-green, .btn-red {
             line-height: 20px;
+          }
+          .btn-edit {
+            .hide-focus {
+              display: inline-block;
+            }
+            .show-focus {
+              display: none;
+            }
+            &:focus {
+              .hide-focus {
+                display: none;
+              }
+              .show-focus {
+                display: inline-block;
+              }
+              img {
+                background-color: $color-blue;
+              }
+            }
           }
         }
 
@@ -3633,6 +3664,15 @@
   }
   .el-button--danger {
     font-weight: 400;
+  }
+  #career-btn-create {
+    .el-button {
+      width: 150px;
+      margin-left: 16px;
+    }
+    .el-button--danger {
+      width: 150px;
+    }
   }
   .desired-edit {
     .edit-cv-element {

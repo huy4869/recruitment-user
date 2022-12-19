@@ -78,14 +78,14 @@
                     </div>
                     <div class="required">{{ $t('form.required') }}</div>
                   </el-col>
-                  <el-col class="pb-8" :md="18" :sm="24">
+                  <el-col :md="18" :sm="24">
                     <div ref="period_end"></div>
                     <div ref="period_start" class="content-input content-datetime">
                       <el-row class="enroll-checkbox">
                         <el-checkbox v-model="accountForm.period_check">{{ $t('my_page.enroll') }}</el-checkbox>
                       </el-row>
-                      <el-row class="d-flex period items-center period-career">
-                        <el-col :md="9" :sm="24" :xs="11" class="first-name">
+                      <el-row class="d-flex period period-career">
+                        <el-col :md="9" :sm="24" :xs="11" class="">
                           <el-form-item label="" prop="period_start" :error="(error.key === 'period_start') ? error.value : ''">
                             <el-row class="d-flex items-center">
                               <el-col  :sm="8" :xs="12" class="birth-year">
@@ -128,7 +128,7 @@
                           </el-form-item>
                         </el-col>
                         <span class="date-space date-space-career">~</span>
-                        <span v-show="accountForm.period_check" class="text-normal">{{ $t('career.current') }}</span>
+                        <span v-show="accountForm.period_check" class="text-normal d-flex items-center">{{ $t('career.current') }}</span>
                         <el-col v-show="!accountForm.period_check" :md="9" :sm="24" :xs="11" class="birth-year">
                           <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
                             <el-row class="d-flex items-center">
@@ -318,7 +318,7 @@
                             <el-input
                               v-model="accountForm.business_content"
                               :placeholder="$t('career.business_content')"
-                              :autosize="{ minRows: 5, maxRows: 10}"
+                              :autosize="{ minRows: 3, maxRows: 10}"
                               name="business_content"
                               type="textarea"
                               maxlength="2000"
@@ -335,26 +335,21 @@
                 <BorderElement :middle="true"></BorderElement>
                 <el-row class="d-flex form-label-input">
                   <el-col :md="6" :sm="12" class="col-label">
-                    <div class="label show-pc">
-                   <span>
-                     {{ $t('career.experience_accumulation1') }}<br>
-                     {{ $t('career.experience_accumulation2') }}<br>
-                     {{ $t('career.experience_accumulation3') }}
-                   </span>
-                      <div class="show-sp">
+                    <div class="label">
+                      <span>
                         {{ $t('career.experience') }}
-                      </div>
+                      </span>
                     </div>
                   </el-col>
                   <el-col :md="18" :sm="24">
-                    <div ref="experience_accumulation" class="content-input">
+                    <div ref="experience_accumulation" class="content-input last-input">
                       <el-row class="d-flex">
                         <el-col :md="20" :sm="24">
                           <el-form-item label="" prop="experience_accumulation" :error="(error.key === 'experience_accumulation') ? error.value : ''">
                             <el-input
                               v-model="accountForm.experience_accumulation"
                               :placeholder="$t('career.experience')"
-                              :autosize="{ minRows: 5, maxRows: 10}"
+                              :autosize="{ minRows: 3, maxRows: 10}"
                               name="experience"
                               type="textarea"
                               maxlength="2000"
@@ -388,6 +383,13 @@
           :text="$t('confirm_modal.back_confirm')"
           @close="closeConfirmModal"
           @handleRouter="handleRouter('/my-page/job-career')">
+        </ConfirmModal>
+        <ConfirmModal
+          v-show="deleteModal"
+          :text="$t('confirm_modal.delete_confirm')"
+          @close="closeDeleteModal"
+          @handleRouter="handleDelete(job.id)"
+        >
         </ConfirmModal>
       </div>
     </div>

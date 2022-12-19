@@ -65,7 +65,7 @@
           </div>
           <div class="right-item">
             <p class="card-text-normal">
-              {{ info.age ? (info.age) : '0' + $t('common.age')}}
+              {{ info.age ? (info.age) + $t('common.age') : '0' + $t('common.age')}}
             </p>
           </div>
           <div class="left-item">

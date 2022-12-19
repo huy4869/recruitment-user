@@ -45,7 +45,7 @@
             <div v-else class="button-footer" @click="handleRouter('/')">
               <img src="/assets/icon/icon_home.png" alt="">
             </div>
-            <div v-if="$route.path.includes('/search') || $route.path.includes('/job')" class="button-home" @click="handleRouter('/search')">
+            <div v-if="$route.path.includes('/search') || $route.path.includes('/job/')" class="button-home" @click="handleRouter('/search')">
               <img src="/assets/icon/icon-search-active.svg" alt=""><span>{{ $t('header.search') }}</span>
             </div>
             <div v-else class="button-footer" @click="handleRouter('/search')">

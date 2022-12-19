@@ -384,7 +384,7 @@
             {{ $t('button.close_up') }}
           </el-button>
           <el-button type="danger" @click="createFeedback">
-            {{ $t('button.confirm') }}
+            {{ $t('my_page.send') }}
           </el-button>
         </div>
       </el-dialog>

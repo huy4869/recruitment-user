@@ -37,7 +37,10 @@
         </div>
       </div>
       <div class="btn-option-mobile d-flex">
-        <el-button class="btn-edit" @click="handleRouter('job-career/edit/' + index + '?id=' + job.id)"><img src="/assets/icon/edit.svg" alt="img-edit">{{ $t('my_page.edit') }}</el-button>
+        <el-button class="btn-edit" @click="handleRouter('job-career/edit/' + index + '?id=' + job.id)">
+          <img class="hide-focus" src="/assets/icon/edit.svg" alt="img-edit">
+          <img class="show-focus" src="/assets/icon/edit_focus.svg" alt="img-edit">{{ $t('my_page.edit') }}
+        </el-button>
         <el-button class="btn-remove" @click="showConfirmModal"><img src="/assets/icon/remove.svg" alt="img-edit">{{ $t('my_page.remove') }}</el-button>
       </div>
     </div>

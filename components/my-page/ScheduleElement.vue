@@ -17,12 +17,18 @@
           <span class="bold">{{ $t('schedule.method') }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.method }}</span>
         </div>
         <div>
-          <span v-if="schedule.interview_approach" class="bold">{{ schedule.interview_approach.approach_label }}</span>
-          <span v-if="schedule.interview_approach" class="show-pc">{{ schedule.interview_approach.approach }}</span>
-          <span v-if="schedule.interview_approach" class="show-sp">
-            <span v-if="schedule.interview_approach.id !== 3">{{ schedule.interview_approach.approach }}</span>
-            <a v-else :href="'tel:' + schedule.interview_approach.approach" @click.stop="">{{ schedule.interview_approach.approach }}</a>
-          </span>
+          <div class="show-pc">
+            <span v-if="schedule.interview_approach" class="bold">{{ schedule.interview_approach.approach_label }}</span>
+            <span v-if="schedule.interview_approach" class="">{{ schedule.interview_approach.approach }}</span>
+          </div>
+          <div class="show-sp">
+            <span v-if="schedule.interview_approach" class="bold">{{ schedule.interview_approach.approach_label }}</span>
+            <span v-if="schedule.interview_approach" class="">
+              <span v-if="schedule.interview_approach.id !== 3">{{ schedule.interview_approach.approach }}</span>
+              <a v-else :href="'tel:' + schedule.interview_approach.approach" @click.stop="">{{ schedule.interview_approach.approach }}</a>
+            </span>
+          </div>
+
         </div>
         <div class="schedule-button">
           <el-button v-if="schedule.allow_edit" :loading="loading" type="danger" @click.stop="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
