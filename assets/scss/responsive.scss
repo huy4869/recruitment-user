@@ -2898,16 +2898,21 @@
                 .province-item {
                   display: block;
                   width: unset;
-                  border-bottom: 1px solid $border-default;
                   padding: 0;
                   margin: 0;
                   .province-name {
-                    padding: 15px 16px;
+                    padding: 7px 50px;
                     margin: 0;
                     display: flex;
                     justify-content: space-between;
-                    border-bottom: 1px solid $border-default;
+                    .el-checkbox {
+                      align-items: center;
+                    }
                   }
+                }
+                .province-item:last-child {
+                  padding-bottom: 10px;
+                  border-bottom: 1px solid $border-default;
                 }
                 .form-work {
                   padding: 15px 16px;
@@ -3049,6 +3054,9 @@
                   font-size: 13px;
                   line-height: 20px;
                   padding-left: 6px;
+                  .total-record {
+                    padding-left: 6px;
+                  }
                 }
               }
             }

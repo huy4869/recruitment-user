@@ -142,9 +142,6 @@
   &:hover {
     background-color: $color-blue-hover;
     border: 1px solid $color-blue-hover;
-    img {
-      opacity: 0.8;
-    }
   }
   &:focus {
     background-color: $color-blue-focus;
@@ -445,7 +442,12 @@
         background-color: $color-blue;
         border-color: $color-blue;
         color: $color-white;
+        &:focus {
+          border-color: $color-blue-focus;
+          background: $color-blue-focus;
+        }
         &:hover {
+          border-color: $color-blue-hover;
           background-color: $color-blue-hover;
           color: $color-white;
         }

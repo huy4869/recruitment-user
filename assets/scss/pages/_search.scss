@@ -40,6 +40,12 @@
           .el-button {
             height: 36px;
             padding: 6px 20px;
+            .hide-focus {
+              display: inline-block;
+            }
+            .show-focus {
+              display: none;
+            }
             span {
               display: flex;
               justify-content: center;
@@ -50,6 +56,20 @@
                 width: 20px;
                 height: 20px;
                 margin-top: 1px;
+              }
+            }
+            &:focus {
+              color: $color-white !important;
+              background: $color-blue-focus;
+              border-color: $color-blue-focus;
+              img {
+                background: $color-blue-focus;
+              }
+              .hide-focus {
+                display: none;
+              }
+              .show-focus {
+                display: inline-block;
               }
             }
           }
@@ -173,6 +193,10 @@
     width: calc(100% - 194px);
     margin-left: 20px;
     padding: 3px 0;
+    .el-button--default:focus {
+      background: $color-white;
+      color: $color-blue !important;
+    }
   }
   .recommend-job-element {
     .job-title {
