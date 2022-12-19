@@ -1169,7 +1169,7 @@ export default {
       })
     },
     getBirthDay() {
-      const birthday = this.$auth.user.birthday ? this.$auth.user.birthday.split('-') : '2000-01-01'.split('-')
+      const birthday = this.$auth.user.birthday ? this.$auth.user.birthday.split('-') : ''
       this.accountForm.year = birthday[0]
       this.accountForm.month = birthday[1]
       this.accountForm.day = birthday[2]
