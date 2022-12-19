@@ -5,7 +5,7 @@
       <div class="title"> {{ text }} </div>
       <div class="btn-group d-flex justify-center">
         <el-button class="button" @click="close" >{{$t('confirm_modal.no')}}</el-button>
-        <el-button class="button" type="danger" @click="handleRouter" >{{$t('confirm_modal.yes')}}</el-button>
+        <el-button class="button button-yes" type="danger" @click="handleRouter" >{{$t('confirm_modal.yes')}}</el-button>
       </div>
     </div>
   </div>
