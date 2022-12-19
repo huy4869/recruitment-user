@@ -29,19 +29,12 @@
       justify-content: flex-start;
       margin: 32px 0 0 24px;
       .el-button {
-        width: 150px;
+        width: 140px;
         margin-left: 0;
         margin-right: 16px;
       }
-    }
-    #career-btn-create {
-      display: flex;
-      justify-content: flex-start;
-      margin: 32px 0 0 24px;
-      .el-button {
-        width: 150px;
-        margin-left: 0;
-        margin-right: 16px;
+      .el-button--danger {
+        width: 136px;
       }
     }
   }
@@ -515,16 +508,16 @@
       }
       .text-normal {
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 400;
       }
       .gender {
         padding: 0 36px 0 8px;
       }
       .date-space {
-        margin: 0 18px 0 4px
+        margin: 8px 18px 0 4px
       }
       .edu-status {
-        margin-top: 32px;
+        margin-top: 6px;
       }
       .feature-cb-group {
         margin-top: 14px;
@@ -670,6 +663,10 @@
   .menu-active {
     font-weight: 700;
     color: $color-text-primary;
+    img {
+      width: 24px;
+      height: 15px;
+    }
   }
   .hamburger-title {
     width: max-content;

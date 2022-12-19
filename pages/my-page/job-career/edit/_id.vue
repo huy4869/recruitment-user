@@ -81,7 +81,7 @@
                       <el-row class="enroll-checkbox">
                         <el-checkbox v-model="accountForm.period_check">{{ $t('my_page.enroll') }}</el-checkbox>
                       </el-row>
-                      <el-row class="d-flex period items-center period-career">
+                      <el-row class="d-flex period period-career">
                         <el-col :md="9" :sm="24" :xs="11" class="">
                           <el-form-item label="" prop="period_start" :error="(error.key === 'period_start') ? error.value : ''">
                             <el-row class="d-flex items-center">
@@ -125,7 +125,7 @@
                           </el-form-item>
                         </el-col>
                         <span class="date-space date-space-career">~</span>
-                        <span v-show="accountForm.period_check" class="text-normal">{{ $t('career.current') }}</span>
+                        <span v-show="accountForm.period_check" class="text-normal d-flex items-center">{{ $t('career.current') }}</span>
                         <el-col v-show="!accountForm.period_check" :md="9" :sm="24" :xs="11" class="birth-year">
                           <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
                             <el-row class="d-flex items-center">

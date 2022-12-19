@@ -313,7 +313,7 @@
       }
       &:focus {
         background-color: $color-bg-error;
-        border: $color-red !important;
+        border-color: $color-red !important;
         color: $color-red-primary !important;
       }
     }

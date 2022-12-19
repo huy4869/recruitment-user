@@ -234,7 +234,7 @@
                 <BorderElement :middle="true"></BorderElement>
                 <el-row class="d-flex form-label-input">
                   <el-col :md="6" :sm="10" class="col-label">
-                    <div class="label"><span>{{ $t('desired_condition.working_day') }}</span></div>
+                    <div class="label"><span>{{ $t('desired_condition.working_hour') }}</span></div>
                   </el-col>
                   <el-col :md="18" :sm="24">
                     <div ref="start_working_time"></div>
@@ -372,7 +372,7 @@
         </div>
         <div id="btn-center" class="text-center">
           <el-button class="card-button" @click="handleRouter('/my-page/desired-condition')">{{ $t('my_page.back') }}</el-button>
-          <el-button class="card-button btn-right" type="danger" @click.native="handleUpdate" >{{ $t('my_page.edit') }}</el-button>
+          <el-button class="card-button btn-right" type="danger" @click.native="handleUpdate" >{{ $t('my_page.save') }}</el-button>
         </div>
         <ConfirmModal
           v-show="confirmModal"
@@ -438,6 +438,7 @@ export default {
       const salary_min = this.accountForm.salary_min
       if (salary_max && salary_min && salary_min >= salary_max) {
         callback(new Error(this.$t('validation.valid_salary', { _field_: message })))
+        this.resetValidate('salary_max')
       } else {
         callback()
       }
@@ -535,6 +536,9 @@ export default {
       this.resetValidateSalary()
     },
     'accountForm.salary_max'() {
+      if (this.accountForm.salary_max <= this.accountForm.salary_min) {
+        this.validate('salary_min')
+      }
       this.resetValidateSalary()
     },
     'accountForm.working_hours.start_hours'() {
