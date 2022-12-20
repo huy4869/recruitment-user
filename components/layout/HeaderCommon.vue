@@ -20,7 +20,7 @@
         </div>
         <div class="button-action show-pc">
           <div class="border-default"></div>
-          <div v-if="mark" @click="changeToLink('/notification')">
+          <div v-if="totalNotification > 0" @click="changeToLink('/notification')">
             <el-badge class="mark" :value="totalNotification">
               <img src="/assets/icon/icon_notification.svg" alt="">
             </el-badge>
