@@ -18,7 +18,7 @@
       <div v-else>
         <NoDataElement :text="$t('common.message_no_data.search_condition')"></NoDataElement>
       </div>
-      <div v-if="lastPage > 1">
+      <div v-if="lastPage >= 1 && listConditions.length">
         <PaginationElement :current-page="page" :last-page="lastPage" @change="changePage"></PaginationElement>
       </div>
       <el-dialog class="popup-confirm" :visible.sync="dialogCancel" width="570px">

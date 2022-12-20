@@ -39,7 +39,8 @@
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div v-else class="button-like el-button el-button--default" @click.stop="addFavoriteJob">
-            <img src="/assets/icon/icon_like.svg" alt="">
+            <img class="show-active" src="/assets/icon/icon_like.svg" alt="">
+            <img class="hide-active" src="/assets/icon/icon_dislike.svg" alt="">
             <span>{{ $t('home.job_favorite') }}</span>
           </div>
           <div class="button-detail el-button el-button--primary" @click="changeToLink('/job/' + jobActive.id)">

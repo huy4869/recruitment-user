@@ -3,7 +3,10 @@
     <div class="container-footer">
       <div class="show-pc">
         <div class="top-arrow">
-          <img src="@/static/assets/icon/top-arrow.svg" @click="scrollToTop">
+          <div class="footer-active" @click="scrollToTop">
+            <img class="cursor-pointer show-active" src="@/static/assets/icon/top-arrow.png">
+            <img class="cursor-pointer hide-active" src="@/static/assets/icon/top-arrow-active.png">
+          </div>
         </div>
         <div class="footer-item">
           <div class="show-sp-center cursor-pointer">{{ $t('footer.company') }}</div>

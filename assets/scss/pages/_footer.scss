@@ -34,17 +34,32 @@
       padding-bottom: 13px;
     }
     .top-arrow {
-      cursor: pointer;
       position: relative;
       display: block;
-      text-align: right;
-      margin-right: 59px;
       height: 64px;
-      img {
-        width: 64px;
-        height: 64px;
-        &:hover {
-          opacity: 0.6;
+      width: calc(100% - 59px);
+      .footer-active {
+        &:active {
+          .hide-active {
+            display: block !important;
+          }
+          .show-active {
+            display: none;
+          }
+        }
+        position: relative;
+        .hide-active {
+          display: none;
+        }
+        img {
+          width: 64px;
+          height: 64px;
+          position: absolute;
+          right: 0;
+          &:hover {
+            opacity: 0.6;
+          }
+
         }
       }
     }

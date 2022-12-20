@@ -93,7 +93,11 @@
     }
     &:focus {
       background-color: $color-primary-focus !important;
-      background-image: url('/assets/icon/icon_checked_hover.svg');
+      background-image: url('/assets/icon/icon_checked_focus.svg');
+    }
+    &:active {
+      background-color: $color-primary-focus !important;
+      background-image: url('/assets/icon/icon_checked_focus.svg');
     }
     &::after {
       display: none;
@@ -147,6 +151,10 @@
     background-color: $color-blue-focus;
     border: 1px solid $color-blue-focus;
   }
+  &:active {
+    background-color: $color-blue-focus;
+    border: 1px solid $color-blue-focus;
+  }
 }
 
 .el-button--default {
@@ -195,6 +203,10 @@
     }
   }
   &:focus {
+    background-color: $color-primary-focus;
+    border: 1px solid $color-primary-focus;
+  }
+  &:active {
     background-color: $color-primary-focus;
     border: 1px solid $color-primary-focus;
   }

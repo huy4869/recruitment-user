@@ -122,7 +122,7 @@
           </div>
         </div>
         <div class="button-search">
-          <el-button type="danger" >
+          <el-button type="danger" @click="searchJob">
             {{ $t('button.search_again') }}
           </el-button>
         </div>
