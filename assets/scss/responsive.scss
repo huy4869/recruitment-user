@@ -698,6 +698,12 @@
           height: auto;
         }
       }
+      .show-pc-schedule {
+        display: none;
+      }
+      .show-sp-schedule {
+        display: inline;
+      }
     }
   }
 }
@@ -2176,6 +2182,11 @@
                   justify-content: center;
                 }
               }
+              .el-input {
+                .el-input__inner {
+                  border-color: $border-default;
+                }
+              }
             }
           }
 
@@ -3098,7 +3109,7 @@
       .input-keyword {
         width: calc(50% + 85px);
         .el-input__prefix {
-          margin: 10px 16px;
+          margin: 4px 16px;
           width: 24px;
           height: 24px;
           img {

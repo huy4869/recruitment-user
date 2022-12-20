@@ -42,6 +42,8 @@
         &:active {
           .hide-active {
             display: block !important;
+            opacity: 1;
+
           }
           .show-active {
             display: none;
