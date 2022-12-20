@@ -22,6 +22,9 @@
     &:hover {
       border-color: $color-primary-hover;
     }
+    &:active {
+      border-color: $border-default;
+    }
   }
   input {
     height: 40px;
@@ -255,6 +258,13 @@
     .el-input {
       .el-input__inner {
         border-color: $color-text-primary;
+      }
+    }
+  }
+  &:active {
+    .el-input {
+      .el-input__inner {
+        border-color: $border-default;
       }
     }
   }
