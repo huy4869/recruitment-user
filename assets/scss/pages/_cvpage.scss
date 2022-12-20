@@ -494,6 +494,10 @@
               background-color: $border-default;
               border: 1px solid $color-placeholder;
             }
+            &:active {
+              background-color: $border-default;
+              border: 1px solid $color-placeholder;
+            }
           }
         }
       }

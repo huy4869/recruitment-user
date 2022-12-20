@@ -211,6 +211,7 @@
         margin: 0 12px;
       }
       .button-like {
+        padding: 12px 24px;
         img {
           width: 24px;
           height: 24px;
@@ -247,7 +248,7 @@
         }
       }
       .button-detail {
-        padding: 12px 43px;
+        padding: 12px 46px;
         &.el-disabled {
           background-color: $border-default;
           cursor: not-allowed;

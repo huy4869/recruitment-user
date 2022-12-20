@@ -162,7 +162,8 @@
       .list-image-detail {
         display: inline-block;
         .d-flex {
-          display: inline-block;
+          display: flex;
+          gap: 8px;
         }
       }
     }
@@ -578,7 +579,7 @@
     .job-detail-content {
       padding: 0 24px;
       .form-list-new-social {
-        img {
+        a img {
           width: 24px;
           height: 24px;
           border-radius: 5px;
@@ -1607,6 +1608,11 @@
           }
         }
       }
+      .image-avatar {
+        img {
+          margin-right: 8px;
+        }
+      }
     }
   }
 
@@ -2521,12 +2527,14 @@
 
       .job-description {
         padding-left: 0;
+        margin-top: 14px;
 
         .job-info {
           margin-bottom: 9px;
         }
 
         .job-button {
+          margin-top: 17px;
           display: flex;
           justify-content: space-between;
 
@@ -2543,6 +2551,7 @@
           }
 
           .button-detail {
+            font-weight: 400;
             width: 48%;
             padding: 8px 0;
             .el-button {
@@ -3236,6 +3245,12 @@
           padding-top: 8px;
           padding-bottom: 8px;
           margin: 8px;
+          &.button-like {
+            padding: 8px 19px;
+          }
+          &.button-detail {
+            padding: 8px 41px;
+          }
         }
       }
       .title-component {
@@ -3312,7 +3327,8 @@
             .job-title {
               padding-left: 8px;
               .title-main {
-                color: $color-text-primary;
+                margin-top: 1px;
+                color: $color-blue;
                 font-size: 14px;
                 line-height: 22px;
                 word-wrap: break-word;
@@ -3324,6 +3340,7 @@
                 -webkit-line-clamp: 2;
               }
               .sub-title {
+                margin-top: 3px;
                 font-size: 13px;
                 line-height: 22px;
                 word-wrap: break-word;
@@ -3344,7 +3361,7 @@
               }
             }
             .job-content {
-              margin-top: 12px;
+              margin-top: 2px;
               .job-description {
                 .job-info {
                   span {
@@ -3375,8 +3392,18 @@
             width: calc(100% - 100px);
             font-size: 14px;
             line-height: 22px;
-            padding: 13px 0;
+            font-weight: 400;
+            padding: 17px 0 9px 0;
             margin-left: 10px;
+            .form-list-new-social {
+              height: 24px;
+            }
+            .employment-status-item{
+              font-weight: 400;
+            }
+            .show-button-google-map span {
+              font-weight: 400;
+            }
           }
         }
       }
@@ -3416,9 +3443,22 @@
           }
         }
         .recommend-job-element {
-          margin-bottom: 16px;
+          margin-bottom: 12px;
           .job-content .job-description .job-button {
             display: flex;
+          }
+          .job-title {
+            .title-main {
+              font-weight: 700;
+              font-size: 16px;
+              line-height: 24px;
+            }
+            .sub-title {
+              font-weight: 400;
+              font-size: 13px;
+              line-height: 20px;
+              margin-top: 3px;
+            }
           }
         }
       }
