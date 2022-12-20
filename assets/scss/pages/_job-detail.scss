@@ -87,8 +87,9 @@
       display: grid;
       grid-template-columns: 75% calc(25% - 10px);
       column-gap: 10px;
+      align-items: baseline;
       .job-avatar {
-        display: flex;
+        display: contents;
         img {
           width: 100%;
           max-height: 551px;
@@ -228,6 +229,15 @@
           background-color: $color-blue-focus;
           border-color: $color-blue-focus;
           color: $color-white;
+        }
+        &:focus {
+          .hide-active {
+            display: initial;
+            background: $color-blue;
+          }
+          .show-active {
+            display: none;
+          }
         }
       }
       .button-dislike {

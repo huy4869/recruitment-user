@@ -678,8 +678,20 @@
           font-size: 14px;
           line-height: 22px;
           img {
+            padding-right: 7.67px;
             width: 24px;
             height: 24px;
+          }
+        }
+        .hide-active {
+          display: none;
+        }
+        &:focus {
+          .show-active {
+            display: none;
+          }
+          .hide-active {
+            display: initial;
           }
         }
       }

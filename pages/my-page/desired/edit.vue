@@ -250,6 +250,7 @@
                                   v-model="accountForm.working_hours.start_hours"
                                   clearable
                                   :placeholder="''"
+                                  @change="fillStartMinutes"
                                   @focus="resetValidate('start_working_time')"
                                   @blur="validate('start_working_time')"
                                 >
@@ -290,6 +291,7 @@
                                   v-model="accountForm.working_hours.end_hours"
                                   clearable
                                   :placeholder="''"
+                                  @change="fillEndMinutes"
                                   @focus="resetValidate('end_working_time')"
                                   @blur="validate('end_working_time')"
                                 >
@@ -816,6 +818,16 @@ export default {
       if (this.accountForm.salary_min < this.accountForm.salary_max) {
         this.resetValidate('salary_max')
         this.resetValidate('salary_min')
+      }
+    },
+    fillStartMinutes() {
+      if (this.accountForm.working_hours.start_minutes === '') {
+        this.accountForm.working_hours.start_minutes = '00'
+      }
+    },
+    fillEndMinutes() {
+      if (this.accountForm.working_hours.end_minutes === '') {
+        this.accountForm.working_hours.end_minutes = '00'
       }
     }
   }
