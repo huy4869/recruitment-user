@@ -225,12 +225,15 @@
           .search-from-popular-item {
             display: flex;
             margin-bottom: 20px;
+            .form-button {
+              max-width: 326px;
+            }
             .search-from-popular-button {
               color: $color-white;
               background-color: $color-blue;
               min-width: 326px;
               text-align: center;
-              padding: 5px 0;
+              padding: 5px;
               font-weight: 500;
               font-size: 14px;
               line-height: 22px;
@@ -508,6 +511,18 @@
           width: 24px;
           height: 24px;
         }
+        .hide-active {
+          display: none;
+        }
+        &:focus {
+          .hide-active {
+            display: initial;
+            background: $color-blue;
+          }
+          .show-active {
+            display: none;
+          }
+        }
       }
       .button-dislike {
         display: flex;
@@ -615,6 +630,7 @@
             padding-top: 1px;
           }
           img {
+            padding-right: 7.5px;
             width: 24px;
             height: 24px;
           }
@@ -633,6 +649,15 @@
             border-color: $color-blue-focus;
             color: $color-white;
           }
+          &:focus {
+            .hide-active {
+              display: initial;
+              background: $color-blue;
+            }
+            .show-active {
+              display: none;
+            }
+          }
         }
         .button-dislike {
           display: flex;
@@ -640,6 +665,7 @@
             padding-top: 1px;
           }
           img {
+            padding-right: 7.5px;
             width: 24px;
             height: 24px;
           }

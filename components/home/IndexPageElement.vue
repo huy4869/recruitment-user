@@ -107,8 +107,8 @@
           </div>
           <div v-if="Object.keys(listSearch).length" class="search-from-popular-content">
             <div v-for="(search, index) in listSearch" :key="index" class="search-from-popular-item">
-              <div>
-                <div class="search-from-popular-button">{{ index + $t('home.text_form_search') }}</div>
+              <div class="form-button">
+                <div class="search-from-popular-button">{{ index }}</div>
               </div>
               <div class="search-next">
                 <img src="/assets/icon/icon_next_search.svg" alt="">

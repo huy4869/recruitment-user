@@ -14,7 +14,7 @@
               <div class="choose-job" @click="changeToSearch(false)">{{ $t('home.search_by_condition') }}</div>
             </div>
             <div class="form-select">
-              <div class="d-flex">
+              <div class="d-flex justify-between">
                 <div class="form-condition">
                   <el-select v-model="provinceCity" :placeholder="$t('home.search_by_prefecture')">
                     <el-option
@@ -55,11 +55,11 @@
     <div class="index-home-content">
       <div class="form-more-info">
         <div class="d-flex justify-between">
-          <div class="button-more-info" @click="dialogPopular = true">
+          <div class="button-more-info button-short" @click="dialogPopular = true">
             <img src="/assets/icon/icon_place_primary.svg" alt="">
             <div>{{ $t('home.search_from_popular') }}</div>
           </div>
-          <div class="button-more-info" @click="dialogEmployment = true">
+          <div class="button-more-info button-short" @click="dialogEmployment = true">
             <img src="/assets/icon/icon_save_primary.svg" alt="">
             <div>{{ $t('home.search_by_employment') }}</div>
           </div>

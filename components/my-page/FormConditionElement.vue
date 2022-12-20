@@ -5,8 +5,9 @@
         <div class="form-condition-date">{{ condition.created_at }}</div>
         <div class="form-condition-button">
           <el-button type="primary" class="form-search" plain @click="changeToSearch">
-            <img class="hide-focus" src="/assets/icon/icon_search_blue.svg" alt="img-edit">
-            <img class="show-focus" src="/assets/icon/icon-search-blue-active.svg" alt="img-edit">{{ $t('common.search') }}
+            <img src="/assets/icon/icon_search_blue.svg" alt="" class="show-active">
+            <img src="/assets/icon/icon-search-default.svg" alt="" class="hide-active">
+            {{ $t('common.search') }}
           </el-button>
           <el-button type="danger" class="form-delete" plain @click="removeSearchJob(condition.id)">
             <img src="/assets/icon/icon_delete.svg" alt="">
@@ -19,8 +20,9 @@
       <div class="form-condition-title">
         <div class="form-condition-date">{{ condition.created_at }}</div>
         <div class="form-condition-button">
-          <el-button type="primary" class="form-search" plain>
-            <img src="/assets/icon/icon_search_blue.svg" alt="" @click="changeToSearch">
+          <el-button type="primary" class="form-search" plain @click="changeToSearch">
+            <img src="/assets/icon/icon_search_blue.svg" alt="" class="show-active">
+            <img src="/assets/icon/icon_search_default.svg" alt="" class="hide-active">
           </el-button>
           <el-button type="danger" class="form-delete" plain @click="removeSearchJob(condition.id)">
             <img src="/assets/icon/icon_delete.svg" alt="">
