@@ -501,6 +501,9 @@
           }
         }
       }
+      .button-upload-sp {
+        display: none;
+      }
       .first-name {
         padding-right: 12px;
       }
@@ -519,6 +522,12 @@
       }
       .date-space {
         margin: 8px 18px 0 4px
+      }
+      .date-space-edu {
+        margin: 8px 18px 0 -4px
+      }
+      .date-current {
+        margin-top: 12px;
       }
       .edu-status {
         margin-top: 6px;

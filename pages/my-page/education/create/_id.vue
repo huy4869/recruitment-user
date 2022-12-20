@@ -54,7 +54,7 @@
                   </el-col>
                   <el-col :md="18" :sm="24">
                     <div class="content-input content-datetime-edu">
-                      <el-row class="d-flex period items-center">
+                      <el-row class="d-flex period">
                         <el-col :md="9" :sm="24" class="first-name">
                           <el-form-item label="" prop="enrollment_period_start" :error="(error.key === 'enrollment_period_start') ? error.value : ''">
                             <el-row class="d-flex">
@@ -93,7 +93,7 @@
                             </el-row>
                           </el-form-item>
                         </el-col>
-                        <span class="date-space"> ~ </span>
+                        <span class="date-space date-space-edu"> ~ </span>
                         <el-col :md="9" :sm="24" class="birth-year">
                           <el-form-item label="" prop="enrollment_period_end" :error="(error.key === 'enrollment_period_end') ? error.value : ''">
                             <el-row class="d-flex">
@@ -157,15 +157,15 @@
                   <el-col :md="6" :sm="12" class="col-label">
                   </el-col>
                   <el-col :md="18" :sm="24">
-                    <div id="career-btn-create" class="justify-start text-center">
-                      <el-button class="card-button triple-btn" @click="handleRouter('/my-page/education')">{{ $t('my_page.back') }}</el-button>
-                      <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
-                    </div>
                   </el-col>
                 </el-row>
               </div>
             </el-form>
           </div>
+        </div>
+        <div id="btn-center" class="text-center">
+          <el-button class="card-button triple-btn" @click="handleRouter('/my-page/education')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
         </div>
         <ConfirmModal
           v-show="confirmModal"

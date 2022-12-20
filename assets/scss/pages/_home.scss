@@ -514,6 +514,18 @@
         .hide-active {
           display: none;
         }
+        &:active {
+          .show-active {
+            display: none;
+          }
+          .hide-active {
+            display: inline-block;
+            opacity: 1;
+          }
+          background-color: $color-blue-focus;
+          border-color: $color-blue-focus;
+          color: $color-white;
+        }
         &:focus {
           .hide-active {
             display: initial;

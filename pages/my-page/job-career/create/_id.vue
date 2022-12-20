@@ -128,7 +128,7 @@
                           </el-form-item>
                         </el-col>
                         <span class="date-space date-space-career">~</span>
-                        <span v-show="accountForm.period_check" class="text-normal d-flex items-center">{{ $t('career.current') }}</span>
+                        <span v-show="accountForm.period_check" class="text-normal date-current">{{ $t('career.current') }}</span>
                         <el-col v-show="!accountForm.period_check" :md="9" :sm="24" :xs="11" class="birth-year">
                           <el-form-item label="" prop="period_end" :error="(error.key === 'period_end') ? error.value : ''">
                             <el-row class="d-flex items-center">
@@ -368,15 +368,15 @@
                   <el-col :md="6" :sm="12" class="col-label">
                   </el-col>
                   <el-col :md="18" :sm="24">
-                    <div id="career-btn-create" class="justify-start text-center">
-                      <el-button class="card-button triple-btn" @click="handleRouter('/my-page/job-career')">{{ $t('my_page.back') }}</el-button>
-                      <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
-                    </div>
                   </el-col>
                 </el-row>
               </div>
             </el-form>
           </div>
+        </div>
+        <div id="btn-center" class="text-center">
+          <el-button class="card-button triple-btn" @click="handleRouter('/my-page/job-career')">{{ $t('my_page.back') }}</el-button>
+          <el-button class="card-button triple-btn" type="danger" @click.native="update" >{{ $t('my_page.save') }}</el-button>
         </div>
         <ConfirmModal
           v-show="confirmModal"

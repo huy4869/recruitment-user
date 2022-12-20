@@ -160,10 +160,10 @@
     }
     .detail-image {
       .list-image-detail {
+        margin-top: 12px;
         display: inline-block;
         .d-flex {
           display: flex;
-          gap: 8px;
         }
       }
     }
@@ -1504,8 +1504,16 @@
         padding: 0;
         .button-upload {
           margin-left: 0;
+          display: none;
+          button label {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 20px;
+          }
+        }
+        .button-upload-sp {
           display: block;
-          margin-top: 8px;
+          margin-left: 0;
           button label {
             font-weight: 400;
             font-size: 13px;
@@ -1553,7 +1561,7 @@
         }
 
         .date-space {
-          margin: 0 5px 0 -14px;
+          margin: 8px 5px 0 -14px;
         }
 
         .checkbox-item {
@@ -2491,6 +2499,7 @@
 
         .button-like {
           display: flex;
+          align-items: center;
           width: 48%;
           justify-content: center;
           padding: 12px 0;
