@@ -45,6 +45,9 @@
                     <div class="content-input detail-image">
                       <el-form-item label="" prop="imageDetail" ref="imageDetail" :error="(error.key === 'image') ? error.value : ''">
                         <input id="upload-detail" ref="fileUploadDetail" :class="{'disabledImg' : disableImgUp}" :disabled="disableImgUp" class="d-none" type="file" max="3" multiple @change="onFileChangeDetail" accept=".jpeg, .jpg, .png, .svg">
+                        <div class="button-upload button-upload-sp">
+                          <button type="button"><label :class="{'disabledImg' : disableImgUp}" for="upload-detail">{{ $t('my_page.upload_image_detail') }}</label></button>
+                        </div>
                         <div class="d-flex list-image-detail">
                           <div v-if="imageDetailShow.length" class="d-flex">
                             <div v-for="(detail, index) in imageDetailShow" :key="index" class="show-detail">

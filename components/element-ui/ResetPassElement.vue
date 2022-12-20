@@ -67,7 +67,7 @@
           </div>
         </el-form-item>
         <div class="link-register text-center">
-          <span class="text-mobile cursor-pointer text-primary-pink" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
+          <span class="underline-hover text-mobile cursor-pointer text-primary-pink" @click="changeLink('register')">{{ $t('login.create_new_account') }}</span>
         </div>
       </el-form>
     </div>

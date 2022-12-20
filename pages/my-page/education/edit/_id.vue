@@ -54,7 +54,7 @@
                   </el-col>
                   <el-col :md="18" :sm="24">
                     <div class="content-input content-datetime-edu">
-                      <el-row class="d-flex period items-center">
+                      <el-row class="d-flex period ">
                         <el-col :md="9" :sm="24" class="first-name">
                           <el-form-item label="" prop="enrollment_period_start" :error="(error.key === 'enrollment_period_start') ? error.value : ''">
                             <el-row class="d-flex">
@@ -93,7 +93,7 @@
                             </el-row>
                           </el-form-item>
                         </el-col>
-                        <span class="date-space"> ~ </span>
+                        <span class="date-space date-space-edu"> ~ </span>
                         <el-col :md="9" :sm="24" class="birth-year">
                           <el-form-item label="" prop="enrollment_period_end" :error="(error.key === 'enrollment_period_end') ? error.value : ''">
                             <el-row class="d-flex">
