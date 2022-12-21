@@ -39,7 +39,6 @@
     }
   }
   .el-input {
-    height: 40px;
     input {
       height: 40px;
     }
@@ -435,6 +434,21 @@
           }
         }
       }
+      .period-desired {
+        .start-time {
+          margin-right: -25px;
+          .input-time-select {
+            .el-input__suffix {
+              position: absolute;
+              right: -10px;
+              top: -5px;
+              .el-input__suffix-inner .el-select__caret::before {
+                right: -8px;
+              }
+            }
+          }
+        }
+      }
     }
 
     .content-input {
@@ -527,7 +541,7 @@
         margin: 8px 18px 0 -4px
       }
       .date-current {
-        margin-top: 12px;
+        margin-top: 10px;
       }
       .edu-status {
         margin-top: 6px;

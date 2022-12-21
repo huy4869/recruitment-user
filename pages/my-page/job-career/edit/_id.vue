@@ -229,7 +229,7 @@
                     <div ref="position_offices" class="content-input">
                       <el-row class="d-flex">
                         <el-col :md="20" :sm="24">
-                          <el-form-item label="" prop="position_offices" :error="(error.key === 'position_offices') ? error.value : ''">
+                          <el-form-item label="" prop="position_offices" :error="(error.key && error.key.includes('position_offices')) ? error.value : ''">
                             <el-select
                               v-model="accountForm.position_offices"
                               :placeholder="$t('career.position_offices')"

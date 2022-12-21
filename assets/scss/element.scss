@@ -338,10 +338,6 @@
   }
 }
 
-.el-select__tags {
-  height: 100%;
-}
-
 .el-checkbox__input.is-focus {
   .el-checkbox__inner {
     border-color: $border-default;
@@ -472,6 +468,10 @@
           border-color: $color-blue-hover;
           background-color: $color-blue-hover;
           color: $color-white;
+        }
+        &:active {
+          border-color: $color-blue-focus;
+          background: $color-blue-focus;
         }
       }
     }
