@@ -6,7 +6,9 @@
       </div>
       <div class="job-title">
         <div class="title-main">{{ job.name }}</div>
-        <div class="sub-title">{{ job.store_name }}</div>
+        <div class="sub-title">{{ job.store_name }}
+          <span v-if="job.company_name" class="job-list__name">({{ job.company_name }})</span>
+        </div>
       </div>
     </div>
     <div class="job-content">

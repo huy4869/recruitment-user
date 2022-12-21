@@ -4,7 +4,9 @@
     <div class="job-detail-header">
       <div class="job-detail-title">{{ job.name }}</div>
       <div class="job-detail-store-name">
-        <div>{{ job.store_name }}</div>
+        <div>{{ job.store_name }}
+          <span v-if="job.company_name" class="job-list__name">({{ job.company_name }})</span>
+        </div>
         <div class="last-updated">{{ job.updated_at }}</div>
       </div>
     </div>

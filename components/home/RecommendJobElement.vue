@@ -2,7 +2,9 @@
   <div class="recommend-job-element cursor-pointer" @click="changeToLink('/job/' + jobActive.id)">
     <div class="job-title">
       <div class="title-main">{{ jobActive.name }}</div>
-      <div class="sub-title">{{ jobActive.store_name }}</div>
+      <div class="sub-title">{{ jobActive.store_name }}
+        <span v-if="jobActive.store_name" class="job-list__name">({{ jobActive.store_name }})</span>
+      </div>
     </div>
     <div class="job-content">
       <div class="job-image">
