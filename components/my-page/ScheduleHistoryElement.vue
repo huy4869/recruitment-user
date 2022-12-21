@@ -29,8 +29,8 @@
         </div>
         <div v-if="schedule.interview_approach">
           <span class="bold">{{ schedule.interview_approach.approach_label }}</span>
-          <span v-if="schedule.interview_approach" class="show-pc">{{ schedule.interview_approach.approach }}</span>
-          <span v-if="schedule.interview_approach" class="show-sp">
+          <span v-if="schedule.interview_approach" class="show-pc-schedule">{{ schedule.interview_approach.approach }}</span>
+          <span v-if="schedule.interview_approach" class="show-sp-schedule">
             <span v-if="schedule.interview_approach.id !== 3">{{ schedule.interview_approach.approach }}</span>
             <a v-else :href="'tel:' + schedule.interview_approach.approach" @click.stop="">{{ schedule.interview_approach.approach }}</a>
           </span>
