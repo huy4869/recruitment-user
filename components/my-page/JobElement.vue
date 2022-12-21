@@ -5,7 +5,9 @@
         <img class="favorite-job-img" :src="job.banner_image" alt="favorite-job">
         <div class="title-left">
           <div class="card-title">{{ job.name }}</div>
-          <div class="card-subtitle">{{ job.store_name }}</div>
+          <div class="card-subtitle">{{ job.store_name }}
+            <span v-if="job.company_name" class="job-list__name">({{ job.company_name }})</span>
+          </div>
           <div v-if="job.interview_status" :class="['schedule-button-status', 'status-1']">
             {{ job.interview_status }}
           </div>
@@ -44,7 +46,9 @@
       <div class="job-title">
         <div class="title-left">
           <div class="card-title">{{ job.name }}</div>
-          <div class="card-subtitle">{{ job.store_name }}</div>
+          <div class="card-subtitle">{{ job.store_name }}
+            <span v-if="job.company_name" class="job-list__name">({{ job.company_name }})</span>
+          </div>
         </div>
         <div class="job-image">
           <img class="favorite-job-img" :src="job.banner_image" alt="favorite-job">

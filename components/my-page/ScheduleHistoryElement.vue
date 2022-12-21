@@ -9,7 +9,9 @@
         <span v-if="showStatus && schedule.apply_or_interview" class="show-interview">{{ $t('schedule.interview') }}</span>
         {{ schedule.job_name }}
       </div>
-      <div class="sub-title">{{ schedule.store_name }}</div>
+      <div class="sub-title">{{ schedule.store_name }}
+        <span v-if="schedule.store_name" class="job-list__name">({{ schedule.store_name }})</span>
+      </div>
     </div>
     <div class="schedule-content">
       <div class="schedule-image">

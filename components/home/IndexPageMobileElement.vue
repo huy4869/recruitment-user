@@ -194,7 +194,9 @@
           </div>
           <div class="new-item-content">
             <div class="job-name">{{ job.name }}</div>
-            <div class="store-name">{{ job.store_name }}</div>
+            <div class="store-name">{{ job.store_name }}
+              <span v-if="job.company_name" class="job-list__name">({{ job.company_name }})</span>
+            </div>
             <div class="job-info">
               <img src="/assets/icon/icon_place.svg" alt="">
               <span>{{ showAddress(job) }}</span>
