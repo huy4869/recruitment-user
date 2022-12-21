@@ -241,12 +241,13 @@
                     <div ref="end_working_time"></div>
                     <div class="content-input content-datetime-edu">
                       <el-row class="d-flex period-desired">
-                        <el-col :md="11" :sm="24" class="start-time">
+                        <el-col :md="12" :sm="24" class="start-time">
                           <el-form-item label="" prop="start_working_time" :error="(error.key === 'start_working_time') ? error.value : ''">
                             <el-row class="d-flex">
                               <span class="text-normal birthday birth-text">{{ $t('desired_condition.start_time') }}</span>
                               <el-col :md="5" :sm="7" :xs="6" class="birth-year">
                                 <el-select
+                                  class="input-time-select"
                                   v-model="accountForm.working_hours.start_hours"
                                   clearable
                                   :placeholder="''"
@@ -265,6 +266,7 @@
                               <span class="text-normal birthday birth-space">:</span>
                               <el-col :md="5" :sm="7" :xs="6" class="birth-month">
                                 <el-select
+                                  class="input-time-select"
                                   v-model="accountForm.working_hours.start_minutes"
                                   clearable
                                   :placeholder="''"
@@ -282,12 +284,13 @@
                             </el-row>
                           </el-form-item>
                         </el-col>
-                        <el-col :md="11" :sm="24" class="birth-year">
+                        <el-col :md="12" :sm="24" class="birth-year">
                           <el-form-item label="" prop="end_working_time" :error="(error.key === 'end_working_time') ? error.value : ''">
                             <el-row class="d-flex">
                               <span class="text-normal birthday birth-text">{{ $t('desired_condition.end_time') }}</span>
                               <el-col :md="5" :sm="7" :xs="6" class="birth-year">
                                 <el-select
+                                  class="input-time-select"
                                   v-model="accountForm.working_hours.end_hours"
                                   clearable
                                   :placeholder="''"
@@ -306,6 +309,7 @@
                               <span class="text-normal birthday birth-space">:</span>
                               <el-col :md="5" :sm="7" :xs="6" class="birth-month">
                                 <el-select
+                                  class="input-time-select"
                                   v-model="accountForm.working_hours.end_minutes"
                                   clearable
                                   :placeholder="''"

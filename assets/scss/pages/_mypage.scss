@@ -1100,6 +1100,12 @@
               height: 24px;
               margin-left: 4px;
             }
+            &:hover {
+              background-color: $color-primary-hover;
+            }
+            &:active {
+              background-color: $color-primary-focus;
+            }
           }
           .el-input {
             width: calc(100% - 110px);
@@ -1228,6 +1234,7 @@
         border-bottom: none;
       }
       .edit-cv-title {
+        color: $color-black;
         font-weight: 400;
         font-size: 24px;
         line-height: 32px;

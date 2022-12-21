@@ -736,6 +736,12 @@ hr {
   color: $color-primary-focus !important;
 }
 
+.underline-hover:active {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  color: $color-primary-focus !important;
+}
+
 .disabledImg {
   cursor: not-allowed !important;
 }
