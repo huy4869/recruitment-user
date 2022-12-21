@@ -97,6 +97,9 @@
             width: 32px;
             height: 32px;
           }
+          .disable-item {
+            cursor: not-allowed;
+          }
         }
 
         &.first-right-item {

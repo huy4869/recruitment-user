@@ -254,11 +254,31 @@
             <span>{{ $t('job.sns_social') }}</span>
           </div>
           <div class="application-requirement-right">
-            <div v-if="jobStatus" class="form-list-new-social">
-              <a href="https://www.facebook.com/" target="_blank"><img src="/assets/icon/icon_facebook.svg" alt=""></a>
-              <a href="https://twitter.com/" target="_blank"><img src="/assets/icon/icon_twitter.svg" alt=""></a>
-              <a href="https://www.instagram.com/" target="_blank"><img src="/assets/icon/icon_instagram.svg" alt=""></a>
-              <a href="https://line.me/" target="_blank"><img src="/assets/icon/icon_line.svg" alt=""></a>
+            <div class="social-media">
+              <a v-if="job.sns.facebook" :href="job.sns.facebook" target="_blank">
+                <img src="/assets/icon/fb.svg" alt="fb">
+              </a>
+              <a v-else class="disable-item" disabled>
+                <img src="/assets/icon/fb_disable.svg" alt="fb">
+              </a>
+              <a v-if="job.sns.twitter" :href="job.sns.twitter" target="_blank">
+                <img src="/assets/icon/ebay.svg" alt="ebay">
+              </a>
+              <a v-else class="disable-item" disabled>
+                <img src="/assets/icon/ebay_disable.svg" alt="fb">
+              </a>
+              <a v-if="job.sns.instagram" :href="job.sns.instagram" target="_blank">
+                <img src="/assets/icon/ig.svg" alt="ig">
+              </a>
+              <a v-else class="disable-item" disabled>
+                <img src="/assets/icon/ig_disable.svg" alt="fb">
+              </a>
+              <a v-if="job.sns.line" :href="job.sns.line" target="_blank">
+                <img src="/assets/icon/line.svg" alt="line">
+              </a>
+              <a v-else class="disable-item" disabled>
+                <img src="/assets/icon/line_disable.svg" alt="fb">
+              </a>
             </div>
           </div>
         </div>

@@ -920,11 +920,15 @@ export default {
       }
     },
     birthday(newValue, oldValue) {
-      if (this.accountForm.year && this.accountForm.year.length === 4) {
-        if (new Date().getFullYear() - this.accountForm.year === 0) {
+      if (this.accountForm.day && this.accountForm.month && this.accountForm.year && this.accountForm.year.length === 4) {
+        const birthDate = new Date(this.accountForm.year + '/' + this.accountForm.month + '/' + this.accountForm.day).getTime()
+        const currentDate = new Date()
+        const difference = currentDate - birthDate
+        const age = Math.floor(difference / 31557600000)
+        if (age <= 0) {
           this.accountForm.age = 1
         } else {
-          this.accountForm.age = new Date().getFullYear() - this.accountForm.year
+          this.accountForm.age = age
         }
       }
     },
