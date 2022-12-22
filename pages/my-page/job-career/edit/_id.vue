@@ -239,6 +239,7 @@
                               allow-create
                               default-first-option
                               @visible-change="validatePositionOffice"
+                              @input="changePositionOffice"
                               @focus="resetValidate('position_offices')">
                               <el-option
                                 v-for="item in m_position_offices"
@@ -1018,6 +1019,13 @@ export default {
       }
       if (this.accountForm.period_year_end && this.accountForm.period_month_end) {
         this.accountForm.period_end = this.accountForm.period_year_end + '/' + this.accountForm.period_month_end
+      }
+    },
+    changePositionOffice(val) {
+      for (let i = 0; i < val.length; i++) {
+        if (val[i].length > 255) {
+          val[i] = val[i].slice(0, 255)
+        }
       }
     }
   }
