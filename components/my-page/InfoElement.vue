@@ -114,20 +114,32 @@
             </p>
           </div>
           <div id="img-detail1" class="right-item">
-          <div class="social-media">
-          <a v-if="info.facebook" :href="info.facebook" target="_blank">
-          <img src="/assets/icon/fb.svg" alt="fb">
-          </a>
-          <a v-if="info.twitter" :href="info.twitter" target="_blank">
-          <img src="/assets/icon/ebay.svg" alt="ebay">
-          </a>
-          <a v-if="info.instagram" :href="info.instagram" target="_blank">
-          <img src="/assets/icon/ig.svg" alt="ig">
-          </a>
-          <a v-if="info.line" :href="info.line" target="_blank">
-          <img src="/assets/icon/line.svg" alt="line">
-          </a>
-          </div>
+            <div class="social-media">
+              <a v-if="info.facebook" :href="info.facebook" target="_blank">
+                <img src="/assets/icon/fb.svg" alt="fb">
+              </a>
+              <a v-else class="disable-item" disabled>
+                <img src="/assets/icon/fb_disable.svg" alt="fb">
+              </a>
+              <a v-if="info.twitter" :href="info.twitter" target="_blank">
+                <img src="/assets/icon/ebay.svg" alt="ebay">
+              </a>
+              <a v-else class="disable-item" disabled>
+                <img src="/assets/icon/ebay_disable.svg" alt="fb">
+              </a>
+              <a v-if="info.instagram" :href="info.instagram" target="_blank">
+                <img src="/assets/icon/ig.svg" alt="ig">
+              </a>
+              <a v-else class="disable-item" disabled>
+                <img src="/assets/icon/ig_disable.svg" alt="fb">
+              </a>
+              <a v-if="info.line" :href="info.line" target="_blank">
+                <img src="/assets/icon/line.svg" alt="line">
+              </a>
+              <a v-else class="disable-item" disabled>
+                <img src="/assets/icon/line_disable.svg" alt="fb">
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -172,10 +172,30 @@
           </div>
         </div>
         <div class="form-list-new-social">
-          <a :href="listSocial.facebook" target="_blank"><img src="/assets/icon/icon_facebook.svg" alt=""></a>
-          <a :href="listSocial.twitter" target="_blank"><img src="/assets/icon/icon_twitter.svg" alt=""></a>
-          <a :href="listSocial.instagram" target="_blank"><img src="/assets/icon/icon_instagram.svg" alt=""></a>
-          <a :href="listSocial.line" target="_blank"><img src="/assets/icon/icon_line.svg" alt=""></a>
+          <a v-if="listSocial.facebook" :href="listSocial.facebook" target="_blank">
+            <img src="/assets/icon/fb.svg" alt="fb">
+          </a>
+          <a v-else class="disable-item" disabled>
+            <img src="/assets/icon/fb_disable.svg" alt="fb">
+          </a>
+          <a v-if="listSocial.twitter" :href="listSocial.twitter" target="_blank">
+            <img src="/assets/icon/ebay.svg" alt="ebay">
+          </a>
+          <a v-else class="disable-item" disabled>
+            <img src="/assets/icon/ebay_disable.svg" alt="fb">
+          </a>
+          <a v-if="listSocial.instagram" :href="listSocial.instagram" target="_blank">
+            <img src="/assets/icon/ig.svg" alt="ig">
+          </a>
+          <a v-else class="disable-item" disabled>
+            <img src="/assets/icon/ig_disable.svg" alt="fb">
+          </a>
+          <a v-if="listSocial.line" :href="listSocial.line" target="_blank">
+            <img src="/assets/icon/line.svg" alt="line">
+          </a>
+          <a v-else class="disable-item" disabled>
+            <img src="/assets/icon/line_disable.svg" alt="fb">
+          </a>
         </div>
       </div>
     </div>
