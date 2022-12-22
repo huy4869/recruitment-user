@@ -222,6 +222,13 @@ export default {
       }
     }
   },
+  watch: {
+    showDetailMessage(newValue, oldValue) {
+      if (!this.showDetailMessage) {
+        setTimeout(() => this.scrollToElementSp(), 500)
+      }
+    }
+  },
   async created() {
     await this.$store.commit(INDEX_SET_LOADING, true)
     await this.getDataUser()
@@ -320,6 +327,10 @@ export default {
       const userDisplayMobile = this.$refs.scrollListUserMobile
       const userDisplay = this.$refs.scrollListUser
       userDisplay.scrollTo({ top: 0, behavior: 'smooth' })
+      userDisplayMobile.scrollTo({ top: 0, behavior: 'smooth' })
+    },
+    scrollToElementSp() {
+      const userDisplayMobile = this.$refs.scrollListUserMobile
       userDisplayMobile.scrollTo({ top: 0, behavior: 'smooth' })
     },
     checkSearch(name) {
