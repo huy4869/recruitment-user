@@ -691,6 +691,11 @@
             }
           }
         }
+        .schedule-url {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+        }
       }
       .schedule-image{
         width: 100%;
@@ -1281,6 +1286,25 @@
         right: unset;
       }
     }
+    .schedule-content {
+      .schedule-description {
+        .open-google-map {
+          .show-button-google-map {
+            span {
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
+            }
+          }
+        }
+        .schedule-url {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+        }
+      }
+    }
+
   }
   // cv-element-start
   .card-component {
