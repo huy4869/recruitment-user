@@ -92,7 +92,7 @@
         </div>
         <div class="show-sp">
           <div class="form-chat">
-            <div v-if="!showDetailMessage" class="list-form-chat">
+            <div v-show="!showDetailMessage" class="list-form-chat">
               <div class="form-search">
                 <el-input
                   v-model.trim="search"
@@ -131,7 +131,7 @@
                 </div>
               </div>
             </div>
-            <div v-else class="content-form-chat">
+            <div v-show="showDetailMessage" class="content-form-chat">
               <div class="form-message" ref="scrollListMessageMobile">
                 <div v-for="(message, index) in listMessages" :key="index">
                   <FormChatElement :message="message" :store_id="userActive.store_id"></FormChatElement>

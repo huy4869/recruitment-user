@@ -31,10 +31,14 @@
         </div>
         <div v-if="schedule.interview_approach">
           <span class="bold">{{ schedule.interview_approach.approach_label }}</span>
-          <span v-if="schedule.interview_approach" class="show-pc-schedule">{{ schedule.interview_approach.approach }}</span>
+          <span v-if="schedule.interview_approach" class="show-pc-schedule">
+            <a class="schedule-url text-blue-hover" :href="schedule.interview_approach.approach" target="_blank" v-if="schedule.interview_approach.id === 1">{{ schedule.interview_approach.approach }}</a>
+            <span v-else>{{ schedule.interview_approach.approach }}</span>
+          </span>
           <span v-if="schedule.interview_approach" class="show-sp-schedule">
-            <span v-if="schedule.interview_approach.id !== 3">{{ schedule.interview_approach.approach }}</span>
-            <a v-else :href="'tel:' + schedule.interview_approach.approach" @click.stop="">{{ schedule.interview_approach.approach }}</a>
+            <a class="schedule-url text-blue-hover" :href="schedule.interview_approach.approach" target="_blank" v-if="schedule.interview_approach.id === 1">{{ schedule.interview_approach.approach }}</a>
+            <span v-else-if="schedule.interview_approach.id === 2">{{ schedule.interview_approach.approach }}</span>
+            <a class="schedule-url text-blue-hover" v-else :href="'tel:' + schedule.interview_approach.approach" @click.stop="">{{ schedule.interview_approach.approach }}</a>
           </span>
           <div v-if="showStatus" class="open-google-map">
             <a v-if="schedule.interview_approach.is_direct_interview" :href="'https://www.google.com/maps/place/' + schedule.interview_approach.approach" class="show-button-google-map text-blue-hover" target="_blank" @click.stop="openGoogleMap">
