@@ -50,7 +50,7 @@
           <div class="job-detail">
             <div v-for="(image, index) in job.detail_images" :key="index" class="image-detail">
               <el-image
-                :src="image.uurl"
+                :src="image.url"
                 :preview-src-list="[image.url]">
               </el-image>
             </div>
