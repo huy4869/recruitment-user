@@ -317,6 +317,7 @@
   "condition": {
     "list": {
       "job_type_ids": "職種",
+      "work_type_ids": "雇用形態",
       "province_id": "勤務地",
       "search": "キーワード",
       "employment_status": "雇用形態",
