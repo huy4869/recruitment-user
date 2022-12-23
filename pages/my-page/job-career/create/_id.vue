@@ -241,6 +241,7 @@
                               filterable
                               allow-create
                               default-first-option
+                              @input="changePositionOffice"
                               @visible-change="validatePositionOffice"
                               @focus="resetValidate('position_offices')">
                               <el-option
@@ -982,6 +983,13 @@ export default {
     getCarrerInfo() {
       this.accountForm.period_year_start = '2000'
       this.accountForm.period_month_start = '01'
+    },
+    changePositionOffice(val) {
+      for (let i = 0; i < val.length; i++) {
+        if (val[i].length > 255) {
+          val[i] = val[i].slice(0, 255)
+        }
+      }
     }
   }
 }
