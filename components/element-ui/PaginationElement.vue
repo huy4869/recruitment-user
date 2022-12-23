@@ -63,6 +63,7 @@ export default {
   methods: {
     changePage(page) {
       this.$emit('change', page)
+      window.scrollTo(0, 0)
     },
     prePage() {
       if (this.currentPage >= 2) {
