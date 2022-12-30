@@ -273,9 +273,9 @@
       line-height: 22px;
       word-break: break-all;
       .schedule-url {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
         color: $color-blue;
       }
       div {
@@ -315,6 +315,9 @@
         color: $color-white;
         margin-left: 10px;
         padding: 1px 6px;
+      }
+      .approach-label {
+        min-width: fit-content;
       }
     }
     .show-sp-schedule {
@@ -370,9 +373,9 @@
     }
     .schedule-description {
       .schedule-url {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
         color: $color-blue;
       }
       .open-google-map {
@@ -1061,6 +1064,7 @@
               .message-chat {
                 background-color: $color-blue-3;
                 color: $color-blue;
+                white-space: pre-line;
               }
             }
           }
