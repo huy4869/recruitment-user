@@ -7,7 +7,7 @@
     <div v-else-if="message.is_from_user" class="content-chat content-chat-right">
       <div class="d-flex justify-end form-chat-message">
         <div class="show-message">
-          <div class="message-chat">{{ message.content }}</div>
+          <div class="message-chat" v-html="formatMessage(message.content)"></div>
         </div>
         <div v-if="message.show_date" class="message-date">{{ message.send_time }}</div>
       </div>
@@ -20,7 +20,7 @@
           </div>
           <div class="show-message">
             <div class="user-name">{{ message.store_name }}</div>
-            <div class="message-chat">{{ message.content }}</div>
+            <div class="message-chat" v-html="formatMessage(message.content)"></div>
             <div v-if="message.show_date" class="message-date">{{ message.send_time }}</div>
           </div>
         </div>
@@ -34,6 +34,14 @@ import ShowAvatarElement from '../element-ui/ShowAvatarElement'
 export default {
   name: 'FormChatElement',
   props: ['message', 'store_id'],
-  components: { ShowAvatarElement }
+  components: { ShowAvatarElement },
+  methods: {
+    formatMessage(value) {
+      if (value) {
+        return value.replace(/\\n/g, '<br/>')
+      }
+      return ''
+    }
+  }
 }
 </script>

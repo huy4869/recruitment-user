@@ -177,11 +177,11 @@ export default {
             show: true,
             text: this.$t('content.EXC_001')
           })
-          // await this.$router.push('/404-not-found')
+          await this.$router.push('/404-not-found')
           break
         default:
           this.$store.commit(INDEX_SET_ERROR, { show: true, text: data.messages })
-          // await this.$router.push('/404-not-found')
+          await this.$router.push('/404-not-found')
           break
       }
     }

@@ -29,7 +29,7 @@
               {{ $t('job.pick_up_point2') }}
             </span>
             </el-button>
-            <div class="sub-detail-title-sp" v-html="job.pick_up_point"></div>
+            <div class="sub-detail-title-sp" v-html="job.pick_up_point || ''"></div>
           </div>
         </div>
         <div v-if="loggedIn" class="about-job show-pc text-blue-hover" @click="openAboutDialog">
@@ -37,7 +37,7 @@
           <span>{{ $t('job.about_job') }}</span>
         </div>
       </div>
-      <div class="sub-detail-title" v-html="job.pick_up_point">
+      <div class="sub-detail-title" v-html="job.pick_up_point || ''">
       </div>
       <div class="show-sp">
         <div class="detail-job-image">
@@ -156,7 +156,7 @@
             <span>{{ $t('job.description') }}</span>
           </div>
           <div class="application-requirement-right">
-            <div class="break-space">{{ job.description }}</div>
+            <div class="break-space">{{ job.description || '' }}</div>
           </div>
         </div>
         <div class="application-requirement-item">
@@ -175,7 +175,7 @@
           </div>
           <div class="application-requirement-right">
             <div class="show-salary">{{ showSalary }}</div>
-            <div class="break-space">{{ job.salary.description }}</div>
+            <div class="break-space">{{ job.salary ? (job.salary.description || '') : '' }}</div>
           </div>
         </div>
         <div class="application-requirement-item">
