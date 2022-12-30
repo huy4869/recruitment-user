@@ -1,8 +1,4 @@
-@media screen and (min-height: 825px) {
-  #register-layout {
-    height: 100vh;
-  }
-}
+
 @media only screen and (min-width: 1150px) and (max-width: 1280px) {
   .login-page {
     .login-element {
@@ -453,30 +449,12 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .self-pr-page .edit-cv-element .edit-cv-content {
-    .self-skill .skill-item {
-      .pr-slider .skill-slider {
-        max-width: 250px;
-      }
-      .left-item {
-        max-width: 120px;
-      }
-    }
-    .left-item {
-      max-width: 120px;
-    }
-  }
-  .edit-cv-element .edit-cv-content .edit-form-input .el-form-item__content .el-input__inner::placeholder {
-    font-size: 14px;
-  }
-  .edit-cv-element .edit-cv-content .edit-form-input .el-form-item__content .el-input__inner {
-    font-size: 14px;
-  }
-  .el-textarea .el-textarea__inner {
-    font-size: 14px;
+@media screen and (min-height: 825px) {
+  #register-layout {
+    height: 100vh;
   }
 }
+
 @media screen and (max-width: 820px) {
   .card-component {
     .favorite-job-element {
@@ -643,6 +621,31 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .self-pr-page .edit-cv-element .edit-cv-content {
+    .self-skill .skill-item {
+      .pr-slider .skill-slider {
+        max-width: 250px;
+      }
+      .left-item {
+        max-width: 120px;
+      }
+    }
+    .left-item {
+      max-width: 120px;
+    }
+  }
+  .edit-cv-element .edit-cv-content .edit-form-input .el-form-item__content .el-input__inner::placeholder {
+    font-size: 14px;
+  }
+  .edit-cv-element .edit-cv-content .edit-form-input .el-form-item__content .el-input__inner {
+    font-size: 14px;
+  }
+  .el-textarea .el-textarea__inner {
+    font-size: 14px;
+  }
+}
+
 @media screen and (max-width: 750px) {
   .home-job-element {
     .job-content {
@@ -659,6 +662,7 @@
     }
   }
 }
+
 @media screen and (max-width: 720px) {
   .my-page-schedule-element {
     padding: 14px 12px;
