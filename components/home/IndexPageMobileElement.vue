@@ -254,7 +254,9 @@ export default {
         'speed': 500,
         'slidesToShow': 1,
         'slidesToScroll': 1,
-        'touchThreshold': 5
+        'touchThreshold': 5,
+        'autoplay': true,
+        'autoplaySpeed': 50000000
       }
     }
   },

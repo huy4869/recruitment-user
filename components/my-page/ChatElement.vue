@@ -11,7 +11,7 @@
             <div class="list-form-chat">
               <div class="form-search">
                 <el-input
-                  v-model.trim="search"
+                  v-model="search"
                   :placeholder="$t('common.search')"
                   name="search"
                   type="text"
@@ -95,7 +95,7 @@
             <div v-show="!showDetailMessage" class="list-form-chat">
               <div class="form-search">
                 <el-input
-                  v-model.trim="search"
+                  v-model="search"
                   :placeholder="$t('common.search')"
                   name="search"
                   type="text"

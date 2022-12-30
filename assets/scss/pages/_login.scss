@@ -161,6 +161,12 @@
         border-color: $color-black;
         height: 40px;
 
+        &::placeholder {
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 22px
+        }
+
         &:focus {
           border: 1px solid $color-text-primary;
           outline: 0;

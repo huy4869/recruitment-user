@@ -8,7 +8,7 @@
           <div class="notification-form">
             <div v-if="!notification.be_read" class="show-status">{{ $t('common.unread') }}</div>
             <div class="notification-title cursor-pointer">
-              <a class="text-blue-hover" @click="updateRead(notification)" :href="getLinkNotification(notification)">{{ notification.title }}</a>
+              <a class="text-blue-hover" @click="updateRead(notification, index)" :href="getLinkNotification(notification)">{{ notification.title }}</a>
               <div class="show-pc notification-date">{{ notification.created_at }}</div>
             </div>
             <div class="notification-detail">
@@ -86,13 +86,14 @@ export default {
         })
       }
     },
-    async updateRead(notification) {
+    async updateRead(notification, index) {
       if (notification.be_read === 0) {
         try {
           await this.$store.commit(INDEX_SET_LOADING, true)
           const response = await this.$store.dispatch(NOTIFICATION_UPDATE_READ, notification.id)
           switch (response.status_code) {
             case 200:
+              this.listNotifications[index].be_read = 1
               this.getDataNotifications()
               break
             case 500:
