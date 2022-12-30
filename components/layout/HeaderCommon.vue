@@ -63,7 +63,7 @@
             <div class="content-user items-center">
               <div class="d-flex cursor-pointer">
                 <img class="avatar" :src="user.avatar ? user.avatar : '/assets/images/user_default.svg'" alt="">
-                <span>{{ checkName(user.alias_name || user.email) + $t('common.dear') }}</span>
+                <span>{{ checkName(user.alias_name || (user.first_name + user.last_name)) + $t('common.dear') }}</span>
               </div>
               <img class="cursor-pointer" src="/assets/icon/icon_drop_more.svg" alt="">
             </div>
