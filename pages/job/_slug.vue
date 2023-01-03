@@ -186,7 +186,7 @@
             <div>{{ showDate }}</div>
           </div>
         </div>
-        <div class="application-requirement-item">
+        <div v-if="job.age.min && job.age.max" class="application-requirement-item">
           <div class="application-requirement-left">
             <span>{{ $t('job.age') }}</span>
           </div>
@@ -194,7 +194,7 @@
             <div>{{ showAge }}</div>
           </div>
         </div>
-        <div class="application-requirement-item">
+        <div v-if="job.genders.length" class="application-requirement-item">
           <div class="application-requirement-left">
             <span>{{ $t('job.gender') }}</span>
           </div>
@@ -202,7 +202,7 @@
             <div>{{ showTextList('genders', 'name') }}</div>
           </div>
         </div>
-        <div class="application-requirement-item">
+        <div v-if="job.experience_types.length" class="application-requirement-item">
           <div class="application-requirement-left">
             <span>{{ $t('job.experience') }}</span>
           </div>
@@ -216,13 +216,13 @@
           </div>
           <div class="application-requirement-right">
             <div class="break-word">{{ showAddress }}</div>
-            <a v-if="job.address.address" :href="'https://www.google.com/maps/place/' + showAddress" class="show-button-google-map text-blue-hover" target="_blank">
+            <a v-if="job.address.address" :href="'http://maps.google.com/?q=' + showAddress" class="show-button-google-map text-blue-hover" target="_blank">
               <img src="/assets/icon/icon_google_map.svg" alt="">
               <span>{{ $t('schedule.open_google_map') }}</span>
             </a>
           </div>
         </div>
-        <div class="application-requirement-item">
+        <div v-if="job.stations.length" class="application-requirement-item">
           <div class="application-requirement-left">
             <span>{{ $t('job.station') }}</span>
           </div>
@@ -242,7 +242,7 @@
             <div class="break-space">{{ job.welfare_treatment_description }}</div>
           </div>
         </div>
-        <div class="application-requirement-item">
+        <div v-if="job.feature_types.length" class="application-requirement-item">
           <div class="application-requirement-left">
             <span>{{ $t('job.feature') }}</span>
           </div>
@@ -583,11 +583,9 @@ export default {
     ])
     await this.$store.commit(INDEX_SET_LOADING, false)
     this.clonedformAbout = _.cloneDeep(this.formAbout)
-  },
-  mounted() {
     if (this.$route.query.notification === '9') {
       if (!this.job.is_apply) {
-        this.openApplyDialog()
+        await this.openApplyDialog()
       }
     }
   },

@@ -29,7 +29,7 @@
           <el-button type="danger" @click="cancelSchedulePost(applyActive, dialogHistory)">{{ $t('confirm_modal.yes') }}</el-button>
         </div>
       </el-dialog>
-      <FormApplyJobElement :apply-dialog="applyDialog" @closeDialog="applyDialog = !applyDialog" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
+      <FormApplyJobElement @getListHistory="getDataScheduleHistory" :apply-dialog="applyDialog" @closeDialog="applyDialog = !applyDialog" :is-edit="true" :apply="applyActive"></FormApplyJobElement>
     </div>
   </div>
 </template>

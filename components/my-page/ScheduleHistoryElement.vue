@@ -47,7 +47,7 @@
             <a class="schedule-url text-blue-hover" v-else :href="'tel:' + schedule.interview_approach.approach" @click.stop="">{{ schedule.interview_approach.approach }}</a>
           </span>
           <div v-if="showStatus" class="open-google-map">
-            <a v-if="schedule.interview_approach.is_direct_interview" :href="'https://www.google.com/maps/place/' + schedule.interview_approach.approach" class="show-button-google-map text-blue-hover" target="_blank" @click.stop="openGoogleMap">
+            <a v-if="schedule.interview_approach.is_direct_interview" :href="'http://maps.google.com/?q=' + schedule.interview_approach.approach" class="show-button-google-map text-blue-hover" target="_blank" @click.stop="openGoogleMap">
               <img src="/assets/icon/icon_google_map.svg" alt="">
               <span>{{ $t('schedule.open_google_map') }}</span>
             </a>
