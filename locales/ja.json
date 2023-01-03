@@ -190,7 +190,7 @@
     "no_data": "データがありません。",
     "all": "全",
     "subject": "件",
-    "display_item": "{min} ～ {max}件目を表示中",
+    "display_item": "{min}～{max}件目を表示中",
     "search": "検索",
     "delete": "削除",
     "select_all": "全てを選択",
