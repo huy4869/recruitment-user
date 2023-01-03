@@ -115,7 +115,7 @@
             </div>
           </div>
           <div class="d-flex justify-end">
-            <div class="button-see-all text-blue-hover" @click="showAll = !showAll">
+            <div class="button-see-all text-blue-hover" @click="showAdvSearch">
               <span>{{ $t('condition.specify_detailed_conditions') }}</span>
               <img :class="{ 'hide-show-all':showAll }" src="/assets/icon/icon_double_next.svg" alt="">
             </div>
@@ -958,6 +958,18 @@ export default {
         this.showDistrictModal = ''
       } else {
         this.showDistrictModal = index
+      }
+    },
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    },
+    showAdvSearch() {
+      this.showAll = !this.showAll
+      if (this.showAll === false) {
+        this.scrollToTop()
       }
     }
   }

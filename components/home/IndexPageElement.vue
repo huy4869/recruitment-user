@@ -239,7 +239,7 @@ export default {
         'slidesToScroll': 3,
         'touchThreshold': 5,
         'autoplay': true,
-        'autoplaySpeed': 50000000
+        'autoplaySpeed': 5000
       }
     }
   },

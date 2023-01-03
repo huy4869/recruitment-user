@@ -10,7 +10,7 @@
         {{ schedule.job_name }}
       </div>
       <div class="sub-title">{{ schedule.store_name }}
-        <span v-if="schedule.store_name" class="job-list__name">({{ schedule.store_name }})</span>
+        <span v-if="schedule.company_name" class="job-list__name">({{ schedule.company_name }})</span>
       </div>
     </div>
     <div class="schedule-content">
@@ -29,14 +29,20 @@
         <div>
           <span class="bold">{{ $t('schedule.method') }}</span><span v-if="schedule.interview_approach">{{ schedule.interview_approach.method }}</span>
         </div>
-        <div v-if="schedule.interview_approach">
-          <span class="bold">{{ schedule.interview_approach.approach_label }}</span>
+        <div v-if="schedule.interview_approach" class="d-flex">
+          <span class="bold approach-label">{{ schedule.interview_approach.approach_label }}</span>
           <span v-if="schedule.interview_approach" class="show-pc-schedule">
-            <a class="schedule-url text-blue-hover" :href="schedule.interview_approach.approach" target="_blank" v-if="schedule.interview_approach.id === 1">{{ schedule.interview_approach.approach }}</a>
+            <div v-if="schedule.interview_approach.id === 1">
+              <a v-if="schedule.interview_approach.is_link" class="schedule-url text-blue-hover" :href="schedule.interview_approach.approach" target="_blank">{{ schedule.interview_approach.approach }}</a>
+              <span v-else>{{ schedule.interview_approach.approach }}</span>
+            </div>
             <span v-else>{{ schedule.interview_approach.approach }}</span>
           </span>
           <span v-if="schedule.interview_approach" class="show-sp-schedule">
-            <a class="schedule-url text-blue-hover" :href="schedule.interview_approach.approach" target="_blank" v-if="schedule.interview_approach.id === 1">{{ schedule.interview_approach.approach }}</a>
+            <div v-if="schedule.interview_approach.id === 1">
+              <a v-if="schedule.interview_approach.is_link" class="schedule-url text-blue-hover" :href="schedule.interview_approach.approach" target="_blank">{{ schedule.interview_approach.approach }}</a>
+              <span v-else>{{ schedule.interview_approach.approach }}</span>
+            </div>
             <span v-else-if="schedule.interview_approach.id === 2">{{ schedule.interview_approach.approach }}</span>
             <a class="schedule-url text-blue-hover" v-else :href="'tel:' + schedule.interview_approach.approach" @click.stop="">{{ schedule.interview_approach.approach }}</a>
           </span>
