@@ -19,15 +19,15 @@
           </div>
         </div>
         <div class="show-pc">
-          <el-button class="pick-up-point" type="danger">{{ $t('job.pick_up_point') }}</el-button>
+          <el-button v-show="job.pick_up_point" class="pick-up-point" type="danger">{{ $t('job.pick_up_point') }}</el-button>
         </div>
         <div class="show-sp pick-up-sp">
           <div class="d-flex">
-            <el-button class="pick-up-point" type="danger">
-            <span class="pick-up-text">
-              {{ $t('job.pick_up_point1') }}<br>
-              {{ $t('job.pick_up_point2') }}
-            </span>
+            <el-button v-if="job.pick_up_point" class="pick-up-point" type="danger">
+              <span class="pick-up-text">
+                {{ $t('job.pick_up_point1') }}<br>
+                {{ $t('job.pick_up_point2') }}
+              </span>
             </el-button>
             <div class="sub-detail-title-sp" v-html="job.pick_up_point || ''"></div>
           </div>
