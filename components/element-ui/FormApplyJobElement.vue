@@ -213,6 +213,8 @@ export default {
           })
           this.listDate = dataDate
           this.listTime = this.listDate[dataResponse.data.application_user.date].times
+        } else if (dataResponse.status_code === 400) {
+          this.$router.push('/job-not-found')
         } else if (dataResponse.status_code === 500) {
           await this.$store.commit(INDEX_SET_ERROR, {
             show: true,
@@ -256,6 +258,8 @@ export default {
             show: true,
             text: this.$t('content.EXC_001')
           })
+        } else if (dataResponse.status_code === 400) {
+          this.$router.push('/job-not-found')
         }
       }
     },

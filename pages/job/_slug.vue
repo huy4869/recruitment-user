@@ -118,7 +118,10 @@
               </div>
               <div class="application-item-right">
                 <span v-if="job.application.interview_approaches" class="show-pc">
-                  <a v-if="job.application.interview_approaches.id === 1" class="application-schedule-url text-blue-hover" :href="job.application.interview_approaches.approach" target="_blank">{{ job.application.interview_approaches.approach }}</a>
+                  <span v-if="job.application.interview_approaches.id === 1">
+                    <a v-if="job.application.interview_approaches.is_link" class="application-schedule-url text-blue-hover" :href="job.application.interview_approaches.approach" target="_blank">{{ job.application.interview_approaches.approach }}</a>
+                    <span v-else>{{ job.application.interview_approaches.approach }}</span>
+                  </span>
                   <span v-else>{{ job.application.interview_approaches.approach }}</span>
                 </span>
                 <span v-if="job.application.interview_approaches" class="show-sp">
@@ -443,8 +446,7 @@ import {
   JOB_ADD_FAVORITE_JOB,
   JOB_REMOVE_FAVORITE_JOB,
   INDEX_SET_SUCCESS,
-  JOB_CREATE_FEEDBACK,
-  SET_JOB_ERROR
+  JOB_CREATE_FEEDBACK
 } from '../../store/store.const'
 
 export default {
@@ -546,7 +548,7 @@ export default {
       if (this.job.address === undefined) {
         return ''
       }
-      return (this.job.postal_code ? ('〒' + this.job.postal_code) : '') + this.job.address.province + this.job.address.province_city + this.job.address.address + (this.job.address.building || '')
+      return (this.job.postal_code ? ('〒' + this.zipCodeFormat(this.job.postal_code)) : '') + this.job.address.province + this.job.address.province_city + this.job.address.address + (this.job.address.building || '')
     },
     showStation() {
       if (this.job.stations === undefined) {
@@ -603,8 +605,7 @@ export default {
       if (dataResponse.status_code === 200) {
         this.job = dataResponse.data
       } else if (dataResponse.status_code === 400) {
-        await this.$store.commit(SET_JOB_ERROR, dataResponse.messages)
-        this.$router.push('/404-not-found?error=job')
+        this.$router.push('/job-not-found')
       } else {
         this.$router.push('/404-not-found')
       }
@@ -654,6 +655,12 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     async changeStatusJob(response, state) {
+      if (state) {
+        if (response.status_code === 400) {
+          this.$router.push('/job-not-found')
+          return
+        }
+      }
       switch (response.status_code) {
         case 200:
           await this.$store.commit(INDEX_SET_SUCCESS, {
@@ -798,6 +805,9 @@ export default {
         this.$refs.formAbout.resetFields()
       }
       this.error = { key: null, value: '' }
+    },
+    zipCodeFormat(zip) {
+      return zip ? zip.toString().slice(0, 3) + '-' + zip.toString().slice(3) : ''
     }
   }
 }
