@@ -187,11 +187,8 @@ export default {
           text: response.messages
         })
       }
-      if (history) {
-        await this.getDataScheduleHistory(!this.showViewAllScheduleHistory)
-      } else {
-        await this.getDataSchedule(!this.showViewAllSchedule)
-      }
+      await this.getDataScheduleHistory(!this.showViewAllScheduleHistory)
+      await this.getDataSchedule(!this.showViewAllSchedule)
       this.dialogCancel = false
       await this.$store.commit(INDEX_SET_LOADING, false)
     },

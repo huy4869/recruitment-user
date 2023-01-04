@@ -886,7 +886,9 @@
 }
 
 .chat-page-element {
-  width: 100%;
+  padding: 28px 90px 12px;
+  margin: auto;
+  max-width: 1152px;
   .chat-page-title {
     font-weight: 700;
     font-size: 24px;
@@ -904,8 +906,6 @@
     border-radius: 5px;
   }
   .chat-page-content {
-    margin: 22px auto;
-    max-width: 1152px;
     background: $color-bg-footer;
     box-shadow: 0 2px 9px rgba(33, 16, 16, 0.25);
     border-radius: 6px;

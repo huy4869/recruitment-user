@@ -121,6 +121,12 @@ export default {
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
     async changeStatusJob(response, state) {
+      if (state) {
+        if (response.status_code === 400) {
+          this.$router.push('/job-not-found')
+          return
+        }
+      }
       if (response.status_code === 200) {
         await this.$store.commit(INDEX_SET_SUCCESS, {
           show: true,
