@@ -57,7 +57,7 @@
                   <FormChatElement :message="message" :store_id="userActive.store_id"></FormChatElement>
                 </div>
               </div>
-              <div class="input-chat">
+              <div v-if="!is_delete_store" class="input-chat">
                 <el-form
                   ref="chatForm"
                   :model="chatForm"
@@ -86,6 +86,11 @@
                     </div>
                   </el-form-item>
                 </el-form>
+              </div>
+              <div v-else class="deleted-store text-center">
+                <span class="delete-message">
+                {{ $t('common.deleted_store')}}
+                </span>
               </div>
             </div>
           </div>
@@ -137,7 +142,7 @@
                   <FormChatElement :message="message" :store_id="userActive.store_id"></FormChatElement>
                 </div>
               </div>
-              <div class="input-chat">
+              <div v-if="!is_delete_store" class="input-chat">
                 <el-form
                   ref="chatForm"
                   :model="chatForm"
@@ -166,6 +171,11 @@
                     </div>
                   </el-form-item>
                 </el-form>
+              </div>
+              <div v-else class="deleted-store-sp text-center">
+                <span class="delete-message">
+                {{ $t('common.deleted_store')}}
+                </span>
               </div>
             </div>
           </div>
@@ -219,7 +229,8 @@ export default {
         message: [
           { validator: validFormLength, trigger: 'blur' }
         ]
-      }
+      },
+      is_delete_store: false
     }
   },
   watch: {
@@ -261,26 +272,28 @@ export default {
       this.userActive = user
       const dataResponse = await this.$store.dispatch(CHAT_DETAIL_CHAT, user.store_id)
       if (dataResponse.status_code === 200) {
+        this.is_delete_store = dataResponse.data.is_delete_store
         const dataMessages = []
         let check = ''
         let user = ''
         let message = {}
         let send_time = ''
-        for (const y in dataResponse.data) {
+        const data = dataResponse.data.data
+        for (const y in data) {
           dataMessages.push({ is_date_now: true, date_show: y })
-          for (let i = 0; i <= dataResponse.data[y].length - 1; i++) {
-            message = dataResponse.data[y][i]
+          for (let i = 0; i <= data[y].length - 1; i++) {
+            message = data[y][i]
             message.color = this.userActive.color
-            check = dataResponse.data[y][i].initial_time
-            user = dataResponse.data[y][i].is_from_user
-            send_time = dataResponse.data[y][i].send_time
-            if (i < dataResponse.data[y].length - 1) {
+            check = data[y][i].initial_time
+            user = data[y][i].is_from_user
+            send_time = data[y][i].send_time
+            if (i < data[y].length - 1) {
               message.show_date = false
-              if (user !== dataResponse.data[y][i + 1].is_from_user) {
+              if (user !== data[y][i + 1].is_from_user) {
                 message.show_date = true
               }
-              if (check !== dataResponse.data[y][i + 1].initial_time) {
-                if (send_time !== dataResponse.data[y][i + 1].send_time) {
+              if (check !== data[y][i + 1].initial_time) {
+                if (send_time !== data[y][i + 1].send_time) {
                   message.show_date = true
                 }
               }

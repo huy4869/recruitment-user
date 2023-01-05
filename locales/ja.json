@@ -224,7 +224,8 @@
     "unread": "未読",
     "not_found": "お探しのページは見つかりませんでした。",
     "dear": "さん",
-    "job_not_found": "こちらの求人は募集を終了しました。"
+    "job_not_found": "こちらの求人は募集を終了しました。",
+    "deleted_store": "こちらの店舗は削除されました。"
   },
   "button": {
     "cancel": "キャンセル",
