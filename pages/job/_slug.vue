@@ -548,7 +548,7 @@ export default {
       if (this.job.address === undefined) {
         return ''
       }
-      return (this.job.postal_code ? ('〒' + this.zipCodeFormat(this.job.postal_code)) : '') + this.job.address.province + this.job.address.province_city + this.job.address.address + (this.job.address.building || '')
+      return (this.job.postal_code ? ('〒' + this.zipCodeFormat(this.job.postal_code)) : '') + ' ' + this.job.address.province + this.job.address.province_city + this.job.address.address + (this.job.address.building || '')
     },
     showStation() {
       if (this.job.stations === undefined) {
