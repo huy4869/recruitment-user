@@ -271,6 +271,13 @@
       padding: 0 10px;
     }
   }
+  .index-home-page {
+    .index-banner {
+      .banner-page-element {
+        padding: 0;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 912px) {
