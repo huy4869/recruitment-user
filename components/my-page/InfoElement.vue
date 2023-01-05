@@ -4,8 +4,9 @@
       <div class="card-text-title card-title-mobile"> {{ $t('my_page.basic_information') }}</div>
       <div class="show-public-avatar">
         <span>
-          {{ $t('my_page.show_public_avatar') }}
-           <el-switch v-model="showAvatar" />
+          <span v-if="showAvatar">{{ $t('my_page.show_public_avatar') }}</span>
+          <span v-else>{{ $t('my_page.show_none_public_avatar') }}</span>
+          <el-switch v-model="showAvatar" @change="handleShowAvatar" />
         </span>
       </div>
       <div class="card-main d-flex">
@@ -153,6 +154,8 @@
 
 <script>
 
+import { INDEX_SET_ERROR, INDEX_SET_LOADING, INDEX_SET_SUCCESS, USER_UPDATE_BASIC_INFO } from '@/store/store.const'
+
 export default {
   name: 'InfoElement',
   props: {
@@ -163,7 +166,7 @@ export default {
   },
   data() {
     return {
-      showAvatar: false
+      showAvatar: this.$auth.user.is_public_avatar
     }
   },
   methods: {
@@ -172,6 +175,35 @@ export default {
     },
     zipCodeFormat(zip) {
       return zip ? zip.toString().slice(0, 3) + '-' + zip.toString().slice(3) : ''
+    },
+    async handleShowAvatar() {
+      try {
+        await this.$store.commit(INDEX_SET_LOADING, true)
+        const response = await this.$store.dispatch(USER_UPDATE_BASIC_INFO, {
+          is_public_avatar: this.showAvatar ? 1 : 0
+        })
+        if (response.status_code === 200) {
+          await this.$store.commit(INDEX_SET_SUCCESS, {
+            show: true,
+            text: response.messages
+          })
+          await this.$auth.fetchUser()
+        } else if (response.status_code === 500) {
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: this.$t('content.EXC_001')
+          })
+        } else {
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: response.messages
+          })
+        }
+        await this.$store.commit(INDEX_SET_LOADING, false)
+      } catch (err) {
+        await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
     }
   }
 }
