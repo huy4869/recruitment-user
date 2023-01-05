@@ -278,6 +278,12 @@
       }
     }
   }
+  .chat-page-element {
+    padding: 28px 40px 12px;
+  }
+  .search-page .search-content {
+    padding: 31px 19px;
+  }
 }
 
 @media only screen and (max-width: 912px) {
@@ -1816,6 +1822,7 @@
   .chat-page-element {
     width: 100%;
     border-top: 1px solid $border-primary;
+    padding: 0;
 
     .chat-page-title {
       display: none;
@@ -3078,6 +3085,9 @@
       .el-input__prefix, .el-input__suffix {
         top: 5px;
       }
+    }
+    .recommend-job-element .job-content .job-image img {
+      width: 100%;
     }
   }
   .form-dialog-select {
