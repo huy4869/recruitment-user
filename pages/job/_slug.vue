@@ -533,14 +533,14 @@ export default {
       if (this.job.salary === undefined) {
         return ''
       }
-      return this.job.salary.min + ' ～ ' + this.job.salary.max + this.job.salary.type
+      return this.job.salary.min + '～' + this.job.salary.max + this.job.salary.type
     },
     showAge() {
       if (this.job.age === undefined) {
         return ''
       }
       if (this.job.age.min && this.job.age.max) {
-        return this.job.age.min + ' ～ ' + this.job.age.max + this.$t('common.age')
+        return this.job.age.min + '～' + this.job.age.max + this.$t('common.age')
       }
       return ''
     },

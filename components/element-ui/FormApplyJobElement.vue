@@ -287,6 +287,9 @@ export default {
                   text: this.$t('content.EXC_001')
                 })
                 break
+              case 400:
+                await this.$router.push('/job-not-found')
+                break
               default:
                 await this.$store.commit(INDEX_SET_ERROR, {
                   show: true,
@@ -313,6 +316,9 @@ export default {
                   show: true,
                   text: this.$t('content.EXC_001')
                 })
+                break
+              case 400:
+                await this.$router.push('/job-not-found')
                 break
               case 422:
                 await this.$store.commit(INDEX_SET_ERROR, {
