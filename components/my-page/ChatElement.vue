@@ -381,6 +381,9 @@ export default {
                 text: this.$t('content.EXC_001')
               })
             }
+            if (dataResponse.status_code === 400) {
+              this.is_delete_store = true
+            }
           } catch (err) {
             await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('content.EXC_001') })
           }
