@@ -734,6 +734,9 @@
 }
 
 @media only screen and (max-width: 540px) {
+  .el-select-dropdown__wrap .el-select-dropdown__list .el-select-dropdown__item {
+    max-width: unset;
+  }
 
   .show-modal-sp {
     max-height: 100vh;
@@ -2138,6 +2141,8 @@
               background-color: $color-bg-footer;
             }
             background-color: $color-bg-footer;
+            max-width: 120px;
+            min-width: 120px;
           }
           .col-label {
             .label {
