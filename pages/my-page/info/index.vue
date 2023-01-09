@@ -4,7 +4,7 @@
     <TitlePageElement class="show-pc"></TitlePageElement>
     <div class="cv-content">
       <MenuLeftElement sub-active="info" menu-active="web-cv"></MenuLeftElement>
-      <InfoElement :info="info"></InfoElement>
+      <InfoElement :info="info" :list-detail="listPrDetail"></InfoElement>
     </div>
   </div>
 </template>
@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       info: {},
-      user: this.$auth.user
+      user: this.$auth.user,
+      listPrDetail: []
     }
   },
   created() {
@@ -47,6 +48,9 @@ export default {
         const { data, status_code } = response
         if (status_code === 200) {
           this.info = data
+          data.images.forEach((element) => {
+            this.listPrDetail.push(element.url)
+          })
         }
       } catch (e) {
         this.$store.commit(INDEX_SET_LOADING, false)
