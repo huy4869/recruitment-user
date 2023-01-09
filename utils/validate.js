@@ -118,7 +118,7 @@ export function validFullWidth(str) {
 }
 
 export function validFurigana(str) {
-  const reg = /^([ァ-ン]|一){0,255}$/
+  const reg = /^([ァ-ン]|一|ー){0,255}$/
   return reg.test(str)
 }
 export function validHalfWidth(str) {

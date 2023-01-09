@@ -26,7 +26,13 @@
           </div>
           <div class="right-item first-right-item">
             <div class="img-detail">
-              <img v-for="(img, key) in info.images" :key="key" :src="img.url" alt="img-detail">
+              <el-image
+                v-for="(img, key) in info.images"
+                :key="key"
+                :src="img.url"
+                alt="img-detail"
+                :preview-src-list="listDetail">
+              </el-image>
             </div>
           </div>
           <div class="left-item">
@@ -162,6 +168,10 @@ export default {
     info: {
       type: Object,
       default: () => {}
+    },
+    listDetail: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
