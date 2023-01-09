@@ -27,9 +27,9 @@
           <div class="right-item first-right-item">
             <div class="img-detail">
               <el-image
-                v-for="(img, key) in info.images"
+                v-for="(img, key) in listDetail"
                 :key="key"
-                :src="img.url"
+                :src="img"
                 alt="img-detail"
                 :preview-src-list="listDetail">
               </el-image>
