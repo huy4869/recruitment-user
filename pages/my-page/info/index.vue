@@ -47,10 +47,15 @@ export default {
         const response = await this.$store.dispatch(USER_BASIC_INFO)
         const { data, status_code } = response
         if (status_code === 200) {
+          const listDetail = []
           this.info = data
           data.images.forEach((element) => {
-            this.listPrDetail.push(element.url)
+            listDetail.push(element.url)
           })
+          for (let i = 0; i < (3 - data.images.length); i++) {
+            listDetail.push('/assets/icon/icon_user_default.svg')
+          }
+          this.listPrDetail = listDetail
         }
       } catch (e) {
         this.$store.commit(INDEX_SET_LOADING, false)
