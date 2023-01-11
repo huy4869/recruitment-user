@@ -156,7 +156,7 @@
                 </div>
                 <div class="job-info">
                   <img src="/assets/icon/icon_place.svg" alt="">
-                  <span>{{ showAddress(job) }}</span>
+                  <span class="location">{{ showAddress(job) }}</span>
                 </div>
               </div>
             </div>

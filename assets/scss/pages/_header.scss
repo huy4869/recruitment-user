@@ -83,8 +83,10 @@
         }
       }
       .show-action-user {
-        padding: 8px 0;
         margin-left: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         .content-user {
           display: flex;
           span {

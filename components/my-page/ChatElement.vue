@@ -79,7 +79,7 @@
                         @focus="resetValidate('message')"
                         maxlength="1000"
                       />
-                      <div class="button-send" @click="sendMessage">
+                      <div class="button-send" :class="listMessages.length > 0 ? '' : 'disable-btn'" @click="sendMessage">
                         <span>{{ $t('my_page.send') }}</span>
                         <img src="/assets/icon/icon_send_message.svg" alt="">
                       </div>
