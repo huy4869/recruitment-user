@@ -305,9 +305,9 @@
           margin-left: 24px;
           border-bottom: 1px solid $border-default;
           padding: 9px 0;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 24px;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
           .show-button-google-map {
             width: max-content;
             margin-bottom: 0;
@@ -322,9 +322,9 @@
               left: 0;
             }
             span {
-              font-weight: 500;
-              font-size: 16px;
-              line-height: 24px;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
               color: $color-blue;
             }
           }

@@ -1123,6 +1123,10 @@
               background-color: $color-primary-focus;
             }
           }
+          .disable-btn {
+            background: $color-button-disable;
+            pointer-events: none;
+          }
           .el-input {
             width: calc(100% - 110px);
             input {
