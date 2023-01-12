@@ -12,8 +12,8 @@
       <LoadingBar />
     </client-only>
     <div v-if="showModal" class="nav_mobile">
-      <label for="nav-mobile-input" class="icon-close">
-        <img id="close_btn" src="/assets/icon/union-white.svg" alt="">
+      <label class="icon-close">
+        <img id="close_btn" src="/assets/icon/union-white.svg" alt="" @click="closeModal">
       </label>
     </div>
   </div>
@@ -21,6 +21,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { SET_SHOW_MODAL_SP } from '../store/store.const'
 import LoadingBar from '../components/LoadingBar'
 import HeaderCommon from '../components/layout/HeaderCommon'
 import FooterCommon from '../components/layout/FooterCommon'
@@ -34,6 +35,14 @@ export default {
       showDetailMessage: state => state.my_page.showDetailMessage,
       showModal: state => state.showModalSp
     })
+  },
+  created() {
+    this.$store.commit(SET_SHOW_MODAL_SP, false)
+  },
+  methods: {
+    closeModal() {
+      this.$store.commit(SET_SHOW_MODAL_SP, false)
+    }
   }
 }
 </script>

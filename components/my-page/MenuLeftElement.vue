@@ -22,37 +22,37 @@
         </div>
       </label>
       <div class=" header-main-menu-mobile">
-        <input @click="showModal"  id="nav-mobile-input" type="checkbox" name="" hidden class="nav-input">
+        <input @click="showModal" id="nav-mobile-input" type="checkbox" name="" hidden class="nav-input">
         <label for="nav-mobile-input" class="nav-overlay"></label>
-        <div class="nav-box">
-            <div v-if="$auth.loggedIn" class="menu-mobile-alt ">
-              <el-menu
-                :default-active="menuActive"
-                :default-openeds="['web-cv']"
-                class="el-menu-vertical"
-              >
-                <div v-for="(item, key) in menuLeft" :key="key">
-                  <el-submenu v-if="item.key === 'web-cv'" :index="item.key" :class="menuActive === 'web-cv' ? 'mobile-menu-active' : ''">
-                    <template slot="title">
-                      <span @click="changeToPage(item.key)">{{ item.name }}</span>
-                    </template>
-                    <el-menu-item :index="web.key" v-for="(web, key) in menuWebCv" :key="key" :class="subActive === web.key ? 'sub-menu-active' : ''" @click="changeToPage(web.key)" >
-                      <div class="d-flex items-center justify-between">
-                        <span class="menu-item">{{web.name}}</span>
-                        <span><i class="el-icon-arrow-right"></i></span>
-                      </div>
-                    </el-menu-item>
+        <div :class="'nav-box ' + (showModalSp ? 'nav-show' : 'nav-hide')">
+          <div v-if="$auth.loggedIn" class="menu-mobile-alt ">
+            <el-menu
+              :default-active="menuActive"
+              :default-openeds="['web-cv']"
+              class="el-menu-vertical"
+            >
+              <div v-for="(item, key) in menuLeft" :key="key">
+                <el-submenu v-if="item.key === 'web-cv'" :index="item.key" :class="menuActive === 'web-cv' ? 'mobile-menu-active' : ''">
+                  <template slot="title">
+                    <span @click="changeToPage(item.key)">{{ item.name }}</span>
+                  </template>
+                  <el-menu-item :index="web.key" v-for="(web, key) in menuWebCv" :key="key" :class="subActive === web.key ? 'sub-menu-active' : ''" @click="changeToPage(web.key)" >
+                    <div class="d-flex items-center justify-between">
+                      <span class="menu-item">{{web.name}}</span>
+                      <span><i class="el-icon-arrow-right"></i></span>
+                    </div>
+                  </el-menu-item>
 
-                  </el-submenu>
-                <el-menu-item v-else :index="item.key" @click="changeToPage(item.key)" >
-                  <div class="d-flex items-center justify-between">
-                    <span class="menu-item">{{item.name}}</span>
-                    <span><i class="el-icon-arrow-right"></i></span>
-                  </div>
-                </el-menu-item>
+                </el-submenu>
+              <el-menu-item v-else :index="item.key" @click="changeToPage(item.key)" >
+                <div class="d-flex items-center justify-between">
+                  <span class="menu-item">{{item.name}}</span>
+                  <span><i class="el-icon-arrow-right"></i></span>
                 </div>
-              </el-menu>
-            </div>
+              </el-menu-item>
+              </div>
+            </el-menu>
+          </div>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@ export default {
       this.$router.push('/my-page/' + page)
     },
     showModal() {
-      this.$store.commit(SET_SHOW_MODAL_SP, !this.showModalSp)
+      this.$store.commit(SET_SHOW_MODAL_SP, true)
     }
   }
 }

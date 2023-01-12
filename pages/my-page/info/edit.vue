@@ -1017,7 +1017,6 @@ export default {
       if (valid) {
         await this.$store.commit(INDEX_SET_ERROR, { show: true, text: valid })
       } else {
-        this.imageAvatarShow = URL.createObjectURL(file)
         this.file = file
         await this.upLoadFile('avatar_banner')
       }
@@ -1079,6 +1078,7 @@ export default {
       switch (data.status_code) {
         case 200:
           this.accountForm.avatar = data.data.url
+          this.imageAvatarShow = data.data.url
           break
         case 422:
           for (const [key] of Object.entries(data.data)) {
