@@ -708,6 +708,25 @@ export default {
               this.condition[query] = data
             }
           }
+          if (query === 'province_id') {
+            this.listProvinceDistricts.forEach(district => {
+              let check = false
+              district.provinces.forEach(province => {
+                if (province.id === Number(this.query[query])) {
+                  const listCity = this.condition.province_city_id
+                  province.province_city.forEach(city => {
+                    listCity.push(city.id)
+                  })
+                  this.condition.province_city_id = listCity
+                  this.cityLocation = listCity
+                  check = true
+                }
+              })
+              if (check) {
+                this.listDistrictIndeterminate.push(district.id)
+              }
+            })
+          }
           key++
         }
       }
