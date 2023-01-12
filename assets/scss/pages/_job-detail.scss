@@ -187,13 +187,18 @@
               display: inline-block;
               width: calc(100% - 211px);
               background: $color-blue-3;
-              font-weight: 500;
-              font-size: 16px;
-              line-height: 24px;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
               padding: 16px 0 16px 16px;
               .application-schedule-url {
                 color: $color-blue;
                 word-break: break-all;
+              }
+              .schedule-button-status {
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 24px;
               }
             }
           }
