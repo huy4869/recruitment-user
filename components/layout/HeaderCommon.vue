@@ -1,7 +1,7 @@
 <template>
   <div class="header-common">
     <div class="header-container">
-      <div class="header-logo" @click="$router.push('/')">
+      <div class="header-logo" @click="changeToLink('/')">
         <img src="/assets/images/logo.svg" alt="">
       </div>
       <div class="header-content">
@@ -58,7 +58,7 @@
             {{ $t('login.title') }}
           </el-button>
         </div>
-        <div v-if="loggedIn" class="show-action-user">
+        <div v-if="loggedIn" class="show-action-user" @click="closeModal">
           <el-dropdown trigger="click">
             <div class="content-user items-center">
               <div class="d-flex cursor-pointer">
@@ -89,7 +89,7 @@
 </template>
 <script>
 
-import { INDEX_SET_ERROR, INDEX_SET_LOADING, NOTIFICATION_COUNT } from '@/store/store.const'
+import { INDEX_SET_ERROR, INDEX_SET_LOADING, NOTIFICATION_COUNT, SET_SHOW_MODAL_SP } from '@/store/store.const'
 
 export default {
   name: 'HeaderCommon',
@@ -116,9 +116,14 @@ export default {
   methods: {
     changeToLink(link) {
       this.$router.push(link)
+      this.closeModal()
     },
     async logout() {
       await this.$router.push('/logout')
+      this.closeModal()
+    },
+    closeModal() {
+      this.$store.commit(SET_SHOW_MODAL_SP, false)
     },
     checkName(value) {
       const name = value
