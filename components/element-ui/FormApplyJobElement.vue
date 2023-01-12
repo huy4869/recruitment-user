@@ -269,6 +269,7 @@ export default {
       }
       this.$refs.formApply.validate(async valid => {
         if (valid) {
+          await this.$store.commit(INDEX_SET_LOADING, true)
           if (this.isEdit) {
             const dataForm = this.formApply
             const dataResponse = await this.$store.dispatch(APPLICATION_UPDATE_APPLICATION, { id: this.apply, form: dataForm })
@@ -300,7 +301,6 @@ export default {
           } else {
             const dataForm = this.formApply
             dataForm.id = this.job.id
-            await this.$store.commit(INDEX_SET_LOADING, true)
             const dataResponse = await this.$store.dispatch(APPLICATION_CREATE_APPLICATION, dataForm)
             switch (dataResponse.status_code) {
               case 200:
@@ -333,8 +333,8 @@ export default {
                 })
                 break
             }
-            await this.$store.commit(INDEX_SET_LOADING, false)
           }
+          await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
     },
