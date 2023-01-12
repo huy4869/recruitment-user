@@ -75,9 +75,10 @@
                         name="message"
                         type="text"
                         tabindex="2"
+                        :disabled="listMessages.length === 0"
+                        maxlength="1000"
                         @keyup.enter.native="sendMessage"
                         @focus="resetValidate('message')"
-                        maxlength="1000"
                       />
                       <div class="button-send" :class="listMessages.length > 0 ? '' : 'disable-btn'" @click="sendMessage">
                         <span>{{ $t('my_page.send') }}</span>
