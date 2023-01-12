@@ -1094,6 +1094,9 @@
           }
         }
         .message-chat-input {
+          input:disabled {
+            background: $color-white;
+          }
         }
         .input-chat {
           height: 54px;
