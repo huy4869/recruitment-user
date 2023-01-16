@@ -86,21 +86,27 @@ export default {
     async cancelSchedulePost(id, history) {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const response = await this.$store.dispatch(APPLICATION_CANCEL_APPLICATION, id)
-      if (response.status_code === 200) {
-        await this.$store.commit(INDEX_SET_SUCCESS, {
-          show: true,
-          text: response.messages
-        })
-      } else if (response.status_code === 500) {
-        await this.$store.commit(INDEX_SET_ERROR, {
-          show: true,
-          text: this.$t('content.EXC_001')
-        })
-      } else {
-        await this.$store.commit(INDEX_SET_ERROR, {
-          show: true,
-          text: response.messages
-        })
+      switch (response.status_code) {
+        case 200:
+          await this.$store.commit(INDEX_SET_SUCCESS, {
+            show: true,
+            text: response.messages
+          })
+          break
+        case 400:
+          await this.$router.push('/job-not-found')
+          break
+        case 500:
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: this.$t('content.EXC_001')
+          })
+          break
+        default:
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: response.messages
+          })
       }
       await this.getDataScheduleHistory()
       this.dialogCancel = false
