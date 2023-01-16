@@ -59,4 +59,8 @@
       }
     }
   }
+  .no-data-element {
+    min-height: calc(100vh - 350px);
+    padding: 0;
+  }
 }

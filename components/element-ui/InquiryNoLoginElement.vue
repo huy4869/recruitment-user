@@ -88,6 +88,7 @@
                               type="text"
                               tabindex="2"
                               maxlength="13"
+                              @input="phoneInput('tel')"
                               @focus="resetValidate('tel')"
                             />
                           </el-form-item>
@@ -153,7 +154,7 @@ import {
   INQUIRY_CREATE,
   INQUIRY_PHONE_NUMBER
 } from '~/store/store.const'
-import { validEmail, validHalfWidth, validOnlyHalfWidth, validPhoneNumber } from '~/utils/validate'
+import { validEmail, validHalfWidth } from '~/utils/validate'
 
 export default {
   name: 'InquiryNoLoginElement',
@@ -197,13 +198,8 @@ export default {
       }
     }
     const validPhone = (rule, value, callback) => {
-      if (!validOnlyHalfWidth(value)) {
-        callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('inquiry.phone') })))
-      }
-      if (value && (value.length > 13 || value.length < 10 || !value.startsWith(0))) {
-        callback(new Error(this.$t('validation.phone_length', { _field_: this.$t('inquiry.phone') })))
-      } else if (!validPhoneNumber(value)) {
-        callback(new Error(this.$t('validation.phone', { _field_: this.$t('inquiry.phone') })))
+      if (value && (value.length > 13 || value.length < 12 || !value.startsWith(0))) {
+        callback(new Error(this.$t('validation.phone_length', { _field_: this.$t('my_page.phone') })))
       } else {
         callback()
       }
@@ -300,6 +296,10 @@ export default {
         this.$store.commit(INDEX_SET_LOADING, false)
       }
       this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    phoneInput(key) {
+      const x = this.accountForm[key].replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/)
+      this.accountForm[key] = !x[2] ? x[1] : '' + x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '')
     }
   }
 }

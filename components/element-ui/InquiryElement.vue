@@ -100,6 +100,7 @@
                               type="text"
                               tabindex="2"
                               maxlength="13"
+                              @input="phoneInput('tel')"
                               @focus="resetValidate('tel')"
                             />
                           </el-form-item>
@@ -338,6 +339,10 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    phoneInput(key) {
+      const x = this.accountForm[key].replace(/\D/g, '').match(/(\d{0,3})(\d{0,4})(\d{0,4})/)
+      this.accountForm[key] = !x[2] ? x[1] : '' + x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '')
     },
     async getPhoneNumber() {
       this.$store.commit(INDEX_SET_LOADING, true)
