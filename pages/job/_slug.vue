@@ -602,12 +602,15 @@ export default {
     async getDetailJob() {
       await this.$store.commit(INDEX_SET_LOADING, true)
       const dataResponse = await this.$store.dispatch(JOB_GET_DETAIL_JOB, this.$route.params.slug)
-      if (dataResponse.status_code === 200) {
-        this.job = dataResponse.data
-      } else if (dataResponse.status_code === 400) {
-        this.$router.push('/job-not-found')
-      } else {
-        this.$router.push('/404-not-found')
+      switch (dataResponse.status_code) {
+        case 200:
+          this.job = dataResponse.data
+          break
+        case 400:
+          await this.$router.push('/job-not-found')
+          break
+        default:
+          await this.$router.push('/404-not-found')
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     },
