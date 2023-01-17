@@ -185,7 +185,7 @@ import {
   INQUIRY_CREATE,
   INQUIRY_PHONE_NUMBER
 } from '~/store/store.const'
-import { validEmail, validHalfWidth, validOnlyHalfWidth, validPhoneNumber } from '~/utils/validate'
+import { validEmail, validHalfWidth } from '~/utils/validate'
 
 export default {
   name: 'InquiryElement',
@@ -211,18 +211,6 @@ export default {
     const validFormLength = (rule, value, callback, message) => {
       if (value && value.length > 255) {
         callback(new Error(this.$t('validation.max_length', { _field_: message })))
-      } else {
-        callback()
-      }
-    }
-    const validPhone = (rule, value, callback) => {
-      if (!validOnlyHalfWidth(value)) {
-        callback(new Error(this.$t('validation.halfwidth_length', { _field_: this.$t('inquiry.phone') })))
-      }
-      if (value && (value.length > 13 || value.length < 10 || !value.startsWith(0))) {
-        callback(new Error(this.$t('validation.phone_length', { _field_: this.$t('inquiry.phone') })))
-      } else if (!validPhoneNumber(value)) {
-        callback(new Error(this.$t('validation.phone', { _field_: this.$t('inquiry.phone') })))
       } else {
         callback()
       }
@@ -263,10 +251,6 @@ export default {
         name: [
           { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('inquiry.name') }), trigger: 'blur' },
           { validator: validFormLength, message: this.$t('validation.max_length', { _field_: this.$t('inquiry.name') }), trigger: 'blur' }
-        ],
-        tel: [
-          { required: true, message: this.$t('validation.required', { _field_: this.$t('inquiry.phone') }), trigger: 'blur' },
-          { validator: validPhone, trigger: 'blur' }
         ],
         content: [
           { validator: validRequired, message: this.$t('validation.required', { _field_: this.$t('inquiry.content') }), trigger: 'blur' },
