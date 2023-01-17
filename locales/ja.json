@@ -315,7 +315,8 @@
     "application": "応募",
     "app_history": "履歴",
     "show_public_avatar": "登録されたプロフィール写真及び実績紹介写真は全員に公開されています。",
-    "show_none_public_avatar": "登録されたプロフィール写真及び実績紹介写真は、採用マッチングしている美容室にのみ公開されます。"
+    "show_none_public_avatar": "登録されたプロフィール写真及び実績紹介写真は、採用マッチングしている美容室にのみ公開されます。",
+    "job_end": "募集終了"
   },
   "condition": {
     "list": {

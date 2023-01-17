@@ -91,7 +91,7 @@
                                   name="period_start"
                                   :placeholder="$t('YYYY')"
                                   @focus="resetValidate('period_start')"
-                                  @blur="validate('period_start')"
+                                  @visible-change="(event) => { checkValidate('period_start', event) }"
                                 >
                                   <el-option
                                     v-for="item in linksYear"
@@ -108,7 +108,7 @@
                                   name="period_start"
                                   :placeholder="$t('MM')"
                                   @focus="resetValidate('period_start')"
-                                  @blur="validate('period_start')"
+                                  @visible-change="(event) => { checkValidate('period_start', event) }"
                                 >
                                   <el-option
                                     v-for="item in linksMonth"
@@ -135,7 +135,7 @@
                                   name="period_end"
                                   :placeholder="$t('YYYY')"
                                   @focus="resetValidate('period_end')"
-                                  @blur="validate('period_end')"
+                                  @visible-change="(event) => { checkValidate('period_end', event) }"
                                 >
                                   <el-option
                                     v-for="item in linksYear"
@@ -152,7 +152,7 @@
                                   name="period_end"
                                   :placeholder="$t('MM')"
                                   @focus="resetValidate('period_end')"
-                                  @blur="validate('period_end')"
+                                  @visible-change="(event) => { checkValidate('period_end', event) }"
                                 >
                                   <el-option
                                     v-for="item in linksMonthEnd"
@@ -735,6 +735,11 @@ export default {
     this.clonedAccountForm = _.cloneDeep(this.accountForm)
   },
   methods: {
+    checkValidate(ref, event) {
+      if (!event) {
+        this.$refs.accountForm.validateField(ref)
+      }
+    },
     showLengthTextarea(value) {
       if (value) {
         return ('000' + value.length).slice(-4)
