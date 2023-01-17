@@ -39,8 +39,8 @@
       </div>
     </div>
     <div class="button-footer">
-      <div class="button-item menu-hover">
-        <div class="d-flex" @click="changeToPage('application-history')">
+      <div class="button-item menu-hover" @click="changeToPage('application-history')">
+        <div class="d-flex">
           <img src="/assets/icon/icon_history.svg" alt="">
           <span>{{ $t('my_page.history') }}</span>
         </div>
