@@ -1,8 +1,20 @@
 <template>
-  <div class="my-page-schedule-element schedule-history" @click="changeToDetail(schedule.job_id)">
-    <div class="title-create">
-      <span class="bold">{{ $t('schedule.created_at') }}</span>
-      <span class="">{{ schedule.created_at }}</span>
+  <div :class="'my-page-schedule-element schedule-history ' + (schedule.job_status_end ? 'disable-application' : '')" @click="changeToDetail(schedule.job_id)">
+    <div class="title-create d-flex justify-between">
+      <div>
+        <span class="bold">{{ $t('schedule.created_at') }}</span>
+        <span class="">{{ schedule.created_at }}</span>
+      </div>
+      <div class="show-pc">
+        <div class="schedule-status d-flex">
+          <div v-if="(schedule.interview_status_id !== undefined) && showStatus" :class="['schedule-history-status', 'status-' + schedule.interview_status_id]">
+            {{ schedule.interview_status_name }}
+          </div>
+          <div v-if="schedule.job_status_end" :class="['schedule-history-status', 'status-end']">
+            {{ $t('my_page.job_end') }}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="schedule-title">
       <div class="title-main">
@@ -17,9 +29,14 @@
       <div class="schedule-image">
         <img :src="schedule.job_banner" alt="">
       </div>
-      <div v-if="(schedule.interview_status_id !== undefined) && showStatus" class="schedule-status">
-        <div :class="['schedule-button-status', 'status-' + schedule.interview_status_id]">
-          {{ schedule.interview_status_name }}
+      <div class="show-sp">
+        <div class="schedule-status d-flex">
+          <div v-if="(schedule.interview_status_id !== undefined) && showStatus" :class="['schedule-history-status', 'status-' + schedule.interview_status_id]">
+            {{ schedule.interview_status_name }}
+          </div>
+          <div v-if="schedule.job_status_end" :class="['schedule-history-status', 'status-end']">
+            {{ $t('my_page.job_end') }}
+          </div>
         </div>
       </div>
       <div class="schedule-description">
@@ -53,7 +70,7 @@
             </a>
           </div>
         </div>
-        <div class="schedule-button">
+        <div v-if="!schedule.job_status_end" class="schedule-button">
           <el-button class="" v-if="schedule.allow_edit" :loading="loading" type="danger" @click.stop="editApply(schedule.id)">{{ $t('schedule.change') }}</el-button>
           <el-button v-if="schedule.allow_cancel" :loading="loading" @click.stop="cancelSchedule(schedule.id)">{{ $t('button.cancel') }}</el-button>
         </div>
@@ -79,7 +96,9 @@ export default {
       this.$emit('editApply', id)
     },
     changeToDetail(id) {
-      this.$router.push('/job/' + id)
+      if (!this.schedule.job_status_end) {
+        this.$router.push('/job/' + id)
+      }
     },
     openGoogleMap() {
       this.loading = false

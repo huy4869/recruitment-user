@@ -327,6 +327,10 @@
 }
 .schedule-history {
   position: relative;
+  &.disable-application {
+    background: $color-dark-400;
+    cursor: not-allowed;
+  }
   .title-create {
     font-weight: 400;
     font-size: 13px;
@@ -359,6 +363,20 @@
       font-weight: 400;
       font-size: 14px;
       line-height: 22px;
+    }
+    .schedule-history-status {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      margin-top: -4px;
+      color: $color-white;
+      padding: 3px 16px;
+      border-radius: 4px;
+      background-color: $color-blue-2;
+    }
+    .status-end {
+      margin-left: 16px;
+      background-color: $color-text-3;
     }
     .status-3 {
       background-color: $color-orange;
