@@ -486,33 +486,33 @@
         min-height: 30px;
         button {
           padding: 0;
-          border: none;
           background: $color-white;
           position: absolute;
           display: inline-block;
           -webkit-appearance: none;
           height: 28px;
+          background: $color-white;
+          cursor: pointer;
+          border: 1px solid $border-default;
+          border-radius: 4px;
+          &:hover  {
+            background-color: $color-bg-footer;
+            border: 1px solid $color-placeholder;
+          }
+          &:focus {
+            background-color: $border-default;
+            border: 1px solid $color-placeholder;
+          }
+          &:active {
+            background-color: $border-default;
+            border: 1px solid $color-placeholder;
+          }
           label {
             font-weight: 400;
             font-size: 13px;
             line-height: 22px;
-            padding: 4px 16px;
-            background: $color-white;
+            padding: 3px 16px;
             cursor: pointer;
-            border: 1px solid $border-default;
-            border-radius: 4px;
-            &:hover  {
-              background-color: $color-bg-footer;
-              border: 1px solid $color-placeholder;
-            }
-            &:focus {
-              background-color: $border-default;
-              border: 1px solid $color-placeholder;
-            }
-            &:active {
-              background-color: $border-default;
-              border: 1px solid $color-placeholder;
-            }
           }
         }
       }
