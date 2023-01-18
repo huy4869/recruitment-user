@@ -96,9 +96,7 @@ export default {
       this.$emit('editApply', id)
     },
     changeToDetail(id) {
-      if (!this.schedule.job_status_end) {
-        this.$router.push('/job/' + id)
-      }
+      this.$router.push('/job/' + id)
     },
     openGoogleMap() {
       this.loading = false
