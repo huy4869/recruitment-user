@@ -371,7 +371,6 @@
       color: $color-white;
       padding: 3px 16px;
       border-radius: 4px;
-      background-color: $color-blue-2;
     }
     .status-end {
       margin-left: 16px;
@@ -447,6 +446,8 @@
   color: $color-white;
   padding: 3px 16px;
   border-radius: 4px;
+}
+.status-1 {
   background-color: $color-blue-2;
 }
 .status-2 {

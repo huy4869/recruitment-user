@@ -499,14 +499,6 @@
             background-color: $color-bg-footer;
             border: 1px solid $color-placeholder;
           }
-          &:focus {
-            background-color: $border-default;
-            border: 1px solid $color-placeholder;
-          }
-          &:active {
-            background-color: $border-default;
-            border: 1px solid $color-placeholder;
-          }
           label {
             font-weight: 400;
             font-size: 13px;
