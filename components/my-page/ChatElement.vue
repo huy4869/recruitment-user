@@ -1,7 +1,7 @@
 <template>
   <div class="chat-page-element">
     <div>
-      <div v-if="showDetailMessage" class="back-to-list-user" @click="backToListUser">
+      <div v-if="showMessageSP" class="back-to-list-user" @click="backToListUser">
         <img src="/assets/icon/icon_arrow_back.svg" alt="">
         <span>{{ userActive.store_name }}</span>
       </div>
@@ -98,7 +98,7 @@
         </div>
         <div class="show-sp">
           <div class="form-chat">
-            <div v-show="!showDetailMessage" class="list-form-chat">
+            <div v-show="!showMessageSP" class="list-form-chat">
               <div class="form-search">
                 <el-input
                   v-model="search"
@@ -112,7 +112,7 @@
                 </el-input>
               </div>
               <div ref="scrollListUserMobile" class="list-user">
-                <div v-for="(user, index) in listUsers" :key="index" @click="changeActive(user, index, true)">
+                <div v-for="(user, index) in listUsers" :key="index" @click="showDetailSp(user, index, true)">
                   <div v-if="checkSearch(user.store_name)" :class="['user-message-item', {'user-active': (index === indexActive)}, {'user-unread': !user.be_readed}]">
                     <div class="d-flex">
                       <div class="user-avatar">
@@ -137,7 +137,7 @@
                 </div>
               </div>
             </div>
-            <div v-show="showDetailMessage" class="content-form-chat">
+            <div v-show="showMessageSP" class="content-form-chat">
               <div class="form-message" ref="scrollListMessageMobile">
                 <div v-for="(message, index) in listMessages" :key="index">
                   <FormChatElement :message="message" :store_id="userActive.store_id"></FormChatElement>
@@ -188,13 +188,15 @@
 
 <script>
 import _ from 'lodash'
+import { mapState } from 'vuex'
 import {
   INDEX_SET_LOADING,
   CHAT_LIST,
   MY_PAGE_SET_SHOW_DETAIL_MESSAGE,
   CHAT_CREATE_MESSAGE,
   CHAT_DETAIL_CHAT,
-  INDEX_SET_ERROR
+  INDEX_SET_ERROR,
+  SET_SHOW_MESSAGE_SP
 } from '../../store/store.const'
 import ShowAvatarElement from '../element-ui/ShowAvatarElement'
 import FormChatElement from './FormChatElement'
@@ -235,11 +237,16 @@ export default {
     }
   },
   watch: {
-    showDetailMessage(newValue, oldValue) {
-      if (!this.showDetailMessage) {
+    showMessageSP(newValue, oldValue) {
+      if (!this.showMessageSP) {
         setTimeout(() => this.scrollToElementSp(), 500)
       }
     }
+  },
+  computed: {
+    ...mapState({
+      showMessageSP: state => state.showMessageSP
+    })
   },
   async created() {
     await this.$store.commit(INDEX_SET_LOADING, true)
@@ -252,6 +259,7 @@ export default {
         }
       })
     }
+    this.$store.commit(SET_SHOW_MESSAGE_SP, false)
     await this.$store.commit(INDEX_SET_LOADING, false)
   },
   methods: {
@@ -261,6 +269,10 @@ export default {
       }
       this.$refs.chatForm.fields.find((f) => f.prop === ref).clearValidate()
       this.chatForm.errors[ref] = ''
+    },
+    async showDetailSp(user, index, mobile) {
+      await this.changeActive(user, index, mobile)
+      await this.$store.commit(SET_SHOW_MESSAGE_SP, true)
     },
     async changeActive(user, index, mobile) {
       if (user) {
@@ -308,12 +320,11 @@ export default {
         this.listUsers[index].be_readed = 1
       }
       if (mobile) {
-        this.showDetailMessage = true
         this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, true)
       }
     },
     backToListUser() {
-      this.showDetailMessage = false
+      this.$store.commit(SET_SHOW_MESSAGE_SP, false)
       this.$store.commit(MY_PAGE_SET_SHOW_DETAIL_MESSAGE, false)
     },
     async getDataUser() {

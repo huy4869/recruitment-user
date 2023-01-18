@@ -9,7 +9,8 @@ export const state = () => ({
   showModalSp: false,
   openSidebar: 0,
   errorJob: '',
-  titleMenu: [{ name: '', route: '/' }]
+  titleMenu: [{ name: '', route: '/' }],
+  showMessageSP: false
 })
 
 export const getters = {}
@@ -41,6 +42,9 @@ export const mutations = {
   },
   setErrorJob(state, errorJob) {
     state.errorJob = errorJob
+  },
+  setShowMessageSP(state, showMessageSP) {
+    state.showMessageSP = showMessageSP
   }
 }
 

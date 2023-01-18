@@ -21,7 +21,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { SET_SHOW_MODAL_SP } from '../store/store.const'
+import { SET_SHOW_MODAL_SP, SET_SHOW_MESSAGE_SP } from '../store/store.const'
 import LoadingBar from '../components/LoadingBar'
 import HeaderCommon from '../components/layout/HeaderCommon'
 import FooterCommon from '../components/layout/FooterCommon'
@@ -38,6 +38,11 @@ export default {
   },
   created() {
     this.$store.commit(SET_SHOW_MODAL_SP, false)
+  },
+  watch: {
+    '$route.path'() {
+      this.$store.commit(SET_SHOW_MESSAGE_SP, false)
+    }
   },
   methods: {
     closeModal() {

@@ -8,6 +8,7 @@ export const MASTER_GET_DATA = 'getMasterData'
 export const GET_ZIPCODE = 'getZipcode'
 export const SET_SHOW_MODAL_SP = 'setShowModalSp'
 export const SET_JOB_ERROR = 'setErrorJob'
+export const SET_SHOW_MESSAGE_SP = 'setShowMessageSP'
 
 // user
 export const USER_UPDATE_PROFILE = 'user/updateProfile'
