@@ -57,12 +57,12 @@
             <div v-if="!$route.path.includes('chat')">
               <div class="button-footer">
                 <div @click="handleRouter('/chat')">
-                  <img src="/assets/icon/icon-chat.svg" alt="">
+                  <img src="/assets/icon/icon_chat.png" alt="">
                 </div>
               </div>
             </div>
             <div v-else class="button-home" @click="handleRouter('/chat')">
-              <img src="/assets/icon/icon_chat_active.svg" alt=""><span>{{ $t('my_page.chat') }}</span>
+              <img src="/assets/icon/icon_chat_active.png" alt=""><span>{{ $t('my_page.chat') }}</span>
             </div>
             <div v-if="!$route.path.includes('notification')">
               <div class="button-footer" @click="handleRouter('/notification')">
