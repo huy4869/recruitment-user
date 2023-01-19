@@ -38,7 +38,7 @@ export default {
   methods: {
     formatMessage(value) {
       if (value) {
-        return value.replace(/\\n/g, '<br/>')
+        return value.replace(/\n/g, '<br/>')
       }
       return ''
     }
