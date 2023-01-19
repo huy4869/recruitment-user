@@ -68,5 +68,10 @@ export const actions = {
     return new Promise((resolve, reject) => {
       handleApi(resolve, reject, this.$axios.post('/register-receive-email', data), context)
     })
+  },
+  getCountChat(context, param) {
+    return new Promise((resolve, reject) => {
+      handleApi(resolve, reject, this.$axios.get(`/chat/unread-count`), context)
+    })
   }
 }

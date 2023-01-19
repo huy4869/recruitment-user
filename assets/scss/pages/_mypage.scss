@@ -1122,11 +1122,49 @@
           border-radius: 27px;
           background: $color-white;
           margin-left: 13px;
+          .el-form {
+            width: 100%;
+          }
+          .el-form-item {
+            margin-bottom: 0;
+          }
+          .el-form-item__content {
+            height: 54px;
+            display: flex;
+            align-items: center;
+            margin-left: 16px;
+          }
+          .min-height-22 {
+            textarea {
+              height: 22px;
+            }
+          }
+          .el-textarea .el-textarea__inner {
+            border: none;
+            max-height: 44px;
+            padding: 0;
+            margin-right: 40px;
+            width: calc(100% - 90px);
+            resize: none;
+            /* width */
+            &::-webkit-scrollbar {
+              display: none;
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+              display: none;
+            }
+          }
+          .button-send {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+          }
           .button-send {
             padding: 7px 10px;
             background: $color-text-primary;
             border-radius: 19px;
-            margin: 7px 10px;
             display: flex;
             cursor: pointer;
             span {

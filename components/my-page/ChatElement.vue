@@ -67,23 +67,21 @@
                   @submit.native.prevent
                 >
                   <el-form-item class="message-chat-input" label="" prop="message" :error="(error.key === 'message') ? error.value : ''">
-                    <div class="d-flex justify-between">
-                      <el-input
-                        ref="message"
-                        v-model="chatForm.message"
-                        :placeholder="$t('login.email')"
-                        name="message"
-                        type="text"
-                        tabindex="2"
-                        :disabled="listMessages.length === 0"
-                        maxlength="1000"
-                        @keyup.enter.native="sendMessage"
-                        @focus="resetValidate('message')"
-                      />
-                      <div class="button-send" :class="listMessages.length > 0 ? '' : 'disable-btn'" @click="sendMessage">
-                        <span>{{ $t('my_page.send') }}</span>
-                        <img src="/assets/icon/icon_send_message.svg" alt="">
-                      </div>
+                    <el-input
+                      ref="message"
+                      v-model="chatForm.message"
+                      :placeholder="$t('my_page.enter_message')"
+                      name="message"
+                      type="textarea"
+                      tabindex="2"
+                      @keypress.enter.native="checkSendMessage"
+                      @focus="resetValidate('message')"
+                      maxlength="1000"
+                      autosize
+                    />
+                    <div class="button-send" @click="sendMessage">
+                      <span>{{ $t('my_page.send') }}</span>
+                      <img src="/assets/icon/icon_send_message.svg" alt="">
                     </div>
                   </el-form-item>
                 </el-form>
@@ -153,22 +151,21 @@
                   @submit.native.prevent
                 >
                   <el-form-item class="message-chat-input" label="" prop="message" :error="(error.key === 'message') ? error.value : ''">
-                    <div class="d-flex justify-between">
-                      <el-input
-                        ref="message"
-                        v-model="chatForm.message"
-                        :placeholder="$t('login.email')"
-                        name="message"
-                        type="text"
-                        tabindex="2"
-                        @keyup.enter.native="sendMessage"
-                        @focus="resetValidate('message')"
-                        maxlength="1000"
-                      />
-                      <div class="button-send" @click="sendMessage">
-                        <span>{{ $t('my_page.send') }}</span>
-                        <img src="/assets/icon/icon_send_message.svg" alt="">
-                      </div>
+                    <el-input
+                      ref="message"
+                      v-model="chatForm.message"
+                      :placeholder="$t('my_page.enter_message')"
+                      name="message"
+                      type="textarea"
+                      tabindex="2"
+                      @keypress.enter.native="checkSendMessage"
+                      @focus="resetValidate('message')"
+                      maxlength="1000"
+                      autosize
+                    />
+                    <div class="button-send" @click="sendMessage">
+                      <span>{{ $t('my_page.send') }}</span>
+                      <img src="/assets/icon/icon_send_message.svg" alt="">
                     </div>
                   </el-form-item>
                 </el-form>
@@ -402,6 +399,14 @@ export default {
           await this.$store.commit(INDEX_SET_LOADING, false)
         }
       })
+    },
+    checkSendMessage(event) {
+      if (event.key === 'Enter') {
+        if (!event.shiftKey) {
+          event.preventDefault()
+          this.sendMessage()
+        }
+      }
     }
   }
 }
