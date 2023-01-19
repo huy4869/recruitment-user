@@ -17,7 +17,7 @@
             <el-badge class="mark" :value="chat">
               <img src="/assets/icon/icon_chat.svg" alt="">
             </el-badge>
-            <span>{{ $t('my_page.chat') }}</span>
+            <span class="noti-text-badge">{{ $t('my_page.chat') }}</span>
           </div>
           <div v-else @click="changeToLink('/chat')">
             <img src="/assets/icon/icon_chat.svg" alt="">

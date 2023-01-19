@@ -6,7 +6,7 @@
       <div class="home">
         <nuxt />
       </div>
-      <div v-if="!showDetailMessage">
+      <div v-if="!showMessageSP">
         <FooterCommon />
       </div>
       <LoadingBar />
@@ -32,7 +32,7 @@ export default {
   components: { FooterCommon, HeaderCommon, LoadingBar, NotificationBlock },
   computed: {
     ...mapState({
-      showDetailMessage: state => state.my_page.showDetailMessage,
+      showMessageSP: state => state.showMessageSP,
       showModal: state => state.showModalSp
     })
   },
