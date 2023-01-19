@@ -91,7 +91,7 @@
         </div>
       </div>
     </div>
-    <div class="show-sp">
+    <div v-if="!showMessageSP" class="show-sp">
       <div class="footer-mobile">
         <div class="content-button">
           <div class="d-flex justify-between list-icon">
@@ -146,7 +146,7 @@
   </div>
 </template>
 <script>
-
+import { mapState } from 'vuex'
 import { INDEX_SET_ERROR, INDEX_SET_LOADING, NOTIFICATION_COUNT, SET_SHOW_MODAL_SP, GET_COUNT_CHAT } from '@/store/store.const'
 
 export default {
@@ -172,6 +172,11 @@ export default {
       this.countNotification()
       this.getCountChat()
     }
+  },
+  computed: {
+    ...mapState({
+      showMessageSP: state => state.showMessageSP
+    })
   },
   methods: {
     changeToLink(link) {
