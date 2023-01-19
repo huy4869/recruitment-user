@@ -9,6 +9,7 @@ export const GET_ZIPCODE = 'getZipcode'
 export const SET_SHOW_MODAL_SP = 'setShowModalSp'
 export const SET_JOB_ERROR = 'setErrorJob'
 export const SET_SHOW_MESSAGE_SP = 'setShowMessageSP'
+export const GET_COUNT_CHAT = 'getCountChat'
 
 // user
 export const USER_UPDATE_PROFILE = 'user/updateProfile'

@@ -13,7 +13,13 @@
         </div>
         <div v-if="loggedIn" class="button-action show-pc">
           <div class="border-default"></div>
-          <div @click="changeToLink('/chat')">
+          <div v-if="chat > 0" @click="changeToLink('/chat')">
+            <el-badge class="mark" :value="chat">
+              <img src="/assets/icon/icon_chat.svg" alt="">
+            </el-badge>
+            <span>{{ $t('my_page.chat') }}</span>
+          </div>
+          <div v-else @click="changeToLink('/chat')">
             <img src="/assets/icon/icon_chat.svg" alt="">
             <span>{{ $t('my_page.chat') }}</span>
           </div>
@@ -89,7 +95,7 @@
 </template>
 <script>
 
-import { INDEX_SET_ERROR, INDEX_SET_LOADING, NOTIFICATION_COUNT, SET_SHOW_MODAL_SP } from '@/store/store.const'
+import { INDEX_SET_ERROR, INDEX_SET_LOADING, NOTIFICATION_COUNT, SET_SHOW_MODAL_SP, GET_COUNT_CHAT } from '@/store/store.const'
 
 export default {
   name: 'HeaderCommon',
@@ -97,7 +103,8 @@ export default {
     return {
       user: this.$auth.user,
       loggedIn: this.$auth.loggedIn,
-      totalNotification: ''
+      totalNotification: '',
+      chat: 0
     }
   },
   watch: {
@@ -111,6 +118,7 @@ export default {
   created() {
     if (this.loggedIn) {
       this.countNotification()
+      this.getCountChat()
     }
   },
   methods: {
@@ -156,6 +164,31 @@ export default {
         await this.$store.commit(INDEX_SET_LOADING, false)
       } catch (err) {
         await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.message_error') })
+      }
+      await this.$store.commit(INDEX_SET_LOADING, false)
+    },
+    async getCountChat() {
+      const response = await this.$store.dispatch(GET_COUNT_CHAT)
+      switch (response.status_code) {
+        case 200:
+          this.chat = response.data.total_unread
+          break
+        case 401:
+          await this.$store.commit(INDEX_SET_ERROR, { show: true, text: this.$t('message.token_expired') })
+          this.$auth.logout()
+          break
+        case 500:
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: this.$t('content.EXC_001')
+          })
+          break
+        default:
+          await this.$store.commit(INDEX_SET_ERROR, {
+            show: true,
+            text: response.messages
+          })
+          break
       }
       await this.$store.commit(INDEX_SET_LOADING, false)
     }
