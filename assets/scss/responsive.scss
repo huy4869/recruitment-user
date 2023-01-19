@@ -864,39 +864,48 @@
         color: $color-white;
       }
     }
-    .footer-mobile {
-      position: fixed;
-      bottom: 0;
-      width: 100vw;
-      background: $color-white;
-      border-top: 1px solid $border-default;
-      z-index: 3;
-      .content-button {
-        display: grid;
-        padding: 17px;
-        .button-home {
-          padding: 6px 10px;
-          display: flex;
-          background: $color-primary-200;
-          border-radius: 18px;
-          span {
-            margin: 2px 0 2px 2px;
-            font-weight: 500;
-            font-size: 13px;
-            line-height: 20px;
-            color: $color-text-primary;
-          }
+  }
+  .footer-mobile {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    background: $color-white;
+    border-top: 1px solid $border-default;
+    z-index: 3;
+    .content-button {
+      display: grid;
+      padding: 17px;
+      .button-home {
+        padding: 6px 10px;
+        display: flex;
+        background: $color-primary-200;
+        border-radius: 18px;
+        span {
+          margin: 2px 0 2px 2px;
+          font-weight: 500;
+          font-size: 13px;
+          line-height: 20px;
+          color: $color-text-primary;
         }
-        .list-icon {
-          .button-footer {
-            img {
-              margin-top: 6px;
-              width: 24px;
-              height: 24px;
-            }
+      }
+      .list-icon {
+        .button-footer {
+          img {
+            margin-top: 6px;
+            width: 24px;
+            height: 24px;
           }
         }
       }
+    }
+    .show-count {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: $color-red;
+      position: absolute;
+      right: -3px;
+      top: 5px;
     }
   }
   #register-layout {

@@ -91,6 +91,58 @@
         </div>
       </div>
     </div>
+    <div class="show-sp">
+      <div class="footer-mobile">
+        <div class="content-button">
+          <div class="d-flex justify-between list-icon">
+            <div v-if="$route.path === '/'">
+              <div class="button-home" @click="handleRouter('/')">
+                <img src="/assets/icon/icon_home_active.svg" alt=""><span>{{ $t('header.home') }}</span>
+              </div>
+            </div>
+            <div v-else class="button-footer" @click="handleRouter('/')">
+              <img src="/assets/icon/icon_home.png" alt="">
+            </div>
+            <div v-if="$route.path.includes('/search') || $route.path.includes('/job/')" class="button-home" @click="handleRouter('/search')">
+              <img src="/assets/icon/icon-search-active.svg" alt=""><span>{{ $t('header.search') }}</span>
+            </div>
+            <div v-else class="button-footer" @click="handleRouter('/search')">
+              <img src="/assets/icon/icon_search.svg" alt="">
+            </div>
+            <div v-if="!$route.path.includes('chat')">
+              <div class="button-footer">
+                <div class="relative" @click="handleRouter('/chat')">
+                  <img src="/assets/icon/icon_chat.png" alt="">
+                  <div v-if="chat" class="show-count"></div>
+                </div>
+              </div>
+            </div>
+            <div v-else class="button-home" @click="handleRouter('/chat')">
+              <img src="/assets/icon/icon_chat_active.png" alt="">
+              <span>{{ $t('my_page.chat') }}</span>
+            </div>
+            <div v-if="!$route.path.includes('notification')">
+              <div class="button-footer relative" @click="handleRouter('/notification')">
+                <img src="/assets/icon/icon_notification_mobile.svg" alt="">
+                <div v-if="totalNotification" class="show-count"></div>
+              </div>
+            </div>
+            <div v-else class="button-home" @click="handleRouter('/notification')">
+              <img src="/assets/icon/icon-noti-active.svg" alt=""><span>{{ $t('header.notification') }}</span>
+            </div>
+            <div v-if="$route.path.includes('/my-page') || $route.path.includes('/inquiry')">
+              <div class="button-home" @click="handleRouter('/my-page/top-page')">
+                <img src="/assets/icon/icon_user_mobile.png" alt=""><span>{{ $t('page.my_page') }}</span>
+              </div>
+            </div>
+            <div v-else class="button-footer" @click="handleRouter('/my-page/top-page')">
+              <img src="/assets/icon/icon_user_inactive.svg" alt="">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -103,7 +155,7 @@ export default {
     return {
       user: this.$auth.user,
       loggedIn: this.$auth.loggedIn,
-      totalNotification: '',
+      totalNotification: 0,
       chat: 0
     }
   },
@@ -125,6 +177,9 @@ export default {
     changeToLink(link) {
       this.$router.push(link)
       this.closeModal()
+    },
+    handleRouter(route) {
+      this.$router.push(route)
     },
     async logout() {
       await this.$router.push('/logout')
