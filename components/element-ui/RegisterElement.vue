@@ -1,6 +1,6 @@
 <template>
   <div id="register-element" class="login-element">
-    <img class="logo-login" src="/assets/images/logo_white.svg" alt="">
+    <img class="logo-login cursor-pointer" src="/assets/images/logo_white.svg" alt="" @click="changeLink('/')">
     <div class="login-form">
       <div class="login-title">{{ $t('register.title') }}</div>
       <el-form
@@ -193,7 +193,7 @@ import {
 import { validEmail, validFurigana, validHalfWidth, validOnlyHalfWidth } from '@/utils/validate'
 
 export default {
-  name: 'LoginElement',
+  name: 'RegisterElement',
   data() {
     const validFormEmail = (rule, value, callback) => {
       if (value && value.length > 255) {

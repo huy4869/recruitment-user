@@ -1,6 +1,6 @@
 <template>
   <div class="login-element forgot-page">
-    <img class="logo-login" src="/assets/images/logo_white.svg" alt="">
+    <img class="logo-login cursor-pointer" src="/assets/images/logo_white.svg" alt="" @click="changeLink('/')">
     <div>
       <div class="login-title">{{ $t('forgot_pass.title') }}</div>
       <div id="forgot-des" class="text-center">
