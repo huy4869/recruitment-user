@@ -1280,6 +1280,7 @@ export default {
                   }
                 }
                 this.accountForm.province_city_id = this.listProvinceCity[province_city_id].id
+                this.accountForm.address = data.data.address
               } else if (data.data.length === 0) {
                 this.error = {
                   key: 'postal_code',
