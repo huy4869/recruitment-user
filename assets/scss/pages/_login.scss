@@ -1,0 +1,227 @@
+.login-page {
+  background: url('~assets/images/login1.png') center no-repeat;
+  background-size: cover;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  #register-element {
+    .button-login {
+      margin-top: 24px;
+    }
+    .required {
+      margin-top: 1px;
+      margin-left: 4px;
+      background: $color-red-primary;
+      color: $color-white;
+      text-align: center;
+    }
+    .first-name {
+      margin-right: 14px;
+    }
+    .last-name {
+      margin-left: 10px;
+    }
+  }
+  #forgot-des {
+    div {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    width: 470px;
+    margin: auto;
+    padding-bottom: 24px;
+  }
+  .login-element {
+    max-width: 1280px;
+    width: 788px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    height: max-content;
+    .logo-login {
+      position: absolute;
+      width: 88px;
+      height: 22px;
+      left: 32px;
+      top: 33px;
+    }
+    .login-title {
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 40px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    form {
+      width: 550px;
+    }
+    .image-login {
+      padding-left: 55px;
+    }
+    .password-login {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+    .link-register {
+      text-align: center;
+      color: $color-text-primary;
+      cursor: pointer;
+      height: 22px;
+      span {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
+    .check-remember {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 22px;
+      .forgot-password {
+        color: $color-text-primary;
+        cursor: pointer;
+      }
+      .el-checkbox__label {
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 20px;
+        padding-top: 2px;
+      }
+    }
+    .button-login {
+      margin-top: 32px;
+      margin-bottom: 20px;
+      button {
+        width: 100%;
+        border-radius: 4px;
+      }
+    }
+    .el-button {
+      padding: 9px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 22px;
+      background-color: $color-text-primary;
+      border: 1px solid $color-text-primary;
+      &:hover {
+        background-color: $color-primary-hover;
+        border: 1px solid $color-primary-hover;
+        img {
+          opacity: 0.8;
+        }
+      }
+      &:focus {
+        background-color: $color-primary-focus;
+        border: 1px solid $color-primary-focus;
+      }
+    }
+    .description {
+      height: 66px;
+      margin-top: 24px;
+      .el-checkbox {
+        height: 66px;
+      }
+      .el-checkbox__label {
+        white-space: pre-line;
+      }
+    }
+    .terms {
+      margin-left: 8px;
+      span {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        padding: 1px 0;
+      }
+    }
+    #here-login {
+      display: none;
+    }
+    .el-input__suffix {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      right: 17px;
+      .icon-show-pass {
+        display: flex;
+      }
+    }
+    .el-input {
+      height: 40px;
+
+      .el-input__inner {
+        border-color: $color-black;
+        height: 40px;
+
+        &::placeholder {
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 22px
+        }
+
+        &:focus {
+          border: 1px solid $color-text-primary;
+          outline: 0;
+        }
+
+        &:hover {
+          border-color: $color-text-primary;
+        }
+      }
+    }
+    .el-form-item.is-error .el-input .el-input__inner {
+      border-color: $color-red-primary;
+    }
+    .el-form-item__error {
+      position: absolute;
+    }
+    .el-checkbox .el-checkbox__inner {
+      border-color: $color-text-primary;
+    }
+  }
+  .forgot-page {
+    .login-title {
+      margin-bottom: 24px;
+    }
+    .button-login {
+      margin-top: 24px;
+    }
+  }
+  .reset-password-element {
+    .login-title {
+      margin-bottom: 24px;
+    }
+    .button-login {
+      margin-top: 24px;
+    }
+    #forgot-des {
+      padding-bottom: 8px;
+      height: 22px;
+    }
+    .el-button {
+      padding: 12px;
+      height: 46px;
+    }
+  }
+  .label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: $color-black-50;
+    margin-bottom: 5px;
+  }
+  .el-form-item {
+    margin-bottom: 24px;
+  }
+  .content-input {
+    width: 100%;
+  }
+}

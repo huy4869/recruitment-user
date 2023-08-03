@@ -1,0 +1,344 @@
+.search-page {
+  padding-top: 30px;
+  .search-content {
+    padding: 31px 90px;
+    max-width: 1152px;
+    margin: auto;
+    .el-checkbox {
+      width: fit-content;
+      height: fit-content;
+    }
+    .search-form-condition {
+      box-shadow: 0px 2px 9px rgba(33, 16, 16, 0.25);
+      border-radius: 6px;
+      padding: 21px 16px 32px;
+      position: relative;
+      .header-search {
+        display: flex;
+        justify-content: space-between;
+        .header-search-right {
+          .show-result-condition {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 22px;
+            margin-top: 12px;
+            .district-item {
+              color: $color-blue;
+              margin-top: 8px;
+            }
+            .province-item {
+              margin-top: 4px;
+              word-wrap: break-word;
+              white-space: normal;
+              overflow: hidden;
+              display: -webkit-box;
+              text-overflow: ellipsis;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 1;
+            }
+          }
+          .el-button {
+            height: 36px;
+            padding: 6px 20px;
+            .hide-focus {
+              display: inline-block;
+            }
+            .show-focus {
+              display: none;
+            }
+            span {
+              display: flex;
+              justify-content: center;
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
+              img {
+                width: 20px;
+                height: 20px;
+                margin-top: 1px;
+              }
+            }
+            &:focus {
+              color: $color-white !important;
+              background: $color-blue-focus;
+              border-color: $color-blue-focus;
+              img {
+                background: $color-blue-focus;
+              }
+              .hide-focus {
+                display: none;
+              }
+              .show-focus {
+                display: inline-block;
+              }
+            }
+          }
+        }
+        .search-occupation {
+          width: calc(50% - 8px);
+          display: flex;
+          justify-content: space-between;
+        }
+        .search-work-location {
+          width: calc(50% - 8px);
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+      .all-condition {
+        .button-see-all {
+          position: absolute;
+          right: 20px;
+          bottom: 40px;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          color: $color-blue;
+          display: flex;
+          margin-top: 30px;
+          cursor: pointer;
+          img {
+            width: 24px;
+            height: 24px;
+            margin-left: 6px;
+          }
+          .hide-show-all {
+            transform: rotate(180deg);
+          }
+        }
+        .form-all-condition {
+          .form-condition-item {
+            display: flex;
+            justify-content: space-between;
+            .input-keyword {
+              width: calc(50% + 85px);
+              .el-input__prefix {
+                margin: 10px 16px;
+                width: 24px;
+                height: 24px;
+                img {
+                  width: 24px;
+                  height: 24px;
+                }
+              }
+              input {
+                padding-left: 48px;
+              }
+            }
+            .el-checkbox-group {
+              .checkbox-item {
+                width: 33%;
+                display: inline-block;
+                margin: 3px 0;
+                .el-checkbox__label {
+                  white-space: normal;
+                }
+              }
+            }
+            .feature-title {
+              width: 100%;
+              font-weight: 700;
+              font-size: 16px;
+              line-height: 24px;
+              margin-bottom: 3px;
+            }
+          }
+        }
+      }
+      .button-search {
+        justify-content: center;
+        display: flex;
+        margin-top: 32px;
+        .el-button {
+          padding: 8px 52px;
+        }
+        span {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+        }
+      }
+    }
+    .search-result {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 28px;
+      margin-top: 32px;
+      .total-record {
+        font-family: 'Inter';
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        margin-right: 8px;
+        color: $color-blue;
+      }
+    }
+    .search-list-job {
+      margin-top: 24px;
+    }
+  }
+  .header-search-left {
+    width: 146px;
+    background-color: $color-bg-footer;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 9px 0 9px 24px;
+    border-radius: 4px;
+  }
+  .header-search-sort {
+    padding: 7px 0 7px 24px;
+  }
+  .header-search-right {
+    width: calc(100% - 194px);
+    margin-left: 20px;
+    padding: 3px 0;
+    .el-button--default:focus {
+      background: $color-white;
+      color: $color-blue !important;
+    }
+  }
+  .recommend-job-element {
+    .job-title {
+      margin-bottom: 14px;
+    }
+    .job-content {
+      .job-image {
+        display: flex;
+        img {
+          width: 366px;
+          height: 244px;
+        }
+      }
+      .job-description {
+        .job-info {
+          margin-bottom: 12px;
+        }
+        .feature-item {
+          margin-top: 8px;
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+}
+
+.form-dialog-select {
+  .el-dialog__header {
+    padding: 30px 32px 32px;
+    .el-dialog__title {
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 40px;
+      height: 40px;
+      display: inline-block;
+      color: $color-text-primary;
+      border-left: 5px solid $color-text-primary;
+      padding-left: 16px;
+    }
+    .el-dialog__headerbtn {
+      top: 34px;
+      right: 32px;
+      i {
+        width: 32px;
+        height: 32px;
+        font-size: 32px;
+        color: $color-black;
+        &::before {
+          width: 32px;
+          height: 32px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  .el-dialog__body {
+    padding: 0 32px;
+    .form-filter-location {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 500;
+      .district-item {
+        .district-name {
+          background: $color-primary-200;
+          border-radius: 4px;
+          padding: 15px 16px;
+          .el-checkbox__label {
+            font-weight: 700;
+            padding-left: 10px;
+            font-size: 16px;
+            line-height: 24px;
+          }
+        }
+        .list-province {
+          padding: 8px 16px 18px;
+          .city-item {
+            width: 100%;
+            .list-city {
+              position: relative;
+              border-radius: 4px;
+              background: $color-blue-3;
+              padding: 16px 20px;
+            }
+            .show-province-active {
+              position: absolute;
+              top: -10px;
+              width: 0;
+              height: 0;
+              border-left: 11.5px solid transparent;
+              border-right: 11.5px solid transparent;
+              border-bottom: 13.75px solid $color-blue-3;
+            }
+            .position-0 {
+              left: 4px;
+            }
+            .position-1 {
+              left: calc(25% - 4px);
+            }
+            .position-2 {
+              left: 50%;
+            }
+            .position-3 {
+              left: 75%;
+            }
+            .province-city-item {
+              width: 25%;
+              display: inline-block;
+              margin: 0;
+            }
+          }
+          .form-show-city {
+            cursor: pointer;
+            margin-left: 10px;
+            width: 24px;
+            height: 24px;
+          }
+          .province-item {
+            width: 25%;
+            display: inline-block;
+            margin: 12px 0;
+            .el-checkbox__label {
+              white-space: normal;
+            }
+          }
+
+          .form-work {
+            width: 33%;
+          }
+          .total-record {
+            color: $color-blue;
+          }
+        }
+      }
+    }
+  }
+  .el-dialog__footer {
+    text-align: center;
+    padding: 0 0 30px;
+    .dialog-footer {
+      .el-button {
+        padding: 8px 43px;
+      }
+    }
+  }
+}

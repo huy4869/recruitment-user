@@ -1,0 +1,76 @@
+.inquiry-page {
+  .inquiry-content {
+    margin: 32px auto 12px;
+    max-width: 1100px;
+    .inquiry-container {
+      display: grid;
+      grid-template-columns: 67% 29%;
+      gap: 4%;
+
+      .left-container {
+        .inquiry-title {
+          font-weight: 400;
+          font-size: 32px;
+          line-height: 40px;
+          padding-bottom: 18px;
+          border-bottom: 3px solid $color-text-primary;
+        }
+        .description {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+          margin-top: 16px;
+        }
+        .description2 {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 22px;
+          margin: 12px 0 24px;
+        }
+        .edit-cv-element {
+          margin-bottom: 24px;
+          .edit-cv-content {
+            border-top: none;
+          }
+        }
+      }
+
+      .right-container {
+        padding-top: 58px;
+        .here {
+          background: $color-dark-50;
+          border-radius: 4px 4px 0 0;
+          padding: 10px 0;
+          color: $color-white;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 24px;
+        }
+        .schedule-des {
+          background: $color-primary-200;
+          border-radius: 4px;
+          padding-bottom: 20px;
+          .phone-number {
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 40px;
+            color: $color-blue;
+            padding: 20px 0 14px;
+          }
+        }
+      }
+      .show-data-user {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        padding: 8px 0;
+      }
+      #btn-center {
+        .el-button {
+          padding: 8px 60px;
+        }
+      }
+    }
+  }
+}
+

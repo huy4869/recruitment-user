@@ -1,0 +1,72 @@
+.pagination-common {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  ul {
+    list-style-type: none;
+  }
+  .button-prev {
+    transform: rotate(180deg);
+  }
+  .page-item {
+    border: 1px solid $color-placeholder;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    margin-left: 8px;
+    span {
+      margin: auto;
+    }
+    cursor: pointer;
+  }
+  .icon-next {
+    background: url('~assets/icons/arrow_next.svg') center no-repeat;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+  }
+  .page-item:hover {
+    .icon-next {
+      background: url('~assets/icons/arrow_next_active.svg') center no-repeat;
+    }
+  }
+
+  .page-item:hover, .active span {
+    color: $color-white;
+    background-color: $color-text-primary;
+    border-color: $color-text-primary;
+    .icon-next {
+      background: url('~assets/icons/arrow_next_disable.svg') center no-repeat;
+    }
+  }
+  .active {
+    color: $color-white;
+    background-color: $color-text-primary;
+    border-color: $color-text-primary;
+  }
+  .page-item.disable, .page-item.disable:hover {
+    cursor: not-allowed;
+    border-color: $color-button-disable;
+    background-color: $color-button-disable;
+    opacity: 0.5;
+    .icon-next {
+      background: url('~assets/icons/arrow_next_disable.svg') center no-repeat;
+    }
+  }
+  .page-more {
+    cursor: not-allowed;
+    &:hover {
+      color: $color-button-disable;
+      border-color: $color-button-disable;
+    }
+  }
+  .pagination {
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+  }
+}

@@ -1,0 +1,97 @@
+.menu-left-element {
+  .menu-mobile-alt {
+    overflow: auto;
+  }
+  .menu-mobile-alt::-webkit-scrollbar {
+    display: none;
+  }
+  .el-drawer__close-btn {
+    position: fixed;
+    right: 25%;
+    top: 30px;
+    color: rgba(255, 255, 255, 1);
+
+  }
+  .el-dialog__close el-icon el-icon-close {
+    color: rgba(255, 255, 255, 1);
+
+  }
+  .el-icon-close:before {
+    color: rgba(255, 255, 255, 1);
+
+  }
+  .el-drawer__open .el-drawer.ltr {
+    width: 63% !important;
+  }
+  .el-drawer__header {
+    margin-bottom: 0;
+    padding: 0;
+  }
+  .el-menu-vertical {
+    .menu-item {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 22px;
+    }
+    .el-submenu__title {
+      border-bottom: 1px solid $border-default;
+      span {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 22px;
+      }
+    }
+    .el-menu-item {
+      border-bottom: 1px solid $border-default;
+      padding: 0 12px;
+      &:hover {
+        background-color: $color-primary-200;
+      }
+    }
+    .el-submenu .el-menu-item {
+      font-weight: 500;
+      font-size: 14px;
+      border-bottom: 1px solid $border-default;
+    }
+    .el-icon-arrow-right {
+      color: $color-black;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .el-icon-arrow-down:before {
+      content: "\e6e0";
+      font-size: 20px;
+      font-weight: 600;
+      color: $color-black;
+    }
+    .el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow {
+      transform: rotateZ(90deg);
+    }
+  }
+  .el-menu-item.is-active{
+    border-radius: 4px;
+    color: $color-text-primary;
+    .el-icon-arrow-right {
+      color: $color-text-primary;
+    }
+  }
+  .mobile-menu-active {
+    background-color: $color-text-primary;
+    border-radius: 4px;
+    .el-submenu__title {
+      color: $color-text-primary;
+      background-color: $color-primary-200;
+      .el-icon-arrow-down:before {
+        color: $color-text-primary;
+      }
+    }
+  }
+  .sub-menu-active {
+    .menu-item {
+      color: $color-text-primary;
+    }
+    .el-icon-arrow-right {
+      color: $color-text-primary;
+    }
+  }
+}

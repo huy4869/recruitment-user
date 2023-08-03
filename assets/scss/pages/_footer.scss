@@ -1,0 +1,69 @@
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background: $color-white;
+  margin-top: 2px;
+  .container-footer {
+    .footer-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 70px;
+      color: $color-text-1;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 22px;
+      margin: 28px 0 16px;
+      div:hover {
+        color: $color-icon-link-hover;
+      }
+    }
+    .logo {
+      text-align: center;
+      padding-top: 27px;
+      border-top: 4px solid $color-dark-100;
+    }
+    .copy-right {
+      text-align: center;
+      margin-top: 7px;
+      color: $color-text-3;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 20px;
+      padding-bottom: 13px;
+    }
+    .top-arrow {
+      position: relative;
+      display: block;
+      height: 64px;
+      width: calc(100% - 26px);
+      .footer-active {
+        &:active {
+          .hide-active {
+            display: block !important;
+            opacity: 1;
+
+          }
+          .show-active {
+            display: none;
+          }
+        }
+        position: relative;
+        .hide-active {
+          display: none;
+        }
+        img {
+          width: 64px;
+          height: 64px;
+          position: absolute;
+          right: 0;
+          &:hover {
+            opacity: 0.6;
+          }
+
+        }
+      }
+    }
+  }
+}
